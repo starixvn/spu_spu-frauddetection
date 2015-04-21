@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection", "Fanex.NAP.FraudDetection\Fanex.NAP.FraudDetection.csproj", "{0970FB24-9D16-4C86-A170-C2A2156C97EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.Model", "Fanex.NAP.FraudDetection.Model\Fanex.NAP.FraudDetection.Model.csproj", "{F07AB61E-FC65-4292-A968-F124C5A28F30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.Service", "Fanex.NAP.FraudDetection.Service\Fanex.NAP.FraudDetection.Service.csproj", "{090A12AF-90C2-4072-9B95-CC5E33C5D444}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BC6C1A3A-0C99-40BB-8CD0-9E34C218B50A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6CB0135A-AE21-4955-A9D8-A3C448DC09CA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{4A9AB1B0-394A-4516-96FB-881232380823}"
+	ProjectSection(SolutionItems) = preProject
+		CodeAnalysis\CodeAnalysisConfiguration.xml = CodeAnalysis\CodeAnalysisConfiguration.xml
+		CodeAnalysis\FxCopDictionary.xml = CodeAnalysis\FxCopDictionary.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.Controllers", "Fanex.NAP.FraudDetection.Controllers\Fanex.NAP.FraudDetection.Controllers.csproj", "{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0970FB24-9D16-4C86-A170-C2A2156C97EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0970FB24-9D16-4C86-A170-C2A2156C97EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0970FB24-9D16-4C86-A170-C2A2156C97EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0970FB24-9D16-4C86-A170-C2A2156C97EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07AB61E-FC65-4292-A968-F124C5A28F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07AB61E-FC65-4292-A968-F124C5A28F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07AB61E-FC65-4292-A968-F124C5A28F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07AB61E-FC65-4292-A968-F124C5A28F30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{090A12AF-90C2-4072-9B95-CC5E33C5D444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090A12AF-90C2-4072-9B95-CC5E33C5D444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090A12AF-90C2-4072-9B95-CC5E33C5D444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090A12AF-90C2-4072-9B95-CC5E33C5D444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
