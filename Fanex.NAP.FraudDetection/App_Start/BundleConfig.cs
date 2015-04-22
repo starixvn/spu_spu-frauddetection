@@ -1,4 +1,14 @@
-﻿namespace Fanex.NAP.SPU.AppStart
+﻿// ----------------------------------------------------------------------
+// <copyright file="BundleConfig.cs" company="Nexcel Solutions Vietnam">
+//     Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// ------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015/04/22">Created</change>
+//   <change who="" date=""></change>
+// </history>
+
+namespace Fanex.NAP.SPU.AppStart
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Optimization;
@@ -34,6 +44,11 @@
            .Include("~/Content/Core/site.less");
 
             css.Transforms.Add(cssTransformer);
+            /*var css = new ScriptBundle("~/bundles/coreCss")
+            .IncludeDirectory("~/Content/jquery-ui/base/", "*.css")
+            .Include("~/Content/bootstrap/bootstrap.less")
+           .Include("~/Content/Plugin/multi-select-control.css")
+           .Include("~/Content/Core/site.less");*/
 
             bundles.Add(css);
 
@@ -57,6 +72,13 @@
 
             bundles.Add(coreJs);
 
+            var homeJs = new Bundle("~/bundles/HomeJs")
+                .Include(
+                "~/Scripts/Page/Home/home.js");
+
+            homeJs.Transforms.Add(scriptTransformer);
+            bundles.Add(homeJs);
+
             var defaultBetSettingJs = new Bundle("~/bundles/DefaultBetSettingJs")
                 .Include(
                 "~/Scripts/Page/DefaultBetSetting/addnew.js",
@@ -75,7 +97,7 @@
             bundles.Add(fanexGridJs);
             /*If you'd like to test the optimization locally,
             you can use this line to force it.*/
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
