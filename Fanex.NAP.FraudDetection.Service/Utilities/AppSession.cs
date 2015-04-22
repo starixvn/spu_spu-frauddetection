@@ -1,12 +1,11 @@
-﻿// --------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------
 // <copyright file="AppSession.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+//     Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// --------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 // <history>
-//   <change who="Louis.Bao" date="2012.10.18">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.11.22">Update Session Manager</change>
-//   <change who="Kaden.Trinh" date="2013.09.16">Check styleCop</change>
+//   <change who="Long.Luu" date="2015/04/22">Created</change>
+//   <change who="" date=""></change>
 // </history>
 
 namespace Fanex.NAP.SPU.Service

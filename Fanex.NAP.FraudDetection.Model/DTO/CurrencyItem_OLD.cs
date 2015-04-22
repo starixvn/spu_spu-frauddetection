@@ -1,8 +1,12 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CurrencyItem.cs" company="">
-// TODO: Update copyright text.
+﻿// ----------------------------------------------------------------------
+// <copyright file="CurrencyItem.cs" company="Nexcel Solutions Vietnam">
+//     Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015/04/22">Created</change>
+//   <change who="" date=""></change>
+// </history>
 
 namespace Fanex.NAP.SPU.Model.DTO
 {

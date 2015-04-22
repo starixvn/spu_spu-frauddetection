@@ -1,8 +1,12 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SingleDefaultBetSettingViewModel.cs" company="Nexcel">
-// TODO: Update copyright text.
+﻿// ----------------------------------------------------------------------
+// <copyright file="SingleDefaultBetSettingViewModel.cs" company="Nexcel Solutions Vietnam">
+//     Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015/04/22">Created</change>
+//   <change who="" date=""></change>
+// </history>
 
 namespace Fanex.NAP.SPU.Model.ViewModel.DefaultBetSetting
 {

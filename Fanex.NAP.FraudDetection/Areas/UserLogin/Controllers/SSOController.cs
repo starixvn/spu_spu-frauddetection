@@ -1,10 +1,10 @@
 ﻿// ----------------------------------------------------------------------
-// <copyright file="SSOController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SsoController.cs" company="Nexcel Solutions Vietnam">
 //     Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // ------------------------------------------------------------------------
 // <history>
-//   <change who="Jeff.Nguyen" date="2013/08/30">Created</change>
+//   <change who="Long.Luu" date="2015/04/22">Created</change>
 //   <change who="" date=""></change>
 // </history>
 
