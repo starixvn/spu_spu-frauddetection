@@ -2,8 +2,24 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @section Headline {
     <ul class="breadcrumb title">
         <li>Home</li>
     </ul>
+
+    <div class="form-group">
+    <input type="button" id="btn_PopupDemo" value="Demo Popup" class="btn-primary" />
+</div>
+}
+
+@section FooterJs
+{
+    @System.Web.Optimization.Scripts.Render("~/bundles/HomeJs")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            home.setup();
+        });
+    </script>
 }

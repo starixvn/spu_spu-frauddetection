@@ -1,4 +1,14 @@
-﻿namespace Fanex.NAP.SPU.Controllers
+﻿// ----------------------------------------------------------------------
+// <copyright file="BetSettingController.cs" company="Nexcel Solutions Vietnam">
+//     Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// ------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015/04/22">Created</change>
+//   <change who="" date=""></change>
+// </history>
+
+namespace Fanex.NAP.SPU.Controllers
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -38,14 +48,14 @@
         #region Load default bet setting
 
         [HttpGet]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Read)]
         public ActionResult Default()
         {
             return View();
         }
 
         [HttpPost]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Host)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Host)]
         [AjaxRequest]
         public ActionResult Default(GetAllDefaultBetSettingCriteria criteria)
         {
@@ -62,14 +72,14 @@
         #region Add New
 
         [HttpGet]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Read)]
         public ActionResult AddNew()
         {
             return View();
         }
 
         [HttpPost]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Host)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Host)]
         [AjaxRequest]
         public ActionResult AddNew(SingleDefaultBetSettingViewModel viewModel)
         {
@@ -77,7 +87,7 @@
         }
 
         [HttpPost]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Host)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Host)]
         [AjaxRequest]
         public ActionResult LoadTeamplate(GetSingleDefaultBetSettingCriteria criteria)
         {
@@ -95,7 +105,7 @@
         #region Editting
 
         [HttpGet]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Read)]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Edit(string licensee, int? currencyId, int? agentId)
         {
@@ -103,7 +113,7 @@
         }
 
         [HttpPost]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Host)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Host)]
         [AjaxRequest]
         public ActionResult Edit(SingleDefaultBetSettingViewModel viewModel)
         {
@@ -115,7 +125,7 @@
         #region Logs
 
         [HttpGet]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.ViewLogs, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.ViewLogs, Policy = Constant.Policy.Read)]
         public ActionResult Logs()
         {
             return View();
@@ -123,7 +133,7 @@
 
         [HttpPost]
         [AjaxRequest]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.ViewLogs, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.ViewLogs, Policy = Constant.Policy.Read)]
         public ActionResult Logs(GetSettingLogCriteria criteria)
         {
             IList<SettingLogItem> viewModel = new List<SettingLogItem>();
@@ -143,7 +153,7 @@
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Reviewed")]
         [HttpGet]
         [AjaxRequest]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Read)]
         public ActionResult GetCurrencyList()
         {
             return Json(_commonService.GetCurrencyList, JsonRequestBehavior.AllowGet);
@@ -152,7 +162,7 @@
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Reviewed")]
         [HttpGet]
         [AjaxRequest]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.DefaultBetSetting, Policy = Constant.Policy.Read)]
         public ActionResult GetLicenseeList()
         {
             return Json(_commonService.GetLicenseeList, JsonRequestBehavior.AllowGet);
@@ -165,7 +175,7 @@
         /// <returns>The agent list.</returns>
         [HttpGet]
         [AjaxRequest]
-        //[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Read)]
+        ////[NapAuth(FunctionKey = NapLicenseeFunctionKeys.EditDefaultBetSetting, Policy = Constant.Policy.Read)]
         public ActionResult GetAgents(GetAgentListCriteria criteria)
         {
             return Json(_betSettingService.GetAgents(criteria), JsonRequestBehavior.AllowGet);
