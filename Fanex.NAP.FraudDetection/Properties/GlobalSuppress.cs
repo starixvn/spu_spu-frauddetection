@@ -3,6 +3,6 @@
 using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling",
     Scope = "member",
-    Target = "Fanex.NAP.SPU.Areas.UserLogin.Controllers.LoginController.#Index(System.String,System.String)",
+    Target = "Fanex.NAP.FraudDetection.Areas.UserLogin.Controllers.LoginController.#Index(System.String,System.String)",
     Justification = "Settlement site is a factory, and requires high class coupling.")]
-[assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Fanex.NAP.SPU.Areas.UserLogin.Controllers.LoginController.#Index(System.String,System.String)")]
+[assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Fanex.NAP.FraudDetection.Areas.UserLogin.Controllers.LoginController.#Index(System.String,System.String)")]

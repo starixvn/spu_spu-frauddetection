@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Model.DTO.DefaultBetSetting
+namespace Fanex.NAP.FraudDetection.Model.DTO.DefaultBetSetting
 {
     /// <summary>
     /// TODO: Update summary.

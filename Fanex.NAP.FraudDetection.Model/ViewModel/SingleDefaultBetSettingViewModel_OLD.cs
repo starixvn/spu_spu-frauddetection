@@ -8,15 +8,15 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Model.ViewModel.DefaultBetSetting
+namespace Fanex.NAP.FraudDetection.Model.ViewModel.DefaultBetSetting
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.SPU.Model.Criteria.DefaultBetSetting;
-    using Fanex.NAP.SPU.Model.DTO;
-    using Fanex.NAP.SPU.Model.DTO.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Model.Criteria.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Model.DTO;
+    using Fanex.NAP.FraudDetection.Model.DTO.DefaultBetSetting;
 
     /// <summary>
     /// TODO: Update summary.

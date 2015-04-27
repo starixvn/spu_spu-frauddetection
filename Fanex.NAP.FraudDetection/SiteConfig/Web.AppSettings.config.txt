@@ -1,7 +1,7 @@
 ﻿
 // Generated helper templates
 // Generated items
-// Fanex.NAP.SPU\SiteConfig\Web.AppSettings.SANDBOX.config
-// Fanex.NAP.SPU\SiteConfig\Web.AppSettings.PRO.config
-// Fanex.NAP.SPU\SiteConfig\Web.AppSettings.UAT.config
-// Fanex.NAP.SPU\SiteConfig\Web.AppSettings.LOCAL.config
+// Fanex.NAP.FraudDetection\SiteConfig\Web.AppSettings.SANDBOX.config
+// Fanex.NAP.FraudDetection\SiteConfig\Web.AppSettings.PRO.config
+// Fanex.NAP.FraudDetection\SiteConfig\Web.AppSettings.UAT.config
+// Fanex.NAP.FraudDetection\SiteConfig\Web.AppSettings.LOCAL.config

@@ -19,7 +19,7 @@
 // <history>
 //  <change who="Kaden.Trinh" date="<#= DateTime.Now.ToString() #>">Created and Implement</change>
 // </history>
-namespace Fanex.NAP.SPU.Model.DataDomain
+namespace Fanex.NAP.FraudDetection.Model.DataDomain
 {
 	using System.Diagnostics.CodeAnalysis;
 	/// <summary>

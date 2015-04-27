@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Service
+namespace Fanex.NAP.FraudDetection.Service
 {
     using System;
     using System.CodeDom.Compiler;

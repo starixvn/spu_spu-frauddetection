@@ -4,13 +4,13 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.NAP.SPU.Model
+namespace Fanex.NAP.FraudDetection.Model
 {
     using System;
     using System.Collections.Generic;
     using System.Xml.Linq;
-    using Fanex.NAP.SPU.Model.DTO.DefaultBetSetting;
-    using Fanex.NAP.SPU.Model.DTO.XmlLog;
+    using Fanex.NAP.FraudDetection.Model.DTO.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Model.DTO.XmlLog;
 
     /// <summary>
     /// TODO: Update summary.

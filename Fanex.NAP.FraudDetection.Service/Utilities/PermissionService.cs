@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Service.Utilities
+namespace Fanex.NAP.FraudDetection.Service.Utilities
 {
     using System.Collections.Generic;
     using System.Linq;

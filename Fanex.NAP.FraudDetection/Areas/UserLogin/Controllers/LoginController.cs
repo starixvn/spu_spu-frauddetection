@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Areas.UserLogin.Controllers
+namespace Fanex.NAP.FraudDetection.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -19,9 +19,9 @@ namespace Fanex.NAP.SPU.Areas.UserLogin.Controllers
     using System.Web.Mvc;
     using System.Web.Security;
     using Common;
-    using Fanex.NAP.SPU.Controllers;
-    using Fanex.NAP.SPU.Service;
-    using Fanex.NAP.SPU.Service.Utilities;
+    using Fanex.NAP.FraudDetection.Controllers;
+    using Fanex.NAP.FraudDetection.Service;
+    using Fanex.NAP.FraudDetection.Service.Utilities;
     using Logging;
     using NAP.Core.Configuration;
     using NAP.Core.Criteria.User;

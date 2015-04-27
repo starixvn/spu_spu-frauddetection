@@ -8,20 +8,20 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Controllers
+namespace Fanex.NAP.FraudDetection.Controllers
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.SPU.Controllers.Attributes;
-    using Fanex.NAP.SPU.Model.Criteria.DefaultBetSetting;
-    using Fanex.NAP.SPU.Model.DataDomain;
-    using Fanex.NAP.SPU.Model.DTO;
-    using Fanex.NAP.SPU.Model.DTO.DefaultBetSetting;
-    using Fanex.NAP.SPU.Model.ViewModel.DefaultBetSetting;
-    using Fanex.NAP.SPU.Service;
+    using Fanex.NAP.FraudDetection.Controllers.Attributes;
+    using Fanex.NAP.FraudDetection.Model.Criteria.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Model.DataDomain;
+    using Fanex.NAP.FraudDetection.Model.DTO;
+    using Fanex.NAP.FraudDetection.Model.DTO.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Model.ViewModel.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Service;
 
     /// <summary>
     /// Bet setting controller.

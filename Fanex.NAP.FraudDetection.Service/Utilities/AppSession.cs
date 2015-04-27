@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Service
+namespace Fanex.NAP.FraudDetection.Service
 {
     using System;
     using System.Collections.Generic;
@@ -20,14 +20,14 @@ namespace Fanex.NAP.SPU.Service
     /// </summary>
     public static class AppSession
     {
-        private const string CurrentActionNameKey = "Fanex.NAP.SPU.Contants.AppSession.CurrentActionName";
-        private const string CurrentLogInUserKey = "Fanex.NAP.SPU.Contants.AppSession.CurrentLogInUser";
-        private const string CurrentUserMenuKey = "Fanex.NAP.SPU.Contants.AppSession.CurrentUserMenu";
-        private const string CurrentUserRoleAccessKey = "Fanex.NAP.SPU.Contants.AppSession.CurrentUserRoleAccess";
+        private const string CurrentActionNameKey = "Fanex.NAP.FraudDetection.Contants.AppSession.CurrentActionName";
+        private const string CurrentLogInUserKey = "Fanex.NAP.FraudDetection.Contants.AppSession.CurrentLogInUser";
+        private const string CurrentUserMenuKey = "Fanex.NAP.FraudDetection.Contants.AppSession.CurrentUserMenu";
+        private const string CurrentUserRoleAccessKey = "Fanex.NAP.FraudDetection.Contants.AppSession.CurrentUserRoleAccess";
 
-        private const string IsAccountingLoginKey = "Fanex.NAP.SPU.Contants.AppSession.IsAccountingLogin";
+        private const string IsAccountingLoginKey = "Fanex.NAP.FraudDetection.Contants.AppSession.IsAccountingLogin";
         private const string ViewIpVnKey = "ViewIPVN";
-        private const string CurrentWorkingOnMenuKey = "Fanex.NAP.SPU.Contants.AppSession.CurrentWorkingOnMenu";
+        private const string CurrentWorkingOnMenuKey = "Fanex.NAP.FraudDetection.Contants.AppSession.CurrentWorkingOnMenu";
 
         /// <summary>
         ///     Gets or sets current login user.
