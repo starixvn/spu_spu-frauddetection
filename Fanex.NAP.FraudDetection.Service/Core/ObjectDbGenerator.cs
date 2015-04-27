@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Service.Core
+namespace Fanex.NAP.FraudDetection.Service.Core
 {
     using Fanex.Data;
 

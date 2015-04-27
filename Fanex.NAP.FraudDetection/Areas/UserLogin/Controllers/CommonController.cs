@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Areas.UserLogin.Controllers
+namespace Fanex.NAP.FraudDetection.Areas.UserLogin.Controllers
 {
     using System.Web.Mvc;
     using System.Web.Security;

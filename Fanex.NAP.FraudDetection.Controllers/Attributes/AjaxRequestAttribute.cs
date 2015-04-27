@@ -3,7 +3,7 @@
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Fanex.NAP.SPU.Controllers.Attributes
+namespace Fanex.NAP.FraudDetection.Controllers.Attributes
 {
     using System;
     using System.Reflection;

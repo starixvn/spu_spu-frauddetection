@@ -8,17 +8,17 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Service
+namespace Fanex.NAP.FraudDetection.Service
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using Fanex.NAP.SPU.Model.Criteria.DefaultBetSetting;
-    using Fanex.NAP.SPU.Model.DTO;
-    using Fanex.NAP.SPU.Model.DTO.DefaultBetSetting;
-    using Fanex.NAP.SPU.Model.ViewModel.DefaultBetSetting;
-    using Fanex.NAP.SPU.Service.Core;
+    using Fanex.NAP.FraudDetection.Model.Criteria.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Model.DTO;
+    using Fanex.NAP.FraudDetection.Model.DTO.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Model.ViewModel.DefaultBetSetting;
+    using Fanex.NAP.FraudDetection.Service.Core;
    
     /// <summary>
     /// TODO: Update summary.

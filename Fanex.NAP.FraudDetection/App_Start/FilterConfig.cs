@@ -8,10 +8,10 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.AppStart
+namespace Fanex.NAP.FraudDetection.AppStart
 {
     using System.Web.Mvc;
-    using Fanex.NAP.SPU.Controllers.Attributes;
+    using Fanex.NAP.FraudDetection.Controllers.Attributes;
 
     public static class FilterConfig
     {

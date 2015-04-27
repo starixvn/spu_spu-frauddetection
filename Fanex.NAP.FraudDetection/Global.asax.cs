@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.SPU
+﻿namespace Fanex.NAP.FraudDetection
 {
     using System;
     using System.Web.Http;
@@ -6,7 +6,7 @@
     using System.Web.Optimization;
     using System.Web.Routing;
     using Fanex.Data.Configuration;
-    using Fanex.NAP.SPU.AppStart;
+    using Fanex.NAP.FraudDetection.AppStart;
 
     /// <summary>
     /// MVC application.

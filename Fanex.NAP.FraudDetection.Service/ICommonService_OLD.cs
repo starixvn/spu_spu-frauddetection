@@ -8,10 +8,10 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Service
+namespace Fanex.NAP.FraudDetection.Service
 {
     using System.Collections.Generic;
-    using Fanex.NAP.SPU.Model.DTO;
+    using Fanex.NAP.FraudDetection.Model.DTO;
 
     /// <summary>
     /// TODO: Update summary.

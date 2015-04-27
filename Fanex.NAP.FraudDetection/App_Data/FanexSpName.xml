@@ -23,5 +23,9 @@
         </Setting>
         <Setting Key="NAP_SpecialCustSettingGameType_Sel" SpName="NAP_SpecialCustSettingGameType_Sel" DbName="DBTXN.CustDB.bodbLicenseeNet">
         </Setting>
+
+      <Setting Key="SPU_WorkflowSelectAll" SpName="SPU_WorkflowSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet">
+      </Setting>
+      
     </Function>
 </Functions>

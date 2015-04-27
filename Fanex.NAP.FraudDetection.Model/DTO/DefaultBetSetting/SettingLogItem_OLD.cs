@@ -8,11 +8,11 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Model.DTO.DefaultBetSetting
+namespace Fanex.NAP.FraudDetection.Model.DTO.DefaultBetSetting
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.NAP.SPU.Model.DataDomain;
+    using Fanex.NAP.FraudDetection.Model.DataDomain;
 
     /// <summary>
     /// TODO: Update summary.

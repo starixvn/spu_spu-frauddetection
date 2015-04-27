@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Model.DataDomain
+namespace Fanex.NAP.FraudDetection.Model.DataDomain
 {
     /// <summary>
     /// TODO: Update summary.

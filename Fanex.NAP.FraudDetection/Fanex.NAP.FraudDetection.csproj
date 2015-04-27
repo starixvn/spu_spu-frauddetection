@@ -138,6 +138,26 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
+    <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
+    </Reference>
+    <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
+    </Reference>
+    <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Service.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -214,6 +234,8 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
+    <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
@@ -298,6 +320,8 @@
     <Content Include="Content\Fanex.Grid\images\white-top-bottom.gif" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\jquery-ui\base\accordion.css" />
+    <Content Include="Areas\FraudDetection\Views\Web.config" />
+    <Content Include="Areas\FraudDetection\Views\Workflow.cshtml" />
     <None Include="Content\jquery-ui\base\all.css.nk" />
     <Content Include="Content\jquery-ui\base\autocomplete.css" />
     <None Include="Content\jquery-ui\base\base.css.bk" />
@@ -437,8 +461,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\FraudDetection\Models\" />
+    <Folder Include="Areas\FraudDetection\Scripts\Workflow\" />
+    <Folder Include="Areas\FraudDetection\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="ClearScript.V8\" />
+    <Folder Include="_Dependency\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -448,21 +476,9 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.NAP.FraudDetection.Controllers\Fanex.NAP.FraudDetection.Controllers.csproj">
-      <Project>{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}</Project>
-      <Name>Fanex.NAP.FraudDetection.Controllers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAP.FraudDetection.Model\Fanex.NAP.FraudDetection.Model.csproj">
-      <Project>{F07AB61E-FC65-4292-A968-F124C5A28F30}</Project>
-      <Name>Fanex.NAP.FraudDetection.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAP.FraudDetection.Service\Fanex.NAP.FraudDetection.Service.csproj">
-      <Project>{090A12AF-90C2-4072-9B95-CC5E33C5D444}</Project>
-      <Name>Fanex.NAP.FraudDetection.Service</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.ConnectionString.config" />
+    <Content Include="Web.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
@@ -579,6 +595,20 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.NAP.FraudDetection.Controllers\Fanex.NAP.FraudDetection.Controllers.csproj">
+      <Project>{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}</Project>
+      <Name>Fanex.NAP.FraudDetection.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAP.FraudDetection.Service\Fanex.NAP.FraudDetection.Service.csproj">
+      <Project>{090A12AF-90C2-4072-9B95-CC5E33C5D444}</Project>
+      <Name>Fanex.NAP.FraudDetection.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Nap.SPU.Core\Fanex.Nap.SPU.Core.csproj">
+      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
+      <Name>Fanex.Nap.SPU.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.Model.Criteria.DefaultBetSetting
+namespace Fanex.NAP.FraudDetection.Model.Criteria.DefaultBetSetting
 {
     using System;
     using Fanex.Data.Repository;

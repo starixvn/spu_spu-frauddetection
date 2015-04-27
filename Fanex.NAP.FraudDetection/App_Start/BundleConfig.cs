@@ -8,7 +8,7 @@
 //   <change who="" date=""></change>
 // </history>
 
-namespace Fanex.NAP.SPU.AppStart
+namespace Fanex.NAP.FraudDetection.AppStart
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Optimization;
