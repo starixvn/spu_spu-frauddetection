@@ -54,10 +54,13 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             var cssFanexGrid = new Bundle("~/bundles/FanexGridCss")
              .IncludeDirectory("~/Content/Fanex.Grid", "*.css");
-
             cssFanexGrid.Transforms.Add(cssTransformer);
-
             bundles.Add(cssFanexGrid);
+
+            var fraudDetectionCss = new Bundle("~/bundles/FraudDetectionCss")
+            .IncludeDirectory("~/Areas/FraudDetection/App_Themes/Core", "*.css");
+            fraudDetectionCss.Transforms.Add(cssTransformer);
+            bundles.Add(fraudDetectionCss);
 
             var coreJs = new Bundle("~/bundles/coreJs")
                 .Include(
@@ -71,7 +74,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
             coreJs.Transforms.Add(scriptTransformer);
 
             bundles.Add(coreJs);
-
+            
             var homeJs = new Bundle("~/bundles/HomeJs")
                 .Include(
                 "~/Scripts/Page/Home/home.js");
@@ -91,10 +94,14 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             var fanexGridJs = new Bundle("~/bundles/FanexGridJs")
             .IncludeDirectory("~/Scripts/Fanex.Grid", "*.js", true);
-
             fanexGridJs.Transforms.Add(scriptTransformer);
-
             bundles.Add(fanexGridJs);
+
+            var fraudDetectionJs = new Bundle("~/bundles/FraudDetectionJs")
+            .IncludeDirectory("~/Areas/FraudDetection/Scripts/Core", "*.js", true);
+            fraudDetectionJs.Transforms.Add(scriptTransformer);
+            bundles.Add(fraudDetectionJs);
+
             /*If you'd like to test the optimization locally,
             you can use this line to force it.*/
             BundleTable.EnableOptimizations = false;

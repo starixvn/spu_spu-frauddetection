@@ -1,37 +1,10 @@
-﻿var _affId = 0;
-var _affName = "";
+﻿var _workflowId = 0;
+var _workflowName = "";
 var gridOptions
         , _pageIndex = 0
         , _pageSize = 10;
 
-$(document).ready(function () {
-    //Process redirect to Afiiliate list.
-    var successed = $("#successed").val();
-    if (successed == "true") {
-        confirm('Successfull!\nPress OK to continue', function () {
-            document.location =currentDomainURL + "/Affiliate/List";
-        });
-    }
-
-    $("#Username").Watermark("Username");
-
-    $("#Username").autocomplete({
-        source: [],
-        minLength: 1
-    });
-
-    $("#Username").keyup(function (e) {
-        if (e.keyCode == $.ui.keyCode.ENTER) {
-            Search();
-        }
-    });
-    
-    $("#DomainName").keyup(function (e) {
-        if (e.keyCode == $.ui.keyCode.ENTER) {
-            Search();
-        }
-    });
-
+$(document).ready(function () {    
     Search();
 });
 //--------------------------------------------------------------------------------------------------------------------
@@ -47,14 +20,13 @@ function Search() {
     $('#PageSize').val(_pageSize);
     $('#PageIndex').val(_pageIndex);
     
-    var searchParams = {
-        UserName: $("#Username").val(),
+    var searchParams = {        
         PageSize: _pageSize,
         PageIndex: _pageIndex
     };
 
     $.ajax({
-        url: "GetAffiliateList",
+        url: "GetWorkflowList",
         type: 'POST',
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -62,29 +34,23 @@ function Search() {
         cache: false,
         success: function (result) {
             result = result.replace(/\n/g, "<\/br>");
-            result = OddsFeedAdminManager.formatFanexGridStringResult(result);
+            result = FraudDetectionScripts.formatFanexGridStringResult(result);
             gridOptions =
             {
                 columns: [
-                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "PartnerId", Width: 100, Name: "PartnerId", HeaderAlign: "center", CellAlign: "right" },
-                    { HeaderText: "Username", Width: 100, Name: "UserName", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },                    
+                    { HeaderText: "WorkflowId", Width: 100, Name: "WorkflowId", HeaderAlign: "center", CellAlign: "left" },                    
+                    { HeaderText: "Workflow Name", Width: 200, Name: "WorkflowName", HeaderAlign: "center", CellAlign: "left" },                    
                     { HeaderText: "Action", Width: 50, Name: "Action", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Active", Width: 50, Name: "IsAllowed", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Site", Width: 165, Name: "Site", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Created Date", Width: 120, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Last Update", Width: 120, Name: "LastUpdate", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Creator", Width: 100, Name: "Creator", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Contact Person", Width: 100, Name: "ContactPerson", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Contact Email", Width: 170, Name: "ContactEmail", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Note", Width: 100, Name: "Remark", HeaderAlign: "center", CellAlign: "center" }
+                    { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },                    
+                    { HeaderText: "Description", Width: 300, Name: "WorkflowDesc", HeaderAlign: "center", CellAlign: "left" }                    
                 ],
                 bodyRows: result[0].data,
                 hideYBackGroundScroller: true,
                 gridExpandHeight: 150,
                 allowTruncate: true,
                 enableHiddenColumns: false,
-                hiddenColumns: [1, 11], 
+                hiddenColumns: [1], 
                 //numberOfFrozenColumn: 2,
                 showPager: true,
                 customPager: true,
@@ -103,11 +69,10 @@ function Search() {
                 gridOptions.bodyRows[i].Columns[3].CustomCellRender = ActiveColumn;
                                 
                 // Modify "Action" column
-                gridOptions.bodyRows[i].Columns =  OddsFeedAdminManager.insertAtIndex(
+                gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
                     gridOptions.bodyRows[i].Columns,
                     3,
                     { Name: "Action", Row: i });
-//                gridOptions.bodyRows[i].Columns.push({ Name: "Action", Row: i });
                 gridOptions.bodyRows[i].Columns[3].CustomCellRender = ActionColumn;
             }
 
@@ -138,120 +103,56 @@ function ReRenderAfterPaged(page_index, itemsPerPage, jq) {
 
     return false;
 }
-function ActiveColumn(cell, cellFormated) {
-    var partnerId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
-    if( $("#IsActivateSystem").val() != "")    //system is activated
-    {
-        if (cell.Value == "True") {
-            return "<img title='Deactivate this account' class='ico-tick' alt='' onclick='editActive(this," + partnerId + ")'/>";
+function ActiveColumn(cell, cellFormated) {
+    var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
+
+    if (cell.Value == "True") {
+            return "<img title='Deactivate this workflow' class='ico-tick' alt='' onclick='editActive(this," + workflowId + ")'/>";
         }
         else {
-            return "<img title='Activate this account' class='ico-untick' alt='' onclick='editActive(this," + partnerId + ")'/>";
+            return "<img title='Activate this workflow' class='ico-untick' alt='' onclick='editActive(this," + workflowId + ")'/>";
         }
-    }
-    else{
-       return "<img class='ico-untick-deactivate' /> ";
-    }
 }
+
 function ActionColumn(cell, cellFormated) {
     return "<div class='btn-action' onclick=\"javascript:ShowAction('" + cell.Row + "');\"></div>";
 }
 
 function ShowAction(cellRow) {
-    var partnerId = gridOptions.bodyRows[cellRow].Columns[1].Value;
-    var userName = gridOptions.bodyRows[cellRow].Columns[2].Value;
-    var site = gridOptions.bodyRows[cellRow].Columns[4].Value;
-    var email = gridOptions.bodyRows[cellRow].Columns[9].Value;
-    var note = gridOptions.bodyRows[cellRow].Columns[11].Value;
+    var workflowId = gridOptions.bodyRows[cellRow].Columns[1].Value;
+    var workflowName = gridOptions.bodyRows[cellRow].Columns[2].Value;    
 
-    _affId = partnerId;
-    _affName = userName;
+    _workflowId = workflowId;
+    _workflowName = workflowName;
 
     //$.contextMenu('destroy'); -- using if items of menu are updated
     $.contextMenu({
         selector: '.btn-action',
         items: {
-            deleteAffiliate: {
-                name: "Delete this affiliate",
+            deleteWorkflow: {
+                name: "Delete this workflow",
                 height: 25,
                 className: "iconDelAff",
                 callback: function (key, opt) {
-                    deleteAffiliate(_affId, _affName);
+                    deleteAffiliate(_workflowId, _workflowName);
                 }
-            },
-            editSetting: {
-                name: "Edit authentication settings",
-                height: 25,
-                className: "iconEditSetting",
-                callback: function (key, opt) {
-                    var updateParam = $.param({
-                        id: _affId,
-                        name: _affName
-                    });
-
-                    window.location.href = currentDomainURL + "/Affiliate/EditSetting?" + updateParam;
-                }
-            },
+            },            
             editInfo: {
                 name: "Edit information",
                 height: 25,
                 className: "iconEditInfo",
                 callback: function (key, opt) {
                     var updateParam = $.param({
-                        userName: _affName,
+                        workflowName: _workflowName,
                     });
 
-                    window.location.href = currentDomainURL + "/Affiliate/EditAffiliateInfo/" + _affId+ "?" + updateParam;
+                    window.location.href = currentDomainURL + "/Workflow/EditInfo/" + _workflowId+ "?" + updateParam;
                 }
-            },
-            editProfile: {
-                name: "Edit odds profile",
-                className: "iconOddProfile",
-                callback: function (key, opt) {
-                    var updateParam = $.param({
-                        name: _affName
-                    });
-
-                    window.location.href = currentDomainURL + "/Affiliate/EditProfile/" + _affId + "?" + updateParam;
-                }
-            },
-            viewXMLURLs: {
-                name: "View XML URLs",
-                className: "iconViewXMLURLs",
-                callback: function (key, opt) {
-                    var updateParam = $.param({
-                        name: _affName
-                    });
-
-                    window.location.href = currentDomainURL + "/Affiliate/ViewXMLURLs_Edit/" + _affId + "?" + updateParam;
-                }
-            }
+            }           
         },
         trigger: "left",
         ignoreRightClick: true,
         autoHide: true
-    });
-}
-
-function StartAutoSuggesttion() {
-    var temp = $("#Username").val()
-    var url = 'ListExistedAff?username=' + temp;
-
-    $.ajax({
-        url: url,
-        type: 'POST',
-        dataType: 'html',
-        cache: false,
-        success: function (result) {
-            var sourceAdmin = result.split(',');
-
-            $("#Username").autocomplete({
-                source: sourceAdmin,
-                minLength: 1
-            });
-        },
-        error: function (xhr, status, err) {
-        }
     });
 }

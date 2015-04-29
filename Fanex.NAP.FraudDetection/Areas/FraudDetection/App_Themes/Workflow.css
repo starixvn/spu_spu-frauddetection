@@ -1,0 +1,229 @@
+﻿select.AffiliateEdit
+{
+    border:1px solid #c8c8c8;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow:    1px 1px 3px 3px #f2f2f2;
+    -webkit-box-shadow: 1px 1px 3px 3px #f2f2f2;
+    box-shadow:         1px 1px 3px 3px #f2f2f2;
+    padding: 4px;
+    text-align: left;
+    vertical-align: bottom;
+    margin-left:0px;    
+    min-width:auto;
+}
+
+select.request
+{
+     border:1px solid #c8c8c8;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow:    1px 1px 3px 3px #f2f2f2;
+    -webkit-box-shadow: 1px 1px 3px 3px #f2f2f2;
+    box-shadow:         1px 1px 3px 3px #f2f2f2;
+    padding: 4px;
+    text-align: left;
+    vertical-align: bottom;
+    margin-left:0px;    
+    min-width:auto;   
+}
+
+#slDomain, #slAssignedDomain
+{
+    border:1px solid #c8c8c8;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow:    1px 1px 3px 3px #f2f2f2;
+    -webkit-box-shadow: 1px 1px 3px 3px #f2f2f2;
+    box-shadow:         1px 1px 3px 3px #f2f2f2;
+    padding: 4px;
+    text-align: left;
+    vertical-align: bottom;
+    margin-left:0px;
+    min-width:300px;    
+}
+
+.ico-tick {
+    background: url("images/tick-ico-16.png") no-repeat scroll 0 0 transparent;    
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.ico-untick {
+    background: url("images/untick-ico-16.png") no-repeat scroll 0 0 transparent;    
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.ico-untick-deactivate {
+    background: url("images/untick-ico-deactivate-16.png") no-repeat scroll 0 0 transparent;    
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.btn-action {
+    background: url("images/action-ico.png") no-repeat scroll center 0 transparent;
+    cursor: pointer;
+    display: block;
+    font-size: 0;
+    height: 19px;
+    margin: 0 auto;
+    width: 34px;
+    color: #2489CE !important;
+}
+
+.btn-action:hover
+{
+    background-position :center -56px;
+}
+
+.data .action-wrp.active .actions {
+    display: block;
+}
+
+.data .action-wrp .actions{
+    background-color: #FFFFFF;
+    border-bottom: 5px solid #549CBA;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    display: none;
+    margin: 0;
+    padding: 10px 0 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.2s ease-in-out 0s;
+    z-index: 99;
+}
+
+.relative {
+    position: relative;
+}
+
+.data .action-wrp .actions li .dd-editstep1, .dd-editstep2, .dd-editstep3 {
+    /*background: url("../img/actions/dd/permission-ico.png") no-repeat scroll right 5px transparent;*/
+    color: #666666;
+    display: block;
+    padding: 6px 44px 6px 12px;
+    text-align: left;
+}
+
+.data .action-wrp .actions li .dd-delete {
+    /*background: url("../img/actions/dd/site-ico.png") no-repeat scroll right 2px transparent;*/
+    color: #666666;
+    display: block;
+    padding: 6px 44px 6px 12px;
+    text-align: left;
+}
+
+.data .action-wrp .actions li {
+    clear: both;
+    display: block;
+}
+
+.grid-fixed-table .action-wrp.active .actions {
+    display: block;
+}
+.grid-fixed-table .action-wrp .actions{
+    background-color: #FFFFFF;
+    border-bottom: 5px solid #549CBA;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    display: none;
+    margin: 0;
+    padding: 10px 0 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.2s ease-in-out 0s;
+    z-index: 99;
+}
+.grid-fixed-table .action-wrp .actions li .dd-editstep1, .dd-editstep2, .dd-editstep3 {
+    /*background: url("../img/actions/dd/permission-ico.png") no-repeat scroll right 5px transparent;*/
+    color: #666666;
+    display: block;
+    padding: 6px 44px 6px 12px;
+    text-align: left;
+}
+
+.grid-fixed-table .action-wrp .actions li .dd-delete {
+    /*background: url("../img/actions/dd/site-ico.png") no-repeat scroll right 2px transparent;*/
+    color: #666666;
+    display: block;
+    padding: 6px 44px 6px 12px;
+    text-align: left;
+}
+
+.grid-fixed-table .action-wrp .actions li {
+    clear: both;
+    display: block;
+}
+
+.iconEditInfo     
+{    
+    background: url("images/editinfo.png") no-repeat scroll 0 transparent; 
+    background-position:left center;
+    margin-left: 5px
+}
+.iconDelAff     
+{    
+    background: url("images/delaff.png") no-repeat scroll left 0 transparent; 
+    background-position:left center;
+    margin-left: 5px
+}
+.iconEditSetting     
+{    
+    background: url("images/editsetting.png") no-repeat scroll left 0 transparent; 
+    background-position:left center;
+    margin-left: 5px
+}
+.iconOddProfile
+{    
+    background: url("images/editodds.png") no-repeat scroll left 0 transparent; 
+    background-position:left center;
+    margin-left: 5px
+}
+.iconResetPass
+{
+    background: url("images/repass.png") no-repeat scroll left 0 transparent; 
+    background-position:left center;
+    margin-left: 5px
+}
+#IpTable td input[type="text"]
+{
+    border: none;
+    box-shadow: none;
+}
+
+.iconEditLicensee
+{    
+    background: url("images/editsystem.png") no-repeat scroll left 0 transparent; 
+    background-position:left center;
+    margin-left: 5px
+}
+
+.iconViewXMLURLs 
+{    
+    background: url("images/view-xml-urls.png") no-repeat scroll left 0 transparent; 
+    background-position:left center;
+    margin-left: 5px
+}
+
+.grid9
+{
+    width: 830px;
+}
+
+#ieOnly > .row.btndomain
+{    
+    margin-left:20px;
+}
+
+.row.btndomain
+{
+    margin-left:-25px;    
+}

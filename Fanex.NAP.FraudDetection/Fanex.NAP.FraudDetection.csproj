@@ -48,8 +48,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\BundleTransformer.Less.1.9.54\lib\net40\BundleTransformer.Less.dll</HintPath>
     </Reference>
-    <Reference Include="ClearScript">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.1.12\lib\net40\ClearScript.dll</HintPath>
+    <Reference Include="ClearScript, Version=5.4.1.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.2.4\lib\net40\ClearScript.dll</HintPath>
     </Reference>
     <Reference Include="Couchbase">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
@@ -100,8 +101,9 @@
     <Reference Include="JavaScriptEngineSwitcher.Msie">
       <HintPath>..\packages\JavaScriptEngineSwitcher.Msie.1.1.11\lib\net40\JavaScriptEngineSwitcher.Msie.dll</HintPath>
     </Reference>
-    <Reference Include="JavaScriptEngineSwitcher.V8">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.1.12\lib\net40\JavaScriptEngineSwitcher.V8.dll</HintPath>
+    <Reference Include="JavaScriptEngineSwitcher.V8, Version=1.2.4.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.2.4\lib\net40\JavaScriptEngineSwitcher.V8.dll</HintPath>
     </Reference>
     <Reference Include="Less">
       <HintPath>..\packages\Less.3.0\lib\Less.dll</HintPath>
@@ -260,6 +262,143 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\action-ico.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ajax-loader.gif" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\approve.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\arrow-button.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\arrow.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\asc.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\basic-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bg-demo-docs-param.gif" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bg.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bg.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bglogin-center.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bglogin-left.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bglogin-right.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bgLogin.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bg_home.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bkg-pat.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\blank.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\blue_numbers.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\breadcrumb.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\breadcrumb_bg.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\bullet.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\calendar.gif" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\calendar.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\cancel.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\close.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\dashboard-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\delaff.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\delete-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\Delete.gif" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\demo-spindown-closed.gif" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\demo-spindown-open.gif" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\desc.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\drop.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\edit-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\Edit.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\editinfo.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\editodds.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\editper.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\editsetting.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\editsystem.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\facebook.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\footer.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_222222_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_2694e8_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_454545_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_888888_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\FullCalendar\ui-icons_ffffff_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\home.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\icons.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\icons_menu.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\icon_sprite.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\info.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\irongrip.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\lock.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\login-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\LoginCaptcha.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\logo.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\logo_licensee.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\menusplit.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\nexHRMicon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\panel_bg.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\picon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\reject.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\repass.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\search.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\signin_icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\slash-gray.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\sprite_btn.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\sprite_ico_2012-05-15.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\sprite_v.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\table_header_repeat.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tick-ico-16.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tick-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tipsy.gif" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\titlebg.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tittlebg_center.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tittlebg_left.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tittlebg_right.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\top-bg.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tp_404error.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tp_error.jpg" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tp_exclamation.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\tp_maintenance.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\twitter.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-icons_222222_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-icons_454545_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-icons_888888_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\uicon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\untick-ico-16.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\untick-ico-deactivate-16.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\view-btn.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\view-xml-urls.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\windowsLive.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\images\alert.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\images\btn-close.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\images\confirm.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\images\error.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\images\info.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\images\question.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
+    <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
+    <Content Include="Areas\FraudDetection\App_Themes\Workflow.css" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\EditWorkflow.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\WorkflowList.js" />
     <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Error.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Images\accessDenied.gif" />
@@ -352,6 +491,8 @@
     <Content Include="Content\jquery-ui\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\jquery-ui\base\images\ui-icons_cbd4e6_256x240.png" />
     <Content Include="Content\jquery-ui\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Core\jquery.contextMenu.css" />
+    <Content Include="Areas\FraudDetection\App_Themes\Core\jquery.ui.css" />
     <Content Include="Content\jquery-ui\base\menu.css" />
     <Content Include="Content\jquery-ui\base\progressbar.css" />
     <Content Include="Content\jquery-ui\base\resizable.css" />
@@ -474,7 +615,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\FraudDetection\Models\" />
-    <Folder Include="Areas\FraudDetection\Scripts\Workflow\" />
     <Folder Include="Areas\FraudDetection\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="ClearScript.V8\" />
@@ -492,7 +632,7 @@
   <ItemGroup>
     <Content Include="Web.ConnectionString.config">
       <SubType>Designer</SubType>
-    </Content>    
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

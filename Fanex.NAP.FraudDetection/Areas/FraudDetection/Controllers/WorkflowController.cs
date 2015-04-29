@@ -7,10 +7,11 @@ using SPU.Lib.FraudDetection.Criteria.Workflow;
 using SPU.Lib.FraudDetection.Service;
 using Fanex.NAP.SPU.Core;
 using System.Web.Script.Serialization;
+using Fanex.NAP.FraudDetection.Controllers;
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    public class WorkflowController : Controller
+    public class WorkflowController : BaseController
     {
         //
         // GET: /FraudDetection/Workflow/
@@ -21,29 +22,20 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         public ActionResult List()
-        {
-
-            //WorkflowSelectAllCriteria criteria = new WorkflowSelectAllCriteria();
-            //WorkflowService wfService = new WorkflowService();
-            //wfService.GetWorkflows(criteria);
-
-            //return View("~/Areas/FraudDetection/Views/Workflow.cshtml");
-
-            WorkflowSelectAllCriteria criteria = new WorkflowSelectAllCriteria();
-            GetAffiliateList(criteria);
-            return View("~/Areas/FraudDetection/Views/Workflow.cshtml");
+        {            
+            return View("~/Areas/FraudDetection/Views/Workflow.cshtml");            
         }
 
         /// <summary>
-        /// Display the list of affiliates.
+        /// Display the list of workflows.
         /// </summary>
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
-        public JsonResult GetAffiliateList(WorkflowSelectAllCriteria criteria)
+        public JsonResult GetWorkflowList(WorkflowSelectAllCriteria criteria)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();                        
-            //criteria.PageIndex++;
+            criteria.PageIndex++;
 
             WorkflowService wfService = new WorkflowService();
             var dr = wfService.GetWorkflows(criteria);
