@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-    <Function Name="Site.Nap.Licensee">
+  <Function Name="Site.Nap.Licensee">
         <Setting Key="NAP_SpecialCustSetting_CurrencyList" SpName="NAP_SpecialCustSetting_CurrencyList" DbName="DBTXN.CustDB.bodbLicenseeNet">
             <Mapping DataField="exchangeid" ObjectProperty="Id" />
             <Mapping DataField="currency" ObjectProperty="Name" />
@@ -23,5 +23,11 @@
         </Setting>
         <Setting Key="NAP_SpecialCustSettingGameType_Sel" SpName="NAP_SpecialCustSettingGameType_Sel" DbName="DBTXN.CustDB.bodbLicenseeNet">
         </Setting>
-    </Function>
+  </Function>
+  <!--
+  <Function Name="SPU_CustomerGroup">
+    <Setting Key="SPU_GroupIns" SpName="SPU_GroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" Plain="0" />
+    <Setting Key="SPU_GroupSelectAll" SpName="SPU_GroupSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" Plain="0" />
+  </Function>
+  -->
 </Functions>

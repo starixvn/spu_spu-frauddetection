@@ -111,6 +111,8 @@
   <ItemGroup>
     <Compile Include="BetSettingService_OLD.cs" />
     <Compile Include="CommonService_OLD.cs" />
+    <Compile Include="CustomerGroupService.cs" />
+    <Compile Include="ICustomerGroupService.cs" />
     <Compile Include="Core\ObjectDbGenerator.cs" />
     <Compile Include="IBetSettingService_OLD.cs" />
     <Compile Include="ICommonService_OLD.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AppSession.cs" />
     <Compile Include="Utilities\PermissionService.cs" />
+    <Compile Include="Utilities\QueryService.cs" />
     <Compile Include="Utilities\SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>

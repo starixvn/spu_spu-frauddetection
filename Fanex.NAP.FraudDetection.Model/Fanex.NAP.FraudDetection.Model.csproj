@@ -108,6 +108,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criteria\CustomerGroup\CustomerGroupUpdateCriteria.cs" />
+    <Compile Include="Criteria\CustomerGroup\CustomerGroupsSelectCriteria.cs" />
+    <Compile Include="Criteria\CustomerGroup\CustomerGroupInsertCriteria.cs" />
     <Compile Include="Criteria\DefaultBetSetting_OLD\GetAgentListCriteria.cs" />
     <Compile Include="Criteria\DefaultBetSetting_OLD\GetSettingLogCriteria.cs" />
     <Compile Include="Criteria\DefaultBetSetting_OLD\GetSingleDefaultBetSettingCriteria.cs" />
@@ -120,6 +123,7 @@
       <DependentUpon>NapLicenseeFunctionKeys.tt</DependentUpon>
     </Compile>
     <Compile Include="DataDomain\StaticSiteValue_OLD.cs" />
+    <Compile Include="DTO\CustomerGroup\Group.cs" />
     <Compile Include="DTO\DefaultBetSetting\AgentItem_OLD.cs" />
     <Compile Include="DTO\CurrencyItem_OLD.cs" />
     <Compile Include="DTO\DefaultBetSetting\DefaultBetSetting_OLD.cs" />
