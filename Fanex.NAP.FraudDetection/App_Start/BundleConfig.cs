@@ -44,6 +44,11 @@ namespace Fanex.NAP.SPU.AppStart
            .Include("~/Content/Core/site.less");
 
             css.Transforms.Add(cssTransformer);
+            /*var css = new ScriptBundle("~/bundles/coreCss")
+            .IncludeDirectory("~/Content/jquery-ui/base/", "*.css")
+            .Include("~/Content/bootstrap/bootstrap.less")
+           .Include("~/Content/Plugin/multi-select-control.css")
+           .Include("~/Content/Core/site.less");*/
 
             bundles.Add(css);
 
