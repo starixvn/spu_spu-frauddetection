@@ -1,29 +1,36 @@
-﻿function OnInitialize() {
-    $("#btn_AddNewGroup").click(function () {
+﻿$(document).ready(function () {
+    OnInitialize();
+});
+
+function OnInitialize() {
+    $("#AddGroupForm").submit(function (event) {
+        event.preventDefault();
         var url = 'Group/AddNewGroup';
+        var param = {
+            "GroupName": $("#GroupName").val(),
+            "GroupDesc": $("#GroupDesc").val(),
+            "IsActive": $('#IsActive').is(':checked')
+        };
         $.ajax({
-            type: "GET",
+            type: "POST",
             contentType: 'application/json',
-            dataType: "text",
+            dataType: "json",
+            data: JSON.stringify(param),
             cache: false,
             url: url,
             error: function () {
             },
             success: function (response) {
-                $('<div id="popup"></div>')
-                .appendTo('body')
-                .dialog({
-                    modal: true,
-                    title: "Add New Group",
-                    zIndex: 10000,
-                    autoOpen: true,
-                    width: '500px',
-                    resizable: false,
-                    close: function () {
-                        $(this).remove();
-                    }
-                })
-                .html(response); 
+                if (response.ErrCode == 0) {
+                    $("#addResult").attr('class', 'result-text-success');
+                    response.ErrMsg = "Add new group successfully!";
+                }
+                else {
+                    $("#addResult").attr('class', 'result-text-fail');
+                }
+
+                $("#addResult").html(response.ErrMsg);
+                Search();
             },
             beforeSend: function () {
 

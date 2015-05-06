@@ -44,7 +44,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public string AddNewGroup()
         {
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupInfo.cshtml");
+            var groupInfo = new GroupInsertCriteria();
+            groupInfo.ErrMsg = string.Empty;
+
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupInfo.cshtml", groupInfo);
+        }
+
+        [HttpPost]
+        public ActionResult AddNewGroup(GroupInsertCriteria criteria)
+        {
+            criteria.CreatorId = 1;
+            GroupService groupService = new GroupService();
+            var result = groupService.InsertGroup(criteria);
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
         [HttpGet]

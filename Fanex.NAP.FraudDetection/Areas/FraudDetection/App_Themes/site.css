@@ -232,4 +232,35 @@ select.request
 {
     font-size: large;
     font-weight: bold;
+    padding-right: 10px;
+}
+
+.result-text-success
+{    
+    display: block;
+    font-weight: normal;
+    color: Green;
+}
+
+.result-text-fail
+{
+    display: block;
+    font-weight: normal;
+    color: Red;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.table-popup
+{
+    border: 0px;
+    font-size:0.8em;
+}
+
+.table-popup td
+{
+    padding: 5px;
 }

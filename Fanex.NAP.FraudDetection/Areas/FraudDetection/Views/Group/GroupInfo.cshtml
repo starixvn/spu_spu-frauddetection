@@ -1,12 +1,36 @@
 ﻿@using System.Web.Optimization
-@model SPU.Lib.FraudDetection.Criteria.GroupSelectAllCriteria
+@model SPU.Lib.FraudDetection.Criteria.GroupInsertCriteria
 @{
     ViewBag.Title = "Add New Group";
     Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+    Model.IsActive = true;
 }
-<div>
-    <span class="infor-text">anh Thai</span>
-    <input type="button" id="btn_AddNewGroup" value="+ Add new Group" class="btn-green" />
-</div>
-<div class="newline">&nbsp;</div>
-<label>LUU HOANG LONG</label>
+
+@using (Html.BeginForm("AddNewGroup", "Group", FormMethod.Post, new { @id = "AddGroupForm" }))
+{
+    <table class="table-popup">
+        <tr>
+            <td align="right"><span>Group Name</span></td>
+            <td>@Html.TextBoxFor(l => l.GroupName, new { @style = "width: 350px;" })</td>
+        </tr>
+        <tr>
+            <td align="right"><span>Description</span></td>
+            <td>@Html.TextAreaFor(l => l.GroupDesc, 5, 45, null)</td>
+        </tr>
+        <tr>
+            <td align="right"><span>Active</span></td>
+            <td>@Html.CheckBoxFor(l => l.IsActive)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" id="btn_AddGroup" value="Add" class="btn-green" /></td>
+        </tr>
+    </table>
+}
+<br />
+@Html.LabelFor(l => l.ErrMsg, new { @id = "addResult", @class = "hidden" })
+
+@section FooterJs
+{
+    <script src="~/Areas/FraudDetection/Scripts/Group/group-add.js" type="text/javascript"></script>
+}
