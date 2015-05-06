@@ -145,25 +145,20 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.Criteria">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.DataAccess">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.DTO">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.DTO.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Service.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.Service">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -241,6 +236,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
@@ -397,6 +393,9 @@
     <Content Include="Areas\FraudDetection\App_Themes\Workflow.css" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\EditWorkflow.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\WorkflowList.js" />
     <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
@@ -466,6 +465,8 @@
     <Content Include="Content\jquery-ui\base\accordion.css" />
     <Content Include="Areas\FraudDetection\Views\Web.config" />
     <Content Include="Areas\FraudDetection\Views\Workflow.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupInfo.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -612,6 +613,7 @@
     <Content Include="SiteConfig\Web.UAT.config">
       <DependentUpon>Web.config.tt</DependentUpon>
     </Content>
+    <Content Include="Views\Shared\_LayoutPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\FraudDetection\Models\" />
@@ -638,7 +640,9 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\UserLogin\Views\Web.config" />
+    <Content Include="Areas\UserLogin\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\UserLogin\Views\Common\AccessDenied.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Error.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />

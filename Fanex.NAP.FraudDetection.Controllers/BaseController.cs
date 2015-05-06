@@ -16,6 +16,7 @@ namespace Fanex.NAP.FraudDetection.Controllers
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
+    using System.IO;
 
     /// <summary>
     /// Base controller.
@@ -74,5 +75,51 @@ namespace Fanex.NAP.FraudDetection.Controllers
             get;
             set;
         }
+
+        /// <summary>
+        /// Return the HTML string of a View.
+        /// </summary>
+        /// <param name="context">Controller context.</param>
+        /// <param name="viewPath">View path.</param>
+        /// <param name="viewModel">View model.</param>
+        /// <param name="partial">View partial.</param>
+        /// <returns>HTML string.</returns>
+        public string RenderViewToString(
+            ControllerContext context,
+            string viewPath,
+            object viewModel = null,
+            bool partial = false)
+        {
+            ViewEngineResult viewEngineResult = null;
+            if (partial)
+            {
+                viewEngineResult = ViewEngines.Engines.FindPartialView(context, viewPath);
+            }
+            else
+            {
+                viewEngineResult = ViewEngines.Engines.FindView(context, viewPath, null);
+            }
+
+            if (viewEngineResult == null)
+                throw new FileNotFoundException("View cannot be found.");
+
+            // get the view and attach the model to view data
+            var view = viewEngineResult.View;
+            context.Controller.ViewData.Model = viewModel;
+
+            string htmlStringFromView = string.Empty;
+            using (var stringWriter = new StringWriter())
+            {
+                var viewContext = new ViewContext(context, view,
+                                            context.Controller.ViewData,
+                                            context.Controller.TempData,
+                                            stringWriter);
+                view.Render(viewContext, stringWriter);
+                htmlStringFromView = stringWriter.ToString();
+            }
+
+            return htmlStringFromView;
+        }
+
     }
 }

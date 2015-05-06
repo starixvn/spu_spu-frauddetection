@@ -227,3 +227,9 @@ select.request
 {
     margin-left:-25px;    
 }
+
+.infor-text
+{
+    font-size: large;
+    font-weight: bold;
+}

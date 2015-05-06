@@ -38,10 +38,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.PageIndex++;
 
             WorkflowService wfService = new WorkflowService();
-            var dr = wfService.GetWorkflows(criteria);
-            var result = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dr);
+            var dataReader = wfService.GetWorkflows(criteria);
+            var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(results, JsonRequestBehavior.AllowGet);
         }
   
 
