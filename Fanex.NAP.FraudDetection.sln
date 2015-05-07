@@ -22,8 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.Controllers", "Fanex.NAP.FraudDetection.Controllers\Fanex.NAP.FraudDetection.Controllers.csproj", "{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Nap.SPU.Core", "Fanex.Nap.SPU.Core\Fanex.Nap.SPU.Core.csproj", "{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,10 +44,6 @@ Global
 		{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

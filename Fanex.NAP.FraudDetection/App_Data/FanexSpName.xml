@@ -27,8 +27,8 @@
   </Function>
   
   <Function Name="SPU_Workflow">
-      <Setting Key="SPU_WorkflowSelectAll" SpName="SPU_WorkflowSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet">
-      </Setting>
+      <Setting Key="SPU_WorkflowSelectAll" SpName="SPU_WorkflowSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+      <Setting Key="SPU_WorkflowIns" SpName="SPU_WorkflowIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />      
   </Function>
   
   <Function Name="SPU_CustomerGroup">

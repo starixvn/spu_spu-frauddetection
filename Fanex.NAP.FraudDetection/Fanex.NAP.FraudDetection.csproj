@@ -145,6 +145,9 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
+    <Reference Include="SPU.Lib.Core">
+      <HintPath>_Dependency\SPU.Lib.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SPU.Lib.FraudDetection">
       <HintPath>_Dependency\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
@@ -396,8 +399,9 @@
     <Content Include="Areas\FraudDetection\Scripts\Group\group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-edit.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\EditWorkflow.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\WorkflowList.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-list.js" />
     <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Error.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Images\accessDenied.gif" />
@@ -464,9 +468,10 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\jquery-ui\base\accordion.css" />
     <Content Include="Areas\FraudDetection\Views\Web.config" />
-    <Content Include="Areas\FraudDetection\Views\Workflow.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupInfo.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -755,10 +760,6 @@
     <ProjectReference Include="..\Fanex.NAP.FraudDetection.Service\Fanex.NAP.FraudDetection.Service.csproj">
       <Project>{090A12AF-90C2-4072-9B95-CC5E33C5D444}</Project>
       <Name>Fanex.NAP.FraudDetection.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Nap.SPU.Core\Fanex.Nap.SPU.Core.csproj">
-      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
-      <Name>Fanex.Nap.SPU.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

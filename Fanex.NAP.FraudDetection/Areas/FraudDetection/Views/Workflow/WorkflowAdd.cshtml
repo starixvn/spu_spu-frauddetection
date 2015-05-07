@@ -1,0 +1,36 @@
+﻿@using System.Web.Optimization
+@model SPU.Lib.FraudDetection.Criteria.Workflow.WorkflowInsertCriteria
+@{
+    ViewBag.Title = "Add New Workflow";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+    Model.IsActive = true;
+}
+
+@using (Html.BeginForm("AddNewWorkflow", "Workflow", FormMethod.Post, new { @id = "AddWorkflowForm" }))
+{
+    <table class="table-popup">
+        <tr>
+            <td align="right"><span>Workflow Name</span></td>
+            <td>@Html.TextBoxFor(l => l.WorkflowName, new { @style = "width: 350px;" })</td>
+        </tr>
+        <tr>
+            <td align="right"><span>Description</span></td>
+            <td>@Html.TextAreaFor(l => l.WorkflowDesc, 5, 45, new { @style = "width: 350px;" })</td>
+        </tr>
+        <tr>
+            <td align="right"><span>Active</span></td>
+            <td>@Html.CheckBoxFor(l => l.IsActive)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" id="btn_AddWorkflow" value="Add" class="btn-green" /></td>
+        </tr>
+    </table>
+}
+<br />
+<label id="addResult" class="hidden" />
+
+@section FooterJs
+{
+    <script src="~/Areas/FraudDetection/Scripts/Workflow/workflow-add.js" type="text/javascript"></script>
+}

@@ -10,9 +10,9 @@
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Fanex.NAP.FraudDetection.Controllers;
-using Fanex.NAP.SPU.Core;
-using SPU.Lib.FraudDetection.Service;
+using SPU.Lib.Core;
 using SPU.Lib.FraudDetection.Criteria;
+using SPU.Lib.FraudDetection.Service;
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
@@ -44,8 +44,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public string AddNewGroup()
         {
-            var groupInfo = new GroupInsertCriteria();
-            groupInfo.ErrMsg = string.Empty;
+            var groupInfo = new GroupInsertCriteria();            
 
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupInfo.cshtml", groupInfo);
         }

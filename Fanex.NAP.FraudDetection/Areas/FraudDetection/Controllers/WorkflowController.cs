@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SPU.Lib.FraudDetection.Criteria.Workflow;
-using SPU.Lib.FraudDetection.Service;
-using Fanex.NAP.SPU.Core;
+﻿using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Fanex.NAP.FraudDetection.Controllers;
+using SPU.Lib.Core;
+using SPU.Lib.FraudDetection.Criteria.Workflow;
+using SPU.Lib.FraudDetection.Service;
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
@@ -18,14 +14,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View("~/Areas/FraudDetection/Views/Workflow/WorkflowList.cshtml");            
         }
-
-        public ActionResult List()
-        {            
-            return View("~/Areas/FraudDetection/Views/Workflow.cshtml");            
-        }
-
+        
         /// <summary>
         /// Display the list of workflows.
         /// </summary>
@@ -43,7 +34,22 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
-  
 
+        [HttpGet]
+        public string AddNewWorkflow()
+        {
+            var criteria = new WorkflowInsertCriteria();            
+
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Workflow/WorkflowAdd.cshtml", criteria);
+        }
+
+        [HttpPost]
+        public ActionResult AddNewWorkflow(WorkflowInsertCriteria criteria)
+        {
+            criteria.CreatorId = 1;
+            WorkflowService workflowService = new WorkflowService();
+            var result = workflowService.InsertWorkflow(criteria);
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }  
     }
 }

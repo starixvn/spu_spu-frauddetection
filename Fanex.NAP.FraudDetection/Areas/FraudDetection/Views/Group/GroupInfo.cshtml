@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <td align="right"><span>Description</span></td>
-            <td>@Html.TextAreaFor(l => l.GroupDesc, 5, 45, null)</td>
+            <td>@Html.TextAreaFor(l => l.GroupDesc, 5, 45, new { @style = "width: 350px;" })</td>
         </tr>
         <tr>
             <td align="right"><span>Active</span></td>
@@ -28,7 +28,7 @@
     </table>
 }
 <br />
-@Html.LabelFor(l => l.ErrMsg, new { @id = "addResult", @class = "hidden" })
+<label id="addResult" class="hidden" />
 
 @section FooterJs
 {

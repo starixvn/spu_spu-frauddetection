@@ -26,7 +26,7 @@ function Search() {
     };
 
     $.ajax({
-        url: "GetWorkflowList",
+        url: "Workflow/GetWorkflowList",
         type: 'POST',
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -41,9 +41,9 @@ function Search() {
                     { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },                    
                     { HeaderText: "WorkflowId", Width: 100, Name: "WorkflowId", HeaderAlign: "center", CellAlign: "left" },                    
                     { HeaderText: "Workflow Name", Width: 200, Name: "WorkflowName", HeaderAlign: "center", CellAlign: "left" },                    
-                    { HeaderText: "Action", Width: 50, Name: "Action", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Description", Width: 300, Name: "WorkflowDesc", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },                    
-                    { HeaderText: "Description", Width: 300, Name: "WorkflowDesc", HeaderAlign: "center", CellAlign: "left" }                    
+                    { HeaderText: "Action", Width: 50, Name: "Action", HeaderAlign: "center", CellAlign: "center" }                                        
                 ],
                 bodyRows: result[0].data,
                 hideYBackGroundScroller: true,
@@ -65,15 +65,15 @@ function Search() {
 
             for (var i = 0; i < gridOptions.bodyRows.length; i++) {
                 // Modify "Active" column                
-                gridOptions.bodyRows[i].Columns[3].Row = i;
-                gridOptions.bodyRows[i].Columns[3].CustomCellRender = ActiveColumn;
+                gridOptions.bodyRows[i].Columns[4].Row = i;
+                gridOptions.bodyRows[i].Columns[4].CustomCellRender = ActiveColumn;
                                 
                 // Modify "Action" column
                 gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
                     gridOptions.bodyRows[i].Columns,
-                    3,
+                    5,
                     { Name: "Action", Row: i });
-                gridOptions.bodyRows[i].Columns[3].CustomCellRender = ActionColumn;
+                gridOptions.bodyRows[i].Columns[5].CustomCellRender = ActionColumn;
             }
 
             $("#SearchResult").fanexGrid(gridOptions);
@@ -156,3 +156,37 @@ function ShowAction(cellRow) {
         autoHide: true
     });
 }
+
+$("#btn_AddNewWorkflow").click(function () {
+    var url = 'Workflow/AddNewWorkflow';
+    $.ajax({
+        type: "GET",
+        contentType: 'application/json',
+        dataType: "text",
+        cache: false,
+        url: url,
+        error: function () {
+        },
+        success: function (response) {
+            $('<div id="popup"></div>')
+            .appendTo('body')
+            .dialog({
+                modal: true,
+                title: "Add New Workflow",
+                zIndex: 10000,
+                autoOpen: true,
+                width: '500px',
+                resizable: false,
+                close: function () {
+                    $(this).remove();
+                }
+            })
+            .html(response); 
+        },
+        beforeSend: function () {
+
+        },
+        complete: function () {
+        }
+    });
+});
