@@ -43,7 +43,7 @@ function Search() {
                     { HeaderText: "Group Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },                    
                     { HeaderText: "Description", Width: 300, Name: "GroupDesc", HeaderAlign: "center", CellAlign: "left" }, 
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },                  
-                    { HeaderText: "Action", Width: 50, Name: "Action", HeaderAlign: "center", CellAlign: "center" }        
+                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }        
                 ],
                 bodyRows: results[0].data,
                 hideYBackGroundScroller: true,
@@ -68,12 +68,12 @@ function Search() {
                 gridOptions.bodyRows[i].Columns[4].Row = i;
                 gridOptions.bodyRows[i].Columns[4].CustomCellRender = ActiveColumn;               
 
-                // Modify "Action" column
-                gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
+                // Modify "Edit" column
+                gridOptions.bodyRows[i].Columns = FraudDetectionScripts.insertAtIndex(
                     gridOptions.bodyRows[i].Columns,
                     5,
-                    { Name: "Action", Row: i });
-                gridOptions.bodyRows[i].Columns[5].CustomCellRender = ActionColumn;                
+                    { Name: "Edit", Row: i });
+                gridOptions.bodyRows[i].Columns[5].CustomCellRender = EditColumn;                
             }
 
             $("#SearchResult").fanexGrid(gridOptions);
@@ -115,46 +115,10 @@ function ActiveColumn(cell, cellFormated) {
         }
 }
 
-function ActionColumn(cell, cellFormated) {
-    return "<div class='btn-action' onclick=\"javascript:ShowAction('" + cell.Row + "');\"></div>";
-}
+function EditColumn(cell, cellFormated) {
+    var groupId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
-function ShowAction(cellRow) {
-    var groupId = gridOptions.bodyRows[cellRow].Columns[1].Value;
-    var groupName = gridOptions.bodyRows[cellRow].Columns[2].Value;    
-
-    _groupId = groupId;
-    _groupName = groupName;
-
-    //$.contextMenu('destroy'); -- using if items of menu are updated
-    $.contextMenu({
-        selector: '.btn-action',
-        items: {
-            deleteGroup: {
-                name: "Delete",
-                height: 25,
-                className: "iconDelAff",
-                callback: function (key, opt) {
-                    deleteGroup(_groupId, _groupName);
-                }
-            },            
-            editInfo: {
-                name: "Edit Information",
-                height: 25,
-                className: "iconEditInfo",
-                callback: function (key, opt) {
-                    var updateParam = $.param({
-                        GroupName: _groupName,
-                    });
-
-                    window.location.href = "/Group/EditGroupInfo/" + _groupId+ "?" + updateParam;
-                }
-            }           
-        },
-        trigger: "left",
-        ignoreRightClick: true,
-        autoHide: true
-    });
+    return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editGroupInfo(this," + groupId + ")'/>";
 }
 
 $("#btn_AddNewGroup").click(function () {

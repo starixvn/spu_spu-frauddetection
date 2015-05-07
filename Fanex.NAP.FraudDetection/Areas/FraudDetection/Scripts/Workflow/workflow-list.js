@@ -43,7 +43,7 @@ function Search() {
                     { HeaderText: "Workflow Name", Width: 200, Name: "WorkflowName", HeaderAlign: "center", CellAlign: "left" },                    
                     { HeaderText: "Description", Width: 300, Name: "WorkflowDesc", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },                    
-                    { HeaderText: "Action", Width: 50, Name: "Action", HeaderAlign: "center", CellAlign: "center" }                                        
+                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }                                        
                 ],
                 bodyRows: result[0].data,
                 hideYBackGroundScroller: true,
@@ -72,7 +72,7 @@ function Search() {
                 gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
                     gridOptions.bodyRows[i].Columns,
                     5,
-                    { Name: "Action", Row: i });
+                    { Name: "Edit", Row: i });
                 gridOptions.bodyRows[i].Columns[5].CustomCellRender = ActionColumn;
             }
 

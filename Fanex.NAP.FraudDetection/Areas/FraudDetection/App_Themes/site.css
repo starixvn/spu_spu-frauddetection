@@ -68,19 +68,15 @@ select.request
 }
 
 .btn-action {
-    background: url("images/action-ico.png") no-repeat scroll center 0 transparent;
+    background: url("images/editinfo.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     display: block;
-    font-size: 0;
-    height: 19px;
-    margin: 0 auto;
-    width: 34px;
-    color: #2489CE !important;
+    height: 16px;
+    width: 16px;
 }
 
 .btn-action:hover
 {
-    background-position :center -56px;
 }
 
 .data .action-wrp.active .actions {
