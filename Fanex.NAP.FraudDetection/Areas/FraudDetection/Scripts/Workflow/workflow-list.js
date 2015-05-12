@@ -64,6 +64,10 @@ function Search() {
             };
 
             for (var i = 0; i < gridOptions.bodyRows.length; i++) {
+                // Modify "Workflow Name" column
+                gridOptions.bodyRows[i].Columns[2].Row = i;
+                gridOptions.bodyRows[i].Columns[2].CustomCellRender = WorkflowNameColumn;
+
                 // Modify "Active" column                
                 gridOptions.bodyRows[i].Columns[4].Row = i;
                 gridOptions.bodyRows[i].Columns[4].CustomCellRender = ActiveColumn;
@@ -103,6 +107,15 @@ function ReRenderAfterPaged(page_index, itemsPerPage, jq) {
 
     return false;
 }
+
+function WorkflowNameColumn(cell, cellFormated) {
+    var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
+    var workflowName = gridOptions.bodyRows[cell.Row].Columns[2].Value;
+
+    var url = "Workflow/WorkflowDetail?workflowId=" + workflowId + "&workflowName=" + workflowName;
+    return "<a href=" + url + ">" + workflowName + "</a>";   
+}
+
 
 function ActiveColumn(cell, cellFormated) {
     var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;

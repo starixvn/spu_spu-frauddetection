@@ -231,6 +231,13 @@ select.request
     padding-right: 10px;
 }
 
+.lbl-text
+{
+    font-size: small;    
+    font-weight: bold;
+    padding-right: 10px;
+}
+
 .result-text-success
 {    
     display: block;

@@ -30,7 +30,11 @@
       <Setting Key="SPU_WorkflowSelectAll" SpName="SPU_WorkflowSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
       <Setting Key="SPU_WorkflowIns" SpName="SPU_WorkflowIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />      
   </Function>
-  
+
+  <Function Name="SPU_Task">    
+    <Setting Key="SPU_TaskSelectAllByWorkflowId" SpName="SPU_TaskSelectAllByWorkflowId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  </Function>  
+    
   <Function Name="SPU_CustomerGroup">
     <Setting Key="SPU_GroupIns" SpName="SPU_GroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_GroupSelectAll" SpName="SPU_GroupSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
