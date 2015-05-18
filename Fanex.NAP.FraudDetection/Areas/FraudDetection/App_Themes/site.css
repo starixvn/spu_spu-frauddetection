@@ -267,3 +267,68 @@ select.request
 {
     padding: 5px;
 }
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+    /*background: linear-gradient(#486cb8, #5a7dc1) repeat scroll 0 0 #5a7dc1 !important;
+    color: #fff !important;*/
+}
+
+input[type="submit"], .btn-primary,
+.btn-red, .btn-green, .btn-back {
+    margin-right: 0px !important;
+}
+
+.table-items tr:nth-child(even) 
+{
+    background: #CCC;
+    border: none;
+}
+.table-items tr:nth-child(odd) {background: #FFF}
+/* Start modify the accordion control */
+
+/* End modify the accordion control */
+
+/* Start modify the datetimepicker control */
+[class^="icon-"], [class*=" icon-"] {
+    background-image: url("/Areas/FraudDetection/App_Themes/Images/glyphicons-halflings.png");
+    background-position: -192px -120px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    margin-top: 1px;
+    vertical-align: text-top;
+    width: 14px;
+    cursor: pointer;
+}
+
+.ui-tpicker-grid-label
+{
+    display: none;
+}
+
+.ui_tpicker_time
+{
+    width: 140px;
+    margin: -20px 0px 10px 60px;
+}
+
+.ui_tpicker_hour_slider
+{
+    width: 140px;
+    margin: -13px 0px 10px 60px;
+}
+
+.ui_tpicker_minute_slider
+{
+    width: 140px;
+    margin: -13px 0px 10px 60px;
+}
+
+.ui_tpicker_second_slider
+{
+    width: 140px;
+    margin: -13px 0px 10px 60px;
+}
+/* End modify the datetimepicker control */

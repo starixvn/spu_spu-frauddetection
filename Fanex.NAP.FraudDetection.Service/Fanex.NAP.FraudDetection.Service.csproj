@@ -109,12 +109,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BetSettingService_OLD.cs" />
     <Compile Include="CommonService_OLD.cs" />
     <Compile Include="CustomerGroupService.cs" />
     <Compile Include="ICustomerGroupService.cs" />
     <Compile Include="Core\ObjectDbGenerator.cs" />
-    <Compile Include="IBetSettingService_OLD.cs" />
     <Compile Include="ICommonService_OLD.cs" />
     <Compile Include="Core\IObjectDbGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -95,9 +95,13 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
+    <Reference Include="SPU.Lib.FraudDetection.DTO">
+      <HintPath>..\Fanex.NAP.FraudDetection\_Dependency\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -143,13 +147,16 @@
     </None>
     <None Include="packages.config" />
     <Compile Include="SettingItemHelper.cs" />
-    <Compile Include="ViewModel\SingleDefaultBetSettingViewModel_OLD.cs" />
+    <Compile Include="ViewModel\Task\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\DefaultBetSetting\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

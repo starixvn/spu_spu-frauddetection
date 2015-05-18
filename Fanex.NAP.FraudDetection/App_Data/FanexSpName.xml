@@ -39,4 +39,11 @@
     <Setting Key="SPU_GroupIns" SpName="SPU_GroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_GroupSelectAll" SpName="SPU_GroupSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
+
+  <Function Name="SPU_Task">
+    <Setting Key="SPU_ActionSelectAll" SpName="SPU_ActionSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_ConfigurationSelectAll" SpName="SPU_ConfigurationSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_SBSportSelectAll" SpName="SPU_SBSportSelectAll" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="SPU_SBBettypeSelectAll" SpName="SPU_SBBettypeSelectAll" DbName="DBSPU.bodb02.bodbSPUNet" />
+  </Function>
 </Functions>

@@ -145,25 +145,23 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
+    <Reference Include="SPU.Lib.Core">
+      <HintPath>_Dependency\SPU.Lib.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.Criteria">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.DataAccess">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Service.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.DTO">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="SPU.Lib.FraudDetection.Service">
+      <HintPath>_Dependency\SPU.Lib.FraudDetection.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -241,6 +239,8 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
@@ -262,6 +262,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="Areas\FraudDetection\AddOns\TimePicker\date-format.js" />
+    <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.css" />
+    <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.js" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\action-ico.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\ajax-loader.gif" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\approve.png" />
@@ -394,11 +397,21 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\images\question.png" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
-    <Content Include="Areas\FraudDetection\App_Themes\Workflow.css" />
+    <Content Include="Areas\FraudDetection\App_Themes\site.css" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\EditWorkflow.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\WorkflowList.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-edit.js" />
+<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-list.js" />
+=======
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
+>>>>>>> #35575 - Modify layout
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-list.js" />
     <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Error.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Images\accessDenied.gif" />
@@ -464,12 +477,16 @@
     <Content Include="Content\Fanex.Grid\images\white-top-bottom.gif" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\jquery-ui\base\accordion.css" />
-<<<<<<< HEAD
     <Content Include="Areas\FraudDetection\Views\Web.config" />
-    <Content Include="Areas\FraudDetection\Views\Workflow.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowList.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupInfo.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowDetail.cshtml" />
 =======
-    <None Include="Content\fonts\glyphicons-halflings-regular.eot" />
->>>>>>> #34792 - Done initialize
+    <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
+>>>>>>> #35575 - Modify layout
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -616,6 +633,7 @@
     <Content Include="SiteConfig\Web.UAT.config">
       <DependentUpon>Web.config.tt</DependentUpon>
     </Content>
+    <Content Include="Views\Shared\_LayoutPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\FraudDetection\Models\" />
@@ -642,7 +660,9 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\UserLogin\Views\Web.config" />
+    <Content Include="Areas\UserLogin\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\UserLogin\Views\Common\AccessDenied.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Error.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />
@@ -752,13 +772,13 @@
       <Project>{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}</Project>
       <Name>Fanex.NAP.FraudDetection.Controllers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAP.FraudDetection.Model\Fanex.NAP.FraudDetection.Model.csproj">
+      <Project>{F07AB61E-FC65-4292-A968-F124C5A28F30}</Project>
+      <Name>Fanex.NAP.FraudDetection.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.NAP.FraudDetection.Service\Fanex.NAP.FraudDetection.Service.csproj">
       <Project>{090A12AF-90C2-4072-9B95-CC5E33C5D444}</Project>
       <Name>Fanex.NAP.FraudDetection.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Nap.SPU.Core\Fanex.Nap.SPU.Core.csproj">
-      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
-      <Name>Fanex.Nap.SPU.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

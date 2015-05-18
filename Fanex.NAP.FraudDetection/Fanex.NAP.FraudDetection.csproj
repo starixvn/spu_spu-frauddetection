@@ -239,6 +239,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
@@ -261,6 +262,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="Areas\FraudDetection\AddOns\TimePicker\date-format.js" />
+    <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.css" />
+    <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.js" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\action-ico.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\ajax-loader.gif" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\approve.png" />
@@ -396,10 +400,12 @@
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\mathformula-validation.min.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-add.js" />
@@ -475,6 +481,7 @@
     <Content Include="Areas\FraudDetection\Views\Group\GroupInfo.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowDetail.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -759,6 +766,10 @@
     <ProjectReference Include="..\Fanex.NAP.FraudDetection.Controllers\Fanex.NAP.FraudDetection.Controllers.csproj">
       <Project>{4C37DC9E-1058-4DD9-AFA8-00B4F9C326EA}</Project>
       <Name>Fanex.NAP.FraudDetection.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAP.FraudDetection.Model\Fanex.NAP.FraudDetection.Model.csproj">
+      <Project>{F07AB61E-FC65-4292-A968-F124C5A28F30}</Project>
+      <Name>Fanex.NAP.FraudDetection.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAP.FraudDetection.Service\Fanex.NAP.FraudDetection.Service.csproj">
       <Project>{090A12AF-90C2-4072-9B95-CC5E33C5D444}</Project>

@@ -14,7 +14,7 @@ namespace Fanex.NAP.FraudDetection.Service
     using Fanex.NAP.FraudDetection.Model.Criteria.DefaultBetSetting;
     using Fanex.NAP.FraudDetection.Model.DTO;
     using Fanex.NAP.FraudDetection.Model.DTO.DefaultBetSetting;
-    using Fanex.NAP.FraudDetection.Model.ViewModel.DefaultBetSetting;
+    //using Fanex.NAP.FraudDetection.Model.ViewModel.DefaultBetSetting;
 
     /// <summary>
     /// TODO: Update summary.
@@ -23,7 +23,7 @@ namespace Fanex.NAP.FraudDetection.Service
     {
         IList<DefaultBetSetting> GetAll(GetAllDefaultBetSettingCriteria criteria);
 
-        SingleDefaultBetSettingViewModel SingleSetting(GetSingleDefaultBetSettingCriteria criteria);
+        void SingleSetting(GetSingleDefaultBetSettingCriteria criteria);
       
         ResultInfo InsertOrUpdate(InsertOrUpdateDefaultBetSetting criteria);
 
