@@ -1,10 +1,12 @@
 ﻿var _taskId = 0;
 var _taskName = "";
+var _workflowId = 0;
 var gridOptions
         , _pageIndex = 0
         , _pageSize = 10;
 
 $(document).ready(function () {    
+    _workflowId = $("#WorkFlowId").val();
     Search();
 });
 //--------------------------------------------------------------------------------------------------------------------
@@ -21,7 +23,7 @@ function Search() {
     $('#PageIndex').val(_pageIndex);
     
     var searchParams = {              
-        WorkflowId:  $("#WorkFlowId").val(),
+        WorkflowId:  _workflowId,
         PageSize: _pageSize,
         PageIndex: _pageIndex
     };
@@ -160,5 +162,5 @@ function ShowAction(cellRow) {
 }
 
 $("#btn_AddNewTask").click(function () {    
-     window.location.href = "/Workflow/AddNewTask/";    
+     window.location.href = "/Task" + "?workflowId=" + _workflowId;    
 });
