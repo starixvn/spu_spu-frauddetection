@@ -255,10 +255,14 @@ function changeConfigSelection(currentObj, isPrecondition) {
     selectedValue = selectedValue.toLowerCase().replace(/ /g, '');
 
     if (isPrecondition) {
-        renderConfigControl("preconditionConfigControl", selectedValue, controlType);
+        if ($("#preconditionConfigCompare").prop("checked") == false) {
+            renderConfigControl("preconditionConfigControl", selectedValue, controlType);
+        }
     }
     else {
-        renderConfigControl("ruleConfigControl", selectedValue, controlType);
+        if ($("#ruleConfigCompare").prop("checked") == false) {
+            renderConfigControl("ruleConfigControl", selectedValue, controlType);
+        }
     }
 }
 
