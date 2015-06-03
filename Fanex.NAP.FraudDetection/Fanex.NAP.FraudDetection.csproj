@@ -243,6 +243,7 @@
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
+    <Compile Include="Areas\FraudDetection\Models\TaskAdditionalInfo.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
@@ -343,7 +344,6 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\login-icon.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\LoginCaptcha.jpg" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\logo.png" />
-    <Content Include="Areas\FraudDetection\App_Themes\Images\logo_licensee.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\menusplit.jpg" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\nexHRMicon.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\panel_bg.png" />
@@ -400,7 +400,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Core\mathformula-validation.min.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\mathformula-validation.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-edit.js" />
@@ -631,7 +631,6 @@
     <Content Include="Views\Shared\_LayoutPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\FraudDetection\Models\" />
     <Folder Include="Areas\FraudDetection\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="ClearScript.V8\" />

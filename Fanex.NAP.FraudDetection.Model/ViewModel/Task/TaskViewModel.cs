@@ -36,44 +36,34 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         }
 
         //=========================================================================
+        // On User ID
+        public int OnUserID { get; set; }
+
+        //=========================================================================
+        // Actions
+        public int WorkflowID { get; set; }
+
+        //=========================================================================
         // Actions
         public List<SPU.Lib.FraudDetection.DTO.Action> ActionList { get; set; }
 
-        public string ActionName { get; set; }
+        public int ActionID { get; set; }
 
-        public IEnumerable<SelectListItem> ActionListItem
-        {
-            get
-            {
-                var countryItemList = ActionList.Select(action => new SelectListItem
-                {
-                    Value = action.ActionId.ToString(),
-                    Text = action.ActionName
-                }).ToList<SelectListItem>();
+        public int IntervalValue { get; set; }
 
-                return countryItemList;
-            }
-        }
+        public string IntervalUnit { get; set; }
 
         //=========================================================================
         // Bettypes and Sports
         public List<Bettype> BettypeList { get; set; }
 
-        public string Bettype { get; set; }
-
         public List<Sport> SportList { get; set; }
-
-        public string Sport { get; set; }
 
         //=========================================================================
         // Configurations
         public List<Config> ConfigurationList { get; set; }
 
-        public string PreconditionConfigKey { get; set; }
-
-        public string PreconditionConfigOperator { get; set; }
-
-        public string PreconditionConfigValue { get; set; }
+        public string PreconditionConfigSQLQuery { get; set; }
 
         public List<Config> PreconditionConfigurations
         {
@@ -83,17 +73,13 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
             }
         }
 
-        public string RuleConfigKey { get; set; }
-
-        public string RuleConfigOperator { get; set; }
-
-        public string RuleConfigValue { get; set; }
+        public string RuleConfigSQLQuery { get; set; }
 
         public List<Config> RuleConfigurations
         {
             get
             {
-                return ConfigurationList.Where(l => l.ConfigCategory.Trim() == "Ticket").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory.Trim() == "Ticket" || l.ConfigCategory.Trim() == "Counter").ToList();
             }
         }
 
@@ -101,6 +87,10 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         // Customer Groups
         public List<Group> GroupList { get; set; }
 
-        public string Group { get; set; }
+        public int AssignedToGroup { get; set; }
+
+        //=========================================================================
+        // Mail Pattern
+        public int MailPattern { get; set; }
     }
 }

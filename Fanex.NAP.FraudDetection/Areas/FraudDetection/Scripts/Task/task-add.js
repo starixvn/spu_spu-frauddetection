@@ -1,4 +1,8 @@
 ﻿var cssClassForDeactiveTab = "ui-accordion-header ui-state-default ui-corner-all ui-accordion-icons";
+var NextActionIdList = "";
+var NextActionTargetIdList = "";
+var IsCheckNotScanned = true;
+var SQLForNotScanned = "";
 
 $(document).ready(function () {
     OnAccordionInitialize();
@@ -9,17 +13,16 @@ $(document).ready(function () {
 /* INITIALIZE */
 function OnInitialize() {
     $('#preconditionConfigControlDatetimePicker').datepicker();
+    SQLForNotScanned = $("option[value='Match State']").attr("data-sqlfield");
     
     $("#btn_AddRule").click(function () {
         var currentRowNum = $('#ruleTable tr').length;
-        var newConfig = generateConfig("ruleConfig");
-        AddingOneMoreRuleToTable("ruleTable", currentRowNum, newConfig);
+        AddingOneMoreRuleToTable("ruleTable", currentRowNum, "ruleConfig");
     });
 
     $("#btn_AddPrecondition").click(function () {
         var currentRowNum = $('#preconditionTable tr').length;
-        var newConfig = generateConfig("preconditionConfig");
-        AddingOneMoreRuleToTable("preconditionTable", currentRowNum, newConfig);
+        AddingOneMoreRuleToTable("preconditionTable", currentRowNum, "preconditionConfig");
     });
 
     var dateObj = new Date();
@@ -37,48 +40,65 @@ function OnInitialize() {
 
     $("#AddTaskForm").submit(function (event) {
         event.preventDefault();
-        checkFormula("preconditionTable");
-        checkFormula("ruleTable");
-        /*
-        var url = 'Group/AddNewGroup';
-        var param = {
-        "GroupName": $("#GroupName").val(),
-        "GroupDesc": $("#GroupDesc").val(),
-        "IsActive": $('#IsActive').is(':checked')
-        };
-        $.ajax({
-        type: "POST",
-        contentType: 'application/json',
-        dataType: "json",
-        data: JSON.stringify(param),
-        cache: false,
-        url: url,
-        error: function () {
-        },
-        success: function (response) {
-        if (response.ErrCode == 0) {
-        $("#addResult").attr('class', 'result-text-success');
-        response.ErrMsg = "Add new group successfully!";
-        }
-        else {
-        $("#addResult").attr('class', 'result-text-fail');
-        }
+        var formulaIsCorrect = CheckFormula("preconditionTable") && CheckFormula("ruleTable");
+        if (formulaIsCorrect) {
+            GenerateNextActions();
 
-        $("#addResult").html(response.ErrMsg);
-        Search();
-        },
-        beforeSend: function () {
+            var url = 'Task/AddNewTask';
+            var param = {
+                "CreatorId": $("#onUserid").text(),
+                "WorkflowId": $("#workflowid").text(),
+                "TaskName": $("#ActionName").find(":selected").text(),
+                "TaskDesc": $("#ActionName").find(":selected").attr("data-actiondesc"),
+                "ActionId": $("#ActionName").find(":selected").val(),
+                "Interval": $("#timeInterval").val(),
+                "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
+                "TaskPreconditions": $("#preconditionTableFormula").attr("data-formatted-formula"),
+                "TaskRules": $("#ruleTableFormula").attr("data-formatted-formula"),
+                "NextActionIdList": NextActionIdList,
+                "NextActionTargetIdList": NextActionTargetIdList,
+                "PreconRelevantTables": $("#preconditionTableFormula").attr("data-tables"),
+                "RuleRelevantTables": $("#ruleTableFormula").attr("data-tables"),
+                "PreconRelevantReturns": $("#preconditionTableFormula").attr("data-returns"),
+                "RuleRelevantReturns": $("#ruleTableFormula").attr("data-returns"),
+                "IsCheckNotScanned": IsCheckNotScanned,
+                "SQLForNotScanned": SQLForNotScanned
+            };
 
-        },
-        complete: function () {
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json',
+                dataType: "json",
+                data: JSON.stringify(param),
+                cache: false,
+                url: url,
+                error: function () {
+                },
+                success: function (response) {
+                    if (response.ErrCode == 0) {
+                        // redirect to workflow detail page
+                        var url = "Workflow/WorkflowDetail?workflowId=" + $("#workflowid").text();
+                        url += "&workflowName=" + "longluu";
+                        window.location.replace(url);
+                    }
+                    else {
+                        // display the error message
+                        alert("Fail");
+                    }
+                },
+                beforeSend: function () {
+
+                },
+                complete: function () {
+                }
+            });
         }
-        });*/
     });
 }
 
 //=========================================================================
-/* GENERATE CONFIGURATION RULE */
-function generateConfig(parentName) {
+/* GENERATE CONFIGURATIONS */
+function GenerateConfig(parentName) {
     // Config key
     var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
     var keySelectedValue = $(keySelectedOption).val();
@@ -107,6 +127,87 @@ function generateConfig(parentName) {
     }
 
     return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
+}
+
+function GenerateConfigFormatted(parentName) {
+    // Config key
+    var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
+    var keySelectedValue = $(keySelectedOption).val();
+    var keySelectedFormattedValue = $(keySelectedOption).attr("data-sqlfield");
+    var controlType = $(keySelectedOption).attr("data-controltype");
+    if ($("#" + parentName + "Compare").prop("checked") == true) {
+        controlType = "Compare";
+    }
+
+    // Config operator
+    var selectedOperator = $('#' + parentName + 'Operator').find(":selected").text();
+
+    // Config value
+    var valueSelectedValue = "";
+    switch (controlType) {
+        case "ComboBox":
+            valueSelectedValue = $('#' + parentName + 'ControlComboBox' + keySelectedValue.toLowerCase().replace(/ /g, '') + ' option:selected').val();
+            break;
+        case "DatetimePicker":
+            valueSelectedValue = '%' + $('#' + parentName + 'ControlDatetimePicker').val() + '%';
+            break;
+        case "Compare":
+            valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').attr("data-sqlfield");
+            break;
+        case "TextBoxNumber":
+            valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
+            break;
+        default:
+            valueSelectedValue = '%' + $('#' + parentName + 'ControlTextbox').val() + '%';
+    }
+
+    if (keySelectedValue == "Match State") {
+        if(valueSelectedValue == "scanned") {
+            IsCheckNotScanned = false;
+        }
+
+        return "";
+    }
+
+    return keySelectedFormattedValue + " " + selectedOperator + " " + valueSelectedValue;
+}
+
+function GenerateRelevantTables(parentName) {
+    var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
+    var relatedTables = $(keySelectedOption).attr("data-sqltable");
+    if ($("#" + parentName + "Compare").prop("checked") == true) {
+        relatedTables += "," + $('#' + parentName + 'ControlComboBoxKeyClone').find(":selected").attr("data-sqltable");
+    }
+
+    return relatedTables;
+}
+
+function GenerateRelevantReturns(parentName) {
+    var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
+    var relatedReturns = $(keySelectedOption).attr("data-sqlreturns");
+    if ($("#" + parentName + "Compare").prop("checked") == true) {
+        relatedReturns += "," + $('#' + parentName + 'ControlComboBoxKeyClone').find(":selected").attr("data-sqlreturns");
+    }
+
+    return relatedReturns;
+}
+
+function GenerateNextActions() {
+    NextActionIdList = "";
+    NextActionTargetIdList = "";
+
+    $("input:checkbox[id^=nextaction_]").each(function () {
+        if ($(this).prop('checked')) {
+            var nextAction = $(this).attr('id');
+            var nextTargetAction = nextAction + "_value";
+
+            NextActionIdList += $("#" + nextAction).attr("data-actionid") + ",";
+            NextActionTargetIdList += $("#" + nextTargetAction).find(":selected").val() + ",";
+        }
+    });
+
+    NextActionIdList = NextActionIdList.slice(0, -1);
+    NextActionTargetIdList = NextActionTargetIdList.slice(0, -1);
 }
 
 //=========================================================================
@@ -189,28 +290,47 @@ function AddElement(parentName, elementString, isPrefix) {
             var checkboxId = $(this).attr('id');
             checkboxId = checkboxId.replace("cb_" + parentName, "");
             var targetObject = "#div_" + parentName + checkboxId;
-            var ruleContent = $(targetObject).attr("data-encodedContent");
+            var ruleContent = $(targetObject).text();
+            var ruleContentFormatted = $(targetObject).attr("data-encodedContent");
+            var ruleRawContent = $(targetObject).attr("data-rawContent");
             if (elementString == "AND#" || elementString == "OR#") {
                 ruleContent = ruleContent.replace(/AND#/g, "").replace(/OR#/g, "");
+                ruleContentFormatted = ruleContentFormatted.replace(/AND#/g, "").replace(/OR#/g, "");
+                ruleRawContent = ruleRawContent.replace(/AND#/g, "").replace(/OR#/g, "");
             }
 
-            ruleContent = isPrefix ? elementString + ruleContent : ruleContent + elementString;
-
-            if (ruleContent.indexOf("AND#") >= 0) {
-                ruleContent = ruleContent.replace(/AND#/g, "")
-                ruleContent = "AND#" + ruleContent;
+            if (ruleContent.indexOf("Match State") >= 0) {
+                ruleContentFormatted = "";
             }
-            else if (ruleContent.indexOf("OR#") >= 0) {
-                ruleContent = ruleContent.replace(/OR#/g, "")
-                ruleContent = "OR#" + ruleContent;
+            else {
+                ruleContentFormatted = isPrefix ? elementString + ruleContentFormatted : ruleContentFormatted + elementString;
             }
 
-            $(targetObject).attr("data-encodedContent", ruleContent);
+            ruleRawContent = isPrefix ? elementString + ruleRawContent : ruleRawContent + elementString;
+            ruleContent = ruleRawContent;
+
+            WorkWithLogicOperator(ruleContent);
+            WorkWithLogicOperator(ruleContentFormatted);
+            WorkWithLogicOperator(ruleRawContent);
+
+            $(targetObject).attr("data-encodedContent", ruleContentFormatted);
+            $(targetObject).attr("data-rawContent", ruleRawContent);
             $(targetObject).html(ruleContent.replace(/#/g, " "));
         }
     });
 
-    updateFormula(parentName);
+    UpdateFormula(parentName);
+}
+
+function WorkWithLogicOperator(targetString) {
+    if (targetString.indexOf("AND#") >= 0) {
+        targetString = targetString.replace(/AND#/g, "")
+        targetString = "AND#" + targetString;
+    }
+    else if (targetString.indexOf("OR#") >= 0) {
+        targetString = targetString.replace(/OR#/g, "")
+        targetString = "OR#" + targetString;
+    }
 }
 
 function RemoveElement(parentName, elementString) {
@@ -226,24 +346,38 @@ function RemoveElement(parentName, elementString) {
         }
     });
 
-    updateFormula(parentName);
+    UpdateFormula(parentName);
 }
 
-function AddingOneMoreRuleToTable(tableName, rowNumber, ruleString) {
+function AddingOneMoreRuleToTable(tableName, rowNumber, parentName) {
+    var ruleString = GenerateConfig(parentName);
+    var ruleStringFormatted = GenerateConfigFormatted(parentName);
+    var relevantTables = GenerateRelevantTables(parentName);
+    var returns = GenerateRelevantReturns(parentName);
+
     var blockOfTableRow = "<tr id='" + tableName + rowNumber + "'><td><input type='checkbox' id='cb_" + tableName + rowNumber + "' /></td>";
-    blockOfTableRow += "<td style='width: 510px;'><div id='div_" + tableName + rowNumber + "' data-encodedContent='" + ruleString + "'>" + ruleString + "</div></td>";
+    blockOfTableRow += "<td style='width: 510px;'><div id='div_" + tableName + rowNumber + "' data-returns='" + returns + "' data-tables='" + relevantTables + "' data-encodedContent='" + ruleStringFormatted + "' data-rawContent='" + ruleString + "'>" + ruleString + "</div></td>";
     blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='/Areas/FraudDetection/App_Themes/Images/Delete.gif' onclick='RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
     blockOfTableRow = blockOfTableRow.replace(/@/g, '"'); 
 
     var targetObject = "#" + tableName + " tr:last";
     $(targetObject).after(blockOfTableRow);
-    updateFormula(tableName);
+    UpdateFormula(tableName);
 }
 
 function RemoveOneRuleFromTable(tableName, rowNumber) {
     var targetObject = "#" + tableName + rowNumber;
     $(targetObject).remove();
-    updateFormula(tableName);
+    UpdateFormula(tableName);
+}
+
+//=========================================================================
+/* MANAGE ACTION SELECTION CHANGE */
+function changeActionSelection(currentObj) {
+    var selectedAction = $(currentObj).find(":selected");
+    var actionDesc = $(selectedAction).attr("data-actiondesc");
+
+    $('#selectedActionDesc').text(actionDesc);
 }
 
 //=========================================================================
@@ -285,32 +419,87 @@ function renderConfigControl(parentName, selectedValue, controlType) {
 }
 
 //=========================================================================
-/* GET/UPDATE/CHECK FORMULA */
-function updateFormula(parentName) {
-    var formula = getFormula(parentName);
+/* GET/UPDATE/CHECK FORMULA */ 
+function UpdateFormula(parentName) {
+    var formula = GetFormula(parentName);
 
-    $('#' + parentName + 'Formula').attr('data-formatted-formula', formula);
+    $('#' + parentName + 'Formula').attr('data-formatted-formula', GetFormattedFormula(parentName));
+    $('#' + parentName + 'Formula').attr('data-rawcontent', GetRawFormula(parentName));
+    $('#' + parentName + 'Formula').attr('data-tables', GetRelevantTables(parentName));
+    $('#' + parentName + 'Formula').attr('data-returns', GetReturns(parentName));
     $('#' + parentName + 'Formula').text(formula.replace(/#/g, " "));
 }
 
-function getFormula(parentName) {
+function GetFormula(parentName) {
+    var formula = "";
+    $('div[id^="div_' + parentName + '"]').each(function () {
+        formula += $(this).text() + "#";
+    });
+
+    formula = formula.slice(0, -1);
+    return formula;
+}
+
+function GetRawFormula(parentName) {
+    var formula = "";
+    $('div[id^="div_' + parentName + '"]').each(function () {
+        formula += $(this).attr("data-rawcontent") + "#";
+    });
+
+    formula = formula.slice(0, -1);
+    return formula;
+}
+
+function GetFormattedFormula(parentName) {
     var formula = "";
     $('div[id^="div_' + parentName + '"]').each(function () {
         formula += $(this).attr("data-encodedContent") + "#";
     });
 
+    formula = formula.slice(0, -1);
     return formula;
 }
 
-function checkFormula(parentName) {
-    var formula = getFormula(parentName);
+function GetRelevantTables(parentName) {
+    var tables = "";
+    $('div[id^="div_' + parentName + '"]').each(function () {
+        var newTables = $(this).attr("data-tables").split(',');
+        for (var i = 0; i < newTables.length; i++) {
+            if (tables.indexOf(newTables[i]) == -1) {
+                tables += newTables[i] + ",";
+            }
+        }
+    });
+
+    tables = tables.slice(0, -1);
+    return tables;
+}
+
+function GetReturns(parentName) {
+    var sqlReturns = "";
+    $('div[id^="div_' + parentName + '"]').each(function () {
+        var newReturns = $(this).attr("data-returns").split(',');
+        for (var i = 0; i < newReturns.length; i++) {
+            if (sqlReturns.indexOf(newReturns[i]) == -1) {
+                sqlReturns += newReturns[i] + ",";
+            }
+        }
+    });
+
+    sqlReturns = sqlReturns.slice(0, -1);
+    return sqlReturns;
+}
+
+function CheckFormula(parentName) {
+    var formula = GetRawFormula(parentName);
     var formulaCheckResults = expVal.validateLogicExpession(formula, "#").split(",");
     
     if (formulaCheckResults[0] == "") {
-        //alert("formula is correct");
+        return true;
     }
     else {
-        $('#' + parentName + 'Formula').html(formulaCheckResults[formulaCheckResults.length-1]);
+        $('#' + parentName + 'Formula').html(formulaCheckResults[formulaCheckResults.length - 1]);
+        return false;
     }
 }
 

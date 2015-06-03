@@ -19,7 +19,7 @@
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
-    <script src="~/Areas/FraudDetection/Scripts/Core/mathformula-validation.min.js" type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/Scripts/Core/mathformula-validation.js" type="text/javascript"></script>
     
 }
 <div>
@@ -28,6 +28,8 @@
 <div class="newline">&nbsp;</div>
 @using (Html.BeginForm("AddNewTask", "Task", FormMethod.Post, new { @id = "AddTaskForm" }))
 {
+    <div id="workflowid" style="display: none;">@Model.WorkflowID</div>
+    <div id="onUserid" style="display: none;">@Model.OnUserID</div>
     <div id="accordion" style="width: 620px;">
       <h3 id="accordionBlockEvent">Event</h3>
       <div>
@@ -35,14 +37,22 @@
             <tr>
                 <td><span>Event Name</span></td>
                 <td> 
-                    @Html.DropDownListFor(l => l.ActionName, Model.ActionListItem, new { @id = "ActionName", @style = "height: 25px;" })
+                    <select name="ActionName" id="ActionName" style="height: 25px;" onchange="changeActionSelection(this)">
+                        @foreach (var action in Model.ActionList)
+                        {
+                            <option value="@action.ActionId" data-actiondesc="@action.ActionDesc">
+                                @action.ActionName
+                            </option>
+                        }
+                    </select>
+                    <label id="selectedActionDesc" style="font-weight: normal;">@Model.ActionList[0].ActionDesc</label>
                 </td>
             </tr>
             <tr>
                 <td><span>Executed Timer</span></td>
                 <td>
                     <input type="text" id="timeInterval" style="width: 100px; height: 25px;" onkeypress="return isNumber(event)" />
-                    <select style="height: 25px;">
+                    <select id="timeIntervalUnit" style="height: 25px;">
                       <option value="Second">Second(s)</option>
                       <option value="Minute">Minute(s)</option>
                       <option value="Hour">Hour(s)</option>
@@ -59,7 +69,8 @@
                 @foreach (var config in Model.PreconditionConfigurations)
                 {
                     <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" 
-                    data-category="@config.ConfigCategory">
+                    data-category="@config.ConfigCategory" data-sqltable="@config.ConfigSQLTable"
+                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
                         @config.ConfigName
                     </option>
                 }
@@ -75,23 +86,24 @@
             <select id="preconditionConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                 @foreach (var config in Model.PreconditionConfigurations)
                 {
-                    <option value="@config.ConfigName">
+                    <option value="@config.ConfigName" data-sqltable="@config.ConfigSQLTable"
+                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
                         @config.ConfigName
                     </option>
                 }
             </select>
             <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxmatchstatus">
-                <option value="closed">Closed</option>
-                <option value="completed">Completed</option>
-                <option value="running">Running</option>
+                <option value="%completed%">Completed</option>
+                <option value="%closed%">Closed</option>
+                <option value="%running%">Running</option>
             </select>
             <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxmatchstate">
-                <option value="scanned">Scanned</option>
                 <option value="notscanned">Not Scanned</option>
+                <option value="scanned">Scanned</option>
             </select>
             <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxleaguetype">
-                <option value="mainmarkets">Main Markets</option>
-                <option value="othermarkets">Other Markets</option>
+                <option value="gue.IsMainMarket">Main Markets</option>
+                <option value="gue.IsMainMarket">Other Markets</option>
             </select>
             <select name="preconditionConfigControlComboBoxsport" id="preconditionConfigControlComboBoxsport" style="height: 25px; display:none;">
                 @foreach (var sport in Model.SportList)
@@ -114,7 +126,7 @@
                 <table id="preconditionTable" class="table-items"><tr style="display:none"><td></td><td></td><td></td></tr></table>
             </div>
             <div class="newline">&nbsp;</div>
-            <label id="preconditionTableFormula" data-formatted-formula=""></label>
+            <label id="preconditionTableFormula" data-formatted-formula="" data-rawcontent="" data-tables="" data-returns=""></label>
             <div class="newline">&nbsp;</div>
             <div>
                 <input type="button" onclick="AddFormulaElement(true, '(#', true)" value="(+" class="btn-green" />
@@ -138,7 +150,8 @@
                 @foreach (var config in Model.RuleConfigurations)
                 {
                     <option value="@config.ConfigName" data-controltype="@config.ConfigControlType"
-                    data-category="@config.ConfigCategory">
+                    data-category="@config.ConfigCategory" data-sqltable="@config.ConfigSQLTable"
+                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
                         @config.ConfigName
                     </option>
                 }
@@ -154,7 +167,8 @@
             <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                 @foreach (var config in Model.RuleConfigurations)
                 {
-                    <option value="@config.ConfigName">
+                    <option value="@config.ConfigName" data-sqltable="@config.ConfigSQLTable" 
+                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
                         @config.ConfigName
                     </option>
                 }
@@ -189,7 +203,7 @@
                 <table id="ruleTable" class="table-items"><tr style="display:none"><td></td><td></td><td></td></tr></table>
             </div>
             <div class="newline">&nbsp;</div>            
-            <label id="ruleTableFormula" data-formatted-formula=""></label>
+            <label id="ruleTableFormula" data-formatted-formula="" data-rawcontent="" data-tables="" data-returns=""></label>
             <div class="newline">&nbsp;</div>
             <div>
                 <input type="button" onclick="AddFormulaElement(false, '(', true)" value="(+" class="btn-green" />
@@ -198,11 +212,11 @@
                 <input type="button" onclick="AddFormulaElement(false, ')', false)" value=")+" class="btn-green" />
                 <input type="button" onclick="RemoveFormulaElement(false, ')')" value=")-" class="btn-green" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, 'AND ', true)" value="AND+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(false, 'AND ')" value="AND-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(false, 'AND#', true)" value="AND+" class="btn-green" />
+                <input type="button" onclick="RemoveFormulaElement(false, 'AND#')" value="AND-" class="btn-green" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, 'OR ', true)" value="OR+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(false, 'OR ')" value="OR-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(false, 'OR#', true)" value="OR+" class="btn-green" />
+                <input type="button" onclick="RemoveFormulaElement(false, 'OR#')" value="OR-" class="btn-green" />
             </div>
         </div>
       </div>
@@ -212,11 +226,11 @@
             <tr>
                 <td>
                     <div>
-                        <input type="checkbox" id="ccc" /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
+                        <input type="checkbox" id="nextaction_assignGroup" data-actionid="2" /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
                     </div>
                 </td>
                 <td> 
-                    <select name="groupConfig" id="groupConfig" style="height: 25px;">
+                    <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;">
                         @foreach (var group in Model.GroupList)
                         {
                             <option value="@group.GroupId" >
@@ -229,14 +243,14 @@
             <tr>
                 <td>
                     <div>
-                        <input type="checkbox" id="ccc" /> Send Mail
+                        <input type="checkbox" id="nextaction_sendMail" data-actionid="1" /> Send Mail
                     </div>
                 </td>
                 <td>
-                    <select style="height: 25px;">
-                      <option value="volvo">to A</option>
-                      <option value="saab">to B</option>
-                      <option value="mercedes">to C</option>
+                    <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
+                      <option value="1">Email Template 1</option>
+                      <option value="2">Email Template 2</option>
+                      <option value="3">Email Template 3</option>
                     </select>
                 </td>
             </tr>

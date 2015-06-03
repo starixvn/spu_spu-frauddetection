@@ -12,23 +12,36 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models;
 using Fanex.NAP.FraudDetection.Controllers;
 using Fanex.NAP.FraudDetection.Model.ViewModel;
 using SPU.Lib.Core;
 using SPU.Lib.FraudDetection.Criteria;
+using SPU.Lib.FraudDetection.Criteria.Taks;
+using SPU.Lib.FraudDetection.Criteria.Task;
 using SPU.Lib.FraudDetection.DTO;
 using SPU.Lib.FraudDetection.Service;
+using Fanex.NAP.FraudDetection.Service;
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     public class TaskController : BaseController
     {
-        public ActionResult Index()
+        public int workflowID = 0;
+
+        public ActionResult Index(string workflowId)
         {
-            return View("~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", GenerateViewModel());            
+            if (int.TryParse(workflowId, out workflowID))
+            {
+                return View("~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, workflowID));
+            }
+            else
+            {
+                return View("~/Views/Error/AccessDenied.cshtml");
+            }
         }
 
-        public TaskViewModel GenerateViewModel()
+        public TaskViewModel GenerateViewModel(int onUserID, int workflowID)
         {
             // Actions
             var actionService = new ActionService();
@@ -60,6 +73,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 groupList, 
                 sportList.ToList(), 
                 bettypeList.ToList());
+            taskViewModel.OnUserID = onUserID;
+            taskViewModel.WorkflowID = workflowID;
+
             return taskViewModel;
         }
 
@@ -82,12 +98,78 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNewTask(GroupInsertCriteria criteria)
+        public ActionResult AddNewTask(TaskInsertCriteria criteria, TaskAdditionalInfo additionalInfo)
         {
-            criteria.CreatorId = 1;
-            GroupService groupService = new GroupService();
-            var result = groupService.InsertGroup(criteria);
+            criteria.IsActive = false; // true;
+            var queryTemplateString = "select {0} from {1} where {2}";
+            var taskService = new TaskService();
+            List<TablesForeignKey> tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
+
+            criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconRelevantTables) ? string.Empty :
+                string.Format(queryTemplateString,
+                additionalInfo.PreconRelevantReturns,
+                GenerateSQLFrom(tablesForeignKey, additionalInfo.PreconRelevantTables),
+                GenerateSQLWhere(true, tablesForeignKey, additionalInfo, criteria.TaskPreconditions));
+
+            criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleRelevantTables) ? string.Empty : 
+                string.Format(queryTemplateString,
+                additionalInfo.RuleRelevantReturns,
+                GenerateSQLFrom(tablesForeignKey, additionalInfo.RuleRelevantTables),
+                GenerateSQLWhere(false, tablesForeignKey, additionalInfo, criteria.TaskRules));
+
+            var result = taskService.InsertTask(criteria);
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        public string GenerateSQLFrom(List<TablesForeignKey> tablesForeignKey, string relevantTables)
+        {
+            if (relevantTables.Contains("COUNT"))
+            {
+                return relevantTables;
+            }
+
+            var tables = relevantTables.Split(',');
+            var sqlFromString = "bodb02.dbo.match tch ";
+            foreach (var table in tables)
+            {
+                sqlFromString += tablesForeignKey.Single(l => l.DBTable2.Trim().ToLower() == table.Trim().ToLower()).ForeignKey;
+            }
+
+
+            return RemoveRedundantSpace(sqlFromString);
+        }
+
+        public string GenerateSQLWhere(bool isPrecondition, List<TablesForeignKey> tablesForeignKey, TaskAdditionalInfo additionalInfo, string relevantConditions)
+        {
+            if (additionalInfo.RuleRelevantTables.Contains("COUNT"))
+            {
+                return relevantConditions;
+            }
+
+            var sqlWhereString = "tch.matchid in ($param1$) and (" + relevantConditions.Replace("%", "'").Replace("#", " ") + ")";
+            if (isPrecondition)
+            {
+                if (additionalInfo.IsCheckNotScanned)
+                {
+                    sqlWhereString = sqlWhereString.Replace("$param1$", additionalInfo.SQLForNotScanned);
+                }
+                else
+                {
+                    sqlWhereString = relevantConditions.Replace("%", "'").Replace("#", " ");
+                }
+            }
+
+            return RemoveRedundantSpace(sqlWhereString);
+        }
+
+        public string RemoveRedundantSpace(string targetString)
+        {
+
+            System.Text.RegularExpressions.RegexOptions options = System.Text.RegularExpressions.RegexOptions.None;
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", options);
+            targetString = regex.Replace(targetString, @" ");
+
+            return targetString;
         }
     }
 }
