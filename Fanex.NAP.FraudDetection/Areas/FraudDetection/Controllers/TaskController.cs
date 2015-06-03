@@ -7,33 +7,35 @@
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 // </history>
 
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models;
-using Fanex.NAP.FraudDetection.Controllers;
-using Fanex.NAP.FraudDetection.Model.ViewModel;
-using SPU.Lib.Core;
-using SPU.Lib.FraudDetection.Criteria;
-using SPU.Lib.FraudDetection.Criteria.Taks;
-using SPU.Lib.FraudDetection.Criteria.Task;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service;
-using Fanex.NAP.FraudDetection.Service;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.Script.Serialization;
+    using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models;
+    using Fanex.NAP.FraudDetection.Controllers;
+    using Fanex.NAP.FraudDetection.Model.ViewModel;
+    using Fanex.NAP.FraudDetection.Service;
+    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Criteria.Taks;
+    using SPU.Lib.FraudDetection.Criteria.Task;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service;
+
     public class TaskController : BaseController
     {
-        public int workflowID = 0;
+        private int _workflowID = 0;
 
         public ActionResult Index(string workflowId)
         {
-            if (int.TryParse(workflowId, out workflowID))
+            if (int.TryParse(workflowId, out _workflowID))
             {
-                return View("~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, workflowID));
+                return View(
+                    "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", 
+                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, _workflowID));
             }
             else
             {
@@ -41,7 +43,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
         }
 
-        public TaskViewModel GenerateViewModel(int onUserID, int workflowID)
+        public TaskViewModel GenerateViewModel(int currentUserID, int workflowID)
         {
             // Actions
             var actionService = new ActionService();
@@ -58,9 +60,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var groupList = new List<Group>();
             foreach (DataRow dr in dataCollection.Data.Tables[0].Rows)
             {
-                groupList.Add(new Group { 
+                groupList.Add(new Group 
+                { 
                     GroupId = int.Parse(dr["groupid"].ToString()),
-                    GroupName = dr["groupname"].ToString()});
+                    GroupName = dr["groupname"].ToString()
+                });
             }
 
             // Bettypes and Sports
@@ -68,12 +72,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var sportList = bettypeService.GetAllSBSports(new SportSelectAllCriteria());
             var bettypeList = bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
 
-            var taskViewModel = new TaskViewModel(actionList.ToList(), 
+            var taskViewModel = new TaskViewModel(
+                actionList.ToList(), 
                 configList.ToList(), 
                 groupList, 
                 sportList.ToList(), 
                 bettypeList.ToList());
-            taskViewModel.OnUserID = onUserID;
+            taskViewModel.OnUserID = currentUserID;
             taskViewModel.WorkflowID = workflowID;
 
             return taskViewModel;
@@ -100,19 +105,26 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult AddNewTask(TaskInsertCriteria criteria, TaskAdditionalInfo additionalInfo)
         {
+            if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The conditions are left blank. Please add condition(s) for the new Task." } };
+            }
+
             criteria.IsActive = false; // true;
             var queryTemplateString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             List<TablesForeignKey> tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
 
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconRelevantTables) ? string.Empty :
-                string.Format(queryTemplateString,
+                string.Format(
+                queryTemplateString,
                 additionalInfo.PreconRelevantReturns,
                 GenerateSQLFrom(tablesForeignKey, additionalInfo.PreconRelevantTables),
                 GenerateSQLWhere(true, tablesForeignKey, additionalInfo, criteria.TaskPreconditions));
 
             criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleRelevantTables) ? string.Empty : 
-                string.Format(queryTemplateString,
+                string.Format(
+                queryTemplateString,
                 additionalInfo.RuleRelevantReturns,
                 GenerateSQLFrom(tablesForeignKey, additionalInfo.RuleRelevantTables),
                 GenerateSQLWhere(false, tablesForeignKey, additionalInfo, criteria.TaskRules));
@@ -134,7 +146,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             {
                 sqlFromString += tablesForeignKey.Single(l => l.DBTable2.Trim().ToLower() == table.Trim().ToLower()).ForeignKey;
             }
-
 
             return RemoveRedundantSpace(sqlFromString);
         }
@@ -164,7 +175,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public string RemoveRedundantSpace(string targetString)
         {
-
             System.Text.RegularExpressions.RegexOptions options = System.Text.RegularExpressions.RegexOptions.None;
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", options);
             targetString = regex.Replace(targetString, @" ");

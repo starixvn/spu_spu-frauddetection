@@ -26,6 +26,7 @@
     <span class="infor-text">Add New Task</span>
 </div>
 <div class="newline">&nbsp;</div>
+<label id="addTaskResult" style="color: Red; font-weight: normal;"></label>
 @using (Html.BeginForm("AddNewTask", "Task", FormMethod.Post, new { @id = "AddTaskForm" }))
 {
     <div id="workflowid" style="display: none;">@Model.WorkflowID</div>

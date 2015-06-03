@@ -1,18 +1,15 @@
-﻿using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using Fanex.NAP.FraudDetection.Controllers;
-using SPU.Lib.Core;
-using SPU.Lib.FraudDetection.Criteria.Workflow;
-using SPU.Lib.FraudDetection.Service;
-using SPU.Lib.FraudDetection.Criteria.Taks;
-
-namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
+﻿namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
+    using System.Web.Mvc;
+    using System.Web.Script.Serialization;
+    using Fanex.NAP.FraudDetection.Controllers;
+    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.Criteria.Taks;
+    using SPU.Lib.FraudDetection.Criteria.Workflow;
+    using SPU.Lib.FraudDetection.Service;
+
     public class WorkflowController : BaseController
     {
-        //
-        // GET: /FraudDetection/Workflow/
-
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Workflow/WorkflowList.cshtml");            
@@ -29,8 +26,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             JavaScriptSerializer serializer = new JavaScriptSerializer();                        
             criteria.PageIndex++;
 
-            WorkflowService wfService = new WorkflowService();
-            var dataReader = wfService.GetWorkflows(criteria);
+            WorkflowService workflowService = new WorkflowService();
+            var dataReader = workflowService.GetWorkflows(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
             return Json(results, JsonRequestBehavior.AllowGet);
@@ -63,7 +60,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         /// <summary>
-        /// Display the list of taks by workflowId.
+        /// Display the list of task by workflowId.
         /// </summary>
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>

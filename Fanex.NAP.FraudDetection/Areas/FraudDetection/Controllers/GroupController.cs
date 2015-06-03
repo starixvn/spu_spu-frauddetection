@@ -7,15 +7,15 @@
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 // </history>
 
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using Fanex.NAP.FraudDetection.Controllers;
-using SPU.Lib.Core;
-using SPU.Lib.FraudDetection.Criteria;
-using SPU.Lib.FraudDetection.Service;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
+    using System.Web.Mvc;
+    using System.Web.Script.Serialization;
+    using Fanex.NAP.FraudDetection.Controllers;
+    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Service;
+
     public class GroupController : BaseController
     {
         public ActionResult Index()
