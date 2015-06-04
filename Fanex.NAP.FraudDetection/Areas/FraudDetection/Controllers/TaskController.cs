@@ -19,6 +19,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Fanex.NAP.FraudDetection.Model.ViewModel;
     using Fanex.NAP.FraudDetection.Service;
     using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.BusinessManager;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Criteria.Taks;
     using SPU.Lib.FraudDetection.Criteria.Task;
@@ -110,7 +111,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The conditions are left blank. Please add condition(s) for the new Task." } };
             }
 
-            criteria.IsActive = false; // true;
+            criteria.IsActive = true; // true;
+            criteria.TaskName = RemoveRedundantSpace(criteria.TaskName);
             var queryTemplateString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             List<TablesForeignKey> tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
@@ -130,6 +132,25 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 GenerateSQLWhere(false, tablesForeignKey, additionalInfo, criteria.TaskRules));
 
             var result = taskService.InsertTask(criteria);
+            if (result.Code == 0)
+            {
+                FraudAutoDetection syncNewTask = new FraudAutoDetection();
+                syncNewTask.AddNewTask(new Task(new TaskInfo {
+                    ActionId = criteria.ActionId,
+                    Interval = criteria.Interval,
+                IntervalType = criteria.IntervalType,
+                IsActive = true,
+                IsBackgroundProcess = true,
+                NextActionIdList = criteria.NextActionIdList,
+                NextActionTargetIdList = criteria.NextActionTargetIdList,
+                TaskPreconditions = criteria.TaskPreconditions,
+                TaskRules = criteria.TaskRules,
+                TaskDesc = criteria.TaskDesc,
+                TaskId = int.Parse(result.Message),
+                TaskName = criteria.TaskName,
+                WorkflowId = criteria.WorkflowId}));
+            }
+
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
