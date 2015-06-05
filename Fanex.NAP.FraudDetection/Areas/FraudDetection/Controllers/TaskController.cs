@@ -111,22 +111,30 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The conditions are left blank. Please add condition(s) for the new Task." } };
             }
 
+            if (string.IsNullOrEmpty(criteria.NextActionIdList) && string.IsNullOrEmpty(criteria.NextActionTargetIdList))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The next actions are left blank. Please add next action(s) for the new Task." } };
+            }
+
             criteria.IsActive = true; // true;
             criteria.TaskName = RemoveRedundantSpace(criteria.TaskName);
-            var queryTemplateString = "select {0} from {1} where {2}";
+            criteria.TaskPreconditionsOriginal = string.Empty;
+            criteria.TaskRulesOriginal = string.Empty;
+            var queryPreconString = "select top 100 {0} from {1} where {2}";
+            var queryRuleString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             List<TablesForeignKey> tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
 
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconRelevantTables) ? string.Empty :
                 string.Format(
-                queryTemplateString,
+                queryPreconString,
                 additionalInfo.PreconRelevantReturns,
                 GenerateSQLFrom(tablesForeignKey, additionalInfo.PreconRelevantTables),
                 GenerateSQLWhere(true, tablesForeignKey, additionalInfo, criteria.TaskPreconditions));
 
             criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleRelevantTables) ? string.Empty : 
                 string.Format(
-                queryTemplateString,
+                queryRuleString,
                 additionalInfo.RuleRelevantReturns,
                 GenerateSQLFrom(tablesForeignKey, additionalInfo.RuleRelevantTables),
                 GenerateSQLWhere(false, tablesForeignKey, additionalInfo, criteria.TaskRules));

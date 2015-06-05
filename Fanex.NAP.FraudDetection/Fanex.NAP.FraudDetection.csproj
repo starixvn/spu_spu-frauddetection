@@ -745,7 +745,9 @@
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\wells.less" />
     <Content Include="Content\Core\custom.less" />
-    <Content Include="Web.AppSettings.config" />
+    <Content Include="Web.AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\BetSetting\Default.cshtml" />
     <Content Include="Views\BetSetting\AddNew.cshtml" />
