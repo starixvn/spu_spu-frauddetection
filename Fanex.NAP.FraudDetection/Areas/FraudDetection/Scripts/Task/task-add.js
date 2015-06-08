@@ -1,7 +1,6 @@
 ﻿var NextActionIdList = "";
 var NextActionTargetIdList = "";
 var IsCheckNotScanned = true;
-var SQLForNotScanned = "";
 
 $(document).ready(function () {
     OnAccordionInitialize();
@@ -87,16 +86,15 @@ function OnInitialize() {
                 "ActionId": $("#ActionName").find(":selected").val(),
                 "Interval": $("#timeInterval").val(),
                 "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
-                "TaskPreconditions": $("#preconditionTableFormula").attr("data-formatted-formula"),
-                "TaskRules": $("#ruleTableFormula").attr("data-formatted-formula"),
+                "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
+                "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
+                "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
                 "NextActionIdList": NextActionIdList,
                 "NextActionTargetIdList": NextActionTargetIdList,
-                "PreconRelevantTables": $("#preconditionTableFormula").attr("data-tables"),
-                "RuleRelevantTables": $("#ruleTableFormula").attr("data-tables"),
-                "PreconRelevantReturns": $("#preconditionTableFormula").attr("data-returns"),
-                "RuleRelevantReturns": $("#ruleTableFormula").attr("data-returns"),
-                "IsCheckNotScanned": IsCheckNotScanned,
-                "SQLForNotScanned": SQLForNotScanned
+                "PreconConfigs": $("#preconditionTableFormula").attr("data-configids"),
+                "RuleConfigs": $("#ruleTableFormula").attr("data-configids"),
+                "IsCheckNotScanned": IsCheckNotScanned
             };
 
             $.ajax({
@@ -156,18 +154,38 @@ function GenerateConfig(parentName) {
         case "Compare":
             valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').text();
             break;
-        default:
+        case "TextBoxNumber":
             valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
+            break;
+        default:
+            valueSelectedValue = '%' + $('#' + parentName + 'ControlTextbox').val() + '%';
+    }
+
+    if (keySelectedValue == "Match State") {
+        if (valueSelectedValue == "scanned") {
+            IsCheckNotScanned = false;
+        };
     }
 
     return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
 }
 
-function GenerateConfigFormatted(parentName) {
+function GetSelectedConfigIds(parentName) {
+    var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
+    var configIds = $(keySelectedOption).attr("data-configid");
+
+    if ($("#" + parentName + "Compare").prop("checked") == true) {
+        configIds += "#" + $('#' + parentName + 'ControlComboBoxKeyClone').find(":selected").attr("data-configid");
+    }
+
+    return configIds;
+}
+
+
+function GenerateFormattedConfig(parentName) {
     // Config key
     var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
     var keySelectedValue = $(keySelectedOption).val();
-    var keySelectedFormattedValue = $(keySelectedOption).attr("data-sqlfield");
     var controlType = $(keySelectedOption).attr("data-controltype");
     if ($("#" + parentName + "Compare").prop("checked") == true) {
         controlType = "Compare";
@@ -186,7 +204,7 @@ function GenerateConfigFormatted(parentName) {
             valueSelectedValue = '%' + $('#' + parentName + 'ControlDatetimePicker').val() + '%';
             break;
         case "Compare":
-            valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').attr("data-sqlfield");
+            valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').text();
             break;
         case "TextBoxNumber":
             valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
@@ -195,35 +213,7 @@ function GenerateConfigFormatted(parentName) {
             valueSelectedValue = '%' + $('#' + parentName + 'ControlTextbox').val() + '%';
     }
 
-    if (keySelectedValue == "Match State") {
-        if(valueSelectedValue == "scanned") {
-            IsCheckNotScanned = false;
-        }
-
-        return "";
-    }
-
-    return keySelectedFormattedValue + " " + selectedOperator + " " + valueSelectedValue;
-}
-
-function GenerateRelevantTables(parentName) {
-    var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
-    var relatedTables = $(keySelectedOption).attr("data-sqltable");
-    if ($("#" + parentName + "Compare").prop("checked") == true) {
-        relatedTables += "," + $('#' + parentName + 'ControlComboBoxKeyClone').find(":selected").attr("data-sqltable");
-    }
-
-    return relatedTables;
-}
-
-function GenerateRelevantReturns(parentName) {
-    var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
-    var relatedReturns = $(keySelectedOption).attr("data-sqlreturns");
-    if ($("#" + parentName + "Compare").prop("checked") == true) {
-        relatedReturns += "," + $('#' + parentName + 'ControlComboBoxKeyClone').find(":selected").attr("data-sqlreturns");
-    }
-
-    return relatedReturns;
+    return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
 }
 
 function GenerateNextActions() {
@@ -289,32 +279,20 @@ function AddElement(parentName, elementString, isPrefix) {
             var checkboxId = $(this).attr('id');
             checkboxId = checkboxId.replace("cb_" + parentName, "");
             var targetObject = "#div_" + parentName + checkboxId;
-            var ruleContent = $(targetObject).text();
-            var ruleContentFormatted = $(targetObject).attr("data-encodedContent");
             var ruleRawContent = $(targetObject).attr("data-rawContent");
+            var ruleFormattedContent = $(targetObject).attr("data-formattedcontent");
             if (elementString == "AND#" || elementString == "OR#") {
-                ruleContent = ruleContent.replace(/AND#/g, "").replace(/OR#/g, "");
-                ruleContentFormatted = ruleContentFormatted.replace(/AND#/g, "").replace(/OR#/g, "");
                 ruleRawContent = ruleRawContent.replace(/AND#/g, "").replace(/OR#/g, "");
-            }
-
-            if (ruleContent.indexOf("Match State") >= 0) {
-                ruleContentFormatted = "";
-            }
-            else {
-                ruleContentFormatted = isPrefix ? elementString + ruleContentFormatted : ruleContentFormatted + elementString;
+                ruleFormattedContent = ruleFormattedContent.replace(/AND#/g, "").replace(/OR#/g, "");
             }
 
             ruleRawContent = isPrefix ? elementString + ruleRawContent : ruleRawContent + elementString;
-            ruleContent = ruleRawContent;
-
-            WorkWithLogicOperator(ruleContent);
-            WorkWithLogicOperator(ruleContentFormatted);
-            WorkWithLogicOperator(ruleRawContent);
-
-            $(targetObject).attr("data-encodedContent", ruleContentFormatted);
-            $(targetObject).attr("data-rawContent", ruleRawContent);
-            $(targetObject).html(ruleContent.replace(/#/g, " "));
+            ruleFormattedContent = isPrefix ? elementString + ruleFormattedContent : ruleFormattedContent + elementString;
+            ruleRawContent = WorkWithLogicOperator(ruleRawContent);
+            ruleFormattedContent = WorkWithLogicOperator(ruleFormattedContent);
+            $(targetObject).attr("data-rawcontent", ruleRawContent);
+            $(targetObject).attr("data-formattedcontent", ruleFormattedContent);
+            $(targetObject).html(ruleRawContent.replace(/#/g, " "));
         }
     });
 
@@ -330,6 +308,8 @@ function WorkWithLogicOperator(targetString) {
         targetString = targetString.replace(/OR#/g, "")
         targetString = "OR#" + targetString;
     }
+
+    return targetString;
 }
 
 function RemoveElement(parentName, elementString) {
@@ -338,10 +318,13 @@ function RemoveElement(parentName, elementString) {
             var checkboxId = $(this).attr('id');
             checkboxId = checkboxId.replace("cb_" + parentName, "");
             var targetObject = "#div_" + parentName + checkboxId;
-            var ruleContent = $(targetObject).attr("data-encodedContent");
-            ruleContent = ruleContent.replace(elementString, "");
-            $(targetObject).attr("data-encodedContent", ruleContent);
-            $(targetObject).html(ruleContent.replace(/#/g, " "));
+            var rawContent = $(targetObject).attr("data-rawcontent");
+            var formattedContent = $(targetObject).attr("data-formattedcontent");
+            rawContent = rawContent.replace(elementString, "");
+            formattedContent = formattedContent.replace(elementString, "");
+            $(targetObject).attr("data-rawcontent", rawContent);
+            $(targetObject).attr("data-formattedcontent", formattedContent);
+            $(targetObject).html(rawContent.replace(/#/g, " "));
         }
     });
 
@@ -350,12 +333,11 @@ function RemoveElement(parentName, elementString) {
 
 function AddingOneMoreRuleToTable(tableName, rowNumber, parentName) {
     var ruleString = GenerateConfig(parentName);
-    var ruleStringFormatted = GenerateConfigFormatted(parentName);
-    var relevantTables = GenerateRelevantTables(parentName);
-    var returns = GenerateRelevantReturns(parentName);
+    var formattedRuleString = GenerateFormattedConfig(parentName);
+    var configIds = GetSelectedConfigIds(parentName);
 
     var blockOfTableRow = "<tr id='" + tableName + rowNumber + "'><td><input type='checkbox' id='cb_" + tableName + rowNumber + "' /></td>";
-    blockOfTableRow += "<td style='width: 510px;'><div id='div_" + tableName + rowNumber + "' data-returns='" + returns + "' data-tables='" + relevantTables + "' data-encodedContent='" + ruleStringFormatted + "' data-rawContent='" + ruleString + "'>" + ruleString + "</div></td>";
+    blockOfTableRow += "<td style='width: 510px;'><div id='div_" + tableName + rowNumber + "' data-configid='" + configIds + "' data-rawcontent='" + ruleString + "' data-formattedcontent='" + formattedRuleString + "'>" + ruleString + "</div></td>";
     blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='/Areas/FraudDetection/App_Themes/Images/Delete.gif' onclick='RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
     blockOfTableRow = blockOfTableRow.replace(/@/g, '"'); 
 
@@ -418,75 +400,51 @@ function renderConfigControl(parentName, selectedValue, controlType) {
 }
 
 //=========================================================================
-/* GET/UPDATE/CHECK FORMULA */ 
+/* GET/UPDATE/CHECK FORMULA */
 function UpdateFormula(parentName) {
-    var formula = GetFormula(parentName);
-
-    $('#' + parentName + 'Formula').attr('data-formatted-formula', GetFormattedFormula(parentName));
-    $('#' + parentName + 'Formula').attr('data-rawcontent', GetRawFormula(parentName));
-    $('#' + parentName + 'Formula').attr('data-tables', GetRelevantTables(parentName));
-    $('#' + parentName + 'Formula').attr('data-returns', GetReturns(parentName));
-    $('#' + parentName + 'Formula').text(formula.replace(/#/g, " "));
-}
-
-function GetFormula(parentName) {
-    var formula = "";
-    $('div[id^="div_' + parentName + '"]').each(function () {
-        formula += $(this).text() + "#";
-    });
-
-    formula = formula.slice(0, -1);
-    return formula;
+    var rawFormula = GetRawFormula(parentName);
+    $('#' + parentName + 'Formula').attr('data-rawcontent', rawFormula);
+    $('#' + parentName + 'Formula').attr('data-formattedcontent', GetFormattedFormula(parentName));
+    $('#' + parentName + 'Formula').attr('data-configids', GetAllConfigIds(parentName));
+    $('#' + parentName + 'Formula').text(rawFormula.replace(/#/g, " "));
 }
 
 function GetRawFormula(parentName) {
-    var formula = "";
+    var rawFormula = "";
     $('div[id^="div_' + parentName + '"]').each(function () {
-        formula += $(this).attr("data-rawcontent") + "#";
+        rawFormula += $(this).attr("data-rawcontent") + "#";
     });
 
-    formula = formula.slice(0, -1);
-    return formula;
+    rawFormula = rawFormula.slice(0, -1);
+    return rawFormula;
 }
 
 function GetFormattedFormula(parentName) {
-    var formula = "";
+    var rawFormula = "";
     $('div[id^="div_' + parentName + '"]').each(function () {
-        formula += $(this).attr("data-encodedContent") + "#";
+        var currentRawContent = $(this).attr("data-formattedcontent");
+        if (currentRawContent.indexOf("Match State") < 0) {
+            rawFormula += currentRawContent + "#";
+        }
     });
 
-    formula = formula.slice(0, -1);
-    return formula;
+    rawFormula = rawFormula.slice(0, -1);
+    return rawFormula;
 }
 
-function GetRelevantTables(parentName) {
-    var tables = "";
+function GetAllConfigIds(parentName) {
+    var configids = "";
     $('div[id^="div_' + parentName + '"]').each(function () {
-        var newTables = $(this).attr("data-tables").split(',');
-        for (var i = 0; i < newTables.length; i++) {
-            if (tables.indexOf(newTables[i]) == -1) {
-                tables += newTables[i] + ",";
+        var configs = $(this).attr("data-configid").split("#");
+        for (var i = 0; i < configs.length; i++) {
+            if (configids.indexOf(configs[i]) < 0) {
+                configids += configs[i] + "#";
             }
         }
     });
 
-    tables = tables.slice(0, -1);
-    return tables;
-}
-
-function GetReturns(parentName) {
-    var sqlReturns = "";
-    $('div[id^="div_' + parentName + '"]').each(function () {
-        var newReturns = $(this).attr("data-returns").split(',');
-        for (var i = 0; i < newReturns.length; i++) {
-            if (sqlReturns.indexOf(newReturns[i]) == -1) {
-                sqlReturns += newReturns[i] + ",";
-            }
-        }
-    });
-
-    sqlReturns = sqlReturns.slice(0, -1);
-    return sqlReturns;
+    configids = configids.slice(0, -1);
+    return configids;
 }
 
 function CheckFormula(parentName) {

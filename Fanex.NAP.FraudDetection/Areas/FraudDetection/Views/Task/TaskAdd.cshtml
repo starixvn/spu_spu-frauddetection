@@ -41,9 +41,7 @@
                     <select name="ActionName" id="ActionName" style="height: 25px;" onchange="changeActionSelection(this)">
                         @foreach (var action in Model.ActionList)
                         {
-                            <option value="@action.ActionId" data-actiondesc="@action.ActionDesc">
-                                @action.ActionName
-                            </option>
+                            <option value="@action.ActionId" data-actiondesc="@action.ActionDesc">@action.ActionName</option>
                         }
                     </select>
                     <label id="selectedActionDesc" style="font-weight: normal;">@Model.ActionList[0].ActionDesc</label>
@@ -69,11 +67,7 @@
             <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, true)">
                 @foreach (var config in Model.PreconditionConfigurations)
                 {
-                    <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" 
-                    data-category="@config.ConfigCategory" data-sqltable="@config.ConfigSQLTable"
-                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
-                        @config.ConfigName
-                    </option>
+                    <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
                 }
             </select>
             <select style="height: 25px;" id="preconditionConfigOperator">
@@ -87,10 +81,7 @@
             <select id="preconditionConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                 @foreach (var config in Model.PreconditionConfigurations)
                 {
-                    <option value="@config.ConfigName" data-sqltable="@config.ConfigSQLTable"
-                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
-                        @config.ConfigName
-                    </option>
+                    <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
                 }
             </select>
             <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxmatchstatus">
@@ -109,9 +100,7 @@
             <select name="preconditionConfigControlComboBoxsport" id="preconditionConfigControlComboBoxsport" style="height: 25px; display:none;">
                 @foreach (var sport in Model.SportList)
                 {
-                    <option value="@sport.SportId">
-                        @sport.SportName
-                    </option>
+                    <option value="@sport.SportId">@sport.SportName</option>
                 }
             </select>
             <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px; display: none;" />
@@ -127,7 +116,7 @@
                 <table id="preconditionTable" class="table-items"><tr style="display:none"><td></td><td></td><td></td></tr></table>
             </div>
             <div class="newline">&nbsp;</div>
-            <label id="preconditionTableFormula" data-formatted-formula="" data-rawcontent="" data-tables="" data-returns=""></label>
+            <label id="preconditionTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
             <div class="newline">&nbsp;</div>
             <div>
                 <input type="button" onclick="AddFormulaElement(true, '(#', true)" value="(+" class="btn-green" />
@@ -150,11 +139,7 @@
             <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, false)">
                 @foreach (var config in Model.RuleConfigurations)
                 {
-                    <option value="@config.ConfigName" data-controltype="@config.ConfigControlType"
-                    data-category="@config.ConfigCategory" data-sqltable="@config.ConfigSQLTable"
-                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
-                        @config.ConfigName
-                    </option>
+                    <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
                 }
             </select>
             <select style="height: 25px;" id="ruleConfigOperator">
@@ -168,10 +153,7 @@
             <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                 @foreach (var config in Model.RuleConfigurations)
                 {
-                    <option value="@config.ConfigName" data-sqltable="@config.ConfigSQLTable" 
-                    data-sqlfield="@config.ConfigSQLField" data-sqlreturns="@config.ConfigSQLReturn">
-                        @config.ConfigName
-                    </option>
+                    <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
                 }
             </select>
             <select style="height: 25px; display: none;" id="ruleConfigControlComboBoxstatus">
@@ -186,9 +168,7 @@
             <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype" style="height: 25px; display:none;">
                 @foreach (var bettype in Model.BettypeList)
                 {
-                    <option value="@bettype.BettypeId">
-                        @bettype.BettypeName
-                    </option>
+                    <option value="@bettype.BettypeId">@bettype.BettypeName</option>
                 }
             </select>
             <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
@@ -204,7 +184,7 @@
                 <table id="ruleTable" class="table-items"><tr style="display:none"><td></td><td></td><td></td></tr></table>
             </div>
             <div class="newline">&nbsp;</div>            
-            <label id="ruleTableFormula" data-formatted-formula="" data-rawcontent="" data-tables="" data-returns=""></label>
+            <label id="ruleTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
             <div class="newline">&nbsp;</div>
             <div>
                 <input type="button" onclick="AddFormulaElement(false, '(', true)" value="(+" class="btn-green" />
@@ -234,9 +214,7 @@
                     <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;">
                         @foreach (var group in Model.GroupList)
                         {
-                            <option value="@group.GroupId" >
-                                @group.GroupName
-                            </option>
+                            <option value="@group.GroupId" >@group.GroupName</option>
                         }
                     </select>
                 </td>

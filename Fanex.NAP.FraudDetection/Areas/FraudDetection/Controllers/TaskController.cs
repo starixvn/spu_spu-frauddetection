@@ -30,6 +30,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     {
         private int _workflowID = 0;
 
+        /// <summary>
+        /// Home page for Task.
+        /// </summary>
+        /// <param name="workflowId">Workflow ID.</param>
+        /// <returns>Action Result.</returns>
         public ActionResult Index(string workflowId)
         {
             if (int.TryParse(workflowId, out _workflowID))
@@ -44,6 +49,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
         }
 
+        /// <summary>
+        /// Generate Task View Model.
+        /// </summary>
+        /// <param name="currentUserID">Current User ID.</param>
+        /// <param name="workflowID">Workflow ID.</param>
+        /// <returns>Task View Model.</returns>
         public TaskViewModel GenerateViewModel(int currentUserID, int workflowID)
         {
             // Actions
@@ -103,6 +114,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Add New Task.
+        /// </summary>
+        /// <param name="criteria">Task Insert Criteria.</param>
+        /// <param name="additionalInfo">Additional Info.</param>
+        /// <returns>Action Result.</returns>
         [HttpPost]
         public ActionResult AddNewTask(TaskInsertCriteria criteria, TaskAdditionalInfo additionalInfo)
         {
@@ -116,61 +133,104 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The next actions are left blank. Please add next action(s) for the new Task." } };
             }
 
-            criteria.IsActive = true; // true;
-            criteria.TaskName = RemoveRedundantSpace(criteria.TaskName);
-            criteria.TaskPreconditionsOriginal = string.Empty;
-            criteria.TaskRulesOriginal = string.Empty;
+            criteria.IsActive = true;
             var queryPreconString = "select top 100 {0} from {1} where {2}";
             var queryRuleString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
-            List<TablesForeignKey> tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
+            var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
+            var configurationService = new ConfigurationsService();
+            var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
 
-            criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconRelevantTables) ? string.Empty :
+            criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
                 string.Format(
                 queryPreconString,
-                additionalInfo.PreconRelevantReturns,
-                GenerateSQLFrom(tablesForeignKey, additionalInfo.PreconRelevantTables),
-                GenerateSQLWhere(true, tablesForeignKey, additionalInfo, criteria.TaskPreconditions));
+                GenerateSQLSelect(configList, additionalInfo.PreconConfigs),
+                GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.PreconConfigs),
+                GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions));
 
-            criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleRelevantTables) ? string.Empty : 
+            criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty : 
                 string.Format(
                 queryRuleString,
-                additionalInfo.RuleRelevantReturns,
-                GenerateSQLFrom(tablesForeignKey, additionalInfo.RuleRelevantTables),
-                GenerateSQLWhere(false, tablesForeignKey, additionalInfo, criteria.TaskRules));
+                GenerateSQLSelect(configList, additionalInfo.RuleConfigs),
+                GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.RuleConfigs),
+                GenerateSQLWhere(configList, false, additionalInfo, criteria.TaskRules));
 
             var result = taskService.InsertTask(criteria);
             if (result.Code == 0)
             {
-                FraudAutoDetection syncNewTask = new FraudAutoDetection();
-                syncNewTask.AddNewTask(new Task(new TaskInfo {
-                    ActionId = criteria.ActionId,
-                    Interval = criteria.Interval,
-                IntervalType = criteria.IntervalType,
-                IsActive = true,
-                IsBackgroundProcess = true,
-                NextActionIdList = criteria.NextActionIdList,
-                NextActionTargetIdList = criteria.NextActionTargetIdList,
-                TaskPreconditions = criteria.TaskPreconditions,
-                TaskRules = criteria.TaskRules,
-                TaskDesc = criteria.TaskDesc,
-                TaskId = int.Parse(result.Message),
-                TaskName = criteria.TaskName,
-                WorkflowId = criteria.WorkflowId}));
+                PushNewTaskToRun(criteria, int.Parse(result.Message));
             }
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
-        public string GenerateSQLFrom(List<TablesForeignKey> tablesForeignKey, string relevantTables)
+        /// <summary>
+        /// Push New Task To Run Automatically.
+        /// </summary>
+        /// <param name="criteria">Task Insert Criteria.</param>
+        /// <param name="taskId">Inserted Task ID.</param>
+        public void PushNewTaskToRun(TaskInsertCriteria criteria, int taskId)
         {
-            if (relevantTables.Contains("COUNT"))
+            FraudAutoDetection syncNewTask = new FraudAutoDetection();
+            syncNewTask.AddNewTask(
+                new Task(new TaskInfo
+                {
+                    ActionId = criteria.ActionId,
+                    Interval = criteria.Interval,
+                    IntervalType = criteria.IntervalType,
+                    IsActive = true,
+                    IsBackgroundProcess = true,
+                    NextActionIdList = criteria.NextActionIdList,
+                    NextActionTargetIdList = criteria.NextActionTargetIdList,
+                    TaskPreconditions = criteria.TaskPreconditions,
+                    TaskRules = criteria.TaskRules,
+                    TaskDesc = criteria.TaskDesc,
+                    TaskId = taskId,
+                    TaskName = criteria.TaskName,
+                    WorkflowId = criteria.WorkflowId
+                }));
+        }
+
+        /// <summary>
+        /// Generate SQL Select.
+        /// </summary>
+        /// <param name="configs">List of configurations.</param>
+        /// <param name="selectedConfigIds">Selected Config IDs.</param>
+        /// <returns>SQL Select string.</returns>
+        public string GenerateSQLSelect(List<Config> configs, string selectedConfigIds)
+        {
+            var sqlSelectString = string.Empty;
+            var configsList = selectedConfigIds.Split('#');
+            foreach (var config in configsList)
+            {
+                var currentRelevantReturn = configs.Single(l => l.ConfigId == int.Parse(config)).ConfigSQLReturn;
+                if (!sqlSelectString.Contains(currentRelevantReturn))
+                {
+                    sqlSelectString += currentRelevantReturn + ",";
+                }
+            }
+
+            return sqlSelectString.Remove(sqlSelectString.Length - 1);
+        }
+
+        /// <summary>
+        /// Generate SQL From.
+        /// </summary>
+        /// <param name="configs">List of configurations.</param>
+        /// <param name="tablesForeignKey">Tables' Foreign Keys.</param>
+        /// <param name="selectedConfigIds">Selected Config IDs.</param>
+        /// <returns>SQL From string.</returns>
+        public string GenerateSQLFrom(List<Config> configs, List<TablesForeignKey> tablesForeignKey, string selectedConfigIds)
+        {
+            var sqlFromString = "bodb02.dbo.match tch ";
+            var relevantTables = GenerateRelevantTables(configs, selectedConfigIds);
+
+            if (relevantTables.ToLower().Contains("count"))
             {
                 return relevantTables;
             }
 
             var tables = relevantTables.Split(',');
-            var sqlFromString = "bodb02.dbo.match tch ";
             foreach (var table in tables)
             {
                 sqlFromString += tablesForeignKey.Single(l => l.DBTable2.Trim().ToLower() == table.Trim().ToLower()).ForeignKey;
@@ -179,29 +239,75 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return RemoveRedundantSpace(sqlFromString);
         }
 
-        public string GenerateSQLWhere(bool isPrecondition, List<TablesForeignKey> tablesForeignKey, TaskAdditionalInfo additionalInfo, string relevantConditions)
+        /// <summary>
+        /// Generate SQL Where.
+        /// </summary>
+        /// <param name="configs">List of configurations.</param>
+        /// <param name="isPrecondition">Is Precondition.</param>
+        /// <param name="additionalInfo">Additional Info.</param>
+        /// <param name="formula">Original Formula.</param>
+        /// <returns>SQL Where string.</returns>
+        public string GenerateSQLWhere(List<Config> configs, bool isPrecondition, TaskAdditionalInfo additionalInfo, string formula)
         {
-            if (additionalInfo.RuleRelevantTables.Contains("COUNT"))
+            var sqlForNotScanned = configs.Single(l => l.ConfigName.ToLower().Trim() == "matchstate").ConfigSQLField;
+            var relevantTables = isPrecondition
+                ? GenerateRelevantTables(configs, additionalInfo.PreconConfigs)
+                : GenerateRelevantTables(configs, additionalInfo.RuleConfigs);
+            var configIds = isPrecondition ? additionalInfo.PreconConfigs.Split('#') : additionalInfo.RuleConfigs.Split('#');
+            foreach (var configId in configIds)
             {
-                return relevantConditions;
+                var config = configs.Single(l => l.ConfigId == int.Parse(configId));
+                formula = formula.Replace(config.ConfigName, config.ConfigSQLField);
             }
 
-            var sqlWhereString = "tch.matchid in ($param1$) and (" + relevantConditions.Replace("%", "'").Replace("#", " ") + ")";
+            if (relevantTables.ToLower().Contains("count"))
+            {
+                return formula;
+            }
+
+            var sqlWhereString = "tch.matchid in ($param1$) and (" + formula.Replace("%", "'").Replace("#", " ") + ")";
             if (isPrecondition)
             {
                 if (additionalInfo.IsCheckNotScanned)
                 {
-                    sqlWhereString = sqlWhereString.Replace("$param1$", additionalInfo.SQLForNotScanned);
+                    sqlWhereString = sqlWhereString.Replace("$param1$", sqlForNotScanned);
                 }
                 else
                 {
-                    sqlWhereString = relevantConditions.Replace("%", "'").Replace("#", " ");
+                    sqlWhereString = formula.Replace("%", "'").Replace("#", " ");
                 }
             }
 
             return RemoveRedundantSpace(sqlWhereString);
         }
 
+        /// <summary>
+        /// Generate Relevant Tables.
+        /// </summary>
+        /// <param name="configs">List of configurations.</param>
+        /// <param name="selectedConfigIds">Selected Config IDs.</param>
+        /// <returns>List of selected tables.</returns>
+        public string GenerateRelevantTables(List<Config> configs, string selectedConfigIds)
+        {
+            var relevantTables = string.Empty;
+            var configsList = selectedConfigIds.Split('#');
+            foreach (var config in configsList)
+            {
+                var currentRelevantTable = configs.Single(l => l.ConfigId == int.Parse(config)).ConfigSQLTable;
+                if (!relevantTables.Contains(currentRelevantTable))
+                {
+                    relevantTables += currentRelevantTable + ",";
+                }
+            }
+
+            return relevantTables.Remove(relevantTables.Length - 1);
+        }
+
+        /// <summary>
+        /// Remove multiple space in a string.
+        /// </summary>
+        /// <param name="targetString">Target String.</param>
+        /// <returns>Formatted String.</returns>
         public string RemoveRedundantSpace(string targetString)
         {
             System.Text.RegularExpressions.RegexOptions options = System.Text.RegularExpressions.RegexOptions.None;

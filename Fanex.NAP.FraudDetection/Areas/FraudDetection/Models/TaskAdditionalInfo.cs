@@ -11,16 +11,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models
 {
     public class TaskAdditionalInfo
     {
-        public string PreconRelevantTables { get; set; }
+        public string PreconConfigs { get; set; }
 
-        public string RuleRelevantTables { get; set; }
-
-        public string PreconRelevantReturns { get; set; }
-
-        public string RuleRelevantReturns { get; set; }
+        public string RuleConfigs { get; set; }
 
         public bool IsCheckNotScanned { get; set; }
-
-        public string SQLForNotScanned { get; set; }
     }
 }
