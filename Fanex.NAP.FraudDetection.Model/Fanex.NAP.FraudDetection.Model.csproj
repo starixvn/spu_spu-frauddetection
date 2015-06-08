@@ -112,45 +112,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Criteria\CustomerGroup\CustomerGroupUpdateCriteria.cs" />
-    <Compile Include="Criteria\CustomerGroup\CustomerGroupsSelectCriteria.cs" />
-    <Compile Include="Criteria\CustomerGroup\CustomerGroupInsertCriteria.cs" />
-    <Compile Include="Criteria\DefaultBetSetting_OLD\GetAgentListCriteria.cs" />
-    <Compile Include="Criteria\DefaultBetSetting_OLD\GetSettingLogCriteria.cs" />
-    <Compile Include="Criteria\DefaultBetSetting_OLD\GetSingleDefaultBetSettingCriteria.cs" />
-    <Compile Include="Criteria\DefaultBetSetting_OLD\InsertOrUpdateDefaultBetSetting.cs" />
-    <Compile Include="Criteria\DefaultBetSetting_OLD\GetAllDefaultBetSettingCriteria.cs" />
-    <Compile Include="DataDomain\LogActionType_OLD.cs" />
-    <Compile Include="DataDomain\NapLicenseeFunctionKeys.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NapLicenseeFunctionKeys.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataDomain\StaticSiteValue_OLD.cs" />
-    <Compile Include="DTO\CustomerGroup\Group.cs" />
-    <Compile Include="DTO\DefaultBetSetting\AgentItem_OLD.cs" />
-    <Compile Include="DTO\CurrencyItem_OLD.cs" />
-    <Compile Include="DTO\DefaultBetSetting\DefaultBetSetting_OLD.cs" />
-    <Compile Include="DTO\LicenseeItem_OLD.cs" />
-    <Compile Include="DTO\DefaultBetSetting\BetSettingBySport_OLD.cs" />
-    <Compile Include="DTO\ResultInfo_OLD.cs" />
-    <Compile Include="DTO\DefaultBetSetting\SettingLogItem_OLD.cs" />
-    <Compile Include="DTO\DefaultBetSetting\SportOrGameItem_OLD.cs" />
-    <Compile Include="DTO\DefaultBetSetting\XmlLog\LogTemplate_OLD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DataDomain\NapLicenseeFunctionKeys.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>NapLicenseeFunctionKeys.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
-    <Compile Include="SettingItemHelper.cs" />
     <Compile Include="ViewModel\Task\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\DefaultBetSetting\" />
+    <Folder Include="Criteria\" />
+    <Folder Include="DataDomain\" />
+    <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

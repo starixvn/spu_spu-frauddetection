@@ -4,27 +4,25 @@
     <file relUrl="SiteConfig/Web.ConnectionString.UAT.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/Views/Web.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/mixins/size.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/jquery-ui/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Views/BetSetting/__InsertLogItems.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/go-hover-icon.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Core/jquery.contextMenu.css" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/back-icon.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/bootstrap.less" publishTime="04/10/2015 09:37:18" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-bg_glass_75_dadada_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins.less" publishTime="04/21/2015 16:25:37" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.Model.pdb" publishTime="06/03/2015 16:07:33" />
-    <file relUrl="Areas/UserLogin/themes/img/title-bg.jpg" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.Model.pdb" publishTime="06/04/2015 17:21:47" />
     <file relUrl="Content/bootstrap/mixins/center-block.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/themes/img/bkg-pat.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.WebPages.Razor.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tittlebg_right.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/UserLogin/themes/login.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/arrow-button.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.pdb" publishTime="06/04/2015 14:37:22" />
+    <file relUrl="Areas/FraudDetection/Scripts/Core/FraudDetectionScripts.js" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.pdb" publishTime="06/05/2015 09:45:53" />
     <file relUrl="bin/Microsoft.Practices.EnterpriseLibrary.Common.dll" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/System.Web.Http.WebHost.dll" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="Content/bootstrap/wells.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Plugin/multi-select-control.css" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/UserLogin/Views/UserSite/Site.cshtml" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.Mvc.xml" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/bootstrap/navs.less" publishTime="04/21/2015 08:55:59" />
@@ -32,8 +30,10 @@
     <file relUrl="Content/Core/custom.less" publishTime="05/19/2015 09:32:24" />
     <file relUrl="bin/System.Web.Http.WebHost.xml" publishTime="04/21/2015 08:56:00" />
     <file relUrl="bin/System.Web.Helpers.dll" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="bin/SPU.Lib.FraudDetection.Service.dll" publishTime="06/04/2015 14:29:39" />
+    <file relUrl="bin/SPU.Lib.FraudDetection.Service.dll" publishTime="06/05/2015 09:44:45" />
     <file relUrl="Content/bootstrap/fonts/glyphicons-halflings-regular.eot" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="SiteConfig/Web.ConnectionString.SANDBOX.config" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/msgbox/msgbox-0.0.1.js" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/Scripts/Group/group-add.js" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Core/site.less" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/slash-gray.png" publishTime="05/07/2015 16:06:40" />
@@ -43,20 +43,20 @@
     <file relUrl="Areas/UserLogin/themes/img/header_bg.jpg" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bgLogin.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/Page/DefaultBetSetting/viewlog.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/Core/img/icon-question.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/Fanex.Grid/images/expand-icon.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/mixins/progress-bar.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Fanex.Grid/images/collapse-icon.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/top-bg.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/untick-ico-deactivate-16.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/cancel.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/jquery-ui/base/images/ui-icons_2e83ff_256x240.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/jumbotron.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="SiteConfig/Web.ConnectionString.SANDBOX.config" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/repass.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/jquery-ui.min-1.11.1.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/jquery-ui/base/progressbar.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/editsetting.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/UserLogin/themes/img/password.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Views/BetSetting/Edit.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/icon_page.gif" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/reject.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/Views/Workflow/WorkflowAdd.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="SiteConfig/Web.PRO.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bkg-pat.png" publishTime="05/07/2015 16:06:40" />
@@ -64,19 +64,19 @@
     <file relUrl="Areas/FraudDetection/Scripts/Workflow/workflow-list.js" publishTime="05/19/2015 09:21:03" />
     <file relUrl="Scripts/Fanex.Grid/Language/Fanex.Gird.Lang.vi-VN.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/breadcrumb.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="packages.config" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/bootstrap/theme.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.Http.dll" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="bin/MvcPager.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/bootstrap/mixins/alerts.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/mixins/resize.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-icons_222222_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Newtonsoft.Json.xml" publishTime="04/27/2015 13:51:07" />
     <file relUrl="Areas/UserLogin/scripts/ReCheckIn.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/basic-icon.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/UMControllerLibrary.dll" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="bin/System.Web.Optimization.xml" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="Areas/UserLogin/themes/img/warn.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Glimpse.Core.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/jquery-ui-1.11.1.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/UserLogin/Views/Shared/_Layout.cshtml" publishTime="04/23/2015 10:39:36" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_highlight-hard_70_000000_1x100.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/print.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.Optimization.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/bootstrap/tooltip.less" publishTime="04/21/2015 08:55:59" />
@@ -87,8 +87,8 @@
     <file relUrl="Content/Core/common.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/Scripts/Core/jquery.contextmenu.js" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/System.Net.Http.dll" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Areas/FraudDetection/Views/Task/TaskAdd.cshtml" publishTime="06/03/2015 14:57:08" />
-    <file relUrl="Content/Fanex.Grid/images/icn_add.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_72a7cf_256x240.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/Views/Group/GroupInfo.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/System.Net.Http.WebRequest.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css" publishTime="05/19/2015 09:32:24" />
     <file relUrl="Content/bootstrap/fonts/glyphicons-halflings-regular.ttf" publishTime="04/21/2015 08:55:59" />
@@ -100,16 +100,18 @@
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_2694e8_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/blue_numbers.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Views/BetSetting/Default.cshtml" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/UserLogin/themes/img/welcome.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/drop.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="SiteConfig/Web.AppSettings.UAT.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Fanex.Common.dll" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/jquery-ui/base/autocomplete.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_cd0a0a_256x240.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/UserLogin/themes/img/firefox_original.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/approve.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/Fanex.Grid/Language/Fanex.Gird.Lang.th-TH.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/themes/img/logo.png" publishTime="04/22/2015 16:51:54" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.Model.dll" publishTime="06/03/2015 16:07:33" />
-    <file relUrl="Content/bootstrap/mixins/list-group.less" publishTime="04/22/2015 14:52:59" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.Model.dll" publishTime="06/04/2015 17:21:47" />
     <file relUrl="Content/bootstrap/scaffolding.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/JavaScriptEngineSwitcher.Core.dll" publishTime="04/27/2015 13:51:07" />
     <file relUrl="Content/jquery-ui/base/core.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/Views/Workflow/WorkflowList.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/sprite_ico_2012-05-15.png" publishTime="05/07/2015 16:06:40" />
@@ -117,17 +119,18 @@
     <file relUrl="Scripts/Fanex.Grid/Language/Fanex.Gird.Lang.ko-KR.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/breadcrumbs.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Fanex.Grid/images/check-box.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.dll" publishTime="06/04/2015 14:37:23" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.dll" publishTime="06/05/2015 09:45:53" />
     <file relUrl="SiteConfig/Web.ConnectionString.LOCAL.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/scripts/lib/jquery-1.9.0.min.js" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/bootstrap/grid.less" publishTime="04/21/2015 16:25:30" />
     <file relUrl="Content/Fanex.Grid/images/1350530947_page_excel.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/msgbox/images/btn-close.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_3d80b3_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Core/jquery.ui.css" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tp_maintenance.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/Fanex.Grid/Language/Fanex.Gird.Lang.zh-TW.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/Core/img/btn-close.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/SPU.Lib.FraudDetection.DTO.dll" publishTime="06/03/2015 16:04:26" />
+    <file relUrl="Content/bootstrap/mixins/forms.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ajax-loader.gif" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/jquery-1.9.1.js" publishTime="04/27/2015 13:51:50" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bullet.png" publishTime="05/07/2015 16:06:40" />
@@ -139,6 +142,7 @@
     <file relUrl="Areas/FraudDetection/App_Themes/Images/icons.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_95_fef1ec_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/utilities.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/home.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins/opacity.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/resizable.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/pagination.less" publishTime="04/21/2015 08:55:59" />
@@ -147,33 +151,31 @@
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_454545_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/Fanex.Pagination.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Fanex.MailDeliver.MailClient.dll" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/bootstrap/mixins/pagination.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/thumbnails.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/Edit.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/desc.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="App_Data/NAPFrameworkSpNames.xml" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/UserLogin/Views/Common/Offline.cshtml" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_888888_256x240.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="bin/Microsoft.Practices.EnterpriseLibrary.Data.dll" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/bootstrap/mixins/background-variant.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/jquery-ui/base/menu.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="SiteConfig/Web.ConnectionString.config1.txt" publishTime="04/21/2015 09:31:55" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tittlebg_center.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Glimpse.AspNet.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tick-icon.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/System.Web.WebPages.Deployment.xml" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Scripts/jquery-1.9.0.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/type.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_72a7cf_256x240.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/dotless.Core.dll" publishTime="05/05/2015 09:49:26" />
+    <file relUrl="Content/bootstrap/mixins/vendor-prefixes.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/Views/Group/GroupList.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/Views/Web.config" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins/grid.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/jquery-ui/base/menu.css" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Global.asax" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/UserLogin/themes/img/username.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/SPSRemoting.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/Fanex.Grid/images/send-mail.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Fanex.NAP.Core.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/LoginCaptcha.jpg" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_75_dadada_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/logo.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Fanex.Data.dll" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/jquery-ui/base/images/ui-icons_222222_256x240.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Views/Web.config" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tp_exclamation.png" publishTime="05/07/2015 16:06:40" />
@@ -187,19 +189,18 @@
     <file relUrl="bin/ru-ru/JavaScriptEngineSwitcher.V8.resources.dll" publishTime="05/07/2015 16:06:40" />
     <file relUrl="SiteConfig/Web.AppSettings.LOCAL.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-icons_454545_256x240.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Global.asax" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/Fanex.Grid/images/bg_gloss_wave.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/bootstrap/badges.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/Fanex.Grid/Fanex.Pagination.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.WebPages.Razor.xml" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/Fanex.Grid/images/icn_del.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Fanex.NAP.Framework.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bglogin-center.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Content/bootstrap/popovers.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/Fanex.Grid/numeral.min.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Antlr3.Runtime.pdb" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Views/BetSetting/__DeleteLogItems.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/Fanex.Grid.css" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/Views/Workflow/WorkflowAdd.cshtml" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Views/BetSetting/_DefaultBetSettingList.cshtml" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/reject.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-icons_cd0a0a_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_ffffff_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/Scripts/Workflow/workflow-detail-edit.js" publishTime="05/19/2015 09:21:03" />
@@ -207,14 +208,16 @@
     <file relUrl="Areas/FraudDetection/App_Themes/Images/editper.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins/tab-focus.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/dropdowns.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/IBCFile.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/Scripts/Task/task-add.js" publishTime="06/03/2015 14:57:08" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/search.jpg" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/refresh_icon.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Newtonsoft.Json.dll" publishTime="04/27/2015 13:51:07" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/untick-ico-16.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/System.Web.WebPages.xml" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Content/bootstrap/mixins/vendor-prefixes.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/JavaScriptEngineSwitcher.V8.dll" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-bg_glass_65_ffffff_1x400.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="bin/System.Web.Http.WebHost.dll" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_highlight-hard_100_f2f5f7_1x100.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Microsoft.Practices.EnterpriseLibrary.Caching.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tipsy.gif" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/excel-icon.png" publishTime="04/21/2015 08:55:59" />
@@ -224,89 +227,84 @@
     <file relUrl="Content/jquery-ui/base/selectable.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/code.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/UserLogin/Views/Login/Index.cshtml" publishTime="04/27/2015 11:15:50" />
     <file relUrl="Areas/UserLogin/themes/img/lock.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/edit-icon.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/report_check.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/view-btn.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/Scripts/Workflow/workflow-add.js" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/SPU.Lib.FraudDetection.DataAccess.dll" publishTime="06/04/2015 14:29:39" />
+    <file relUrl="bin/SPU.Lib.FraudDetection.DataAccess.dll" publishTime="06/05/2015 09:44:45" />
     <file relUrl="Content/jquery-ui/base/selectmenu.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/uicon.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.Service.dll" publishTime="06/03/2015 16:07:34" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/info.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/jquery-ui/base/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.Razor.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js" publishTime="05/19/2015 09:32:24" />
+    <file relUrl="Views/Error/AccessDenied.cshtml" publishTime="06/03/2015 13:34:24" />
     <file relUrl="Content/jquery-ui/base/draggable.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Net.Http.WebRequest.xml" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Content/jquery-ui/base/datepicker.css" publishTime="05/15/2015 15:56:39" />
+    <file relUrl="Content/bootstrap/carousel.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/images/ui-icons_888888_256x240.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/calendar.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="SiteConfig/Web.UAT.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.WebPages.Deployment.dll" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Views/BetSetting/__InsertLogItems.cshtml" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Content/Core/img/user.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Views/BetSetting/_LogItems.cshtml" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="04/27/2015 11:20:59" />
     <file relUrl="Scripts/Plugin/multi-select-control.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bg.jpg" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/fonts/glyphicons-halflings-regular.woff" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/Views/Common/Style/Images/accessDenied.gif" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/themes/img/welcome2.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Net.Http.Formatting.dll" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Content/bootstrap/mixins/text-emphasis.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/Views/Task/TaskAdd.cshtml" publishTime="06/03/2015 14:57:08" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/view-xml-urls.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/Delete.gif" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/facebook.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="SiteConfig/Web.LOCAL.config" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/msgbox/msgbox-0.0.1.css" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Content/Fanex.Grid/images/bg_gloss_wave.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/Antlr3.Runtime.dll" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/Core/img/icon-calendar.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/UserLogin/Views/Common/Error.cshtml" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/BundleTransformer.Core.dll" publishTime="04/27/2015 13:51:07" />
+    <file relUrl="Web.config" publishTime="05/08/2015 09:06:38" />
     <file relUrl="SiteConfig/Web.SANDBOX.config" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.Controllers.pdb" publishTime="06/03/2015 16:07:34" />
+    <file relUrl="Content/bootstrap/panels.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.Controllers.pdb" publishTime="06/04/2015 17:21:47" />
     <file relUrl="Areas/UserLogin/Views/Common/Style/Images/UnderMaintenance.gif" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="SiteConfig/Web.AppSettings.config.txt" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/sprite_btn.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Scripts/Fanex.Grid/Language/Fanex.Gird.Lang.zh-CN.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_80_d7ebf9_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Views/Shared/Error.cshtml" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/button.css" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/bglogin-right.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/Scripts/Group/group-list.js" publishTime="05/07/2015 16:07:01" />
     <file relUrl="Content/Core/variables.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.Mvc.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/jquery-ui/base/dialog.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="App_Data/FanexSpName.xml" publishTime="06/03/2015 13:34:24" />
     <file relUrl="bin/WebGrease.dll" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Content/Core/img/icon-calendar.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/repass.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/Core/img/sprites.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Web.Http.xml" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="bin/Couchbase.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/close.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/jquery-1.9.1.min.js" publishTime="04/27/2015 13:51:50" />
+    <file relUrl="bin/Antlr3.Runtime.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/ru-ru/JavaScriptEngineSwitcher.Core.resources.dll" publishTime="04/27/2015 13:51:07" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/lock.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/jquery-ui/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Scripts/Page/DefaultBetSetting/addnew.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/jquery-ui/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/bootstrap.min.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="04/27/2015 11:20:59" />
-    <file relUrl="Content/bootstrap/alerts.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/bootstrap/badges.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/JavaScriptEngineSwitcher.Msie.dll" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="Content/jquery-ui/base/progressbar.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/Views/Common/Style/AccessDenied.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Fanex.Grid/images/ajax-loader.gif" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/mixins/labels.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/msgbox/images/question.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Content/Core/img/sprites.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/table_header_repeat.jpg" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/nexHRMicon.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins/panels.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/ru-ru/BundleTransformer.Less.resources.dll" publishTime="04/27/2015 13:51:07" />
     <file relUrl="SiteConfig/Web.ConnectionString.PRO.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Views/Home/Index.cshtml" publishTime="04/23/2015 11:20:09" />
-    <file relUrl="packages.config" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-icons_2e83ff_256x240.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/UserLogin/Views/UserSite/Site.cshtml" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Fanex.Grid/images/sorting_desc.gif" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/themes/img/auth-bg.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bg.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins/table-row.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/UserLogin/Views/Common/Error.cshtml" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Microsoft.Practices.ServiceLocation.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/images/ui-icons_cd0a0a_256x240.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/irongrip.png" publishTime="05/07/2015 16:06:40" />
@@ -316,24 +314,26 @@
     <file relUrl="Content/Fanex.Grid/images/email.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/Page/DefaultBetSetting/default.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/twitter.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="SiteConfig/Web.UAT.config" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Scripts/Page/DefaultBetSetting/edit.js" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/msgbox/msgbox-0.0.1.css" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/jquery-1.9.0-vsdoc.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/forms.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/mixins/border-radius.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/UserLogin/themes/img/firefox_original.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.Service.dll" publishTime="06/04/2015 17:21:47" />
     <file relUrl="bin/dotless.Core.pdb" publishTime="05/05/2015 09:49:26" />
-    <file relUrl="bin/System.Web.WebPages.dll" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="Areas/UserLogin/themes/login.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="@JSense.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/windowsLive.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/IBCFile.dll" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/Core/img/btn-close.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Views/BetSetting/__UpdateLogItems.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/jquery-ui/base/spinner.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/msgbox/images/error.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/login-icon.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/blank.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/responsive-utilities.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/accordion.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Fanex.Grid/images/white-top-bottom.gif" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/Fanex.Grid/images/sort-icon.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/UserLogin/Views/Shared/_Layout.cshtml" publishTime="04/23/2015 10:39:36" />
     <file relUrl="bin/Enyim.Caching.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/RemotingRef.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_flat_75_ffffff_40x100.png" publishTime="05/07/2015 16:06:40" />
@@ -342,7 +342,7 @@
     <file relUrl="bin/Microsoft.Practices.EnterpriseLibrary.Logging.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/Scripts/Workflow/workflow-detail-list.js" publishTime="05/19/2015 15:43:34" />
     <file relUrl="Content/bootstrap/fonts/glyphicons-halflings-regular.svg" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/UserLogin/themes/img/warn.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Views/BetSetting/_LogItems.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/collapse-small.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Views/Shared/_LayoutPopup.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/variables.less" publishTime="04/21/2015 08:55:59" />
@@ -351,64 +351,65 @@
     <file relUrl="Content/fonts/glyphicons-halflings-regular.svg" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_65_ffffff_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Less.pdb" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="bin/Microsoft.Practices.EnterpriseLibrary.Data.dll" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/Fanex.Grid/images/sort-icon.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/slider.css" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/bootstrap/mixins/text-emphasis.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/Fanex.Grid/Fanex.Grid.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Web.AppSettings.config" publishTime="06/04/2015 16:10:56" />
-    <file relUrl="Areas/FraudDetection/App_Themes/msgbox/images/info.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/bglogin-right.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Web.AppSettings.config" publishTime="06/04/2015 17:21:37" />
+    <file relUrl="bin/ru-ru/BundleTransformer.Less.resources.dll" publishTime="04/27/2015 13:51:07" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_highlight-soft_25_ffef8f_1x100.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_888888_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/media.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Fanex.Grid/images/sorting_bg.gif" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/SPU.Lib.FraudDetection.Criteria.dll" publishTime="06/01/2015 09:24:33" />
+    <file relUrl="bin/SPU.Lib.FraudDetection.Criteria.dll" publishTime="06/05/2015 09:44:45" />
     <file relUrl="Content/bootstrap/mixins/gradients.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Views/BetSetting/Logs.cshtml" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/calendar.gif" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/msgbox/images/alert.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-bg_flat_75_ffffff_40x100.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Content/bootstrap/mixins/forms.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/Fanex.Grid/images/sort-icon-new3.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/jquery-ui/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/mixins/nav-vertical-align.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/ClearScript.dll" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/sprite_btn.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/bootstrap/mixins/pagination.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tick-ico-16.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Views/Error/AccessDenied.cshtml" publishTime="06/03/2015 13:34:24" />
-    <file relUrl="Areas/UserLogin/Views/Common/AccessDenied.cshtml" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/System.Web.Optimization.xml" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Content/bootstrap/mixins/image.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/Core/img/icon-question.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="App_Data/NAPFrameworkSpNames.xml" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/bootstrap/mixins/list-group.less" publishTime="04/22/2015 14:52:59" />
+    <file relUrl="bin/MvcPager.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/editodds.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/Fanex.Grid/images/expand-small.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-bg_glass_65_ffffff_1x400.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.Controllers.dll" publishTime="06/03/2015 16:07:34" />
+    <file relUrl="Content/Core/img/user.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.Controllers.dll" publishTime="06/04/2015 17:21:47" />
     <file relUrl="Content/Core/img/loading.gif" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/panel_bg.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/System.Net.Http.xml" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/bootstrap/progress-bars.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/JavaScriptEngineSwitcher.Core.dll" publishTime="04/27/2015 13:51:07" />
+    <file relUrl="bin/dotless.Core.dll" publishTime="05/05/2015 09:49:26" />
     <file relUrl="Content/bootstrap/mixins/grid-framework.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/msgbox/msgbox-0.0.1.js" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Views/BetSetting/_DefaultBetSettingList.cshtml" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/UserLogin/themes/img/pattern6.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/AddOns/TimePicker/date-format.js" publishTime="05/19/2015 09:32:24" />
-    <file relUrl="bin/SPU.Lib.FraudDetection.dll" publishTime="06/04/2015 14:30:37" />
+    <file relUrl="bin/SPU.Lib.FraudDetection.dll" publishTime="06/05/2015 09:44:45" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bg-demo-docs-param.gif" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/Page/Home/home.js" publishTime="04/23/2015 11:20:51" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/dashboard-icon.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="bin/ru-ru/BundleTransformer.Core.resources.dll" publishTime="04/27/2015 13:51:07" />
-    <file relUrl="Content/jquery-ui/base/theme.css" publishTime="05/19/2015 09:32:24" />
-    <file relUrl="Content/bootstrap/panels.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/Views/Group/GroupList.cshtml" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Views/BetSetting/Edit.cshtml" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="SiteConfig/Web.AppSettings.config.txt" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/bootstrap/alerts.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/JavaScriptEngineSwitcher.V8.dll" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_highlight-hard_70_000000_1x100.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/navbar.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/mixins/hide-text.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/normalize.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/jquery-ui/base/autocomplete.css" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/UserLogin/Views/Login/Index.cshtml" publishTime="04/27/2015 11:15:50" />
     <file relUrl="Content/bootstrap/mixins/clearfix.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="SiteConfig/Web.AppSettings.SANDBOX.config" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/demo-spindown-closed.gif" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/asc.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_diagonals-thick_90_eeeeee_40x40.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Fanex.Caching.dll" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-icons_2e83ff_256x240.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/Fanex.Grid/images/sort-icon-new3.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/Scripts/Core/mathformula-validation.js" publishTime="06/03/2015 13:34:24" />
     <file relUrl="Content/jquery-ui/base/sortable.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/editsystem.png" publishTime="05/07/2015 16:06:40" />
@@ -416,61 +417,60 @@
     <file relUrl="bin/SPU.Lib.Core.dll" publishTime="06/04/2015 14:29:39" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/editinfo.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/labels.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/Scripts/Core/FraudDetectionScripts.js" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Content/Fanex.Grid/images/expand-icon.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/System.Web.WebPages.dll" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="Content/bootstrap/popovers.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/sprite_v.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Scripts/Fanex.Grid/Language/Fanex.Gird.Lang.ja-JP.js" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/bootstrap/mixins/background-variant.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/jquery-ui/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/tabs.css" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/tables.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/breadcrumb_bg.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_highlight-hard_100_f2f5f7_1x100.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/jquery-ui/base/datepicker.css" publishTime="05/15/2015 15:56:39" />
     <file relUrl="Content/bootstrap/component-animations.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/tp_error.jpg" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bglogin-left.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Deployment.ignore" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="SiteConfig/Web.AppSettings.UAT.config" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/JavaScriptEngineSwitcher.Msie.dll" publishTime="04/21/2015 08:56:00" />
+    <file relUrl="Areas/FraudDetection/App_Themes/msgbox/images/info.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/UserLogin/themes/img/welcome.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/System.Web.WebPages.Deployment.xml" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/jquery-ui/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/Fanex.Logging.dll" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/login-icon.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/jquery-ui/base/theme.css" publishTime="05/19/2015 09:32:24" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/demo-spindown-open.gif" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/bg_home.jpg" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/Microsoft.Practices.Unity.Interception.dll" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/images/ui-icons_454545_256x240.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/top-bg.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="SiteConfig/Web.LOCAL.config" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/jquery-1.9.0.min.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="SiteConfig/Web.ConnectionString.config.txt" publishTime="04/21/2015 08:55:59" />
     <file relUrl="SiteConfig/Web.config1.txt" publishTime="04/21/2015 09:31:54" />
     <file relUrl="bin/System.Web.Razor.xml" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Content/Core/img/favicon.ico" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/jquery-ui/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/bootstrap/theme.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/Fanex.Grid/images/sort-icon-new1.png" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/UserLogin/Views/Common/Offline.cshtml" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/site.css" publishTime="05/19/2015 09:32:24" />
     <file relUrl="Content/bootstrap/button-groups.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/signin_icon.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins/responsive-visibility.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Web.config" publishTime="05/08/2015 09:06:38" />
+    <file relUrl="bin/ru-ru/BundleTransformer.Core.resources.dll" publishTime="04/27/2015 13:51:07" />
+    <file relUrl="Content/jquery-ui/base/images/ui-icons_222222_256x240.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/Fanex.Grid/images/bgtitle.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/Views/Workflow/WorkflowDetail.cshtml" publishTime="05/19/2015 09:21:03" />
     <file relUrl="Content/Fanex.Grid/images/icn_edit.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/table_header_repeat.jpg" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Scripts/Page/DefaultBetSetting/addnew.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Scripts/Core/site.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="bin/System.Net.Http.Formatting.xml" publishTime="04/21/2015 08:56:00" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_highlight-soft_25_ffef8f_1x100.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Scripts/Fanex.Grid/Language/Fanex.Gird.Lang.zh-CN.js" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/Couchbase.dll" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/UserLogin/Views/Common/AccessDenied.cshtml" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/footer.jpg" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/home.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/FraudDetection/App_Themes/Images/edit-icon.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/bootstrap/mixins/text-overflow.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/demo-spindown-closed.gif" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/FraudDetection/Views/Group/GroupInfo.cshtml" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Areas/UserLogin/themes/img/password.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/Scripts/Group/group-edit.js" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_100_e4f1fb_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="bin/BundleTransformer.Less.dll" publishTime="04/27/2015 13:51:07" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/icons_menu.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Content/bootstrap/wells.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Areas/UserLogin/themes/img/title-bg.jpg" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-icons_222222_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_50_3baae3_1x400.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Content/jquery-ui/base/images/ui-icons_cbd4e6_256x240.png" publishTime="04/21/2015 08:55:59" />
@@ -481,17 +481,17 @@
     <file relUrl="Scripts/Fanex.Grid/moment.min.js" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/glyphicons.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/picon.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Areas/FraudDetection/App_Themes/Images/FullCalendar/ui-bg_glass_75_dadada_1x400.png" publishTime="05/07/2015 16:06:40" />
+    <file relUrl="Content/bootstrap/mixins/image.less" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Web.ConnectionString.config" publishTime="05/19/2015 09:32:24" />
-    <file relUrl="Content/bootstrap/grid.less" publishTime="04/21/2015 16:25:30" />
+    <file relUrl="Content/Fanex.Grid/images/sort-icon-new1.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Content/bootstrap/responsive-embed.less" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="bin/Fanex.NAP.FraudDetection.Service.pdb" publishTime="06/03/2015 16:07:34" />
+    <file relUrl="bin/Fanex.NAP.FraudDetection.Service.pdb" publishTime="06/04/2015 17:21:47" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/arrow.png" publishTime="05/07/2015 16:06:40" />
-    <file relUrl="Scripts/Page/DefaultBetSetting/edit.js" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="bin/UMControllerLibrary.dll" publishTime="04/21/2015 08:56:00" />
     <file relUrl="Areas/FraudDetection/App_Themes/msgbox/images/confirm.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/FraudDetection/App_Themes/Images/ui-icons_888888_256x240.png" publishTime="05/07/2015 16:06:40" />
     <file relUrl="Areas/UserLogin/themes/img/ie.png" publishTime="04/21/2015 08:55:59" />
-    <file relUrl="Content/bootstrap/carousel.less" publishTime="04/21/2015 08:55:59" />
+    <file relUrl="Content/Fanex.Grid/images/icn_add.png" publishTime="04/21/2015 08:55:59" />
     <file relUrl="Areas/UserLogin/themes/img/pattern.png" publishTime="04/21/2015 08:55:59" />
   </publishProfile>
 </publishData>

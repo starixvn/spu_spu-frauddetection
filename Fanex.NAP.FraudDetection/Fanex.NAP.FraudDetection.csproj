@@ -749,16 +749,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Error\AccessDenied.cshtml" />
-    <Content Include="Views\BetSetting\Default.cshtml" />
-    <Content Include="Views\BetSetting\AddNew.cshtml" />
-    <Content Include="Views\BetSetting\Edit.cshtml" />
-    <Content Include="Views\BetSetting\__UpdateLogItems.cshtml" />
-    <Content Include="Views\BetSetting\Logs.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\BetSetting\_DefaultBetSettingList.cshtml" />
-    <Content Include="Views\BetSetting\_LogItems.cshtml" />
-    <Content Include="Views\BetSetting\__DeleteLogItems.cshtml" />
-    <Content Include="Views\BetSetting\__InsertLogItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
