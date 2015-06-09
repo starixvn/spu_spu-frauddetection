@@ -35,15 +35,12 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
             BettypeList = bettypeList;
         }
 
-        //=========================================================================
         // On User ID
         public int OnUserID { get; set; }
 
-        //=========================================================================
         // Actions
         public int WorkflowID { get; set; }
 
-        //=========================================================================
         // Actions
         public List<SPU.Lib.FraudDetection.DTO.Action> ActionList { get; set; }
 
@@ -53,13 +50,11 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
 
         public string IntervalUnit { get; set; }
 
-        //=========================================================================
         // Bettypes and Sports
         public List<Bettype> BettypeList { get; set; }
 
         public List<Sport> SportList { get; set; }
 
-        //=========================================================================
         // Configurations
         public List<Config> ConfigurationList { get; set; }
 
@@ -83,13 +78,11 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
             }
         }
 
-        //=========================================================================
         // Customer Groups
         public List<Group> GroupList { get; set; }
 
         public int AssignedToGroup { get; set; }
 
-        //=========================================================================
         // Mail Pattern
         public int MailPattern { get; set; }
     }

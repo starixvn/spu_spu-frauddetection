@@ -10,13 +10,13 @@
 
 namespace Fanex.NAP.FraudDetection.Controllers
 {
+    using System.IO;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
-    using System.IO;
 
     /// <summary>
     /// Base controller.
@@ -101,7 +101,9 @@ namespace Fanex.NAP.FraudDetection.Controllers
             }
 
             if (viewEngineResult == null)
+            {
                 throw new FileNotFoundException("View cannot be found.");
+            }
 
             // get the view and attach the model to view data
             var view = viewEngineResult.View;
@@ -110,16 +112,17 @@ namespace Fanex.NAP.FraudDetection.Controllers
             string htmlStringFromView = string.Empty;
             using (var stringWriter = new StringWriter())
             {
-                var viewContext = new ViewContext(context, view,
-                                            context.Controller.ViewData,
-                                            context.Controller.TempData,
-                                            stringWriter);
+                var viewContext = new ViewContext(
+                    context,
+                    view,
+                    context.Controller.ViewData,
+                    context.Controller.TempData,
+                    stringWriter);
                 view.Render(viewContext, stringWriter);
                 htmlStringFromView = stringWriter.ToString();
             }
 
             return htmlStringFromView;
         }
-
     }
 }
