@@ -21,7 +21,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.BusinessManager;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Criteria.Taks;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
@@ -147,6 +146,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 GenerateSQLSelect(configList, additionalInfo.PreconConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.PreconConfigs),
                 GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions));
+            criteria.TaskPreconditionsOriginal = string.IsNullOrEmpty(criteria.TaskPreconditions) ? string.Empty : criteria.TaskPreconditionsOriginal;
 
             criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty : 
                 string.Format(
@@ -203,10 +203,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var configsList = selectedConfigIds.Split('#');
             foreach (var config in configsList)
             {
-                var currentRelevantReturn = configs.Single(l => l.ConfigId == int.Parse(config)).ConfigSQLReturn;
-                if (!sqlSelectString.Contains(currentRelevantReturn))
+                var currentRelevantReturns = configs.Single(l => l.ConfigId == int.Parse(config)).ConfigSQLReturn.Split(',');
+                foreach (var currentReturn in currentRelevantReturns)
                 {
-                    sqlSelectString += currentRelevantReturn + ",";
+                    if (!sqlSelectString.Contains(currentReturn))
+                    {
+                        sqlSelectString += currentReturn + ",";
+                    }
                 }
             }
 
@@ -249,7 +252,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>SQL Where string.</returns>
         public string GenerateSQLWhere(List<Config> configs, bool isPrecondition, TaskAdditionalInfo additionalInfo, string formula)
         {
-            var sqlForNotScanned = configs.Single(l => l.ConfigName.ToLower().Trim() == "matchstate").ConfigSQLField;
+            var sqlForNotScanned = configs.Single(l => l.ConfigName.ToLower() == "match state").ConfigSQLField;
             var relevantTables = isPrecondition
                 ? GenerateRelevantTables(configs, additionalInfo.PreconConfigs)
                 : GenerateRelevantTables(configs, additionalInfo.RuleConfigs);
@@ -293,10 +296,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var configsList = selectedConfigIds.Split('#');
             foreach (var config in configsList)
             {
-                var currentRelevantTable = configs.Single(l => l.ConfigId == int.Parse(config)).ConfigSQLTable;
-                if (!relevantTables.Contains(currentRelevantTable))
+                var currentRelevantTables = configs.Single(l => l.ConfigId == int.Parse(config)).ConfigSQLTable.Split(',');
+                foreach (var currentTable in currentRelevantTables)
                 {
-                    relevantTables += currentRelevantTable + ",";
+                    if (!relevantTables.Contains(currentTable))
+                    {
+                        relevantTables += currentTable + ",";
+                    }
                 }
             }
 

@@ -158,7 +158,7 @@ function GenerateConfig(parentName) {
             valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
             break;
         default:
-            valueSelectedValue = '%' + $('#' + parentName + 'ControlTextbox').val() + '%';
+            valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
     }
 
     if (keySelectedValue == "Match State") {

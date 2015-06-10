@@ -4,7 +4,7 @@
     using System.Web.Script.Serialization;
     using Fanex.NAP.FraudDetection.Controllers;
     using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.Criteria.Taks;
+    using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.Criteria.Workflow;
     using SPU.Lib.FraudDetection.Service;
 
