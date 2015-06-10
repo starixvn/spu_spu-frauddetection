@@ -145,22 +145,28 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.Core">
+    <Reference Include="SPU.Lib.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_Dependency\SPU.Lib.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection">
+    <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_Dependency\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Criteria">
+    <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_Dependency\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DataAccess">
+    <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_Dependency\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DTO">
+    <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_Dependency\SPU.Lib.FraudDetection.DTO.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Service">
+    <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>_Dependency\SPU.Lib.FraudDetection.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -787,7 +793,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54840</DevelopmentServerPort>
+          <DevelopmentServerPort>51823</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
