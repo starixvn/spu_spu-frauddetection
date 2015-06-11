@@ -40,8 +40,8 @@ namespace Fanex.NAP.FraudDetection.AppStart
             var css = new Bundle("~/bundles/coreCss")
             .IncludeDirectory("~/Content/jquery-ui/base/", "*.css")
             .Include("~/Content/bootstrap/bootstrap.less")
-           .Include("~/Content/Plugin/multi-select-control.css")
-           .Include("~/Content/Core/site.less");
+            .Include("~/Content/Plugin/multi-select-control.css")
+            .Include("~/Content/Core/site.less");
 
             css.Transforms.Add(cssTransformer);
 
@@ -62,14 +62,18 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Scripts/jquery-1.9.0.js",
                 "~/Scripts/jquery-ui-1.11.1.js",
                 "~/Scripts/jquery.number.js",
-                 "~/Scripts/Plugin/multi-select-control.js",
+                "~/Scripts/Plugin/multi-select-control.js",
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/Core/site.js");
+                "~/Scripts/Core/site.js",
+                "~/Scripts/tinymce/tinymce.min.js",
+                "~/Scripts/jquery.validate.js",
+                "~/Scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/jquery.confirm.min.js");
 
             coreJs.Transforms.Add(scriptTransformer);
 
             bundles.Add(coreJs);
-            
+
             var homeJs = new Bundle("~/bundles/HomeJs")
                 .Include(
                 "~/Scripts/Page/Home/home.js");
@@ -83,7 +87,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
                  "~/Scripts/Page/DefaultBetSetting/default.js",
                 "~/Scripts/Page/DefaultBetSetting/edit.js",
                  "~/Scripts/Page/DefaultBetSetting/viewlog.js");
-         
+
             defaultBetSettingJs.Transforms.Add(scriptTransformer);
             bundles.Add(defaultBetSettingJs);
 

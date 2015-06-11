@@ -21,7 +21,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.BusinessManager;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Criteria.Taks;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
