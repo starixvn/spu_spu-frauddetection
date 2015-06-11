@@ -89,7 +89,7 @@ var dateFormat = function() {
             return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
         });
     };
-}();
+};
 
 // Some common format strings
 dateFormat.masks = {
