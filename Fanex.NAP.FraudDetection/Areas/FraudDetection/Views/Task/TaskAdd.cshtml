@@ -34,17 +34,17 @@
     <div id="accordion" style="width: 620px;">
       <h3 id="accordionBlockEvent">Event</h3>
       <div>
-        <table class="table-popup">
+        <table class="table-popup font-size-small">
             <tr>
                 <td><span>Event Name</span></td>
                 <td> 
                     <select name="ActionName" id="ActionName" style="height: 25px;" onchange="changeActionSelection(this)">
-                        @foreach (var action in Model.ActionList)
+                        @foreach (var mevent in Model.EventList)
                         {
-                            <option value="@action.ActionId" data-actiondesc="@action.ActionDesc">@action.ActionName</option>
+                            <option value="@mevent.EventId" data-actiondesc="@mevent.EventDesc">@mevent.EventName</option>
                         }
                     </select>
-                    <label id="selectedActionDesc" style="font-weight: normal;">@Model.ActionList[0].ActionDesc</label>
+                    <label id="selectedActionDesc" style="font-weight: normal;">@Model.EventList[0].EventDesc</label>
                 </td>
             </tr>
             <tr>
@@ -63,7 +63,7 @@
       </div>
       <h3 id="accordionBlockPrecondition">Pre-condition</h3>
       <div>
-        <div class="table-popup">
+        <div class="table-popup font-size-small">
             <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, true)">
                 @foreach (var config in Model.PreconditionConfigurations)
                 {
@@ -113,7 +113,7 @@
             </div>
             <div class="newline">&nbsp;</div>
             <div style="border: 1px solid #000000;">
-                <table id="preconditionTable" class="table-items"><tr style="display:none"><td></td><td></td><td></td></tr></table>
+                <table id="preconditionTable" class="table-items"><tr id="preconditionTable1" style="display:none"><td></td><td></td><td></td></tr></table>
             </div>
             <div class="newline">&nbsp;</div>
             <label id="preconditionTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
@@ -135,7 +135,7 @@
       </div>
       <h3 id="accordionBlockRule">Rule</h3>
       <div>
-        <div class="table-popup">
+        <div class="table-popup font-size-small">
             <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, false)">
                 @foreach (var config in Model.RuleConfigurations)
                 {
@@ -181,7 +181,7 @@
             </div>
             <div class="newline">&nbsp;</div>            
             <div style="border: 1px solid #000000;">
-                <table id="ruleTable" class="table-items"><tr style="display:none"><td></td><td></td><td></td></tr></table>
+                <table id="ruleTable" class="table-items"><tr id="ruleTable1" style="display:none"><td></td><td></td><td></td></tr></table>
             </div>
             <div class="newline">&nbsp;</div>            
             <label id="ruleTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
@@ -203,7 +203,7 @@
       </div>
       <h3 id="accordionBlockPerform">Perform</h3>
       <div>
-        <table class="table-popup">
+        <table class="table-popup font-size-small">
             <tr>
                 <td>
                     <div>

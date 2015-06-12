@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model SPU.Lib.FraudDetection.Criteria.ConfigParameterUpdateCriteria
+@model Fanex.NAP.FraudDetection.Model.ViewModel.ParameterViewModel
 @{        
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Configure Parameters";        
@@ -26,22 +26,20 @@
 
 @using (Html.BeginForm("UpdateParamater", "Parameter", FormMethod.Post, new { @id = "UpdateParamater" }))
 {    
-    <div id="onUserid" style="display: none;">@Model.CreatorId</div>
+    <div id="onUserid" style="display: none;">@Model.OnUserID</div>
     <table class="table-popup">
-        <tr>
-            <td align="right"><span>Big Stake</span></td>
-            <td>
-                @Html.TextBoxFor(l => l.PercentageMaxBet, new { @id = "percentageMaxBet", @style = "width: 150px;", @placeholder = "% of Max Bet" })
-                <div class="more-info" title=" A ticket with the Stake amount reachs to this percentages of Max Bet will be considered as suspicious."></div>
-            </td>
-        </tr>
-        <tr>
-            <td align="right"><span>Period Time</span></td>
-            <td>
-                @Html.TextBoxFor(l => l.SecondsToGoal, new { @id = "secondsToGoal", @style = "width: 150px;", @placeholder = "Seconds to the goal" })
-                <div class="more-info" title="Tickets were placed in the Period Time around the goal will be considerd as suspicious."></div>
-            </td>
-        </tr>
+        @{
+            foreach (var param in Model.ParameterList)
+            {
+                <tr>
+                    <td align="right"><span>@param.ParamDisplayName</span></td>
+                    <td>
+                        <input type="text" id="tb_param_@param.ParamId" value="@param.ParamValue" />
+                        <div class="more-info" title="@param.ParamDesc"></div>
+                    </td>
+                </tr>
+            }            
+        }
         <tr>
             <td></td>
             <td><input type="button" id="btn_UpdateParameter" value="Submit" class="btn-green" /></td>

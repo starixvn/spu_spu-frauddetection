@@ -6,7 +6,8 @@
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.Criteria.Workflow;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     public class WorkflowController : BaseController
     {
@@ -23,16 +24,20 @@
         [Compress]
         public JsonResult GetWorkflowList(WorkflowSelectAllCriteria criteria)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();                        
+            var serializer = new JavaScriptSerializer();                        
             criteria.PageIndex++;
 
-            WorkflowService workflowService = new WorkflowService();
+            var workflowService = new WorkflowService();
             var dataReader = workflowService.GetWorkflows(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Add New Workflow.
+        /// </summary>
+        /// <returns>HTML string.</returns>
         [HttpGet]
         public string AddNewWorkflow()
         {
@@ -41,15 +46,26 @@
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Workflow/WorkflowAdd.cshtml", criteria);
         }
 
+        /// <summary>
+        /// Add New Workflow.
+        /// </summary>
+        /// <param name="criteria">Workflow Insert Criteria.</param>
+        /// <returns>Action Result.</returns>
         [HttpPost]
         public ActionResult AddNewWorkflow(WorkflowInsertCriteria criteria)
         {
             criteria.CreatorId = 1;
-            WorkflowService workflowService = new WorkflowService();
+            var workflowService = new WorkflowService();
             var result = workflowService.InsertWorkflow(criteria);
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
+        /// <summary>
+        /// Workflow Detail.
+        /// </summary>
+        /// <param name="workflowId">Workflow ID.</param>
+        /// <param name="workflowName">Workflow Name.</param>
+        /// <returns>Action Result.</returns>
         [HttpGet]
         public ActionResult WorkflowDetail(int workflowId, string workflowName)
         {
@@ -67,10 +83,10 @@
         [Compress]
         public JsonResult GetWorkflowDetail(TaskSelectAllByWorkflowIdCriteria criteria)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var serializer = new JavaScriptSerializer();
             criteria.PageIndex++;
 
-            TaskService taskService = new TaskService();
+            var taskService = new TaskService();
             var dataReader = taskService.GetTasksByWorkflowId(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 

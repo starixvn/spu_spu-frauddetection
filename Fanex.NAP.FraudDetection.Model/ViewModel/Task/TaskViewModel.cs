@@ -22,13 +22,13 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
     public class TaskViewModel
     {
         public TaskViewModel(
-            List<SPU.Lib.FraudDetection.DTO.Action> actions, 
+            List<SPU.Lib.FraudDetection.DTO.Event> events, 
             List<Config> configs,
             List<Group> groups,
             List<Sport> sportList,
             List<Bettype> bettypeList)
         {
-            ActionList = actions;
+            EventList = events;
             ConfigurationList = configs;
             GroupList = groups;
             SportList = sportList;
@@ -42,9 +42,9 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         public int WorkflowID { get; set; }
 
         // Actions
-        public List<SPU.Lib.FraudDetection.DTO.Action> ActionList { get; set; }
+        public List<SPU.Lib.FraudDetection.DTO.Event> EventList { get; set; }
 
-        public int ActionID { get; set; }
+        public int EventID { get; set; }
 
         public int IntervalValue { get; set; }
 
@@ -64,7 +64,7 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         {
             get
             {
-                return ConfigurationList.Where(l => l.ConfigCategory.Trim() == "Match").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory == "Match").ToList();
             }
         }
 
@@ -74,7 +74,7 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         {
             get
             {
-                return ConfigurationList.Where(l => l.ConfigCategory.Trim() == "Ticket" || l.ConfigCategory.Trim() == "Counter").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory == "Ticket" || l.ConfigCategory == "Counter").ToList();
             }
         }
 

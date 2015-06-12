@@ -5,13 +5,29 @@
 //=========================================================================
 /* INITIALIZE */
 function OnInitialize() {
+    $('input[id^="tb_param_"]').keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        // Allow: Ctrl+A, Command+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+        // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
     $("#btn_UpdateParameter").click(function (event) {
         event.preventDefault();
         var url = 'Parameter/UpdateParamater';
         var param = {
             "CreatorId": $("#onUserid").text(),
-            "PercentageMaxBet": $("#percentageMaxBet").val(),
-            "SecondsToGoal": $("#secondsToGoal").val()
+            "ListParamIDs": GenerateListParamIDs(),
+            "ListParamNewValues": GenerateListParamNewValues()
         };
 
         $.ajax({
@@ -40,6 +56,26 @@ function OnInitialize() {
             }
         });
     });
+}
+
+function GenerateListParamIDs() {
+    var paramIDs = "";
+    $('input[id^="tb_param_"]').each(function () {
+        var paramID = $(this).attr('id');
+        paramID = paramID.replace("tb_param_", "");
+        paramIDs += paramID + ",";
+    });
+
+    return paramIDs.slice(0, -1);
+}
+
+function GenerateListParamNewValues() {
+    var paramNewValues = "";
+    $('input[id^="tb_param_"]').each(function () {
+        paramNewValues += $(this).val() +",";
+    });
+
+    return paramNewValues.slice(0, -1);
 }
 
 //=========================================================================

@@ -33,6 +33,13 @@ namespace Fanex.NAP.FraudDetection.Service
             return _repository.Fetch<T>(criteria);
         }
 
+        /// <summary>
+        /// Get Data by template.
+        /// </summary>
+        /// <typeparam name="T">Delegate object.</typeparam>
+        /// <param name="criteria">Input criteria.</param>
+        /// <param name="totalPages">Total Pages.</param>
+        /// <returns>List of delegate objects.</returns>
         public IEnumerable<T> GetData<T>(ICriteria criteria, ref int totalPages)
         {
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))

@@ -19,11 +19,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Fanex.NAP.FraudDetection.Model.ViewModel;
     using Fanex.NAP.FraudDetection.Service;
     using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection;
     using SPU.Lib.FraudDetection.BusinessManager;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
 
     public class TaskController : BaseController
     {
@@ -57,8 +58,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public TaskViewModel GenerateViewModel(int currentUserID, int workflowID)
         {
             // Actions
-            var actionService = new ActionService();
-            var actionList = actionService.GetActions(new ActionSelectAllCriteria());
+            var actionService = new EventService();
+            var actionList = actionService.GetEvents(new EventSelectAllCriteria());
 
             // Configurations
             var configurationService = new ConfigurationsService();
@@ -103,10 +104,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [Compress]
         public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();                        
+            var serializer = new JavaScriptSerializer();                        
             criteria.PageIndex++;
 
-            GroupService groupService = new GroupService();
+            var groupService = new GroupService();
             var dataReader = groupService.GetGroups(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
@@ -171,11 +172,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="taskId">Inserted Task ID.</param>
         public void PushNewTaskToRun(TaskInsertCriteria criteria, int taskId)
         {
-            FraudAutoDetection syncNewTask = new FraudAutoDetection();
+            var syncNewTask = new FraudAutoDetection();
             syncNewTask.AddNewTask(
                 new Task(new TaskInfo
                 {
-                    ActionId = criteria.ActionId,
+                    EventId = criteria.EventId,
                     Interval = criteria.Interval,
                     IntervalType = criteria.IntervalType,
                     IsActive = true,

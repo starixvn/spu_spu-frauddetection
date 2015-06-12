@@ -9,25 +9,45 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
     using Fanex.NAP.FraudDetection.Controllers;
+    using Fanex.NAP.FraudDetection.Model.ViewModel;
     using Fanex.NAP.FraudDetection.Service;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
 
     public class ParameterController : BaseController
     {
         public ActionResult Index()
         {
-            var onUserId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0;
-            return View("~/Areas/FraudDetection/Views/Parameter/ParameterUpdate.cshtml", new ConfigParameterUpdateCriteria { CreatorId = onUserId });            
+            return View("~/Areas/FraudDetection/Views/Parameter/ParameterUpdate.cshtml", GenerateViewModel());            
         }
 
+        /// <summary>
+        /// Generate View Model.
+        /// </summary>
+        /// <returns>View Model.</returns>
+        public ParameterViewModel GenerateViewModel()
+        {
+            var loggedInUserId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0;
+            var configService = new ConfigurationsService();
+            var listOfParams = configService.GetParameters(new ParameterSelectAllCriteria()).ToList();
+            var viewModel = new ParameterViewModel(listOfParams, loggedInUserId);
+
+            return viewModel;
+        }
+
+        /// <summary>
+        /// Update parameter.
+        /// </summary>
+        /// <param name="criteria">Config Parameter Update Criteria.</param>
+        /// <returns>Action Result.</returns>
         [HttpPost]
         public ActionResult UpdateParamater(ConfigParameterUpdateCriteria criteria)
         {
-            var groupService = new ConfigurationsService();
-            var result = groupService.UpdateConfigParameters(criteria);
+            var configService = new ConfigurationsService();
+            var result = configService.UpdateConfigParameters(criteria);
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
