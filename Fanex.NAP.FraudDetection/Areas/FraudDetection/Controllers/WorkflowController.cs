@@ -2,12 +2,11 @@
 {
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
-    using Fanex.NAP.FraudDetection.Controllers;
+    using NAP.FraudDetection.Controllers;
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.Criteria.Workflow;
     using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
 
     public class WorkflowController : BaseController
     {
@@ -83,7 +82,6 @@
         [Compress]
         public JsonResult GetWorkflowDetail(TaskSelectAllByWorkflowIdCriteria criteria)
         {
-            var serializer = new JavaScriptSerializer();
             criteria.PageIndex++;
 
             var taskService = new TaskService();

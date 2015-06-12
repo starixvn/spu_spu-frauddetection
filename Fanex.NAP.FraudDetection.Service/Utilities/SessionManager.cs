@@ -13,7 +13,6 @@ namespace Fanex.NAP.FraudDetection.Service
     using System;
     using System.CodeDom.Compiler;
     using System.Web;
-    using Fanex.Logging;
 
     /// <summary>
     ///     TODO: Update summary.

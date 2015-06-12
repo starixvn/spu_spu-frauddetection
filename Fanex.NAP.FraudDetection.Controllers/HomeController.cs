@@ -11,8 +11,7 @@
 namespace Fanex.NAP.FraudDetection.Controllers
 {
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Core.Web.Session;
+    using Core.Web.Attribute;
 
     /// <summary>
     /// Home controller.

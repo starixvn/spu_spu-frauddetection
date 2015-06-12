@@ -11,10 +11,8 @@ namespace Fanex.NAP.FraudDetection.Service
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using Fanex.Data;
-    using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;
+    using Data;
+    using Framework.Data;
 
     /// <summary>
     /// Query Service.

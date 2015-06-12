@@ -11,9 +11,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.NAP.FraudDetection.Controllers;
-    using Fanex.NAP.FraudDetection.Model.ViewModel;
-    using Fanex.NAP.FraudDetection.Service;
+    using NAP.FraudDetection.Controllers;
+    using Model.ViewModel;
+    using Service;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Service.Implement;
 

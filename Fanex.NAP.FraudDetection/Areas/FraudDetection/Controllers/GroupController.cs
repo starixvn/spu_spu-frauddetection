@@ -11,11 +11,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
-    using Fanex.NAP.FraudDetection.Controllers;
+    using NAP.FraudDetection.Controllers;
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
 
     public class GroupController : BaseController
     {
@@ -31,8 +30,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
         public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
-        {
-            var serializer = new JavaScriptSerializer();                        
+        {                     
             criteria.PageIndex++;
 
             var groupService = new GroupService();

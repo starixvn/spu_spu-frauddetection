@@ -12,10 +12,10 @@ namespace Fanex.NAP.FraudDetection.AppStart
 {
     using System.Web;
     using System.Web.Security;
-    using NAP.Core.Criteria.User;
-    using NAP.Core.Service.Impl;
-    using NAP.Core.Web.Auth;
-    using NAP.Core.Web.Session;
+    using Core.Criteria.User;
+    using Core.Service.Impl;
+    using Core.Web.Auth;
+    using Core.Web.Session;
 
     /// <summary>
     /// Authentication class.
@@ -42,7 +42,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
                         return;
                     }
 
-                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(httpCookie.Value);
+                    var ticket = FormsAuthentication.Decrypt(httpCookie.Value);
                     if (ticket == null || ticket.Expired)
                     {
                         return;

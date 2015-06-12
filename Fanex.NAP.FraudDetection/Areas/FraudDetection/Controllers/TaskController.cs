@@ -14,10 +14,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
-    using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models;
-    using Fanex.NAP.FraudDetection.Controllers;
-    using Fanex.NAP.FraudDetection.Model.ViewModel;
-    using Fanex.NAP.FraudDetection.Service;
+    using Model.ViewModel;
+    using Models;
+    using NAP.FraudDetection.Controllers;
+    using Service;
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection;
     using SPU.Lib.FraudDetection.BusinessManager;
@@ -43,10 +43,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", 
                     GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, _workflowID));
             }
-            else
-            {
-                return View("~/Views/Error/AccessDenied.cshtml");
-            }
+
+            return View("~/Views/Error/AccessDenied.cshtml");
         }
 
         /// <summary>
@@ -58,8 +56,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public TaskViewModel GenerateViewModel(int currentUserID, int workflowID)
         {
             // Actions
-            var actionService = new EventService();
-            var actionList = actionService.GetEvents(new EventSelectAllCriteria());
+            var eventService = new EventService();
+            var eventList = eventService.GetEvents(new EventSelectAllCriteria());
 
             // Configurations
             var configurationService = new ConfigurationsService();
@@ -85,7 +83,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var bettypeList = bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
 
             var taskViewModel = new TaskViewModel(
-                actionList.ToList(), 
+                eventList.ToList(), 
                 configList.ToList(), 
                 groupList, 
                 sportList.ToList(), 
@@ -103,10 +101,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
         public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
-        {
-            var serializer = new JavaScriptSerializer();                        
+        {                     
             criteria.PageIndex++;
-
             var groupService = new GroupService();
             var dataReader = groupService.GetGroups(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
@@ -134,8 +130,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             criteria.IsActive = true;
-            var queryPreconString = "select top 100 {0} from {1} where {2}";
-            var queryRuleString = "select {0} from {1} where {2}";
+            const string queryPreconString = "select top 100 {0} from {1} where {2}";
+            const string queryRuleString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
@@ -317,8 +313,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Formatted String.</returns>
         public string RemoveRedundantSpace(string targetString)
         {
-            System.Text.RegularExpressions.RegexOptions options = System.Text.RegularExpressions.RegexOptions.None;
-            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", options);
+            var options = System.Text.RegularExpressions.RegexOptions.None;
+            var regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", options);
             targetString = regex.Replace(targetString, @" ");
 
             return targetString;

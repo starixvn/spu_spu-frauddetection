@@ -12,8 +12,8 @@ namespace Fanex.NAP.FraudDetection.Service
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.Logging;
-    using NAP.Core.Model;
+    using Core.Model;
+    using Logging;
 
     /// <summary>
     /// AppSession class.
