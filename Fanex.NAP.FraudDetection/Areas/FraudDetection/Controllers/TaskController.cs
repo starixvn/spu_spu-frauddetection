@@ -13,7 +13,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Data;
     using System.Linq;
     using System.Web.Mvc;
-    using Model.ViewModel;
+    using Model.ViewModel.Task;
     using Models;
     using NAP.FraudDetection.Controllers;
     using Service;
@@ -87,8 +87,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 groupList, 
                 sportList.ToList(), 
                 bettypeList.ToList());
-            taskViewModel.OnUserID = currentUserID;
-            taskViewModel.WorkflowID = workflowID;
+            taskViewModel.OnUserId = currentUserID;
+            taskViewModel.WorkflowId = workflowID;
 
             return taskViewModel;
         }

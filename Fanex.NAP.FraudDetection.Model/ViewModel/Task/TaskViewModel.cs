@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.05.13">Created</change>
 // </history>
 
-namespace Fanex.NAP.FraudDetection.Model.ViewModel
+namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
 {
     using System;
     using System.Collections.Generic;
@@ -35,15 +35,15 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         }
 
         // On User ID
-        public int OnUserID { get; set; }
+        public int OnUserId { get; set; }
 
         // Actions
-        public int WorkflowID { get; set; }
+        public int WorkflowId { get; set; }
 
         // Actions
         public List<SPU.Lib.FraudDetection.DTO.Event> EventList { get; set; }
 
-        public int EventID { get; set; }
+        public int EventId { get; set; }
 
         public int IntervalValue { get; set; }
 
@@ -57,7 +57,7 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         // Configurations
         public List<Config> ConfigurationList { get; set; }
 
-        public string PreconditionConfigSQLQuery { get; set; }
+        public string PreconditionConfigSqlQuery { get; set; }
 
         public List<Config> PreconditionConfigurations
         {
@@ -67,13 +67,13 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
             }
         }
 
-        public string RuleConfigSQLQuery { get; set; }
+        public string RuleConfigSqlQuery { get; set; }
 
         public List<Config> RuleConfigurations
         {
             get
             {
-                return ConfigurationList.Where(l => l.ConfigCategory == "Ticket" || l.ConfigCategory == "Counter").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory != "Match").ToList();
             }
         }
 

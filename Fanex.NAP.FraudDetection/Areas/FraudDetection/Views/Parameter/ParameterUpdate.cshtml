@@ -1,5 +1,4 @@
-﻿@using System.Web.Optimization
-@model Fanex.NAP.FraudDetection.Model.ViewModel.ParameterViewModel
+﻿@model Fanex.NAP.FraudDetection.Model.ViewModel.Paramater.ParameterViewModel
 @{        
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Configure Parameters";        
@@ -26,7 +25,7 @@
 
 @using (Html.BeginForm("UpdateParamater", "Parameter", FormMethod.Post, new { @id = "UpdateParamater" }))
 {    
-    <div id="onUserid" style="display: none;">@Model.OnUserID</div>
+    <div id="onUserid" style="display: none;">@Model.OnUserId</div>
     <table class="table-popup">
         @{
             foreach (var param in Model.ParameterList)

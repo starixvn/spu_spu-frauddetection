@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.06.11">Created</change>
 // </history>
 
-namespace Fanex.NAP.FraudDetection.Model.ViewModel
+namespace Fanex.NAP.FraudDetection.Model.ViewModel.Paramater
 {
     using System;
     using System.Collections.Generic;
@@ -24,11 +24,11 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
             int currentOnlineUser)
         {
             ParameterList = paramList;
-            OnUserID = currentOnlineUser;
+            OnUserId = currentOnlineUser;
         }
 
         // On User ID
-        public int OnUserID { get; set; }
+        public int OnUserId { get; set; }
 
         // Bettypes and Sports
         public List<Parameter> ParameterList { get; set; }

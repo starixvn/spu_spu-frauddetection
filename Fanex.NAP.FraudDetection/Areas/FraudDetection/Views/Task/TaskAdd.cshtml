@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@using Fanex.NAP.FraudDetection.Model.ViewModel
+@using Fanex.NAP.FraudDetection.Model.ViewModel.Task
 @model TaskViewModel
 @{        
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -29,8 +29,8 @@
 <label id="addTaskResult" style="color: Red; font-weight: normal;"></label>
 @using (Html.BeginForm("AddNewTask", "Task", FormMethod.Post, new { @id = "AddTaskForm" }))
 {
-    <div id="workflowid" style="display: none;">@Model.WorkflowID</div>
-    <div id="onUserid" style="display: none;">@Model.OnUserID</div>
+    <div id="workflowid" style="display: none;">@Model.WorkflowId</div>
+    <div id="onUserid" style="display: none;">@Model.OnUserId</div>
     <div id="accordion" style="width: 620px;">
       <h3 id="accordionBlockEvent">Event</h3>
       <div>
