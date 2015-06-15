@@ -13,22 +13,21 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Data;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Web.Script.Serialization;
     using Model.ViewModel;
     using Models;
     using NAP.FraudDetection.Controllers;
     using Service;
     using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection;
     using SPU.Lib.FraudDetection.BusinessManager;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.SendingTasks;
     using SPU.Lib.FraudDetection.Service.Implement;
 
     public class TaskController : BaseController
     {
-        private int _workflowID = 0;
+        private int _workflowId = 0;
 
         /// <summary>
         /// Home page for Task.
@@ -37,11 +36,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Action Result.</returns>
         public ActionResult Index(string workflowId)
         {
-            if (int.TryParse(workflowId, out _workflowID))
+            if (int.TryParse(workflowId, out _workflowId))
             {
                 return View(
                     "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", 
-                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, _workflowID));
+                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, _workflowId));
             }
 
             return View("~/Views/Error/AccessDenied.cshtml");
@@ -130,8 +129,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             criteria.IsActive = true;
-            const string queryPreconString = "select top 100 {0} from {1} where {2}";
-            const string queryRuleString = "select {0} from {1} where {2}";
+            const string QueryPreconString = "select top 100 {0} from {1} where {2}";
+            const string QueryRuleString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
@@ -139,7 +138,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
                 string.Format(
-                queryPreconString,
+                QueryPreconString,
                 GenerateSQLSelect(configList, additionalInfo.PreconConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.PreconConfigs),
                 GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions));
@@ -147,7 +146,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty : 
                 string.Format(
-                queryRuleString,
+                QueryRuleString,
                 GenerateSQLSelect(configList, additionalInfo.RuleConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.RuleConfigs),
                 GenerateSQLWhere(configList, false, additionalInfo, criteria.TaskRules));
@@ -168,8 +167,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="taskId">Inserted Task ID.</param>
         public void PushNewTaskToRun(TaskInsertCriteria criteria, int taskId)
         {
-            var syncNewTask = new FraudAutoDetection();
-            syncNewTask.AddNewTask(
+            var syncNewTask = SendingTaskFactory.GetSender(SendingType.AddingTask);
+            syncNewTask.Send(
                 new Task(new TaskInfo
                 {
                     EventId = criteria.EventId,
