@@ -11,10 +11,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using Fanex.NAP.FraudDetection.Controllers;
+    using NAP.FraudDetection.Controllers;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
 
     /// <summary>
     /// The controller of mail master.
@@ -52,8 +52,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 var model = new MailMasterInfo()
                 {
                     IsActive = true,
-                    MailCode = "Mail_01",
-                    MailDescription = "Aaron test mail template"
+                    MailCode = "Mail_01"
                 };
                 mailTemplates.Add(model);
             }
