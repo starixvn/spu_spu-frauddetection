@@ -11,10 +11,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
-    using Fanex.NAP.FraudDetection.Controllers;
+    using NAP.FraudDetection.Controllers;
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
 
     public class GroupController : BaseController
     {
@@ -30,17 +30,20 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
         public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();                        
+        {                     
             criteria.PageIndex++;
 
-            GroupService groupService = new GroupService();
+            var groupService = new GroupService();
             var dataReader = groupService.GetGroups(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Add New Group.
+        /// </summary>
+        /// <returns>HTML string.</returns>
         [HttpGet]
         public string AddNewGroup()
         {
@@ -49,11 +52,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupInfo.cshtml", groupInfo);
         }
 
+        /// <summary>
+        /// Add New Group.
+        /// </summary>
+        /// <param name="criteria">Group Insert Criteria.</param>
+        /// <returns>Action Result.</returns>
         [HttpPost]
         public ActionResult AddNewGroup(GroupInsertCriteria criteria)
         {
             criteria.CreatorId = 1;
-            GroupService groupService = new GroupService();
+            var groupService = new GroupService();
             var result = groupService.InsertGroup(criteria);
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }

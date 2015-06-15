@@ -7,12 +7,11 @@
 //   <change who="Long.Luu" date="2015.05.13">Created</change>
 // </history>
 
-namespace Fanex.NAP.FraudDetection.Model.ViewModel
+namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Mvc;
     using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
@@ -22,13 +21,13 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
     public class TaskViewModel
     {
         public TaskViewModel(
-            List<SPU.Lib.FraudDetection.DTO.Action> actions, 
+            List<SPU.Lib.FraudDetection.DTO.Event> events, 
             List<Config> configs,
             List<Group> groups,
             List<Sport> sportList,
             List<Bettype> bettypeList)
         {
-            ActionList = actions;
+            EventList = events;
             ConfigurationList = configs;
             GroupList = groups;
             SportList = sportList;
@@ -36,15 +35,15 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         }
 
         // On User ID
-        public int OnUserID { get; set; }
+        public int OnUserId { get; set; }
 
         // Actions
-        public int WorkflowID { get; set; }
+        public int WorkflowId { get; set; }
 
         // Actions
-        public List<SPU.Lib.FraudDetection.DTO.Action> ActionList { get; set; }
+        public List<SPU.Lib.FraudDetection.DTO.Event> EventList { get; set; }
 
-        public int ActionID { get; set; }
+        public int EventId { get; set; }
 
         public int IntervalValue { get; set; }
 
@@ -58,23 +57,23 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel
         // Configurations
         public List<Config> ConfigurationList { get; set; }
 
-        public string PreconditionConfigSQLQuery { get; set; }
+        public string PreconditionConfigSqlQuery { get; set; }
 
         public List<Config> PreconditionConfigurations
         {
             get
             {
-                return ConfigurationList.Where(l => l.ConfigCategory.Trim() == "Match").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory == "Match").ToList();
             }
         }
 
-        public string RuleConfigSQLQuery { get; set; }
+        public string RuleConfigSqlQuery { get; set; }
 
         public List<Config> RuleConfigurations
         {
             get
             {
-                return ConfigurationList.Where(l => l.ConfigCategory.Trim() == "Ticket" || l.ConfigCategory.Trim() == "Counter").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory != "Match").ToList();
             }
         }
 

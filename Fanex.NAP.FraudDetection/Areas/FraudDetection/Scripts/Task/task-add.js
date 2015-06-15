@@ -46,16 +46,15 @@ function OnAccordionInitialize() {
 /* INITIALIZE */
 function OnInitialize() {
     $('#preconditionConfigControlDatetimePicker').datepicker();
-    SQLForNotScanned = $("option[value='Match State']").attr("data-sqlfield");
-    
+
     $("#btn_AddRule").click(function () {
-        var currentRowNum = $('#ruleTable tr').length;
-        AddingOneMoreRuleToTable("ruleTable", currentRowNum, "ruleConfig");
+        var currentRowNum = $('#ruleTable tr:last').attr('id').replace("ruleTable", "");
+        AddingOneMoreRuleToTable("ruleTable", parseInt(currentRowNum) + 1, "ruleConfig");
     });
 
     $("#btn_AddPrecondition").click(function () {
-        var currentRowNum = $('#preconditionTable tr').length;
-        AddingOneMoreRuleToTable("preconditionTable", currentRowNum, "preconditionConfig");
+        var currentRowNum = $('#preconditionTable tr:last').attr('id').replace("preconditionTable", "");
+        AddingOneMoreRuleToTable("preconditionTable", parseInt(currentRowNum) + 1, "preconditionConfig");
     });
 
     var dateObj = new Date();
@@ -83,7 +82,7 @@ function OnInitialize() {
                 "WorkflowId": $("#workflowid").text(),
                 "TaskName": $("#ActionName").find(":selected").text(),
                 "TaskDesc": $("#ActionName").find(":selected").attr("data-actiondesc"),
-                "ActionId": $("#ActionName").find(":selected").val(),
+                "EventId": $("#ActionName").find(":selected").val(),
                 "Interval": $("#timeInterval").val(),
                 "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
                 "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
@@ -158,7 +157,7 @@ function GenerateConfig(parentName) {
             valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
             break;
         default:
-            valueSelectedValue = '%' + $('#' + parentName + 'ControlTextbox').val() + '%';
+            valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
     }
 
     if (keySelectedValue == "Match State") {

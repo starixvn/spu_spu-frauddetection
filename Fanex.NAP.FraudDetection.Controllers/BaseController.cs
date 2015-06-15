@@ -12,11 +12,11 @@ namespace Fanex.NAP.FraudDetection.Controllers
 {
     using System.IO;
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Web.Context;
-    using Fanex.NAP.Core.Web.Session;
+    using Core.Configuration;
+    using Core.Service.Impl;
+    using Core.Service.Interface;
+    using Core.Web.Context;
+    using Core.Web.Session;
 
     /// <summary>
     /// Base controller.
@@ -109,7 +109,7 @@ namespace Fanex.NAP.FraudDetection.Controllers
             var view = viewEngineResult.View;
             context.Controller.ViewData.Model = viewModel;
 
-            string htmlStringFromView = string.Empty;
+            var htmlStringFromView = string.Empty;
             using (var stringWriter = new StringWriter())
             {
                 var viewContext = new ViewContext(

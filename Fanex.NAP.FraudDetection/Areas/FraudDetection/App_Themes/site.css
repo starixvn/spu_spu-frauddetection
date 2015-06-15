@@ -260,12 +260,16 @@ select.request
 .table-popup
 {
     border: 0px;
-    font-size:0.8em;
 }
 
 .table-popup td
 {
     padding: 5px;
+}
+
+.font-size-small
+{
+    font-size:0.8em;
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
@@ -332,3 +336,19 @@ input[type="submit"], .btn-primary,
     margin: -13px 0px 10px 60px;
 }
 /* End modify the datetimepicker control */
+
+/* Start More Information */
+.more-info
+{
+    background-image: url("/Areas/FraudDetection/App_Themes/Images/icons.png");
+    background-position: -28px -28px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 18px;
+    line-height: 14px;
+    margin-top: 0px;
+    vertical-align: text-top;
+    width: 18px;
+    cursor: pointer;
+}
+/* End More Information */

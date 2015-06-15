@@ -245,6 +245,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MailMasterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
@@ -405,6 +406,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-update.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\mathformula-validation.js" />
@@ -492,6 +494,7 @@
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowDetail.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Parameter\ParameterUpdate.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
@@ -882,7 +885,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54840</DevelopmentServerPort>
+          <DevelopmentServerPort>51823</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

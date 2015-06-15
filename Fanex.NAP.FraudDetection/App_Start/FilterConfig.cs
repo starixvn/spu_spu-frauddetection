@@ -11,7 +11,7 @@
 namespace Fanex.NAP.FraudDetection.AppStart
 {
     using System.Web.Mvc;
-    using Fanex.NAP.FraudDetection.Controllers.Attributes;
+    using Controllers.Attributes;
 
     public static class FilterConfig
     {

@@ -95,8 +95,9 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DTO">
-      <HintPath>..\Fanex.NAP.FraudDetection\_Dependency\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DTO.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -117,6 +118,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Compile Include="ViewModel\Paramater\ParameterViewModel.cs" />
     <Compile Include="ViewModel\Task\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -145,23 +145,29 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.Core">
-      <HintPath>_Dependency\SPU.Lib.Core.dll</HintPath>
+    <Reference Include="SPU.Lib.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection">
-      <HintPath>_Dependency\SPU.Lib.FraudDetection.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Criteria">
-      <HintPath>_Dependency\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DataAccess">
-      <HintPath>_Dependency\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DTO">
-      <HintPath>_Dependency\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DTO.dll</HintPath>
     </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Service">
-      <HintPath>_Dependency\SPU.Lib.FraudDetection.Service.dll</HintPath>
+    <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -239,10 +245,16 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+<<<<<<< HEAD
+    <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
+=======
+    <Compile Include="Areas\FraudDetection\Controllers\MailMasterController.cs" />
+>>>>>>> #37484 - add javascript, tinymce lib, jquery.confirm, jquery.validate, controller, view
     <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
+    <Compile Include="Areas\FraudDetection\Models\TaskAdditionalInfo.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
@@ -343,7 +355,6 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\login-icon.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\LoginCaptcha.jpg" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\logo.png" />
-    <Content Include="Areas\FraudDetection\App_Themes\Images\logo_licensee.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\menusplit.jpg" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\nexHRMicon.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\panel_bg.png" />
@@ -398,17 +409,19 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-update.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\mathformula-validation.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-edit.js" />
-<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-edit.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-list.js" />
-=======
     <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
->>>>>>> #35575 - Modify layout
+    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-list.js" />
@@ -482,11 +495,15 @@
     <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupInfo.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowDetail.cshtml" />
-=======
     <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
->>>>>>> #35575 - Modify layout
+<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Views\Parameter\ParameterUpdate.cshtml" />
+=======
+    <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
+>>>>>>> #37484 - add javascript, tinymce lib, jquery.confirm, jquery.validate, controller, view
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -526,6 +543,7 @@
     <Content Include="Content\jquery-ui\base\theme.css" />
     <Content Include="Content\jquery-ui\base\tooltip.css" />
     <Content Include="Content\Plugin\multi-select-control.css" />
+    <Content Include="Content\tinymce\tinymce.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -549,13 +567,90 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.1.js" />
     <Content Include="Scripts\jquery-ui.min-1.11.1.js" />
+    <Content Include="Scripts\jquery.confirm.min.js" />
     <Content Include="Scripts\jquery.number.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\viewlog.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\edit.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\addnew.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\default.js" />
     <Content Include="Scripts\Page\Home\home.js" />
     <Content Include="Scripts\Plugin\multi-select-control.js" />
+    <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\example\dialog.html" />
+    <Content Include="Scripts\tinymce\plugins\example\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\layer\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\media\moxieplayer.swf" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="SiteConfig\Web.AppSettings.config.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -584,6 +679,13 @@
     <Content Include="Views\Web.config" />
     <Content Include="Deployment.ignore" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Scripts\tinymce\langs\readme.md" />
+    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <None Include="SiteConfig\SiteConfiguration.ttinclude" />
     <None Include="SiteConfig\Web.AppSettings.config.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -636,7 +738,6 @@
     <Content Include="Views\Shared\_LayoutPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\FraudDetection\Models\" />
     <Folder Include="Areas\FraudDetection\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="ClearScript.V8\" />
@@ -751,18 +852,11 @@
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\wells.less" />
     <Content Include="Content\Core\custom.less" />
-    <Content Include="Web.AppSettings.config" />
+    <Content Include="Web.AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Error\AccessDenied.cshtml" />
-    <Content Include="Views\BetSetting\Default.cshtml" />
-    <Content Include="Views\BetSetting\AddNew.cshtml" />
-    <Content Include="Views\BetSetting\Edit.cshtml" />
-    <Content Include="Views\BetSetting\__UpdateLogItems.cshtml" />
-    <Content Include="Views\BetSetting\Logs.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\BetSetting\_DefaultBetSettingList.cshtml" />
-    <Content Include="Views\BetSetting\_LogItems.cshtml" />
-    <Content Include="Views\BetSetting\__DeleteLogItems.cshtml" />
-    <Content Include="Views\BetSetting\__InsertLogItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -797,7 +891,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54840</DevelopmentServerPort>
+          <DevelopmentServerPort>51823</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
