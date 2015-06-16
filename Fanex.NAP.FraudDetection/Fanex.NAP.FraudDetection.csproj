@@ -52,11 +52,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.2.4\lib\net40\ClearScript.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Couchbase">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
     </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.4.4\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
@@ -75,6 +81,9 @@
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\packages\Fanex.NAP.Core.1.0.0.2\lib\net40\Fanex.NAP.Core.dll</HintPath>
@@ -138,6 +147,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef">
       <HintPath>..\packages\RemotingRef.1.0.0.1\lib\net40\RemotingRef.dll</HintPath>
@@ -270,7 +285,9 @@
     <Content Include="App_Data\FanexSpName.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="App_Data\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\date-format.js" />
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.css" />
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.js" />

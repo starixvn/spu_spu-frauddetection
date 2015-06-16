@@ -10,6 +10,8 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.MailDelivery.Client.Models;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
     using SPU.Lib.FraudDetection.Service.Implement;
@@ -61,9 +63,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             if (ModelState.IsValid)
             {
                 criteria.CreatorId = 1;
-                _mailMasterService.InsertMail(criteria);
+                var result = _mailMasterService.InsertMail(criteria);
 
-                return RedirectToAction("Index");
+                if (result.IsSuccessful)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("error", result.Message);
+                }
             }
 
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterAdd.cshtml");
@@ -111,6 +120,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 MailSubject = mail.MailSubject
             };
 
+            /*-----------------------Test send mail---------------------
+            var newMail = new Mail
+            {
+                Subject = mail.MailSubject,
+                Title = mail.MailSubject,
+                Body = mail.MailContent,
+            };
+
+            newMail.MailingListId = 80;
+            MailClientHandler.Start();
+            MailClientHandler.SendMail(newMail);
+            -----------------------Test send mail---------------------*/
+
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterUpdate.cshtml", model);
         }
 
@@ -126,9 +148,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             if (ModelState.IsValid)
             {
                 criteria.CreatorId = 1;
-                _mailMasterService.UpdateMail(criteria);
 
-                return RedirectToAction("Index");
+                var result = _mailMasterService.UpdateMail(criteria);
+
+                if (result.IsSuccessful)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("error", result.Message);
+                }
             }
 
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterUpdate.cshtml");

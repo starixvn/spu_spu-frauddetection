@@ -9,6 +9,7 @@
 <br>
 @using (Html.BeginForm("UpdateMail", "MailMaster", FormMethod.Post, new { @id = "updateMailForm" }))
 {
+    @Html.ValidationMessage("error")
     <div class="col-md-12">
         <div class="form-group col-md-6">
             <label class="col-md-2">
@@ -71,9 +72,11 @@
     </div>
     <div class="form-group text-center col-md-12">
         <input type="submit" value="Submit" class="btn-green" />
-        <input id="mailCancel" type="button" value="Cancel" class="btn-green" style="width: 66px; cursor: pointer;"/>
+        <input id="mailCancel" type="button" value="Cancel" class="btn-green" style="width: 66px;
+            cursor: pointer;" />
     </div>
     @Html.HiddenFor(model => model.MailId)
+    @Html.HiddenFor(model => model.MailCode)
 }
 <br />
 @section FooterJs
