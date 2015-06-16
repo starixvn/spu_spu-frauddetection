@@ -9,11 +9,9 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Collections.Generic;
     using System.Web.Mvc;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
-    using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service.Implement;
 
     /// <summary>
@@ -45,17 +43,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            var mailTemplates = new List<MailMasterInfo>();
-
-            for (var i = 0; i < 20; i++)
-            {
-                var model = new MailMasterInfo()
-                {
-                    IsActive = true,
-                    MailCode = "Mail_01"
-                };
-                mailTemplates.Add(model);
-            }
+            var criteria = new MailMasterGetAllCriteria();
+            var mailTemplates = _mailMasterService.GetMails(criteria);
 
             return Json(mailTemplates, JsonRequestBehavior.AllowGet);
         }
@@ -72,7 +61,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             if (ModelState.IsValid)
             {
                 criteria.CreatorId = 1;
-                //// _mailMasterService.InsertMail(criteria);
+                _mailMasterService.InsertMail(criteria);
 
                 return RedirectToAction("Index");
             }
@@ -90,12 +79,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var criteria = new MailMasterDeleteCriteria()
             {
+                CreatorId = 1,
                 MailId = mailId
             };
 
-            //// _mailMasterService.DeleteMail(criteria);
+            var result = _mailMasterService.DeleteMail(criteria);
 
-            return new JsonResult { Data = new { ErrCode = 1, ErrMsg = "Test choi" } };
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
         /// <summary>
@@ -105,14 +95,20 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>The ActionResult.</returns>
         public ActionResult Update(int? mailId)
         {
+            var criteria = new MailMasterGetByIdCriteria()
+            {
+                MailId = mailId == null ? 0 : (int)mailId
+            };
+            var mail = _mailMasterService.GetMailById(criteria);
             var model = new MailMasterUpdateCriteria()
             {
-                MailId = 100,
-                IsActive = true,
-                MailCode = "Mail_01",
-                MailDesc = "Aaron test mail template",
-                MailContent = string.Empty,
-                MailSubject = "Test"
+                IsActive = mail.IsActive,
+                MailCode = mail.MailCode,
+                MailContent = mail.MailContent,
+                MailDesc = mail.MailDesc,
+                MailId = mail.MailId,
+                MailingListId = mail.MailingListId,
+                MailSubject = mail.MailSubject
             };
 
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterUpdate.cshtml", model);
@@ -129,12 +125,34 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (ModelState.IsValid)
             {
-                //// _mailMasterService.UpdateMail(criteria);
+                criteria.CreatorId = 1;
+                _mailMasterService.UpdateMail(criteria);
 
                 return RedirectToAction("Index");
             }
 
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterUpdate.cshtml");
+        }
+
+        /// <summary>
+        /// Activate mail template.
+        /// </summary>
+        /// <param name="mailId">The Mail ID.</param>
+        /// <param name="isActive">True or False.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpPost]
+        public ActionResult ActivateMail(int mailId, bool isActive)
+        {
+            var criteria = new MailMasterActivateCriteria()
+            {
+                CreatorId = 1,
+                MailId = mailId,
+                IsActive = isActive
+            };
+
+            var result = _mailMasterService.UpdateMail(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
     }
 }

@@ -13,20 +13,30 @@
         <div class="form-group col-md-6">
             <label class="col-md-2">
                 Mail Code</label>
-            @Html.TextBoxFor(model => model.MailCode, new { @class = "col-md-8", @style = "width: 300px; margin-left: 3px; margin-right: 10px;" })
+            @Html.TextBoxFor(model => model.MailCode, new { @disabled = "disabled", @class = "col-md-8", @style = "padding-left: 5px; width: 300px; margin-left: 3px; margin-right: 10px;" })
             @Html.ValidationMessageFor(model => model.MailCode)
         </div>
         <div class="form-group col-md-6">
-            <label class="col-md-2">
-                Description</label>
-            @Html.TextBoxFor(model => model.MailDescription, new { @class = "col-md-6", @style = "width: 300px;"})
-            <label class="col-md-2 text-right">
-                Active</label>
-            @Html.CheckBoxFor(model => model.IsActive) 
+            <label class="col-md-3 text-left">
+                Mailing List</label>
+            @Html.TextBoxFor(model => model.MailingListId, new { @class = "col-md-6", @style = "padding-left: 5px; width: 150px; margin-right: 10px;" })
+            @Html.ValidationMessageFor(model => model.MailingListId)
         </div>
     </div>
     <div class="col-md-12">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+            <label class="col-md-2">
+                Description</label>
+            @Html.TextBoxFor(model => model.MailDesc, new { @class = "col-md-6", @style = "padding-left: 5px; margin-left: 3px; width: 300px;" })
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-md-3 text-left">
+                Active</label>
+            @Html.CheckBoxFor(model => model.IsActive)
+        </div>
+    </div>
+    <div class="col-md-12">
+        @*<div class="form-group col-md-12">
             <label class="col-md-1">
                 To</label>
             @Html.TextBoxFor(model => model.MailAddressSentTo, new { @class = "col-md-11" })
@@ -41,11 +51,11 @@
             <label class="col-md-1">
                 BCC</label>
             @Html.TextBoxFor(model => model.MailAddressBcc, new { @class = "col-md-11" })
-        </div>
+        </div>*@
         <div class="form-group col-md-12">
             <label class="col-md-1">
                 Subject</label>
-            @Html.TextBoxFor(model => model.MailSubject, new { @class = "col-md-11" })
+            @Html.TextBoxFor(model => model.MailSubject, new { @class = "col-md-11", @style = "padding-left: 5px;" })
             @Html.ValidationMessageFor(model => model.MailSubject)
         </div>
         <div>
@@ -61,6 +71,7 @@
     </div>
     <div class="form-group text-center col-md-12">
         <input type="submit" value="Submit" class="btn-green" />
+        <input id="mailCancel" type="button" value="Cancel" class="btn-green" style="width: 66px; cursor: pointer;"/>
     </div>
     @Html.HiddenFor(model => model.MailId)
 }

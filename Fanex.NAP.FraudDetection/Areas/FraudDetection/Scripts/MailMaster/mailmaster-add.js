@@ -15,4 +15,8 @@
         toolbar2: "print preview media | forecolor backcolor emoticons | fontselect fontsizeselect",
         image_advtab: true
     });
+
+    $("#mailCancel").click(function () {
+        window.location.href = '/MailMaster';
+    });
 });

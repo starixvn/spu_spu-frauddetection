@@ -1,20 +1,21 @@
 ﻿$(function () {
     "use strict";
 
-    var formSearch = $('#mailSearch').submit(function (event) {
-        $.get('MailMaster/Search', function (mailTemplates) {
-            renderMailTable(mailTemplates);
-        });
-    });
-
     formSearch.submit();
+});
 
-    /*
-    * Render mails.
-    */
-    function renderMailTable(mailTemplates) {
-        var gridOptions = {
-            columns:
+var formSearch = $('#mailSearch').submit(function (event) {
+    $.get('MailMaster/Search', function (mailTemplates) {
+        renderMailTable(mailTemplates);
+    });
+});
+
+/*
+* Render mails.
+*/
+function renderMailTable(mailTemplates) {
+    var gridOptions = {
+        columns:
                 [
                     { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Mail Code", Width: 200, Name: "MailCode", HeaderAlign: "center", CellAlign: "left" },
@@ -22,68 +23,68 @@
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
-            bodyRows: createMailTable(mailTemplates),
-            gridExpandHeight: 150,
-            showPager: true,
-            pagerOption:
+        bodyRows: createMailTable(mailTemplates),
+        gridExpandHeight: 150,
+        showPager: true,
+        pagerOption:
             {
                 itemsPerPage: 10,
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true
             }
-        };
+    };
 
-        $("#mailMasterId").fanexGrid(gridOptions);
-    }
+    $("#mailMasterId").fanexGrid(gridOptions);
+}
 
-    /*
-    * Create the data for rendering.
-    */
-    function createMailTable(mailTemplates) {
-        var rows = [];
+/*
+* Create the data for rendering.
+*/
+function createMailTable(mailTemplates) {
+    var rows = [];
 
-        for (var index = 0; index < mailTemplates.length; index++) {
-            rows.push({
-                Columns: [
+    for (var index = 0; index < mailTemplates.length; index++) {
+        rows.push({
+            Columns: [
                     { Name: "Row", Value: index + 1 },
                     { Name: "MailCode", Value: mailTemplates[index].MailCode },
-                    { Name: "Description", Value: mailTemplates[index].MailDescription },
-                    { Name: "Active", Value: mailTemplates[index].IsActive, CustomCellRender: ActiveColumn },
+                    { Name: "Description", Value: mailTemplates[index].MailDesc },
+                    { Name: "Active", Value: mailTemplates[index], CustomCellRender: ActiveColumn },
                     { Name: "Edit", Value: mailTemplates[index].MailId, CustomCellRender: ActionColumn }
                 ]
-            });
-        }
-
-        return rows;
+        });
     }
 
-    /*
-    * Active Column template.
-    */
-    function ActiveColumn(cell, cellFormated) {
-        if (cell.Value) {
-            return "<img title='Deactivate this email' class='ico-tick' alt='' onclick='editActive(true, 1)'/>";
-        }
-        else {
-            return "<img title='Activate this email' class='ico-untick' alt='' onclick='editActive(false, 2)'/>";
-        }
-    }
+    return rows;
+}
 
-    /*
-    * Action Column template.
-    */
-    function ActionColumn(cell, cellFormated) {
-        return "<div class='btn-action' onclick=\"ShowAction(" + cell.Value + ");\"></div>";
+/*
+* Active Column template.
+*/
+function ActiveColumn(cell, cellFormated) {
+    var params = cell.Value.MailId + "," + cell.Value.IsActive;
+    if (cell.Value.IsActive) {
+        return "<img title='Deactivate this email' class='ico-tick' alt='' onclick=\"editActive(" + params + ");\"/>";
     }
-});
+    else {
+        return "<img title='Activate this email' class='ico-untick' alt='' onclick=\"editActive(" + params + ");\"/>";
+    }
+}
+
+/*
+* Action Column template.
+*/
+function ActionColumn(cell, cellFormated) {
+    return "<div id ='edit" + cell.Value + "' class='btn-action' onclick=\"ShowAction(" + cell.Value + ");\"></div>";
+}
 
 /*
 * Action.
 */
 function ShowAction(mailId) {
     $.contextMenu({
-        selector: '.btn-action',
+        selector: '#edit' + mailId,
         items: {
             deleteMail: {
                 name: "Delete this mail",
@@ -136,20 +137,19 @@ function deleteMail(mailId) {
 * Delete mail template.
 */
 function updateMail(mailId) {
-    //alert('Not implement yet!');
     window.location.href = '/MailMaster/Update?mailId=' + mailId;
 }
 
 /*
 * Activate/deactivate mail template.
 */
-function editActive(isActive, mailId) {
+function editActive(mailId, isActive) {
     var active = isActive === true ? "deactivate " : "activate ";
     $.confirm({
         title: "Confirmation",
-        text: "Are you sure to " + active + mailId + "?",
+        text: "Are you sure to " + active + "this mail template?",
         confirm: function (button) {
-            $.post('MailMaster/DeleteMail', { mailId: mailId }, function (result) {
+            $.post('MailMaster/ActivateMail', { mailId: mailId, isActive: !isActive }, function (result) {
                 if (result.ErrCode === 0) {
                     formSearch.submit();
                 }
@@ -160,7 +160,7 @@ function editActive(isActive, mailId) {
         },
         cancel: function (button) {
         },
-        confirmButton: "Delete",
+        confirmButton: "OK",
         cancelButton: "Cancel"
     });
 }
