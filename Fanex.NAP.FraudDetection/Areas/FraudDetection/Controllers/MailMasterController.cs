@@ -10,8 +10,6 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
-    using Fanex.MailDelivery.Client.Handlers;
-    using Fanex.MailDelivery.Client.Models;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
     using SPU.Lib.FraudDetection.Service.Implement;
@@ -119,19 +117,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 MailingListId = mail.MailingListId,
                 MailSubject = mail.MailSubject
             };
-
-            /*-----------------------Test send mail---------------------
-            var newMail = new Mail
-            {
-                Subject = mail.MailSubject,
-                Title = mail.MailSubject,
-                Body = mail.MailContent,
-            };
-
-            newMail.MailingListId = 80;
-            MailClientHandler.Start();
-            MailClientHandler.SendMail(newMail);
-            -----------------------Test send mail---------------------*/
 
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterUpdate.cshtml", model);
         }

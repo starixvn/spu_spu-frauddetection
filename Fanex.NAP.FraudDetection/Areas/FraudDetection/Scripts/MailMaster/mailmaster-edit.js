@@ -20,3 +20,8 @@
         window.location.href = '/MailMaster';
     });
 });
+
+function insertSuspiciousStatistic(name) {
+    var data = '<div>{{' + name + '}}</div>';
+    tinyMCE.execCommand('mceInsertContent', false, data);
+}
