@@ -7,12 +7,11 @@
 //   <change who="Long.Luu" date="2015.06.10">Created</change>
 // </history>
 
-using Fanex.NAP.FraudDetection.Model.ViewModel.Paramater;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using Model.ViewModel.Paramater;
     using NAP.FraudDetection.Controllers;
     using Service;
     using SPU.Lib.FraudDetection.Criteria;

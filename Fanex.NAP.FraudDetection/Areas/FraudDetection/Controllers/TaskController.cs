@@ -86,9 +86,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 configList.ToList(), 
                 groupList, 
                 sportList.ToList(), 
-                bettypeList.ToList());
-            taskViewModel.OnUserId = currentUserID;
-            taskViewModel.WorkflowId = workflowID;
+                bettypeList.ToList()) { OnUserId = currentUserID, WorkflowId = workflowID };
 
             return taskViewModel;
         }
@@ -129,7 +127,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             criteria.IsActive = true;
-            const string QueryPreconString = "select top 100 {0} from {1} where {2}";
+            const string QueryPreconString = "select top 10 {0} from {1} where {2}";
             const string QueryRuleString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
@@ -221,7 +219,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>SQL From string.</returns>
         public string GenerateSQLFrom(List<Config> configs, List<TablesForeignKey> tablesForeignKey, string selectedConfigIds)
         {
-            var sqlFromString = "bodb02.dbo.match tch ";
+            var sqlFromString = "bodb02.dbo.match tch with(nolock) ";
             var relevantTables = GenerateRelevantTables(configs, selectedConfigIds);
 
             if (relevantTables.ToLower().Contains("count"))
@@ -267,6 +265,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var sqlWhereString = "tch.matchid in ($param1$) and (" + formula.Replace("%", "'").Replace("#", " ") + ")";
             if (isPrecondition)
             {
+                sqlWhereString = sqlWhereString.Replace("tch.matchid in", "tch.matchid not in");
+
                 if (additionalInfo.IsCheckNotScanned)
                 {
                     sqlWhereString = sqlWhereString.Replace("$param1$", sqlForNotScanned);
