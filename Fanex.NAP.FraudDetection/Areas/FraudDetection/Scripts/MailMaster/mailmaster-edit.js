@@ -22,6 +22,6 @@
 });
 
 function insertSuspiciousStatistic(name) {
-    var data = '<div>{{' + name + '}}</div>';
+    var data = '&lt;placeholder&gt;' + name + '&lt;/placeholder&gt;';
     tinyMCE.execCommand('mceInsertContent', false, data);
 }

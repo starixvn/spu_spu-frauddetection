@@ -11,18 +11,21 @@
 {
     @Html.ValidationMessage("error")
     <div class="col-md-12">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" style="margin-bottom: 0px;">
             <label class="col-md-2">
                 Mail Code</label>
             @Html.TextBoxFor(model => model.MailCode, new { @class = "col-md-8", @style = "width: 300px; margin-left: 3px; padding-left: 5px; margin-right: 10px;" })
             @Html.ValidationMessageFor(model => model.MailCode)
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" style="margin-bottom: 0px;">
             <label class="col-md-3 text-left">
                 Mailing List</label>
             @Html.TextBoxFor(model => model.MailingListId, new { @class = "col-md-6", @style = "width: 150px; margin-right: 10px; padding-left: 5px;" })
             @Html.ValidationMessageFor(model => model.MailingListId)
         </div>
+    </div>
+    <div class="col-md-12">
+        <hr style="border-bottom: 1px solid #9E9E9E; width: 50%;">
     </div>
     <div class="col-md-12">
         <div class="form-group col-md-6">
@@ -49,18 +52,25 @@
             <div class="form-group col-md-9">
                 @Html.TextAreaFor(model => model.MailContent, new { @class = "editor", @id = "editor", @style = "resize: none; height: 350px; padding-left: 5px;" })
             </div>
-            <ul class="list-group col-md-2" style="height: 490px; border: 1px solid #9E9E9E; padding: 10px;">
-                <li onclick="insertSuspiciousStatistic('Suspicious Statistic');" class="list-group-item list-group-item-warning" style="cursor: pointer;">Suspicious Statistic</li>
-                <li onclick="" class="list-group-item list-group-item-warning">Suspicious Statistic 1</li>
-                <li onclick="" class="list-group-item list-group-item-warning">Suspicious Statistic 2</li>
-                <li onclick="" class="list-group-item list-group-item-warning">Suspicious Statistic 3</li>
-                <li onclick="insertSuspiciousStatistic('Suspicious Statistic');" class="list-group-item list-group-item-warning" style="cursor: pointer;">Suspicious Statistic 4</li>
+            <ul class="list-group col-md-2" style="height: 490px; border: 1px solid #9E9E9E;
+                padding: 10px;">
+                <li onclick="insertSuspiciousStatistic('Suspicious Statistic');" class="list-group-item list-group-item-warning"
+                    style="cursor: pointer;">Suspicious Statistic</li>
+                <li onclick="" class="list-group-item list-group-item-warning">Suspicious Statistic
+                    1</li>
+                <li onclick="" class="list-group-item list-group-item-warning">Suspicious Statistic
+                    2</li>
+                <li onclick="" class="list-group-item list-group-item-warning">Suspicious Statistic
+                    3</li>
+                <li onclick="insertSuspiciousStatistic('Suspicious Statistic');" class="list-group-item list-group-item-warning"
+                    style="cursor: pointer;">Suspicious Statistic 4</li>
             </ul>
         </div>
     </div>
     <div class="form-group text-center col-md-12">
         <input type="submit" value="Submit" class="btn-green" />
-        <input id="mailCancel" type="button" value="Cancel" class="btn-green" style="width: 66px; cursor: pointer;" />
+        <input id="mailCancel" type="button" value="Cancel" class="btn-green" style="width: 66px;
+            cursor: pointer;" />
     </div>
 }
 <br />
