@@ -262,6 +262,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return formula;
             }
 
+            var dangerPeriodSql = configs.Single(l => l.ConfigId == 16).ConfigSQLField;
+            formula = formula.Replace("NEARTHEGOAL", dangerPeriodSql);
             var sqlWhereString = "tch.matchid in ($param1$) and (" + formula.Replace("%", "'").Replace("#", " ") + ")";
             if (isPrecondition)
             {
