@@ -1,98 +1,83 @@
-﻿function editGroupStatus(obj, groupId) {
+﻿$(document).ready(function () {
+    OnInitialize();
+});
 
+function OnInitialize() {
+    $('#EditGroupForm').submit(function (event) {
+        event.preventDefault();
+
+        $.post(this.action, $(this).serialize(), function (response) {
+            if (response.ErrCode === 0) {
+                $("#addResult").attr('class', 'result-text-success');
+                response.ErrMsg = "Edit group successfully!";
+            }
+            else {
+                $("#addResult").attr('class', 'result-text-fail');
+            }
+
+            $("#addResult").html(response.ErrMsg);
+            Search();
+        });
+    });
+}
+
+/*
+* Edit a group.
+*/
+function editGroupInfo(groupId) {
+    $.get('Group/EditGroupInfo', { groupId: groupId }, function (response) {
+        $('<div id="popup"></div>').appendTo('body').dialog({
+            modal: true,
+            title: "Edit Group",
+            zIndex: 10000,
+            autoOpen: true,
+            width: '500px',
+            resizable: false,
+            close: function () {
+                $(this).remove();
+            }
+        }).html(response);
+    });
+}
+
+/*
+* Activate/deactivate a group.
+*/
+function editGroupStatus(obj, groupId) {
+    var active = "activate ";
+    var isActive = false;
     if ($(obj).hasClass('ico-tick')) {
-
-        confirm('Do you want to deactivate this group ?', function () {
-            $(obj).removeClass('ico-tick').addClass('ico-untick');
-
-            var url = 'Group/EditGroupStatus?groupId=' + groupId + '&status=false';
-
-            //todo
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'html',
-                cache: false,
-                beforeSend: function (xhr) {
-                },
-                success: function (result) {
-                    result = result.toLowerCase();
-
-                    if (result == 'successfully!') {
-                        document.location = currentDomainURL + "/Group/List";
-                    }
-                    else {
-                        alert(result);
-                    }
-                },
-                error: function (xhr, status, err) {
-                }
-            });
-        });
-    }
-    else {
-        confirm('Do you want to activate this group ?', function () {
-            $(obj).removeClass('ico-untick').addClass('ico-tick');
-
-            var url = 'Group/EditGroupStatus?groupId=' + groupId + '&status=true';
-
-            //todo
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'html',
-                cache: false,
-                beforeSend: function (xhr) {
-                },
-                success: function (result) {
-                    result = result.toLowerCase();
-
-                    if (result == 'successfully!') {
-                        document.location = currentDomainURL + "/Group/List";
-                    }
-                    else {
-                        alert(result);
-                    }
-                },
-                error: function (xhr, status, err) {
-                }
-            });
-        });
+        active = "deactivate ";
+        isActive = true;
     }
 
-};
+    if (isActive) {
+        $(obj).removeClass('ico-tick').addClass('ico-untick');
+    } else {
+        $(obj).removeClass('ico-untick').addClass('ico-tick');
+    }
 
-function deleteGroup(groupId, groupName) {
-
-    confirm('Do you want to delete this group (' + groupName + ') ?', function () {
-        var url = 'Group/DeleteGroup?groupId=' + groupId
-
-        $.ajax({
-            url: url,
-            type: 'POST',
-            dataType: 'html',
-            cache: false,
-            beforeSend: function (xhr) {
-                //NAP.loadingBox.show();
-                //NAP.closePopup();
-            },
-            success: function (result) {
-                //NAP.loadingBox.close();
-                result = result.toLowerCase();
-
-                if (result == 'successfully!') {
-                    document.location = currentDomainURL + "/Group/List";
-                    //NAP.headlineMsgBox.showErr("Unknowned error detected!");                    
+    $.confirm({
+        title: "Confirmation",
+        text: "Are you sure to " + active + "this group?",
+        confirm: function () {
+            $.post('Group/EditGroupStatus', { groupId: groupId, isActive: !isActive }, function (result) {
+                if (result.ErrCode === 0) {
+                    Search();
                 }
                 else {
-                    alert(result);
-                    //NAP.headlineMsgBox.showInfo("Added '" + username + "'. You will be redirected in 3s.", { closeBtn: false, modal: true });
-                    //NAP.redirect('User/Manage?SiteId=0', 3000);
+                    alert(result.ErrMsg);
                 }
-            },
-            error: function (xhr, status, err) {
-                //NAP.handleAjaxError(xhr, status, err);
+            });
+        },
+        cancel: function () {
+            if (!isActive) {
+                $(obj).removeClass('ico-tick').addClass('ico-untick');
+            } else {
+                $(obj).removeClass('ico-untick').addClass('ico-tick');
             }
-        });
+        },
+        confirmButton: "OK",
+        cancelButton: "Cancel"
     });
 }

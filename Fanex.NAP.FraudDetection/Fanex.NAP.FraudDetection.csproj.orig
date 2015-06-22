@@ -52,11 +52,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.2.4\lib\net40\ClearScript.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Couchbase">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
     </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.4.4\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
@@ -75,6 +81,9 @@
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\packages\Fanex.NAP.Core.1.0.0.2\lib\net40\Fanex.NAP.Core.dll</HintPath>
@@ -138,6 +147,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef">
       <HintPath>..\packages\RemotingRef.1.0.0.1\lib\net40\RemotingRef.dll</HintPath>
@@ -245,11 +260,8 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-<<<<<<< HEAD
     <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
-=======
     <Compile Include="Areas\FraudDetection\Controllers\MailMasterController.cs" />
->>>>>>> #37484 - add javascript, tinymce lib, jquery.confirm, jquery.validate, controller, view
     <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
@@ -273,7 +285,9 @@
     <Content Include="App_Data\FanexSpName.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="App_Data\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\date-format.js" />
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.css" />
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.js" />
@@ -420,7 +434,7 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-edit.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-add.js" />
@@ -493,17 +507,19 @@
     <Content Include="Areas\FraudDetection\Views\Web.config" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\Group\GroupInfo.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowDetail.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\FraudDetection\Views\Parameter\ParameterUpdate.cshtml" />
-=======
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
->>>>>>> #37484 - add javascript, tinymce lib, jquery.confirm, jquery.validate, controller, view
+<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
+=======
+    <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
+>>>>>>> #38306: Implement client side (Edit Group)
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />

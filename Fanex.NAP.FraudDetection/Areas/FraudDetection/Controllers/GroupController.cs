@@ -5,22 +5,32 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
+//   <change who="Aaron.Cao" date="2015.06.22">Updated</change>
 // </history>
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
-    using System.Web.Script.Serialization;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Criteria.Group;
     using SPU.Lib.FraudDetection.Service.Implement;
 
+    /// <summary>
+    /// The Group Controller.
+    /// </summary>
     public class GroupController : BaseController
     {
+        private readonly GroupService _groupService;
+
+        public GroupController()
+        {
+            _groupService = new GroupService();
+        }
+
         public ActionResult Index()
-        {            
-            return View("~/Areas/FraudDetection/Views/Group/GroupList.cshtml");            
+        {
+            return View("~/Areas/FraudDetection/Views/Group/GroupList.cshtml");
         }
 
         /// <summary>
@@ -30,11 +40,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
         public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
-        {                     
+        {
             criteria.PageIndex++;
 
-            var groupService = new GroupService();
-            var dataReader = groupService.GetGroups(criteria);
+            var dataReader = _groupService.GetGroups(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
             return Json(results, JsonRequestBehavior.AllowGet);
@@ -47,9 +56,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public string AddNewGroup()
         {
-            var groupInfo = new GroupInsertCriteria();            
+            var groupInfo = new GroupInsertCriteria();
 
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupInfo.cshtml", groupInfo);
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupAdd.cshtml", groupInfo);
         }
 
         /// <summary>
@@ -61,26 +70,68 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult AddNewGroup(GroupInsertCriteria criteria)
         {
             criteria.CreatorId = 1;
-            var groupService = new GroupService();
-            var result = groupService.InsertGroup(criteria);
+            var result = _groupService.InsertGroup(criteria);
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
+        /// <summary>
+        /// The method EditGroupInfo.
+        /// </summary>
+        /// <param name="groupId">The group ID.</param>
+        /// <returns>A template view.</returns>
         [HttpGet]
-        public void EditGroupInfo()
+        public string EditGroupInfo(int? groupId)
         {
+            var criteria = new GroupGetByIdCriteria
+            {
+                GroupId = groupId == null ? 0 : (int)groupId
+            };
+            var groupInfo = _groupService.GetGroupById(criteria);
+            var model = new GroupUpdateCriteria
+            {
+                CreatorId = 1,
+                GroupId = groupInfo.GroupId,
+                GroupName = groupInfo.GroupName,
+                GroupDesc = groupInfo.GroupDesc,
+                IsActive = groupInfo.IsActive
+            };
+
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupEdit.cshtml", model);
         }
 
-        [HttpGet]
-        public string EditGroupStatus(int groupId, bool newStatus)
+        /// <summary>
+        /// Edit Group.
+        /// </summary>
+        /// <param name="criteria">Group Update Criteria.</param>
+        /// <returns>Action Result.</returns>
+        [HttpPost]
+        public ActionResult EditGroup(GroupUpdateCriteria criteria)
         {
-            return "successfully update groupID: " + groupId + " with newStatus:" + newStatus;
+            criteria.CreatorId = 1;
+            var result = _groupService.UpdateGroup(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
-        [HttpGet]
-        public string DeleteGroup(int groupId)
+        /// <summary>
+        /// Update a group status.
+        /// </summary>
+        /// <param name="groupId">The group ID.</param>
+        /// <param name="isActive">The new status.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpPost]
+        public ActionResult EditGroupStatus(int groupId, bool isActive)
         {
-            return "successfully remove groupID: " + groupId;
+            var criteria = new GroupUpdateStatusCriteria
+            {
+                CreatorId = 1,
+                GroupId = groupId,
+                IsActive = isActive
+            };
+
+            var result = _groupService.UpdateGroup(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
     }
 }

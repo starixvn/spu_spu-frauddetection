@@ -4,7 +4,7 @@ var gridOptions
         , _pageIndex = 0
         , _pageSize = 10;
 
-$(document).ready(function () {    
+$(document).ready(function () {
     OnSearch();
 });
 //--------------------------------------------------------------------------------------------------------------------
@@ -19,8 +19,8 @@ function OnSearch() {
 function Search() {
     $('#PageSize').val(_pageSize);
     $('#PageIndex').val(_pageIndex);
-    
-    var searchParams = {        
+
+    var searchParams = {
         PageSize: _pageSize,
         PageIndex: _pageIndex
     };
@@ -38,19 +38,19 @@ function Search() {
             gridOptions =
             {
                 columns: [
-                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },                    
-                    { HeaderText: "GroupId", Width: 100, Name: "GroupId", HeaderAlign: "center", CellAlign: "left" },                    
-                    { HeaderText: "Group Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },                    
-                    { HeaderText: "Description", Width: 300, Name: "GroupDesc", HeaderAlign: "center", CellAlign: "left" }, 
-                    { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },                  
-                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }        
+                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "GroupId", Width: 100, Name: "GroupId", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Group Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Description", Width: 300, Name: "GroupDesc", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
                 bodyRows: results[0].data,
                 hideYBackGroundScroller: true,
                 gridExpandHeight: 150,
                 allowTruncate: true,
                 enableHiddenColumns: false,
-                hiddenColumns: [1], 
+                hiddenColumns: [1],
                 //numberOfFrozenColumn: 2,
                 showPager: true,
                 customPager: true,
@@ -64,16 +64,16 @@ function Search() {
             };
 
             for (var i = 0; i < gridOptions.bodyRows.length; i++) {
-                // Modify "Active" column                
+                // Modify "Active" column
                 gridOptions.bodyRows[i].Columns[4].Row = i;
-                gridOptions.bodyRows[i].Columns[4].CustomCellRender = ActiveColumn;               
+                gridOptions.bodyRows[i].Columns[4].CustomCellRender = ActiveColumn;
 
                 // Modify "Edit" column
                 gridOptions.bodyRows[i].Columns = FraudDetectionScripts.insertAtIndex(
                     gridOptions.bodyRows[i].Columns,
                     5,
                     { Name: "Edit", Row: i });
-                gridOptions.bodyRows[i].Columns[5].CustomCellRender = EditColumn;                
+                gridOptions.bodyRows[i].Columns[5].CustomCellRender = EditColumn;
             }
 
             $("#SearchResult").fanexGrid(gridOptions);
@@ -108,17 +108,17 @@ function ActiveColumn(cell, cellFormated) {
     var groupId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     if (cell.Value == "True") {
-            return "<img title='Deactivate this Group' class='ico-tick' alt='' onclick='editGroupStatus(this," + groupId + ")'/>";
-        }
-        else {
-            return "<img title='Activate this Group' class='ico-untick' alt='' onclick='editGroupStatus(this," + groupId + ")'/>";
-        }
+        return "<img title='Deactivate this Group' class='ico-tick' alt='' onclick='editGroupStatus(this," + groupId + ")'/>";
+    }
+    else {
+        return "<img title='Activate this Group' class='ico-untick' alt='' onclick='editGroupStatus(this," + groupId + ")'/>";
+    }
 }
 
 function EditColumn(cell, cellFormated) {
     var groupId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
-    return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editGroupInfo(this," + groupId + ")'/>";
+    return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editGroupInfo(" + groupId + ")'/>";
 }
 
 $("#btn_AddNewGroup").click(function () {
@@ -145,7 +145,7 @@ $("#btn_AddNewGroup").click(function () {
                     $(this).remove();
                 }
             })
-            .html(response); 
+            .html(response);
         },
         beforeSend: function () {
 

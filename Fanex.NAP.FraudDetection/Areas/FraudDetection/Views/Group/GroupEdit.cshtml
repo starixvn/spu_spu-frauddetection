@@ -1,0 +1,45 @@
+﻿@model SPU.Lib.FraudDetection.Criteria.Group.GroupUpdateCriteria
+@{
+    ViewBag.Title = "Edit Group";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+}
+@using (Html.BeginForm("EditGroup", "Group", FormMethod.Post, new { @id = "EditGroupForm" }))
+{
+    <table class="table-popup">
+        <tr>
+            <td align="right">
+                <span>Group Name</span>
+            </td>
+            <td>@Html.TextBoxFor(l => l.GroupName, new { @style = "width: 350px;" })
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <span>Description</span>
+            </td>
+            <td>@Html.TextAreaFor(l => l.GroupDesc, 5, 45, new { @style = "width: 350px;" })
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <span>Active</span>
+            </td>
+            <td>@Html.CheckBoxFor(l => l.IsActive)
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" id="btn_AddGroup" value="Submit" class="btn-green" />
+            </td>
+        </tr>
+    </table>
+    @Html.HiddenFor(l => l.GroupId)
+}
+<br />
+<label id="addResult" class="hidden" />
+@section FooterJs
+{
+    <script src="~/Areas/FraudDetection/Scripts/Group/group-edit.js" type="text/javascript"></script>
+}

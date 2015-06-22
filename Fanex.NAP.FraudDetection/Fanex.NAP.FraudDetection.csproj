@@ -507,7 +507,7 @@
     <Content Include="Areas\FraudDetection\Views\Web.config" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\Group\GroupInfo.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowDetail.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
@@ -516,6 +516,7 @@
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />

@@ -12,6 +12,9 @@
   <Function Name="SPU_CustomerGroup">
     <Setting Key="SPU_GroupIns" SpName="SPU_GroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_GroupSelectAll" SpName="SPU_GroupSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_GroupGetById" SpName="SPU_GroupGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_GroupUpdate" SpName="SPU_GroupUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_GroupUpdateStatus" SpName="SPU_GroupUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="SPU_Task">
