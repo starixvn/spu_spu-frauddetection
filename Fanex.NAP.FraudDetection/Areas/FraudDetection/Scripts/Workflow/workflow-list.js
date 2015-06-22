@@ -4,10 +4,9 @@ var gridOptions
         , _pageIndex = 0
         , _pageSize = 10;
 
-$(document).ready(function () {    
+$(document).ready(function () {
     Search();
 });
-//--------------------------------------------------------------------------------------------------------------------
 
 function OnSearch() {
     _pageIndex = 0;
@@ -19,8 +18,8 @@ function OnSearch() {
 function Search() {
     $('#PageSize').val(_pageSize);
     $('#PageIndex').val(_pageIndex);
-    
-    var searchParams = {        
+
+    var searchParams = {
         PageSize: _pageSize,
         PageIndex: _pageIndex
     };
@@ -38,20 +37,19 @@ function Search() {
             gridOptions =
             {
                 columns: [
-                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },                    
-                    { HeaderText: "WorkflowId", Width: 100, Name: "WorkflowId", HeaderAlign: "center", CellAlign: "left" },                    
-                    { HeaderText: "Workflow Name", Width: 200, Name: "WorkflowName", HeaderAlign: "center", CellAlign: "left" },                    
+                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "WorkflowId", Width: 100, Name: "WorkflowId", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Workflow Name", Width: 200, Name: "WorkflowName", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Description", Width: 300, Name: "WorkflowDesc", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },                    
-                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }                                        
+                    { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
                 bodyRows: result[0].data,
                 hideYBackGroundScroller: true,
                 gridExpandHeight: 150,
                 allowTruncate: true,
                 enableHiddenColumns: false,
-                hiddenColumns: [1], 
-                //numberOfFrozenColumn: 2,
+                hiddenColumns: [1],
                 showPager: true,
                 customPager: true,
                 pagerOption: {
@@ -68,16 +66,16 @@ function Search() {
                 gridOptions.bodyRows[i].Columns[2].Row = i;
                 gridOptions.bodyRows[i].Columns[2].CustomCellRender = WorkflowNameColumn;
 
-                // Modify "Active" column                
+                // Modify "Active" column
                 gridOptions.bodyRows[i].Columns[4].Row = i;
                 gridOptions.bodyRows[i].Columns[4].CustomCellRender = ActiveColumn;
-                                
+
                 // Modify "Action" column
-                gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
+                gridOptions.bodyRows[i].Columns = FraudDetectionScripts.insertAtIndex(
                     gridOptions.bodyRows[i].Columns,
                     5,
                     { Name: "Edit", Row: i });
-                gridOptions.bodyRows[i].Columns[5].CustomCellRender = ActionColumn;
+                gridOptions.bodyRows[i].Columns[5].CustomCellRender = EditColumn;
             }
 
             $("#SearchResult").fanexGrid(gridOptions);
@@ -90,19 +88,19 @@ function Search() {
     });
 }
 
-function ReRenderAfterPaged(page_index, itemsPerPage, jq) {
+function ReRenderAfterPaged(pageIndex, itemsPerPage, jq) {
     if (itemsPerPage != $('#PageSize').val()) {
         $('#PageIndex').val(0);
         _pageIndex = 0;
     } else {
-        $('#PageIndex').val(page_index);
-        _pageIndex = page_index
+        $('#PageIndex').val(pageIndex);
+        _pageIndex = pageIndex;
     }
 
     $('#PageSize').val(itemsPerPage);
     _pageSize = itemsPerPage;
 
-    gridOptions.pagerOption.currentPage = page_index;
+    gridOptions.pagerOption.currentPage = pageIndex;
     Search();
 
     return false;
@@ -113,7 +111,7 @@ function WorkflowNameColumn(cell, cellFormated) {
     var workflowName = gridOptions.bodyRows[cell.Row].Columns[2].Value;
 
     var url = "Workflow/WorkflowDetail?workflowId=" + workflowId + "&workflowName=" + workflowName;
-    return "<a href=" + url + ">" + workflowName + "</a>";   
+    return "<a href=" + url + ">" + workflowName + "</a>";
 }
 
 
@@ -121,53 +119,17 @@ function ActiveColumn(cell, cellFormated) {
     var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     if (cell.Value == "True") {
-            return "<img title='Deactivate this workflow' class='ico-tick' alt='' onclick='editActive(this," + workflowId + ")'/>";
-        }
-        else {
-            return "<img title='Activate this workflow' class='ico-untick' alt='' onclick='editActive(this," + workflowId + ")'/>";
-        }
+        return "<img title='Deactivate this workflow' class='ico-tick' alt='' onclick='editWorkflowStatus(this," + workflowId + ")'/>";
+    }
+    else {
+        return "<img title='Activate this workflow' class='ico-untick' alt='' onclick='editWorkflowStatus(this," + workflowId + ")'/>";
+    }
 }
 
-function ActionColumn(cell, cellFormated) {
-    return "<div class='btn-action' onclick=\"javascript:ShowAction('" + cell.Row + "');\"></div>";
-}
+function EditColumn(cell, cellFormated) {
+    var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
-function ShowAction(cellRow) {
-    var workflowId = gridOptions.bodyRows[cellRow].Columns[1].Value;
-    var workflowName = gridOptions.bodyRows[cellRow].Columns[2].Value;    
-
-    _workflowId = workflowId;
-    _workflowName = workflowName;
-
-    //$.contextMenu('destroy'); -- using if items of menu are updated
-    $.contextMenu({
-        selector: '.btn-action',
-        items: {
-            deleteWorkflow: {
-                name: "Delete this workflow",
-                height: 25,
-                className: "iconDelAff",
-                callback: function (key, opt) {
-                    deleteAffiliate(_workflowId, _workflowName);
-                }
-            },            
-            editInfo: {
-                name: "Edit information",
-                height: 25,
-                className: "iconEditInfo",
-                callback: function (key, opt) {
-                    var updateParam = $.param({
-                        workflowName: _workflowName,
-                    });
-
-                    window.location.href = currentDomainURL + "/Workflow/EditInfo/" + _workflowId+ "?" + updateParam;
-                }
-            }           
-        },
-        trigger: "left",
-        ignoreRightClick: true,
-        autoHide: true
-    });
+    return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editWorkflowInfo(" + workflowId + ")'/>";
 }
 
 $("#btn_AddNewWorkflow").click(function () {
@@ -194,7 +156,7 @@ $("#btn_AddNewWorkflow").click(function () {
                     $(this).remove();
                 }
             })
-            .html(response); 
+            .html(response);
         },
         beforeSend: function () {
 

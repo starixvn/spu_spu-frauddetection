@@ -517,6 +517,7 @@
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowEdit.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />

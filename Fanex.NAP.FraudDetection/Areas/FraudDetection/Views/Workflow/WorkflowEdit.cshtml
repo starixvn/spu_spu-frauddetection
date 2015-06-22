@@ -1,0 +1,45 @@
+﻿@model SPU.Lib.FraudDetection.Criteria.Workflow.WorkflowUpdateCriteria
+@{
+    ViewBag.Title = "Edit Workflow";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+}
+@using (Html.BeginForm("EditWorkflow", "Workflow", FormMethod.Post, new { @id = "EditWorkflowForm" }))
+{
+    <table class="table-popup">
+        <tr>
+            <td align="right">
+                <span>Workflow Name</span>
+            </td>
+            <td>@Html.TextBoxFor(l => l.WorkflowName, new { @style = "width: 330px;" })
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <span>Description</span>
+            </td>
+            <td>@Html.TextAreaFor(l => l.WorkflowDesc, 5, 45, new { @style = "width: 330px;" })
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <span>Active</span>
+            </td>
+            <td>@Html.CheckBoxFor(l => l.IsActive)
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" id="btn_EditWorkflow" value="Submit" class="btn-green" />
+            </td>
+        </tr>
+    </table>
+    @Html.HiddenFor(l => l.WorkflowId)
+}
+<br />
+<label id="addResult" class="hidden" />
+@section FooterJs
+{
+    <script src="~/Areas/FraudDetection/Scripts/Workflow/workflow-edit.js" type="text/javascript"></script>
+}

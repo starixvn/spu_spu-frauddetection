@@ -1,113 +1,83 @@
 ﻿$(document).ready(function () {
-//    //Process redirect to Workflow list.
-//    var successed = $("#successed").val();
-//    if (successed == "true") {
-//        confirm('Successfull!\nPress OK to continue', function () {
-    //            document.location = currentDomainURL + "/Workflow/List";
-//        });
-//    }
-        
+    OnInitialize();
 });
 
-//--------------------------------------------------------------------------------------------------------------------
+function OnInitialize() {
+    $('#EditWorkflowForm').submit(function (event) {
+        event.preventDefault();
 
-function editActive(obj, workflowId) {
+        $.post(this.action, $(this).serialize(), function (response) {
+            if (response.ErrCode === 0) {
+                $("#addResult").attr('class', 'result-text-success');
+                response.ErrMsg = "Edit workflow successfully!";
+            }
+            else {
+                $("#addResult").attr('class', 'result-text-fail');
+            }
 
+            $("#addResult").html(response.ErrMsg);
+            Search();
+        });
+    });
+}
+
+/*
+* Edit a work flow.
+*/
+function editWorkflowInfo(workflowId) {
+    $.get('Workflow/EditWorkflowInfo', { workflowId: workflowId }, function (response) {
+        $('<div id="popup"></div>').appendTo('body').dialog({
+            modal: true,
+            title: "Edit Workflow",
+            zIndex: 10000,
+            autoOpen: true,
+            width: '500px',
+            resizable: false,
+            close: function () {
+                $(this).remove();
+            }
+        }).html(response);
+    });
+}
+
+/*
+* Activate/deactivate a work flow.
+*/
+function editWorkflowStatus(obj, workflowId) {
+    var active = "activate ";
+    var isActive = false;
     if ($(obj).hasClass('ico-tick')) {
-
-        confirm('Do you want to deactivate this workflow ?', function () {
-            $(obj).removeClass('ico-tick').addClass('ico-untick');
-
-            var url = 'EditActive?workflowId=' + workflowId + '&status=false';
-
-            //todo
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'html',
-                cache: false,
-                beforeSend: function (xhr) {
-                },
-                success: function (result) {
-                    result = result.toLowerCase();
-
-                    if (result == 'successfully!') {
-                        document.location = currentDomainURL + "/Workflow/List";
-                    }
-                    else {
-                        alert(result);
-                    }
-                },
-                error: function (xhr, status, err) {
-                }
-            });
-        });
-    }
-    else {
-        confirm('Do you want to activate this workflow ?', function () {
-            $(obj).removeClass('ico-untick').addClass('ico-tick');
-
-            var url = 'EditActive?workflowId=' + workflowId + '&status=true';
-
-            //todo
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'html',
-                cache: false,
-                beforeSend: function (xhr) {
-                },
-                success: function (result) {
-                    result = result.toLowerCase();
-
-                    if (result == 'successfully!') {
-                        document.location = currentDomainURL + "/Workflow/List";
-                    }
-                    else {
-                        alert(result);
-                    }
-                },
-                error: function (xhr, status, err) {
-                }
-            });
-        });
+        active = "deactivate ";
+        isActive = true;
     }
 
-};
+    if (isActive) {
+        $(obj).removeClass('ico-tick').addClass('ico-untick');
+    } else {
+        $(obj).removeClass('ico-untick').addClass('ico-tick');
+    }
 
-function deleteWorkflow(workflowId, name) {
-
-    confirm('Do you want to delete this workflow (' +name + ') ?', function () {
-
-        var url = 'Delete?workflowId=' + workflowId
-
-        //todo
-        $.ajax({
-            url: url,
-            type: 'POST',
-            dataType: 'html',
-            cache: false,
-            beforeSend: function (xhr) {
-                //NAP.loadingBox.show();
-                //NAP.closePopup();
-            },
-            success: function (result) {
-                //NAP.loadingBox.close();
-                result = result.toLowerCase();
-
-                if (result == 'successfully!') {
-                    document.location = currentDomainURL + "/Workflow/List";
-                    //NAP.headlineMsgBox.showErr("Unknowned error detected!");                    
+    $.confirm({
+        title: "Confirmation",
+        text: "Are you sure to " + active + "this Workflow?",
+        confirm: function () {
+            $.post('Workflow/EditWorkflowStatus', { workflowId: workflowId, isActive: !isActive }, function (result) {
+                if (result.ErrCode === 0) {
+                    Search();
                 }
                 else {
-                    alert(result);
-                    //NAP.headlineMsgBox.showInfo("Added '" + username + "'. You will be redirected in 3s.", { closeBtn: false, modal: true });
-                    //NAP.redirect('User/Manage?SiteId=0', 3000);
+                    alert(result.ErrMsg);
                 }
-            },
-            error: function (xhr, status, err) {
-                //NAP.handleAjaxError(xhr, status, err);
+            });
+        },
+        cancel: function () {
+            if (!isActive) {
+                $(obj).removeClass('ico-tick').addClass('ico-untick');
+            } else {
+                $(obj).removeClass('ico-untick').addClass('ico-tick');
             }
-        });
+        },
+        confirmButton: "OK",
+        cancelButton: "Cancel"
     });
 }

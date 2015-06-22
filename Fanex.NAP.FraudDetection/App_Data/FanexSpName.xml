@@ -3,6 +3,9 @@
   <Function Name="SPU_Workflow">
     <Setting Key="SPU_WorkflowSelectAll" SpName="SPU_WorkflowSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_WorkflowIns" SpName="SPU_WorkflowIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_WorkflowUpdate" SpName="SPU_WorkflowUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_WorkflowUpdateStatus" SpName="SPU_WorkflowUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_WorkflowSelectById" SpName="SPU_WorkflowSelectById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="SPU_Task">
