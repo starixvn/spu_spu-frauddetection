@@ -17,7 +17,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Models;
     using NAP.FraudDetection.Controllers;
     using Service;
-    using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.BusinessManager;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Criteria.Task;
@@ -27,8 +26,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
     public class TaskController : BaseController
     {
-        private int _workflowId = 0;
-
+        #region Add Task
         /// <summary>
         /// Home page for Task.
         /// </summary>
@@ -36,11 +34,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Action Result.</returns>
         public ActionResult Index(string workflowId)
         {
-            if (int.TryParse(workflowId, out _workflowId))
+            var workflow = 0;
+            if (int.TryParse(workflowId, out workflow))
             {
                 return View(
-                    "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", 
-                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, _workflowId));
+                    "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml",
+                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, workflow));
             }
 
             return View("~/Views/Error/AccessDenied.cshtml");
@@ -85,8 +84,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 eventList.ToList(), 
                 configList.ToList(), 
                 groupList, 
-                sportList.ToList(), 
-                bettypeList.ToList()) { OnUserId = currentUserID, WorkflowId = workflowID };
+                sportList.ToList(),
+                bettypeList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { WorkflowId = workflowID } };
 
             return taskViewModel;
         }
@@ -96,7 +95,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
-        [Compress]
+        /*[Compress]
         public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
         {                     
             criteria.PageIndex++;
@@ -105,7 +104,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
             return Json(results, JsonRequestBehavior.AllowGet);
-        }
+        }*/
 
         /// <summary>
         /// Add New Task.
@@ -134,6 +133,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
 
+            criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
                 string.Format(
                 QueryPreconString,
@@ -142,6 +142,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions));
             criteria.TaskPreconditionsOriginal = string.IsNullOrEmpty(criteria.TaskPreconditions) ? string.Empty : criteria.TaskPreconditionsOriginal;
 
+            criteria.TaskRulesFormatted = criteria.TaskRules;
             criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty : 
                 string.Format(
                 QueryRuleString,
@@ -167,7 +168,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var syncNewTask = SendingTaskFactory.GetSender(SendingType.AddingTask);
             syncNewTask.Send(
-                new Task(new TaskInfo
+                new Task
                 {
                     EventId = criteria.EventId,
                     Interval = criteria.Interval,
@@ -182,7 +183,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     TaskId = taskId,
                     TaskName = criteria.TaskName,
                     WorkflowId = criteria.WorkflowId
-                }));
+                });
         }
 
         /// <summary>
@@ -264,10 +265,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var dangerPeriodSql = configs.Single(l => l.ConfigId == 16).ConfigSQLField;
             formula = formula.Replace("NEARTHEGOAL", dangerPeriodSql);
-            var sqlWhereString = "tch.matchid in ($param1$) and (" + formula.Replace("%", "'").Replace("#", " ") + ")";
+            var sqlWhereString = "tch.matchid in ($param1$) and (" + formula.Replace("%", "'").Replace("#", " ").Replace("@", " ") + ")";
             if (isPrecondition)
             {
-                sqlWhereString = sqlWhereString.Replace("tch.matchid in", "tch.matchid not in");
+                sqlWhereString = sqlWhereString.Replace("tch.matchid in", "tch.sporttype between 1 and 99 and tch.matchid not in");
 
                 if (additionalInfo.IsCheckNotScanned)
                 {
@@ -275,8 +276,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 }
                 else
                 {
-                    sqlWhereString = formula.Replace("%", "'").Replace("#", " ");
+                    sqlWhereString = formula.Replace("%", "'").Replace("#", " ").Replace("@", " ");
                 }
+            }
+            else
+            {
+                sqlWhereString = "ans.liveindicator = 1 and " + sqlWhereString;
             }
 
             return RemoveRedundantSpace(sqlWhereString);
@@ -307,6 +312,80 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return relevantTables.Remove(relevantTables.Length - 1);
         }
 
+        #endregion
+
+        #region Edit Task
+
+        [HttpGet]
+        public ActionResult TaskEditInfo(string taskId)
+        {
+            var taskService = new TaskService();
+            var taskInfo = taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria { TaskId = taskId });
+            var viewModel = GenerateViewModel(
+                AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
+                taskInfo.WorkflowId);
+            viewModel.TaskInformation = taskInfo;
+
+            return View("~/Areas/FraudDetection/Views/Task/TaskEdit.cshtml", viewModel);
+        }
+
+        /// <summary>
+        /// Edit Task.
+        /// </summary>
+        /// <param name="criteria">Task Edit Criteria.</param>
+        /// <param name="additionalInfo">Additional Info.</param>
+        /// <returns>Action Result.</returns>
+        [HttpPost]
+        public ActionResult TaskEditInfo(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo)
+        {
+            if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The conditions are left blank. Please add condition(s) for the new Task." } };
+            }
+
+            if (string.IsNullOrEmpty(criteria.NextActionIdList) && string.IsNullOrEmpty(criteria.NextActionTargetIdList))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The next actions are left blank. Please add next action(s) for the new Task." } };
+            }
+
+            criteria.IsActive = true;
+            const string QueryPreconString = "select top 10 {0} from {1} where {2}";
+            const string QueryRuleString = "select {0} from {1} where {2}";
+            var taskService = new TaskService();
+            var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
+            var configurationService = new ConfigurationsService();
+            var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
+
+            criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
+            criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
+                string.Format(
+                QueryPreconString,
+                GenerateSQLSelect(configList, additionalInfo.PreconConfigs),
+                GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.PreconConfigs),
+                GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions));
+            criteria.TaskPreconditionsOriginal = string.IsNullOrEmpty(criteria.TaskPreconditions) ? string.Empty : criteria.TaskPreconditionsOriginal;
+
+            criteria.TaskRulesFormatted = criteria.TaskRules;
+            criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty :
+                string.Format(
+                QueryRuleString,
+                GenerateSQLSelect(configList, additionalInfo.RuleConfigs),
+                GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.RuleConfigs),
+                GenerateSQLWhere(configList, false, additionalInfo, criteria.TaskRules));
+
+            var result = taskService.UpdateTask(criteria);
+            if (result.Code == 0)
+            {
+                //PushNewTaskToRun(criteria, int.Parse(result.Message));
+            }
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        #endregion
+
+        #region Utilities
+
         /// <summary>
         /// Remove multiple space in a string.
         /// </summary>
@@ -320,5 +399,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return targetString;
         }
+
+        #endregion
     }
 }

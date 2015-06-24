@@ -434,7 +434,7 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-edit.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-add.js" />
@@ -515,6 +515,7 @@
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />

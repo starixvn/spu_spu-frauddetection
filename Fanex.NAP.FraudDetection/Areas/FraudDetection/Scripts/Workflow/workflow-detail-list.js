@@ -55,7 +55,6 @@ function Search() {
                 allowTruncate: true,
                 enableHiddenColumns: false,
                 hiddenColumns: [1], 
-                //numberOfFrozenColumn: 2,
                 showPager: true,
                 customPager: true,
                 pagerOption: {
@@ -81,11 +80,6 @@ function Search() {
             }
 
             $("#SearchResult").fanexGrid(gridOptions);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            //alert(xhr);
-        },
-        complete: function (jqXHR, textStatus) {
         }
     });
 }
@@ -120,45 +114,12 @@ function ActiveColumn(cell, cellFormated) {
 }
 
 function ActionColumn(cell, cellFormated) {
-    return "<div class='btn-action' onclick=\"javascript:ShowAction('" + cell.Row + "');\"></div>";
+    var taskId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
+    return "<div class='btn-action' onclick=\"EditTask(" + taskId + ");\"></div>";
 }
 
-function ShowAction(cellRow) {
-    var taskId = gridOptions.bodyRows[cellRow].Columns[1].Value;
-    var taskName = gridOptions.bodyRows[cellRow].Columns[2].Value;    
-
-    _taskId = taskId;
-    _taskName = taskName;
-
-    //$.contextMenu('destroy'); -- using if items of menu are updated
-    $.contextMenu({
-        selector: '.btn-action',
-        items: {
-            deleteWorkflow: {
-                name: "Delete this task",
-                height: 25,
-                className: "iconDelAff",
-                callback: function (key, opt) {
-                    deleteAffiliate(_taskId, _taskName);
-                }
-            },            
-            editInfo: {
-                name: "Edit information",
-                height: 25,
-                className: "iconEditInfo",
-                callback: function (key, opt) {
-                    var updateParam = $.param({
-                        taskName: _taskName,
-                    });
-
-                    window.location.href = currentDomainURL + "/Workflow/EditInfo/" + _taskId+ "?" + updateParam;
-                }
-            }           
-        },
-        trigger: "left",
-        ignoreRightClick: true,
-        autoHide: true
-    });
+function EditTask(taskId) {
+    window.location.href = "/Task/TaskEditInfo" + "?taskId=" + taskId;
 }
 
 $("#btn_AddNewTask").click(function () {    

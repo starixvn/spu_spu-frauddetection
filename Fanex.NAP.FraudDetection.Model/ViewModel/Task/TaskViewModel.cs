@@ -37,18 +37,12 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
         // On User ID
         public int OnUserId { get; set; }
 
-        // Actions
-        public int WorkflowId { get; set; }
+        // Task
+        public Task TaskInformation { get; set; }
 
         // Actions
         public List<SPU.Lib.FraudDetection.DTO.Event> EventList { get; set; }
-
-        public int EventId { get; set; }
-
-        public int IntervalValue { get; set; }
-
-        public string IntervalUnit { get; set; }
-
+        
         // Bettypes and Sports
         public List<Bettype> BettypeList { get; set; }
 
@@ -57,8 +51,6 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
         // Configurations
         public List<Config> ConfigurationList { get; set; }
 
-        public string PreconditionConfigSqlQuery { get; set; }
-
         public List<Config> PreconditionConfigurations
         {
             get
@@ -66,8 +58,6 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
                 return ConfigurationList.Where(l => l.ConfigCategory == "Match").ToList();
             }
         }
-
-        public string RuleConfigSqlQuery { get; set; }
 
         public List<Config> RuleConfigurations
         {

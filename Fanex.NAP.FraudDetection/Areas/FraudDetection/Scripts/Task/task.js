@@ -125,6 +125,62 @@ function OnInitialize() {
             });
         }
     });
+
+    $("#EditTaskForm").submit(function (event) {
+        event.preventDefault();
+        var formulaIsCorrect = CheckFormula("preconditionTable") && CheckFormula("ruleTable");
+        if (formulaIsCorrect) {
+            GenerateNextActions();
+
+            var url = 'TaskEditInfo';
+            var param = {
+                "CreatorId": $("#onUserid").text(),
+                "TaskId": $("#taskid").text(),
+                "TaskName": $("#ActionName").find(":selected").text(),
+                "TaskDesc": $("#ActionName").find(":selected").attr("data-actiondesc"),
+                "EventId": $("#ActionName").find(":selected").val(),
+                "Interval": $("#timeInterval").val(),
+                "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
+                "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
+                "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
+                "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
+                "NextActionIdList": NextActionIdList,
+                "NextActionTargetIdList": NextActionTargetIdList,
+                "PreconConfigs": $("#preconditionTableFormula").attr("data-configids"),
+                "RuleConfigs": $("#ruleTableFormula").attr("data-configids"),
+                "IsCheckNotScanned": IsCheckNotScanned
+            };
+
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json',
+                dataType: "json",
+                data: JSON.stringify(param),
+                cache: false,
+                url: url,
+                error: function () {
+                },
+                success: function (response) {
+                    if (response.ErrCode == 0) {
+                        // redirect to workflow detail page
+                        $("#editTaskResult").css("class", "result-text-success");
+                        $("#editTaskResult").text("Update Task Information successfully!");
+                    }
+                    else {
+                        // display the error message
+                        $("#editTaskResult").css("class", "result-text-fail");
+                        $("#editTaskResult").text(response.ErrMsg);
+                    }
+                },
+                beforeSend: function () {
+
+                },
+                complete: function () {
+                }
+            });
+        }
+    });
 }
 
 //=========================================================================
@@ -226,13 +282,13 @@ function GenerateNextActions() {
             var nextAction = $(this).attr('id');
             var nextTargetAction = nextAction + "_value";
 
-            NextActionIdList += $("#" + nextAction).attr("data-actionid") + ",";
-            NextActionTargetIdList += $("#" + nextTargetAction).find(":selected").val() + ",";
+            NextActionIdList += $("#" + nextAction).attr("data-actionid") + "#";
+            NextActionTargetIdList += $("#" + nextTargetAction).find(":selected").val() + "#";
         }
     });
 
-    NextActionIdList = NextActionIdList.slice(0, -1);
-    NextActionTargetIdList = NextActionTargetIdList.slice(0, -1);
+    //NextActionIdList = NextActionIdList.slice(0, -1);
+    //NextActionTargetIdList = NextActionTargetIdList.slice(0, -1);
 }
 
 //=========================================================================
@@ -407,13 +463,13 @@ function UpdateFormula(parentName) {
     $('#' + parentName + 'Formula').attr('data-rawcontent', rawFormula);
     $('#' + parentName + 'Formula').attr('data-formattedcontent', GetFormattedFormula(parentName));
     $('#' + parentName + 'Formula').attr('data-configids', GetAllConfigIds(parentName));
-    $('#' + parentName + 'Formula').text(rawFormula.replace(/#/g, " "));
+    $('#' + parentName + 'Formula').text(rawFormula.replace(/#|@/g, " "));
 }
 
 function GetRawFormula(parentName) {
     var rawFormula = "";
     $('div[id^="div_' + parentName + '"]').each(function () {
-        rawFormula += $(this).attr("data-rawcontent") + "#";
+        rawFormula += $(this).attr("data-rawcontent") + "@";
     });
 
     rawFormula = rawFormula.slice(0, -1);
@@ -425,7 +481,9 @@ function GetFormattedFormula(parentName) {
     $('div[id^="div_' + parentName + '"]').each(function () {
         var currentRawContent = $(this).attr("data-formattedcontent");
         if (currentRawContent.indexOf("Match State") < 0) {
-            rawFormula += currentRawContent + "#";
+            rawFormula += currentRawContent + "@";
+        } else {
+            rawFormula += "@";
         }
     });
 
@@ -450,6 +508,7 @@ function GetAllConfigIds(parentName) {
 
 function CheckFormula(parentName) {
     var formula = GetRawFormula(parentName);
+    formula = formula.replace(/@/g, "#");
     var formulaCheckResults = expVal.validateLogicExpession(formula, "#").split(",");
     
     if (formulaCheckResults[0] == "") {
