@@ -93,22 +93,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         /// <summary>
-        /// Display the list of groups.
-        /// </summary>
-        /// <param name="criteria">The criteria for displaying.</param>
-        /// <returns>Represents a JSON-formatted content for displaying.</returns>
-        /*[Compress]
-        public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
-        {
-            criteria.PageIndex++;
-            var groupService = new GroupService();
-            var dataReader = groupService.GetGroups(criteria);
-            var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
-
-            return Json(results, JsonRequestBehavior.AllowGet);
-        }*/
-
-        /// <summary>
         /// Add New Task.
         /// </summary>
         /// <param name="criteria">Task Insert Criteria.</param>
@@ -353,8 +337,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             criteria.IsActive = true;
-            const string QueryPreconString = "select top 10 {0} from {1} where {2}";
-            const string QueryRuleString = "select {0} from {1} where {2}";
+            string queryPreconString = "select top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
+            string queryRuleString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
@@ -363,16 +347,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
                 string.Format(
-                QueryPreconString,
+                queryPreconString,
                 GenerateSQLSelect(configList, additionalInfo.PreconConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.PreconConfigs),
-                GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions));
+                GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions, criteria.TaskPreconditionsOriginal));
             criteria.TaskPreconditionsOriginal = string.IsNullOrEmpty(criteria.TaskPreconditions) ? string.Empty : criteria.TaskPreconditionsOriginal;
 
             criteria.TaskRulesFormatted = criteria.TaskRules;
             criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty :
                 string.Format(
-                QueryRuleString,
+                queryRuleString,
                 GenerateSQLSelect(configList, additionalInfo.RuleConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.RuleConfigs),
                 GenerateSQLWhere(configList, false, additionalInfo, criteria.TaskRules));
