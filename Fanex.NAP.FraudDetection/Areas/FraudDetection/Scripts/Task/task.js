@@ -135,6 +135,7 @@ function OnInitialize() {
             var url = 'TaskEditInfo';
             var param = {
                 "CreatorId": $("#onUserid").text(),
+                "workflowId": $("#workflowid").text(),
                 "TaskId": $("#taskid").text(),
                 "TaskName": $("#ActionName").find(":selected").text(),
                 "TaskDesc": $("#ActionName").find(":selected").attr("data-actiondesc"),

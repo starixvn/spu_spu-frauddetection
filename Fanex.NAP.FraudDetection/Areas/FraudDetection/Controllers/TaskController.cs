@@ -10,6 +10,7 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Data;
     using System.Linq;
     using System.Web.Mvc;
@@ -127,8 +128,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             criteria.IsActive = true;
-            const string QueryPreconString = "select top 10 {0} from {1} where {2}";
-            const string QueryRuleString = "select {0} from {1} where {2}";
+            var queryPreconString = "select top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
+            var queryRuleString = "select {0} from {1} where {2}";
             var taskService = new TaskService();
             var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
@@ -137,16 +138,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
                 string.Format(
-                QueryPreconString,
+                queryPreconString,
                 GenerateSQLSelect(configList, additionalInfo.PreconConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.PreconConfigs),
-                GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions));
+                GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions, criteria.TaskPreconditionsOriginal));
             criteria.TaskPreconditionsOriginal = string.IsNullOrEmpty(criteria.TaskPreconditions) ? string.Empty : criteria.TaskPreconditionsOriginal;
 
             criteria.TaskRulesFormatted = criteria.TaskRules;
             criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty :
                 string.Format(
-                QueryRuleString,
+                queryRuleString,
                 GenerateSQLSelect(configList, additionalInfo.RuleConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.RuleConfigs),
                 GenerateSQLWhere(configList, false, additionalInfo, criteria.TaskRules));
@@ -242,17 +243,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Generate SQL Where.
         /// </summary>
         /// <param name="configs">List of configurations.</param>
-        /// <param name="isPrecondition">Is Precondition.</param>
+        /// <param name="isPrecond">Is Precondition.</param>
         /// <param name="additionalInfo">Additional Info.</param>
-        /// <param name="formula">Original Formula.</param>
+        /// <param name="formula">Formatted Formula.</param>
+        /// <param name="originFormula">Original Formula.</param>
         /// <returns>SQL Where string.</returns>
-        public string GenerateSQLWhere(List<Config> configs, bool isPrecondition, TaskAdditionalInfo additionalInfo, string formula)
+        public string GenerateSQLWhere(List<Config> configs, bool isPrecond, TaskAdditionalInfo additionalInfo, string formula, string originFormula = "")
         {
             var sqlForNotScanned = configs.Single(l => l.ConfigName.ToLower() == "match state").ConfigSQLField;
-            var relevantTables = isPrecondition
+            var relevantTables = isPrecond
                 ? GenerateRelevantTables(configs, additionalInfo.PreconConfigs)
                 : GenerateRelevantTables(configs, additionalInfo.RuleConfigs);
-            var configIds = isPrecondition ? additionalInfo.PreconConfigs.Split('#') : additionalInfo.RuleConfigs.Split('#');
+            var configIds = isPrecond ? additionalInfo.PreconConfigs.Split('#') : additionalInfo.RuleConfigs.Split('#');
             foreach (var configId in configIds)
             {
                 var config = configs.Single(l => l.ConfigId == int.Parse(configId));
@@ -267,17 +269,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var dangerPeriodSql = configs.Single(l => l.ConfigId == 16).ConfigSQLField;
             formula = formula.Replace("NEARTHEGOAL", dangerPeriodSql);
             var sqlWhereString = "tch.matchid in ($param1$) and (" + formula.Replace("%", "'").Replace("#", " ").Replace("@", " ") + ")";
-            if (isPrecondition)
+            if (isPrecond)
             {
                 sqlWhereString = sqlWhereString.Replace("tch.matchid in", "tch.sporttype between 1 and 99 and tch.matchid not in");
 
-                if (additionalInfo.IsCheckNotScanned)
+                if (originFormula.Contains("Match State") && additionalInfo.IsCheckNotScanned)
                 {
                     sqlWhereString = sqlWhereString.Replace("$param1$", sqlForNotScanned);
                 }
                 else
                 {
-                    sqlWhereString = formula.Replace("%", "'").Replace("#", " ").Replace("@", " ");
+                    sqlWhereString = "tch.sporttype between 1 and 99 and " + formula.Replace("%", "'").Replace("#", " ").Replace("@", " ");
                 }
             }
             else
@@ -335,9 +337,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">Task Edit Criteria.</param>
         /// <param name="additionalInfo">Additional Info.</param>
+        /// <param name="workflowId">Work flow ID.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult TaskEditInfo(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo)
+        public ActionResult TaskEditInfo(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo, int workflowId)
         {
             if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
             {
@@ -377,10 +380,37 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var result = taskService.UpdateTask(criteria);
             if (result.Code == 0)
             {
-                //PushNewTaskToRun(criteria, int.Parse(result.Message));
+                UpdateRunningTask(criteria, workflowId);
             }
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        /// <summary>
+        /// Push New Task To Run Automatically.
+        /// </summary>
+        /// <param name="criteria">Task Insert Criteria.</param>
+        /// <param name="workflowId">Work flow ID.</param>
+        public void UpdateRunningTask(TaskUpdateCriteria criteria, int workflowId)
+        {
+            var syncNewTask = SendingTaskFactory.GetSender(SendingType.UpdatingTask);
+            syncNewTask.Send(
+                new Task
+                {
+                    EventId = criteria.EventId,
+                    Interval = criteria.Interval,
+                    IntervalType = criteria.IntervalType,
+                    IsActive = true,
+                    IsBackgroundProcess = true,
+                    NextActionIdList = criteria.NextActionIdList,
+                    NextActionTargetIdList = criteria.NextActionTargetIdList,
+                    TaskPreconditions = criteria.TaskPreconditions,
+                    TaskRules = criteria.TaskRules,
+                    TaskDesc = criteria.TaskDesc,
+                    TaskId = criteria.TaskId,
+                    TaskName = criteria.TaskName,
+                    WorkflowId = workflowId
+                });
         }
 
         #endregion Edit Task

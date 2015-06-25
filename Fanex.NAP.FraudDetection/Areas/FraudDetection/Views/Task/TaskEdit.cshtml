@@ -135,7 +135,7 @@
                                 <td style="width: 510px;">
                                     <div id="div_@rowName" data-formattedcontent="@configsFormatter[i]" data-rawcontent="@configsOriginal[i]" data-configid="@configIdsForEachPrecond">@configsOriginal[i].Replace("#", " ")</div>
                                 </td>
-                                <td><img onclick="RemoveOneRuleFromTable('preconditionTable',@counter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
+                                <td><img alt="" onclick="RemoveOneRuleFromTable('preconditionTable',@counter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
                             </tr>
                             counter++;
                         }
@@ -218,7 +218,7 @@
                         var ruleConfigsFormatter = Model.TaskInformation.TaskRulesFormatted.Split('@');
                         for (var i = 0; i < ruleConfigsOriginal.Length; i++)
                         {
-                            var rowName = "ruleTable" + ruleCounter;
+                            var ruleRowName = "ruleTable" + ruleCounter;
                             var rules = Model.RuleConfigurations.Where(l => ruleConfigsOriginal[i].Contains(l.ConfigName)).ToList();
                             var configIdsForEachRule = "";
                             foreach (var rule in rules)
@@ -227,12 +227,12 @@
                                 configIdsForEachRule += rule.ConfigId + "#";
                             }
                             configIdsForEachRule = configIdsForEachRule.Remove(configIdsForEachRule.Length - 1);
-                            <tr id="@rowName">
-                                <td><input id="cb_@rowName" type="checkbox"></td>
+                            <tr id="@ruleRowName">
+                                <td><input id="cb_@ruleRowName" type="checkbox"></td>
                                 <td style="width: 510px;">
-                                    <div id="div_@rowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
+                                    <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
                                 </td>
-                                <td><img onclick="RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
+                                <td><img alt="" onclick="RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
                             </tr>
                             counter++;
                         }
