@@ -218,7 +218,7 @@ function GenerateConfig(parentName) {
     }
 
     if (keySelectedValue == "Match State") {
-        if (valueSelectedValue == "scanned") {
+        if (valueSelectedValue.toLowerCase() == "scanned") {
             IsCheckNotScanned = false;
         };
     }
@@ -283,8 +283,8 @@ function GenerateNextActions() {
             var nextAction = $(this).attr('id');
             var nextTargetAction = nextAction + "_value";
 
-            NextActionIdList += $("#" + nextAction).attr("data-actionid") + "#";
-            NextActionTargetIdList += $("#" + nextTargetAction).find(":selected").val() + "#";
+            NextActionIdList += $("#" + nextAction).attr("data-actionid") + ",";
+            NextActionTargetIdList += $("#" + nextTargetAction).find(":selected").val() + ",";
         }
     });
 

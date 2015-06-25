@@ -272,7 +272,7 @@
                     <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;">
                         @foreach (var group in Model.GroupList)
                         {
-                            <option value="@group.GroupId" @(Model.TaskInformation.NextActionTargetIdList.Split('#')[0] == group.GroupId.ToString() ? "selected" : "")>@group.GroupName</option>
+                            <option value="@group.GroupId" @(Model.TaskInformation.NextActionTargetIdList.Split(',')[0] == group.GroupId.ToString() ? "selected" : "")>@group.GroupName</option>
                         }
                     </select>
                 </td>
@@ -284,9 +284,9 @@
                 </td>
                 <td>
                     <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
-                      <option value="1" @(Model.TaskInformation.NextActionTargetIdList.Split('#')[1] == "1" ? "selected" : "")>Email Template 1</option>
-                      <option value="2" @(Model.TaskInformation.NextActionTargetIdList.Split('#')[1] == "2" ? "selected" : "")>Email Template 2</option>
-                      <option value="3" @(Model.TaskInformation.NextActionTargetIdList.Split('#')[1] == "3" ? "selected" : "")>Email Template 3</option>
+                      <option value="1" @(Model.TaskInformation.NextActionTargetIdList.Split(',')[1] == "1" ? "selected" : "")>Email Template 1</option>
+                      <option value="2" @(Model.TaskInformation.NextActionTargetIdList.Split(',')[1] == "2" ? "selected" : "")>Email Template 2</option>
+                      <option value="3" @(Model.TaskInformation.NextActionTargetIdList.Split(',')[1] == "3" ? "selected" : "")>Email Template 3</option>
                     </select>
                 </td>
             </tr>

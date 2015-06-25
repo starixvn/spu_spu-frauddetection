@@ -324,7 +324,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="workflowId">Work flow ID.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult TaskEditInfo(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo, int workflowId)
+        public ActionResult TaskEditInfo(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo, string workflowId)
         {
             if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
             {
@@ -364,7 +364,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var result = taskService.UpdateTask(criteria);
             if (result.Code == 0)
             {
-                UpdateRunningTask(criteria, workflowId);
+                UpdateRunningTask(criteria, int.Parse(workflowId));
             }
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
