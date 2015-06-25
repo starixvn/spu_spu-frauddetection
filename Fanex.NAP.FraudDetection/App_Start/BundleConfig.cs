@@ -30,11 +30,9 @@ namespace Fanex.NAP.FraudDetection.AppStart
                      Justification = "Reviewed. Suppression is OK here.")]
         public static void RegisterBundles(BundleCollection bundles)
         {
-            var cssTransformer = new StyleTransformer();
-            cssTransformer.CombineFilesBeforeMinification = true;
+            var cssTransformer = new StyleTransformer { CombineFilesBeforeMinification = true };
 
-            var scriptTransformer = new ScriptTransformer();
-            scriptTransformer.CombineFilesBeforeMinification = true;
+            var scriptTransformer = new ScriptTransformer { CombineFilesBeforeMinification = true };
             BundleResolver.Current = new CustomBundleResolver();
 
             var css = new Bundle("~/bundles/coreCss")

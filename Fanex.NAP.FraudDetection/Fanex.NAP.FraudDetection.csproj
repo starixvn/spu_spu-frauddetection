@@ -260,6 +260,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\CustomerController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MailMasterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
@@ -423,6 +424,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-update.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
@@ -518,6 +520,7 @@
     <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowEdit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Reports\SuspiciousCustomerReport.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />

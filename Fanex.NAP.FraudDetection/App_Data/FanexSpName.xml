@@ -45,4 +45,8 @@
     <Setting Key="SPU_MailMasterUpdate" SpName="SPU_MailMasterUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_MailMasterActivate" SpName="SPU_MailMasterActivate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
+
+  <Function Name="Reports">
+    <Setting Key="SPU_SuspiciousCustomerReportGetAll" SpName="SPU_SuspiciousCustomerReportGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  </Function>
 </Functions>
