@@ -48,5 +48,15 @@
 
   <Function Name="Reports">
     <Setting Key="SPU_SuspiciousCustomerReportGetAll" SpName="SPU_SuspiciousCustomerReportGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_SuspiciousCustomerGetByGroup" SpName="SPU_SuspiciousCustomerGetByGroup" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_SuspiciousCustomerGetCount" SpName="SPU_SuspiciousCustomerGetCount" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  </Function>
+
+  <Function Name="SPU_Suspicious_Customer">
+    <Setting Key="SPU_SelectUsernameByCustId" SpName="SPU_SelectUsernameByCustId" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="SPU_SelectMatchInfoFromDB02" SpName="SPU_SelectMatchInfoFromDB02" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="SPU_SelectMatchInfoFromDBArchive" SpName="SPU_SelectMatchInfoFromDBArchive" DbName="DBSPU.bodb_Archive.bodbSPUNet" />
+    <Setting Key="SPU_SelBalanceUpDay" SpName="SPU_SelBalanceUpDay" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="SPU_SuspiciousCustomerMargin" SpName="SPU_SuspiciousCustomerMargin" DbName="DBSPU.bodb02.bodbSPUNet" />
   </Function>
 </Functions>

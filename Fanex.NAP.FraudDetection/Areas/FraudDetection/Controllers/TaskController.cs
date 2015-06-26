@@ -17,17 +17,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Models;
     using NAP.FraudDetection.Controllers;
     using Service;
-    using SPU.Lib.FraudDetection.BusinessManager;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Criteria.Group;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.SendingTasks;
+    using SPU.Lib.FraudDetection.QueueManagement.SendingTasks;
     using SPU.Lib.FraudDetection.Service.Implement;
 
     public class TaskController : BaseController
     {
         #region Add Task
+
         /// <summary>
         /// Home page for Task.
         /// </summary>
@@ -69,8 +69,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var groupList = new List<Group>();
             foreach (DataRow dr in dataCollection.Data.Tables[0].Rows)
             {
-                groupList.Add(new Group 
-                { 
+                groupList.Add(new Group
+                {
                     GroupId = int.Parse(dr["groupid"].ToString()),
                     GroupName = dr["groupname"].ToString()
                 });
@@ -82,9 +82,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var bettypeList = bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
 
             var taskViewModel = new TaskViewModel(
-                eventList.ToList(), 
-                configList.ToList(), 
-                groupList, 
+                eventList.ToList(),
+                configList.ToList(),
+                groupList,
                 sportList.ToList(),
                 bettypeList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { WorkflowId = workflowID } };
 
@@ -98,7 +98,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         /*[Compress]
         public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
-        {                     
+        {
             criteria.PageIndex++;
             var groupService = new GroupService();
             var dataReader = groupService.GetGroups(criteria);
@@ -144,7 +144,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.TaskPreconditionsOriginal = string.IsNullOrEmpty(criteria.TaskPreconditions) ? string.Empty : criteria.TaskPreconditionsOriginal;
 
             criteria.TaskRulesFormatted = criteria.TaskRules;
-            criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty : 
+            criteria.TaskRules = string.IsNullOrEmpty(additionalInfo.RuleConfigs) ? string.Empty :
                 string.Format(
                 QueryRuleString,
                 GenerateSQLSelect(configList, additionalInfo.RuleConfigs),
@@ -313,7 +313,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return relevantTables.Remove(relevantTables.Length - 1);
         }
 
-        #endregion
+        #endregion Add Task
 
         #region Edit Task
 
@@ -383,7 +383,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
-        #endregion
+        #endregion Edit Task
 
         #region Utilities
 
@@ -401,6 +401,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return targetString;
         }
 
-        #endregion
+        #endregion Utilities
     }
 }

@@ -166,7 +166,7 @@
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
+      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.BusinessManager.UnitTest\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

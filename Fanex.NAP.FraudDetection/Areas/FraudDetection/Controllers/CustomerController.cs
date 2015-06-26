@@ -9,6 +9,7 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
@@ -62,7 +63,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomerReport(criteria);
 
-            return Json(suspiciousCustomers, JsonRequestBehavior.AllowGet);
+            var result = new
+            {
+                SuspiciousCustomers = suspiciousCustomers,
+                Months = GetThreeLatestMonths()
+            };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -89,6 +96,20 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             groups = all.Concat(groups);
 
             return groups;
+        }
+
+        private IEnumerable<string> GetThreeLatestMonths()
+        {
+            var result = new List<string>();
+            var startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-2);
+            for (var i = 0; i < 3; i++)
+            {
+                var month = startMonth.AddMonths(i);
+
+                result.Add(month.ToString("MMM-yyyy"));
+            }
+
+            return result;
         }
     }
 }
