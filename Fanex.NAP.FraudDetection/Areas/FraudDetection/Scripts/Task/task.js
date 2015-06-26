@@ -288,8 +288,8 @@ function GenerateNextActions() {
         }
     });
 
-    //NextActionIdList = NextActionIdList.slice(0, -1);
-    //NextActionTargetIdList = NextActionTargetIdList.slice(0, -1);
+    NextActionIdList = NextActionIdList.slice(0, -1);
+    NextActionTargetIdList = NextActionTargetIdList.slice(0, -1);
 }
 
 //=========================================================================

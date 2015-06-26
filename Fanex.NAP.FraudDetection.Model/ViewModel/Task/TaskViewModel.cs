@@ -25,13 +25,15 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
             List<Config> configs,
             List<Group> groups,
             List<Sport> sportList,
-            List<Bettype> bettypeList)
+            List<Bettype> bettypeList,
+            List<MailMasterInfo> mailMasterList )
         {
             EventList = events;
             ConfigurationList = configs;
             GroupList = groups;
             SportList = sportList;
             BettypeList = bettypeList;
+            MaiMasterList = mailMasterList;
         }
 
         // On User ID
@@ -69,6 +71,9 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
 
         // Customer Groups
         public List<Group> GroupList { get; set; }
+
+        // Mail Masters
+        public List<MailMasterInfo> MaiMasterList { get; set; }
 
         public int AssignedToGroup { get; set; }
 

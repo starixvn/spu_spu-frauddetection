@@ -7,6 +7,8 @@
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 // </history>
 
+using SPU.Lib.FraudDetection.Criteria.MailMaster;
+
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
@@ -81,13 +83,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var bettypeService = new BettypeService();
             var sportList = bettypeService.GetAllSBSports(new SportSelectAllCriteria());
             var bettypeList = bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
+            var mailMasterList = new MailMasterService().GetMails(new MailMasterGetAllCriteria());
 
             var taskViewModel = new TaskViewModel(
                 eventList.ToList(),
                 configList.ToList(),
                 groupList,
                 sportList.ToList(),
-                bettypeList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { WorkflowId = workflowID } };
+                bettypeList.ToList(),
+                mailMasterList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { WorkflowId = workflowID } };
 
             return taskViewModel;
         }

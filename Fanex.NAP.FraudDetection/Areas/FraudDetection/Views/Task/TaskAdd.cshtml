@@ -227,9 +227,10 @@
                 </td>
                 <td>
                     <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
-                      <option value="1">Email Template 1</option>
-                      <option value="2">Email Template 2</option>
-                      <option value="3">Email Template 3</option>
+                        @foreach (var mailMaster in Model.MaiMasterList)
+                        {
+                            <option value="@mailMaster.MailId" >@mailMaster.MailCode</option>
+                        }
                     </select>
                 </td>
             </tr>
