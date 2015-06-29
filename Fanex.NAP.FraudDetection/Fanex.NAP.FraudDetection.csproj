@@ -18,6 +18,10 @@
     <UseIISExpress>false</UseIISExpress>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <JSLintSkip>\Scripts\head.min.js|\Scripts\head.js|\Scripts\respond.js|\Scripts\Plugin\multi-select-control.js</JSLintSkip>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -163,27 +167,27 @@
     </Reference>
     <Reference Include="SPU.Lib.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.Core.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.Core.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.BusinessManager.UnitTest\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.DTO.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Service.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -563,6 +567,12 @@
     <Content Include="Content\jquery-ui\base\tooltip.css" />
     <Content Include="Content\Plugin\multi-select-control.css" />
     <Content Include="Content\tinymce\tinymce.css" />
+    <Content Include="Dependencies\SPU.Lib.Core.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.Criteria.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.DataAccess.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.DTO.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.Service.dll" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -697,6 +707,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Deployment.ignore" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />
     <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
