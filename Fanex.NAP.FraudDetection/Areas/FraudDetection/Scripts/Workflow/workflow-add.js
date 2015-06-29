@@ -3,7 +3,7 @@
 });
 
 function OnInitialize() {
-    $("#AddWorkflowForm").submit(function (event) {
+    $("#btn_AddWorkflow").click(function (event) {
         event.preventDefault();
         var url = 'Workflow/AddNewWorkflow';
         var param = {

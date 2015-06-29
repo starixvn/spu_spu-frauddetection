@@ -3,7 +3,7 @@
 });
 
 function OnInitialize() {
-    $("#AddGroupForm").submit(function (event) {
+    $("#btn_AddGroup").click(function (event) {
         event.preventDefault();
         var url = 'Group/AddNewGroup';
         var param = {
