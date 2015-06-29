@@ -265,7 +265,7 @@
             <tr>
                 <td>
                     <div>
-                        <input type="checkbox" id="nextaction_assignGroup" data-actionid="2" @(Model.TaskInformation.NextActionIdList.Contains("2") ? "checked" : "") /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
+                        <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" @(Model.TaskInformation.NextActionIdList.Contains("2") ? "checked" : "") /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
                     </div>
                 </td>
                 <td> 
@@ -280,7 +280,7 @@
             <tr>
                 <td>
                     <div>
-                        <input type="checkbox" id="nextaction_sendMail" data-actionid="1" @(Model.TaskInformation.NextActionIdList.Contains("1") ? "checked" : "") /> Send Mail                    </div>
+                        <input type="checkbox" id="nextaction_sendMail" data-actionid="2" @(Model.TaskInformation.NextActionIdList.Contains("1") ? "checked" : "") /> Send Mail                    </div>
                 </td>
                 <td>
                     <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
