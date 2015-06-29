@@ -261,7 +261,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="Areas\FraudDetection\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\SuspiciousCustomerController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MailMasterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
@@ -425,6 +425,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-update.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />

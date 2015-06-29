@@ -1,10 +1,11 @@
 ﻿$(document).ready(function () {
-    OnInitialize();
-});
+    $("#btn_addGroup").click(function () {
+        addGroup.submit();
+    });
 
-function OnInitialize() {
-    $("#btn_AddGroup").click(function (event) {
+    var addGroup = $("#AddGroupForm").submit(function (event) {
         event.preventDefault();
+
         var url = 'Group/AddNewGroup';
         var param = {
             "GroupName": $("#GroupName").val(),
@@ -38,5 +39,5 @@ function OnInitialize() {
             complete: function () {
             }
         });
-    });    
-}
+    });
+});

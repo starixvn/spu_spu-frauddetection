@@ -1,10 +1,11 @@
 ﻿$(document).ready(function () {
-    OnInitialize();
-});
+    $("#btn_addWorkflow").click(function () {
+        addWorkflowForm.submit();
+    });
 
-function OnInitialize() {
-    $("#btn_AddWorkflow").click(function (event) {
+    var addWorkflowForm = $("#AddWorkflowForm").submit(function (event) {
         event.preventDefault();
+
         var url = 'Workflow/AddNewWorkflow';
         var param = {
             "WorkflowName": $("#WorkflowName").val(),
@@ -38,5 +39,5 @@ function OnInitialize() {
             complete: function () {
             }
         });
-    });    
-}
+    });
+});

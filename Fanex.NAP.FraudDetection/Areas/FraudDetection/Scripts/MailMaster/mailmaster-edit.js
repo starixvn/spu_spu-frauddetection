@@ -16,8 +16,20 @@
         image_advtab: true
     });
 
-    $("#mailCancel").click(function () {
+    $("#btn_cancelMail").click(function () {
         window.location.href = '/MailMaster';
+    });
+
+    $("#btn_editMail").click(function () {
+        editMail.submit();
+    });
+
+    var editMail = $('#editMailForm').submit(function () {
+        $('#editMailForm').validate();
+
+        if ($('#editMailForm').valid()) {
+            $.post(this.action, $(this).serialize());
+        }
     });
 });
 

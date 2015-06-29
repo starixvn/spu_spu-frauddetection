@@ -63,12 +63,11 @@ function createMailTable(mailTemplates) {
 * Active Column template.
 */
 function ActiveColumn(cell, cellFormated) {
-    var params = cell.Value.MailId + "," + cell.Value.IsActive;
     if (cell.Value.IsActive) {
-        return "<img title='Deactivate this email' class='ico-tick' alt='' onclick=\"editActive(" + params + ");\"/>";
+        return "<img title='Deactivate this email' class='ico-tick' alt='' onclick=\"editActive(this," + cell.Value.MailId + ");\"/>";
     }
     else {
-        return "<img title='Activate this email' class='ico-untick' alt='' onclick=\"editActive(" + params + ");\"/>";
+        return "<img title='Activate this email' class='ico-untick' alt='' onclick=\"editActive(this," + cell.Value.MailId + ");\"/>";
     }
 }
 
@@ -114,6 +113,8 @@ function ShowAction(mailId) {
 */
 function deleteMail(mailId) {
     $.confirm({
+        confirmButtonClass: 'btn-green btn-customConfirm',
+        cancelButtonClass: 'btn-green btn-customCancel',
         title: "Delete confirmation",
         text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
         confirm: function (button) {
@@ -143,12 +144,25 @@ function updateMail(mailId) {
 /*
 * Activate/deactivate mail template.
 */
-function editActive(mailId, isActive) {
-    var active = isActive === true ? "deactivate " : "activate ";
+function editActive(obj, mailId) {
+    var active = "activate ";
+    var isActive = false;
+    if ($(obj).hasClass('ico-tick')) {
+        active = "deactivate ";
+        isActive = true;
+    }
+
+    if (isActive) {
+        $(obj).removeClass('ico-tick').addClass('ico-untick');
+    } else {
+        $(obj).removeClass('ico-untick').addClass('ico-tick');
+    }
     $.confirm({
+        confirmButtonClass: 'btn-green btn-customConfirm',
+        cancelButtonClass: 'btn-green btn-customCancel',
         title: "Confirmation",
         text: "Are you sure to " + active + "this mail template?",
-        confirm: function (button) {
+        confirm: function () {
             $.post('MailMaster/ActivateMail', { mailId: mailId, isActive: !isActive }, function (result) {
                 if (result.ErrCode === 0) {
                     formSearch.submit();
@@ -158,7 +172,12 @@ function editActive(mailId, isActive) {
                 }
             });
         },
-        cancel: function (button) {
+        cancel: function () {
+            if (!isActive) {
+                $(obj).removeClass('ico-tick').addClass('ico-untick');
+            } else {
+                $(obj).removeClass('ico-untick').addClass('ico-tick');
+            }
         },
         confirmButton: "OK",
         cancelButton: "Cancel"

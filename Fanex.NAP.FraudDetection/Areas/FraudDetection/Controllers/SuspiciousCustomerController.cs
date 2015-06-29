@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="CustomerController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousCustomerController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -98,6 +98,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return groups;
         }
 
+        /// <summary>
+        /// Get 3 latest months.
+        /// </summary>
+        /// <returns>List of months.</returns>
         private IEnumerable<string> GetThreeLatestMonths()
         {
             var result = new List<string>();

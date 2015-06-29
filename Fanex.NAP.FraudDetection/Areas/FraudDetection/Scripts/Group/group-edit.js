@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    OnInitialize();
-});
+    $("#btn_editGroup").click(function () {
+        editGroup.submit();
+    });
 
-function OnInitialize() {
-    $('#EditGroupForm').submit(function (event) {
+    var editGroup = $('#EditGroupForm').submit(function (event) {
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
@@ -19,7 +19,7 @@ function OnInitialize() {
             Search();
         });
     });
-}
+});
 
 /*
 * Edit a group.
@@ -58,6 +58,8 @@ function editGroupStatus(obj, groupId) {
     }
 
     $.confirm({
+        confirmButtonClass: 'btn-green btn-customConfirm',
+        cancelButtonClass: 'btn-green btn-customCancel',
         title: "Confirmation",
         text: "Are you sure to " + active + "this group?",
         confirm: function () {

@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    OnInitialize();
-});
+    $("#btn_editWorkflow").click(function () {
+        editWorkflowForm.submit();
+    });
 
-function OnInitialize() {
-    $('#EditWorkflowForm').submit(function (event) {
+    var editWorkflowForm = $('#EditWorkflowForm').submit(function (event) {
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
@@ -19,7 +19,7 @@ function OnInitialize() {
             Search();
         });
     });
-}
+});
 
 /*
 * Edit a work flow.
@@ -58,6 +58,8 @@ function editWorkflowStatus(obj, workflowId) {
     }
 
     $.confirm({
+        confirmButtonClass: 'btn-green btn-customConfirm',
+        cancelButtonClass: 'btn-green btn-customCancel',
         title: "Confirmation",
         text: "Are you sure to " + active + "this Workflow?",
         confirm: function () {
