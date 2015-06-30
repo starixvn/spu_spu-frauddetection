@@ -70,7 +70,7 @@ function OnInitialize() {
         $('#ruleConfigControlDatetimePicker').datetimepicker("show");
     });
 
-    $("#AddTaskForm").submit(function (event) {
+    $("#btn_AddTask").click(function (event) {
         event.preventDefault();
         var formulaIsCorrect = CheckFormula("preconditionTable") && CheckFormula("ruleTable");
         if (formulaIsCorrect) {
@@ -108,8 +108,7 @@ function OnInitialize() {
                 success: function (response) {
                     if (response.ErrCode == 0) {
                         // redirect to workflow detail page
-                        var url = "Workflow/WorkflowDetail?workflowId=" + $("#workflowid").text();
-                        url += "&workflowName=" + "longluu";
+                        url = "Workflow/WorkflowDetail?workflowId=" + $("#workflowid").text();
                         window.location.replace(url);
                     }
                     else {
@@ -126,7 +125,7 @@ function OnInitialize() {
         }
     });
 
-    $("#EditTaskForm").submit(function (event) {
+    $("#btn_EditTask").click(function (event) {
         event.preventDefault();
         var formulaIsCorrect = CheckFormula("preconditionTable") && CheckFormula("ruleTable");
         if (formulaIsCorrect) {
@@ -484,7 +483,7 @@ function GetFormattedFormula(parentName) {
         if (currentRawContent.indexOf("Match State") < 0) {
             rawFormula += currentRawContent + "@";
         } else {
-            rawFormula += "@";
+            rawFormula += "AND#1=1@";
         }
     });
 

@@ -110,7 +110,7 @@ function WorkflowNameColumn(cell, cellFormated) {
     var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
     var workflowName = gridOptions.bodyRows[cell.Row].Columns[2].Value;
 
-    var url = "Workflow/WorkflowDetail?workflowId=" + workflowId + "&workflowName=" + workflowName;
+    var url = "Workflow/WorkflowDetail?workflowId=" + workflowId;
     return "<a href=" + url + ">" + workflowName + "</a>";
 }
 

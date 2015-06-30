@@ -34,8 +34,7 @@
         {
             criteria.PageIndex++;
 
-            var workflowService = new WorkflowService();
-            var dataReader = workflowService.GetWorkflows(criteria);
+            var dataReader = _workflowService.GetWorkflows(criteria);
             var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
             return Json(results, JsonRequestBehavior.AllowGet);
@@ -62,8 +61,7 @@
         public ActionResult AddNewWorkflow(WorkflowInsertCriteria criteria)
         {
             criteria.CreatorId = 1;
-            var workflowService = new WorkflowService();
-            var result = workflowService.InsertWorkflow(criteria);
+            var result = _workflowService.InsertWorkflow(criteria);
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
@@ -71,12 +69,12 @@
         /// Workflow Detail.
         /// </summary>
         /// <param name="workflowId">Workflow ID.</param>
-        /// <param name="workflowName">Workflow Name.</param>
         /// <returns>Action Result.</returns>
         [HttpGet]
-        public ActionResult WorkflowDetail(int workflowId, string workflowName)
+        public ActionResult WorkflowDetail(int workflowId)
         {
-            ViewBag.WorkflowName = workflowName;
+            var workflowInfo = _workflowService.GetWorkflowById(new WorkflowSelectByIdCriteria { WorkflowId = workflowId });
+            ViewBag.WorkflowName = workflowInfo.WorkflowName;
             var criteria = new TaskSelectAllByWorkflowIdCriteria { WorkFlowId = workflowId };
 
             return View("~/Areas/FraudDetection/Views/Workflow/WorkflowDetail.cshtml", criteria);

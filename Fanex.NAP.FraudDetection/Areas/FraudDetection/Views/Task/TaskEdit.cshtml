@@ -129,8 +129,8 @@
                                 precondRelevantConfigs += rule.ConfigId + "#";
                                 configIdsForEachPrecond += rule.ConfigId + "#";
                             }
-                            configIdsForEachPrecond = configIdsForEachPrecond.Remove(configIdsForEachPrecond.Length - 1);
-                            <tr id="@rowName">
+                            configIdsForEachPrecond = string.IsNullOrEmpty(configIdsForEachPrecond) ? "" : configIdsForEachPrecond.Remove(configIdsForEachPrecond.Length - 1);
+                            <tr id="@rowName" style="@(string.IsNullOrEmpty(configIdsForEachPrecond) ? "" : "display:none")">
                                 <td><input id="cb_@rowName" type="checkbox"></td>
                                 <td style="width: 510px;">
                                     <div id="div_@rowName" data-formattedcontent="@configsFormatter[i]" data-rawcontent="@configsOriginal[i]" data-configid="@configIdsForEachPrecond">@configsOriginal[i].Replace("#", " ")</div>
@@ -140,7 +140,7 @@
                             counter++;
                         }
 
-                        precondRelevantConfigs = precondRelevantConfigs.Remove(precondRelevantConfigs.Length - 1);
+                        precondRelevantConfigs = string.IsNullOrEmpty(precondRelevantConfigs) ? "" : precondRelevantConfigs.Remove(precondRelevantConfigs.Length - 1);
                     }
                 </table>
             </div>
@@ -295,7 +295,7 @@
       </div>
     </div>
     <div class="newline">&nbsp;</div>
-    <input type="submit" id="btn_EditTask" value="Submit" class="btn-green" />
+    <input type="button" id="btn_EditTask" value="Submit" class="btn-green" />
 }
 <div id="SearchResult" class="freegrid  content-grid">
 </div>
