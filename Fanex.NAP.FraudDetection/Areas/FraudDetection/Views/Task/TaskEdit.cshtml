@@ -130,7 +130,7 @@
                                 configIdsForEachPrecond += rule.ConfigId + "#";
                             }
                             configIdsForEachPrecond = string.IsNullOrEmpty(configIdsForEachPrecond) ? "" : configIdsForEachPrecond.Remove(configIdsForEachPrecond.Length - 1);
-                            <tr id="@rowName" style="@(string.IsNullOrEmpty(configIdsForEachPrecond) ? "" : "display:none")">
+                            <tr id="@rowName" style="@(string.IsNullOrEmpty(Model.TaskInformation.TaskPreconditionsOriginal) ? "display:none" : "")">
                                 <td><input id="cb_@rowName" type="checkbox"></td>
                                 <td style="width: 510px;">
                                     <div id="div_@rowName" data-formattedcontent="@configsFormatter[i]" data-rawcontent="@configsOriginal[i]" data-configid="@configIdsForEachPrecond">@configsOriginal[i].Replace("#", " ")</div>
@@ -140,7 +140,7 @@
                             counter++;
                         }
 
-                        precondRelevantConfigs = string.IsNullOrEmpty(precondRelevantConfigs) ? "" : precondRelevantConfigs.Remove(precondRelevantConfigs.Length - 1);
+                        precondRelevantConfigs = string.IsNullOrEmpty(Model.TaskInformation.TaskPreconditionsOriginal) ? "" : precondRelevantConfigs.Remove(precondRelevantConfigs.Length - 1);
                     }
                 </table>
             </div>

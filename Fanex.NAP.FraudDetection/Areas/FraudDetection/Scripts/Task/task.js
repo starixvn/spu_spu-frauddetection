@@ -479,12 +479,15 @@ function GetRawFormula(parentName) {
 function GetFormattedFormula(parentName) {
     var rawFormula = "";
     $('div[id^="div_' + parentName + '"]').each(function () {
+        var currentContent = $(this).attr("data-rawcontent");
         var currentRawContent = $(this).attr("data-formattedcontent");
-        if (currentRawContent.indexOf("Match State") < 0) {
+        if (currentContent.indexOf("Match State") < 0) {
             rawFormula += currentRawContent + "@";
         } else {
-            rawFormula += "AND#1=1@";
+            currentRawContent = currentRawContent.replace("Match State = notscanned", "1=1").replace("Match State = scanned", "1=1");
         }
+
+        rawFormula += currentRawContent + "@";
     });
 
     rawFormula = rawFormula.slice(0, -1);

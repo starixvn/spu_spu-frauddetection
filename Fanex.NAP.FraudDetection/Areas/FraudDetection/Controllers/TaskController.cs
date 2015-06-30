@@ -401,6 +401,21 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 });
         }
 
+        /// <summary>
+        /// Update a work task.
+        /// </summary>
+        /// <param name="criteria">The input criteria.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpPost]
+        public ActionResult EditTaskStatus(TaskUpdateStatusCriteria criteria)
+        {
+            criteria.CreatorId = 1;
+            var taskService = new TaskService();
+            var result = taskService.UpdateTask(criteria);
+
+            return new JsonResult {Data = new {ErrCode = result.Code, ErrMsg = result.Message}};
+        }
+
         #endregion Edit Task
 
         #region Utilities

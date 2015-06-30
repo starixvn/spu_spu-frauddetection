@@ -106,10 +106,10 @@ function ActiveColumn(cell, cellFormated) {
     var taskId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     if (cell.Value == "True") {
-            return "<img title='Deactivate this task' class='ico-tick' alt='' onclick='editActive(this," + taskId + ")'/>";
+        return "<img title='Deactivate this task' class='ico-tick' alt='' onclick='editTaskStatus(this," + taskId + ")'/>";
         }
         else {
-            return "<img title='Activate this task' class='ico-untick' alt='' onclick='editActive(this," + taskId + ")'/>";
+            return "<img title='Activate this task' class='ico-untick' alt='' onclick='editTaskStatus(this," + taskId + ")'/>";
         }
 }
 
@@ -123,5 +123,65 @@ function EditTask(taskId) {
 }
 
 $("#btn_AddNewTask").click(function () {    
-     window.location.href = "/Task" + "?workflowId=" + _workflowId;    
-});
+     window.location.href = "/Task" + "?workflowId=" + _workflowId;
+ });
+
+ /*
+ * Activate/deactivate a task.
+ */
+ function editTaskStatus(obj, taskId) {
+     var active = "activate ";
+     var isActive = false;
+     if ($(obj).hasClass('ico-tick')) {
+         active = "deactivate ";
+         isActive = true;
+     }
+
+     if (isActive) {
+         $(obj).removeClass('ico-tick').addClass('ico-untick');
+     } else {
+         $(obj).removeClass('ico-untick').addClass('ico-tick');
+     }
+
+     $.confirm({
+         confirmButtonClass: 'btn-green btn-customConfirm',
+         cancelButtonClass: 'btn-green btn-customCancel',
+         title: "Confirmation",
+         text: "Are you sure to " + active + "this Task?",
+         confirm: function () {
+             var url = 'Task/EditTaskStatus';
+             var param = {
+                 "TaskId": taskId,
+                 "IsActive": !isActive
+             };
+
+             $.ajax({
+                 type: "POST",
+                 contentType: 'application/json',
+                 dataType: "json",
+                 data: JSON.stringify(param),
+                 cache: false,
+                 url: url,
+                 error: function () {
+                 },
+                 success: function (response) {
+                     if (response.ErrCode == 0) {
+                         Search();
+                     }
+                     else {
+                         alert(result.ErrMsg);
+                     }
+                 }
+             });
+         },
+         cancel: function () {
+             if (!isActive) {
+                 $(obj).removeClass('ico-tick').addClass('ico-untick');
+             } else {
+                 $(obj).removeClass('ico-untick').addClass('ico-tick');
+             }
+         },
+         confirmButton: "OK",
+         cancelButton: "Cancel"
+     });
+ }
