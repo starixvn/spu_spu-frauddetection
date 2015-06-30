@@ -481,9 +481,7 @@ function GetFormattedFormula(parentName) {
     $('div[id^="div_' + parentName + '"]').each(function () {
         var currentContent = $(this).attr("data-rawcontent");
         var currentRawContent = $(this).attr("data-formattedcontent");
-        if (currentContent.indexOf("Match State") < 0) {
-            rawFormula += currentRawContent + "@";
-        } else {
+        if (currentContent.indexOf("Match State") >= 0) {
             currentRawContent = currentRawContent.replace("Match State = notscanned", "1=1").replace("Match State = scanned", "1=1");
         }
 
