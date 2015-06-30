@@ -22,6 +22,23 @@
     formSearch.submit();
 
     /*
+    * Grid options.
+    */
+    var gridOptions = {
+        customizeHeader: true,
+        gridExpandHeight: 150,
+        showTree: true,
+        showPager: true,
+        showColumnsShowHide: false,
+        sortOption: {},
+        pagerOption: {
+            itemsPerPage: 10,
+            currentPage: 0,
+            itemsPerPageArray: [10, 20, 50, 100, 500]
+        }
+    };
+
+    /*
     * Render customer report.
     */
     var renderCustomerReportTable = function (data) {
@@ -30,25 +47,31 @@
         var columnHeaders = generateColumnHeaders(months);
         var customHeader = generateCustomColumnHeaders(months);
         var bodyRows = generateBodyRows(months, suspiciousCustomers);
-        var gridOptions = {
-            customizeHeader: true,
-            groupHeaderRows: customHeader,
-            columns: columnHeaders,
-            bodyRows: bodyRows,
-            gridExpandHeight: 150,
-            showTree: true,
-            showPager: true,
-            showColumnsShowHide: false,
-            pagerOption:
-            {
-                itemsPerPage: 10,
-                currentPage: 0,
-                itemsPerPageArray: [10, 20, 50, 100, 500]
-            }
+
+        gridOptions.bodyRows = bodyRows;
+        gridOptions.groupHeaderRows = customHeader;
+        gridOptions.columns = columnHeaders;
+        gridOptions.sortOption = {
+            afterGridSorted: reRenderBodyAfterSort
         };
 
         $("#customerReportId").fanexGrid(gridOptions);
     };
+
+    /*
+    * Re-render customer report.
+    */
+    function reRenderBodyAfterSort(rows) {
+        $.each(rows, function (index, item) {
+            item.Columns[0].Value = index + 1;
+        });
+
+        gridOptions.bodyRows = rows;
+
+        $('#customerReportId').fanexGrid(gridOptions);
+
+        return rows;
+    }
 
     /*
     * Create the body for rendering.
@@ -92,15 +115,29 @@
         var month3 = months[2];
         var columnHeaders = [
             { HeaderText: "#", Width: 50, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Member", Width: 150, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Group", Width: 300, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Suspicious Time", Width: 120, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: month1, Width: 115, Name: month1 + "WinLoss", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: month2, Width: 115, Name: month2 + "WinLoss", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: month3, Width: 115, Name: month3 + "WinLoss", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: month1, Width: 60, Name: month1 + "Margin", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: month2, Width: 60, Name: month2 + "Margin", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: month3, Width: 60, Name: month3 + "Margin", HeaderAlign: "center", CellAlign: "right" }
+            { HeaderText: "Member", Width: 120, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Group", Width: 280, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Suspicious Time", Width: 125, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right",
+                Sort: true, SortType: 'number'
+            },
+            { HeaderText: month1, Width: 110, Name: month1 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatConstant.INT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+            },
+            { HeaderText: month2, Width: 110, Name: month2 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatConstant.INT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+            },
+            { HeaderText: month3, Width: 110, Name: month3 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatConstant.INT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+            },
+            { HeaderText: month1, Width: 85, Name: month1 + "Margin", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+            },
+            { HeaderText: month2, Width: 85, Name: month2 + "Margin", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+            },
+            { HeaderText: month3, Width: 85, Name: month3 + "Margin", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+            }
         ];
 
         return columnHeaders;
@@ -125,6 +162,25 @@
 
         return customColumnHeaders;
     };
+
+    /*
+    * Format.
+    */
+    var formatConstant = {
+        INT_NUMBER: '0,0',
+        TWO_DECIMAL_NUMBER: '0,0.00',
+        FOUR_DECIMAL_NUMBER: '0,0.0000',
+        TWO_DECIMAL_PERCENT_NUMBER: '0,0.00%',
+        MMM_DD_YYYY_STRING: 'MMM DD, YYYY',
+        M_DD_YY_STRING: 'M dd, yy',
+        MM_DD_YYYY_WITH_SLASH_STRING: 'MM/dd/yyyy',
+        MMM_YY_STRING: 'MMM YY',
+        MMM_YY_STRING_MONTH_PICKER: 'MMM yyyy',
+        MMM_DD_YY_STRING_MONTH_PICKER: 'MMM dd, yyyy',
+        MM_DD_YYYY_WITH_SLASH_STRING_MOMENT: 'M/D/YYYY',
+        MMM_DD_YYYY_STRING_MOMENT: 'MMM D, YYYY',
+        MMM_DD_YYYY_H_M_STRING: 'MMM DD, YYYY HH:mm'
+    };
 });
 
 var waitingDialog = waitingDialog || (function ($) {
@@ -146,8 +202,8 @@ var waitingDialog = waitingDialog || (function ($) {
         * Opens our dialog
         * @param message Custom message
         * @param options Custom options:
-                        options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
-                        options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
+        options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
+        options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
         */
         show: function (message, options) {
             // Assigning defaults

@@ -600,6 +600,7 @@
     <Content Include="Scripts\jquery.number.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\numeral.min.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\viewlog.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\edit.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\addnew.js" />

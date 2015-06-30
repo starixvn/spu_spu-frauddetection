@@ -6,7 +6,7 @@
 }
 @section HeadCss
 {
-    <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FanexGridCss")" />
+    @Styles.Render("~/bundles/FanexGrid/FanexGridCss")
     <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionCss")" />
     <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />
 }
@@ -29,7 +29,7 @@
         <label>
             Group</label>
         @Html.DropDownList("groupId", Model, new { @style = "height: 25px; min-width:100px; margin-left: 3px; padding-left: 5px; margin-right: 10px;" })
-        <button class="btn-primary" id="btnSearch">Search</button>
+        <button class="btn-green" id="btnSearch">Search</button>
     </div>
 }
 

@@ -50,6 +50,10 @@ namespace Fanex.NAP.FraudDetection.AppStart
             cssFanexGrid.Transforms.Add(cssTransformer);
             bundles.Add(cssFanexGrid);
 
+            bundles.Add(new StyleBundle("~/bundles/FanexGrid/FanexGridCss").Include(
+                "~/Content/Fanex.Grid/Fanex.Grid.css",
+                "~/Content/Fanex.Grid/Fanex.Pagination.css"));
+
             var fraudDetectionCss = new Bundle("~/bundles/FraudDetectionCss")
             .IncludeDirectory("~/Areas/FraudDetection/App_Themes/Core", "*.css");
             fraudDetectionCss.Transforms.Add(cssTransformer);
@@ -66,7 +70,8 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
-                "~/Scripts/jquery.confirm.min.js");
+                "~/Scripts/jquery.confirm.min.js",
+                "~/Scripts/numeral.min.js");
 
             coreJs.Transforms.Add(scriptTransformer);
 
