@@ -54,6 +54,11 @@
         gridOptions.sortOption = {
             afterGridSorted: reRenderBodyAfterSort
         };
+        gridOptions.pagerOption = {
+            itemsPerPage: 10,
+            currentPage: 0,
+            itemsPerPageArray: [10, 20, 50, 100, 500]
+        };
 
         $("#customerReportId").fanexGrid(gridOptions);
     };

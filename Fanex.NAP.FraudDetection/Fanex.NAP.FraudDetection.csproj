@@ -695,12 +695,12 @@
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Shared\_LayoutPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
