@@ -126,13 +126,13 @@
                 Sort: true, SortType: 'number'
             },
             { HeaderText: month1, Width: 110, Name: month1 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.INT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
             },
             { HeaderText: month2, Width: 110, Name: month2 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.INT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
             },
             { HeaderText: month3, Width: 110, Name: month3 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.INT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
             },
             { HeaderText: month1, Width: 85, Name: month1 + "Margin", HeaderAlign: "center", CellAlign: "right",
                 FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
