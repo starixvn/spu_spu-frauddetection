@@ -5,6 +5,7 @@
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.Criteria.Workflow;
+    using SPU.Lib.FraudDetection.QueueManagement.SendingTasks;
     using SPU.Lib.FraudDetection.Service.Implement;
 
     /// <summary>
@@ -153,6 +154,27 @@
             };
 
             var result = _workflowService.UpdateWorkflow(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        /// <summary>
+        /// Update a work task.
+        /// </summary>
+        /// <param name="criteria">The input criteria.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpPost]
+        public ActionResult EditTaskStatus(TaskUpdateStatusCriteria criteria)
+        {
+            criteria.CreatorId = 1;
+            var taskService = new TaskService();
+            var result = taskService.UpdateTask(criteria);
+            if (result.Code == 0)
+            {
+                var taskInfo = taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria {TaskId = criteria.TaskId});
+                var syncNewTask = SendingTaskFactory.GetSender(SendingType.UpdatingTask);
+                syncNewTask.Send(taskInfo);
+            }
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }

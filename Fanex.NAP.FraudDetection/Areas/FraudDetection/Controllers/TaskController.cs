@@ -7,6 +7,7 @@
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 // </history>
 
+using System.Text.RegularExpressions;
 using SPU.Lib.FraudDetection.Criteria.MailMaster;
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
@@ -29,6 +30,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
     public class TaskController : BaseController
     {
+        private readonly TaskService _taskService;
+
+        public TaskController()
+        {
+            _taskService = new TaskService();
+        }
+
         #region Add Task
 
         /// <summary>
@@ -118,8 +126,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.IsActive = true;
             var queryPreconString = "select top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
             var queryRuleString = "select {0} from {1} where {2}";
-            var taskService = new TaskService();
-            var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
+            var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
 
@@ -140,7 +147,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.RuleConfigs),
                 GenerateSQLWhere(configList, false, additionalInfo, criteria.TaskRules));
 
-            var result = taskService.InsertTask(criteria);
+            var result = _taskService.InsertTask(criteria);
             if (result.Code == 0)
             {
                 PushNewTaskToRun(criteria, int.Parse(result.Message));
@@ -308,10 +315,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         #region Edit Task
 
         [HttpGet]
-        public ActionResult TaskEditInfo(string taskId)
+        public ActionResult TaskEditInfo(int taskId)
         {
-            var taskService = new TaskService();
-            var taskInfo = taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria { TaskId = taskId });
+            var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria { TaskId = taskId });
             var viewModel = GenerateViewModel(
                 AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
                 taskInfo.WorkflowId);
@@ -343,8 +349,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.IsActive = true;
             string queryPreconString = "select top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
             string queryRuleString = "select {0} from {1} where {2}";
-            var taskService = new TaskService();
-            var tablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
+            var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
 
@@ -365,7 +370,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.RuleConfigs),
                 GenerateSQLWhere(configList, false, additionalInfo, criteria.TaskRules));
 
-            var result = taskService.UpdateTask(criteria);
+            var result = _taskService.UpdateTask(criteria);
             if (result.Code == 0)
             {
                 UpdateRunningTask(criteria, int.Parse(workflowId));
@@ -401,21 +406,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 });
         }
 
-        /// <summary>
-        /// Update a work task.
-        /// </summary>
-        /// <param name="criteria">The input criteria.</param>
-        /// <returns>The ActionResult.</returns>
-        [HttpPost]
-        public ActionResult EditTaskStatus(TaskUpdateStatusCriteria criteria)
-        {
-            criteria.CreatorId = 1;
-            var taskService = new TaskService();
-            var result = taskService.UpdateTask(criteria);
-
-            return new JsonResult {Data = new {ErrCode = result.Code, ErrMsg = result.Message}};
-        }
-
         #endregion Edit Task
 
         #region Utilities
@@ -427,8 +417,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Formatted String.</returns>
         public string RemoveRedundantSpace(string targetString)
         {
-            var options = System.Text.RegularExpressions.RegexOptions.None;
-            var regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", options);
+            const RegexOptions options = RegexOptions.None;
+            var regex = new Regex(@"[ ]{2,}", options);
             targetString = regex.Replace(targetString, @" ");
 
             return targetString;

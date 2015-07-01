@@ -114,8 +114,9 @@
             <div class="newline">&nbsp;</div>
             <div style="border: 1px solid #000000;">
                 <table id="preconditionTable" class="table-items">
+                    <tr id="preconditionTable1" style="display:none"><td></td><td></td><td></td></tr>
                     @{
-                        var counter = 1;
+                        var counter = 2;
                         var precondRelevantConfigs = "";
                         var configsOriginal = Model.TaskInformation.TaskPreconditionsOriginal.Split('@');
                         var configsFormatter = Model.TaskInformation.TaskPreconditionsFormatted.Split('@');
@@ -211,8 +212,9 @@
             <div class="newline">&nbsp;</div>            
             <div style="border: 1px solid #000000;">
                 <table id="ruleTable" class="table-items">
+                    <tr id="ruleTable1" style="display:none"><td></td><td></td><td></td></tr>
                     @{
-                        var ruleCounter = 1;
+                        var ruleCounter = 2;
                         var ruleRelevantConfigs = "";
                         var ruleConfigsOriginal = Model.TaskInformation.TaskRulesOriginal.Split('@');
                         var ruleConfigsFormatter = Model.TaskInformation.TaskRulesFormatted.Split('@');
@@ -265,7 +267,7 @@
             <tr>
                 <td>
                     <div>
-                        <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" @(Model.TaskInformation.NextActionIdList.Contains("2") ? "checked" : "") /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
+                        <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" @(Model.TaskInformation.NextActionIdList.Contains("1") ? "checked" : "") /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
                     </div>
                 </td>
                 <td> 
@@ -280,7 +282,7 @@
             <tr>
                 <td>
                     <div>
-                        <input type="checkbox" id="nextaction_sendMail" data-actionid="2" @(Model.TaskInformation.NextActionIdList.Contains("1") ? "checked" : "") /> Send Mail                    </div>
+                        <input type="checkbox" id="nextaction_sendMail" data-actionid="2" @(Model.TaskInformation.NextActionIdList.Contains("2") ? "checked" : "") /> Send Mail                    </div>
                 </td>
                 <td>
                     <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">

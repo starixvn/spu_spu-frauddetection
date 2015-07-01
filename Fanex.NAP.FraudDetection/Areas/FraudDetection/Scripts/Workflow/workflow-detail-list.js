@@ -149,7 +149,7 @@ $("#btn_AddNewTask").click(function () {
          title: "Confirmation",
          text: "Are you sure to " + active + "this Task?",
          confirm: function () {
-             var url = 'Task/EditTaskStatus';
+             var url = 'EditTaskStatus';
              var param = {
                  "TaskId": taskId,
                  "IsActive": !isActive
