@@ -162,23 +162,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public void PushNewTaskToRun(TaskInsertCriteria criteria, int taskId)
         {
             var syncNewTask = SendingMessageFactory.GetSender(SendingType.AddingTask);
-            syncNewTask.Send(
-                new Task
-                {
-                    EventId = criteria.EventId,
-                    Interval = criteria.Interval,
-                    IntervalType = criteria.IntervalType,
-                    IsActive = true,
-                    IsBackgroundProcess = true,
-                    NextActionIdList = criteria.NextActionIdList,
-                    NextActionTargetIdList = criteria.NextActionTargetIdList,
-                    TaskPreconditions = criteria.TaskPreconditions,
-                    TaskRules = criteria.TaskRules,
-                    TaskDesc = criteria.TaskDesc,
-                    TaskId = taskId,
-                    TaskName = criteria.TaskName,
-                    WorkflowId = criteria.WorkflowId
-                });
+            syncNewTask.Send(taskId);
         }
 
         /// <summary>
@@ -384,23 +368,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public void UpdateRunningTask(TaskUpdateCriteria criteria, int workflowId)
         {
             var syncNewTask = SendingMessageFactory.GetSender(SendingType.UpdatingTask);
-            syncNewTask.Send(
-                new Task
-                {
-                    EventId = criteria.EventId,
-                    Interval = criteria.Interval,
-                    IntervalType = criteria.IntervalType,
-                    IsActive = criteria.IsActive,
-                    IsBackgroundProcess = true,
-                    NextActionIdList = criteria.NextActionIdList,
-                    NextActionTargetIdList = criteria.NextActionTargetIdList,
-                    TaskPreconditions = criteria.TaskPreconditions,
-                    TaskRules = criteria.TaskRules,
-                    TaskDesc = criteria.TaskDesc,
-                    TaskId = criteria.TaskId,
-                    TaskName = criteria.TaskName,
-                    WorkflowId = workflowId
-                });
+            syncNewTask.Send(criteria.TaskId);
         }
 
         #endregion Edit Task

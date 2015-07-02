@@ -156,7 +156,8 @@
             var result = _workflowService.UpdateWorkflow(criteria);
             if (result.Code == 0)
             {
-                var syncNewTask = SendingMessageFactory.GetSender(SendingType.DeactivateWorkflow);
+                var syncNewTask = SendingMessageFactory.GetSender(
+                    isActive ? SendingType.ActivatingWorkflow : SendingType.DeactivatingWorkflow);
                 syncNewTask.Send(workflowId);
             }
 
@@ -176,9 +177,8 @@
             var result = taskService.UpdateTask(criteria);
             if (result.Code == 0)
             {
-                var taskInfo = taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria {TaskId = criteria.TaskId});
                 var syncNewTask = SendingMessageFactory.GetSender(SendingType.UpdatingTask);
-                syncNewTask.Send(taskInfo);
+                syncNewTask.Send(criteria.TaskId);
             }
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
