@@ -346,7 +346,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The next actions are left blank. Please add next action(s) for the new Task." } };
             }
 
-            criteria.IsActive = true;
             string queryPreconString = "select top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
             string queryRuleString = "select {0} from {1} where {2}";
             var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
@@ -393,7 +392,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     EventId = criteria.EventId,
                     Interval = criteria.Interval,
                     IntervalType = criteria.IntervalType,
-                    IsActive = true,
+                    IsActive = criteria.IsActive,
                     IsBackgroundProcess = true,
                     NextActionIdList = criteria.NextActionIdList,
                     NextActionTargetIdList = criteria.NextActionTargetIdList,

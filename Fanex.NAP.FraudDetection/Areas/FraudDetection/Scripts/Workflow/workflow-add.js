@@ -3,6 +3,10 @@
         addWorkflowForm.submit();
     });
 
+    $("#btn_Cancel").click(function () {
+        $("div#popup").dialog("destroy").remove();
+    });
+
     var addWorkflowForm = $("#AddWorkflowForm").submit(function (event) {
         event.preventDefault();
 
@@ -24,14 +28,16 @@
             success: function (response) {
                 if (response.ErrCode == 0) {
                     $("#addResult").attr('class', 'result-text-success');
-                    response.ErrMsg = "Add new workflow successfully!";
+                    $("#addResult").html("Add new workflow successfully!"); 
+                    setTimeout(function () {
+                        $("div#popup").dialog("destroy").remove();
+                    }, 3000);
+                    Search();
                 }
                 else {
                     $("#addResult").attr('class', 'result-text-fail');
+                    $("#addResult").html(response.ErrMsg);
                 }
-
-                $("#addResult").html(response.ErrMsg);
-                Search();
             },
             beforeSend: function () {
 

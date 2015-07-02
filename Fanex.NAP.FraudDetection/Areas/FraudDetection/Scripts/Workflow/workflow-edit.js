@@ -3,20 +3,26 @@
         editWorkflowForm.submit();
     });
 
+    $("#btn_Cancel").click(function () {
+        $("div#popup").dialog("destroy").remove();
+    });
+
     var editWorkflowForm = $('#EditWorkflowForm').submit(function (event) {
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
             if (response.ErrCode === 0) {
                 $("#addResult").attr('class', 'result-text-success');
-                response.ErrMsg = "Edit workflow successfully!";
+                $("#addResult").html("Edit workflow successfully!");
+                setTimeout(function () {
+                    $("div#popup").dialog("destroy").remove();
+                }, 3000);
+                Search();
             }
             else {
                 $("#addResult").attr('class', 'result-text-fail');
+                $("#addResult").html(response.ErrMsg);
             }
-
-            $("#addResult").html(response.ErrMsg);
-            Search();
         });
     });
 });
