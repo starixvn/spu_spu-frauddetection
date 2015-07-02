@@ -32,7 +32,7 @@
         showColumnsShowHide: false,
         sortOption: {},
         pagerOption: {
-            itemsPerPage: 10,
+            itemsPerPage: 20,
             currentPage: 0,
             itemsPerPageArray: [10, 20, 50, 100, 500]
         }
@@ -55,7 +55,7 @@
             afterGridSorted: reRenderBodyAfterSort
         };
         gridOptions.pagerOption = {
-            itemsPerPage: 10,
+            itemsPerPage: 20,
             currentPage: 0,
             itemsPerPageArray: [10, 20, 50, 100, 500]
         };
@@ -126,22 +126,22 @@
                 Sort: true, SortType: 'number'
             },
             { HeaderText: month1, Width: 110, Name: month1 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
             },
             { HeaderText: month2, Width: 110, Name: month2 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
             },
             { HeaderText: month3, Width: 110, Name: month3 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
             },
             { HeaderText: month1, Width: 85, Name: month1 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
             },
             { HeaderText: month2, Width: 85, Name: month2 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
             },
             { HeaderText: month3, Width: 85, Name: month3 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '($)', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
             }
         ];
 
@@ -173,7 +173,7 @@
     */
     var formatConstant = {
         INT_NUMBER: '0,0',
-        TWO_DECIMAL_NUMBER: '0,0.00',
+        TWO_DECIMAL_NUMBER: '-0,0.00',
         FOUR_DECIMAL_NUMBER: '0,0.0000',
         TWO_DECIMAL_PERCENT_NUMBER: '0,0.00%',
         MMM_DD_YYYY_STRING: 'MMM DD, YYYY',

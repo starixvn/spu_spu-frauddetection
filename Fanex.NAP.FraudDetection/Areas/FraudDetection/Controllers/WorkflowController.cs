@@ -154,6 +154,11 @@
             };
 
             var result = _workflowService.UpdateWorkflow(criteria);
+            if (result.Code == 0)
+            {
+                var syncNewTask = SendingMessageFactory.GetSender(SendingType.DeactivateWorkflow);
+                syncNewTask.Send(workflowId);
+            }
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
@@ -172,7 +177,7 @@
             if (result.Code == 0)
             {
                 var taskInfo = taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria {TaskId = criteria.TaskId});
-                var syncNewTask = SendingTaskFactory.GetSender(SendingType.UpdatingTask);
+                var syncNewTask = SendingMessageFactory.GetSender(SendingType.UpdatingTask);
                 syncNewTask.Send(taskInfo);
             }
 

@@ -7,9 +7,6 @@
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 // </history>
 
-using System.Text.RegularExpressions;
-using SPU.Lib.FraudDetection.Criteria.MailMaster;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
@@ -23,6 +20,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Service;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.Criteria.Group;
+    using SPU.Lib.FraudDetection.Criteria.MailMaster;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.QueueManagement.SendingTasks;
@@ -163,7 +161,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="taskId">Inserted Task ID.</param>
         public void PushNewTaskToRun(TaskInsertCriteria criteria, int taskId)
         {
-            var syncNewTask = SendingTaskFactory.GetSender(SendingType.AddingTask);
+            var syncNewTask = SendingMessageFactory.GetSender(SendingType.AddingTask);
             syncNewTask.Send(
                 new Task
                 {
@@ -385,7 +383,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="workflowId">Work flow ID.</param>
         public void UpdateRunningTask(TaskUpdateCriteria criteria, int workflowId)
         {
-            var syncNewTask = SendingTaskFactory.GetSender(SendingType.UpdatingTask);
+            var syncNewTask = SendingMessageFactory.GetSender(SendingType.UpdatingTask);
             syncNewTask.Send(
                 new Task
                 {
@@ -416,8 +414,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Formatted String.</returns>
         public string RemoveRedundantSpace(string targetString)
         {
-            const RegexOptions options = RegexOptions.None;
-            var regex = new Regex(@"[ ]{2,}", options);
+            const System.Text.RegularExpressions.RegexOptions options = System.Text.RegularExpressions.RegexOptions.None;
+            var regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", options);
             targetString = regex.Replace(targetString, @" ");
 
             return targetString;
