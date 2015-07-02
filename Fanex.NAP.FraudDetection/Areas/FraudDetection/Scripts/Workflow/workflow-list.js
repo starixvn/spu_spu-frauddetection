@@ -2,7 +2,7 @@
 var _workflowName = "";
 var gridOptions
         , _pageIndex = 0
-        , _pageSize = 10;
+        , _pageSize = 50;
 
 $(document).ready(function () {
     Search();
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 function OnSearch() {
     _pageIndex = 0;
-    _pageSize = 10;
+    _pageSize = 50;
 
     Search();
 };
@@ -46,7 +46,7 @@ function Search() {
                 ],
                 bodyRows: result[0].data,
                 hideYBackGroundScroller: true,
-                gridExpandHeight: 150,
+                gridExpandHeight: 180,
                 allowTruncate: true,
                 enableHiddenColumns: false,
                 hiddenColumns: [1],

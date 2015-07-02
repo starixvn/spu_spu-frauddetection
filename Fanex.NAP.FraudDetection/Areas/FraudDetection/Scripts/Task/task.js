@@ -46,6 +46,10 @@ function OnAccordionInitialize() {
 /* INITIALIZE */
 function OnInitialize() {
     $('#preconditionConfigControlDatetimePicker').datepicker();
+    
+    $("#btn_Cancel").click(function () {
+        window.location.href = '/Workflow/WorkflowDetail?workflowId=' + $("#workflowid").text();
+    });
 
     $("#btn_AddRule").click(function () {
         var currentRowNum = $('#ruleTable tr:last').attr('id').replace("ruleTable", "");

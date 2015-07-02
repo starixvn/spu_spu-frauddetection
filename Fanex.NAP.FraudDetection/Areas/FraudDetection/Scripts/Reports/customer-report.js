@@ -26,13 +26,13 @@
     */
     var gridOptions = {
         customizeHeader: true,
-        gridExpandHeight: 150,
+        gridExpandHeight: 180,
         showTree: true,
         showPager: true,
         showColumnsShowHide: false,
         sortOption: {},
         pagerOption: {
-            itemsPerPage: 20,
+            itemsPerPage: 50,
             currentPage: 0,
             itemsPerPageArray: [10, 20, 50, 100, 500]
         }
@@ -55,7 +55,7 @@
             afterGridSorted: reRenderBodyAfterSort
         };
         gridOptions.pagerOption = {
-            itemsPerPage: 20,
+            itemsPerPage: 50,
             currentPage: 0,
             itemsPerPageArray: [10, 20, 50, 100, 500]
         };
