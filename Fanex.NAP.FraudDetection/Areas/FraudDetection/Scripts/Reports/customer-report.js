@@ -89,19 +89,19 @@
 
         for (var i = 0; i < suspiciousCustomers.length; i++) {
             var suspiciousCustomer = suspiciousCustomers[i];
-
+            debugger;
             var currentRow = {
                 Columns: [
                         { Name: "Row", Value: i + 1 },
                         { Name: "Member", Value: suspiciousCustomer.Customer.CustName },
                         { Name: "Group", Value: suspiciousCustomer.Group.GroupName },
                         { Name: "SuspiciousTime", Value: suspiciousCustomer.SuspiciousTime },
-                        { Name: month1 + "WinLoss", Value: suspiciousCustomer.WinLoss[0] !== 'undefined' ? suspiciousCustomer.WinLoss[0] : "N/A" },
-                        { Name: month2 + "WinLoss", Value: suspiciousCustomer.WinLoss[1] !== 'undefined' ? suspiciousCustomer.WinLoss[1] : "N/A" },
-                        { Name: month3 + "WinLoss", Value: suspiciousCustomer.WinLoss[2] !== 'undefined' ? suspiciousCustomer.WinLoss[2] : "N/A" },
-                        { Name: month1 + "Margin", Value: suspiciousCustomer.Margins[0] !== 'undefined' ? suspiciousCustomer.Margins[0] : "N/A" },
-                        { Name: month2 + "Margin", Value: suspiciousCustomer.Margins[1] !== 'undefined' ? suspiciousCustomer.Margins[1] : "N/A" },
-                        { Name: month3 + "Margin", Value: suspiciousCustomer.Margins[2] !== 'undefined' ? suspiciousCustomer.Margins[2] : "N/A" }
+                        { Name: month1 + "WinLoss", Value: suspiciousCustomer.WinLoss[0] !== null ? suspiciousCustomer.WinLoss[0] : "N/A" },
+                        { Name: month2 + "WinLoss", Value: suspiciousCustomer.WinLoss[1] !== null ? suspiciousCustomer.WinLoss[1] : "N/A" },
+                        { Name: month3 + "WinLoss", Value: suspiciousCustomer.WinLoss[2] !== null ? suspiciousCustomer.WinLoss[2] : "N/A" },
+                        { Name: month1 + "Margin", Value: suspiciousCustomer.Margins[0] !== null ? suspiciousCustomer.Margins[0] : "N/A" },
+                        { Name: month2 + "Margin", Value: suspiciousCustomer.Margins[1] !== null ? suspiciousCustomer.Margins[1] : "N/A" },
+                        { Name: month3 + "Margin", Value: suspiciousCustomer.Margins[2] !== null ? suspiciousCustomer.Margins[2] : "N/A" }
                     ]
             };
 
@@ -121,27 +121,27 @@
         var columnHeaders = [
             { HeaderText: "#", Width: 50, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Member", Width: 120, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Group", Width: 280, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Group", Width: 250, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Suspicious Time", Width: 125, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right",
                 Sort: true, SortType: 'number'
             },
             { HeaderText: month1, Width: 110, Name: month1 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$'
             },
             { HeaderText: month2, Width: 110, Name: month2 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$'
             },
             { HeaderText: month3, Width: 110, Name: month3 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$'
             },
             { HeaderText: month1, Width: 85, Name: month1 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$'
             },
             { HeaderText: month2, Width: 85, Name: month2 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$'
             },
             { HeaderText: month3, Width: 85, Name: month3 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$', Sort: true, SortType: 'number'
+                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$'
             }
         ];
 
