@@ -5,8 +5,8 @@ var gridOptions
         , _pageIndex = 0
         , _pageSize = 50;
 
-$(document).ready(function () {    
-    _caseId = $("#WorkFlowId").val();
+$(document).ready(function () {
+    _caseId = $("#CaseId").val();
     Search();
 });
 //--------------------------------------------------------------------------------------------------------------------

@@ -28,7 +28,7 @@
 <label id="editTaskResult" class="result-text-success"></label>
 @using (Html.BeginForm("EditTaskForm", "Task", FormMethod.Post, new { @id = "EditTaskForm" }))
 {
-    <div id="workflowid" style="display: none;">@Model.TaskInformation.WorkflowId</div>
+    <div id="caseid" style="display: none;">@Model.TaskInformation.CaseId</div>
     <div id="taskid" style="display: none;">@Model.TaskInformation.TaskId</div>
     <div id="onUserid" style="display: none;">@Model.OnUserId</div>
     <div id="accordion" style="width: 620px;">
