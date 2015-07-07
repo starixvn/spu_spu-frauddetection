@@ -61,6 +61,11 @@
         [HttpPost]
         public ActionResult AddNewWorkflow(WorkflowInsertCriteria criteria)
         {
+            if (string.IsNullOrEmpty(criteria.WorkflowName))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Workflow should has a name." } };
+            }
+
             criteria.CreatorId = 1;
             var result = _workflowService.InsertWorkflow(criteria);
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
@@ -131,6 +136,11 @@
         [HttpPost]
         public ActionResult EditWorkflow(WorkflowUpdateCriteria criteria)
         {
+            if (string.IsNullOrEmpty(criteria.WorkflowName))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Workflow should has a name." } };
+            }
+
             criteria.CreatorId = 1;
             var result = _workflowService.UpdateWorkflow(criteria);
 

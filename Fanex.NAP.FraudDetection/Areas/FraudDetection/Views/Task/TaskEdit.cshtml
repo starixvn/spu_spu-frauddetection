@@ -30,6 +30,7 @@
 {
     <div id="workflowid" style="display: none;">@Model.TaskInformation.WorkflowId</div>
     <div id="taskid" style="display: none;">@Model.TaskInformation.TaskId</div>
+    <div id="isactive" style="display: none;">@Model.TaskInformation.IsActive</div>
     <div id="onUserid" style="display: none;">@Model.OnUserId</div>
     <div id="accordion" style="width: 620px;">
       <h3 id="accordionBlockEvent">Event</h3>
@@ -106,7 +107,7 @@
             <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px; display: none;" />
             @Html.TextBox("preconditionConfigControlDatetimePicker", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:100px;" })
             <i class="icon-calendar icon-event-date-calendar" id="preconditionConfigControlDatetimePickerIcon" style=""></i>
-            <input type="button" id="btn_AddPrecondition" value="Add to List" class="btn-green" />
+            <input type="button" id="btn_AddPrecondition" value="Add to List" class="btn-green font-size-small" />
             <div class="newline">&nbsp;</div>
             <div>
                 <input type="checkbox" id="preconditionConfigCompare" onchange="onCompareWithOtherField(this, true)" /> Compare with another field
@@ -116,21 +117,21 @@
                 <table id="preconditionTable" class="table-items">
                     <tr id="preconditionTable1" style="display:none"><td></td><td></td><td></td></tr>
                     @{
-                        var counter = 2;
-                        var precondRelevantConfigs = "";
-                        var configsOriginal = Model.TaskInformation.TaskPreconditionsOriginal.Split('@');
-                        var configsFormatter = Model.TaskInformation.TaskPreconditionsFormatted.Split('@');
-                        for (var i = 0; i < configsOriginal.Length; i++)
-                        {
-                            var rowName = "preconditionTable" + counter;
-                            var preconds = Model.PreconditionConfigurations.Where(l => configsOriginal[i].Contains(l.ConfigName)).ToList();
-                            var configIdsForEachPrecond = "";
-                            foreach (var rule in preconds)
-                            {
-                                precondRelevantConfigs += rule.ConfigId + "#";
-                                configIdsForEachPrecond += rule.ConfigId + "#";
-                            }
-                            configIdsForEachPrecond = string.IsNullOrEmpty(configIdsForEachPrecond) ? "" : configIdsForEachPrecond.Remove(configIdsForEachPrecond.Length - 1);
+                var counter = 2;
+                var precondRelevantConfigs = "";
+                var configsOriginal = Model.TaskInformation.TaskPreconditionsOriginal.Split('@');
+                var configsFormatter = Model.TaskInformation.TaskPreconditionsFormatted.Split('@');
+                for (var i = 0; i < configsOriginal.Length; i++)
+                {
+                    var rowName = "preconditionTable" + counter;
+                    var preconds = Model.PreconditionConfigurations.Where(l => configsOriginal[i].Contains(l.ConfigName)).ToList();
+                    var configIdsForEachPrecond = "";
+                    foreach (var rule in preconds)
+                    {
+                        precondRelevantConfigs += rule.ConfigId + "#";
+                        configIdsForEachPrecond += rule.ConfigId + "#";
+                    }
+                    configIdsForEachPrecond = string.IsNullOrEmpty(configIdsForEachPrecond) ? "" : configIdsForEachPrecond.Remove(configIdsForEachPrecond.Length - 1);
                             <tr id="@rowName" style="@(string.IsNullOrEmpty(Model.TaskInformation.TaskPreconditionsOriginal) ? "display:none" : "")">
                                 <td><input id="cb_@rowName" type="checkbox"></td>
                                 <td style="width: 510px;">
@@ -138,10 +139,10 @@
                                 </td>
                                 <td><img alt="" onclick="RemoveOneRuleFromTable('preconditionTable',@counter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
                             </tr>
-                            counter++;
-                        }
+                    counter++;
+                }
 
-                        precondRelevantConfigs = string.IsNullOrEmpty(Model.TaskInformation.TaskPreconditionsOriginal) ? "" : precondRelevantConfigs.Remove(precondRelevantConfigs.Length - 1);
+                precondRelevantConfigs = string.IsNullOrEmpty(Model.TaskInformation.TaskPreconditionsOriginal) ? "" : precondRelevantConfigs.Remove(precondRelevantConfigs.Length - 1);
                     }
                 </table>
             </div>
@@ -149,17 +150,17 @@
             <label id="preconditionTableFormula" data-rawcontent="@Model.TaskInformation.TaskPreconditionsOriginal" data-formattedcontent="@Model.TaskInformation.TaskPreconditionsFormatted" data-configids="@precondRelevantConfigs">@Model.TaskInformation.TaskPreconditionsOriginal.Replace("@", " ").Replace("#", " ")</label>
             <div class="newline">&nbsp;</div>
             <div>
-                <input type="button" onclick="AddFormulaElement(true, '(#', true)" value="(+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(true, '(#')" value="(-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(true, '(#', true)" value="(+" class="btn-green font-size-small font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(true, '(#')" value="(-" class="btn-green font-size-small font-size-small" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(true, '#)', false)" value=")+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(true, '#)')" value=")-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(true, '#)', false)" value=")+" class="btn-green font-size-small font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(true, '#)')" value=")-" class="btn-green font-size-small" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(true, 'AND#', true)" value="AND+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(true, 'AND#')" value="AND-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(true, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(true, 'AND#')" value="AND-" class="btn-green font-size-small" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(true, 'OR#', true)" value="OR+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(true, 'OR#')" value="OR-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(true, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(true, 'OR#')" value="OR-" class="btn-green font-size-small" />
             </div>
         </div>
       </div>
@@ -204,7 +205,7 @@
             <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
             @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
             <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon" style="display: none;"></i>
-            <input type="button" id="btn_AddRule" value="Add to List" class="btn-green" />
+            <input type="button" id="btn_AddRule" value="Add to List" class="btn-green font-size-small" />
             <div class="newline">&nbsp;</div>
             <div>
                 <input type="checkbox" id="ruleConfigCompare"  onchange="onCompareWithOtherField(this, false)" /> Compare with another field
@@ -214,21 +215,21 @@
                 <table id="ruleTable" class="table-items">
                     <tr id="ruleTable1" style="display:none"><td></td><td></td><td></td></tr>
                     @{
-                        var ruleCounter = 2;
-                        var ruleRelevantConfigs = "";
-                        var ruleConfigsOriginal = Model.TaskInformation.TaskRulesOriginal.Split('@');
-                        var ruleConfigsFormatter = Model.TaskInformation.TaskRulesFormatted.Split('@');
-                        for (var i = 0; i < ruleConfigsOriginal.Length; i++)
-                        {
-                            var ruleRowName = "ruleTable" + ruleCounter;
-                            var rules = Model.RuleConfigurations.Where(l => ruleConfigsOriginal[i].Contains(l.ConfigName)).ToList();
-                            var configIdsForEachRule = "";
-                            foreach (var rule in rules)
-                            {
-                                ruleRelevantConfigs += rule.ConfigId + "#";
-                                configIdsForEachRule += rule.ConfigId + "#";
-                            }
-                            configIdsForEachRule = configIdsForEachRule.Remove(configIdsForEachRule.Length - 1);
+                var ruleCounter = 2;
+                var ruleRelevantConfigs = "";
+                var ruleConfigsOriginal = Model.TaskInformation.TaskRulesOriginal.Split('@');
+                var ruleConfigsFormatter = Model.TaskInformation.TaskRulesFormatted.Split('@');
+                for (var i = 0; i < ruleConfigsOriginal.Length; i++)
+                {
+                    var ruleRowName = "ruleTable" + ruleCounter;
+                    var rules = Model.RuleConfigurations.Where(l => ruleConfigsOriginal[i].Contains(l.ConfigName)).ToList();
+                    var configIdsForEachRule = "";
+                    foreach (var rule in rules)
+                    {
+                        ruleRelevantConfigs += rule.ConfigId + "#";
+                        configIdsForEachRule += rule.ConfigId + "#";
+                    }
+                    configIdsForEachRule = configIdsForEachRule.Remove(configIdsForEachRule.Length - 1);
                             <tr id="@ruleRowName">
                                 <td><input id="cb_@ruleRowName" type="checkbox"></td>
                                 <td style="width: 510px;">
@@ -236,10 +237,10 @@
                                 </td>
                                 <td><img alt="" onclick="RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
                             </tr>
-                            ruleCounter++;
-                        }
+                    ruleCounter++;
+                }
 
-                        ruleRelevantConfigs = ruleRelevantConfigs.Remove(ruleRelevantConfigs.Length - 1);
+                ruleRelevantConfigs = ruleRelevantConfigs.Remove(ruleRelevantConfigs.Length - 1);
                     }
                 </table>
             </div>
@@ -247,17 +248,17 @@
             <label id="ruleTableFormula" data-rawcontent="@Model.TaskInformation.TaskRulesOriginal" data-formattedcontent="@Model.TaskInformation.TaskRulesFormatted" data-configids="@ruleRelevantConfigs">@Model.TaskInformation.TaskRulesOriginal.Replace("@", " ").Replace("#", " ")</label>
             <div class="newline">&nbsp;</div>
             <div>
-                <input type="button" onclick="AddFormulaElement(false, '(', true)" value="(+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(false, '(')" value="(-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(false, '(', true)" value="(+" class="btn-green font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(false, '(')" value="(-" class="btn-green font-size-small" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, ')', false)" value=")+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(false, ')')" value=")-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(false, ')', false)" value=")+" class="btn-green font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(false, ')')" value=")-" class="btn-green font-size-small" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, 'AND#', true)" value="AND+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(false, 'AND#')" value="AND-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(false, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(false, 'AND#')" value="AND-" class="btn-green font-size-small" />
                 &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, 'OR#', true)" value="OR+" class="btn-green" />
-                <input type="button" onclick="RemoveFormulaElement(false, 'OR#')" value="OR-" class="btn-green" />
+                <input type="button" onclick="AddFormulaElement(false, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
+                <input type="button" onclick="RemoveFormulaElement(false, 'OR#')" value="OR-" class="btn-green font-size-small" />
             </div>
         </div>
       </div>
@@ -298,8 +299,8 @@
     </div>
     <div class="newline">&nbsp;</div>
     <div style="width: 620px; text-align: center;">
-        <input type="button" id="btn_EditTask" value="Submit" class="btn-green font-size-small" />
-        <input type="button" id="btn_Cancel" value="Cancel" class="btn-green btn-customCancel font-size-small" />
+        <input type="button" id="btn_EditTask" value="Submit" class="btn-green font-size-small font-size-small" />
+        <input type="button" id="btn_Cancel" value="Cancel" class="btn-green font-size-small btn-customCancel font-size-small" />
     </div>
 }
 <div id="SearchResult" class="freegrid  content-grid">

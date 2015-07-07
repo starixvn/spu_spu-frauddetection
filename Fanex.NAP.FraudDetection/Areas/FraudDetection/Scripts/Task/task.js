@@ -140,6 +140,7 @@ function OnInitialize() {
                 "CreatorId": $("#onUserid").text(),
                 "workflowId": $("#workflowid").text(),
                 "TaskId": $("#taskid").text(),
+                "IsActive": $("#isactive").text(),
                 "TaskName": $("#ActionName").find(":selected").text(),
                 "TaskDesc": $("#ActionName").find(":selected").attr("data-actiondesc"),
                 "EventId": $("#ActionName").find(":selected").val(),

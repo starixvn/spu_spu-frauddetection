@@ -69,6 +69,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult AddNewGroup(GroupInsertCriteria criteria)
         {
+            if (string.IsNullOrEmpty(criteria.GroupName))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Group should has a name." } };
+            }
+
             criteria.CreatorId = 1;
             var result = _groupService.InsertGroup(criteria);
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
@@ -107,6 +112,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult EditGroup(GroupUpdateCriteria criteria)
         {
+            if (string.IsNullOrEmpty(criteria.GroupName))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Group should has a name." } };
+            }
+
             criteria.CreatorId = 1;
             var result = _groupService.UpdateGroup(criteria);
 
