@@ -40,16 +40,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <summary>
         /// Home page for Task.
         /// </summary>
-        /// <param name="workflowId">Workflow ID.</param>
+        /// <param name="caseId">Case ID.</param>
         /// <returns>Action Result.</returns>
-        public ActionResult Index(string workflowId)
+        public ActionResult Index(string caseId)
         {
-            var workflow = 0;
-            if (int.TryParse(workflowId, out workflow))
+            var caseSpu = 0;
+            if (int.TryParse(caseId, out caseSpu))
             {
                 return View(
                     "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml",
-                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, workflow));
+                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, caseSpu));
             }
 
             return View("~/Views/Error/AccessDenied.cshtml");
@@ -59,9 +59,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Generate Task View Model.
         /// </summary>
         /// <param name="currentUserID">Current User ID.</param>
-        /// <param name="workflowID">Workflow ID.</param>
+        /// <param name="caseID">Case ID.</param>
         /// <returns>Task View Model.</returns>
-        public TaskViewModel GenerateViewModel(int currentUserID, int workflowID)
+        public TaskViewModel GenerateViewModel(int currentUserID, int caseID)
         {
             // Actions
             var eventService = new EventService();
@@ -97,7 +97,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 groupList,
                 sportList.ToList(),
                 bettypeList.ToList(),
-                mailMasterList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { WorkflowId = workflowID } };
+                mailMasterList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { CaseId = caseID } };
 
             return taskViewModel;
         }
@@ -302,7 +302,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria { TaskId = taskId });
             var viewModel = GenerateViewModel(
                 AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
-                taskInfo.WorkflowId);
+                taskInfo.CaseId);
             viewModel.TaskInformation = taskInfo;
 
             return View("~/Areas/FraudDetection/Views/Task/TaskEdit.cshtml", viewModel);
@@ -313,10 +313,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">Task Edit Criteria.</param>
         /// <param name="additionalInfo">Additional Info.</param>
-        /// <param name="workflowId">Work flow ID.</param>
+        /// <param name="caseId">Work flow ID.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult TaskEditInfo(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo, string workflowId)
+        public ActionResult TaskEditInfo(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo, string caseId)
         {
             if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
             {
@@ -354,7 +354,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var result = _taskService.UpdateTask(criteria);
             if (result.Code == 0)
             {
-                UpdateRunningTask(criteria, int.Parse(workflowId));
+                UpdateRunningTask(criteria, int.Parse(caseId));
             }
 
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
@@ -364,8 +364,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Push New Task To Run Automatically.
         /// </summary>
         /// <param name="criteria">Task Insert Criteria.</param>
-        /// <param name="workflowId">Work flow ID.</param>
-        public void UpdateRunningTask(TaskUpdateCriteria criteria, int workflowId)
+        /// <param name="caseId">Work flow ID.</param>
+        public void UpdateRunningTask(TaskUpdateCriteria criteria, int caseId)
         {
             var syncNewTask = SendingMessageFactory.GetSender(SendingType.UpdatingTask);
             syncNewTask.Send(criteria.TaskId);

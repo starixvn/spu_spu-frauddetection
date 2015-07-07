@@ -1,5 +1,5 @@
-﻿var _workflowId = 0;
-var _workflowName = "";
+﻿var _caseId = 0;
+var _caseName = "";
 var gridOptions
         , _pageIndex = 0
         , _pageSize = 50;
@@ -25,7 +25,7 @@ function Search() {
     };
 
     $.ajax({
-        url: "Workflow/GetWorkflowList",
+        url: "Case/GetCaseList",
         type: 'POST',
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -38,9 +38,9 @@ function Search() {
             {
                 columns: [
                     { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "WorkflowId", Width: 100, Name: "WorkflowId", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Workflow Name", Width: 200, Name: "WorkflowName", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Description", Width: 300, Name: "WorkflowDesc", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "CaseId", Width: 100, Name: "CaseId", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Case Name", Width: 200, Name: "CaseName", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Description", Width: 300, Name: "CaseDesc", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
@@ -62,9 +62,9 @@ function Search() {
             };
 
             for (var i = 0; i < gridOptions.bodyRows.length; i++) {
-                // Modify "Workflow Name" column
+                // Modify "Case Name" column
                 gridOptions.bodyRows[i].Columns[2].Row = i;
-                gridOptions.bodyRows[i].Columns[2].CustomCellRender = WorkflowNameColumn;
+                gridOptions.bodyRows[i].Columns[2].CustomCellRender = CaseNameColumn;
 
                 // Modify "Active" column
                 gridOptions.bodyRows[i].Columns[4].Row = i;
@@ -106,34 +106,34 @@ function ReRenderAfterPaged(pageIndex, itemsPerPage, jq) {
     return false;
 }
 
-function WorkflowNameColumn(cell, cellFormated) {
-    var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
-    var workflowName = gridOptions.bodyRows[cell.Row].Columns[2].Value;
+function CaseNameColumn(cell, cellFormated) {
+    var caseId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
+    var caseName = gridOptions.bodyRows[cell.Row].Columns[2].Value;
 
-    var url = "Workflow/WorkflowDetail?workflowId=" + workflowId;
-    return "<a href=" + url + ">" + workflowName + "</a>";
+    var url = "Case/CaseDetail?caseId=" + caseId;
+    return "<a href=" + url + ">" + caseName + "</a>";
 }
 
 
 function ActiveColumn(cell, cellFormated) {
-    var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
+    var caseId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     if (cell.Value == "True") {
-        return "<img title='Deactivate this workflow' class='ico-tick' alt='' onclick='editWorkflowStatus(this," + workflowId + ")'/>";
+        return "<img title='Deactivate this case' class='ico-tick' alt='' onclick='editCaseStatus(this," + caseId + ")'/>";
     }
     else {
-        return "<img title='Activate this workflow' class='ico-untick' alt='' onclick='editWorkflowStatus(this," + workflowId + ")'/>";
+        return "<img title='Activate this case' class='ico-untick' alt='' onclick='editCaseStatus(this," + caseId + ")'/>";
     }
 }
 
 function EditColumn(cell, cellFormated) {
-    var workflowId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
+    var caseId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
-    return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editWorkflowInfo(" + workflowId + ")'/>";
+    return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editCaseInfo(" + caseId + ")'/>";
 }
 
-$("#btn_AddNewWorkflow").click(function () {
-    var url = 'Workflow/AddNewWorkflow';
+$("#btn_addNewCase").click(function () {
+    var url = 'Case/AddNewCase';
     $.ajax({
         type: "GET",
         contentType: 'application/json',
@@ -147,7 +147,7 @@ $("#btn_AddNewWorkflow").click(function () {
             .appendTo('body')
             .dialog({
                 modal: true,
-                title: "Add New Workflow",
+                title: "Add New Case",
                 zIndex: 10000,
                 autoOpen: true,
                 width: '500px',

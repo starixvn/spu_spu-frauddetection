@@ -1,8 +1,7 @@
-﻿@using System.Web.Optimization
-@model SPU.Lib.FraudDetection.Criteria.Task.TaskSelectAllByWorkflowIdCriteria
+﻿@model SPU.Lib.FraudDetection.Criteria.Task.TaskSelectAllByCaseIdCriteria
 @{        
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Workflow Detail";        
+    ViewBag.Title = "Case Detail";
     
 }
 @section HeadCss
@@ -15,23 +14,25 @@
 {
     <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FanexGridJs")" type="text/ecmascript"></script>
     <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionJs")" type="text/ecmascript"></script>
-    <script src="~/Areas/FraudDetection/Scripts/Workflow/workflow-detail-list.js" type="text/javascript"></script>
-    <script src="~/Areas/FraudDetection/Scripts/Workflow/workflow-detail-edit.js" type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/Scripts/Case/case-detail-list.js" type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/Scripts/Case/case-detail-edit.js" type="text/javascript"></script>
 }
 <div>
-    @Html.HiddenFor(a => a.WorkFlowId)
-    <span class="infor-text">Workflow Detail</span>
-    <div class="newline">&nbsp;</div>
-    <span class="lbl-text">Workflow Name: @ViewBag.WorkflowName </span>    
+    @Html.HiddenFor(a => a.CaseId)
+    <span class="infor-text">Case Detail</span>
+    <div class="newline">
+        &nbsp;</div>
+    <span class="lbl-text">Case Name: @ViewBag.CaseName </span>
     <input type="button" id="btn_AddNewTask" value="+ Add Task" class="btn-green" />
 </div>
-<div class="newline">&nbsp;</div>
+<div class="newline">
+    &nbsp;</div>
 <form id="myForm" method="get" action="">
 <div class="formSearch">
-    @Html.HiddenFor(s => s.PageSize)
+   @* @Html.HiddenFor(s => s.PageSize)
     @Html.HiddenFor(s => s.PageIndex)
     @Html.HiddenFor(s => s.PageCount)
-    @*<input type="button" value="Search" onclick="OnSearch();" />*@
+    <input type="button" value="Search" onclick="OnSearch();" />*@
 </div>
 </form>
 <div id="SearchResult" class="freegrid  content-grid">

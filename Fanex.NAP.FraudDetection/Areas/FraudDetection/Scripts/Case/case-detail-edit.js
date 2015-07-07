@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-//    //Process redirect to Workflow list.
+//    //Process redirect to Case list.
 //    var successed = $("#successed").val();
 //    if (successed == "true") {
 //        confirm('Successfull!\nPress OK to continue', function () {
-    //            document.location = currentDomainURL + "/Workflow/List";
+    //            document.location = currentDomainURL + "/Case/List";
 //        });
 //    }
         
@@ -11,14 +11,14 @@
 
 //--------------------------------------------------------------------------------------------------------------------
 
-function editActive(obj, workflowId) {
+function editActive(obj, caseId) {
 
     if ($(obj).hasClass('ico-tick')) {
 
         confirm('Do you want to deactivate this task ?', function () {
             $(obj).removeClass('ico-tick').addClass('ico-untick');
 
-            var url = 'EditActive?workflowId=' + workflowId + '&status=false';
+            var url = 'EditActive?caseId=' + caseId + '&status=false';
 
             //todo
             $.ajax({
@@ -32,7 +32,7 @@ function editActive(obj, workflowId) {
                     result = result.toLowerCase();
 
                     if (result == 'successfully!') {
-                        document.location = currentDomainURL + "/Workflow/List";
+                        document.location = currentDomainURL + "/Case/List";
                     }
                     else {
                         alert(result);
@@ -44,10 +44,10 @@ function editActive(obj, workflowId) {
         });
     }
     else {
-        confirm('Do you want to activate this workflow ?', function () {
+        confirm('Do you want to activate this case ?', function () {
             $(obj).removeClass('ico-untick').addClass('ico-tick');
 
-            var url = 'EditActive?workflowId=' + workflowId + '&status=true';
+            var url = 'EditActive?caseId=' + caseId + '&status=true';
 
             //todo
             $.ajax({
@@ -61,7 +61,7 @@ function editActive(obj, workflowId) {
                     result = result.toLowerCase();
 
                     if (result == 'successfully!') {
-                        document.location = currentDomainURL + "/Workflow/List";
+                        document.location = currentDomainURL + "/Case/List";
                     }
                     else {
                         alert(result);
@@ -75,11 +75,11 @@ function editActive(obj, workflowId) {
 
 };
 
-function deleteWorkflow(workflowId, name) {
+function deleteCase(caseId, name) {
 
-    confirm('Do you want to delete this workflow (' +name + ') ?', function () {
+    confirm('Do you want to delete this case (' +name + ') ?', function () {
 
-        var url = 'Delete?workflowId=' + workflowId
+        var url = 'Delete?caseId=' + caseId
 
         //todo
         $.ajax({
@@ -96,7 +96,7 @@ function deleteWorkflow(workflowId, name) {
                 result = result.toLowerCase();
 
                 if (result == 'successfully!') {
-                    document.location = currentDomainURL + "/Workflow/List";
+                    document.location = currentDomainURL + "/Case/List";
                     //NAP.headlineMsgBox.showErr("Unknowned error detected!");                    
                 }
                 else {

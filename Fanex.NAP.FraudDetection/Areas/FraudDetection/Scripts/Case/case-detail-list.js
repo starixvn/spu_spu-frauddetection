@@ -1,12 +1,12 @@
 ﻿var _taskId = 0;
 var _taskName = "";
-var _workflowId = 0;
+var _caseId = 0;
 var gridOptions
         , _pageIndex = 0
         , _pageSize = 50;
 
 $(document).ready(function () {    
-    _workflowId = $("#WorkFlowId").val();
+    _caseId = $("#WorkFlowId").val();
     Search();
 });
 //--------------------------------------------------------------------------------------------------------------------
@@ -23,13 +23,13 @@ function Search() {
     $('#PageIndex').val(_pageIndex);
     
     var searchParams = {              
-        WorkflowId:  _workflowId,
+        CaseId:  _caseId,
         PageSize: _pageSize,
         PageIndex: _pageIndex
     };
 
     $.ajax({
-        url: "GetWorkflowDetail",
+        url: "GetCaseDetail",
         type: 'POST',
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -123,7 +123,7 @@ function EditTask(taskId) {
 }
 
 $("#btn_AddNewTask").click(function () {    
-     window.location.href = "/Task" + "?workflowId=" + _workflowId;
+     window.location.href = "/Task" + "?caseId=" + _caseId;
  });
 
  /*

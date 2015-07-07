@@ -48,7 +48,7 @@ function OnInitialize() {
     $('#preconditionConfigControlDatetimePicker').datepicker();
     
     $("#btn_Cancel").click(function () {
-        window.location.href = '/Workflow/WorkflowDetail?workflowId=' + $("#workflowid").text();
+        window.location.href = '/Case/CaseDetail?caseId=' + $("#caseid").text();
     });
 
     $("#btn_AddRule").click(function () {
@@ -83,7 +83,7 @@ function OnInitialize() {
             var url = 'Task/AddNewTask';
             var param = {
                 "CreatorId": $("#onUserid").text(),
-                "WorkflowId": $("#workflowid").text(),
+                "CaseId": $("#caseid").text(),
                 "TaskName": $("#ActionName").find(":selected").text(),
                 "TaskDesc": $("#ActionName").find(":selected").attr("data-actiondesc"),
                 "EventId": $("#ActionName").find(":selected").val(),
@@ -111,8 +111,8 @@ function OnInitialize() {
                 },
                 success: function (response) {
                     if (response.ErrCode == 0) {
-                        // redirect to workflow detail page
-                        url = "Workflow/WorkflowDetail?workflowId=" + $("#workflowid").text();
+                        // redirect to case detail page
+                        url = "Case/CaseDetail?caseId=" + $("#caseid").text();
                         window.location.replace(url);
                     }
                     else {
@@ -138,7 +138,7 @@ function OnInitialize() {
             var url = 'TaskEditInfo';
             var param = {
                 "CreatorId": $("#onUserid").text(),
-                "workflowId": $("#workflowid").text(),
+                "caseId": $("#caseid").text(),
                 "TaskId": $("#taskid").text(),
                 "IsActive": $("#isactive").text(),
                 "TaskName": $("#ActionName").find(":selected").text(),
@@ -168,7 +168,7 @@ function OnInitialize() {
                 },
                 success: function (response) {
                     if (response.ErrCode == 0) {
-                        // redirect to workflow detail page
+                        // redirect to case detail page
                         $("#editTaskResult").css("class", "result-text-success");
                         $("#editTaskResult").text("Update Task Information successfully!");
                     }

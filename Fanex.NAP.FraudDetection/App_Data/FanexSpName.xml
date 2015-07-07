@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-  <Function Name="SPU_Workflow">
-    <Setting Key="SPU_WorkflowSelectAll" SpName="SPU_WorkflowSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_WorkflowIns" SpName="SPU_WorkflowIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_WorkflowUpdate" SpName="SPU_WorkflowUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_WorkflowUpdateStatus" SpName="SPU_WorkflowUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_WorkflowSelectById" SpName="SPU_WorkflowSelectById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  <Function Name="SPU_Case">
+    <Setting Key="SPU_CaseSelectAll" SpName="SPU_CaseSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseIns" SpName="SPU_CaseIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseUpdate" SpName="SPU_CaseUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseUpdateStatus" SpName="SPU_CaseUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseSelectById" SpName="SPU_CaseSelectById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="SPU_Task">
-    <Setting Key="SPU_TaskSelectAllByWorkflowId" SpName="SPU_TaskSelectAllByWorkflowId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_TaskSelectAllByCaseId" SpName="SPU_TaskSelectAllByCaseId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="SPU_CustomerGroup">
@@ -30,7 +30,7 @@
     <Setting Key="SPU_TaskInfoSelect" SpName="SPU_TaskInfoSelect" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_TaskUpd" SpName="SPU_TaskUpd" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_TaskUpdateStatus" SpName="SPU_TaskUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_TaskSelectByWorkflowId" SpName="SPU_TaskSelectByWorkflowId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_TaskSelectByCaseId" SpName="SPU_TaskSelectByCaseId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="SPU_Configurations">

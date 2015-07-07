@@ -1,19 +1,19 @@
 ﻿$(document).ready(function () {
-    $("#btn_editWorkflow").click(function () {
-        editWorkflowForm.submit();
+    $("#btn_editCase").click(function () {
+        editCaseForm.submit();
     });
 
     $("#btn_Cancel").click(function () {
         $("div#popup").dialog("destroy").remove();
     });
 
-    var editWorkflowForm = $('#EditWorkflowForm').submit(function (event) {
+    var editCaseForm = $('#EditCaseForm').submit(function (event) {
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
             if (response.ErrCode === 0) {
                 $("#addResult").attr('class', 'result-text-success');
-                $("#addResult").html("Edit workflow successfully!");
+                $("#addResult").html("Edit case successfully!");
                 setTimeout(function () {
                     $("div#popup").dialog("destroy").remove();
                 }, 3000);
@@ -28,13 +28,13 @@
 });
 
 /*
-* Edit a work flow.
+* Edit a case.
 */
-function editWorkflowInfo(workflowId) {
-    $.get('Workflow/EditWorkflowInfo', { workflowId: workflowId }, function (response) {
+function editCaseInfo(caseId) {
+    $.get('Case/EditCaseInfo', { caseId: caseId }, function (response) {
         $('<div id="popup"></div>').appendTo('body').dialog({
             modal: true,
-            title: "Edit Workflow",
+            title: "Edit Case",
             zIndex: 10000,
             autoOpen: true,
             width: '500px',
@@ -47,9 +47,9 @@ function editWorkflowInfo(workflowId) {
 }
 
 /*
-* Activate/deactivate a work flow.
+* Activate/deactivate a case.
 */
-function editWorkflowStatus(obj, workflowId) {
+function editCaseStatus(obj, caseId) {
     var active = "activate ";
     var isActive = false;
     if ($(obj).hasClass('ico-tick')) {
@@ -67,9 +67,9 @@ function editWorkflowStatus(obj, workflowId) {
         confirmButtonClass: 'btn-green btn-customConfirm',
         cancelButtonClass: 'btn-green btn-customCancel',
         title: "Confirmation",
-        text: "Are you sure to " + active + "this Workflow?",
+        text: "Are you sure to " + active + "this Case?",
         confirm: function () {
-            $.post('Workflow/EditWorkflowStatus', { workflowId: workflowId, isActive: !isActive }, function (result) {
+            $.post('Case/EditCaseStatus', { caseId: caseId, isActive: !isActive }, function (result) {
                 if (result.ErrCode === 0) {
                     Search();
                 }

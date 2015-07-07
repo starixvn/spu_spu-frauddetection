@@ -1,19 +1,19 @@
 ﻿$(document).ready(function () {
-    $("#btn_addWorkflow").click(function () {
-        addWorkflowForm.submit();
+    $("#btn_addCase").click(function () {
+        addCaseForm.submit();
     });
 
     $("#btn_Cancel").click(function () {
         $("div#popup").dialog("destroy").remove();
     });
 
-    var addWorkflowForm = $("#AddWorkflowForm").submit(function (event) {
+    var addCaseForm = $("#AddCaseForm").submit(function (event) {
         event.preventDefault();
 
-        var url = 'Workflow/AddNewWorkflow';
+        var url = 'Case/AddNewCase';
         var param = {
-            "WorkflowName": $("#WorkflowName").val(),
-            "WorkflowDesc": $("#WorkflowDesc").val(),
+            "CaseName": $("#CaseName").val(),
+            "CaseDesc": $("#CaseDesc").val(),
             "IsActive": $('#IsActive').is(':checked')
         };
         $.ajax({
@@ -28,7 +28,7 @@
             success: function (response) {
                 if (response.ErrCode == 0) {
                     $("#addResult").attr('class', 'result-text-success');
-                    $("#addResult").html("Add new workflow successfully!"); 
+                    $("#addResult").html("Add new case successfully!"); 
                     setTimeout(function () {
                         $("div#popup").dialog("destroy").remove();
                     }, 3000);
