@@ -32,210 +32,228 @@
     <div id="caseid" style="display: none;">@Model.TaskInformation.CaseId</div>
     <div id="onUserid" style="display: none;">@Model.OnUserId</div>
     <div id="accordion" style="width: 620px;">
-      <h3 id="accordionBlockEvent">Event</h3>
-      <div>
-        <table class="table-popup font-size-small">
-            <tr>
-                <td><span>Event Name</span></td>
-                <td> 
-                    <select name="ActionName" id="ActionName" style="height: 25px;" onchange="changeActionSelection(this)">
-                        @foreach (var mevent in Model.EventList)
-                        {
-                            <option value="@mevent.EventId" data-actiondesc="@mevent.EventDesc">@mevent.EventName</option>
-                        }
-                    </select>
-                    <label id="selectedActionDesc" style="font-weight: normal;">@Model.EventList[0].EventDesc</label>
-                </td>
-            </tr>
-            <tr>
-                <td><span>Executed Timer</span></td>
-                <td>
-                    <input type="text" id="timeInterval" style="width: 100px; height: 25px;" onkeypress="return isNumber(event)" />
-                    <select id="timeIntervalUnit" style="height: 25px;">
-                      <option value="Second">Second(s)</option>
-                      <option value="Minute">Minute(s)</option>
-                      <option value="Hour">Hour(s)</option>
-                      <option value="Day">Day(s)</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-      </div>
-      <h3 id="accordionBlockPrecondition">Pre-condition</h3>
-      <div>
-        <div class="table-popup font-size-small">
-            <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, true)">
-                @foreach (var config in Model.PreconditionConfigurations)
-                {
-                    <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
-                }
-            </select>
-            <select style="height: 25px;" id="preconditionConfigOperator">
-                <option value="Equal">=</option>
-                <option value="Unequal"><></option>
-                <option value="LargerThan">></option>
-                <option value="LargerThanOrEqual">>=</option>
-                <option value="LessThan"><</option>
-                <option value="LessThanOrEqual"><=</option>
-            </select>
-            <select id="preconditionConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
-                @foreach (var config in Model.PreconditionConfigurations)
-                {
-                    <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
-                }
-            </select>
-            <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxmatchstatus">
-                <option value="%completed%">Completed</option>
-                <option value="%closed%">Closed</option>
-                <option value="%running%">Running</option>
-            </select>
-            <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxmatchstate">
-                <option value="notscanned">Not Scanned</option>
-                <option value="scanned">Scanned</option>
-            </select>
-            <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxleaguetype">
-                <option value="gue.IsMainMarket">Main Markets</option>
-                <option value="gue.IsMainMarket">Other Markets</option>
-            </select>
-            <select name="preconditionConfigControlComboBoxsport" id="preconditionConfigControlComboBoxsport" style="height: 25px; display:none;">
-                @foreach (var sport in Model.SportList)
-                {
-                    <option value="@sport.SportId">@sport.SportName</option>
-                }
-            </select>
-            <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px; display: none;" />
-            @Html.TextBox("preconditionConfigControlDatetimePicker", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:100px;" })
-            <i class="icon-calendar icon-event-date-calendar" id="preconditionConfigControlDatetimePickerIcon" style=""></i>
-            <input type="button" id="btn_AddPrecondition" value="Add to List" class="btn-green font-size-small" />
-            <div class="newline">&nbsp;</div>
-            <div>
-                <input type="checkbox" id="preconditionConfigCompare" onchange="onCompareWithOtherField(this, true)" /> Compare with another field
-            </div>
-            <div class="newline">&nbsp;</div>
-            <div style="border: 1px solid #000000;">
-                <table id="preconditionTable" class="table-items"><tr id="preconditionTable1" style="display:none"><td></td><td></td><td></td></tr></table>
-            </div>
-            <div class="newline">&nbsp;</div>
-            <label id="preconditionTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
-            <div class="newline">&nbsp;</div>
-            <div>
-                <input type="button" onclick="AddFormulaElement(true, '(#', true)" value="(+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(true, '(#')" value="(-" class="btn-green font-size-small" />
-                &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(true, '#)', false)" value=")+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(true, '#)')" value=")-" class="btn-green font-size-small" />
-                &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(true, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(true, 'AND#')" value="AND-" class="btn-green font-size-small" />
-                &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(true, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(true, 'OR#')" value="OR-" class="btn-green font-size-small" />
+        <h3 id="accordionBlockTaskInfo">Task Information</h3>
+        <div>
+            <table class="table-popup font-size-small">
+                <tr>
+                    <td width="100px;"><span>Task Name</span></td>
+                    <td>@Html.TextBoxFor(l => l.TaskInformation.TaskName, new { @id = "taskName", @style = "width: 400px;" })</td>
+                </tr>
+                <tr>
+                    <td><span>Description</span></td>
+                    <td>@Html.TextAreaFor(l => l.TaskInformation.TaskDesc, 5, 45, new { @id = "taskDesc", @style = "width: 400px;" })</td>
+                </tr>
+                <tr>
+                    <td><span>Active</span></td>
+                    <td>@Html.CheckBoxFor(l => l.TaskInformation.IsActive, new { @id = "taskIsActive", @checked = "checked" })</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 id="accordionBlockEvent">Event</h3>
+        <div>
+            <table class="table-popup font-size-small">
+                <tr>
+                    <td><span>Event Name</span></td>
+                    <td> 
+                        <select name="ActionName" id="ActionName" style="height: 25px;" onchange="changeActionSelection(this)">
+                            @foreach (var mevent in Model.EventList)
+                            {
+                                <option value="@mevent.EventId" data-actiondesc="@mevent.EventDesc">@mevent.EventName</option>
+                            }
+                        </select>
+                        <label id="selectedActionDesc" style="font-weight: normal;">@Model.EventList[0].EventDesc</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>Executed Timer</span></td>
+                    <td>
+                        <input type="text" id="timeInterval" style="width: 100px; height: 25px;" onkeypress="return isNumber(event)" />
+                        <select id="timeIntervalUnit" style="height: 25px;">
+                            <option value="Second">Second(s)</option>
+                            <option value="Minute">Minute(s)</option>
+                            <option value="Hour">Hour(s)</option>
+                            <option value="Day">Day(s)</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <h3 id="accordionBlockPrecondition">Pre-condition</h3>
+        <div>
+            <div class="table-popup font-size-small">
+                <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, true)">
+                    @foreach (var config in Model.PreconditionConfigurations)
+                    {
+                        <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                    }
+                </select>
+                <select style="height: 25px;" id="preconditionConfigOperator">
+                    <option value="Equal">=</option>
+                    <option value="Unequal"><></option>
+                    <option value="LargerThan">></option>
+                    <option value="LargerThanOrEqual">>=</option>
+                    <option value="LessThan"><</option>
+                    <option value="LessThanOrEqual"><=</option>
+                </select>
+                <select id="preconditionConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
+                    @foreach (var config in Model.PreconditionConfigurations)
+                    {
+                        <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
+                    }
+                </select>
+                <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxmatchstatus">
+                    <option value="%completed%">Completed</option>
+                    <option value="%closed%">Closed</option>
+                    <option value="%running%">Running</option>
+                </select>
+                <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxmatchstate">
+                    <option value="notscanned">Not Scanned</option>
+                    <option value="scanned">Scanned</option>
+                </select>
+                <select style="height: 25px; display: none;" id="preconditionConfigControlComboBoxleaguetype">
+                    <option value="gue.IsMainMarket">Main Markets</option>
+                    <option value="gue.IsMainMarket">Other Markets</option>
+                </select>
+                <select name="preconditionConfigControlComboBoxsport" id="preconditionConfigControlComboBoxsport" style="height: 25px; display:none;">
+                    @foreach (var sport in Model.SportList)
+                    {
+                        <option value="@sport.SportId">@sport.SportName</option>
+                    }
+                </select>
+                <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px; display: none;" />
+                @Html.TextBox("preconditionConfigControlDatetimePicker", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:100px;" })
+                <i class="icon-calendar icon-event-date-calendar" id="preconditionConfigControlDatetimePickerIcon" style=""></i>
+                <input type="button" id="btn_AddPrecondition" value="Add to List" class="btn-green font-size-small" />
+                <div class="newline">&nbsp;</div>
+                <div>
+                    <input type="checkbox" id="preconditionConfigCompare" onchange="onCompareWithOtherField(this, true)" /> Compare with another field
+                </div>
+                <div class="newline">&nbsp;</div>
+                <div style="border: 1px solid #000000;">
+                    <table id="preconditionTable" class="table-items"><tr id="preconditionTable1" style="display:none"><td></td><td></td><td></td></tr></table>
+                </div>
+                <div class="newline">&nbsp;</div>
+                <label id="preconditionTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
+                <div class="newline">&nbsp;</div>
+                <div>
+                    <input type="button" onclick="AddFormulaElement(true, '(#', true)" value="(+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(true, '(#')" value="(-" class="btn-green font-size-small" />
+                    &nbsp;&nbsp;
+                    <input type="button" onclick="AddFormulaElement(true, '#)', false)" value=")+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(true, '#)')" value=")-" class="btn-green font-size-small" />
+                    &nbsp;&nbsp;
+                    <input type="button" onclick="AddFormulaElement(true, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(true, 'AND#')" value="AND-" class="btn-green font-size-small" />
+                    &nbsp;&nbsp;
+                    <input type="button" onclick="AddFormulaElement(true, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(true, 'OR#')" value="OR-" class="btn-green font-size-small" />
+                </div>
             </div>
         </div>
-      </div>
-      <h3 id="accordionBlockRule">Rule</h3>
-      <div>
-        <div class="table-popup font-size-small">
-            <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, false)">
-                @foreach (var config in Model.RuleConfigurations)
-                {
-                    <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
-                }
-            </select>
-            <select style="height: 25px;" id="ruleConfigOperator">
-                <option value="Equal">=</option>
-                <option value="Unequal"><></option>
-                <option value="LargerThan">></option>
-                <option value="LargerThanOrEqual">>=</option>
-                <option value="LessThan"><</option>
-                <option value="LessThanOrEqual"><=</option>
-            </select>
-            <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
-                @foreach (var config in Model.RuleConfigurations)
-                {
-                    <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
-                }
-            </select>
-            <select style="height: 25px; display: none;" id="ruleConfigControlComboBoxstatus">
-                <option value="112">Won</option>
-                <option value="113">Lose</option>
-                <option value="111">Draw</option>
-                <option value="102">Void</option>
-                <option value="103">Refund</option>
-                <option value="101">Reject</option>
-                <option value="0">Running</option>
-            </select>
-            <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype" style="height: 25px; display:none;">
-                @foreach (var bettype in Model.BettypeList)
-                {
-                    <option value="@bettype.BettypeId">@bettype.BettypeName</option>
-                }
-            </select>
-            <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
-            @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
-            <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon" style="display: none;"></i>
-            <input type="button" id="btn_AddRule" value="Add to List" class="btn-green font-size-small" />
-            <div class="newline">&nbsp;</div>
-            <div>
-                <input type="checkbox" id="ruleConfigCompare"  onchange="onCompareWithOtherField(this, false)" /> Compare with another field
-            </div>
-            <div class="newline">&nbsp;</div>            
-            <div style="border: 1px solid #000000;">
-                <table id="ruleTable" class="table-items"><tr id="ruleTable1" style="display:none"><td></td><td></td><td></td></tr></table>
-            </div>
-            <div class="newline">&nbsp;</div>            
-            <label id="ruleTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
-            <div class="newline">&nbsp;</div>
-            <div>
-                <input type="button" onclick="AddFormulaElement(false, '(', true)" value="(+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(false, '(')" value="(-" class="btn-green font-size-small" />
-                &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, ')', false)" value=")+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(false, ')')" value=")-" class="btn-green font-size-small" />
-                &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(false, 'AND#')" value="AND-" class="btn-green font-size-small" />
-                &nbsp;&nbsp;
-                <input type="button" onclick="AddFormulaElement(false, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
-                <input type="button" onclick="RemoveFormulaElement(false, 'OR#')" value="OR-" class="btn-green font-size-small" />
+        <h3 id="accordionBlockRule">Rule</h3>
+        <div>
+            <div class="table-popup font-size-small">
+                <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="changeConfigSelection(this, false)">
+                    @foreach (var config in Model.RuleConfigurations)
+                    {
+                        <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                    }
+                </select>
+                <select style="height: 25px;" id="ruleConfigOperator">
+                    <option value="Equal">=</option>
+                    <option value="Unequal"><></option>
+                    <option value="LargerThan">></option>
+                    <option value="LargerThanOrEqual">>=</option>
+                    <option value="LessThan"><</option>
+                    <option value="LessThanOrEqual"><=</option>
+                </select>
+                <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
+                    @foreach (var config in Model.RuleConfigurations)
+                    {
+                        <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
+                    }
+                </select>
+                <select style="height: 25px; display: none;" id="ruleConfigControlComboBoxstatus">
+                    <option value="112">Won</option>
+                    <option value="113">Lose</option>
+                    <option value="111">Draw</option>
+                    <option value="102">Void</option>
+                    <option value="103">Refund</option>
+                    <option value="101">Reject</option>
+                    <option value="0">Running</option>
+                </select>
+                <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype" style="height: 25px; display:none;">
+                    @foreach (var bettype in Model.BettypeList)
+                    {
+                        <option value="@bettype.BettypeId">@bettype.BettypeName</option>
+                    }
+                </select>
+                <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
+                @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
+                <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon" style="display: none;"></i>
+                <input type="button" id="btn_AddRule" value="Add to List" class="btn-green font-size-small" />
+                <div class="newline">&nbsp;</div>
+                <div>
+                    <input type="checkbox" id="ruleConfigCompare"  onchange="onCompareWithOtherField(this, false)" /> Compare with another field
+                </div>
+                <div class="newline">&nbsp;</div>            
+                <div style="border: 1px solid #000000;">
+                    <table id="ruleTable" class="table-items"><tr id="ruleTable1" style="display:none"><td></td><td></td><td></td></tr></table>
+                </div>
+                <div class="newline">&nbsp;</div>            
+                <label id="ruleTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
+                <div class="newline">&nbsp;</div>
+                <div>
+                    <input type="button" onclick="AddFormulaElement(false, '(', true)" value="(+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(false, '(')" value="(-" class="btn-green font-size-small" />
+                    &nbsp;&nbsp;
+                    <input type="button" onclick="AddFormulaElement(false, ')', false)" value=")+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(false, ')')" value=")-" class="btn-green font-size-small" />
+                    &nbsp;&nbsp;
+                    <input type="button" onclick="AddFormulaElement(false, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(false, 'AND#')" value="AND-" class="btn-green font-size-small" />
+                    &nbsp;&nbsp;
+                    <input type="button" onclick="AddFormulaElement(false, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
+                    <input type="button" onclick="RemoveFormulaElement(false, 'OR#')" value="OR-" class="btn-green font-size-small" />
+                </div>
             </div>
         </div>
-      </div>
-      <h3 id="accordionBlockPerform">Perform</h3>
-      <div>
-        <table class="table-popup font-size-small">
-            <tr>
-                <td>
-                    <div>
-                        <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
-                    </div>
-                </td>
-                <td> 
-                    <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;">
-                        @foreach (var group in Model.GroupList)
-                        {
-                            <option value="@group.GroupId" >@group.GroupName</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <input type="checkbox" id="nextaction_sendMail" data-actionid="2" /> Send Mail
-                    </div>
-                </td>
-                <td>
-                    <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
-                        @foreach (var mailMaster in Model.MaiMasterList)
-                        {
-                            <option value="@mailMaster.MailId" >@mailMaster.MailCode</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-        </table>
-      </div>
+        <h3 id="accordionBlockPerform">Perform</h3>
+        <div>
+            <table class="table-popup font-size-small">
+                <tr>
+                    <td>
+                        <div>
+                            <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
+                        </div>
+                    </td>
+                    <td> 
+                        <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px; width: 250px;">
+                            @foreach (var group in Model.GroupList)
+                            {
+                                <option value="@group.GroupId" >@group.GroupName</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <input type="checkbox" id="nextaction_sendMail" data-actionid="2" /> Send Mail
+                        </div>
+                    </td>
+                    <td>
+                        <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px; width: 250px;">
+                            @foreach (var mailMaster in Model.MaiMasterList)
+                            {
+                                <option value="@mailMaster.MailId" >@mailMaster.MailCode</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <div class="newline">&nbsp;</div>
     <div style="width: 620px; text-align: center;">
