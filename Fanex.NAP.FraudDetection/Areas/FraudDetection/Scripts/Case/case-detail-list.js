@@ -22,7 +22,7 @@ function Search() {
     $('#PageSize').val(_pageSize);
     $('#PageIndex').val(_pageIndex);
     
-    var searchParams = {              
+    var searchParams = {
         CaseId:  _caseId,
         PageSize: _pageSize,
         PageIndex: _pageIndex
@@ -41,13 +41,13 @@ function Search() {
             gridOptions =
             {
                 columns: [
-                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },                    
-                    { HeaderText: "TaskId", Width: 100, Name: "TaskId", HeaderAlign: "center", CellAlign: "left" },                    
-                    { HeaderText: "Task Name", Width: 200, Name: "TaskName", HeaderAlign: "center", CellAlign: "left" },                    
+                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "TaskId", Width: 100, Name: "TaskId", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Task Name", Width: 200, Name: "TaskName", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Description", Width: 300, Name: "TaskDesc", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Type", Width: 250, Name: "Type", HeaderAlign: "center", CellAlign: "left" },                    
-                    { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },                    
-                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }                                        
+                    { HeaderText: "Type", Width: 250, Name: "Type", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
                 bodyRows: result[0].data,
                 hideYBackGroundScroller: true,
@@ -67,15 +67,15 @@ function Search() {
             };
 
             for (var i = 0; i < gridOptions.bodyRows.length; i++) {
-                // Modify "Active" column                
+                // Modify "Active" column
                 gridOptions.bodyRows[i].Columns[5].Row = i;
                 gridOptions.bodyRows[i].Columns[5].CustomCellRender = ActiveColumn;
                                 
                 // Modify "Action" column
-                gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
-                    gridOptions.bodyRows[i].Columns,
-                    6,
-                    { Name: "Edit", Row: i });
+                //gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
+                //    gridOptions.bodyRows[i].Columns,
+                //    6,
+                //    { Name: "Edit", Row: i });
                 gridOptions.bodyRows[i].Columns[6].CustomCellRender = ActionColumn;
             }
 

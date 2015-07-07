@@ -575,6 +575,9 @@
     <Content Include="Dependencies\SPU.Lib.FraudDetection.DTO.dll" />
     <Content Include="Dependencies\SPU.Lib.FraudDetection.Service.dll" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Grid.js" />
@@ -694,6 +697,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Deployment.ignore" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
