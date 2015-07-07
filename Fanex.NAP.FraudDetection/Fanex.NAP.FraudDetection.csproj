@@ -712,7 +712,6 @@
     <Folder Include="Areas\FraudDetection\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="ClearScript.V8\" />
-    <Folder Include="_Dependency\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

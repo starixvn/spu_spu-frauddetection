@@ -72,10 +72,10 @@ function Search() {
                 gridOptions.bodyRows[i].Columns[5].CustomCellRender = ActiveColumn;
                                 
                 // Modify "Action" column
-                //gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
-                //    gridOptions.bodyRows[i].Columns,
-                //    6,
-                //    { Name: "Edit", Row: i });
+                gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
+                    gridOptions.bodyRows[i].Columns,
+                    6,
+                    { Name: "Edit", Row: i });
                 gridOptions.bodyRows[i].Columns[6].CustomCellRender = ActionColumn;
             }
 

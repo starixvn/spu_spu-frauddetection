@@ -107,8 +107,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [Compress]
         public JsonResult GetCaseDetail(TaskSelectAllByCaseIdCriteria criteria)
         {
+            criteria.PageIndex ++;
             var dataReader = _taskService.GetTasksByCaseId(criteria);
-            var results = dataReader.ConvertToString(); //// FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader); --
+            var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader); 
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
