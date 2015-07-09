@@ -97,7 +97,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 groupList,
                 sportList.ToList(),
                 bettypeList.ToList(),
-                mailMasterList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { CaseId = caseID } };
+                mailMasterList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { CaseId = caseID, IsActive = true} };
 
             return taskViewModel;
         }
@@ -121,8 +121,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The next actions are left blank. Please add next action(s) for the new Task." } };
             }
 
-            var queryPreconString = "select top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
-            var queryRuleString = "select {0} from {1} where {2}";
+            var queryPreconString = "select distinct top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
+            var queryRuleString = "select distinct {0} from {1} where {2}";
             var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
