@@ -1,0 +1,44 @@
+﻿@model SPU.Lib.FraudDetection.Criteria.Task.TaskSelectAllByCaseIdCriteria
+@{
+    Layout = "~/Views/Shared/_LayoutPopup2.cshtml";
+    ViewBag.Title = "Add Customer Group To Case";
+}
+
+@section HeadCss
+{
+}
+
+@section FooterJs
+{
+}
+
+<div id="sentAlert" class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <div>Add Customer Group To Case</div>
+</div>
+
+<div ng-controller="CaseGroupController">
+    <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th><input type="checkbox"/></th>
+            <th>Group Name</th>
+            <th>Group Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in displayedCollection">
+            <td>{{$index + 1}}</td>
+            <td cs-select="row"></td>
+            <td>{{row.GroupName}}</td>
+            <td>{{row.GroupDescription}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="button" class="btn btn-action" value="Submit" ng-click="submitData()"/>
+</div>
+
+<script src="~/Areas/FraudDetection/Scripts/CaseGroup/spuApp.js"></script>
+<script src="~/Areas/FraudDetection/Scripts/CaseGroup/caseGroupService.js"></script>
+<script src="~/Areas/FraudDetection/Scripts/CaseGroup/caseGroupController.js"></script>

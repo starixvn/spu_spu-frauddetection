@@ -16,6 +16,7 @@
     <script src="~/Areas/FraudDetection/Scripts/Case/case-detail-list.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/Scripts/Case/case-detail-edit.js" type="text/javascript"></script>
 }
+
 <div>
     @Html.HiddenFor(a => a.CaseId)
     <span class="infor-text">Case Details</span>
@@ -27,15 +28,15 @@
 <div class="newline">
     &nbsp;</div>
 <form id="myForm" method="get" action="">
-<div class="formSearch">
-    @* @Html.HiddenFor(s => s.PageSize)
-    @Html.HiddenFor(s => s.PageIndex)
-    @Html.HiddenFor(s => s.PageCount)
-    <input type="button" value="Search" onclick="OnSearch();" />*@
-</div>
 </form>
 <div id="SearchResult" class="freegrid  content-grid">
 </div>
 <div class="button-action">
     <a class="back-button" href="/Case">← Back To List </a>
+</div>
+
+<div style ="clear: both;"class="newline">&nbsp;</div>
+
+<div id="CaseGroupResult" class="freegrid  content-grid">
+    
 </div>

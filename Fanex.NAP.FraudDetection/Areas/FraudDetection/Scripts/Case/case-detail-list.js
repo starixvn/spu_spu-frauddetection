@@ -8,6 +8,8 @@ var gridOptions
 $(document).ready(function () {
     _caseId = $("#CaseId").val();
     Search();
+    CaseGroupService.init();
+    CaseGroupService.getCustomerGroupByCase();
 });
 //--------------------------------------------------------------------------------------------------------------------
 
@@ -41,7 +43,7 @@ function Search() {
             gridOptions =
             {
                 columns: [
-                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "#", Width: 30, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "TaskId", Width: 100, Name: "TaskId", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Task Name", Width: 200, Name: "TaskName", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Description", Width: 300, Name: "TaskDesc", HeaderAlign: "center", CellAlign: "left" },
@@ -185,3 +187,166 @@ $("#btn_AddNewTask").click(function () {
          cancelButton: "Cancel"
      });
  }
+
+var CaseGroupService = (function($) {
+    var service = {};
+
+    // private methods
+
+    var caseId = $("#CaseId").val();
+    var $sentAlert = $('#sentAlert');
+    var $message = $('#sentAlert div');
+    var timeoutID = null;
+
+    var getBodyRows = function (data) {
+        var bodyRows = [];
+
+        $.each(data, function (index, element) {
+            var removeValue = "<span class='glyphicon glyphicon-trash cursor-pointer' onclick='CaseGroupService.removeCustomerGroupFromCase({0}, {1});'>".format(element.CaseId, element.GroupId);
+            bodyRows.push({
+                Columns: [
+                    { Name: "No", Value: index + 1 },
+                    { Name: "GroupName", Value: element.GroupName },
+                    { Name: "GroupDescription", Value: element.GroupDescription },
+                    { Name: "Remove", Value: removeValue }
+                ]
+            });
+        });
+
+        return bodyRows;
+    };
+
+    var getGridOption = function (data) {
+
+        var gridOptions = {
+            columns: [
+                { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center", CustomAttr: "title='demo title'" },
+                { HeaderText: "Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Description", Width: 300, Name: "GroupDescription", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center" }],
+            bodyRows: getBodyRows(data),
+            showNumberColumn: true,
+            showTitle: true,
+            titleInfo:
+            {
+                text: "Customer Groups In This Case <span class='glyphicon glyphicon-plus' onclick='CaseGroupService.addCustomerGroupToCase({0});' />".format(caseId),
+                showButtonsWhenNoData: true
+            }
+        };
+
+        return gridOptions;
+    };
+
+
+// public methods
+
+    service.init = function() {
+        $sentAlert.on('close.bs.alert', function () {
+            if (timeoutID !== null) {
+                clearTimeout(timeoutID);
+                timeoutID = null;
+            }
+            
+            $sentAlert.hide();
+            return false;
+        });
+    };
+
+    service.getCustomerGroupByCase = function () {
+        var url = SPU.getAbsoluteUrl("CaseGroup/GetCustomerGroupsInCase");
+        
+        var param = { caseId: caseId };
+        
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            data: JSON.stringify(param),
+            cache: false,
+            url: url,
+            error: function () {
+                alert(error);
+            },
+            success: function (data) {
+                var gridOptions = getGridOption(data);
+                $("#CaseGroupResult").fanexGrid(gridOptions);
+            }
+        });
+    };
+
+    service.addCustomerGroupToCase = function (caseId) {
+        var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase?caseId={0}".format(caseId));
+        var param = {
+        };
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            data: JSON.stringify(param),
+            cache: false,
+            url: url,
+            error: function (error) {
+                alert(error);
+            },
+            success: function (data) {
+                alert("data");
+
+            //    $('<div id="popup"></div>')
+            //.appendTo('body')
+            //.dialog({
+            //    modal: true,
+            //    title: "Add New Group",
+            //    zIndex: 10000,
+            //    autoOpen: true,
+            //    width: '500px',
+            //    resizable: false,
+            //    close: function () {
+            //        $(this).remove();
+            //    }
+            //})
+            //.html(response);
+            }
+        });
+    };
+
+    service.removeCustomerGroupFromCase = function (caseId, groupId) {
+        var url = SPU.getAbsoluteUrl("CaseGroup/RemoveCustomerGroupFromCase");
+        var param = {
+            caseId: caseId,
+            groupId: groupId
+        };
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            data: JSON.stringify(param),
+            cache: false,
+            url: url,
+            error: function (error) {
+                alert(error);
+            },
+            success: function (data) {
+                if (data.IsSuccessful === true) {
+                    $message.text('aabas');
+                    $sentAlert.removeClass('alert-danger');
+                    $sentAlert.addClass('alert-success');
+
+                    timeoutID = setTimeout(function () {
+                        $sentAlert.hide();
+                        timeoutID = null;
+                    }, 3000);
+                } else {
+                    $message.text(data.Message);
+                    $sentAlert.removeClass('alert-success');
+                    $sentAlert.addClass('alert-danger');
+                }
+
+                $sentAlert.show();
+            }
+        });
+    };
+
+    return service;
+})(jQuery);

@@ -61,4 +61,9 @@
     <Setting Key="SPU_SelBalanceUpDay" SpName="SPU_SelBalanceUpDay" DbName="DBSPU.bodb02.bodbSPUNet" />
     <Setting Key="SPU_CustomerWinlostSelect" SpName="SPU_CustomerWinlostSelect" DbName="DBSPU.bodb02.bodbSPUNet" />
   </Function>
+
+  <Function Name="CaseGroup">
+    <Setting Key="SPU_CaseGroupIns" SpName="SPU_CaseGroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseGroupDel" SpName="SPU_CaseGroupDel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  </Function>
 </Functions>
