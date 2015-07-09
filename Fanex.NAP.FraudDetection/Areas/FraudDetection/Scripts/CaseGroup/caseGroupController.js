@@ -1,51 +1,76 @@
-﻿spuApp.directive('csSelect', function () {
-    return {
-        restrict: 'A',
-        require: '^stTable',
-        template: '<input type="checkbox"/>',
-        scope: { row: '=csSelect' },
-        link: function (scope, element, attr, ctrl) {
+﻿
+spuApp.controller('CaseGroupController', [
+    '$scope', 'CaseGroupService', function ($scope, CaseGroupService) {
 
-            element.bind('change', function (evt) {
-                scope.$apply(function () {
-                    ctrl.select(scope.row, 'multiple');
-                });
+        $scope.caseId = caseId;
+
+        var convertRowCollection = function(groups) {
+            var rows = [];
+            $.each(groups, function (idx, item) {
+                var newItem = $.extend(true, {}, item, { isSelected: false });
+                rows.push(newItem);
             });
 
-            scope.$watch('row.isSelected', function (newValue, oldValue) {
-                if (newValue === true) {
-                    element.parent().addClass('st-selected');
-                } else {
-                    element.parent().removeClass('st-selected');
+            return rows;
+        };
+
+        $scope.rowCollection = convertRowCollection(groups);
+
+        $scope.isSelectAll = false;
+
+        $scope.selectAll = function() {
+            $scope.isSelectAll = !$scope.isSelectAll;
+            $.each($scope.rowCollection, function (idx, item) {
+                item.isSelected = $scope.isSelectAll;
+            });
+        };
+
+        var hasAllSelectedRows = function () {
+            var isSelectAll = true;
+            $.each($scope.rowCollection, function (idx, item) {
+                if (!item.isSelected) {
+                    isSelectAll = false;
+                    return;
                 }
             });
-        }
-    };
-});
 
-spuApp.controller('CaseGroupController', [
-    '$scope', function ($scope) {
+            return isSelectAll;
+        };
 
-        $scope.rowCollection = [
-        {
-            GroupId: 1,
-            GroupName: 'Group 1',
-            GroupDescription: 'Descript 1'
-        },
-        {
-            GroupId: 2,
-            GroupName: 'Group 2',
-            GroupDescription: 'Descript 2'
-        },
-        {
-            GroupId: 3,
-            GroupName: 'Group 3',
-            GroupDescription: 'Descript 3'
-        }
-        ];
+        $scope.selectRow = function (index) {
+            $scope.rowCollection[index].isSelected = !$scope.rowCollection[index].isSelected;
+            $scope.isSelectAll = hasAllSelectedRows();
+        };
 
-        $scope.displayedCollection = [].concat($scope.rowCollection);
+        var collectCustomerGroup = function() {
+            var selectedGroups = [];
 
+            $.each($scope.rowCollection, function (idx, item) {
+                if (item.isSelected) {
+                    selectedGroups.push(item.GroupId);
+                }
+            });
+
+            return selectedGroups;
+        };
+
+        $scope.submitData = function() {
+            var selectedGroups = collectCustomerGroup();
+            
+            var param = {
+                caseId: $scope.caseId,
+                groupIds: selectedGroups.join(',')
+            };
+
+            CaseGroupService.addCustomerGroupToCase(param).then(function (result) {
+                var data = result.data;
+                AlertService.showAlert(data);
+            });
+        };
+
+        $scope.$watch($scope.rowCollection, function () {
+
+        });
     }
 ]);
 

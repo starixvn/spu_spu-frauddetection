@@ -67,15 +67,29 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Scripts/Plugin/multi-select-control.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/Core/site.js",
+                "~/Scripts/Core/AlertService.js",
+                "~/Scripts/Core/DialogService.js",
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/jquery.confirm.min.js",
-                "~/Scripts/numeral.min.js");
+                "~/Scripts/numeral.min.js"
+                );
+
+            var angularJs = new Bundle("~/bundles/angularJs")
+            .Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-ui/ui-bootstrap.js",
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                "~/Scripts/smart-table.js"
+                );
 
             coreJs.Transforms.Add(scriptTransformer);
 
+            angularJs.Transforms.Add(scriptTransformer);
+
             bundles.Add(coreJs);
+            bundles.Add(angularJs);
 
             var homeJs = new Bundle("~/bundles/HomeJs")
                 .Include(

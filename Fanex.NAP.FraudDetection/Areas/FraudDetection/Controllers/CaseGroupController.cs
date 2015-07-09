@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Models;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.FraudDetection.Criteria.CaseGroup;
     using SPU.Lib.FraudDetection.Criteria.Group;
@@ -33,35 +34,12 @@
 
         public ActionResult GetCustomerGroupsInCase(CaseGroupSelectCriteria criteria)
         {
-            var caseGroups = new List<CaseGroup>
-            {
-                new CaseGroup
-                {
-                    CaseId = 1,
-                    GroupId = 1,
-                    GroupName = "Group 1",
-                    GroupDescription = "GroupDescription 1"
-                },
-
-                new CaseGroup
-                {
-                    CaseId = 1,
-                    GroupId = 2,
-                    GroupName = "Group 2",
-                    GroupDescription = "GroupDescription 2"
-                },
-                new CaseGroup
-                {
-                    CaseId = 1,
-                    GroupId = 3,
-                    GroupName = "Group 3",
-                    GroupDescription = "GroupDescription 3"
-                }
-            };
+            var caseGroups = _caseGroupService.SelectCaseGroup(criteria);
 
             return Json(caseGroups, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult AddCustomerGroupToCase(int caseId)
         {
             var model = new AddCustomerGroupToCaseViewModel()
@@ -74,7 +52,15 @@
                 }).ToList()
             };
 
-            return View("~/Areas/FraudDetection/Views/CaseGroup/AddCustomerGroupToCase.cshtml");
+            return View("~/Areas/FraudDetection/Views/CaseGroup/AddCustomerGroupToCase.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult AddCustomerGroupToCase(CaseGroupInsertCriteria criteria)
+        {
+            var commandResult = _caseGroupService.InsertCaseGroup(criteria);
+
+            return Json(commandResult, JsonRequestBehavior.DenyGet);
         }
 
         public ActionResult RemoveCustomerGroupFromCase(CaseGroupDeleteCriteria criteria)
@@ -83,12 +69,5 @@
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-    }
-
-    public class AddCustomerGroupToCaseViewModel
-    {
-        public int CaseId { get; set; }
-
-        public IList<Group> Groups { get; set; }
     }
 }

@@ -12,9 +12,13 @@
     <title>Fraud Detection</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     @RenderSection("HeadCss", false)
-    @Styles.Render("~/bundles/coreCss")  
+    @Styles.Render("~/bundles/coreCss")
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~/")';
+        var SPU = {};
+        SPU.getAbsoluteUrl = function (relativeUrl) {
+            return window.rootUrl + relativeUrl;
+        };
     </script>
 </head>
 <body ng-app="spu">
@@ -48,14 +52,6 @@
         </section>
     </div>
     @RenderSection("Foot", false)
-    <script type="text/javascript">
-        var SPU = {};
-        SPU.getAbsoluteUrl = function (relativeUrl) {
-            return '@Url.Content("~/")' + relativeUrl;
-        };
-
-        SPU.baseUrl = '@Url.Content("~/")';
-    </script>
     @Scripts.Render("~/bundles/coreJs")
     @if (NapSettings.Settings.EnableReCheckIn)
     {

@@ -2,14 +2,10 @@
     '$q', '$filter', '$timeout', '$http', function($q, $filter, $timeout, $http) {
         var service = {};
 
-        service.getData = function (params) {
-            //$http.post('http://localhost:49688/TimeSheet/GetData', params)
-            //    .success(function (result) {
-            //        //note, the server passes the information about the data set size
-            //        deferred.resolve(result);
-            //    });
+        service.addCustomerGroupToCase = function (param) {
+            var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase");
 
-            //return deferred.promise;
+            return $http.post(url, param);
         };
 
         return service;

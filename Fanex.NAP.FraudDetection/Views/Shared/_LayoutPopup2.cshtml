@@ -6,19 +6,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @RenderSection("HeadCss", false)
-
-    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
-    <script src="~/Scripts/smart-table.js"></script>
     @Styles.Render("~/bundles/coreCss")
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~/")';
+        var SPU = {};
+        SPU.getAbsoluteUrl = function (relativeUrl) {
+            return window.rootUrl + relativeUrl;
+        };
+    </script>
 </head>
 <body class="popup" ng-app="spuApp">
+    <div id="sentAlert" class="alert alert-danger collapse">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <div>Add Customer Group To Case</div>
+    </div>
+
     @RenderBody()
+
+    @RenderSection("Foot", false)
+    @Scripts.Render("~/bundles/coreJs")
+    @Scripts.Render("~/bundles/angularJs")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () { $('bl').hide(); }, 500);
+        });
+    </script>
 </body>
-
-
-@RenderSection("FooterJs",false)
+    @RenderSection("FooterJs", false)
 </html>

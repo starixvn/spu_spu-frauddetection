@@ -8,7 +8,6 @@ var gridOptions
 $(document).ready(function () {
     _caseId = $("#CaseId").val();
     Search();
-    CaseGroupService.init();
     CaseGroupService.getCustomerGroupByCase();
 });
 //--------------------------------------------------------------------------------------------------------------------
@@ -124,7 +123,7 @@ function EditTask(taskId) {
     window.location.href = "/Task/TaskEditInfo" + "?taskId=" + taskId;
 }
 
-$("#btn_AddNewTask").click(function () {    
+$("#btn_AddNewTask").click(function () {
      window.location.href = "/Task" + "?caseId=" + _caseId;
  });
 
@@ -194,9 +193,6 @@ var CaseGroupService = (function($) {
     // private methods
 
     var caseId = $("#CaseId").val();
-    var $sentAlert = $('#sentAlert');
-    var $message = $('#sentAlert div');
-    var timeoutID = null;
 
     var getBodyRows = function (data) {
         var bodyRows = [];
@@ -240,18 +236,6 @@ var CaseGroupService = (function($) {
 
 // public methods
 
-    service.init = function() {
-        $sentAlert.on('close.bs.alert', function () {
-            if (timeoutID !== null) {
-                clearTimeout(timeoutID);
-                timeoutID = null;
-            }
-            
-            $sentAlert.hide();
-            return false;
-        });
-    };
-
     service.getCustomerGroupByCase = function () {
         var url = SPU.getAbsoluteUrl("CaseGroup/GetCustomerGroupsInCase");
         
@@ -264,7 +248,7 @@ var CaseGroupService = (function($) {
             data: JSON.stringify(param),
             cache: false,
             url: url,
-            error: function () {
+            error: function (error) {
                 alert(error);
             },
             success: function (data) {
@@ -276,38 +260,7 @@ var CaseGroupService = (function($) {
 
     service.addCustomerGroupToCase = function (caseId) {
         var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase?caseId={0}".format(caseId));
-        var param = {
-        };
-
-        $.ajax({
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            data: JSON.stringify(param),
-            cache: false,
-            url: url,
-            error: function (error) {
-                alert(error);
-            },
-            success: function (data) {
-                alert("data");
-
-            //    $('<div id="popup"></div>')
-            //.appendTo('body')
-            //.dialog({
-            //    modal: true,
-            //    title: "Add New Group",
-            //    zIndex: 10000,
-            //    autoOpen: true,
-            //    width: '500px',
-            //    resizable: false,
-            //    close: function () {
-            //        $(this).remove();
-            //    }
-            //})
-            //.html(response);
-            }
-        });
+        DialogService.openDialogFrame(url, "Add Customer Group To Case", { width: 580, height: 350 });
     };
 
     service.removeCustomerGroupFromCase = function (caseId, groupId) {
@@ -328,22 +281,10 @@ var CaseGroupService = (function($) {
                 alert(error);
             },
             success: function (data) {
-                if (data.IsSuccessful === true) {
-                    $message.text('aabas');
-                    $sentAlert.removeClass('alert-danger');
-                    $sentAlert.addClass('alert-success');
-
-                    timeoutID = setTimeout(function () {
-                        $sentAlert.hide();
-                        timeoutID = null;
-                    }, 3000);
-                } else {
-                    $message.text(data.Message);
-                    $sentAlert.removeClass('alert-success');
-                    $sentAlert.addClass('alert-danger');
+                AlertService.showAlert(data);
+                if (data.IsSuccessful) {
+                    service.getCustomerGroupByCase();
                 }
-
-                $sentAlert.show();
             }
         });
     };
