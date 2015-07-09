@@ -23,7 +23,7 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
         public TaskViewModel(
             List<SPU.Lib.FraudDetection.DTO.Event> events, 
             List<Config> configs,
-            List<Group> groups,
+            List<CaseGroup> groups,
             List<Sport> sportList,
             List<Bettype> bettypeList,
             List<MailMasterInfo> mailMasterList )
@@ -34,10 +34,6 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
             SportList = sportList;
             BettypeList = bettypeList;
             MaiMasterList = mailMasterList;
-
-            var counterTableSQLString = ConfigurationList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable;
-            ConfigurationList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable =
-                counterTableSQLString.Replace("$param1$", TaskInformation.CaseId.ToString());
         }
 
         // On User ID
@@ -74,7 +70,7 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
         }
 
         // Customer Groups
-        public List<Group> GroupList { get; set; }
+        public List<CaseGroup> GroupList { get; set; }
 
         // Mail Masters
         public List<MailMasterInfo> MaiMasterList { get; set; }

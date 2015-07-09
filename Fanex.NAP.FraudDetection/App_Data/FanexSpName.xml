@@ -8,10 +8,6 @@
     <Setting Key="SPU_CaseSelectById" SpName="SPU_CaseSelectById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
-  <Function Name="SPU_Task">
-    <Setting Key="SPU_TaskSelectAllByCaseId" SpName="SPU_TaskSelectAllByCaseId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-  </Function>
-
   <Function Name="SPU_CustomerGroup">
     <Setting Key="SPU_GroupIns" SpName="SPU_GroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_GroupSelectAll" SpName="SPU_GroupSelectAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
@@ -31,6 +27,7 @@
     <Setting Key="SPU_TaskUpd" SpName="SPU_TaskUpd" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_TaskUpdateStatus" SpName="SPU_TaskUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_TaskSelectByCaseId" SpName="SPU_TaskSelectByCaseId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_TaskSelectAllByCaseId" SpName="SPU_TaskSelectAllByCaseId" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="SPU_Configurations">
@@ -65,5 +62,6 @@
   <Function Name="CaseGroup">
     <Setting Key="SPU_CaseGroupIns" SpName="SPU_CaseGroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_CaseGroupDel" SpName="SPU_CaseGroupDel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseGroupSel" SpName="SPU_CaseGroupSel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 </Functions>

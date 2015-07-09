@@ -121,6 +121,12 @@
                         <option value="@sport.SportId">@sport.SportName</option>
                     }
                 </select>
+                <select name="preconditionConfigControlComboBoxcustomergroup" id="preconditionConfigControlComboBoxcustomergroup" style="height: 25px; display:none;">
+                    @foreach (var group in Model.GroupList)
+                    {
+                        <option value="@group.GroupId" >@group.GroupName</option>
+                    }
+                </select>
                 <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px; display: none;" />
                 @Html.TextBox("preconditionConfigControlDatetimePicker", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:100px;" })
                 <i class="icon-calendar icon-event-date-calendar" id="preconditionConfigControlDatetimePickerIcon" style=""></i>
@@ -187,6 +193,12 @@
                     @foreach (var bettype in Model.BettypeList)
                     {
                         <option value="@bettype.BettypeId">@bettype.BettypeName</option>
+                    }
+                </select>
+                <select name="ruleConfigControlComboBoxcustomergroup" id="ruleConfigControlComboBoxcustomergroup" style="height: 25px; display:none;">
+                    @foreach (var group in Model.GroupList)
+                    {
+                        <option value="@group.GroupId" >@group.GroupName</option>
                     }
                 </select>
                 <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />

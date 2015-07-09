@@ -7,6 +7,8 @@
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 // </history>
 
+using SPU.Lib.FraudDetection.Criteria.CaseGroup;
+
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
@@ -72,18 +74,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria());
 
             // Groups
-            var groupCriteria = new GroupSelectAllCriteria { PageSize = 100, PageIndex = 1 };
-            var groupService = new GroupService();
-            var dataCollection = groupService.GetGroups(groupCriteria);
-            var groupList = new List<Group>();
-            foreach (DataRow dr in dataCollection.Data.Tables[0].Rows)
-            {
-                groupList.Add(new Group
-                {
-                    GroupId = int.Parse(dr["groupid"].ToString()),
-                    GroupName = dr["groupname"].ToString()
-                });
-            }
+            var caseGroupService = new CaseGroupService();
+            var groupList = caseGroupService.SelectCaseGroup(new CaseGroupSelectCriteria { CaseId = caseID}).ToList();
 
             // Bettypes and Sports
             var bettypeService = new BettypeService();
@@ -98,6 +90,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 sportList.ToList(),
                 bettypeList.ToList(),
                 mailMasterList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { CaseId = caseID, IsActive = true} };
+
+
+            var counterTableSQLString = taskViewModel.ConfigurationList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable;
+            taskViewModel.ConfigurationList.Where(l => l.ConfigName == "Counter").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseID.ToString());
 
             return taskViewModel;
         }
