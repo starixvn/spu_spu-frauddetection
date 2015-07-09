@@ -20,7 +20,10 @@
 
 <div>
     @Html.HiddenFor(a => a.CaseId)
-    <span class="infor-text">Case Details</span>
+    <span class="infor-text">Case Details </span>
+    <div class="button-action">
+        <a class="back-button" href="/Case">← Back To List </a>
+    </div>
     <div class="newline">
         &nbsp;</div>
     <span class="lbl-text">Case Name: @ViewBag.CaseName </span>
@@ -31,12 +34,9 @@
 </form>
 <div id="SearchResult" class="freegrid  content-grid">
 </div>
-<div class="button-action">
-    <a class="back-button" href="/Case">← Back To List </a>
 </div>
 
 <div style ="clear: both;"class="newline">&nbsp;</div>
 
 <div id="CaseGroupResult" class="freegrid  content-grid">
     
-</div>

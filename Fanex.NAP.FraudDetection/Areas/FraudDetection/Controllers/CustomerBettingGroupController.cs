@@ -1,0 +1,163 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="CustomerBettingGroupController.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Aaron.Cao" date="2015.07.08">Created</change>
+// </history>
+
+namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
+{
+    using System.Web.Mvc;
+    using NAP.FraudDetection.Controllers;
+    using SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup;
+    using SPU.Lib.FraudDetection.Service.Implement;
+
+    /// <summary>
+    /// The CustomerBettingGroupController.
+    /// </summary>
+    public class CustomerBettingGroupController : BaseController
+    {
+        private readonly CustomerBettingGroupService _customerBettingGroupService;
+
+        public CustomerBettingGroupController()
+        {
+            _customerBettingGroupService = new CustomerBettingGroupService();
+        }
+
+        public ActionResult Index()
+        {
+            return View("~/Areas/FraudDetection/Views/CustomerBettingGroup/Index.cshtml");
+        }
+
+        /// <summary>
+        /// Add New Group.
+        /// </summary>
+        /// <returns>HTML string.</returns>
+        [HttpGet]
+        public string AddNewGroup()
+        {
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/Add.cshtml", new CustomerBettingGroupInsertCriteria());
+        }
+
+        /// <summary>
+        /// Add new group.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpPost]
+        public ActionResult AddNewGroup(CustomerBettingGroupInsertCriteria criteria)
+        {
+            if (string.IsNullOrEmpty(criteria.Name))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Group should has a name." } };
+            }
+
+            criteria.CreatorId = 1;
+            var result = _customerBettingGroupService.InsertGroup(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        /// <summary>
+        /// The method EditGroupInfo.
+        /// </summary>
+        /// <param name="groupId">The group ID.</param>
+        /// <returns>A template view.</returns>
+        [HttpGet]
+        public string EditGroupInfo(int? groupId)
+        {
+            var criteria = new CustomerBettingGroupGetByIdCriteria
+            {
+                GroupId = groupId == null ? 0 : (int)groupId
+            };
+            var groupInfo = _customerBettingGroupService.GetGroupById(criteria);
+            var model = new CustomerBettingGroupUpdateCriteria
+            {
+                CreatorId = 1,
+                GroupId = groupInfo.GroupId,
+                Name = groupInfo.Name,
+                Description = groupInfo.Description
+            };
+
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/Edit.cshtml", model);
+        }
+
+        /// <summary>
+        /// Edit Group.
+        /// </summary>
+        /// <param name="criteria">Group Update Criteria.</param>
+        /// <returns>Action Result.</returns>
+        [HttpPost]
+        public ActionResult EditGroup(CustomerBettingGroupUpdateCriteria criteria)
+        {
+            criteria.CreatorId = 1;
+            var result = _customerBettingGroupService.UpdateGroup(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        [HttpGet]
+        public ActionResult GetAllGroups()
+        {
+            var criteria = new CustomerBettingGroupGetAllCriteria();
+            var groups = _customerBettingGroupService.GetGroups(criteria);
+
+            return Json(groups, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Delete a group.
+        /// </summary>
+        /// <param name="groupId">The group ID.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpPost]
+        public ActionResult Delete(int groupId)
+        {
+            var criteria = new CustomerBettingGroupDeleteCriteria
+            {
+                CreatorId = 1,
+                GroupId = groupId
+            };
+
+            var result = _customerBettingGroupService.DeleteGroup(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        [HttpGet]
+        public string EditCustomers(int groupId)
+        {
+            var model = new CustomerBettingGroupInsertCustomerCriteria { GroupId = groupId };
+
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/EditCustomer.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomers(CustomerBettingGroupInsertCustomerCriteria criteria)
+        {
+            if (string.IsNullOrEmpty(criteria.CustomerName))
+            {
+                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "Customer should have a name." } };
+            }
+
+            criteria.CreatorId = 1;
+            var result = _customerBettingGroupService.InsertCustomer(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
+        [HttpGet]
+        public ActionResult GetGroupById(int groupId)
+        {
+            var criteria = new CustomerBettingGroupGetByIdCriteria
+            {
+                GroupId = groupId
+            };
+            var group = _customerBettingGroupService.GetGroupById(criteria);
+
+            return Json(group, JsonRequestBehavior.AllowGet);
+        }
+    }
+}

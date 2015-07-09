@@ -1,0 +1,34 @@
+﻿@model SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup.CustomerBettingGroupInsertCustomerCriteria
+@{
+    ViewBag.Title = "Add New Customer";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+}
+@using (Html.BeginForm("EditCustomers", "CustomerBettingGroup", FormMethod.Post, new { @id = "EditCustomerForm" }))
+{
+    <table class="table-popup">
+        <tr>
+            <td align="left">
+                <span>Customer:</span>
+            </td>
+            <td>
+                @Html.TextBoxFor(l => l.CustomerName, new { @style = "width: 250px;" })
+            </td>
+            <td>
+                <input type="button" id="btn_addCustomer" value="Add to Group" class="btn-green font-size-small" />
+            </td>
+        </tr>
+    </table>
+    @Html.HiddenFor(l => l.GroupId)
+}
+<div id="customer-betting-group-customers" class="freegrid content-grid">
+</div>
+<div id="customer-betting-group-search-customers" class="newline">
+    &nbsp;</div>
+<input type="button" id="btn_Cancel" value="Close" class="btn-green btn-customCancel font-size-small" />
+<br />
+<label id="addResult" class="hidden" />
+@section FooterJs
+{
+    <script src="~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-add-customer.js"
+        type="text/javascript"></script>
+}

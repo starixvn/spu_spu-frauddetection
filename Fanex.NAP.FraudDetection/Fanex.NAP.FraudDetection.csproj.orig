@@ -18,6 +18,10 @@
     <UseIISExpress>false</UseIISExpress>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <JSLintSkip>\Scripts\head.min.js|\Scripts\head.js|\Scripts\respond.js|\Scripts\Plugin\multi-select-control.js</JSLintSkip>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,8 +62,9 @@
     <Reference Include="Couchbase">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
     </Reference>
-    <Reference Include="dotless.Core">
-      <HintPath>..\packages\dotless.1.4.4\lib\dotless.Core.dll</HintPath>
+    <Reference Include="dotless.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <HintPath>..\packages\dotless.1.5.0\lib\dotless.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\EasyNetQ.dll</HintPath>
@@ -139,6 +144,9 @@
     <Reference Include="Microsoft.Practices.Unity.Interception">
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="MsieJavaScriptEngine">
       <HintPath>..\packages\MsieJavaScriptEngine.1.4.4\lib\net40\MsieJavaScriptEngine.dll</HintPath>
     </Reference>
@@ -162,27 +170,27 @@
     </Reference>
     <Reference Include="SPU.Lib.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.Core.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.Core.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.DTO.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.DTO.dll</HintPath>
     </Reference>
     <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\spu-lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection\bin\Debug\SPU.Lib.FraudDetection.Service.dll</HintPath>
+      <HintPath>Dependencies\SPU.Lib.FraudDetection.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -260,11 +268,18 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+<<<<<<< HEAD
+    <Compile Include="Areas\FraudDetection\Models\AddCustomerGroupToCaseViewModel.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\CaseGroupController.cs" />
+=======
+    <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
+>>>>>>> #39228: Implement client side
+    <Compile Include="Areas\FraudDetection\Controllers\SuspiciousCustomerController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MailMasterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
-    <Compile Include="Areas\FraudDetection\Controllers\WorkflowController.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\CaseController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
     <Compile Include="Areas\FraudDetection\Models\TaskAdditionalInfo.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
@@ -423,6 +438,20 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
+<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupController.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupService.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\spuApp.js" />
+    <Content Include="Scripts\Core\AlertService.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />
+=======
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add-customer.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
+>>>>>>> #39228: Implement client side
+    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-update.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
@@ -433,12 +462,12 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-list.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Case\case-detail-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-detail-list.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-edit.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-add.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Workflow\workflow-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Case\case-detail-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Case\case-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Case\case-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Case\case-list.js" />
     <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Error.css" />
     <Content Include="Areas\UserLogin\Views\Common\Style\Images\accessDenied.gif" />
@@ -505,21 +534,28 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\jquery-ui\base\accordion.css" />
     <Content Include="Areas\FraudDetection\Views\Web.config" />
-    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowList.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Case\CaseList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupAdd.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowAdd.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\Workflow\WorkflowDetail.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Case\CaseAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Case\CaseDetail.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Parameter\ParameterUpdate.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
-=======
     <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
->>>>>>> #38306: Implement client side (Edit Group)
+    <Content Include="Areas\FraudDetection\Views\Case\CaseEdit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Reports\SuspiciousCustomerReport.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Views\CaseGroup\AddCustomerGroupToCase.cshtml" />
+=======
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Add.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Edit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Index.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\EditCustomer.cshtml" />
+>>>>>>> #39228: Implement client side
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -560,9 +596,25 @@
     <Content Include="Content\jquery-ui\base\tooltip.css" />
     <Content Include="Content\Plugin\multi-select-control.css" />
     <Content Include="Content\tinymce\tinymce.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Dependencies\SPU.Lib.Core.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.BusinessManager.UnitTest.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.Criteria.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.DataAccess.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.DTO.dll" />
+    <Content Include="Dependencies\SPU.Lib.FraudDetection.Service.dll" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Core\DialogService.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Grid.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Pagination.js" />
     <Content Include="Scripts\Fanex.Grid\Language\Fanex.Gird.Lang.en-US.js" />
@@ -587,12 +639,15 @@
     <Content Include="Scripts\jquery.number.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\numeral.min.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\viewlog.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\edit.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\addnew.js" />
     <Content Include="Scripts\Page\DefaultBetSetting\default.js" />
     <Content Include="Scripts\Page\Home\home.js" />
     <Content Include="Scripts\Plugin\multi-select-control.js" />
+    <Content Include="Scripts\smart-table.js" />
+    <Content Include="Scripts\smart-table.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
@@ -667,22 +722,6 @@
     <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
-    <Content Include="SiteConfig\Web.AppSettings.config.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Web.AppSettings.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.config1.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Web.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.ConnectionString.config.txt" />
-    <Content Include="SiteConfig\Web.ConnectionString.config1.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Web.ConnectionString.config.tt</DependentUpon>
-    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -694,70 +733,23 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Deployment.ignore" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
-    <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
-    <None Include="SiteConfig\SiteConfiguration.ttinclude" />
-    <None Include="SiteConfig\Web.AppSettings.config.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Web.AppSettings.config.txt</LastGenOutput>
-    </None>
-    <Content Include="SiteConfig\Web.AppSettings.LOCAL.config">
-      <DependentUpon>Web.AppSettings.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.AppSettings.PRO.config">
-      <DependentUpon>Web.AppSettings.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.AppSettings.SANDBOX.config">
-      <DependentUpon>Web.AppSettings.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.AppSettings.UAT.config">
-      <DependentUpon>Web.AppSettings.config.tt</DependentUpon>
-    </Content>
-    <None Include="SiteConfig\Web.config.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Web.config1.txt</LastGenOutput>
-    </None>
-    <None Include="SiteConfig\Web.ConnectionString.config.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Web.ConnectionString.config1.txt</LastGenOutput>
-    </None>
-    <Content Include="SiteConfig\Web.ConnectionString.LOCAL.config">
-      <DependentUpon>Web.ConnectionString.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.ConnectionString.PRO.config">
-      <DependentUpon>Web.ConnectionString.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.ConnectionString.SANDBOX.config">
-      <DependentUpon>Web.ConnectionString.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.ConnectionString.UAT.config">
-      <DependentUpon>Web.ConnectionString.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.LOCAL.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.PRO.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.SANDBOX.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-    </Content>
-    <Content Include="SiteConfig\Web.UAT.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-    </Content>
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Shared\_LayoutPopup.cshtml" />
+    <Content Include="Views\Shared\_LayoutPopup2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\FraudDetection\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="ClearScript.V8\" />
-    <Folder Include="_Dependency\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -907,7 +899,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51823</DevelopmentServerPort>
+          <DevelopmentServerPort>52128</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

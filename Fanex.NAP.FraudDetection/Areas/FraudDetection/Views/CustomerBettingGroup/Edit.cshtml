@@ -1,0 +1,39 @@
+﻿@model SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup.CustomerBettingGroupUpdateCriteria
+@{
+    ViewBag.Title = "Edit Group";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+}
+@using (Html.BeginForm("EditGroup", "CustomerBettingGroup", FormMethod.Post, new { @id = "EditGroupForm" }))
+{
+    <table class="table-popup">
+        <tr>
+            <td align="right">
+                <span>Name</span>
+            </td>
+            <td>@Html.TextBoxFor(l => l.Name, new { @style = "width: 350px;", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <span>Description</span>
+            </td>
+            <td>@Html.TextAreaFor(l => l.Description, 5, 45, new { @style = "width: 350px;" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="button" id="btn_editGroup" value="Submit" class="btn-green font-size-small" />
+                <input type="button" id="btn_Cancel" value="Cancel" class="btn-green btn-customCancel font-size-small" />
+            </td>
+        </tr>
+    </table>
+    @Html.HiddenFor(l => l.GroupId)
+    @Html.HiddenFor(l => l.Name)}
+<br />
+<label id="addResult" class="hidden" />
+@section FooterJs
+{
+    <script src="~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-edit.js" type="text/javascript"></script>
+}

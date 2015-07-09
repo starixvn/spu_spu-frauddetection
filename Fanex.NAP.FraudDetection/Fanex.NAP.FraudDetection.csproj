@@ -268,6 +268,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Models\AddCustomerGroupToCaseViewModel.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\SuspiciousCustomerController.cs" />
@@ -438,6 +439,10 @@
     <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupController.js" />
     <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupService.js" />
     <Content Include="Areas\FraudDetection\Scripts\CaseGroup\spuApp.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add-customer.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
     <Content Include="Scripts\Core\AlertService.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report.js" />
@@ -538,6 +543,10 @@
     <Content Include="Areas\FraudDetection\Views\Case\CaseEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\SuspiciousCustomerReport.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CaseGroup\AddCustomerGroupToCase.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Add.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Edit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Index.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\EditCustomer.cshtml" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
