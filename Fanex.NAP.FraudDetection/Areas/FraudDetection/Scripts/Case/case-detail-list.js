@@ -71,7 +71,7 @@ function Search() {
                 // Modify "Active" column
                 gridOptions.bodyRows[i].Columns[5].Row = i;
                 gridOptions.bodyRows[i].Columns[5].CustomCellRender = ActiveColumn;
-                                
+
                 // Modify "Action" column
                 gridOptions.bodyRows[i].Columns =  FraudDetectionScripts.insertAtIndex(
                     gridOptions.bodyRows[i].Columns,
@@ -85,25 +85,25 @@ function Search() {
     });
 }
 
-function ReRenderAfterPaged(page_index, itemsPerPage, jq) {
+function ReRenderAfterPaged(pageIndex, itemsPerPage) {
     if (itemsPerPage != $('#PageSize').val()) {
         $('#PageIndex').val(0);
         _pageIndex = 0;
     } else {
-        $('#PageIndex').val(page_index);
-        _pageIndex = page_index
+        $('#PageIndex').val(pageIndex);
+        _pageIndex = pageIndex;
     }
 
     $('#PageSize').val(itemsPerPage);
     _pageSize = itemsPerPage;
 
-    gridOptions.pagerOption.currentPage = page_index;
+    gridOptions.pagerOption.currentPage = pageIndex;
     Search();
 
     return false;
 }
 
-function ActiveColumn(cell, cellFormated) {
+function ActiveColumn(cell) {
     var taskId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     if (cell.Value == "True") {
@@ -114,7 +114,7 @@ function ActiveColumn(cell, cellFormated) {
         }
 }
 
-function ActionColumn(cell, cellFormated) {
+function ActionColumn(cell) {
     var taskId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
     return "<div class='btn-action' onclick=\"EditTask(" + taskId + ");\"></div>";
 }
@@ -170,7 +170,7 @@ $("#btn_AddNewTask").click(function () {
                          Search();
                      }
                      else {
-                         alert(result.ErrMsg);
+                         AlertService.showAlert(response);
                      }
                  }
              });
@@ -270,7 +270,7 @@ var CaseGroupGridService = (function($) {
             cancelButtonClass: 'btn-green btn-customCancel',
             title: "Delete confirmation",
             text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
-            confirm: function (button) {
+            confirm: function () {
                 var url = SPU.getAbsoluteUrl("CaseGroup/RemoveCustomerGroupFromCase");
                 var param = {
                     caseId: caseId,
@@ -296,7 +296,7 @@ var CaseGroupGridService = (function($) {
                     }
                 });
             },
-            cancel: function (button) {
+            cancel: function () {
             },
             confirmButton: "Delete",
             cancelButton: "Cancel"

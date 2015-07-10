@@ -16,7 +16,6 @@
                 $("#addResult").attr('class', 'result-text-success');
                 $("#addResult").html("Edit group successfully!");
                 setTimeout(function () {
-                    //$("div#popup").dialog("destroy").remove();
                     DialogService.closeDialog();
                 }, 3000);
                 Search();
@@ -36,10 +35,7 @@ function editGroupInfo(groupId) {
     $.get('Group/EditGroupInfo', { groupId: groupId }, function (response) {
         DialogService.setDialogId("pop-up");
         DialogService.openDialogContent(response, "Edit Group", {
-            width: '500px',
-            close: function () {
-                $(this).remove();
-            }
+            width: '500px'
         });
     });
 }

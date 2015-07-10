@@ -80,15 +80,15 @@ function Search() {
 
             $("#SearchResult").fanexGrid(gridOptions);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function () {
             //alert(xhr);
         },
-        complete: function (jqXHR, textStatus) {
+        complete: function () {
         }
     });
 }
 
-function ReRenderAfterPaged(pageIndex, itemsPerPage, jq) {
+function ReRenderAfterPaged(pageIndex, itemsPerPage) {
     if (itemsPerPage != $('#PageSize').val()) {
         $('#PageIndex').val(0);
         _pageIndex = 0;
@@ -106,7 +106,7 @@ function ReRenderAfterPaged(pageIndex, itemsPerPage, jq) {
     return false;
 }
 
-function CaseNameColumn(cell, cellFormated) {
+function CaseNameColumn(cell) {
     var caseId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
     var caseName = gridOptions.bodyRows[cell.Row].Columns[2].Value;
 
@@ -115,7 +115,7 @@ function CaseNameColumn(cell, cellFormated) {
 }
 
 
-function ActiveColumn(cell, cellFormated) {
+function ActiveColumn(cell) {
     var caseId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     if (cell.Value == "True") {
@@ -126,7 +126,7 @@ function ActiveColumn(cell, cellFormated) {
     }
 }
 
-function EditColumn(cell, cellFormated) {
+function EditColumn(cell) {
     var caseId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editCaseInfo(" + caseId + ")'/>";
@@ -143,20 +143,10 @@ $("#btn_addNewCase").click(function () {
         error: function () {
         },
         success: function (response) {
-            $('<div id="popup"></div>')
-            .appendTo('body')
-            .dialog({
-                modal: true,
-                title: "Add New Case",
-                zIndex: 10000,
-                autoOpen: true,
-                width: '500px',
-                resizable: false,
-                close: function () {
-                    $(this).remove();
-                }
-            })
-            .html(response);
+            DialogService.setDialogId("popup");
+            DialogService.openDialogContent(response, "Add New Case", {
+                width: '500px'
+            });
         },
         beforeSend: function () {
 

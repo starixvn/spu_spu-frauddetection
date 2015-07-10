@@ -15,7 +15,7 @@
                 $("#addResult").attr('class', 'result-text-success');
                 $("#addResult").html("Edit case successfully!");
                 setTimeout(function () {
-                    $("div#popup").dialog("destroy").remove();
+                    DialogService.closeDialog();
                 }, 3000);
                 Search();
             }
@@ -32,17 +32,10 @@
 */
 function editCaseInfo(caseId) {
     $.get('Case/EditCaseInfo', { caseId: caseId }, function (response) {
-        $('<div id="popup"></div>').appendTo('body').dialog({
-            modal: true,
-            title: "Edit Case",
-            zIndex: 10000,
-            autoOpen: true,
-            width: '500px',
-            resizable: false,
-            close: function () {
-                $(this).remove();
-            }
-        }).html(response);
+        DialogService.setDialogId("popup");
+        DialogService.openDialogContent(response, "Edit Case", {
+            width: '500px'
+        });
     });
 }
 

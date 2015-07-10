@@ -4,7 +4,7 @@ spuApp.controller('CaseGroupController', [
 
         $scope.caseId = caseId;
 
-        var convertRowCollection = function(groups) {
+        var convertRowCollection = function (groups) {
             var rows = [];
             $.each(groups, function (idx, item) {
                 var newItem = $.extend(true, {}, item, { isSelected: false });
@@ -18,7 +18,7 @@ spuApp.controller('CaseGroupController', [
 
         $scope.isSelectAll = false;
 
-        $scope.selectAll = function() {
+        $scope.selectAll = function () {
             $scope.isSelectAll = !$scope.isSelectAll;
             $.each($scope.rowCollection, function (idx, item) {
                 item.isSelected = $scope.isSelectAll;
@@ -42,7 +42,7 @@ spuApp.controller('CaseGroupController', [
             $scope.isSelectAll = hasAllSelectedRows();
         };
 
-        var collectCustomerGroup = function() {
+        var collectCustomerGroup = function () {
             var selectedGroups = [];
 
             $.each($scope.rowCollection, function (idx, item) {
@@ -54,7 +54,7 @@ spuApp.controller('CaseGroupController', [
             return selectedGroups;
         };
 
-        $scope.submitData = function() {
+        $scope.submitData = function () {
             var selectedGroups = collectCustomerGroup();
 
             if (selectedGroups.length === 0) {
@@ -84,10 +84,9 @@ spuApp.controller('CaseGroupController', [
             });
         };
 
-        $scope.closeDialog = function () {
-            alert('closeDialog');
+        $scope.closeDialog = function() {
             DialogService.closeDialog();
-        }
+        };
 
         $scope.$watch($scope.rowCollection, function () {
 

@@ -78,33 +78,33 @@ function Search() {
 
             $("#SearchResult").fanexGrid(gridOptions);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
+        error: function () {
             //alert(xhr);
         },
-        complete: function (jqXHR, textStatus) {
+        complete: function () {
         }
     });
 }
 
-function ReRenderAfterPaged(page_index, itemsPerPage, jq) {
+function ReRenderAfterPaged(pageIndex, itemsPerPage) {
     if (itemsPerPage != $('#PageSize').val()) {
         $('#PageIndex').val(0);
         _pageIndex = 0;
     } else {
-        $('#PageIndex').val(page_index);
-        _pageIndex = page_index
+        $('#PageIndex').val(pageIndex);
+        _pageIndex = pageIndex;
     }
 
     $('#PageSize').val(itemsPerPage);
     _pageSize = itemsPerPage;
 
-    gridOptions.pagerOption.currentPage = page_index;
+    gridOptions.pagerOption.currentPage = pageIndex;
     Search();
 
     return false;
 }
 
-function ActiveColumn(cell, cellFormated) {
+function ActiveColumn(cell) {
     var groupId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     if (cell.Value == "True") {
@@ -115,7 +115,7 @@ function ActiveColumn(cell, cellFormated) {
     }
 }
 
-function EditColumn(cell, cellFormated) {
+function EditColumn(cell) {
     var groupId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
 
     return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='editGroupInfo(" + groupId + ")'/>";
@@ -132,20 +132,10 @@ $("#btn_AddNewGroup").click(function () {
         error: function () {
         },
         success: function (response) {
-            $('<div id="popup"></div>')
-            .appendTo('body')
-            .dialog({
-                modal: true,
-                title: "Add New Group",
-                zIndex: 10000,
-                autoOpen: true,
-                width: '500px',
-                resizable: false,
-                close: function () {
-                    $(this).remove();
-                }
-            })
-            .html(response);
+            DialogService.setDialogId("popup");
+            DialogService.openDialogContent(response, "Add New Group", {
+                width: '500px'
+            });
         },
         beforeSend: function () {
 

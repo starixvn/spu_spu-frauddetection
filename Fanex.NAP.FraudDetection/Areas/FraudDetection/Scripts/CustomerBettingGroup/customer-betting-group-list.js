@@ -8,20 +8,10 @@
     */
     $("#btn_addNewCustomerBettingGroup").click(function () {
         $.get('CustomerBettingGroup/AddNewGroup', function (response) {
-            $('<div id="popup"></div>')
-            .appendTo('body')
-            .dialog({
-                modal: true,
-                title: "Add New Group",
-                zIndex: 10000,
-                autoOpen: true,
-                width: '500px',
-                resizable: false,
-                close: function () {
-                    $(this).remove();
-                }
-            })
-            .html(response);
+            DialogService.setDialogId("popup");
+            DialogService.openDialogContent(response, "Add New Group", {
+                width: '500px'
+            });
         });
     });
 });
@@ -158,17 +148,10 @@ function deleteGroup(groupId) {
 */
 function editGroupInfo(groupId) {
     $.get('CustomerBettingGroup/EditGroupInfo', { groupId: groupId }, function (response) {
-        $('<div id="popup"></div>').appendTo('body').dialog({
-            modal: true,
-            title: "Edit Group",
-            zIndex: 10000,
-            autoOpen: true,
-            width: '500px',
-            resizable: false,
-            close: function () {
-                $(this).remove();
-            }
-        }).html(response);
+        DialogService.setDialogId("popup");
+        DialogService.openDialogContent(response, "Edit Group", {
+            width: '500px'
+        });
     });
 }
 
@@ -180,18 +163,13 @@ function editCustomers(groupId) {
         $.get('CustomerBettingGroup/GetGroupById', { groupId: groupId }, function (group) {
             var groupName = group.Name + " - ";
             var groupDesc = group.Description;
+            var title = "Add Customer: " + groupName + groupDesc;
 
-            $('<div id="popup"></div>').appendTo('body').dialog({
-                modal: true,
-                title: "Add Customer: " + groupName + groupDesc,
-                zIndex: 10000,
-                autoOpen: true,
-                width: '500px',
-                resizable: false,
-                close: function () {
-                    $(this).remove();
-                }
-            }).html(response);
+            DialogService.setDialogId("popup");
+            DialogService.openDialogContent(response, title, {
+                position: { my: "top+63%", at: "center top", of: window },
+                width: '500px'
+            });
 
             renderCustomerTable(group.Customers);
         });

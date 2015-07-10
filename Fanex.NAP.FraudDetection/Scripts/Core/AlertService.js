@@ -33,7 +33,7 @@
             $sentAlert.removeClass('alert-danger');
             $sentAlert.addClass('alert-success');
 
-            timeoutID = setTimeout(function () {
+            timeoutID = setTimeout(function() {
                 $sentAlert.hide();
                 timeoutID = null;
             }, 3000);
@@ -44,9 +44,9 @@
         }
 
         $sentAlert.show();
-    }
+    };
 
-    var showAlertByString = function(message) {
+    var showAlertByString = function (message) {
         $message.text(message);
         $sentAlert.removeClass('alert-success');
         $sentAlert.addClass('alert-danger');

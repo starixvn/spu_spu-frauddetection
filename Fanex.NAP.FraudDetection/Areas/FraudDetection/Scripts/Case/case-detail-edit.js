@@ -15,7 +15,7 @@ function editActive(obj, caseId) {
 
     if ($(obj).hasClass('ico-tick')) {
 
-        confirm('Do you want to deactivate this task ?', function () {
+        confirm('Do you want to deactivate this task?', function () {
             $(obj).removeClass('ico-tick').addClass('ico-untick');
 
             var url = 'EditActive?caseId=' + caseId + '&status=false';
@@ -26,7 +26,7 @@ function editActive(obj, caseId) {
                 type: 'POST',
                 dataType: 'html',
                 cache: false,
-                beforeSend: function (xhr) {
+                beforeSend: function () {
                 },
                 success: function (result) {
                     result = result.toLowerCase();
@@ -77,9 +77,9 @@ function editActive(obj, caseId) {
 
 function deleteCase(caseId, name) {
 
-    confirm('Do you want to delete this case (' +name + ') ?', function () {
+    confirm('Do you want to delete this case (' + name + ') ?', function () {
 
-        var url = 'Delete?caseId=' + caseId
+        var url = 'Delete?caseId=' + caseId;
 
         //todo
         $.ajax({
@@ -97,7 +97,7 @@ function deleteCase(caseId, name) {
 
                 if (result == 'successfully!') {
                     document.location = currentDomainURL + "/Case/List";
-                    //NAP.headlineMsgBox.showErr("Unknowned error detected!");                    
+                    //NAP.headlineMsgBox.showErr("Unknowned error detected!");
                 }
                 else {
                     alert(result);

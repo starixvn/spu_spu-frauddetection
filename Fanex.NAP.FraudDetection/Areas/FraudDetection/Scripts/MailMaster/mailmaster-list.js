@@ -4,7 +4,7 @@
     formSearch.submit();
 });
 
-var formSearch = $('#mailSearch').submit(function (event) {
+var formSearch = $('#mailSearch').submit(function () {
     $.get('MailMaster/Search', function (mailTemplates) {
         renderMailTable(mailTemplates);
     });
@@ -62,7 +62,7 @@ function createMailTable(mailTemplates) {
 /*
 * Active Column template.
 */
-function ActiveColumn(cell, cellFormated) {
+function ActiveColumn(cell) {
     if (cell.Value.IsActive) {
         return "<img title='Deactivate this email' class='ico-tick' alt='' onclick=\"editActive(this," + cell.Value.MailId + ");\"/>";
     }
@@ -74,7 +74,7 @@ function ActiveColumn(cell, cellFormated) {
 /*
 * Action Column template.
 */
-function ActionColumn(cell, cellFormated) {
+function ActionColumn(cell) {
     return "<div id ='edit" + cell.Value + "' class='btn-action' onclick=\"ShowAction(" + cell.Value + ");\"></div>";
 }
 
@@ -89,7 +89,7 @@ function ShowAction(mailId) {
                 name: "Delete this mail",
                 height: 25,
                 className: "iconDelAff",
-                callback: function (key, opt) {
+                callback: function () {
                     deleteMail(mailId);
                 }
             },
@@ -97,7 +97,7 @@ function ShowAction(mailId) {
                 name: "Edit information",
                 height: 25,
                 className: "iconEditInfo",
-                callback: function (key, opt) {
+                callback: function () {
                     updateMail(mailId);
                 }
             }
@@ -117,7 +117,7 @@ function deleteMail(mailId) {
         cancelButtonClass: 'btn-green btn-customCancel',
         title: "Delete confirmation",
         text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
-        confirm: function (button) {
+        confirm: function () {
             $.post('MailMaster/DeleteMail', { mailId: mailId }, function (result) {
                 if (result.ErrCode === 0) {
                     formSearch.submit();
@@ -127,7 +127,7 @@ function deleteMail(mailId) {
                 }
             });
         },
-        cancel: function (button) {
+        cancel: function () {
         },
         confirmButton: "Delete",
         cancelButton: "Cancel"

@@ -61,9 +61,9 @@ function OnInitialize() {
 function GenerateListParamIDs() {
     var paramIDs = "";
     $('input[id^="tb_param_"]').each(function () {
-        var paramID = $(this).attr('id');
-        paramID = paramID.replace("tb_param_", "");
-        paramIDs += paramID + ",";
+        var paramId = $(this).attr('id');
+        paramId = paramId.replace("tb_param_", "");
+        paramIDs += paramId + ",";
     });
 
     return paramIDs.slice(0, -1);

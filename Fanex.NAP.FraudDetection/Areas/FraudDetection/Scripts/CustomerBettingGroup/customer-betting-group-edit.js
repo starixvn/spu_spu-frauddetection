@@ -15,7 +15,7 @@
                 $("#addResult").attr('class', 'result-text-success');
                 $("#addResult").html("Edit group successfully!");
                 setTimeout(function () {
-                    $("div#popup").dialog("destroy").remove();
+                    DialogService.closeDialog();
                 }, 3000);
 
                 formSearch.submit();
