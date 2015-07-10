@@ -197,7 +197,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var sqlFromString = "bodb02.dbo.match tch with(nolock) ";
             var relevantTables = GenerateRelevantTables(configs, selectedConfigIds);
 
-            if (relevantTables.ToLower().Contains("count"))
+            if (relevantTables.ToLower().Contains("count("))
             {
                 return relevantTables;
             }
@@ -233,7 +233,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 formula = formula.Replace(config.ConfigName, config.ConfigSQLField);
             }
 
-            if (relevantTables.ToLower().Contains("count"))
+            if (relevantTables.ToLower().Contains("count("))
             {
                 return formula;
             }
