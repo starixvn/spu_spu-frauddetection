@@ -126,6 +126,27 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
         }
 
+        /// <summary>
+        /// Delete a customer.
+        /// </summary>
+        /// <param name="custId">The customer ID.</param>
+        /// <param name="groupId">The group ID.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpPost]
+        public ActionResult DeleteCustomer(int custId, int groupId)
+        {
+            var criteria = new CustomerBettingGroupDeleteCustomerCriteria
+            {
+                CreatorId = 1,
+                GroupId = groupId,
+                CustId = custId
+            };
+
+            var result = _customerBettingGroupService.DeleteCustomer(criteria);
+
+            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+        }
+
         [HttpGet]
         public string EditCustomers(int groupId)
         {
@@ -137,15 +158,29 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult EditCustomers(CustomerBettingGroupInsertCustomerCriteria criteria)
         {
-            if (string.IsNullOrEmpty(criteria.CustomerName))
+            if (string.IsNullOrEmpty(criteria.CustName))
             {
                 return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "Customer should have a name." } };
             }
 
-            criteria.CreatorId = 1;
-            var result = _customerBettingGroupService.InsertCustomer(criteria);
+            var customer = _customerBettingGroupService.GetCustomerByName(
+                new CustomerBettingGroupGetCustomerByNameCriteria
+                    {
+                        CustName = criteria.CustName
+                    });
+            if (customer != null)
+            {
+                criteria.CreatorId = 1;
+                criteria.CurrencyId = customer.Currency.CurrencyId;
+                criteria.CurrencyName = customer.Currency.CurrencyName;
+                criteria.CustId = customer.CustId;
+                criteria.CustName = customer.CustName;
+                var result = _customerBettingGroupService.InsertCustomer(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+                return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            }
+
+            return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "Customer doesn't exist." } };
         }
 
         [HttpGet]

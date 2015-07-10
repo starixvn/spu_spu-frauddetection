@@ -72,5 +72,8 @@
     <Setting Key="SPU_CustomerBettingGroupGetById" SpName="SPU_CustomerBettingGroupGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_CustomerBettingGroupUpdate" SpName="SPU_CustomerBettingGroupUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_CustomerBettingGroupDelete" SpName="SPU_CustomerBettingGroupDelete" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CustomerBettingGroupGetCustomerByName" SpName="SPU_CustomerBettingGroupGetCustomerByName" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="SPU_CustomerBettingGroupInsertCustomer" SpName="SPU_CustomerBettingGroupInsertCustomer" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CustomerBettingGroupDeleteCustomer" SpName="SPU_CustomerBettingGroupDeleteCustomer" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 </Functions>

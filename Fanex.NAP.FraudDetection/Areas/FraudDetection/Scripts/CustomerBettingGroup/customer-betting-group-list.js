@@ -42,7 +42,7 @@ var renderCustomerBettingGroupTable = function (groups) {
                 { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Name", Width: 200, Name: "Name", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Description", Width: 300, Name: "Description", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Currency", Width: 150, Name: "Currency", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Currency", Width: 150, Name: "Currency", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
                 { HeaderText: "# Customer", Width: 100, Name: "Customers", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
             ],

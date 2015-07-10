@@ -14,7 +14,7 @@
 
         var url = 'CustomerBettingGroup/EditCustomers';
         var param = {
-            "CustomerName": $("#CustomerName").val(),
+            "CustName": $("#CustName").val(),
             "GroupId": $("#GroupId").val()
         };
         $.ajax({
@@ -35,6 +35,8 @@
                     }, 3000);
 
                     getCustomer.submit();
+
+                    formSearch.submit();
                 }
                 else {
                     $("#addResult").attr('class', 'result-text-fail');
@@ -64,7 +66,7 @@ var renderCustomerTable = function (customers) {
     var gridOptions = {
         columns:
             [
-                { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center"},
                 { HeaderText: "Member", Width: 210, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Currency", Width: 150, Name: "Currency", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Delete", Width: 50, Name: "Delete", HeaderAlign: "center", CellAlign: "center" }
@@ -96,10 +98,47 @@ var createCustomerTable = function (customers) {
                     { Name: "Row", Value: index + 1 },
                     { Name: "Member", Value: customers[index].CustName },
                     { Name: "Currency", Value: customers[index].Currency.CurrencyName },
-                    { Name: "Delete", Value: customers[index].CustId }
+                    { Name: "Delete", Value: customers[index], CustomCellRender: deleteColumn }
                 ]
         });
     }
 
     return rows;
 };
+
+/*
+* Delete Column.
+*/
+var deleteColumn = function (cell) {
+    var groupId = $("#GroupId").val();
+    return "<div style='cursor: pointer;' class='glyphicon glyphicon-trash' onclick=\"deleteCustomer(" + cell.Value.CustId + "," + groupId + ");\"></div>";
+};
+
+
+/*
+* Delete Customer.
+*/
+function deleteCustomer(custId, groupId) {
+    $.confirm({
+        confirmButtonClass: 'btn-green btn-customConfirm',
+        cancelButtonClass: 'btn-green btn-customCancel',
+        title: "Delete confirmation",
+        text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
+        confirm: function () {
+            $.post('CustomerBettingGroup/DeleteCustomer', { custId: custId, groupId: groupId }, function (result) {
+                if (result.ErrCode === 0) {
+                    getCustomer.submit();
+
+                    formSearch.submit();
+                }
+                else {
+                    alert(result.ErrMsg);
+                }
+            });
+        },
+        cancel: function () {
+        },
+        confirmButton: "Delete",
+        cancelButton: "Cancel"
+    });
+}
