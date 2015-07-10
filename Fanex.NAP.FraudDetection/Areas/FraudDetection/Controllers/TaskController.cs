@@ -21,7 +21,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using NAP.FraudDetection.Controllers;
     using Service;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Criteria.Group;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
@@ -122,6 +121,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
+            var counterTableSQLString = configList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable;
+            configList.Where(l => l.ConfigName == "Counter").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", criteria.CaseId.ToString());
 
             criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
@@ -328,6 +329,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
+            var counterTableSQLString = configList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable;
+            configList.Where(l => l.ConfigName == "Counter").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseId);
 
             criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :

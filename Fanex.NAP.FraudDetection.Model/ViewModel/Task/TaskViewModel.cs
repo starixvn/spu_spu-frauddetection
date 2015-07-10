@@ -57,7 +57,7 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
         {
             get
             {
-                return ConfigurationList; // ConfigurationList.Where(l => l.ConfigCategory == "Match").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory == "Match").ToList();
             }
         }
 
@@ -65,7 +65,7 @@ namespace Fanex.NAP.FraudDetection.Model.ViewModel.Task
         {
             get
             {
-                return ConfigurationList; // ConfigurationList.Where(l => l.ConfigCategory != "Match").ToList();
+                return ConfigurationList.Where(l => l.ConfigCategory != "Match").ToList();
             }
         }
 
