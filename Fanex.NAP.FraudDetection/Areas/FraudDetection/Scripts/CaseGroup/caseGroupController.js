@@ -56,7 +56,12 @@ spuApp.controller('CaseGroupController', [
 
         $scope.submitData = function() {
             var selectedGroups = collectCustomerGroup();
-            
+
+            if (selectedGroups.length === 0) {
+                AlertService.showAlert("Please choose at leat one customer group!");
+                return;
+            }
+
             var param = {
                 caseId: $scope.caseId,
                 groupIds: selectedGroups.join(',')
@@ -64,9 +69,25 @@ spuApp.controller('CaseGroupController', [
 
             CaseGroupService.addCustomerGroupToCase(param).then(function (result) {
                 var data = result.data;
+
+                if (data.IsSuccessful) {
+                    if (parent.CaseGroupGridService !== undefined) {
+                        parent.CaseGroupGridService.getCustomerGroupByCase();
+                    }
+
+                    setTimeout(function () {
+                        DialogService.closeDialog();
+                    }, 3000);
+                }
+
                 AlertService.showAlert(data);
             });
         };
+
+        $scope.closeDialog = function () {
+            alert('closeDialog');
+            DialogService.closeDialog();
+        }
 
         $scope.$watch($scope.rowCollection, function () {
 

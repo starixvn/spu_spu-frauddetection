@@ -45,8 +45,9 @@
             var model = new AddCustomerGroupToCaseViewModel()
             {
                 CaseId = caseId,
-                Groups = _groupService.GetAllGroups(new GroupSelectAllCriteria()
+                Groups = _groupService.GetGroupsNotInGivenCase(new GroupNotInGivenCaseSelectAllCriteria
                 {
+                    CaseId = caseId,
                     PageIndex = 1,
                     PageSize = 30
                 }).ToList()

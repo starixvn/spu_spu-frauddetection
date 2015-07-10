@@ -8,7 +8,7 @@ var gridOptions
 $(document).ready(function () {
     _caseId = $("#CaseId").val();
     Search();
-    CaseGroupService.getCustomerGroupByCase();
+    CaseGroupGridService.getCustomerGroupByCase();
 });
 //--------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +187,7 @@ $("#btn_AddNewTask").click(function () {
      });
  }
 
-var CaseGroupService = (function($) {
+var CaseGroupGridService = (function($) {
     var service = {};
 
     // private methods
@@ -198,7 +198,7 @@ var CaseGroupService = (function($) {
         var bodyRows = [];
 
         $.each(data, function (index, element) {
-            var removeValue = "<span class='glyphicon glyphicon-trash cursor-pointer' onclick='CaseGroupService.removeCustomerGroupFromCase({0}, {1});'>".format(element.CaseId, element.GroupId);
+            var removeValue = "<span class='glyphicon glyphicon-trash cursor-pointer' onclick='CaseGroupGridService.removeCustomerGroupFromCase({0}, {1});'>".format(element.CaseId, element.GroupId);
             bodyRows.push({
                 Columns: [
                     { Name: "No", Value: index + 1 },
@@ -225,20 +225,19 @@ var CaseGroupService = (function($) {
             showTitle: true,
             titleInfo:
             {
-                text: "Customer Groups In This Case <span class='glyphicon glyphicon-plus' onclick='CaseGroupService.addCustomerGroupToCase({0});' />".format(caseId),
-                showButtonsWhenNoData: true
+                text: "Customer Groups In This Case",
+                showButtonsWhenNoData: true,
+                customButtons: "<span class='glyphicon glyphicon-plus' onclick='CaseGroupGridService.addCustomerGroupToCase({0});' />&nbsp;".format(caseId)
             }
         };
 
         return gridOptions;
     };
 
-
-// public methods
+    // public methods
 
     service.getCustomerGroupByCase = function () {
         var url = SPU.getAbsoluteUrl("CaseGroup/GetCustomerGroupsInCase");
-        
         var param = { caseId: caseId };
         
         $.ajax({
@@ -264,11 +263,15 @@ var CaseGroupService = (function($) {
     };
 
     service.removeCustomerGroupFromCase = function (caseId, groupId) {
+        AlertService.hideAlert();
+
         var url = SPU.getAbsoluteUrl("CaseGroup/RemoveCustomerGroupFromCase");
         var param = {
             caseId: caseId,
             groupId: groupId
         };
+
+        
 
         $.ajax({
             type: "POST",
@@ -281,10 +284,11 @@ var CaseGroupService = (function($) {
                 alert(error);
             },
             success: function (data) {
-                AlertService.showAlert(data);
                 if (data.IsSuccessful) {
                     service.getCustomerGroupByCase();
                 }
+
+                AlertService.showAlert(data);
             }
         });
     };

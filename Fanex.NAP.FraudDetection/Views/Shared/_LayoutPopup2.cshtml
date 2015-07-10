@@ -16,22 +16,18 @@
     </script>
 </head>
 <body class="popup" ng-app="spuApp">
-    <div id="sentAlert" class="alert alert-danger collapse">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <div>Add Customer Group To Case</div>
+    <div style="position: relative">
+        <div id="sentAlert" class="alert alert-danger collapse" style="position: absolute;  padding: 5px; margin-bottom: 10px;">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <div></div>
+        </div>
     </div>
 
-    @RenderBody()
+        @RenderBody()
 
-    @RenderSection("Foot", false)
-    @Scripts.Render("~/bundles/coreJs")
-    @Scripts.Render("~/bundles/angularJs")
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            setTimeout(function () { $('bl').hide(); }, 500);
-        });
-    </script>
+        @RenderSection("Foot", false)
+        @Scripts.Render("~/bundles/coreJs")
+        @Scripts.Render("~/bundles/angularJs")
 </body>
     @RenderSection("FooterJs", false)
 </html>

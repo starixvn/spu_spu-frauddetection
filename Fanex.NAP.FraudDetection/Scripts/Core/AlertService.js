@@ -5,21 +5,31 @@
     var $message = $('#sentAlert div');
     var timeoutID = null;
 
+    var clearTimeout = function () {
+        if (timeoutID !== null) {
+            window.clearTimeout(timeoutID);
+            timeoutID = null;
+        }
+    };
+
     service.init = function () {
         $sentAlert.on('close.bs.alert', function () {
-            if (timeoutID !== null) {
-                clearTimeout(timeoutID);
-                timeoutID = null;
-            }
+            clearTimeout();
 
             $sentAlert.hide();
             return false;
         });
     };
 
-    service.showAlert = function (data) {
+    var defaultMessage = "The operation is successful.";
+
+    var showAlertByObject = function(data) {
         if (data.IsSuccessful === true) {
-            $message.text('aabas');
+            if (data.Message === "") {
+                data.Message = defaultMessage;
+            }
+
+            $message.text(data.Message);
             $sentAlert.removeClass('alert-danger');
             $sentAlert.addClass('alert-success');
 
@@ -34,6 +44,34 @@
         }
 
         $sentAlert.show();
+    }
+
+    var showAlertByString = function(message) {
+        $message.text(message);
+        $sentAlert.removeClass('alert-success');
+        $sentAlert.addClass('alert-danger');
+
+        $sentAlert.show();
+    };
+
+    service.showAlert = function (data) {
+        // clear the previous timeout.
+        clearTimeout();
+
+        if (typeof data === "object") {
+            showAlertByObject(data);
+        }
+
+        if (typeof data === "string") {
+            showAlertByString(data);
+        }
+    };
+
+    service.hideAlert = function () {
+        // clear the previous timeout.
+        clearTimeout();
+
+        $sentAlert.hide();
     };
 
     return service;

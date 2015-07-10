@@ -14,6 +14,7 @@
     <Setting Key="SPU_GroupGetById" SpName="SPU_GroupGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_GroupUpdate" SpName="SPU_GroupUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_GroupUpdateStatus" SpName="SPU_GroupUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_GroupNotInGivenCaseSelect" SpName="SPU_GroupNotInGivenCaseSelect" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="SPU_Task">

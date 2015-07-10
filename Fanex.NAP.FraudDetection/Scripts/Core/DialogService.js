@@ -15,7 +15,7 @@
             return target;
         }
 
-        target = $('<div id="{0}" />'.format(dialogId));
+        target = $('<div id="{0}" style="overflow: hidden"/>'.format(dialogId));
 
         target.appendTo("body");
 
@@ -47,12 +47,11 @@
         var frameHtml = '<iframe scrolling="no" src="' + url + '" width="100%" height="100%" frameborder="0" border="0"></iframe>';
 
         var target = getDialogTarget();
+
         target.html(frameHtml);
 
         return openDialog(target, title, options);
     };
-
-        
 
     service.openDialogContent = function(content, title, options) {
         //var frameHtml = content;
@@ -67,8 +66,10 @@
         //return AFFILIATE.openDialog(frame, title, options);
     };
 
-    service.closeDialog = function(target) {
-        target.dialog("close");
+    service.closeDialog = function () {
+        if (parent.DialogService.currentOpenDialog !== null) {
+            parent.DialogService.currentOpenDialog.dialog("close");
+        }
     };
     
     return service;
