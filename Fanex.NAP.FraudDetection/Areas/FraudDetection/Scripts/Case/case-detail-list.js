@@ -265,32 +265,44 @@ var CaseGroupGridService = (function($) {
     service.removeCustomerGroupFromCase = function (caseId, groupId) {
         AlertService.hideAlert();
 
-        var url = SPU.getAbsoluteUrl("CaseGroup/RemoveCustomerGroupFromCase");
-        var param = {
-            caseId: caseId,
-            groupId: groupId
-        };
+        $.confirm({
+            confirmButtonClass: 'btn-green btn-customConfirm',
+            cancelButtonClass: 'btn-green btn-customCancel',
+            title: "Delete confirmation",
+            text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
+            confirm: function (button) {
+                var url = SPU.getAbsoluteUrl("CaseGroup/RemoveCustomerGroupFromCase");
+                var param = {
+                    caseId: caseId,
+                    groupId: groupId
+                };
+
+                $.ajax({
+                    type: "POST",
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: JSON.stringify(param),
+                    cache: false,
+                    url: url,
+                    error: function (error) {
+                        alert(error);
+                    },
+                    success: function (data) {
+                        if (data.IsSuccessful) {
+                            service.getCustomerGroupByCase();
+                        }
+
+                        AlertService.showAlert(data);
+                    }
+                });
+            },
+            cancel: function (button) {
+            },
+            confirmButton: "Delete",
+            cancelButton: "Cancel"
+        });
 
         
-
-        $.ajax({
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            data: JSON.stringify(param),
-            cache: false,
-            url: url,
-            error: function (error) {
-                alert(error);
-            },
-            success: function (data) {
-                if (data.IsSuccessful) {
-                    service.getCustomerGroupByCase();
-                }
-
-                AlertService.showAlert(data);
-            }
-        });
     };
 
     return service;

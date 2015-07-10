@@ -3,10 +3,13 @@
     var dialogOpt = {
         position: { my: "top+30%", at: "center top", of: window },
         modal: true,
-        width: 'auto'
+        width: 'auto',
+        close: function () {
+            $(this).remove();
+        }
     };
-
-    var dialogId = "spu-dialog-frame";
+    
+    var dialogId = 'spu-dialog-frame';
     var dialogSelector = "#" + dialogId;
 
     var getDialogTarget = function() {
@@ -15,7 +18,7 @@
             return target;
         }
 
-        target = $('<div id="{0}" style="overflow: hidden"/>'.format(dialogId));
+        target = $('<div id="{0}" style="overflow: hidden; display:none;" />'.format(dialogId));
 
         target.appendTo("body");
 
@@ -40,6 +43,10 @@
         return service.currentOpenDialog;
     };
 
+    service.setDialogId = function (id) {
+        dialogId = id;
+    };
+
     service.currentOpenDialog = null;
 
     service.openDialogFrame = function (url, title, options) {
@@ -53,7 +60,16 @@
         return openDialog(target, title, options);
     };
 
-    service.openDialogContent = function(content, title, options) {
+    service.openDialogContent = function (htmlContent, title, options) {
+
+        var frameHtml = htmlContent;
+
+        var target = getDialogTarget();
+
+        target.html(frameHtml);
+
+        return openDialog(target, title, options);
+    
         //var frameHtml = content;
         //var frame = $("#aff-dialog-frame");
 
@@ -68,6 +84,7 @@
 
     service.closeDialog = function () {
         if (parent.DialogService.currentOpenDialog !== null) {
+            //target.remove();
             parent.DialogService.currentOpenDialog.dialog("close");
         }
     };

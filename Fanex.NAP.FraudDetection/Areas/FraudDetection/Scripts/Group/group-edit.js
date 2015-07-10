@@ -4,7 +4,8 @@
     });
 
     $("#btn_Cancel").click(function () {
-        $("div#popup").dialog("destroy").remove();
+        //$("div#popup").dialog("destroy").remove();
+        DialogService.closeDialog();
     });
 
     var editGroup = $('#EditGroupForm').submit(function (event) {
@@ -15,7 +16,8 @@
                 $("#addResult").attr('class', 'result-text-success');
                 $("#addResult").html("Edit group successfully!");
                 setTimeout(function () {
-                    $("div#popup").dialog("destroy").remove();
+                    //$("div#popup").dialog("destroy").remove();
+                    DialogService.closeDialog();
                 }, 3000);
                 Search();
             }
@@ -32,17 +34,13 @@
 */
 function editGroupInfo(groupId) {
     $.get('Group/EditGroupInfo', { groupId: groupId }, function (response) {
-        $('<div id="popup"></div>').appendTo('body').dialog({
-            modal: true,
-            title: "Edit Group",
-            zIndex: 10000,
-            autoOpen: true,
+        DialogService.setDialogId("pop-up");
+        DialogService.openDialogContent(response, "Edit Group", {
             width: '500px',
-            resizable: false,
             close: function () {
                 $(this).remove();
             }
-        }).html(response);
+        });
     });
 }
 
