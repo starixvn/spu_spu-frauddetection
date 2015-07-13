@@ -279,6 +279,8 @@
     <Compile Include="Areas\FraudDetection\Controllers\CaseController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
     <Compile Include="Areas\FraudDetection\Models\TaskAdditionalInfo.cs" />
+    <Compile Include="Areas\FraudDetection\Models\ViewModel\Paramater\ParameterViewModel.cs" />
+    <Compile Include="Areas\FraudDetection\Models\ViewModel\Task\TaskViewModel.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />

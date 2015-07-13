@@ -118,8 +118,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <Compile Include="ViewModel\Paramater\ParameterViewModel.cs" />
-    <Compile Include="ViewModel\Task\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Criteria\" />

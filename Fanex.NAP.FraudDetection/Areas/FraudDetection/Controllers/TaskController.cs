@@ -7,20 +7,18 @@
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 // </history>
 
-using SPU.Lib.FraudDetection.Criteria.CaseGroup;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Data;
     using System.Linq;
     using System.Web.Mvc;
-    using Model.ViewModel.Task;
     using Models;
     using NAP.FraudDetection.Controllers;
+    using NAP.FraudDetection.Models.ViewModel.Task;
     using Service;
     using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Criteria.CaseGroup;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
