@@ -1,16 +1,14 @@
-﻿@using System.Web.Optimization
-@model SPU.Lib.FraudDetection.Criteria.Group.GroupSelectAllCriteria
+﻿@model SPU.Lib.FraudDetection.Criteria.Group.GroupSelectAllCriteria
 @{        
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Groups";        
+    ViewBag.Title = "Groups";
     
 }
-
 @section HeadCss
 {
     <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FanexGridCss")" />
     <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionCss")" />
-    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />    
+    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />
 }
 @section FooterJs
 {
@@ -19,17 +17,17 @@
     <script src="~/Areas/FraudDetection/Scripts/Group/group-list.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/Scripts/Group/group-edit.js" type="text/javascript"></script>
 }
-
 <div>
     <span class="infor-text">All Groups</span>
     <input type="button" id="btn_AddNewGroup" value="+ Add new Group" class="btn-green" />
 </div>
-<div class="newline">&nbsp;</div>
+<div class="newline">
+    &nbsp;</div>
 <form id="myForm" method="get" action="">
 <div class="formSearch">
     @Html.HiddenFor(s => s.PageSize)
     @Html.HiddenFor(s => s.PageIndex)
-    @Html.HiddenFor(s => s.PageCount)        
+    @Html.HiddenFor(s => s.PageCount)
     @*<input type="button" value="Search" onclick="OnSearch();" />*@
 </div>
 </form>
