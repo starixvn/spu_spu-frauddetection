@@ -119,11 +119,11 @@ function deleteMail(mailId) {
         text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
         confirm: function () {
             $.post('MailMaster/DeleteMail', { mailId: mailId }, function (result) {
-                if (result.ErrCode === 0) {
+                if (result.IsSuccessful) {
                     formSearch.submit();
                 }
                 else {
-                    alert(result.ErrMsg);
+                    AlertService.showAlert(result);
                 }
             });
         },
@@ -163,12 +163,12 @@ function editActive(obj, mailId) {
         title: "Confirmation",
         text: "Are you sure to " + active + "this mail template?",
         confirm: function () {
-            $.post('MailMaster/ActivateMail', { mailId: mailId, isActive: !isActive }, function (result) {
-                if (result.ErrCode === 0) {
+            $.post('MailMaster/EditMailStatus', { mailId: mailId, isActive: !isActive }, function (result) {
+                if (result.IsSuccessful) {
                     formSearch.submit();
                 }
                 else {
-                    alert(result.ErrMsg);
+                    AlertService.showAlert(result);
                 }
             });
         },

@@ -32,13 +32,14 @@ var renderCustomerBettingGroupTable = function (groups) {
                 { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Name", Width: 200, Name: "Name", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Description", Width: 300, Name: "Description", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Currency", Width: 150, Name: "Currency", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
+                { HeaderText: "Currency", Width: 150, Name: "Currency", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "# Customer", Width: 100, Name: "Customers", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
             ],
         bodyRows: createCustomerBettingGroupTable(groups),
         gridExpandHeight: 180,
         showPager: true,
+        allowTruncate: true,
         pagerOption:
             {
                 itemsPerPage: 10,
@@ -128,11 +129,11 @@ function deleteGroup(groupId) {
         text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
         confirm: function () {
             $.post('CustomerBettingGroup/Delete', { groupId: groupId }, function (result) {
-                if (result.ErrCode === 0) {
+                if (result.IsSuccessful) {
                     formSearch.submit();
                 }
                 else {
-                    alert(result.ErrMsg);
+                    AlertService.showAlert(result);
                 }
             });
         },

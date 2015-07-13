@@ -11,7 +11,7 @@
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
-            if (response.ErrCode === 0) {
+            if (response.IsSuccessful) {
                 $("#addResult").attr('class', 'result-text-success');
                 $("#addResult").html("Edit group successfully!");
                 setTimeout(function () {
@@ -22,7 +22,7 @@
             }
             else {
                 $("#addResult").attr('class', 'result-text-fail');
-                $("#addResult").html(response.ErrMsg);
+                $("#addResult").html(response.Message);
             }
         });
     });

@@ -106,12 +106,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The conditions are left blank. Please add condition(s) for the new Task." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "The conditions are left blank. Please add condition(s) for the new Task." } };
             }
 
             if (string.IsNullOrEmpty(criteria.NextActionIdList) && string.IsNullOrEmpty(criteria.NextActionTargetIdList))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The next actions are left blank. Please add next action(s) for the new Task." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "The next actions are left blank. Please add next action(s) for the new Task." } };
             }
 
             var queryPreconString = "select distinct top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
@@ -145,7 +145,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 PushNewTaskToRun(criteria, int.Parse(result.Message));
             }
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -314,12 +314,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The conditions are left blank. Please add condition(s) for the new Task." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "The conditions are left blank. Please add condition(s) for the new Task." } };
             }
 
             if (string.IsNullOrEmpty(criteria.NextActionIdList) && string.IsNullOrEmpty(criteria.NextActionTargetIdList))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "The next actions are left blank. Please add next action(s) for the new Task." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "The next actions are left blank. Please add next action(s) for the new Task." } };
             }
 
             string queryPreconString = "select top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
@@ -353,7 +353,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 UpdateRunningTask(criteria, int.Parse(caseId));
             }
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

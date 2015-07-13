@@ -92,7 +92,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var result = _mailMasterService.DeleteMail(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="isActive">True or False.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
-        public ActionResult ActivateMail(int mailId, bool isActive)
+        public ActionResult EditMailStatus(int mailId, bool isActive)
         {
             var criteria = new MailMasterActivateCriteria()
             {
@@ -167,7 +167,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var result = _mailMasterService.UpdateMail(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -3,12 +3,12 @@
 
     var $sentAlert = $('#sentAlert');
     var $message = $('#sentAlert div');
-    var timeoutID = null;
+    var timeoutId = null;
 
     var clearTimeout = function () {
-        if (timeoutID !== null) {
-            window.clearTimeout(timeoutID);
-            timeoutID = null;
+        if (timeoutId !== null) {
+            window.clearTimeout(timeoutId);
+            timeoutId = null;
         }
     };
 
@@ -41,9 +41,9 @@
             $sentAlert.removeClass('alert-danger');
             $sentAlert.addClass('alert-success');
 
-            timeoutID = setTimeout(function() {
+            timeoutId = setTimeout(function() {
                 $sentAlert.hide();
-                timeoutID = null;
+                timeoutId = null;
             }, 3000);
         } else {
             $message.text(data.Message);
@@ -86,6 +86,6 @@
 
 })(jQuery);
 
-(function ($) {
+(function () {
     AlertService.init();
 })();

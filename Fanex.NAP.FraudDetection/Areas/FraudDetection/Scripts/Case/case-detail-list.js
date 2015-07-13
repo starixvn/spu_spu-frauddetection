@@ -166,7 +166,7 @@ $("#btn_AddNewTask").click(function () {
                  error: function () {
                  },
                  success: function (response) {
-                     if (response.ErrCode == 0) {
+                     if (response.IsSuccessful) {
                          Search();
                      }
                      else {

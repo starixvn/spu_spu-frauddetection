@@ -26,7 +26,7 @@
             error: function () {
             },
             success: function (response) {
-                if (response.ErrCode == 0) {
+                if (response.IsSuccessful) {
                     $("#addResult").attr('class', 'result-text-success');
                     $("#addResult").html("Add new group successfully!");
                     setTimeout(function() {
@@ -36,7 +36,7 @@
                 }
                 else {
                     $("#addResult").attr('class', 'result-text-fail');
-                    $("#addResult").html(response.ErrMsg);
+                    $("#addResult").html(response.Message);
                 }
             },
             beforeSend: function () {

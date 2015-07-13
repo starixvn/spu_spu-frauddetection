@@ -26,37 +26,29 @@
             error: function () {
             },
             success: function (response) {
-<<<<<<< Updated upstream
-                if (response.ErrCode == 0) {
-                    $("#addResult").attr('class', 'result-text-success');
-                    $("#addResult").html("Add new case successfully!"); 
+                if (response.IsSuccessful) {
+<<<<<<< HEAD
+                    setTimeout(function () {
+                        DialogService.closeDialog();
+                    }, 3000);
+                }
+
+                AlertService.setAlertId('sentAlertOnPopup');
+=======
+                    //$("#addResult").attr('class', 'result-text-success');
+                    //$("#addResult").html("Add new case successfully!"); 
                     setTimeout(function () {
                         DialogService.closeDialog();
                     }, 3000);
                     Search();
                 }
                 else {
-                    $("#addResult").attr('class', 'result-text-fail');
-                    $("#addResult").html(response.ErrMsg);
+                    //$("#addResult").attr('class', 'result-text-fail');
+                    //$("#addResult").html(response.Message);
                 }
-=======
-                
-                //if (response.ErrCode == 0) {
-                //    $("#addResult").attr('class', 'result-text-success');
-                //    $("#addResult").html("Add new case successfully!"); 
-                //    setTimeout(function () {
-                //        $("div#popup").dialog("destroy").remove();
-                //    }, 3000);
-                //    Search();
-                //}
-                //else {
-                //    $("#addResult").attr('class', 'result-text-fail');
-                //    $("#addResult").html(response.ErrMsg);
-                //}
 
-                AlertService.setAlertId('sentAlertOnPopup');
+>>>>>>> #000 - bug fixes
                 AlertService.showAlert(response);
->>>>>>> Stashed changes
             },
             beforeSend: function () {
 

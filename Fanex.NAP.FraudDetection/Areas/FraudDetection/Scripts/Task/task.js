@@ -111,14 +111,14 @@ function OnInitialize() {
                 error: function () {
                 },
                 success: function (response) {
-                    if (response.ErrCode == 0) {
+                    if (response.IsSuccessful) {
                         // redirect to case detail page
                         url = "Case/CaseDetail?caseId=" + $("#caseid").text();
                         window.location.replace(url);
                     }
                     else {
                         // display the error message
-                        $("#addTaskResult").text(response.ErrMsg);
+                        $("#addTaskResult").text(response.Message);
                     }
                 },
                 beforeSend: function () {
@@ -168,7 +168,7 @@ function OnInitialize() {
                 error: function () {
                 },
                 success: function (response) {
-                    if (response.ErrCode == 0) {
+                    if (response.IsSuccessful) {
                         // redirect to case detail page
                         $("#editTaskResult").css("class", "result-text-success");
                         $("#editTaskResult").text("Update Task Information successfully!");
@@ -176,7 +176,7 @@ function OnInitialize() {
                     else {
                         // display the error message
                         $("#editTaskResult").css("class", "result-text-fail");
-                        $("#editTaskResult").text(response.ErrMsg);
+                        $("#editTaskResult").text(response.Message);
                     }
                 },
                 beforeSend: function () {

@@ -12,7 +12,7 @@
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
-            if (response.ErrCode === 0) {
+            if (response.IsSuccessful) {
                 $("#addResult").attr('class', 'result-text-success');
                 $("#addResult").html("Edit group successfully!");
                 setTimeout(function () {
@@ -22,7 +22,7 @@
             }
             else {
                 $("#addResult").attr('class', 'result-text-fail');
-                $("#addResult").html(response.ErrMsg);
+                $("#addResult").html(response.Message);
             }
         });
     });
@@ -64,11 +64,11 @@ function editGroupStatus(obj, groupId) {
         text: "Are you sure to " + active + "this group?",
         confirm: function () {
             $.post('Group/EditGroupStatus', { groupId: groupId, isActive: !isActive }, function (result) {
-                if (result.ErrCode === 0) {
+                if (result.IsSuccessful) {
                     Search();
                 }
                 else {
-                    alert(result.ErrMsg);
+                    AlertService.showAlert(result);
                 }
             });
         },
