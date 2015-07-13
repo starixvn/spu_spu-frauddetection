@@ -27,9 +27,7 @@
             error: function () {
             },
             success: function (response) {
-                if (response.ErrCode == 0) {
-                    $("#addResult").attr('class', 'result-text-success');
-                    $("#addResult").html("Add new group successfully!");
+                if (response.IsSuccessful) {
                     setTimeout(function () {
                         DialogService.closeDialog();
                     }, 3000);
@@ -38,10 +36,9 @@
 
                     formSearch.submit();
                 }
-                else {
-                    $("#addResult").attr('class', 'result-text-fail');
-                    $("#addResult").html(response.ErrMsg);
-                }
+
+                AlertService.setAlertId('sentAlertOnPopup');
+                AlertService.showAlert(response);
             },
             beforeSend: function () {
 
@@ -126,14 +123,14 @@ function deleteCustomer(custId, groupId) {
         text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
         confirm: function () {
             $.post('CustomerBettingGroup/DeleteCustomer', { custId: custId, groupId: groupId }, function (result) {
-                if (result.ErrCode === 0) {
+                if (result.IsSuccessful) {
                     getCustomer.submit();
 
                     formSearch.submit();
                 }
-                else {
-                    alert(result.ErrMsg);
-                }
+
+                AlertService.setAlertId('sentAlertOnPopup');
+                AlertService.showAlert(result);
             });
         },
         cancel: function () {

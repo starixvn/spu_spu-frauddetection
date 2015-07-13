@@ -77,11 +77,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
             {
-                return Json(new CommandResult
-                {
-                    Code = 2209,
-                    Message = "A case should have a name."
-                });
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Case should has a name." } };
             }
 
             criteria.CreatorId = 1;
@@ -155,11 +151,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
             {
-                return Json(new CommandResult
-                {
-                    Code = 2209,
-                    Message = "A case should have a name."
-                });
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Case should has a name." } };
             }
 
             criteria.CreatorId = 1;
@@ -192,7 +184,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 syncNewTask.Send(caseId);
             }
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -211,7 +203,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 syncNewTask.Send(criteria.TaskId);
             }
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

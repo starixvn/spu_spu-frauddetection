@@ -30,6 +30,7 @@
                     setTimeout(function () {
                         DialogService.closeDialog();
                     }, 3000);
+                    Search();
                 }
 
                 AlertService.setAlertId('sentAlertOnPopup');

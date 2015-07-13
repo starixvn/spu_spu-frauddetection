@@ -4,7 +4,7 @@
     });
 
     $("#btn_Cancel").click(function () {
-        $("div#popup").dialog("destroy").remove();
+        DialogService.closeDialog();
     });
 
     var editCaseForm = $('#EditCaseForm').submit(function (event) {
@@ -15,6 +15,7 @@
                 setTimeout(function () {
                     DialogService.closeDialog();
                 }, 3000);
+                Search();
             }
 
             AlertService.setAlertId('sentAlertOnPopup');
@@ -59,12 +60,11 @@ function editCaseStatus(obj, caseId) {
         text: "Are you sure to " + active + "this Case?",
         confirm: function () {
             $.post('Case/EditCaseStatus', { caseId: caseId, isActive: !isActive }, function (result) {
-                if (result.ErrCode === 0) {
+                if (result.IsSuccessful) {
                     Search();
                 }
-                else {
-                    alert(result.ErrMsg);
-                }
+
+                AlertService.showAlert(result);
             });
         },
         cancel: function () {

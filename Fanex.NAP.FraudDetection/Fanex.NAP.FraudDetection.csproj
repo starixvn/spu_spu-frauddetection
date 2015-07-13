@@ -268,6 +268,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Models\AddCustomerGroupToCaseViewModel.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseGroupController.cs" />
@@ -439,8 +440,6 @@
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
     <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
     <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupController.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupService.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\spuApp.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add-customer.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-edit.js" />

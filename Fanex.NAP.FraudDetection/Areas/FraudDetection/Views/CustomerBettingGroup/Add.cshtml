@@ -3,6 +3,7 @@
     ViewBag.Title = "Add New Group";
     Layout = "~/Views/Shared/_LayoutPopup.cshtml";
 }
+
 @using (Html.BeginForm("AddNewGroup", "CustomerBettingGroup", FormMethod.Post, new { @id = "AddGroupForm" }))
 {
     <table class="table-popup">
@@ -30,8 +31,6 @@
         </tr>
     </table>
 }
-<br />
-<label id="addResult" class="hidden" />
 @section FooterJs
 {
     <script src="~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-add.js"

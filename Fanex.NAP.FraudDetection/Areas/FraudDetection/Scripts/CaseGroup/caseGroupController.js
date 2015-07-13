@@ -1,100 +1,146 @@
-﻿
-spuApp.controller('CaseGroupController', [
-    '$scope', 'CaseGroupService', function ($scope, CaseGroupService) {
+﻿var CaseGroupController = (function ($) {
 
+    var service = {};
 
+    var getBodyRows = function (data) {
+        var bodyRows = [];
 
-        $scope.caseId = caseId;
-
-        var convertRowCollection = function (groups) {
-            var rows = [];
-            $.each(groups, function (idx, item) {
-                var newItem = $.extend(true, {}, item, { isSelected: false });
-                rows.push(newItem);
+        $.each(data, function (index, element) {
+            bodyRows.push({
+                Columns: [
+                    { Name: "No", Value: index + 1 },
+                    { Name: "Selection", Value: "<input type='checkbox' class='checkItem' data-groupid='" + element.GroupId + "' />" },
+                    { Name: "GroupName", Value: element.GroupName },
+                    { Name: "GroupDesc", Value: element.GroupDescription }
+                ]
             });
+        });
 
-            return rows;
-        };
+        return bodyRows;
+    };
 
-        $scope.rowCollection = convertRowCollection(groups);
+    var getGridOption = function (data) {
 
-        $scope.isSelectAll = false;
-
-        $scope.selectAll = function () {
-            $scope.isSelectAll = !$scope.isSelectAll;
-            $.each($scope.rowCollection, function (idx, item) {
-                item.isSelected = $scope.isSelectAll;
-            });
-        };
-
-        var hasAllSelectedRows = function () {
-            var isSelectAll = true;
-            $.each($scope.rowCollection, function (idx, item) {
-                if (!item.isSelected) {
-                    isSelectAll = false;
-                    return;
-                }
-            });
-
-            return isSelectAll;
-        };
-
-        $scope.selectRow = function (index) {
-            $scope.rowCollection[index].isSelected = !$scope.rowCollection[index].isSelected;
-            $scope.isSelectAll = hasAllSelectedRows();
-        };
-
-        var collectCustomerGroup = function () {
-            var selectedGroups = [];
-
-            $.each($scope.rowCollection, function (idx, item) {
-                if (item.isSelected) {
-                    selectedGroups.push(item.GroupId);
-                }
-            });
-
-            return selectedGroups;
-        };
-
-        $scope.submitData = function () {
-            var selectedGroups = collectCustomerGroup();
-
-            if (selectedGroups.length === 0) {
-                AlertService.showAlert("Please choose at leat one customer group!");
-                return;
+        var gridOptions = {
+            columns: [
+                { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "<input type='checkbox' id='checkAll' />", Width: 30, Name: "Selection", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Name", Width: 120, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Description", Width: 250, Name: "GroupDesc", HeaderAlign: "center", CellAlign: "left" }
+            ],
+            bodyRows: getBodyRows(data),
+            showNumberColumn: true,
+            showPager: true,
+            fullHeight: false,
+            gridHeight: 320,
+            pagerOption: {
+                itemsPerPage: 10,
+                currentPage: 0,
+                itemsPerPageArray: [10, 20, 50, 100, 500],
+                showDetail: true
             }
+        };
 
-            var param = {
-                caseId: $scope.caseId,
-                groupIds: selectedGroups.join(',')
-            };
+        return gridOptions;
+    };
 
-            CaseGroupService.addCustomerGroupToCase(param).then(function (result) {
-                var data = result.data;
+    var getAvailableCustomerGroups = function (data) {
+        var gridOptions = getGridOption(data);
+        $("#AvailableGroups").fanexGrid(gridOptions);
+    };
 
+    var bindEventOnElements = function() {
+        $("#spu-dialog-frame #btn_addGroup").on("click", function (event) {
+            event.preventDefault();
+            CaseGroupController.addCustomerGroupToCase();
+        });
+
+        $("#spu-dialog-frame #btn_Cancel").on("click", function () {
+            DialogService.closeDialog();
+        });
+
+        $("#checkAll").on('click', function() {
+            var checked = $(this).prop('checked');
+            $(".checkItem").prop('checked', checked);
+        });
+
+        $(".checkItem").on('click', function() {
+            var itemCount = $(".checkItem").length;
+            var checkedItemCount = $(".checkItem:checked").length;
+
+            if (itemCount === checkedItemCount) {
+                $("#checkAll").prop('checked', true);
+            } else {
+                $("#checkAll").prop('checked', false);
+            }
+        });
+    };
+
+    var collectSelectedCustomerGroups = function () {
+        var checkedElements = $(".checkItem:checked");
+        var selectedGroups = [];
+        $.each(checkedElements, function (idx, ele) {
+            var groupId = $(ele).data('groupid');
+            selectedGroups.push(groupId);
+        });
+
+        return selectedGroups;
+    };
+
+    var validateCustomerGroup = function () {
+        return $(".checkItem:checked").length > 0 ? true : false;
+    };
+
+    service.addCustomerGroupToCase = function() {
+        var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase");
+
+        if (validateCustomerGroup() === false) {
+            AlertService.setAlertId('sentAlertOnPopup');
+            AlertService.showAlert('Please select at least one customer group');
+            return;
+        };
+
+        var param = {
+            caseId: caseId,
+            groupIds: collectSelectedCustomerGroups().join(',')
+        };
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            data: JSON.stringify(param),
+            cache: false,
+            url: url,
+            error: function (error) {
+                alert(error);
+            },
+            success: function (data) {
                 if (data.IsSuccessful) {
-                    if (parent.CaseGroupGridService !== undefined) {
-                        parent.CaseGroupGridService.getCustomerGroupByCase();
-                    }
-
                     setTimeout(function () {
                         DialogService.closeDialog();
                     }, 3000);
+
+                    CaseGroupGridService.getCustomerGroupByCase();
                 }
 
+                AlertService.setAlertId('sentAlertOnPopup');
                 AlertService.showAlert(data);
-            });
-        };
-
-        $scope.closeDialog = function() {
-            DialogService.closeDialog();
-        };
-
-        $scope.$watch($scope.rowCollection, function () {
-
+                AlertService.setAlertId('sentAlert');
+            }
         });
-    }
-]);
+    };
 
+    service.init = function () {
+        getAvailableCustomerGroups(groups);
 
+        bindEventOnElements();
+    };
 
+    return service;
+
+})(jQuery);
+
+(function ($) {
+    CaseGroupController.init();
+})(jQuery);

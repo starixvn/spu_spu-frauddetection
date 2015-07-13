@@ -1,62 +1,17 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutPopup2.cshtml";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
     ViewBag.Title = "Add Customer Group To Case";
 }
 
 @model Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.AddCustomerGroupToCaseViewModel
 
-@section HeadCss
-{
-}
-
-<div ng-controller="CaseGroupController">
-    @*<div style="max-height: 230px; overflow-y: auto;">
-        <table st-table="rowCollection" class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th style="width: 30px">#</th>
-                <th style="width: 30px"><input type="checkbox" ng-checked="isSelectAll" ng-click="selectAll()"/></th>
-                <th class="text-left">Group Name</th>
-                <th class="text-left">Group Description</th>
-            </tr>
-            </thead>
-            @if (Model.Groups.Count > 0)
-            {
-                <tbody>
-                    <tr ng-repeat="row in rowCollection">
-                        <td class="text-center">{{$index + 1}}</td>
-                        <td class="text-center"><input type="checkbox" ng-checked="row.isSelected" ng-click="selectRow($index)"/></td>
-                        <td>{{row.GroupName}}</td>
-                        <td>{{row.GroupDesc}}</td>
-                    </tr>
-                </tbody>
-            }
-            else
-            {
-                <tbody>
-                    <tr>
-                        <td colspan="4" class="text-center" style="color: red; font-weight: bold">
-                            There is no data.
-                        </td>
-                    </tr>
-                </tbody>
-            }
-        </table>
+<div>
+    <div id="AvailableGroups" class="freegrid  content-grid"></div>
+    <div class="newline" style="clear: both;">&nbsp;</div>
+    <div class="text-center">
+        <input type="button" id="btn_addGroup" value="Submit" class="btn-green font-size-small" />
+        <input type="button" id="btn_Cancel" value="Cancel" class="btn-green btn-customCancel font-size-small" />
     </div>
-    <div class="newline">&nbsp;</div>
-    <table>
-        <tfoot>
-            <tr>
-                <th colspan="2" style="width: 60px"></th>
-                <th colspan="2">
-                    <input type="button" class="btn btn-green" value="Submit" ng-click="submitData()" />
-                    <input type="button" class="btn-green btn-customCancel font-size-small" value="Cancel" ng-click="closeDialog()" />
-                </th>
-            </tr>
-        </tfoot>
-    </table>*@
-
-
 </div>
 
 @section FooterJs
@@ -65,7 +20,7 @@
         var caseId = @Model.CaseId;
         var groups = @Html.Raw(Json.Encode(Model.Groups));
     </script>
-    <script src="~/Areas/FraudDetection/Scripts/CaseGroup/spuApp.js"></script>
-    <script src="~/Areas/FraudDetection/Scripts/CaseGroup/caseGroupService.js"></script>
+    @*<script src="~/Areas/FraudDetection/Scripts/CaseGroup/spuApp.js"></script>
+    <script src="~/Areas/FraudDetection/Scripts/CaseGroup/caseGroupService.js"></script>*@
     <script src="~/Areas/FraudDetection/Scripts/CaseGroup/caseGroupController.js"></script>
 }

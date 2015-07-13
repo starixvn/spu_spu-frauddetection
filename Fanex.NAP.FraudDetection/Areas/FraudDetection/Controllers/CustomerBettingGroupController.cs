@@ -51,13 +51,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.Name))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Group should has a name." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Group should has a name." } };
             }
 
             criteria.CreatorId = 1;
             var result = _customerBettingGroupService.InsertGroup(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.CreatorId = 1;
             var result = _customerBettingGroupService.UpdateGroup(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -123,7 +123,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var result = _customerBettingGroupService.DeleteGroup(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var result = _customerBettingGroupService.DeleteCustomer(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -160,7 +160,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.CustName))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "Customer should have a name." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "Customer should have a name." } };
             }
 
             var customer = _customerBettingGroupService.GetCustomerByName(
@@ -177,10 +177,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 criteria.CustName = customer.CustName;
                 var result = _customerBettingGroupService.InsertCustomer(criteria);
 
-                return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
 
-            return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "Customer doesn't exist." } };
+            return new JsonResult { Data = new { IsSuccessful = false, Message = "Customer doesn't exist." } };
         }
 
         [HttpGet]

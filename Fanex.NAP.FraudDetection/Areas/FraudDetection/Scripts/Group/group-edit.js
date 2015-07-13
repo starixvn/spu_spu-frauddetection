@@ -4,7 +4,6 @@
     });
 
     $("#btn_Cancel").click(function () {
-        //$("div#popup").dialog("destroy").remove();
         DialogService.closeDialog();
     });
 
@@ -12,18 +11,15 @@
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
-            if (response.ErrCode === 0) {
-                $("#addResult").attr('class', 'result-text-success');
-                $("#addResult").html("Edit group successfully!");
+            if (response.IsSuccessful) {
                 setTimeout(function () {
                     DialogService.closeDialog();
                 }, 3000);
                 Search();
             }
-            else {
-                $("#addResult").attr('class', 'result-text-fail');
-                $("#addResult").html(response.ErrMsg);
-            }
+
+            AlertService.setAlertId('sentAlertOnPopup');
+            AlertService.showAlert(response);
         });
     });
 });
@@ -64,12 +60,11 @@ function editGroupStatus(obj, groupId) {
         text: "Are you sure to " + active + "this group?",
         confirm: function () {
             $.post('Group/EditGroupStatus', { groupId: groupId, isActive: !isActive }, function (result) {
-                if (result.ErrCode === 0) {
+                if (result.IsSuccessful) {
                     Search();
                 }
-                else {
-                    alert(result.ErrMsg);
-                }
+
+                AlertService.showAlert(result);
             });
         },
         cancel: function () {

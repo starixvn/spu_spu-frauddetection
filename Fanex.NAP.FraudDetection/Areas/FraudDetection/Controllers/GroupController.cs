@@ -71,12 +71,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.GroupName))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Group should has a name." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Group should has a name." } };
             }
 
             criteria.CreatorId = 1;
             var result = _groupService.InsertGroup(criteria);
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -114,13 +115,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.GroupName))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Group should has a name." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Group should has a name." } };
             }
 
             criteria.CreatorId = 1;
             var result = _groupService.UpdateGroup(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -141,7 +142,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var result = _groupService.UpdateGroup(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

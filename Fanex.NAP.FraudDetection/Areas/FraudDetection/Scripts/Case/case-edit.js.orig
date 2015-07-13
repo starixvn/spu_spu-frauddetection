@@ -11,37 +11,15 @@
         event.preventDefault();
 
         $.post(this.action, $(this).serialize(), function (response) {
-<<<<<<< Updated upstream
-            if (response.ErrCode === 0) {
-                $("#addResult").attr('class', 'result-text-success');
-                $("#addResult").html("Edit case successfully!");
+            if (response.IsSuccessful) {
                 setTimeout(function () {
                     DialogService.closeDialog();
                 }, 3000);
                 Search();
             }
-            else {
-                $("#addResult").attr('class', 'result-text-fail');
-                $("#addResult").html(response.ErrMsg);
-            }
-=======
-            //if (response.ErrCode === 0) {
-            //    $("#addResult").attr('class', 'result-text-success');
-            //    $("#addResult").html("Edit case successfully!");
-            //    setTimeout(function () {
-            //        $("div#popup").dialog("destroy").remove();
-            //    }, 3000);
-            //    Search();
-            //}
-            //else {
-            //    $("#addResult").attr('class', 'result-text-fail');
-            //    $("#addResult").html(response.ErrMsg);
-            //}
 
-            alert('EditCaseForm');
             AlertService.setAlertId('sentAlertOnPopup');
             AlertService.showAlert(response);
->>>>>>> Stashed changes
         });
     });
 });
@@ -82,11 +60,11 @@ function editCaseStatus(obj, caseId) {
         text: "Are you sure to " + active + "this Case?",
         confirm: function () {
             $.post('Case/EditCaseStatus', { caseId: caseId, isActive: !isActive }, function (result) {
-                if (result.ErrCode === 0) {
+                if (result.IsSuccessful) {
                     Search();
                 }
                 else {
-                    alert(result.ErrMsg);
+                    AlertService.showAlert(result);
                 }
             });
         },
