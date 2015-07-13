@@ -4,7 +4,7 @@
     });
 
     $("#btn_Cancel").click(function () {
-        $("div#popup").dialog("destroy").remove();
+        DialogService.closeDialog();
     });
 
     var editCaseForm = $('#EditCaseForm').submit(function (event) {
@@ -63,9 +63,8 @@ function editCaseStatus(obj, caseId) {
                 if (result.IsSuccessful) {
                     Search();
                 }
-                else {
-                    AlertService.showAlert(result);
-                }
+
+                AlertService.showAlert(result);
             });
         },
         cancel: function () {

@@ -169,9 +169,8 @@ $("#btn_AddNewTask").click(function () {
                      if (response.IsSuccessful) {
                          Search();
                      }
-                     else {
-                         AlertService.showAlert(response);
-                     }
+                     
+                     AlertService.showAlert(response);
                  }
              });
          },

@@ -117,8 +117,7 @@ function OnInitialize() {
                         window.location.replace(url);
                     }
                     else {
-                        // display the error message
-                        $("#addTaskResult").text(response.Message);
+                        AlertService.showAlert(response);
                     }
                 },
                 beforeSend: function () {
@@ -168,16 +167,7 @@ function OnInitialize() {
                 error: function () {
                 },
                 success: function (response) {
-                    if (response.IsSuccessful) {
-                        // redirect to case detail page
-                        $("#editTaskResult").css("class", "result-text-success");
-                        $("#editTaskResult").text("Update Task Information successfully!");
-                    }
-                    else {
-                        // display the error message
-                        $("#editTaskResult").css("class", "result-text-fail");
-                        $("#editTaskResult").text(response.Message);
-                    }
+                    AlertService.showAlert(response);
                 },
                 beforeSend: function () {
 

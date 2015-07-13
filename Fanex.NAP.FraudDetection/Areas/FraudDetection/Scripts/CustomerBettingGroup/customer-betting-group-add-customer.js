@@ -28,8 +28,6 @@
             },
             success: function (response) {
                 if (response.IsSuccessful) {
-                    $("#addResult").attr('class', 'result-text-success');
-                    $("#addResult").html("Add new group successfully!");
                     setTimeout(function () {
                         DialogService.closeDialog();
                     }, 3000);
@@ -38,10 +36,9 @@
 
                     formSearch.submit();
                 }
-                else {
-                    $("#addResult").attr('class', 'result-text-fail');
-                    $("#addResult").html(response.Message);
-                }
+
+                AlertService.setAlertId('sentAlertOnPopup');
+                AlertService.showAlert(response);
             },
             beforeSend: function () {
 
@@ -131,9 +128,9 @@ function deleteCustomer(custId, groupId) {
 
                     formSearch.submit();
                 }
-                else {
-                    AlertService.showAlert(result);
-                }
+
+                AlertService.setAlertId('sentAlertOnPopup');
+                AlertService.showAlert(result);
             });
         },
         cancel: function () {

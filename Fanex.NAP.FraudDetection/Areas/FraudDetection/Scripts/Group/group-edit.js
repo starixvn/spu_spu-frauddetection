@@ -4,7 +4,6 @@
     });
 
     $("#btn_Cancel").click(function () {
-        //$("div#popup").dialog("destroy").remove();
         DialogService.closeDialog();
     });
 
@@ -13,17 +12,14 @@
 
         $.post(this.action, $(this).serialize(), function (response) {
             if (response.IsSuccessful) {
-                $("#addResult").attr('class', 'result-text-success');
-                $("#addResult").html("Edit group successfully!");
                 setTimeout(function () {
                     DialogService.closeDialog();
                 }, 3000);
                 Search();
             }
-            else {
-                $("#addResult").attr('class', 'result-text-fail');
-                $("#addResult").html(response.Message);
-            }
+
+            AlertService.setAlertId('sentAlertOnPopup');
+            AlertService.showAlert(response);
         });
     });
 });
@@ -67,9 +63,8 @@ function editGroupStatus(obj, groupId) {
                 if (result.IsSuccessful) {
                     Search();
                 }
-                else {
-                    AlertService.showAlert(result);
-                }
+
+                AlertService.showAlert(result);
             });
         },
         cancel: function () {
