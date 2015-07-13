@@ -69,22 +69,10 @@
         target.html(frameHtml);
 
         return openDialog(target, title, options);
-    
-        //var frameHtml = content;
-        //var frame = $("#aff-dialog-frame");
-
-        //if (frame.length > 0) {
-        //    frame.html(frameHtml);
-        //} else {
-        //    var blockLoading = '<div class="block-loading"></div>';
-        //    frame = '<div id="aff-dialog-frame">' + blockLoading + frameHtml + '</div>';
-        //}
-        //return AFFILIATE.openDialog(frame, title, options);
     };
 
     service.closeDialog = function () {
         if (parent.DialogService.currentOpenDialog !== null) {
-            //target.remove();
             parent.DialogService.currentOpenDialog.dialog("close");
         }
     };

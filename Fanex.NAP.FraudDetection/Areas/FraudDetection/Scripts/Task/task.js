@@ -390,7 +390,7 @@ function AddingOneMoreRuleToTable(tableName, rowNumber, parentName) {
     var configIds = GetSelectedConfigIds(parentName);
 
     var blockOfTableRow = "<tr id='" + tableName + rowNumber + "'><td><input type='checkbox' id='cb_" + tableName + rowNumber + "' /></td>";
-    blockOfTableRow += "<td style='width: 510px;'><div id='div_" + tableName + rowNumber + "' data-configid='" + configIds + "' data-rawcontent='" + ruleString + "' data-formattedcontent='" + formattedRuleString + "'>" + ruleString + "</div></td>";
+    blockOfTableRow += "<td style='width: 590px;'><div id='div_" + tableName + rowNumber + "' data-configid='" + configIds + "' data-rawcontent='" + ruleString + "' data-formattedcontent='" + formattedRuleString + "'>" + ruleString + "</div></td>";
     blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='/Areas/FraudDetection/App_Themes/Images/Delete.gif' onclick='RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
     blockOfTableRow = blockOfTableRow.replace(/@/g, '"'); 
 

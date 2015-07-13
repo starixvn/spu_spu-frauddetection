@@ -188,7 +188,6 @@ $("#btn_AddNewTask").click(function () {
 
 var CaseGroupGridService = (function($) {
     var service = {};
-    
 
     // private methods
 
@@ -230,20 +229,23 @@ var CaseGroupGridService = (function($) {
                 customButtons: "<span class='glyphicon glyphicon-plus' onclick='CaseGroupGridService.addCustomerGroupToCase({0});' style='cursor: pointer'/>&nbsp;".format(caseId)
             },
             showPager: true,
-            customPager: true,
-            //pagerOption: {
-            //    itemsPerPage: _pageSize,
-            //    currentPage: _pageIndex,
-            //    totalItem: result[1].totalItem,
-            //    itemsPerPageArray: [10, 20, 50, 100, 500],
-            //    pagerSelectCallBack: ReRenderAfterPaged
-            //}
+            pagerOption: {
+                itemsPerPage: 10,
+                currentPage: 0,
+                itemsPerPageArray: [10, 20, 50, 100, 500],
+                showDetail: true
+            }
         };
 
         return gridOptions;
     };
 
     // public methods
+
+    service.init = function() {
+        
+
+    };
 
     service.getCustomerGroupByCase = function () {
         var url = SPU.getAbsoluteUrl("CaseGroup/GetCustomerGroupsInCase");
@@ -268,6 +270,28 @@ var CaseGroupGridService = (function($) {
 
     service.addCustomerGroupToCase = function (caseId) {
         var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase?caseId={0}".format(caseId));
+        $.ajax({
+            type: "GET",
+            contentType: 'application/json',
+            dataType: "text",
+            cache: false,
+            url: url,
+            error: function () {
+            },
+            success: function (response) {
+                //DialogService.setDialogId("popup");
+                DialogService.openDialogContent(response, "Add Customer Group To Case", {
+                    width: 500,
+                    height: 400
+                });
+            },
+            beforeSend: function () {
+
+            },
+            complete: function () {
+            }
+        });
+
         DialogService.openDialogFrame(url, "Add Customer Group To Case", { width: 580, height: 350 });
     };
 
