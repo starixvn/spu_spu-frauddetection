@@ -166,9 +166,8 @@ function editActive(obj, mailId) {
                 if (result.IsSuccessful) {
                     formSearch.submit();
                 }
-                else {
-                    AlertService.showAlert(result);
-                }
+
+                AlertService.showAlert(result);
             });
         },
         cancel: function () {
