@@ -34,15 +34,17 @@
 </form>
 <div id="SearchResult" class="freegrid  content-grid">
 </div>
-<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
 <div class="button-action">
-    <a class="back-button" href="/Case">← Back To List </a>
+    <a class="back-button" href="/Case">← Back To List</a>
+>>>>>>> Stashed changes
 </div>
-
 <div style ="clear: both;"class="newline">&nbsp;</div>
+<div id="CaseGroupResult" class="freegrid  content-grid">&nbsp;</div>
 
+<<<<<<< Updated upstream
 <div id="CaseGroupResult" class="freegrid  content-grid">
     
-</div>
 =======
->>>>>>> #39228: Implement client side
+>>>>>>> Stashed changes

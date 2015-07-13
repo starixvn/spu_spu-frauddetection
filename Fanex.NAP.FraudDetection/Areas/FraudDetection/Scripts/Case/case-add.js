@@ -26,18 +26,14 @@
             error: function () {
             },
             success: function (response) {
-                if (response.ErrCode == 0) {
-                    $("#addResult").attr('class', 'result-text-success');
-                    $("#addResult").html("Add new case successfully!"); 
+                if (response.IsSuccessful) {
                     setTimeout(function () {
                         DialogService.closeDialog();
                     }, 3000);
-                    Search();
                 }
-                else {
-                    $("#addResult").attr('class', 'result-text-fail');
-                    $("#addResult").html(response.ErrMsg);
-                }
+
+                AlertService.setAlertId('sentAlertOnPopup');
+                AlertService.showAlert(response);
             },
             beforeSend: function () {
 

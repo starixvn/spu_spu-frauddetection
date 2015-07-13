@@ -10,6 +10,7 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
+    using Framework.Command;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria.Case;
@@ -76,12 +77,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Case should has a name." } };
+                return Json(new CommandResult
+                {
+                    Code = 2209,
+                    Message = "A case should have a name."
+                });
             }
 
             criteria.CreatorId = 1;
             var result = _caseService.InsertCase(criteria);
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -107,11 +113,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [Compress]
         public JsonResult GetCaseDetail(TaskSelectAllByCaseIdCriteria criteria)
         {
-            criteria.PageIndex ++;
+            criteria.PageIndex++;
             var dataReader = _taskService.GetTasksByCaseId(criteria);
-            var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader); 
+            var result = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
 
-            return Json(results, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -149,13 +155,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
             {
-                return new JsonResult { Data = new { ErrCode = "2209", ErrMsg = "A Case should has a name." } };
+                return Json(new CommandResult
+                {
+                    Code = 2209,
+                    Message = "A case should have a name."
+                });
             }
 
             criteria.CreatorId = 1;
             var result = _caseService.UpdateCase(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

@@ -2,6 +2,8 @@
 spuApp.controller('CaseGroupController', [
     '$scope', 'CaseGroupService', function ($scope, CaseGroupService) {
 
+
+
         $scope.caseId = caseId;
 
         var convertRowCollection = function (groups) {

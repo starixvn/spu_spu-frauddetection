@@ -21,10 +21,18 @@
         });
     };
 
+    service.setAlertId = function(alertId) {
+        $sentAlert = $('#' + alertId);
+        $message = $('#' + alertId + ' div');
+
+        AlertService.init();
+    };
+
+
     var defaultMessage = "The operation is successful.";
 
     var showAlertByObject = function(data) {
-        if (data.IsSuccessful === true) {
+        if (data.ErrCode === 0 || data.IsSuccessful === true) {
             if (data.Message === "") {
                 data.Message = defaultMessage;
             }

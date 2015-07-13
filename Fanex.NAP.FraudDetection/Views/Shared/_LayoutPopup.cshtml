@@ -10,7 +10,13 @@
     @Styles.Render("~/bundles/coreCss")
 </head>
 <body class="popup">
-    @RenderBody()
+    <div style="position: relative">
+        <div id="sentAlertOnPopup" class="alert alert-danger collapse" style="position: absolute;  padding: 5px; margin-bottom: 10px;width: 100%">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <div></div>
+        </div>
+    </div>
+@RenderBody()
 </body>
 
 @RenderSection("FooterJs",false)

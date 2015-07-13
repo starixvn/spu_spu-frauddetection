@@ -189,6 +189,7 @@ $("#btn_AddNewTask").click(function () {
 
 var CaseGroupGridService = (function($) {
     var service = {};
+    
 
     // private methods
 
@@ -198,7 +199,7 @@ var CaseGroupGridService = (function($) {
         var bodyRows = [];
 
         $.each(data, function (index, element) {
-            var removeValue = "<span class='glyphicon glyphicon-trash cursor-pointer' onclick='CaseGroupGridService.removeCustomerGroupFromCase({0}, {1});'>".format(element.CaseId, element.GroupId);
+            var removeValue = "<span class='glyphicon glyphicon-trash' onclick='CaseGroupGridService.removeCustomerGroupFromCase({0}, {1});' style='cursor: pointer'>".format(element.CaseId, element.GroupId);
             bodyRows.push({
                 Columns: [
                     { Name: "No", Value: index + 1 },
@@ -227,8 +228,17 @@ var CaseGroupGridService = (function($) {
             {
                 text: "Customer Groups In This Case",
                 showButtonsWhenNoData: true,
-                customButtons: "<span class='glyphicon glyphicon-plus' onclick='CaseGroupGridService.addCustomerGroupToCase({0});' />&nbsp;".format(caseId)
-            }
+                customButtons: "<span class='glyphicon glyphicon-plus' onclick='CaseGroupGridService.addCustomerGroupToCase({0});' style='cursor: pointer'/>&nbsp;".format(caseId)
+            },
+            showPager: true,
+            customPager: true,
+            //pagerOption: {
+            //    itemsPerPage: _pageSize,
+            //    currentPage: _pageIndex,
+            //    totalItem: result[1].totalItem,
+            //    itemsPerPageArray: [10, 20, 50, 100, 500],
+            //    pagerSelectCallBack: ReRenderAfterPaged
+            //}
         };
 
         return gridOptions;
