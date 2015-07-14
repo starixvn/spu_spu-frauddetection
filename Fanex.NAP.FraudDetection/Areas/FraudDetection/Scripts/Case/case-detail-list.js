@@ -291,8 +291,6 @@ var CaseGroupGridService = (function($) {
             complete: function () {
             }
         });
-
-        DialogService.openDialogFrame(url, "Add Customer Group To Case", { width: 580, height: 350 });
     };
 
     service.removeCustomerGroupFromCase = function (caseId, groupId) {
