@@ -31,7 +31,7 @@
     <div id="caseid" style="display: none;">@Model.TaskInformation.CaseId</div>
     <div id="taskid" style="display: none;">@Model.TaskInformation.TaskId</div>
     <div id="onUserid" style="display: none;">@Model.OnUserId</div>
-    <div id="accordion" style="width: 700px;">
+    <div id="accordion" style="width: 720px;">
         <h3 id="accordionBlockTaskInfo">Task Information</h3>
         <div>
             <table class="table-popup font-size-small">
@@ -151,7 +151,7 @@
                                 configIdsForEachPrecond = string.IsNullOrEmpty(configIdsForEachPrecond) ? "" : configIdsForEachPrecond.Remove(configIdsForEachPrecond.Length - 1);
                                 <tr id="@rowName" style="@(string.IsNullOrEmpty(Model.TaskInformation.TaskPreconditionsOriginal) ? "display:none" : "")">
                                     <td><input id="cb_@rowName" type="checkbox"></td>
-                                    <td style="width: 510px;">
+                                    <td style="width: 610px;">
                                         <div id="div_@rowName" data-formattedcontent="@configsFormatter[i]" data-rawcontent="@configsOriginal[i]" data-configid="@configIdsForEachPrecond">@configsOriginal[i].Replace("#", " ")</div>
                                     </td>
                                     <td><img alt="" onclick="RemoveOneRuleFromTable('preconditionTable',@counter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
@@ -249,7 +249,7 @@
                                 configIdsForEachRule = configIdsForEachRule.Remove(configIdsForEachRule.Length - 1);
                                 <tr id="@ruleRowName">
                                     <td><input id="cb_@ruleRowName" type="checkbox"></td>
-                                    <td style="width: 510px;">
+                                    <td style="width: 610px;">
                                         <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
                                     </td>
                                     <td><img alt="" onclick="RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;"></td>
