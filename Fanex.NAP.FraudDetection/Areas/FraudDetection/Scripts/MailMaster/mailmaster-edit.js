@@ -24,11 +24,19 @@
         editMail.submit();
     });
 
-    var editMail = $('#editMailForm').submit(function () {
+    var editMail = $('#editMailForm').submit(function (event) {
+        event.preventDefault();
+
         $('#editMailForm').validate();
 
         if ($('#editMailForm').valid()) {
-            $.post(this.action, $(this).serialize());
+            $.post(this.action, $(this).serialize(), function (result) {
+                if (result.IsSuccessful) {
+                    window.location.href = '/MailMaster';
+                } else {
+                    AlertService.showAlert(result);
+                }
+            });
         }
     });
 });

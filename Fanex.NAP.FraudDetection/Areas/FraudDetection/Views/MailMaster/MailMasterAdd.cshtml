@@ -7,15 +7,6 @@
     <b>Mail Master</b></h4>
 @using (Html.BeginForm("AddNewMail", "MailMaster", FormMethod.Post, new { @id = "addNewMailForm" }))
 {
-    <div class="form-group">
-        <ul>
-            <li>@Html.ValidationMessage("error")</li>
-            <li>@Html.ValidationMessageFor(model => model.MailCode)</li>
-            <li>@Html.ValidationMessageFor(model => model.MailingListId)</li>
-            <li>@Html.ValidationMessageFor(model => model.MailSubject)</li>
-        </ul>
-    </div>
-
     <div class="filter-form col-sm-12">
         <div class="form-group col-sm-12">
             <div class="col-sm-6">

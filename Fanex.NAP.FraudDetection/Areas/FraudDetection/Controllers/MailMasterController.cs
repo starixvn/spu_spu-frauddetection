@@ -63,17 +63,20 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 criteria.CreatorId = 1;
                 var result = _mailMasterService.InsertMail(criteria);
 
-                if (result.IsSuccessful)
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
+            var errorMessage = string.Empty;
+            foreach (var value in ModelState.Values)
+            {
+                if (value.Errors.Count > 0)
                 {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("error", result.Message);
+                    errorMessage = value.Errors[0].ErrorMessage;
+                    break;
                 }
             }
 
-            return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterAdd.cshtml");
+            return new JsonResult { Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage } };
         }
 
         /// <summary>
@@ -84,7 +87,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult DeleteMail(int mailId)
         {
-            var criteria = new MailMasterDeleteCriteria()
+            var criteria = new MailMasterDeleteCriteria
             {
                 CreatorId = 1,
                 MailId = mailId
@@ -102,12 +105,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>The ActionResult.</returns>
         public ActionResult Update(int? mailId)
         {
-            var criteria = new MailMasterGetByIdCriteria()
+            var criteria = new MailMasterGetByIdCriteria
             {
                 MailId = mailId == null ? 0 : (int)mailId
             };
             var mail = _mailMasterService.GetMailById(criteria);
-            var model = new MailMasterUpdateCriteria()
+            var model = new MailMasterUpdateCriteria
             {
                 IsActive = mail.IsActive,
                 MailCode = mail.MailCode,
@@ -133,20 +136,22 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             if (ModelState.IsValid)
             {
                 criteria.CreatorId = 1;
-
                 var result = _mailMasterService.UpdateMail(criteria);
 
-                if (result.IsSuccessful)
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
+            var errorMessage = string.Empty;
+            foreach (var value in ModelState.Values)
+            {
+                if (value.Errors.Count > 0)
                 {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("error", result.Message);
+                    errorMessage = value.Errors[0].ErrorMessage;
+                    break;
                 }
             }
 
-            return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterUpdate.cshtml");
+            return new JsonResult { Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage } };
         }
 
         /// <summary>
@@ -158,7 +163,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult EditMailStatus(int mailId, bool isActive)
         {
-            var criteria = new MailMasterActivateCriteria()
+            var criteria = new MailMasterActivateCriteria
             {
                 CreatorId = 1,
                 MailId = mailId,
