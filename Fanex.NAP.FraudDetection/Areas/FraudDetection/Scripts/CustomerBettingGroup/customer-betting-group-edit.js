@@ -19,8 +19,7 @@
                 formSearch.submit();
             }
 
-            AlertService.setAlertId('sentAlertOnPopup');
-            AlertService.showAlert(response);
+            AlertServiceOnPopup.showAlert(response);
         });
     });
 });

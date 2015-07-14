@@ -44,26 +44,6 @@
         return gridOptions;
     };
 
-    var getAvailableCustomerGroups = function (caseId) {
-
-        var url = SPU.getAbsoluteUrl("CaseGroup/GetAvailableCustomerGroups?caseId=" + caseId);
-
-        $.ajax({
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            cache: false,
-            url: url,
-            error: function (error) {
-                alert(error);
-            },
-            success: function (data) {
-                var gridOptions = getGridOption(data);
-                $("#AvailableGroups").fanexGrid(gridOptions);
-            }
-        });
-    };
-
     var bindEventOnElements = function() {
         $("#spu-dialog-frame #btn_addGroup").on("click", function (event) {
             event.preventDefault();
@@ -91,6 +71,28 @@
         });
     };
 
+    var getAvailableCustomerGroups = function (caseId) {
+
+        var url = SPU.getAbsoluteUrl("CaseGroup/GetAvailableCustomerGroups?caseId=" + caseId);
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            cache: false,
+            url: url,
+            error: function (error) {
+                alert(error);
+            },
+            success: function (data) {
+                var gridOptions = getGridOption(data);
+                $("#AvailableGroups").fanexGrid(gridOptions);
+
+                bindEventOnElements();
+            }
+        });
+    };
+
     var collectSelectedCustomerGroups = function () {
         var checkedElements = $(".checkItem:checked");
         var selectedGroups = [];
@@ -110,8 +112,7 @@
         var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase");
 
         if (validateCustomerGroup() === false) {
-            AlertService.setAlertId('sentAlertOnPopup');
-            AlertService.showAlert('Please select at least one customer group');
+            AlertServiceOnPopup.showAlert('Please select at least one customer group');
             return;
         };
 
@@ -139,17 +140,15 @@
                     CaseGroupGridService.getCustomerGroupByCase();
                 }
 
-                AlertService.setAlertId('sentAlertOnPopup');
-                AlertService.showAlert(data);
-                AlertService.setAlertId('sentAlert');
+                
+                AlertServiceOnPopup.showAlert(data);
             }
         });
     };
 
     service.init = function () {
         getAvailableCustomerGroups(caseId);
-
-        bindEventOnElements();
+        
     };
 
     return service;

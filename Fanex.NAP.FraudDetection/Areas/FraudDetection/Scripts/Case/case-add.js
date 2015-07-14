@@ -33,8 +33,7 @@
                     Search();
                 }
 
-                AlertService.setAlertId('sentAlertOnPopup');
-                AlertService.showAlert(response);
+                AlertServiceOnPopup.showAlert(response);
             },
             beforeSend: function () {
 

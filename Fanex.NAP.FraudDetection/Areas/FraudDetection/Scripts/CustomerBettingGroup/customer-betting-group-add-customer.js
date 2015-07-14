@@ -37,8 +37,7 @@
                     formSearch.submit();
                 }
 
-                AlertService.setAlertId('sentAlertOnPopup');
-                AlertService.showAlert(response);
+                AlertServiceOnPopup.showAlert(response);
             },
             beforeSend: function () {
 
@@ -129,8 +128,7 @@ function deleteCustomer(custId, groupId) {
                     formSearch.submit();
                 }
 
-                AlertService.setAlertId('sentAlertOnPopup');
-                AlertService.showAlert(result);
+                AlertServiceOnPopup.showAlert(result);
             });
         },
         cancel: function () {

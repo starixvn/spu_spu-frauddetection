@@ -21,14 +21,6 @@
         });
     };
 
-    service.setAlertId = function(alertId) {
-        $sentAlert = $('#' + alertId);
-        $message = $('#' + alertId + ' div');
-
-        AlertService.init();
-    };
-
-
     var defaultMessage = "The operation is successful.";
 
     var showAlertByObject = function(data) {
