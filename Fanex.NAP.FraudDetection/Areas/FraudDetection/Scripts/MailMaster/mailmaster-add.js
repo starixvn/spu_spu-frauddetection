@@ -29,7 +29,7 @@
 
         $('#addNewMailForm').validate();
 
-        $('#editor').html(tinyMCE.activeEditor.getContent());
+        $('#editor').text(tinyMCE.activeEditor.getContent());
 
         if ($('#addNewMailForm').valid()) {
             $.post(this.action, $(this).serialize(), function (result) {
