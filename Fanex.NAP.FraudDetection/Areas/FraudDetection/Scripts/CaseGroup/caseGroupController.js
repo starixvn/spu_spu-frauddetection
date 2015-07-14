@@ -32,7 +32,7 @@
             showNumberColumn: true,
             showPager: true,
             fullHeight: false,
-            gridHeight: 320,
+            gridHeight: 400,
             pagerOption: {
                 itemsPerPage: 10,
                 currentPage: 0,
@@ -44,9 +44,24 @@
         return gridOptions;
     };
 
-    var getAvailableCustomerGroups = function (data) {
-        var gridOptions = getGridOption(data);
-        $("#AvailableGroups").fanexGrid(gridOptions);
+    var getAvailableCustomerGroups = function (caseId) {
+
+        var url = SPU.getAbsoluteUrl("CaseGroup/GetAvailableCustomerGroups?caseId=" + caseId);
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            cache: false,
+            url: url,
+            error: function (error) {
+                alert(error);
+            },
+            success: function (data) {
+                var gridOptions = getGridOption(data);
+                $("#AvailableGroups").fanexGrid(gridOptions);
+            }
+        });
     };
 
     var bindEventOnElements = function() {
@@ -132,7 +147,7 @@
     };
 
     service.init = function () {
-        getAvailableCustomerGroups(groups);
+        getAvailableCustomerGroups(caseId);
 
         bindEventOnElements();
     };

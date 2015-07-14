@@ -42,18 +42,22 @@
         [HttpGet]
         public ActionResult AddCustomerGroupToCase(int caseId)
         {
-            var model = new AddCustomerGroupToCaseViewModel()
+            ViewBag.CaseId = caseId;
+            
+            return View("~/Areas/FraudDetection/Views/CaseGroup/AddCustomerGroupToCase.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult GetAvailableCustomerGroups(int caseId)
+        {
+            var groups = _groupService.GetGroupsNotInGivenCase(new GroupNotInGivenCaseSelectAllCriteria
             {
                 CaseId = caseId,
-                Groups = _groupService.GetGroupsNotInGivenCase(new GroupNotInGivenCaseSelectAllCriteria
-                {
-                    CaseId = caseId,
-                    PageIndex = 1,
-                    PageSize = 30
-                }).ToList()
-            };
+                PageIndex = 1,
+                PageSize = 30
+            }).ToList();
 
-            return View("~/Areas/FraudDetection/Views/CaseGroup/AddCustomerGroupToCase.cshtml", model);
+            return Json(groups, JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]

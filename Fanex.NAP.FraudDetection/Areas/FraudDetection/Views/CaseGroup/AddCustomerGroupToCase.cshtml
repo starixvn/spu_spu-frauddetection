@@ -3,8 +3,6 @@
     ViewBag.Title = "Add Customer Group To Case";
 }
 
-@model Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.AddCustomerGroupToCaseViewModel
-
 <div>
     <div id="AvailableGroups" class="freegrid  content-grid"></div>
     <div class="newline" style="clear: both;">&nbsp;</div>
@@ -17,10 +15,8 @@
 @section FooterJs
 {
     <script type="text/javascript">
-        var caseId = @Model.CaseId;
-        var groups = @Html.Raw(Json.Encode(Model.Groups));
+        var caseId = @ViewBag.CaseId;
+        
     </script>
-    @*<script src="~/Areas/FraudDetection/Scripts/CaseGroup/spuApp.js"></script>
-    <script src="~/Areas/FraudDetection/Scripts/CaseGroup/caseGroupService.js"></script>*@
     <script src="~/Areas/FraudDetection/Scripts/CaseGroup/caseGroupController.js"></script>
 }
