@@ -115,6 +115,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             var queryPreconString = "select distinct top " + ConfigurationManager.AppSettings["ChunkOfMatchesToScan"] + " {0} from {1} where {2}";
+            var queryPreconStringCount = "select distinct {0} from {1} where {2}";
             var queryRuleString = "select distinct {0} from {1} where {2}";
             var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
@@ -125,7 +126,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
                 string.Format(
-                queryPreconString,
+                criteria.EventId == 1 ? queryPreconString : queryPreconStringCount,
                 GenerateSQLSelect(configList, additionalInfo.PreconConfigs),
                 GenerateSQLFrom(configList, tablesForeignKey, additionalInfo.PreconConfigs),
                 GenerateSQLWhere(configList, true, additionalInfo, criteria.TaskPreconditions, criteria.TaskPreconditionsOriginal));
