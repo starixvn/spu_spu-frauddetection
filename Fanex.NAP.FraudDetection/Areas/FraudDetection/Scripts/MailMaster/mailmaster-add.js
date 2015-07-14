@@ -29,6 +29,8 @@
 
         $('#addNewMailForm').validate();
 
+        $('#editor').html(tinyMCE.activeEditor.getContent());
+
         if ($('#addNewMailForm').valid()) {
             $.post(this.action, $(this).serialize(), function (result) {
                 if (result.IsSuccessful) {

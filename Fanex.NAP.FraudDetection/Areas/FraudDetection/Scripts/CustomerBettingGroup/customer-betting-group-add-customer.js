@@ -68,7 +68,7 @@ var renderCustomerTable = function (customers) {
                 { HeaderText: "Delete", Width: 50, Name: "Delete", HeaderAlign: "center", CellAlign: "center" }
             ],
         bodyRows: createCustomerTable(customers),
-        gridExpandHeight: 180,
+        gridExpandHeight: 500,
         showPager: true,
         pagerOption:
             {

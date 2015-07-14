@@ -21,24 +21,18 @@
     });
 
     $("#btn_editMail").click(function () {
-        editMail.submit();
+        var url = $("#editMailForm").attr('action');
+
+        $.post(url, $("#editMailForm").serialize(), function (result) {
+
+            if (result.IsSuccessful) {
+                window.location.href = '/MailMaster';
+            } else {
+                AlertService.showAlert(result);
+            }
+        });
     });
 
-    var editMail = $('#editMailForm').submit(function (event) {
-        event.preventDefault();
-
-        $('#editMailForm').validate();
-
-        if ($('#editMailForm').valid()) {
-            $.post(this.action, $(this).serialize(), function (result) {
-                if (result.IsSuccessful) {
-                    window.location.href = '/MailMaster';
-                } else {
-                    AlertService.showAlert(result);
-                }
-            });
-        }
-    });
 });
 
 function insertSuspiciousStatistic(name) {
