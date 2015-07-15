@@ -33,6 +33,7 @@
             showPager: true,
             fullHeight: false,
             gridHeight: 400,
+            allowTruncate: true,
             pagerOption: {
                 itemsPerPage: 10,
                 currentPage: 0,

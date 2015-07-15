@@ -39,8 +39,8 @@ function Search() {
                 columns: [
                     { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "CaseId", Width: 100, Name: "CaseId", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Case Name", Width: 200, Name: "CaseName", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Description", Width: 300, Name: "CaseDesc", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Case Name", Width: 300, Name: "CaseName", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Description", Width: 500, Name: "CaseDesc", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],

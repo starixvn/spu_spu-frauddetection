@@ -44,8 +44,8 @@ function Search() {
                 columns: [
                     { HeaderText: "#", Width: 30, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "TaskId", Width: 100, Name: "TaskId", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Task Name", Width: 200, Name: "TaskName", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Description", Width: 300, Name: "TaskDesc", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Task Name", Width: 300, Name: "TaskName", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Description", Width: 500, Name: "TaskDesc", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Type", Width: 250, Name: "Type", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }

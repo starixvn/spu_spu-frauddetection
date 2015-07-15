@@ -18,8 +18,8 @@ function renderMailTable(mailTemplates) {
         columns:
                 [
                     { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Mail Code", Width: 200, Name: "MailCode", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Description", Width: 300, Name: "Description", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Mail Code", Width: 300, Name: "MailCode", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Description", Width: 500, Name: "Description", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
