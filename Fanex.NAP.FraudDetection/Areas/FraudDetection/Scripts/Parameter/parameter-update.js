@@ -40,14 +40,7 @@ function OnInitialize() {
             error: function () {
             },
             success: function (response) {
-                if (response.ErrCode == 0) {
-                    $("#updateParamsResults").css("class", "result-text-success");
-                    $("#updateParamsResults").text("New value of parameters were updated.");
-                }
-                else {
-                    $("#updateParamsResults").css("class", "result-text-fail");
-                    $("#updateParamsResults").text(response.ErrMsg);
-                }
+                AlertService.showAlert(response);
             },
             beforeSend: function () {
 

@@ -49,7 +49,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var configService = new ConfigurationsService();
             var result = configService.UpdateConfigParameters(criteria);
 
-            return new JsonResult { Data = new { ErrCode = result.Code, ErrMsg = result.Message } };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
