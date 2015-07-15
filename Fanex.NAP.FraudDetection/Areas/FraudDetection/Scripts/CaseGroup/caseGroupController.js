@@ -25,7 +25,7 @@
             columns: [
                 { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "<input type='checkbox' id='checkAll' />", Width: 30, Name: "Selection", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Name", Width: 120, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Description", Width: 250, Name: "GroupDesc", HeaderAlign: "center", CellAlign: "left" }
             ],
             bodyRows: getBodyRows(data),

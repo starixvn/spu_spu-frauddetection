@@ -527,7 +527,9 @@
     <Content Include="Content\Fanex.Grid\images\sorting_bg.gif" />
     <Content Include="Content\Fanex.Grid\images\sorting_desc.gif" />
     <Content Include="Content\Fanex.Grid\images\white-top-bottom.gif" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\jquery-ui\base\accordion.css" />
     <Content Include="Areas\FraudDetection\Views\Web.config" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseList.cshtml" />
@@ -549,9 +551,15 @@
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Edit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Index.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\EditCustomer.cshtml" />
-    <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\jquery-ui\base\all.css.nk" />
     <Content Include="Content\jquery-ui\base\autocomplete.css" />
     <None Include="Content\jquery-ui\base\base.css.bk" />

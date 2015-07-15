@@ -281,7 +281,7 @@ var CaseGroupGridService = (function($) {
             success: function (response) {
                 //DialogService.setDialogId("popup");
                 DialogService.openDialogContent(response, "Add Customer Group To Case", {
-                    width: 500,
+                    width: 580,
                     height: 400
                 });
             },
