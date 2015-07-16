@@ -222,6 +222,7 @@ var CaseGroupGridService = (function($) {
             bodyRows: getBodyRows(data),
             showNumberColumn: true,
             showTitle: true,
+            allowTruncate: true,
             titleInfo:
             {
                 text: "Customer Groups In This Case",
