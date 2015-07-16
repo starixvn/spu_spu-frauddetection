@@ -1,4 +1,4 @@
-﻿var CaseGroupController = (function ($) {
+﻿var CaseGroupService = (function ($) {
 
     var service = {};
 
@@ -11,7 +11,7 @@
                     { Name: "No", Value: index + 1 },
                     { Name: "Selection", Value: "<input type='checkbox' class='checkItem' data-groupid='" + element.GroupId + "' />" },
                     { Name: "GroupName", Value: element.GroupName },
-                    { Name: "GroupDesc", Value: element.GroupDescription }
+                    { Name: "GroupDesc", Value: element.GroupDesc }
                 ]
             });
         });
@@ -47,7 +47,7 @@
     var bindEventOnElements = function() {
         $("#spu-dialog-frame #btn_addGroup").on("click", function (event) {
             event.preventDefault();
-            CaseGroupController.addCustomerGroupToCase();
+            CaseGroupService.addCustomerGroupToCase();
         });
 
         $("#spu-dialog-frame #btn_Cancel").on("click", function () {
@@ -156,5 +156,5 @@
 })(jQuery);
 
 (function ($) {
-    CaseGroupController.init();
+    CaseGroupService.init();
 })(jQuery);
