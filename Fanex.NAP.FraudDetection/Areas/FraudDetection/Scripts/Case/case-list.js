@@ -144,7 +144,7 @@ $("#btn_addNewCase").click(function () {
         },
         success: function (response) {
             DialogService.setDialogId("popup");
-            DialogService.openDialogContent(response, "Add New Case", {
+            DialogService.openDialogContent(response, "Add Case", {
                 width: '500px'
             });
         },

@@ -133,7 +133,7 @@ $("#btn_AddNewGroup").click(function () {
         },
         success: function (response) {
             DialogService.setDialogId("popup");
-            DialogService.openDialogContent(response, "Add New Group", {
+            DialogService.openDialogContent(response, "Add Group", {
                 width: '500px'
             });
         },

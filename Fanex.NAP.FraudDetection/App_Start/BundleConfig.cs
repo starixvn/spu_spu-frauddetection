@@ -54,6 +54,11 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Content/Fanex.Grid/Fanex.Grid.css",
                 "~/Content/Fanex.Grid/Fanex.Pagination.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/App/CustomerBettingGroup").Include(
+               "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-factory.js",
+               "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-model.js",
+               "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-controller.js"));
+
             var fraudDetectionCss = new Bundle("~/bundles/FraudDetectionCss")
             .IncludeDirectory("~/Areas/FraudDetection/App_Themes/Core", "*.css");
             fraudDetectionCss.Transforms.Add(cssTransformer);

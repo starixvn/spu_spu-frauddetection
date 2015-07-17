@@ -112,7 +112,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="groupId">The group ID.</param>
         /// <returns>The ActionResult.</returns>
-        [HttpPost]
+        [HttpGet]
         public ActionResult Delete(int groupId)
         {
             var criteria = new CustomerBettingGroupDeleteCriteria

@@ -268,12 +268,10 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-<<<<<<< HEAD
+    <Content Include="Areas\FraudDetection\Content\case.css" />
+    <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Models\AddCustomerGroupToCaseViewModel.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseGroupController.cs" />
-=======
-    <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
->>>>>>> #39228: Implement client side
     <Compile Include="Areas\FraudDetection\Controllers\SuspiciousCustomerController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MailMasterController.cs" />
@@ -282,6 +280,8 @@
     <Compile Include="Areas\FraudDetection\Controllers\CaseController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
     <Compile Include="Areas\FraudDetection\Models\TaskAdditionalInfo.cs" />
+    <Compile Include="Areas\FraudDetection\Models\ViewModel\Paramater\ParameterViewModel.cs" />
+    <Compile Include="Areas\FraudDetection\Models\ViewModel\Task\TaskViewModel.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
@@ -440,17 +440,20 @@
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
     <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
 <<<<<<< HEAD
-    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupController.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupService.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\spuApp.js" />
-    <Content Include="Scripts\Core\AlertService.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\casegroup-service.js" />
 =======
+    <Content Include="Areas\FraudDetection\Scripts\CaseGroup\caseGroupController.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-factory.js" />
+>>>>>>> #39749: remove New, refactor cust betting group and bug fixes
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add-customer.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
->>>>>>> #39228: Implement client side
+    <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
+    <Content Include="Scripts\Core\AlertService.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-update.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
@@ -531,7 +534,9 @@
     <Content Include="Content\Fanex.Grid\images\sorting_bg.gif" />
     <Content Include="Content\Fanex.Grid\images\sorting_desc.gif" />
     <Content Include="Content\Fanex.Grid\images\white-top-bottom.gif" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\jquery-ui\base\accordion.css" />
     <Content Include="Areas\FraudDetection\Views\Web.config" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseList.cshtml" />
@@ -548,17 +553,20 @@
     <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\SuspiciousCustomerReport.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\FraudDetection\Views\CaseGroup\AddCustomerGroupToCase.cshtml" />
-=======
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Add.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Edit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Index.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\EditCustomer.cshtml" />
->>>>>>> #39228: Implement client side
-    <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\jquery-ui\base\all.css.nk" />
     <Content Include="Content\jquery-ui\base\autocomplete.css" />
     <None Include="Content\jquery-ui\base\base.css.bk" />
