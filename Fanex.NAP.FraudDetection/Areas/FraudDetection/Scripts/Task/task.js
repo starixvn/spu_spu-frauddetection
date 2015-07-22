@@ -264,7 +264,7 @@ function GenerateFormattedConfig(parentName) {
             valueSelectedValue = '%' + $('#' + parentName + 'ControlTextbox').val() + '%';
     }
 
-    if (keySelectedValue == "TransDate" && valueSelectedValue == "Seconds To Goal")
+    if (keySelectedValue == "TransDate" && valueSelectedValue == "In Danger Period")
         return "NEARTHEGOAL";
     return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
 }
