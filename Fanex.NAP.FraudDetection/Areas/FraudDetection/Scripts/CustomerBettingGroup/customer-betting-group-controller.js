@@ -1,4 +1,4 @@
-﻿var customerBettingGroupController = (function () {
+﻿var customerBettingGroupController = (function ($) {
     "use strict";
 
     var customerBettingGroupController = {};
