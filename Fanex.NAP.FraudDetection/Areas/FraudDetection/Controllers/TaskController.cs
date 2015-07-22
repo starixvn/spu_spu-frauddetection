@@ -89,8 +89,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 mailMasterList.ToList()) { OnUserId = currentUserID, TaskInformation = new Task { CaseId = caseID, IsActive = true} };
 
 
-            var counterTableSQLString = taskViewModel.ConfigurationList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable;
-            taskViewModel.ConfigurationList.Where(l => l.ConfigName == "Counter").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseID.ToString());
+            var counterTableSQLString = taskViewModel.ConfigurationList.SingleOrDefault(l => l.ConfigName == "Suspicious Time").ConfigSQLTable;
+            taskViewModel.ConfigurationList.Where(l => l.ConfigName == "Suspicious Time").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseID.ToString());
 
             return taskViewModel;
         }
@@ -120,8 +120,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
-            var counterTableSQLString = configList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable;
-            configList.Where(l => l.ConfigName == "Counter").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", criteria.CaseId.ToString());
+            var counterTableSQLString = configList.SingleOrDefault(l => l.ConfigName == "Suspicious Time").ConfigSQLTable;
+            configList.Where(l => l.ConfigName == "Suspicious Time").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", criteria.CaseId.ToString());
 
             criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
@@ -329,8 +329,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var tablesForeignKey = _taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
             var configurationService = new ConfigurationsService();
             var configList = configurationService.GetConfigs(new ConfigSelectAllCriteria()).ToList();
-            var counterTableSQLString = configList.SingleOrDefault(l => l.ConfigName == "Counter").ConfigSQLTable;
-            configList.Where(l => l.ConfigName == "Counter").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseId);
+            var counterTableSQLString = configList.SingleOrDefault(l => l.ConfigName == "Suspicious Time").ConfigSQLTable;
+            configList.Where(l => l.ConfigName == "Suspicious Time").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseId);
 
             criteria.TaskPreconditionsFormatted = criteria.TaskPreconditions;
             criteria.TaskPreconditions = string.IsNullOrEmpty(additionalInfo.PreconConfigs) ? string.Empty :
