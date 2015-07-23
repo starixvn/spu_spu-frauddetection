@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.05.13">Created</change>
 // </history>
 
-namespace Fanex.NAP.FraudDetection.Models.ViewModel.Task
+namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
 {
     using System;
     using System.Collections.Generic;
@@ -22,11 +22,11 @@ namespace Fanex.NAP.FraudDetection.Models.ViewModel.Task
     {
         public TaskViewModel(
             List<SPU.Lib.FraudDetection.DTO.Event> events, 
-            List<Config> configs,
+            List<SPU.Lib.FraudDetection.DTO.Config> configs,
             List<CaseGroup> groups,
             List<Sport> sportList,
             List<Bettype> bettypeList,
-            List<MailMasterInfo> mailMasterList )
+            List<MailMasterInfo> mailMasterList)
         {
             EventList = events;
             ConfigurationList = configs;
@@ -40,7 +40,7 @@ namespace Fanex.NAP.FraudDetection.Models.ViewModel.Task
         public int OnUserId { get; set; }
 
         // Task
-        public Task TaskInformation { get; set; }
+        public SPU.Lib.FraudDetection.DTO.Task TaskInformation { get; set; }
 
         // Actions
         public List<SPU.Lib.FraudDetection.DTO.Event> EventList { get; set; }
@@ -51,9 +51,9 @@ namespace Fanex.NAP.FraudDetection.Models.ViewModel.Task
         public List<Sport> SportList { get; set; }
 
         // Configurations
-        public List<Config> ConfigurationList { get; set; }
+        public List<SPU.Lib.FraudDetection.DTO.Config> ConfigurationList { get; set; }
 
-        public List<Config> PreconditionConfigurations
+        public List<SPU.Lib.FraudDetection.DTO.Config> PreconditionConfigurations
         {
             get
             {
@@ -61,7 +61,7 @@ namespace Fanex.NAP.FraudDetection.Models.ViewModel.Task
             }
         }
 
-        public List<Config> RuleConfigurations
+        public List<SPU.Lib.FraudDetection.DTO.Config> RuleConfigurations
         {
             get
             {

@@ -122,7 +122,7 @@ function EditColumn(cell) {
 }
 
 $("#btn_AddNewGroup").click(function () {
-    var url = 'Group/AddNewGroup';
+    var url = 'Group/AddGroup';
     $.ajax({
         type: "GET",
         contentType: 'application/json',

@@ -54,7 +54,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <returns>HTML string.</returns>
         [HttpGet]
-        public string AddNewGroup()
+        public string AddGroup()
         {
             var groupInfo = new GroupInsertCriteria();
 
@@ -67,7 +67,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Group Insert Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult AddNewGroup(GroupInsertCriteria criteria)
+        public ActionResult AddGroup(GroupInsertCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.GroupName))
             {
@@ -86,7 +86,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="groupId">The group ID.</param>
         /// <returns>A template view.</returns>
         [HttpGet]
-        public string EditGroupInfo(int? groupId)
+        public string EditGroup(int? groupId)
         {
             var criteria = new GroupGetByIdCriteria
             {

@@ -120,7 +120,7 @@ function ActionColumn(cell) {
 }
 
 function EditTask(taskId) {
-    window.location.href = "/Task/TaskEditInfo" + "?taskId=" + taskId;
+    window.location.href = "/Task/EditTask" + "?taskId=" + taskId;
 }
 
 $("#btn_AddNewTask").click(function () {

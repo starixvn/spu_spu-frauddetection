@@ -78,16 +78,14 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/jquery.confirm.min.js",
-                "~/Scripts/numeral.min.js"
-                );
+                "~/Scripts/numeral.min.js");
 
             var angularJs = new Bundle("~/bundles/angularJs")
             .Include(
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-ui/ui-bootstrap.js",
                 "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
-                "~/Scripts/smart-table.js"
-                );
+                "~/Scripts/smart-table.js");
 
             coreJs.Transforms.Add(scriptTransformer);
 

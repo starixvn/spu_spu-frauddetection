@@ -38,7 +38,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public string AddNewGroup()
         {
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/Add.cshtml", new CustomerBettingGroupInsertCriteria());
+            return RenderViewToString(
+                ControllerContext, 
+                "~/Areas/FraudDetection/Views/CustomerBettingGroup/Add.cshtml", 
+                new CustomerBettingGroupInsertCriteria());
         }
 
         /// <summary>

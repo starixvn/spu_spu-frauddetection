@@ -27,7 +27,7 @@
 * Edit a group.
 */
 function editGroupInfo(groupId) {
-    $.get('Group/EditGroupInfo', { groupId: groupId }, function (response) {
+    $.get('Group/EditGroup', { groupId: groupId }, function (response) {
         DialogService.setDialogId("pop-up");
         DialogService.openDialogContent(response, "Edit Group", {
             width: '500px'

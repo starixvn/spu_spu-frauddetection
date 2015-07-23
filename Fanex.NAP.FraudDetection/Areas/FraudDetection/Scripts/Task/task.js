@@ -80,7 +80,7 @@ function OnInitialize() {
         if (formulaIsCorrect) {
             GenerateNextActions();
 
-            var url = 'Task/AddNewTask';
+            var url = 'Task/AddTask';
             var param = {
                 "CreatorId": $("#onUserid").text(),
                 "CaseId": $("#caseid").text(),
@@ -91,8 +91,10 @@ function OnInitialize() {
                 "Interval": $("#timeInterval").val(),
                 "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
                 "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                "TaskPreconditionsFormatted": $("#preconditionTableFormula").attr("data-formattedcontent"),
                 "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
                 "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
+                "TaskRulesFormatted": $("#ruleTableFormula").attr("data-formattedcontent"),
                 "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
                 "NextActionIdList": NextActionIdList,
                 "NextActionTargetIdList": NextActionTargetIdList,
@@ -135,7 +137,7 @@ function OnInitialize() {
         if (formulaIsCorrect) {
             GenerateNextActions();
 
-            var url = 'TaskEditInfo';
+            var url = 'EditTask';
             var param = {
                 "CreatorId": $("#onUserid").text(),
                 "caseId": $("#caseid").text(),
@@ -147,8 +149,10 @@ function OnInitialize() {
                 "Interval": $("#timeInterval").val(),
                 "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
                 "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                "TaskPreconditionsFormatted": $("#preconditionTableFormula").attr("data-formattedcontent"),
                 "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
                 "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
+                "TaskRulesFormatted": $("#ruleTableFormula").attr("data-formattedcontent"),
                 "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
                 "NextActionIdList": NextActionIdList,
                 "NextActionTargetIdList": NextActionTargetIdList,

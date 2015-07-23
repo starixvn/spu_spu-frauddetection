@@ -10,7 +10,7 @@
     var addGroup = $("#AddGroupForm").submit(function (event) {
         event.preventDefault();
 
-        var url = 'Group/AddNewGroup';
+        var url = 'Group/AddGroup';
         var param = {
             "GroupName": $("#GroupName").val(),
             "GroupDesc": $("#GroupDesc").val(),
