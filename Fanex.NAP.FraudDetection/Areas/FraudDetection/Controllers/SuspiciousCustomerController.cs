@@ -96,7 +96,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>The SelectListItem.</returns>
         private IEnumerable<SelectListItem> GetAllGroups()
         {
-            var criteria = new GroupSelectAllCriteria
+            var criteria = new GroupGetAllCriteria
             {
                 PageCount = 0,
                 PageIndex = 1,

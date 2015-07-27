@@ -14,14 +14,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using NAP.FraudDetection.Controllers;
     using NAP.FraudDetection.Models.ViewModel.Paramater;
     using Service;
-    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Criteria.Config;
+    using SPU.Lib.FraudDetection.Criteria.Parameter;
     using SPU.Lib.FraudDetection.Service.Implement;
 
     public class ParameterController : BaseController
     {
         public ActionResult Index()
         {
-            return View("~/Areas/FraudDetection/Views/Parameter/ParameterEdit.cshtml", GenerateViewModel());            
+            return View("~/Areas/FraudDetection/Views/Parameter/ParameterEdit.cshtml", GenerateViewModel());
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var loggedInUserId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0;
             var configService = new ConfigurationsService();
-            var listOfParams = configService.GetParameters(new ParameterSelectAllCriteria()).ToList();
+            var listOfParams = configService.GetParameters(new ParameterGetAllCriteria()).ToList();
             var viewModel = new ParameterViewModel(listOfParams, loggedInUserId);
 
             return viewModel;
@@ -44,7 +45,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Config Parameter Update Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult UpdateParamater(ConfigParameterUpdateCriteria criteria)
+        public ActionResult UpdateParamater(ConfigUpdateCriteria criteria)
         {
             var configService = new ConfigurationsService();
             var result = configService.UpdateConfigParameters(criteria);

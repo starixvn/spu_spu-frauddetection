@@ -48,7 +48,7 @@ function OnInitialize() {
     $('#preconditionConfigControlDatetimePicker').datepicker();
     
     $("#btn_Cancel").click(function () {
-        window.location.href = '/Case/CaseDetail?caseId=' + $("#caseid").text();
+        window.location.href = '/Case/GetCaseDetail?caseId=' + $("#caseid").text();
     });
 
     $("#btn_AddRule").click(function () {

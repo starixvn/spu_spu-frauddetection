@@ -46,7 +46,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
-        public JsonResult GetCaseList(CaseSelectAllCriteria criteria)
+        public JsonResult GetCaseList(CaseGetAllCriteria criteria)
         {
             criteria.PageIndex++;
 
@@ -100,9 +100,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public ActionResult GetCaseDetail(int caseId)
         {
-            var caseInfo = _caseService.GetCaseById(new CaseSelectByIdCriteria { CaseId = caseId });
+            var caseInfo = _caseService.GetCaseById(new CaseGetByIdCriteria { CaseId = caseId });
             ViewBag.CaseName = caseInfo.CaseName;
-            var criteria = new TaskSelectAllByCaseIdCriteria { CaseId = caseId };
+            var criteria = new TaskGetAllByCaseIdCriteria { CaseId = caseId };
 
             return View("~/Areas/FraudDetection/Views/Case/CaseDetail.cshtml", criteria);
         }
@@ -113,7 +113,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
-        public JsonResult GetCaseDetail(TaskSelectAllByCaseIdCriteria criteria)
+        public JsonResult GetCaseDetail(TaskGetAllByCaseIdCriteria criteria)
         {
             criteria.PageIndex++;
             var dataReader = _taskService.GetTasksByCaseId(criteria);
@@ -132,7 +132,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public string EditCaseInfo(int? caseId)
         {
-            var criteria = new CaseSelectByIdCriteria
+            var criteria = new CaseGetByIdCriteria
             {
                 CaseId = caseId == null ? 0 : (int)caseId
             };

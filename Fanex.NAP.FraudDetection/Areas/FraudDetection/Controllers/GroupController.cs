@@ -41,7 +41,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
-        public JsonResult GetGroupList(GroupSelectAllCriteria criteria)
+        public JsonResult GetGroupList(GroupGetAllCriteria criteria)
         {
             criteria.PageIndex++;
 

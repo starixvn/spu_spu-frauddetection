@@ -160,7 +160,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult EditMailStatus(int mailId, bool isActive)
         {
-            var criteria = new MailMasterActivateCriteria
+            var criteria = new MailMasterUpdateStatusCriteria
             {
                 CreatorId = 1,
                 MailId = mailId,

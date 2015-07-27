@@ -16,8 +16,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Models.ViewModel.Task;
     using NAP.FraudDetection.Controllers;
     using Service;
-    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Criteria.Bettype;
     using SPU.Lib.FraudDetection.Criteria.CaseGroup;
+    using SPU.Lib.FraudDetection.Criteria.Config;
+    using SPU.Lib.FraudDetection.Criteria.Event;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
@@ -43,7 +45,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>Action Result.</returns>
         public ActionResult Index(string caseId)
         {
-            var fraudCase = 0;
+            int fraudCase;
             if (int.TryParse(caseId, out fraudCase))
             {
                 return View(
@@ -91,7 +93,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public ActionResult EditTask(int taskId)
         {
-            var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria { TaskId = taskId });
+            var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoGetCriteria { TaskId = taskId });
             var viewModel = GenerateViewModel(
                 AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
                 taskInfo.CaseId);
@@ -145,20 +147,20 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             // Actions
             var eventService = new EventService();
-            var events = eventService.GetEvents(new EventSelectAllCriteria());
+            var events = eventService.GetEvents(new EventGetAllCriteria());
 
             // Configurations
             var configurationService = new ConfigurationsService();
-            var configs = configurationService.GetFormattedConfigs(new ConfigSelectAllCriteria(), fraudCaseId);
+            var configs = configurationService.GetFormattedConfigs(new ConfigGetAllCriteria(), fraudCaseId);
 
             // Groups
             var caseGroupService = new CaseGroupService();
-            var groups = caseGroupService.SelectCaseGroup(new CaseGroupSelectCriteria { CaseId = fraudCaseId }).ToList();
+            var groups = caseGroupService.SelectCaseGroup(new CaseGroupGetAllCriteria { CaseId = fraudCaseId }).ToList();
 
             // Bettypes and Sports
             var bettypeService = new BettypeService();
-            var sports = bettypeService.GetAllSBSports(new SportSelectAllCriteria());
-            var bettypes = bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
+            var sports = bettypeService.GetAllSBSports(new SportGetAllCriteria());
+            var bettypes = bettypeService.GetAllSBBettypes(new BettypeGetAllCriteria());
             var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria());
 
             var taskViewModel = new TaskViewModel(
