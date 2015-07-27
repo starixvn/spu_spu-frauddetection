@@ -157,7 +157,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var model = new CustomerBettingGroupInsertCustomerCriteria { GroupId = groupId };
 
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupEditCustomer.cshtml", model);
+            return RenderViewToString(
+                ControllerContext, 
+                "~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupEditCustomer.cshtml", 
+                model);
         }
 
         [HttpPost]
