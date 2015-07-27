@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Aarom.Cao" date="2015.06.23">Created</change>
+//   <change who="Aaron.Cao" date="2015.06.23">Created</change>
 // </history>
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
@@ -73,6 +73,24 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         /// <summary>
+        /// Get 3 latest months.
+        /// </summary>
+        /// <returns>List of months.</returns>
+        private static IEnumerable<string> GetThreeLatestMonths()
+        {
+            var result = new List<string>();
+            var startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-2);
+            for (var i = 0; i < 3; i++)
+            {
+                var month = startMonth.AddMonths(i);
+
+                result.Add(month.ToString("MMM-yyyy"));
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Get all suspicious groups.
         /// </summary>
         /// <returns>The SelectListItem.</returns>
@@ -85,35 +103,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 PageSize = int.MaxValue,
                 RowCount = 0
             };
+
             var result = _groupService.GetAllGroups(criteria);
             var groups = result.Select(s => new SelectListItem
             {
                 Text = s.GroupName,
                 Value = s.GroupId.ToString(CultureInfo.InvariantCulture)
             });
+
             var all = new[] { new SelectListItem { Selected = true, Text = "All Groups", Value = "-1" } };
 
             groups = all.Concat(groups);
 
             return groups;
-        }
-
-        /// <summary>
-        /// Get 3 latest months.
-        /// </summary>
-        /// <returns>List of months.</returns>
-        private IEnumerable<string> GetThreeLatestMonths()
-        {
-            var result = new List<string>();
-            var startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-2);
-            for (var i = 0; i < 3; i++)
-            {
-                var month = startMonth.AddMonths(i);
-
-                result.Add(month.ToString("MMM-yyyy"));
-            }
-
-            return result;
         }
     }
 }

@@ -10,7 +10,7 @@
     var addCaseForm = $("#AddCaseForm").submit(function (event) {
         event.preventDefault();
 
-        var url = 'Case/AddNewCase';
+        var url = 'Case/AddCase';
         var param = {
             "CaseName": $("#CaseName").val(),
             "CaseDesc": $("#CaseDesc").val(),

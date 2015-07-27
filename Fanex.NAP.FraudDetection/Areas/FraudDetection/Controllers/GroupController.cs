@@ -6,6 +6,7 @@
 // <history>
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
 //   <change who="Aaron.Cao" date="2015.06.22">Updated</change>
+//   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
@@ -28,6 +29,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _groupService = new GroupService();
         }
 
+        #region List Groups
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Group/GroupList.cshtml");
@@ -48,7 +50,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Add Group
         /// <summary>
         /// Add New Group.
         /// </summary>
@@ -80,6 +84,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region Edit Group
         /// <summary>
         /// The method EditGroupInfo.
         /// </summary>
@@ -92,8 +99,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             {
                 GroupId = groupId == null ? 0 : (int)groupId
             };
+
             var groupInfo = _groupService.GetGroupById(criteria);
-            var model = new GroupUpdateCriteria
+            var viewModel = new GroupUpdateCriteria
             {
                 CreatorId = 1,
                 GroupId = groupInfo.GroupId,
@@ -102,7 +110,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 IsActive = groupInfo.IsActive
             };
 
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupEdit.cshtml", model);
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Group/GroupEdit.cshtml", viewModel);
         }
 
         /// <summary>
@@ -115,7 +123,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.GroupName))
             {
-                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Group should has a name." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Group should has a name!" } };
             }
 
             criteria.CreatorId = 1;
@@ -144,5 +152,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }

@@ -15,7 +15,7 @@ function editActive(obj, caseId) {
 
     if ($(obj).hasClass('ico-tick')) {
 
-        confirm('Do you want to deactivate this task?', function () {
+        confirm('Are you sure you really want to deactivate this task?', function () {
             $(obj).removeClass('ico-tick').addClass('ico-untick');
 
             var url = 'EditActive?caseId=' + caseId + '&status=false';
@@ -44,7 +44,7 @@ function editActive(obj, caseId) {
         });
     }
     else {
-        confirm('Do you want to activate this case ?', function () {
+        confirm('Are you sure you really want to activate this case ?', function () {
             $(obj).removeClass('ico-untick').addClass('ico-tick');
 
             var url = 'EditActive?caseId=' + caseId + '&status=true';
@@ -77,7 +77,7 @@ function editActive(obj, caseId) {
 
 function deleteCase(caseId, name) {
 
-    confirm('Do you want to delete this case (' + name + ') ?', function () {
+    confirm('Are you sure you really want to delete this fraud case (' + name + ') ?', function () {
 
         var url = 'Delete?caseId=' + caseId;
 

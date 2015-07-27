@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Long.Luu" date="2015.04.05">Created</change>
+//   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
@@ -12,7 +13,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Configuration;
     using System.Linq;
     using System.Web.Mvc;
-    using Models;
     using Models.ViewModel.Task;
     using NAP.FraudDetection.Controllers;
     using Service;
@@ -39,16 +39,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <summary>
         /// Home page for Task.
         /// </summary>
-        /// <param name="fraudCaseId">Fraud Case ID.</param>
+        /// <param name="caseId">Fraud Case ID.</param>
         /// <returns>Action Result.</returns>
-        public ActionResult Index(string fraudCaseId)
+        public ActionResult Index(string caseId)
         {
-            var caseSpu = 0;
-            if (int.TryParse(fraudCaseId, out caseSpu))
+            var fraudCase = 0;
+            if (int.TryParse(caseId, out fraudCase))
             {
                 return View(
                     "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml",
-                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, caseSpu));
+                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, fraudCase));
             }
 
             return View("~/Views/Error/AccessDenied.cshtml");
@@ -58,10 +58,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Add New Task.
         /// </summary>
         /// <param name="criteria">Task Insert Criteria.</param>
-        /// <param name="additionalInfo">Additional Info.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult AddTask(TaskInsertCriteria criteria, TaskAdditionalInfo additionalInfo)
+        public ActionResult AddTask(TaskInsertCriteria criteria)
         {
             var dataCheckResults = CheckTaskDataIsCorrect(criteria);
             if (!string.IsNullOrEmpty(dataCheckResults))
@@ -71,8 +70,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var queryGeneratorFactory = new QueryGeneratorFactory(
                     criteria.CaseId,
-                    criteria.EventId,
-                    additionalInfo.IsCheckNotScanned,
+                    criteria,
                     int.Parse(ConfigurationManager.AppSettings["ChunkOfMatchesToScan"]));
             criteria.TaskPreconditions = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.PreCondition).GenerateQuery();
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();
@@ -106,11 +104,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Edit Task.
         /// </summary>
         /// <param name="criteria">Task Edit Criteria.</param>
-        /// <param name="additionalInfo">Additional Info.</param>
         /// <param name="caseId">Work flow ID.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult EditTask(TaskUpdateCriteria criteria, TaskAdditionalInfo additionalInfo, string caseId)
+        public ActionResult EditTask(TaskUpdateCriteria criteria, string caseId)
         {
             var dataCheckResults = CheckTaskDataIsCorrect(criteria);
             if (!string.IsNullOrEmpty(dataCheckResults))
@@ -120,8 +117,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var queryGeneratorFactory = new QueryGeneratorFactory(
                     int.Parse(caseId),
-                    criteria.EventId,
-                    additionalInfo.IsCheckNotScanned,
+                    criteria,
                     int.Parse(ConfigurationManager.AppSettings["ChunkOfMatchesToScan"]));
             criteria.TaskPreconditions = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.PreCondition).GenerateQuery();
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();

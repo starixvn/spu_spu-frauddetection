@@ -56,7 +56,7 @@ function editCaseStatus(obj, caseId) {
         confirmButtonClass: 'btn-green btn-customConfirm',
         cancelButtonClass: 'btn-green btn-customCancel',
         title: "Confirmation",
-        text: "Are you sure to " + active + "this Case?",
+        text: "Are you sure you really want to " + active + "this Case?",
         confirm: function () {
             $.post('Case/EditCaseStatus', { caseId: caseId, isActive: !isActive }, function (result) {
                 if (result.IsSuccessful) {

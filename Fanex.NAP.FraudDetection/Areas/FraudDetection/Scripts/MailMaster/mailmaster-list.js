@@ -5,7 +5,7 @@
 });
 
 var formSearch = $('#mailSearch').submit(function () {
-    $.get('MailMaster/Search', function (mailTemplates) {
+    $.get('MailMaster/GetAllMails', function (mailTemplates) {
         renderMailTable(mailTemplates);
     });
 });
@@ -116,7 +116,7 @@ function deleteMail(mailId) {
         confirmButtonClass: 'btn-green btn-customConfirm',
         cancelButtonClass: 'btn-green btn-customCancel',
         title: "Delete confirmation",
-        text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
+        text: "Are you sure you really want to delete this mail?",
         confirm: function () {
             $.post('MailMaster/DeleteMail', { mailId: mailId }, function (result) {
                 if (result.IsSuccessful) {
@@ -137,7 +137,7 @@ function deleteMail(mailId) {
 * Delete mail template.
 */
 function updateMail(mailId) {
-    window.location.href = '/MailMaster/Update?mailId=' + mailId;
+    window.location.href = '/MailMaster/EditMail?mailId=' + mailId;
 }
 
 /*
@@ -160,7 +160,7 @@ function editActive(obj, mailId) {
         confirmButtonClass: 'btn-green btn-customConfirm',
         cancelButtonClass: 'btn-green btn-customCancel',
         title: "Confirmation",
-        text: "Are you sure to " + active + "this mail template?",
+        text: "Are you sure you really want to " + active + " this mail template?",
         confirm: function () {
             $.post('MailMaster/EditMailStatus', { mailId: mailId, isActive: !isActive }, function (result) {
                 if (result.IsSuccessful) {

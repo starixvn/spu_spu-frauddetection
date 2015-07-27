@@ -110,7 +110,7 @@ function CaseNameColumn(cell) {
     var caseId = gridOptions.bodyRows[cell.Row].Columns[1].Value;
     var caseName = gridOptions.bodyRows[cell.Row].Columns[2].Value;
 
-    var url = "Case/CaseDetail?caseId=" + caseId;
+    var url = "Case/GetCaseDetail?caseId=" + caseId;
     return "<a href=" + url + ">" + caseName + "</a>";
 }
 
@@ -133,7 +133,7 @@ function EditColumn(cell) {
 }
 
 $("#btn_addNewCase").click(function () {
-    var url = 'Case/AddNewCase';
+    var url = 'Case/AddCase';
     $.ajax({
         type: "GET",
         contentType: 'application/json',

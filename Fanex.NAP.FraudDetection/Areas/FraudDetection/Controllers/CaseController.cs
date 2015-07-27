@@ -4,13 +4,13 @@
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Aarom.Cao" date="2015.06.09">Created</change>
+//   <change who="Aaron.Cao" date="2015.06.09">Created</change>
+//   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
-    using Framework.Command;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria.Case;
@@ -34,6 +34,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _taskService = new TaskService();
         }
 
+        #region List Fraud Cases
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Case/CaseList.cshtml");
@@ -54,13 +55,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Add Fraud Case
         /// <summary>
         /// Add New Case.
         /// </summary>
         /// <returns>HTML string.</returns>
         [HttpGet]
-        public string AddNewCase()
+        public string AddCase()
         {
             var criteria = new CaseInsertCriteria();
 
@@ -73,7 +76,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Case Insert Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult AddNewCase(CaseInsertCriteria criteria)
+        public ActionResult AddCase(CaseInsertCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
             {
@@ -86,13 +89,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region List Fraud Case's Details
         /// <summary>
         /// Case Detail.
         /// </summary>
         /// <param name="caseId">The Case ID.</param>
         /// <returns>Action Result.</returns>
         [HttpGet]
-        public ActionResult CaseDetail(int caseId)
+        public ActionResult GetCaseDetail(int caseId)
         {
             var caseInfo = _caseService.GetCaseById(new CaseSelectByIdCriteria { CaseId = caseId });
             ViewBag.CaseName = caseInfo.CaseName;
@@ -115,7 +121,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Edit Fraud Case
         /// <summary>
         /// The method EditCaseInfo.
         /// </summary>
@@ -147,7 +155,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Case Update Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult EditCase(CaseUpdateCriteria criteria)
+        public ActionResult EditCaseInfo(CaseUpdateCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
             {
@@ -187,6 +195,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region Edit Task Status
         /// <summary>
         /// Update a work task.
         /// </summary>
@@ -205,5 +216,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }

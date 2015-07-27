@@ -3,25 +3,25 @@
 
     return {
         getGroups: function () {
-            return $.get('CustomerBettingGroup/GetAllGroups');
+            return $.get('CustomerBettingGroup/GetAllBettingGroups');
         },
         getCustomers: function () {
-            return $.get('CustomerBettingGroup/GetAllGroups');
+            return $.get('CustomerBettingGroup/GetAllBettingGroups');
         },
         getEmptyGroup: function () {
-            return $.get('CustomerBettingGroup/AddNewGroup');
+            return $.get('CustomerBettingGroup/AddBettingGroup');
         },
         addGroup: function (group) {
-            return $.post('CustomerBettingGroup/AddNewGroup', group);
+            return $.post('CustomerBettingGroup/AddBettingGroup', group);
         },
         deleteGroup: function (groupId) {
-            return $.get('CustomerBettingGroup/Delete', { groupId: groupId });
+            return $.get('CustomerBettingGroup/DeleteBettingGroup', { groupId: groupId });
         },
         getGroupInfo: function (groupId) {
-            return $.get('CustomerBettingGroup/EditGroupInfo', { groupId: groupId });
+            return $.get('CustomerBettingGroup/EditBettingGroupInfo', { groupId: groupId });
         },
         editGroup: function (group) {
-            return $.post('CustomerBettingGroup/EditGroup', group);
+            return $.post('CustomerBettingGroup/EditBettingGroupInfo', group);
         },
         getEmptyCustomer: function (groupId) {
             return $.get('CustomerBettingGroup/EditCustomers', { groupId: groupId });

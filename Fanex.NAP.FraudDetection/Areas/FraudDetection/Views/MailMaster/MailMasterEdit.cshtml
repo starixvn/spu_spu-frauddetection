@@ -6,7 +6,7 @@
 }
 <h4>
     <b>Mail Master</b></h4>
-@using (Html.BeginForm("UpdateMail", "MailMaster", FormMethod.Post, new { @id = "editMailForm" }))
+@using (Html.BeginForm("EditMail", "MailMaster", FormMethod.Post, new { @id = "editMailForm" }))
 {
     @Html.HiddenFor(model => model.MailId)
     @Html.HiddenFor(model => model.MailCode)

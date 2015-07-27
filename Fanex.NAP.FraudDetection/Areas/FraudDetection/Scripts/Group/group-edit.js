@@ -56,7 +56,7 @@ function editGroupStatus(obj, groupId) {
         confirmButtonClass: 'btn-green btn-customConfirm',
         cancelButtonClass: 'btn-green btn-customCancel',
         title: "Confirmation",
-        text: "Are you sure to " + active + "this group?",
+        text: "Are you sure you really want to " + active + "this group?",
         confirm: function () {
             $.post('Group/EditGroupStatus', { groupId: groupId, isActive: !isActive }, function (result) {
                 if (result.IsSuccessful) {

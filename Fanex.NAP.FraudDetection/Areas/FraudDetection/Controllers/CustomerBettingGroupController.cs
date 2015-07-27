@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Aaron.Cao" date="2015.07.08">Created</change>
+//   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
@@ -28,33 +29,33 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public ActionResult Index()
         {
-            return View("~/Areas/FraudDetection/Views/CustomerBettingGroup/Index.cshtml");
+            return View("~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupIndex.cshtml");
         }
 
         /// <summary>
-        /// Add New Group.
+        /// Add New Betting Group.
         /// </summary>
         /// <returns>HTML string.</returns>
         [HttpGet]
-        public string AddNewGroup()
+        public string AddBettingGroup()
         {
             return RenderViewToString(
-                ControllerContext, 
-                "~/Areas/FraudDetection/Views/CustomerBettingGroup/Add.cshtml", 
+                ControllerContext,
+                "~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupAdd.cshtml", 
                 new CustomerBettingGroupInsertCriteria());
         }
 
         /// <summary>
-        /// Add new group.
+        /// Add New Betting Group.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
-        public ActionResult AddNewGroup(CustomerBettingGroupInsertCriteria criteria)
+        public ActionResult AddBettingGroup(CustomerBettingGroupInsertCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.Name))
             {
-                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Group should has a name." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "A Group should has a name!" } };
             }
 
             criteria.CreatorId = 1;
@@ -64,17 +65,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         /// <summary>
-        /// The method EditGroupInfo.
+        /// Edit Betting Group Info.
         /// </summary>
         /// <param name="groupId">The group ID.</param>
         /// <returns>A template view.</returns>
         [HttpGet]
-        public string EditGroupInfo(int? groupId)
+        public string EditBettingGroupInfo(int? groupId)
         {
             var criteria = new CustomerBettingGroupGetByIdCriteria
             {
                 GroupId = groupId == null ? 0 : (int)groupId
             };
+
             var groupInfo = _customerBettingGroupService.GetGroupById(criteria);
             var model = new CustomerBettingGroupUpdateCriteria
             {
@@ -84,16 +86,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 Description = groupInfo.Description
             };
 
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/Edit.cshtml", model);
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupEdit.cshtml", model);
         }
 
         /// <summary>
-        /// Edit Group.
+        /// Edit Betting Group Info.
         /// </summary>
         /// <param name="criteria">Group Update Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
-        public ActionResult EditGroup(CustomerBettingGroupUpdateCriteria criteria)
+        public ActionResult EditBettingGroupInfo(CustomerBettingGroupUpdateCriteria criteria)
         {
             criteria.CreatorId = 1;
             var result = _customerBettingGroupService.UpdateGroup(criteria);
@@ -102,7 +104,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAllGroups()
+        public ActionResult GetAllBettingGroups()
         {
             var criteria = new CustomerBettingGroupGetAllCriteria();
             var groups = _customerBettingGroupService.GetGroups(criteria);
@@ -111,12 +113,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         /// <summary>
-        /// Delete a group.
+        /// Delete a betting group.
         /// </summary>
         /// <param name="groupId">The group ID.</param>
         /// <returns>The ActionResult.</returns>
         [HttpGet]
-        public ActionResult Delete(int groupId)
+        public ActionResult DeleteBettingGroup(int groupId)
         {
             var criteria = new CustomerBettingGroupDeleteCriteria
             {
@@ -155,7 +157,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var model = new CustomerBettingGroupInsertCustomerCriteria { GroupId = groupId };
 
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/EditCustomer.cshtml", model);
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupEditCustomer.cshtml", model);
         }
 
         [HttpPost]
@@ -163,7 +165,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (string.IsNullOrEmpty(criteria.CustName))
             {
-                return new JsonResult { Data = new { IsSuccessful = false, Message = "Customer should have a name." } };
+                return new JsonResult { Data = new { IsSuccessful = false, Message = "Customer should have a name!" } };
             }
 
             var customer = _customerBettingGroupService.GetCustomerByName(
@@ -183,7 +185,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
 
-            return new JsonResult { Data = new { IsSuccessful = false, Message = "Customer doesn't exist." } };
+            return new JsonResult { Data = new { IsSuccessful = false, Message = "This customer doesn't exist!" } };
         }
 
         [HttpGet]

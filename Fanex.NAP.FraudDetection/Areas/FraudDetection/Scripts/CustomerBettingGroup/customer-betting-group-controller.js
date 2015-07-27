@@ -107,7 +107,7 @@
             confirmButtonClass: 'btn-green btn-customConfirm',
             cancelButtonClass: 'btn-green btn-customCancel',
             title: "Delete confirmation",
-            text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
+            text: "Are you sure you really want to delete this betting group?",
             confirm: function () {
                 customerBettingGroupModel.deleteGroup(groupId).then(function () {
                     var result = customerBettingGroupModel.serverResult;
@@ -164,7 +164,7 @@
             confirmButtonClass: 'btn-green btn-customConfirm',
             cancelButtonClass: 'btn-green btn-customCancel',
             title: "Delete confirmation",
-            text: "This is very dangerous, you shouldn't do it! Are you really really sure?",
+            text: "Are you sure you really want to delete this customer from betting group?",
             confirm: function () {
                 customerBettingGroupModel.deleteCustomer(custId, groupId).then(function () {
                     var result = customerBettingGroupModel.serverResult;

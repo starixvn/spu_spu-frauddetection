@@ -113,7 +113,7 @@
         var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase");
 
         if (validateCustomerGroup() === false) {
-            AlertServiceOnPopup.showAlert('Please select at least one customer group');
+            AlertServiceOnPopup.showAlert('Please select at least one customer group!');
             return;
         };
 

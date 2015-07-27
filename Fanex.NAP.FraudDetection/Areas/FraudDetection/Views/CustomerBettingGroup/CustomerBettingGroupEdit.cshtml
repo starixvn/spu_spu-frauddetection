@@ -1,17 +1,16 @@
-﻿@model SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup.CustomerBettingGroupInsertCriteria
+﻿@model SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup.CustomerBettingGroupUpdateCriteria
 @{
-    ViewBag.Title = "Add Group";
+    ViewBag.Title = "Edit Group";
     Layout = "~/Views/Shared/_LayoutPopup.cshtml";
 }
-
-@using (Html.BeginForm("AddNewGroup", "CustomerBettingGroup", FormMethod.Post, new { @id = "AddGroupForm" }))
+@using (Html.BeginForm("EditBettingGroupInfo", "CustomerBettingGroup", FormMethod.Post, new { @id = "EditGroupForm" }))
 {
     <table class="table-popup">
         <tr>
             <td align="right">
                 <span>Name</span>
             </td>
-            <td>@Html.TextBoxFor(l => l.Name, new { @style = "width: 350px;" })
+            <td>@Html.TextBoxFor(l => l.Name, new { @style = "width: 350px;", @disabled = "disabled" })
             </td>
         </tr>
         <tr>
@@ -25,14 +24,16 @@
             <td>
             </td>
             <td>
-                <input type="button" id="btn_addGroup" value="Submit" class="btn-green font-size-small" />
+                <input type="button" id="btn_editGroup" value="Submit" class="btn-green font-size-small" />
                 <input type="button" id="btn_Cancel" value="Cancel" class="btn-green btn-customCancel font-size-small" />
             </td>
         </tr>
     </table>
+    @Html.HiddenFor(l => l.GroupId)
+    @Html.HiddenFor(l => l.Name)
 }
 @section FooterJs
 {
-    <script src="~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-add.js"
+    <script src="~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-edit.js"
         type="text/javascript"></script>
 }

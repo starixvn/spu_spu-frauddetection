@@ -270,7 +270,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
-    <Compile Include="Areas\FraudDetection\Models\AddCustomerGroupToCaseViewModel.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\SuspiciousCustomerController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\ParameterController.cs" />
@@ -279,7 +278,6 @@
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseController.cs" />
     <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
-    <Compile Include="Areas\FraudDetection\Models\TaskAdditionalInfo.cs" />
     <Compile Include="Areas\FraudDetection\Models\ViewModel\Paramater\ParameterViewModel.cs" />
     <Compile Include="Areas\FraudDetection\Models\ViewModel\Task\TaskViewModel.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
@@ -447,11 +445,12 @@
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-service.js" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-update.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\mathformula-validation.js" />
@@ -541,19 +540,19 @@
     <Content Include="Areas\FraudDetection\Views\Case\CaseAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseDetail.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\Parameter\ParameterUpdate.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Parameter\ParameterEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterUpdate.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\SuspiciousCustomerReport.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\CaseGroup\AddCustomerGroupToCase.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Add.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Edit.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\Index.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\EditCustomer.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CaseGroup\CaseGroupAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupEdit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupIndex.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupEditCustomer.cshtml" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -751,9 +750,7 @@
     <Content Include="Views\Shared\_LayoutPopup2.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\FraudDetection\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
-    <Folder Include="ClearScript.V8\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

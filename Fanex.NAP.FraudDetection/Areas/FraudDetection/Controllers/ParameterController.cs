@@ -21,7 +21,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     {
         public ActionResult Index()
         {
-            return View("~/Areas/FraudDetection/Views/Parameter/ParameterUpdate.cshtml", GenerateViewModel());            
+            return View("~/Areas/FraudDetection/Views/Parameter/ParameterEdit.cshtml", GenerateViewModel());            
         }
 
         /// <summary>

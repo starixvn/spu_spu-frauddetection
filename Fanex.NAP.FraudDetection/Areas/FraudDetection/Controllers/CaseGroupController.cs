@@ -1,18 +1,25 @@
-﻿namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
+﻿// --------------------------------------------------------------------------
+// <copyright file="CaseGroupController.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.04.05">Created</change>
+//   <change who="Long.Luu" date="2015.07.24">Refactored</change>
+// </history>
+
+namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Models;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.FraudDetection.Criteria.CaseGroup;
     using SPU.Lib.FraudDetection.Criteria.Group;
-    using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service.Implement;
     using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
-    /// The CaseController.
+    /// The Case Group Controller.
     /// </summary>
     public class CaseGroupController : BaseController
     {
@@ -43,8 +50,8 @@
         public ActionResult AddCustomerGroupToCase(int caseId)
         {
             ViewBag.CaseId = caseId;
-            
-            return View("~/Areas/FraudDetection/Views/CaseGroup/AddCustomerGroupToCase.cshtml");
+
+            return View("~/Areas/FraudDetection/Views/CaseGroup/CaseGroupAdd.cshtml");
         }
 
         [HttpPost]
@@ -70,9 +77,9 @@
 
         public ActionResult RemoveCustomerGroupFromCase(CaseGroupDeleteCriteria criteria)
         {
-            var result = _caseGroupService.RemoveCaseGroup(criteria);
+            var commandResult = _caseGroupService.RemoveCaseGroup(criteria);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(commandResult, JsonRequestBehavior.AllowGet);
         }
     }
 }

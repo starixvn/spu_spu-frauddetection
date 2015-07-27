@@ -5,10 +5,12 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Aarom.Cao" date="2015.06.09">Created</change>
+//   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
     using NAP.FraudDetection.Controllers;
     using SPU.Lib.FraudDetection.Criteria.MailMaster;
@@ -31,7 +33,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterList.cshtml");
         }
 
-        public ActionResult Add()
+        public ActionResult AddMail()
         {
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterAdd.cshtml");
         }
@@ -41,7 +43,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <returns>The ActionResult.</returns>
         [HttpGet]
-        public ActionResult Search()
+        public ActionResult GetAllMails()
         {
             var criteria = new MailMasterGetAllCriteria();
             var mailTemplates = _mailMasterService.GetMails(criteria);
@@ -56,7 +58,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>The ActionResult.</returns>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddNewMail(MailMasterInsertCriteria criteria)
+        public ActionResult AddMail(MailMasterInsertCriteria criteria)
         {
             if (ModelState.IsValid)
             {
@@ -67,13 +69,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             var errorMessage = string.Empty;
-            foreach (var value in ModelState.Values)
+            foreach (var value in ModelState.Values.Where(value => value.Errors.Count > 0))
             {
-                if (value.Errors.Count > 0)
-                {
-                    errorMessage = value.Errors[0].ErrorMessage;
-                    break;
-                }
+                errorMessage = value.Errors[0].ErrorMessage;
+                break;
             }
 
             return new JsonResult { Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage } };
@@ -99,18 +98,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         /// <summary>
-        /// Update mail template.
+        /// Edit mail template.
         /// </summary>
         /// <param name="mailId">The Mail ID.</param>
         /// <returns>The ActionResult.</returns>
-        public ActionResult Update(int? mailId)
+        public ActionResult EditMail(int? mailId)
         {
             var criteria = new MailMasterGetByIdCriteria
             {
                 MailId = mailId == null ? 0 : (int)mailId
             };
+
             var mail = _mailMasterService.GetMailById(criteria);
-            var model = new MailMasterUpdateCriteria
+            var viewModel = new MailMasterUpdateCriteria
             {
                 IsActive = mail.IsActive,
                 MailCode = mail.MailCode,
@@ -121,7 +121,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 MailSubject = mail.MailSubject
             };
 
-            return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterUpdate.cshtml", model);
+            return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterEdit.cshtml", viewModel);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>The ActionResult.</returns>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult UpdateMail(MailMasterUpdateCriteria criteria)
+        public ActionResult EditMail(MailMasterUpdateCriteria criteria)
         {
             if (ModelState.IsValid)
             {
@@ -142,13 +142,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             }
 
             var errorMessage = string.Empty;
-            foreach (var value in ModelState.Values)
+            foreach (var value in ModelState.Values.Where(value => value.Errors.Count > 0))
             {
-                if (value.Errors.Count > 0)
-                {
-                    errorMessage = value.Errors[0].ErrorMessage;
-                    break;
-                }
+                errorMessage = value.Errors[0].ErrorMessage;
+                break;
             }
 
             return new JsonResult { Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage } };
