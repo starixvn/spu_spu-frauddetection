@@ -445,8 +445,6 @@
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Task\task-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-service.js" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />

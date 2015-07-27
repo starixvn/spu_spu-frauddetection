@@ -4,19 +4,21 @@ var NextActionIdList = "";
 var NextActionTargetIdList = "";
 var IsCheckNotScanned = true;
 
-var TaskService = (function($) {
+var TaskService = (function ($) {
     return {
-        initialize: function() {
+        initialize: function () {
+            TaskService.OnAccordionInitialize();
+            TaskService.OnInitialize();
         },
-        
+
         //=========================================================================
         /* ACCORDION INITIALIZE */
-        OnAccordionInitialize: function() {
+        OnAccordionInitialize: function () {
             $("#accordion").accordion({
                 heightStyle: "content",
                 collapsible: true,
 
-                beforeActivate: function(event, ui) {
+                beforeActivate: function (event, ui) {
                     // The accordion believes a panel is being opened
                     if (ui.newHeader[0]) {
                         var currHeader = ui.newHeader;
@@ -36,7 +38,7 @@ var TaskService = (function($) {
                     currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
 
                     // Toggle the panel's content
-                    currContent.toggleClass('accordion-content-active', !isPanelSelected)
+                    currContent.toggleClass('accordion-content-active', !isPanelSelected);
                     if (isPanelSelected) {
                         currContent.slideUp();
                     } else {
@@ -47,43 +49,151 @@ var TaskService = (function($) {
                 }
             });
         },
-        
+
         //=========================================================================
         /* INITIALIZE */
-        OnInitialize: function() {
+        OnInitialize: function () {
             $('#preconditionConfigControlDatetimePicker').datepicker();
-    
+
             $("#btn_Cancel").click(function () {
-                window.location.href = '/Case/CaseDetail?caseId=' + $("#caseid").text();
+                window.location.href = '/Case/GetCaseDetail?caseId=' + $("#caseid").text();
             });
 
-            $("#btn_AddRule").click(function() {
+            $("#btn_AddRule").click(function () {
                 var currentRowNum = $('#ruleTable tr:last').attr('id').replace("ruleTable", "");
-                AddingOneMoreRuleToTable("ruleTable", parseInt(currentRowNum) + 1, "ruleConfig");
+                TaskService.AddingOneMoreRuleToTable("ruleTable", parseInt(currentRowNum) + 1, "ruleConfig");
             });
 
-            $("#btn_AddPrecondition").click(function() {
+            $("#btn_AddPrecondition").click(function () {
                 var currentRowNum = $('#preconditionTable tr:last').attr('id').replace("preconditionTable", "");
-                AddingOneMoreRuleToTable("preconditionTable", parseInt(currentRowNum) + 1, "preconditionConfig");
+                TaskService.AddingOneMoreRuleToTable("preconditionTable", parseInt(currentRowNum) + 1, "preconditionConfig");
             });
 
             var dateObj = new Date();
             var month = dateObj.getUTCMonth() + 1; //months from 1-12
             var day = dateObj.getUTCDate();
             var year = dateObj.getUTCFullYear();
-            SetupCalendar(dateFormat(new Date(year, month, day, 0, 0, 0), 'mmm dd, yyyy HH:MM:ss'), '.txtCalendar');
-            $('#preconditionConfigControlDatetimePickerIcon').click(function() {
+            TaskService.SetupCalendar(dateFormat(new Date(year, month, day, 0, 0, 0), 'mmm dd, yyyy HH:MM:ss'), '.txtCalendar');
+            $('#preconditionConfigControlDatetimePickerIcon').click(function () {
                 $('#preconditionConfigControlDatetimePicker').datepicker("show");
             });
 
-            $('#ruleConfigControlDatetimePickerIcon').click(function() {
+            $('#ruleConfigControlDatetimePickerIcon').click(function () {
                 $('#ruleConfigControlDatetimePicker').datetimepicker("show");
+            });
+
+            $("#btn_AddTask").click(function (event) {
+                event.preventDefault();
+                var formulaIsCorrect = TaskService.CheckFormula("preconditionTable") && TaskService.CheckFormula("ruleTable");
+                if (formulaIsCorrect) {
+                    TaskService.GenerateNextActions();
+
+                    var url = 'Task/AddTask';
+                    var param = {
+                        "CreatorId": $("#onUserid").text(),
+                        "CaseId": $("#caseid").text(),
+                        "TaskName": $("#taskName").val(),
+                        "TaskDesc": $("#taskDesc").val(),
+                        "IsActive": $("input:checkbox[id=taskIsActive]").prop('checked'),
+                        "EventId": $("#ActionName").find(":selected").val(),
+                        "Interval": $("#timeInterval").val(),
+                        "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
+                        "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                        "TaskPreconditionsFormatted": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                        "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
+                        "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
+                        "TaskRulesFormatted": $("#ruleTableFormula").attr("data-formattedcontent"),
+                        "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
+                        "NextActionIdList": NextActionIdList,
+                        "NextActionTargetIdList": NextActionTargetIdList,
+                        "PreconConfigs": $("#preconditionTableFormula").attr("data-configids"),
+                        "RuleConfigs": $("#ruleTableFormula").attr("data-configids"),
+                        "IsCheckNotScanned": IsCheckNotScanned
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: 'application/json',
+                        dataType: "json",
+                        data: JSON.stringify(param),
+                        cache: false,
+                        url: url,
+                        error: function () {
+                        },
+                        success: function (response) {
+                            if (response.IsSuccessful) {
+                                // redirect to case detail page
+                                url = "Case/GetCaseDetail?caseId=" + $("#caseid").text();
+                                window.location.replace(url);
+                            }
+                            else {
+                                AlertService.showAlert(response);
+                            }
+                        },
+                        beforeSend: function () {
+
+                        },
+                        complete: function () {
+                        }
+                    });
+                }
+            });
+
+            $("#btn_EditTask").click(function (event) {
+                event.preventDefault();
+                var formulaIsCorrect = TaskService.CheckFormula("preconditionTable") && TaskService.CheckFormula("ruleTable");
+                if (formulaIsCorrect) {
+                    TaskService.GenerateNextActions();
+
+                    var url = 'EditTask';
+                    var param = {
+                        "CreatorId": $("#onUserid").text(),
+                        "caseId": $("#caseid").text(),
+                        "TaskId": $("#taskid").text(),
+                        "TaskName": $("#taskName").val(),
+                        "TaskDesc": $("#taskDesc").val(),
+                        "IsActive": $("input:checkbox[id=taskIsActive]").prop('checked'),
+                        "EventId": $("#ActionName").find(":selected").val(),
+                        "Interval": $("#timeInterval").val(),
+                        "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
+                        "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                        "TaskPreconditionsFormatted": $("#preconditionTableFormula").attr("data-formattedcontent"),
+                        "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
+                        "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
+                        "TaskRulesFormatted": $("#ruleTableFormula").attr("data-formattedcontent"),
+                        "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
+                        "NextActionIdList": NextActionIdList,
+                        "NextActionTargetIdList": NextActionTargetIdList,
+                        "PreconConfigs": $("#preconditionTableFormula").attr("data-configids"),
+                        "RuleConfigs": $("#ruleTableFormula").attr("data-configids"),
+                        "IsCheckNotScanned": IsCheckNotScanned
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: 'application/json',
+                        dataType: "json",
+                        data: JSON.stringify(param),
+                        cache: false,
+                        url: url,
+                        error: function () {
+                        },
+                        success: function (response) {
+                            AlertService.showAlert(response);
+                        },
+                        beforeSend: function () {
+
+                        },
+                        complete: function () {
+                        }
+                    });
+                }
             });
         },
 
         //=========================================================================
         /* GENERATE CONFIGURATIONS */
-        GenerateConfig: function(parentName) {
+        GenerateConfig: function (parentName) {
             // Config key
             var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
             var keySelectedValue = $(keySelectedOption).val();
@@ -123,7 +233,7 @@ var TaskService = (function($) {
             return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
         },
 
-        GetSelectedConfigIds: function(parentName) {
+        GetSelectedConfigIds: function (parentName) {
             var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
             var configIds = $(keySelectedOption).attr("data-configid");
 
@@ -135,7 +245,7 @@ var TaskService = (function($) {
         },
 
 
-        GenerateFormattedConfig: function(parentName) {
+        GenerateFormattedConfig: function (parentName) {
             // Config key
             var keySelectedOption = $('#' + parentName + 'Key').find(":selected");
             var keySelectedValue = $(keySelectedOption).val();
@@ -171,7 +281,7 @@ var TaskService = (function($) {
             return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
         },
 
-        GenerateNextActions: function() {
+        GenerateNextActions: function () {
             NextActionIdList = "";
             NextActionTargetIdList = "";
 
@@ -210,25 +320,25 @@ var TaskService = (function($) {
 
         //=========================================================================
         /* MANAGE RULE */
-        AddFormulaElement: function(isPrecondition, elementString, isPrefix) {
+        AddFormulaElement: function (isPrecondition, elementString, isPrefix) {
             if (isPrecondition) {
-                AddElement("preconditionTable", elementString, isPrefix);
+                TaskService.AddElement("preconditionTable", elementString, isPrefix);
             }
             else {
-                AddElement("ruleTable", elementString, isPrefix);
+                TaskService.AddElement("ruleTable", elementString, isPrefix);
             }
         },
 
-        RemoveFormulaElement: function(isPrecondition, elementString) {
+        RemoveFormulaElement: function (isPrecondition, elementString) {
             if (isPrecondition) {
-                RemoveElement("preconditionTable", elementString);
+                TaskService.RemoveElement("preconditionTable", elementString);
             }
             else {
-                RemoveElement("ruleTable", elementString);
+                TaskService.RemoveElement("ruleTable", elementString);
             }
         },
 
-        AddElement: function(parentName, elementString, isPrefix) {
+        AddElement: function (parentName, elementString, isPrefix) {
             $("input:checkbox[id^=cb_" + parentName + "]").each(function () {
                 if ($(this).prop('checked')) {
                     var checkboxId = $(this).attr('id');
@@ -243,18 +353,18 @@ var TaskService = (function($) {
 
                     ruleRawContent = isPrefix ? elementString + ruleRawContent : ruleRawContent + elementString;
                     ruleFormattedContent = isPrefix ? elementString + ruleFormattedContent : ruleFormattedContent + elementString;
-                    ruleRawContent = WorkWithLogicOperator(ruleRawContent);
-                    ruleFormattedContent = WorkWithLogicOperator(ruleFormattedContent);
+                    ruleRawContent = TaskService.WorkWithLogicOperator(ruleRawContent);
+                    ruleFormattedContent = TaskService.WorkWithLogicOperator(ruleFormattedContent);
                     $(targetObject).attr("data-rawcontent", ruleRawContent);
                     $(targetObject).attr("data-formattedcontent", ruleFormattedContent);
                     $(targetObject).html(ruleRawContent.replace(/#/g, " "));
                 }
             });
 
-            UpdateFormula(parentName);
+            TaskService.UpdateFormula(parentName);
         },
 
-        WorkWithLogicOperator: function(targetString) {
+        WorkWithLogicOperator: function (targetString) {
             if (targetString.indexOf("AND#") >= 0) {
                 targetString = targetString.replace(/AND#/g, "")
                 targetString = "AND#" + targetString;
@@ -267,7 +377,7 @@ var TaskService = (function($) {
             return targetString;
         },
 
-        RemoveElement: function(parentName, elementString) {
+        RemoveElement: function (parentName, elementString) {
             $("input:checkbox[id^=cb_" + parentName + "]").each(function () {
                 if ($(this).prop('checked')) {
                     var checkboxId = $(this).attr('id');
@@ -283,33 +393,33 @@ var TaskService = (function($) {
                 }
             });
 
-            UpdateFormula(parentName);
+            TaskService.UpdateFormula(parentName);
         },
 
-        AddingOneMoreRuleToTable: function(tableName, rowNumber, parentName) {
-            var ruleString = GenerateConfig(parentName);
-            var formattedRuleString = GenerateFormattedConfig(parentName);
-            var configIds = GetSelectedConfigIds(parentName);
+        AddingOneMoreRuleToTable: function (tableName, rowNumber, parentName) {
+            var ruleString = TaskService.GenerateConfig(parentName);
+            var formattedRuleString = TaskService.GenerateFormattedConfig(parentName);
+            var configIds = TaskService.GetSelectedConfigIds(parentName);
 
             var blockOfTableRow = "<tr id='" + tableName + rowNumber + "'><td><input type='checkbox' id='cb_" + tableName + rowNumber + "' /></td>";
             blockOfTableRow += "<td style='width: 610px;'><div id='div_" + tableName + rowNumber + "' data-configid='" + configIds + "' data-rawcontent='" + ruleString + "' data-formattedcontent='" + formattedRuleString + "'>" + ruleString + "</div></td>";
-            blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='/Areas/FraudDetection/App_Themes/Images/Delete.gif' onclick='RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
-            blockOfTableRow = blockOfTableRow.replace(/@/g, '"'); 
+            blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='/Areas/FraudDetection/App_Themes/Images/Delete.gif' onclick='TaskService.RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
+            blockOfTableRow = blockOfTableRow.replace(/@/g, '"');
 
             var targetObject = "#" + tableName + " tr:last";
             $(targetObject).after(blockOfTableRow);
-            UpdateFormula(tableName);
+            TaskService.UpdateFormula(tableName);
         },
 
-        RemoveOneRuleFromTable: function(tableName, rowNumber) {
+        RemoveOneRuleFromTable: function (tableName, rowNumber) {
             var targetObject = "#" + tableName + rowNumber;
             $(targetObject).remove();
-            UpdateFormula(tableName);
+            TaskService.UpdateFormula(tableName);
         },
 
         //=========================================================================
         /* MANAGE ACTION SELECTION CHANGE */
-        changeActionSelection: function(currentObj) {
+        changeActionSelection: function (currentObj) {
             var selectedAction = $(currentObj).find(":selected");
             var actionDesc = $(selectedAction).attr("data-actiondesc");
 
@@ -318,7 +428,7 @@ var TaskService = (function($) {
 
         //=========================================================================
         /* MANAGE CONFIG SELECTION CHANGE */
-        changeConfigSelection: function(currentObj, isPrecondition) {
+        changeConfigSelection: function (currentObj, isPrecondition) {
             var selectedOption = $(currentObj).find(":selected");
             var controlType = $(selectedOption).attr("data-controltype");
             var selectedValue = $(selectedOption).val();
@@ -326,17 +436,17 @@ var TaskService = (function($) {
 
             if (isPrecondition) {
                 if ($("#preconditionConfigCompare").prop("checked") == false) {
-                    renderConfigControl("preconditionConfigControl", selectedValue, controlType);
+                    TaskService.renderConfigControl("preconditionConfigControl", selectedValue, controlType);
                 }
             }
             else {
                 if ($("#ruleConfigCompare").prop("checked") == false) {
-                    renderConfigControl("ruleConfigControl", selectedValue, controlType);
+                    TaskService.renderConfigControl("ruleConfigControl", selectedValue, controlType);
                 }
             }
         },
 
-        renderConfigControl: function(parentName, selectedValue, controlType) {
+        renderConfigControl: function (parentName, selectedValue, controlType) {
             var relevantObjects = '[id^="' + parentName + '"]';
             $(relevantObjects).css("display", "none");
 
@@ -356,15 +466,15 @@ var TaskService = (function($) {
 
         //=========================================================================
         /* GET/UPDATE/CHECK FORMULA */
-        UpdateFormula: function(parentName) {
-            var rawFormula = GetRawFormula(parentName);
+        UpdateFormula: function (parentName) {
+            var rawFormula = TaskService.GetRawFormula(parentName);
             $('#' + parentName + 'Formula').attr('data-rawcontent', rawFormula);
-            $('#' + parentName + 'Formula').attr('data-formattedcontent', GetFormattedFormula(parentName));
-            $('#' + parentName + 'Formula').attr('data-configids', GetAllConfigIds(parentName));
+            $('#' + parentName + 'Formula').attr('data-formattedcontent', TaskService.GetFormattedFormula(parentName));
+            $('#' + parentName + 'Formula').attr('data-configids', TaskService.GetAllConfigIds(parentName));
             $('#' + parentName + 'Formula').text(rawFormula.replace(/#|@/g, " "));
         },
 
-        GetRawFormula: function(parentName) {
+        GetRawFormula: function (parentName) {
             var rawFormula = "";
             $('div[id^="div_' + parentName + '"]').each(function () {
                 rawFormula += $(this).attr("data-rawcontent") + "@";
@@ -374,7 +484,7 @@ var TaskService = (function($) {
             return rawFormula;
         },
 
-        GetFormattedFormula: function(parentName) {
+        GetFormattedFormula: function (parentName) {
             var rawFormula = "";
             $('div[id^="div_' + parentName + '"]').each(function () {
                 var currentContent = $(this).attr("data-rawcontent");
@@ -390,7 +500,7 @@ var TaskService = (function($) {
             return rawFormula;
         },
 
-        GetAllConfigIds: function(parentName) {
+        GetAllConfigIds: function (parentName) {
             var configids = "";
             $('div[id^="div_' + parentName + '"]').each(function () {
                 var configs = $(this).attr("data-configid").split("#");
@@ -405,11 +515,11 @@ var TaskService = (function($) {
             return configids;
         },
 
-        CheckFormula: function(parentName) {
-            var formula = GetRawFormula(parentName);
+        CheckFormula: function (parentName) {
+            var formula = TaskService.GetRawFormula(parentName);
             formula = formula.replace(/@/g, "#");
             var formulaCheckResults = expVal.validateLogicExpession(formula, "#").split(",");
-    
+
             if (formulaCheckResults[0] == "") {
                 return true;
             }
@@ -421,7 +531,7 @@ var TaskService = (function($) {
 
         //=========================================================================
         /* COMPARE WITH ANOTHER FIELD */
-        onCompareWithOtherField: function(currentObj, isPrecondition) {
+        onCompareWithOtherField: function (currentObj, isPrecondition) {
             var parentName = isPrecondition ? "preconditionConfig" : "ruleConfig";
 
             if ($(currentObj).prop("checked") == true) {
@@ -434,13 +544,13 @@ var TaskService = (function($) {
                 var controlType = $(selectedOption).attr("data-controltype");
                 var selectedValue = $(selectedOption).val();
                 selectedValue = selectedValue.toLowerCase().replace(/ /g, '');
-                renderConfigControl(parentName + "Control", selectedValue, controlType);
+                TaskService.renderConfigControl(parentName + "Control", selectedValue, controlType);
             }
         },
 
         //=========================================================================
         /* ULTILITIES */
-        isNumber: function(evt) {
+        isNumber: function (evt) {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -453,150 +563,5 @@ var TaskService = (function($) {
 } (jQuery));
 
 $(function () {
+    TaskService.initialize();
 });
-
-$(document).ready(function () {
-    OnAccordionInitialize();
-    OnInitialize();
-});
-
-//=========================================================================
-/* INITIALIZE */
-function OnInitialize() {
-    $('#preconditionConfigControlDatetimePicker').datepicker();
-    
-    $("#btn_Cancel").click(function () {
-        window.location.href = '/Case/CaseDetail?caseId=' + $("#caseid").text();
-    });
-
-    $("#btn_AddRule").click(function () {
-        var currentRowNum = $('#ruleTable tr:last').attr('id').replace("ruleTable", "");
-        AddingOneMoreRuleToTable("ruleTable", parseInt(currentRowNum) + 1, "ruleConfig");
-    });
-
-    $("#btn_AddPrecondition").click(function () {
-        var currentRowNum = $('#preconditionTable tr:last').attr('id').replace("preconditionTable", "");
-        AddingOneMoreRuleToTable("preconditionTable", parseInt(currentRowNum) + 1, "preconditionConfig");
-    });
-
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    SetupCalendar(dateFormat(new Date(year, month, day, 0, 0, 0), 'mmm dd, yyyy HH:MM:ss'), '.txtCalendar');
-    $('#preconditionConfigControlDatetimePickerIcon').click(function () {
-        $('#preconditionConfigControlDatetimePicker').datepicker("show");
-    });
-
-    $('#ruleConfigControlDatetimePickerIcon').click(function () {
-        $('#ruleConfigControlDatetimePicker').datetimepicker("show");
-    });
-
-    $("#btn_AddTask").click(function (event) {
-        event.preventDefault();
-        var formulaIsCorrect = CheckFormula("preconditionTable") && CheckFormula("ruleTable");
-        if (formulaIsCorrect) {
-            GenerateNextActions();
-
-            var url = 'Task/AddTask';
-            var param = {
-                "CreatorId": $("#onUserid").text(),
-                "CaseId": $("#caseid").text(),
-                "TaskName": $("#taskName").val(),
-                "TaskDesc": $("#taskDesc").val(),
-                "IsActive": $("input:checkbox[id=taskIsActive]").prop('checked'),
-                "EventId": $("#ActionName").find(":selected").val(),
-                "Interval": $("#timeInterval").val(),
-                "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
-                "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
-                "TaskPreconditionsFormatted": $("#preconditionTableFormula").attr("data-formattedcontent"),
-                "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
-                "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
-                "TaskRulesFormatted": $("#ruleTableFormula").attr("data-formattedcontent"),
-                "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
-                "NextActionIdList": NextActionIdList,
-                "NextActionTargetIdList": NextActionTargetIdList,
-                "PreconConfigs": $("#preconditionTableFormula").attr("data-configids"),
-                "RuleConfigs": $("#ruleTableFormula").attr("data-configids"),
-                "IsCheckNotScanned": IsCheckNotScanned
-            };
-
-            $.ajax({
-                type: "POST",
-                contentType: 'application/json',
-                dataType: "json",
-                data: JSON.stringify(param),
-                cache: false,
-                url: url,
-                error: function () {
-                },
-                success: function (response) {
-                    if (response.IsSuccessful) {
-                        // redirect to case detail page
-                        url = "Case/CaseDetail?caseId=" + $("#caseid").text();
-                        window.location.replace(url);
-                    }
-                    else {
-                        AlertService.showAlert(response);
-                    }
-                },
-                beforeSend: function () {
-
-                },
-                complete: function () {
-                }
-            });
-        }
-    });
-
-    $("#btn_EditTask").click(function (event) {
-        event.preventDefault();
-        var formulaIsCorrect = CheckFormula("preconditionTable") && CheckFormula("ruleTable");
-        if (formulaIsCorrect) {
-            GenerateNextActions();
-
-            var url = 'EditTask';
-            var param = {
-                "CreatorId": $("#onUserid").text(),
-                "caseId": $("#caseid").text(),
-                "TaskId": $("#taskid").text(),
-                "TaskName": $("#taskName").val(),
-                "TaskDesc": $("#taskDesc").val(),
-                "IsActive": $("input:checkbox[id=taskIsActive]").prop('checked'),
-                "EventId": $("#ActionName").find(":selected").val(),
-                "Interval": $("#timeInterval").val(),
-                "IntervalType": $("#timeIntervalUnit").find(":selected").val(),
-                "TaskPreconditions": $("#preconditionTableFormula").attr("data-formattedcontent"),
-                "TaskPreconditionsFormatted": $("#preconditionTableFormula").attr("data-formattedcontent"),
-                "TaskPreconditionsOriginal": $("#preconditionTableFormula").attr("data-rawcontent"),
-                "TaskRules": $("#ruleTableFormula").attr("data-formattedcontent"),
-                "TaskRulesFormatted": $("#ruleTableFormula").attr("data-formattedcontent"),
-                "TaskRulesOriginal": $("#ruleTableFormula").attr("data-rawcontent"),
-                "NextActionIdList": NextActionIdList,
-                "NextActionTargetIdList": NextActionTargetIdList,
-                "PreconConfigs": $("#preconditionTableFormula").attr("data-configids"),
-                "RuleConfigs": $("#ruleTableFormula").attr("data-configids"),
-                "IsCheckNotScanned": IsCheckNotScanned
-            };
-
-            $.ajax({
-                type: "POST",
-                contentType: 'application/json',
-                dataType: "json",
-                data: JSON.stringify(param),
-                cache: false,
-                url: url,
-                error: function () {
-                },
-                success: function (response) {
-                    AlertService.showAlert(response);
-                },
-                beforeSend: function () {
-
-                },
-                complete: function () {
-                }
-            });
-        }
-    });
-}
