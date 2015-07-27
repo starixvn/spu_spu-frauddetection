@@ -127,7 +127,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <summary>
         /// The method EditCaseInfo.
         /// </summary>
-        /// <param name="caseId">The work flow ID.</param>
+        /// <param name="caseId">The case ID.</param>
         /// <returns>A template view.</returns>
         [HttpGet]
         public string EditCaseInfo(int? caseId)

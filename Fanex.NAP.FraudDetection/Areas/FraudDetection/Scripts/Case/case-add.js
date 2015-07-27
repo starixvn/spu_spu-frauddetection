@@ -1,45 +1,19 @@
-﻿$(document).ready(function () {
+﻿(function () {
+    "use strict";
+
     $("#btn_addCase").click(function () {
-        addCaseForm.submit();
-    });
-
-    $("#btn_Cancel").click(function () {
-        $("div#popup").dialog("destroy").remove();
-    });
-
-    var addCaseForm = $("#AddCaseForm").submit(function (event) {
         event.preventDefault();
 
-        var url = 'Case/AddCase';
-        var param = {
+        var fraudCase = {
             "CaseName": $("#CaseName").val(),
             "CaseDesc": $("#CaseDesc").val(),
             "IsActive": $('#IsActive').is(':checked')
         };
-        $.ajax({
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            data: JSON.stringify(param),
-            cache: false,
-            url: url,
-            error: function () {
-            },
-            success: function (response) {
-                if (response.IsSuccessful) {
-                    setTimeout(function () {
-                        DialogService.closeDialog();
-                    }, 3000);
-                    Search();
-                }
 
-                AlertServiceOnPopup.showAlert(response);
-            },
-            beforeSend: function () {
-
-            },
-            complete: function () {
-            }
-        });
+        caseService.addCase(fraudCase);
     });
-});
+
+    $("#btn_Cancel").click(function () {
+        DialogService.closeDialog();
+    });
+})();
