@@ -1,5 +1,5 @@
 ﻿(function () {
-    $("#btn_editCase").click(function () {
+    $("#btn_editCase").click(function (event) {
         event.preventDefault();
 
         var fraudCase = {

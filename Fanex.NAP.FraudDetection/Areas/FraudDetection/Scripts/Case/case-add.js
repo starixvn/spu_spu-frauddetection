@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    $("#btn_addCase").click(function () {
+    $("#btn_addCase").click(function (event) {
         event.preventDefault();
 
         var fraudCase = {

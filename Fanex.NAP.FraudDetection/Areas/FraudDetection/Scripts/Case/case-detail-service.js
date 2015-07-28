@@ -51,7 +51,6 @@
             title: "Confirmation",
             text: "Are you sure you really want to " + active + "this Task?",
             confirm: function () {
-                debugger;
                 var criteria = {
                     "TaskId": taskId,
                     "IsActive": !isActive

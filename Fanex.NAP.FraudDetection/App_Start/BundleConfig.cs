@@ -65,6 +65,10 @@ namespace Fanex.NAP.FraudDetection.AppStart
                "~/Areas/FraudDetection/Scripts/Case/case-detail-service.js",
                "~/Areas/FraudDetection/Scripts/Case/case-group-service.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/App/Group").Include(
+               "~/Areas/FraudDetection/Scripts/Group/group-factory.js",
+               "~/Areas/FraudDetection/Scripts/Group/group-service.js"));
+
             var fraudDetectionCss = new Bundle("~/bundles/FraudDetectionCss")
             .IncludeDirectory("~/Areas/FraudDetection/App_Themes/Core", "*.css");
             fraudDetectionCss.Transforms.Add(cssTransformer);

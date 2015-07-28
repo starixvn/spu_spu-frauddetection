@@ -89,7 +89,6 @@
 
         for (var i = 0; i < suspiciousCustomers.length; i++) {
             var suspiciousCustomer = suspiciousCustomers[i];
-            debugger;
             var currentRow = {
                 Columns: [
                         { Name: "Row", Value: i + 1 },
