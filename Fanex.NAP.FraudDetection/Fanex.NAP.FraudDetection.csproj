@@ -451,6 +451,8 @@
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-service.js" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />

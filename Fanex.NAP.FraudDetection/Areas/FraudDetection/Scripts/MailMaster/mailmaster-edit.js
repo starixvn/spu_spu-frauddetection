@@ -32,13 +32,7 @@
         $('#editor').text(tinyMCE.activeEditor.getContent());
 
         if ($('#editMailForm').valid()) {
-            $.post(this.action, $(this).serialize(), function (result) {
-                if (result.IsSuccessful) {
-                    window.location.href = '/MailMaster';
-                } else {
-                    AlertService.showAlert(result);
-                }
-            });
+            mailMasterService.editMail($(this).serialize());
         }
     });
 });
