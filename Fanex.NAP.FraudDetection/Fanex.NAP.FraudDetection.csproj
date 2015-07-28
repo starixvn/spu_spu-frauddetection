@@ -96,6 +96,24 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="FraudDetection.Lib.BusinessManager">
+      <HintPath>Dependencies\FraudDetection.Lib.BusinessManager.dll</HintPath>
+    </Reference>
+    <Reference Include="FraudDetection.Lib.Core">
+      <HintPath>Dependencies\FraudDetection.Lib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FraudDetection.Lib.Criteria">
+      <HintPath>Dependencies\FraudDetection.Lib.Criteria.dll</HintPath>
+    </Reference>
+    <Reference Include="FraudDetection.Lib.DataAccess">
+      <HintPath>Dependencies\FraudDetection.Lib.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="FraudDetection.Lib.DTO">
+      <HintPath>Dependencies\FraudDetection.Lib.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="FraudDetection.Lib.Service">
+      <HintPath>Dependencies\FraudDetection.Lib.Service.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.AspNet">
       <HintPath>..\packages\Glimpse.AspNet.1.8.0\lib\net40\Glimpse.AspNet.dll</HintPath>
     </Reference>
@@ -167,30 +185,6 @@
     </Reference>
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
-    </Reference>
-    <Reference Include="SPU.Lib.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\SPU.Lib.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="SPU.Lib.FraudDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\SPU.Lib.FraudDetection.dll</HintPath>
-    </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\SPU.Lib.FraudDetection.Criteria.dll</HintPath>
-    </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\SPU.Lib.FraudDetection.DataAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\SPU.Lib.FraudDetection.DTO.dll</HintPath>
-    </Reference>
-    <Reference Include="SPU.Lib.FraudDetection.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\SPU.Lib.FraudDetection.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -12,8 +12,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
     using NAP.FraudDetection.Controllers;
-    using SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup;
     using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup;
 
     /// <summary>
     /// The CustomerBettingGroupController.
