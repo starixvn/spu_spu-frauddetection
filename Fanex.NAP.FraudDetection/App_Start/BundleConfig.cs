@@ -73,6 +73,10 @@ namespace Fanex.NAP.FraudDetection.AppStart
               "~/Areas/FraudDetection/Scripts/MailMaster/mailmaster-factory.js",
               "~/Areas/FraudDetection/Scripts/MailMaster/mailmaster-service.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/App/Reports").Include(
+              "~/Areas/FraudDetection/Scripts/Reports/customer-report-factory.js",
+              "~/Areas/FraudDetection/Scripts/Reports/customer-report-service.js"));
+
             var fraudDetectionCss = new Bundle("~/bundles/FraudDetectionCss")
             .IncludeDirectory("~/Areas/FraudDetection/App_Themes/Core", "*.css");
             fraudDetectionCss.Transforms.Add(cssTransformer);
