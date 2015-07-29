@@ -61,7 +61,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 GroupId = groupId
             };
 
-            var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomerReport(criteria);
+            var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
             var result = new
             {

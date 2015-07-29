@@ -41,7 +41,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public ActionResult GetCustomerGroupsInCase(CaseGroupGetAllCriteria criteria)
         {
-            var caseGroups = _caseGroupService.SelectCaseGroup(criteria);
+            var caseGroups = _caseGroupService.GetCaseGroup(criteria);
 
             return Json(caseGroups, JsonRequestBehavior.AllowGet);
         }
@@ -57,7 +57,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult GetAvailableCustomerGroups(int caseId)
         {
-            var groups = _groupService.GetGroupsNotInGivenCase(new GroupGetAvailableGroupForCaseCriteria
+            var groups = _groupService.GetAvailableGroupsForCase(new GroupGetAvailableGroupsForCaseCriteria
             {
                 CaseId = caseId,
                 PageIndex = 1,
@@ -77,7 +77,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public ActionResult RemoveCustomerGroupFromCase(CaseGroupDeleteCriteria criteria)
         {
-            var commandResult = _caseGroupService.RemoveCaseGroup(criteria);
+            var commandResult = _caseGroupService.DeleteCaseGroup(criteria);
 
             return Json(commandResult, JsonRequestBehavior.AllowGet);
         }

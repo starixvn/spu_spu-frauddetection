@@ -155,7 +155,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             // Groups
             var caseGroupService = new CaseGroupService();
-            var groups = caseGroupService.SelectCaseGroup(new CaseGroupGetAllCriteria { CaseId = fraudCaseId }).ToList();
+            var groups = caseGroupService.GetCaseGroup(new CaseGroupGetAllCriteria { CaseId = fraudCaseId }).ToList();
 
             // Bettypes and Sports
             var bettypeService = new BettypeService();
