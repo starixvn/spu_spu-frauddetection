@@ -26,10 +26,24 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         /// <summary>
+        /// Update parameter.
+        /// </summary>
+        /// <param name="criteria">Config Parameter Update Criteria.</param>
+        /// <returns>Action Result.</returns>
+        [HttpPost]
+        public ActionResult UpdateParameter(ConfigUpdateCriteria criteria)
+        {
+            var configService = new ConfigurationsService();
+            var result = configService.UpdateConfigParameters(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// Generate View Model.
         /// </summary>
         /// <returns>View Model.</returns>
-        public ParameterViewModel GenerateViewModel()
+        private ParameterViewModel GenerateViewModel()
         {
             var loggedInUserId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0;
             var configService = new ConfigurationsService();
@@ -39,18 +53,5 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return viewModel;
         }
 
-        /// <summary>
-        /// Update parameter.
-        /// </summary>
-        /// <param name="criteria">Config Parameter Update Criteria.</param>
-        /// <returns>Action Result.</returns>
-        [HttpPost]
-        public ActionResult UpdateParamater(ConfigUpdateCriteria criteria)
-        {
-            var configService = new ConfigurationsService();
-            var result = configService.UpdateConfigParameters(criteria);
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
     }
 }

@@ -1,10 +1,4 @@
-﻿$(document).ready(function () {
-    OnInitialize();
-});
-
-//=========================================================================
-/* INITIALIZE */
-function OnInitialize() {
+﻿(function () {
     $('input[id^="tb_param_"]').keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -23,61 +17,13 @@ function OnInitialize() {
 
     $("#btn_UpdateParameter").click(function (event) {
         event.preventDefault();
-        var url = 'Parameter/UpdateParamater';
-        var param = {
+
+        var params = {
             "CreatorId": $("#onUserid").text(),
-            "ListParamIDs": GenerateListParamIDs(),
-            "ListParamNewValues": GenerateListParamNewValues()
+            "ListParamIDs": parameterService.generateListParamIDs(),
+            "ListParamNewValues": parameterService.generateListParamNewValues()
         };
 
-        $.ajax({
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            data: JSON.stringify(param),
-            cache: false,
-            url: url,
-            error: function () {
-            },
-            success: function (response) {
-                AlertService.showAlert(response);
-            },
-            beforeSend: function () {
-
-            },
-            complete: function () {
-            }
-        });
+        parameterService.updateParameter(params);
     });
-}
-
-function GenerateListParamIDs() {
-    var paramIDs = "";
-    $('input[id^="tb_param_"]').each(function () {
-        var paramId = $(this).attr('id');
-        paramId = paramId.replace("tb_param_", "");
-        paramIDs += paramId + ",";
-    });
-
-    return paramIDs.slice(0, -1);
-}
-
-function GenerateListParamNewValues() {
-    var paramNewValues = "";
-    $('input[id^="tb_param_"]').each(function () {
-        paramNewValues += $(this).val() +",";
-    });
-
-    return paramNewValues.slice(0, -1);
-}
-
-//=========================================================================
-/* ULTILITIES */
-function isNumber(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
-}
+})();
