@@ -29,7 +29,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public ActionResult Index()
         {
-            return View("~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupIndex.cshtml");
+            return View("~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupList.cshtml");
         }
 
         /// <summary>

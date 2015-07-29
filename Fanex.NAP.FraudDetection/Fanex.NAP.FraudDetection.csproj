@@ -570,7 +570,7 @@
     <Content Include="Areas\FraudDetection\Views\CaseGroup\CaseGroupAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupEdit.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupIndex.cshtml" />
+    <None Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupEditCustomer.cshtml" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
