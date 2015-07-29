@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BFE3A017-2B3F-4F1D-83E4-BEA4356CE9D3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.NAP.FraudDetection.StoreProcedures</RootNamespace>
+    <AssemblyName>Fanex.NAP.FraudDetection.StoreProcedures</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="CaseGroup\dbo.FD_CaseGroupDelete.StoredProcedure.sql" />
+    <Content Include="CaseGroup\dbo.FD_CaseGroupGetAll.StoredProcedure.sql" />
+    <Content Include="CaseGroup\dbo.FD_CaseGroupInsert.StoredProcedure.sql" />
+    <Content Include="Case\dbo.FD_CaseGetAll.StoredProcedure.sql" />
+    <Content Include="Case\dbo.FD_CaseGetById.StoredProcedure.sql" />
+    <Content Include="Case\dbo.FD_CaseInsert.StoredProcedure.sql" />
+    <Content Include="Case\dbo.FD_CaseUpdate.StoredProcedure.sql" />
+    <Content Include="Case\dbo.FD_CaseUpdateStatus.StoredProcedure.sql" />
+    <Content Include="Common\dbo.FD_WriteLog.StoredProcedure.sql" />
+    <Content Include="ConfigsParams\dbo.FD_ConfigGetAll.StoredProcedure.sql" />
+    <Content Include="ConfigsParams\dbo.FD_ConfigUpdate.StoredProcedure.sql" />
+    <Content Include="ConfigsParams\dbo.FD_ParameterGetAll.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupDelete.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupDeleteCustomer.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetAll.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetById.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupInsert.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupInsertCustomer.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupUpdate.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_CustomerGroupInsert.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_CustomerGroupUpdate.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_GroupGetAll.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_GroupGetAvailableGroupForCase.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_GroupGetById.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_GroupInsert.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_GroupUpdate.StoredProcedure.sql" />
+    <Content Include="CustomerGroup\dbo.FD_GroupUpdateStatus.StoredProcedure.sql" />
+    <Content Include="MailMaster\dbo.FD_MailMasterDelete.StoredProcedure.sql" />
+    <Content Include="MailMaster\dbo.FD_MailMasterGetAll.StoredProcedure.sql" />
+    <Content Include="MailMaster\dbo.FD_MailMasterGetById.StoredProcedure.sql" />
+    <Content Include="MailMaster\dbo.FD_MailMasterInsert.StoredProcedure.sql" />
+    <Content Include="MailMaster\dbo.FD_MailMasterUpdate.StoredProcedure.sql" />
+    <Content Include="MailMaster\dbo.FD_MailMasterUpdateStatus.StoredProcedure.sql" />
+    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciouCustomerGetAll.StoredProcedure.sql" />
+    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetByGroup.StoredProcedure.sql" />
+    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetCount.StoredProcedure.sql" />
+    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerReportGetAll.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_EventGetAll.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_MatchInsert.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_SBBettypeGetAll.sql" />
+    <Content Include="Task\dbo.FD_SBSportGetAll.sql" />
+    <Content Include="Task\dbo.FD_SuspiciousInfoInsert.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TablesForeignKeyGetAll.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskGetAll.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskGetAllByCaseId.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskGetByCaseId.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskGetForExecuting.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskInfoGet.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskInsert.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskUpdate.StoredProcedure.sql" />
+    <Content Include="Task\dbo.FD_TaskUpdateStatus.StoredProcedure.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
