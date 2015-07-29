@@ -143,7 +143,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="currentUserId">Current User ID.</param>
         /// <param name="fraudCaseId">Fraud Case ID.</param>
         /// <returns>Task View Model.</returns>
-        public TaskViewModel GenerateViewModel(int currentUserId, int fraudCaseId)
+        private TaskViewModel GenerateViewModel(int currentUserId, int fraudCaseId)
         {
             // Actions
             var eventService = new EventService();
@@ -179,7 +179,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">Task Info Criteria.</param>
         /// <returns>Check results.</returns>
-        public string CheckTaskDataIsCorrect(TaskInfoCriteria criteria)
+        private string CheckTaskDataIsCorrect(TaskInfoCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
             {
@@ -199,7 +199,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="taskId">Current Task ID.</param>
         /// <param name="runTaskType">Sending Type.</param>
-        public void RunTask(int taskId, SendingType runTaskType)
+        private void RunTask(int taskId, SendingType runTaskType)
         {
             var syncNewTask = SendingMessageFactory.GetSender(runTaskType);
             syncNewTask.Send(taskId);

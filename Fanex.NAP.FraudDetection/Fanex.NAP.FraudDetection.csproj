@@ -455,6 +455,9 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-service.js" />
     <Content Include="Dependencies\FD.Lib.BusinessManager.dll" />
     <Content Include="Dependencies\FD.Lib.Core.dll" />

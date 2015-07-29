@@ -5,57 +5,72 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Adding Task"; 
 }
-
 @section HeadCss
 {
     <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionCss")" />
-    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />    
+    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />
 }
 @section FooterJs
 {
+    @Scripts.Render("~/bundles/App/Task")
     <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionJs")" type="text/ecmascript"></script>
-    <script src="~/Areas/FraudDetection/Scripts/Task/task-service.js" type="text/javascript"></script>
-    <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css" type="text/javascript"></script>
-    <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/Scripts/Task/task-add.js" type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css"
+        type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js"
+        type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/Scripts/Core/mathformula-validation.js" type="text/javascript"></script>
-    
 }
 <div>
     <span class="infor-text">Add New Task</span>
 </div>
-<div class="newline">&nbsp;</div>
-<label id="addTaskResult" style="color: Red; font-weight: normal;"></label>
-@using (Html.BeginForm("AddNewTask", "Task", FormMethod.Post, new { @id = "AddTaskForm" }))
+<div class="newline">
+    &nbsp;</div>
+<label id="addTaskResult" style="color: Red; font-weight: normal;">
+</label>
+@using (Html.BeginForm("AddTask", "Task", FormMethod.Post, new { @id = "AddTaskForm" }))
 {
     <div id="caseid" style="display: none;">@Model.TaskInformation.CaseId</div>
     <div id="onUserid" style="display: none;">@Model.OnUserId</div>
     <div id="accordion" style="width: 720px;">
-        <h3 id="accordionBlockTaskInfo">Task Information</h3>
+        <h3 id="accordionBlockTaskInfo">
+            Task Information</h3>
         <div>
             <table class="table-popup font-size-small">
                 <tr>
-                    <td width="100px;"><span>Task Name</span></td>
-                    <td>@Html.TextBoxFor(l => l.TaskInformation.TaskName, new { @id = "taskName", @style = "width: 400px;" })</td>
+                    <td width="100px;">
+                        <span>Task Name</span>
+                    </td>
+                    <td>@Html.TextBoxFor(l => l.TaskInformation.TaskName, new { @id = "taskName", @style = "width: 400px;" })
+                    </td>
                 </tr>
                 <tr>
-                    <td><span>Description</span></td>
-                    <td>@Html.TextAreaFor(l => l.TaskInformation.TaskDesc, 5, 45, new { @id = "taskDesc", @style = "width: 400px;" })</td>
+                    <td>
+                        <span>Description</span>
+                    </td>
+                    <td>@Html.TextAreaFor(l => l.TaskInformation.TaskDesc, 5, 45, new { @id = "taskDesc", @style = "width: 400px;" })
+                    </td>
                 </tr>
                 <tr>
-                    <td><span>Active</span></td>
-                    <td>@Html.CheckBoxFor(l => l.TaskInformation.IsActive, new { @id = "taskIsActive" })</td>
+                    <td>
+                        <span>Active</span>
+                    </td>
+                    <td>@Html.CheckBoxFor(l => l.TaskInformation.IsActive, new { @id = "taskIsActive" })
+                    </td>
                 </tr>
             </table>
         </div>
-
-        <h3 id="accordionBlockEvent">Event</h3>
+        <h3 id="accordionBlockEvent">
+            Event</h3>
         <div>
             <table class="table-popup font-size-small">
                 <tr>
-                    <td><span>Event Name</span></td>
-                    <td> 
-                        <select name="ActionName" id="ActionName" style="height: 25px;" onchange="TaskService.changeActionSelection(this)">
+                    <td>
+                        <span>Event Name</span>
+                    </td>
+                    <td>
+                        <select name="ActionName" id="ActionName" style="height: 25px;" onchange="taskService.changeActionSelection(this)">
                             @foreach (var mevent in Model.EventList)
                             {
                                 <option value="@mevent.EventId" data-actiondesc="@mevent.EventDesc">@mevent.EventName</option>
@@ -65,9 +80,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><span>Executed Timer</span></td>
                     <td>
-                        <input type="text" id="timeInterval" style="width: 100px; height: 25px;" onkeypress="return TaskService.isNumber(event)" />
+                        <span>Executed Timer</span>
+                    </td>
+                    <td>
+                        <input type="text" id="timeInterval" style="width: 100px; height: 25px;" onkeypress="return taskService.isNumber(event)" />
                         <select id="timeIntervalUnit" style="height: 25px;">
                             <option value="Second">Second(s)</option>
                             <option value="Minute">Minute(s)</option>
@@ -78,10 +95,12 @@
                 </tr>
             </table>
         </div>
-        <h3 id="accordionBlockPrecondition">Pre-condition</h3>
+        <h3 id="accordionBlockPrecondition">
+            Pre-condition</h3>
         <div>
             <div class="table-popup font-size-small">
-                <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;" onchange="TaskService.changeConfigSelection(this, true)">
+                <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;"
+                    onchange="taskService.changeConfigSelection(this, true)">
                     @foreach (var config in Model.PreconditionConfigurations)
                     {
                         <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
@@ -89,11 +108,11 @@
                 </select>
                 <select style="height: 25px;" id="preconditionConfigOperator">
                     <option value="Equal">=</option>
-                    <option value="Unequal"><></option>
+                    <option value="Unequal">&#8800;</option>
                     <option value="LargerThan">></option>
-                    <option value="LargerThanOrEqual">>=</option>
+                    <option value="LargerThanOrEqual">&#8805;</option>
                     <option value="LessThan"><</option>
-                    <option value="LessThanOrEqual"><=</option>
+                    <option value="LessThanOrEqual">&#8804;</option>
                 </select>
                 <select id="preconditionConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                     @foreach (var config in Model.PreconditionConfigurations)
@@ -114,52 +133,81 @@
                     <option value="gue.IsMainMarket">Main Markets</option>
                     <option value="gue.IsMainMarket">Other Markets</option>
                 </select>
-                <select name="preconditionConfigControlComboBoxsport" id="preconditionConfigControlComboBoxsport" style="height: 25px; display:none;">
+                <select name="preconditionConfigControlComboBoxsport" id="preconditionConfigControlComboBoxsport"
+                    style="height: 25px; display: none;">
                     @foreach (var sport in Model.SportList)
                     {
                         <option value="@sport.SportId">@sport.SportName</option>
                     }
                 </select>
-                <select name="preconditionConfigControlComboBoxcustomergroup" id="preconditionConfigControlComboBoxcustomergroup" style="height: 25px; display:none;">
+                <select name="preconditionConfigControlComboBoxcustomergroup" id="preconditionConfigControlComboBoxcustomergroup"
+                    style="height: 25px; display: none;">
                     @foreach (var group in Model.GroupList)
                     {
                         <option value="@group.GroupId" >@group.GroupName</option>
                     }
                 </select>
-                <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px; display: none;" />
+                <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px;
+                    display: none;" />
                 @Html.TextBox("preconditionConfigControlDatetimePicker", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:100px;" })
-                <i class="icon-calendar icon-event-date-calendar" id="preconditionConfigControlDatetimePickerIcon" style=""></i>
+                <i class="icon-calendar icon-event-date-calendar" id="preconditionConfigControlDatetimePickerIcon"
+                    style=""></i>
                 <input type="button" id="btn_AddPrecondition" value="Add to List" class="btn-green font-size-small" />
-                <div class="newline">&nbsp;</div>
+                <div class="newline">
+                    &nbsp;</div>
                 <div>
-                    <input type="checkbox" id="preconditionConfigCompare" onchange="TaskService.onCompareWithOtherField(this, true)" /> Compare with another field
+                    <input type="checkbox" id="preconditionConfigCompare" onchange="taskService.onCompareWithOtherField(this, true)" />
+                    Compare with another field
                 </div>
-                <div class="newline">&nbsp;</div>
+                <div class="newline">
+                    &nbsp;</div>
                 <div style="border: 1px solid #000000;">
-                    <table id="preconditionTable" class="table-items"><tr id="preconditionTable1" style="display:none"><td></td><td></td><td></td></tr></table>
+                    <table id="preconditionTable" class="table-items">
+                        <tr id="preconditionTable1" style="display: none">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="newline">&nbsp;</div>
-                <label id="preconditionTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
-                <div class="newline">&nbsp;</div>
+                <div class="newline">
+                    &nbsp;</div>
+                <label id="preconditionTableFormula" data-rawcontent="" data-formattedcontent=""
+                    data-configids="">
+                </label>
+                <div class="newline">
+                    &nbsp;</div>
                 <div>
-                    <input type="button" onclick="TaskService.AddFormulaElement(true, '(#', true)" value="(+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(true, '(#')" value="(-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(true, '(#', true)" value="(+"
+                        class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(true, '(#')" value="(-"
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
-                    <input type="button" onclick="TaskService.AddFormulaElement(true, '#)', false)" value=")+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(true, '#)')" value=")-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(true, '#)', false)" value=")+"
+                        class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(true, '#)')" value=")-"
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
-                    <input type="button" onclick="TaskService.AddFormulaElement(true, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(true, 'AND#')" value="AND-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(true, 'AND#', true)"
+                        value="AND+" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(true, 'AND#')" value="AND-"
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
-                    <input type="button" onclick="TaskService.AddFormulaElement(true, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(true, 'OR#')" value="OR-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(true, 'OR#', true)" value="OR+"
+                        class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(true, 'OR#')" value="OR-"
+                        class="btn-green font-size-small" />
                 </div>
             </div>
         </div>
-        <h3 id="accordionBlockRule">Rule</h3>
+        <h3 id="accordionBlockRule">
+            Rule</h3>
         <div>
             <div class="table-popup font-size-small">
-                <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="TaskService.changeConfigSelection(this, false)">
+                <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="taskService.changeConfigSelection(this, false)">
                     @foreach (var config in Model.RuleConfigurations)
                     {
                         <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
@@ -167,11 +215,11 @@
                 </select>
                 <select style="height: 25px;" id="ruleConfigOperator">
                     <option value="Equal">=</option>
-                    <option value="Unequal"><></option>
+                    <option value="Unequal">&#8800;</option>
                     <option value="LargerThan">></option>
-                    <option value="LargerThanOrEqual">>=</option>
+                    <option value="LargerThanOrEqual">&#8805;</option>
                     <option value="LessThan"><</option>
-                    <option value="LessThanOrEqual"><=</option>
+                    <option value="LessThanOrEqual">&#8804;</option>
                 </select>
                 <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                     @foreach (var config in Model.RuleConfigurations)
@@ -188,13 +236,15 @@
                     <option value="101">Reject</option>
                     <option value="0">Running</option>
                 </select>
-                <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype" style="height: 25px; display:none;">
+                <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype"
+                    style="height: 25px; display: none;">
                     @foreach (var bettype in Model.BettypeList)
                     {
                         <option value="@bettype.BettypeId">@bettype.BettypeName</option>
                     }
                 </select>
-                <select name="ruleConfigControlComboBoxcustomergroup" id="ruleConfigControlComboBoxcustomergroup" style="height: 25px; display:none;">
+                <select name="ruleConfigControlComboBoxcustomergroup" id="ruleConfigControlComboBoxcustomergroup"
+                    style="height: 25px; display: none;">
                     @foreach (var group in Model.GroupList)
                     {
                         <option value="@group.GroupId" >@group.GroupName</option>
@@ -202,45 +252,72 @@
                 </select>
                 <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
-                <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon" style="display: none;"></i>
+                <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"
+                    style="display: none;"></i>
                 <input type="button" id="btn_AddRule" value="Add to List" class="btn-green font-size-small" />
-                <div class="newline">&nbsp;</div>
+                <div class="newline">
+                    &nbsp;</div>
                 <div>
-                    <input type="checkbox" id="ruleConfigCompare"  onchange="TaskService.onCompareWithOtherField(this, false)" /> Compare with another field
+                    <input type="checkbox" id="ruleConfigCompare" onchange="taskService.onCompareWithOtherField(this, false)" />
+                    Compare with another field
                 </div>
-                <div class="newline">&nbsp;</div>            
+                <div class="newline">
+                    &nbsp;</div>
                 <div style="border: 1px solid #000000;">
-                    <table id="ruleTable" class="table-items"><tr id="ruleTable1" style="display:none"><td></td><td></td><td></td></tr></table>
+                    <table id="ruleTable" class="table-items">
+                        <tr id="ruleTable1" style="display: none">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="newline">&nbsp;</div>            
-                <label id="ruleTableFormula" data-rawcontent="" data-formattedcontent="" data-configids=""></label>
-                <div class="newline">&nbsp;</div>
+                <div class="newline">
+                    &nbsp;</div>
+                <label id="ruleTableFormula" data-rawcontent="" data-formattedcontent="" data-configids="">
+                </label>
+                <div class="newline">
+                    &nbsp;</div>
                 <div>
-                    <input type="button" onclick="TaskService.AddFormulaElement(false, '(', true)" value="(+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(false, '(')" value="(-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(false, '(', true)" value="(+"
+                        class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(false, '(')" value="(-"
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
-                    <input type="button" onclick="TaskService.AddFormulaElement(false, ')', false)" value=")+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(false, ')')" value=")-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(false, ')', false)" value=")+"
+                        class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(false, ')')" value=")-"
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
-                    <input type="button" onclick="TaskService.AddFormulaElement(false, 'AND#', true)" value="AND+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(false, 'AND#')" value="AND-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(false, 'AND#', true)"
+                        value="AND+" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(false, 'AND#')" value="AND-"
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
-                    <input type="button" onclick="TaskService.AddFormulaElement(false, 'OR#', true)" value="OR+" class="btn-green font-size-small" />
-                    <input type="button" onclick="TaskService.RemoveFormulaElement(false, 'OR#')" value="OR-" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.AddFormulaElement(false, 'OR#', true)"
+                        value="OR+" class="btn-green font-size-small" />
+                    <input type="button" onclick="taskService.RemoveFormulaElement(false, 'OR#')" value="OR-"
+                        class="btn-green font-size-small" />
                 </div>
             </div>
         </div>
-        <h3 id="accordionBlockPerform">Perform</h3>
+        <h3 id="accordionBlockPerform">
+            Perform</h3>
         <div>
             <table class="table-popup font-size-small">
                 <tr>
                     <td>
                         <div>
-                            <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" /> <span style="padding-bottom: 5px;"> Allocate customer group to:</span>
+                            <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" />
+                            <span style="padding-bottom: 5px;">Allocate customer group to:</span>
                         </div>
                     </td>
-                    <td> 
-                        <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px; width: 250px;">
+                    <td>
+                        <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;
+                            width: 250px;">
                             @foreach (var group in Model.GroupList)
                             {
                                 <option value="@group.GroupId" >@group.GroupName</option>
@@ -251,11 +328,13 @@
                 <tr>
                     <td>
                         <div>
-                            <input type="checkbox" id="nextaction_sendMail" data-actionid="2" /> Send Mail
+                            <input type="checkbox" id="nextaction_sendMail" data-actionid="2" />
+                            Send Mail
                         </div>
                     </td>
                     <td>
-                        <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px; width: 250px;">
+                        <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;
+                            width: 250px;">
                             @foreach (var mailMaster in Model.MaiMasterList)
                             {
                                 <option value="@mailMaster.MailId" >@mailMaster.MailCode</option>
@@ -266,7 +345,8 @@
             </table>
         </div>
     </div>
-    <div class="newline">&nbsp;</div>
+    <div class="newline">
+        &nbsp;</div>
     <div style="width: 700px; text-align: center;">
         <input type="button" id="btn_AddTask" value="Submit" class="btn-green font-size-small" />
         <input type="button" id="btn_Cancel" value="Cancel" class="btn-green btn-customCancel font-size-small" />
