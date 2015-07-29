@@ -13,19 +13,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Configuration;
     using System.Linq;
     using System.Web.Mvc;
+    using FD.Lib.Criteria.Bettype;
+    using FD.Lib.Criteria.CaseGroup;
+    using FD.Lib.Criteria.Config;
+    using FD.Lib.Criteria.Event;
+    using FD.Lib.Criteria.MailMaster;
+    using FD.Lib.Criteria.Task;
+    using FD.Lib.DTO;
+    using FD.Lib.QueryGenerator;
+    using FD.Lib.QueueManagement.SendingTasks;
+    using FD.Lib.Service.Implement;
     using Models.ViewModel.Task;
     using NAP.FraudDetection.Controllers;
     using Service;
-    using SPU.Lib.FraudDetection.Criteria.Bettype;
-    using SPU.Lib.FraudDetection.Criteria.CaseGroup;
-    using SPU.Lib.FraudDetection.Criteria.Config;
-    using SPU.Lib.FraudDetection.Criteria.Event;
-    using SPU.Lib.FraudDetection.Criteria.MailMaster;
-    using SPU.Lib.FraudDetection.Criteria.Task;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.QueryGenerator;
-    using SPU.Lib.FraudDetection.QueueManagement.SendingTasks;
-    using SPU.Lib.FraudDetection.Service.Implement;
 
     public class TaskController : BaseController
     {

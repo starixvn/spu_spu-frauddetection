@@ -11,12 +11,13 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
+    using FD.Lib.Core.Attribute;
+    using FD.Lib.Core.Utilities;
+    using FD.Lib.Criteria.Case;
+    using FD.Lib.Criteria.Task;
+    using FD.Lib.QueueManagement.SendingTasks;
+    using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.Criteria.Case;
-    using SPU.Lib.FraudDetection.Criteria.Task;
-    using SPU.Lib.FraudDetection.QueueManagement.SendingTasks;
-    using SPU.Lib.FraudDetection.Service.Implement;
 
     /// <summary>
     /// The CaseController.

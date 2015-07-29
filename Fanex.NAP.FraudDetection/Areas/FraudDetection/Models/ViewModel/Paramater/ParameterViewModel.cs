@@ -11,7 +11,7 @@ namespace Fanex.NAP.FraudDetection.Models.ViewModel.Paramater
 {
     using System;
     using System.Collections.Generic;
-    using SPU.Lib.FraudDetection.DTO;
+    using FD.Lib.DTO;
 
     /// <summary>
     /// Task View Model.

@@ -12,9 +12,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using FD.Lib.Criteria.MailMaster;
+    using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
-    using SPU.Lib.FraudDetection.Criteria.MailMaster;
-    using SPU.Lib.FraudDetection.Service.Implement;
 
     /// <summary>
     /// The controller of mail master.

@@ -96,23 +96,29 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="FraudDetection.Lib.BusinessManager">
-      <HintPath>Dependencies\FraudDetection.Lib.BusinessManager.dll</HintPath>
+    <Reference Include="FD.Lib.BusinessManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\FD.Lib.BusinessManager.dll</HintPath>
     </Reference>
-    <Reference Include="FraudDetection.Lib.Core">
-      <HintPath>Dependencies\FraudDetection.Lib.Core.dll</HintPath>
+    <Reference Include="FD.Lib.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\FD.Lib.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FraudDetection.Lib.Criteria">
-      <HintPath>Dependencies\FraudDetection.Lib.Criteria.dll</HintPath>
+    <Reference Include="FD.Lib.Criteria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\FD.Lib.Criteria.dll</HintPath>
     </Reference>
-    <Reference Include="FraudDetection.Lib.DataAccess">
-      <HintPath>Dependencies\FraudDetection.Lib.DataAccess.dll</HintPath>
+    <Reference Include="FD.Lib.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\FD.Lib.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="FraudDetection.Lib.DTO">
-      <HintPath>Dependencies\FraudDetection.Lib.DTO.dll</HintPath>
+    <Reference Include="FD.Lib.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\FD.Lib.DTO.dll</HintPath>
     </Reference>
-    <Reference Include="FraudDetection.Lib.Service">
-      <HintPath>Dependencies\FraudDetection.Lib.Service.dll</HintPath>
+    <Reference Include="FD.Lib.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\FD.Lib.Service.dll</HintPath>
     </Reference>
     <Reference Include="Glimpse.AspNet">
       <HintPath>..\packages\Glimpse.AspNet.1.8.0\lib\net40\Glimpse.AspNet.dll</HintPath>
@@ -450,6 +456,12 @@
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-service.js" />
+    <Content Include="Dependencies\FD.Lib.BusinessManager.dll" />
+    <Content Include="Dependencies\FD.Lib.Core.dll" />
+    <Content Include="Dependencies\FD.Lib.Criteria.dll" />
+    <Content Include="Dependencies\FD.Lib.DataAccess.dll" />
+    <Content Include="Dependencies\FD.Lib.DTO.dll" />
+    <Content Include="Dependencies\FD.Lib.Service.dll" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />
@@ -464,7 +476,6 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-list.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Task\task.js" />
     <Content Include="Areas\FraudDetection\Scripts\Case\case-detail-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Case\case-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Case\case-add.js" />
@@ -603,13 +614,6 @@
     <Content Include="Content\Plugin\multi-select-control.css" />
     <Content Include="Content\tinymce\tinymce.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
-    <Content Include="Dependencies\SPU.Lib.Core.dll" />
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.BusinessManager.UnitTest.dll" />
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.Criteria.dll" />
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.DataAccess.dll" />
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.dll" />
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.DTO.dll" />
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.Service.dll" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />

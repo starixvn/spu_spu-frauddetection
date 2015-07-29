@@ -14,10 +14,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
+    using FD.Lib.Criteria.Group;
+    using FD.Lib.Criteria.Reports;
+    using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
-    using SPU.Lib.FraudDetection.Criteria.Group;
-    using SPU.Lib.FraudDetection.Criteria.Reports;
-    using SPU.Lib.FraudDetection.Service.Implement;
 
     /// <summary>
     /// The controller of Customer Report.

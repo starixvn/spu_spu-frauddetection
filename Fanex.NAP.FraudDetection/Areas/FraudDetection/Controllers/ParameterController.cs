@@ -11,12 +11,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using FD.Lib.Criteria.Config;
+    using FD.Lib.Criteria.Parameter;
+    using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using NAP.FraudDetection.Models.ViewModel.Paramater;
     using Service;
-    using SPU.Lib.FraudDetection.Criteria.Config;
-    using SPU.Lib.FraudDetection.Criteria.Parameter;
-    using SPU.Lib.FraudDetection.Service.Implement;
 
     public class ParameterController : BaseController
     {

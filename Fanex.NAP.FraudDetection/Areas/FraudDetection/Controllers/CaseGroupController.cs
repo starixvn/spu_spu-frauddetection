@@ -12,11 +12,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using FD.Lib.Criteria.CaseGroup;
+    using FD.Lib.Criteria.Group;
+    using FD.Lib.Service.Implement;
+    using FD.Lib.Service.Interface;
     using NAP.FraudDetection.Controllers;
-    using SPU.Lib.FraudDetection.Criteria.CaseGroup;
-    using SPU.Lib.FraudDetection.Criteria.Group;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// The Case Group Controller.

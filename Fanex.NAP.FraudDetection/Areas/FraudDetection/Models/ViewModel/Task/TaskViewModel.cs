@@ -12,7 +12,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.DTO;
+    using FD.Lib.DTO;
 
     /// <summary>
     /// Task View Model.
@@ -21,8 +21,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
     public class TaskViewModel
     {
         public TaskViewModel(
-            List<SPU.Lib.FraudDetection.DTO.Event> events, 
-            List<SPU.Lib.FraudDetection.DTO.Config> configs,
+            List<Event> events,
+            List<Config> configs,
             List<CaseGroup> groups,
             List<Sport> sportList,
             List<Bettype> bettypeList,
@@ -40,10 +40,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
         public int OnUserId { get; set; }
 
         // Task
-        public SPU.Lib.FraudDetection.DTO.Task TaskInformation { get; set; }
+        public Task TaskInformation { get; set; }
 
         // Actions
-        public List<SPU.Lib.FraudDetection.DTO.Event> EventList { get; set; }
+        public List<Event> EventList { get; set; }
         
         // Bettypes and Sports
         public List<Bettype> BettypeList { get; set; }
@@ -51,9 +51,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
         public List<Sport> SportList { get; set; }
 
         // Configurations
-        public List<SPU.Lib.FraudDetection.DTO.Config> ConfigurationList { get; set; }
+        public List<Config> ConfigurationList { get; set; }
 
-        public List<SPU.Lib.FraudDetection.DTO.Config> PreconditionConfigurations
+        public List<Config> PreconditionConfigurations
         {
             get
             {
@@ -61,7 +61,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
             }
         }
 
-        public List<SPU.Lib.FraudDetection.DTO.Config> RuleConfigurations
+        public List<Config> RuleConfigurations
         {
             get
             {
