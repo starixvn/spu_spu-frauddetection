@@ -18,6 +18,7 @@
     var gridOptions = {
         customizeHeader: true,
         gridExpandHeight: 180,
+        marginRight: 0,
         showTree: true,
         showPager: true,
         showColumnsShowHide: false,

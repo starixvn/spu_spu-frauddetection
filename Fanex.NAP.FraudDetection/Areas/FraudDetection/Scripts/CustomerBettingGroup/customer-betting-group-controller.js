@@ -20,7 +20,7 @@
             var groupModel = customerBettingGroupModel.serverResult;
 
             DialogService.setDialogId("popup");
-            DialogService.openDialogContent(groupModel, "Add Group", {
+            DialogService.openDialogContent(groupModel, "Add Betting Group", {
                 width: '500px'
             });
         });
@@ -64,7 +64,7 @@
 
             if (result.IsSuccessful) {
                 setTimeout(function () {
-                    DialogService.closeDialog();
+                    //DialogService.closeDialog();
                 }, 3000);
 
                 customerBettingGroupController.queryCustomer(customer.GroupId);
@@ -144,9 +144,8 @@
             customerBettingGroupModel.getGroupById(groupId).then(function () {
                 var group = customerBettingGroupModel.group;
 
-                var groupName = group.Name + " - ";
-                var groupDesc = group.Description;
-                var title = "Add Customer: " + groupName + groupDesc;
+                var groupName = group.Name;
+                var title = "Add Customer: " + groupName;
 
                 DialogService.setDialogId("popup");
                 DialogService.openDialogContent(customerModal, title, {
@@ -205,7 +204,7 @@
             allowTruncate: true,
             pagerOption:
             {
-                itemsPerPage: 10,
+                itemsPerPage: 50,
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true
@@ -268,7 +267,7 @@
             showPager: true,
             pagerOption:
             {
-                itemsPerPage: 10,
+                itemsPerPage: 50,
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true

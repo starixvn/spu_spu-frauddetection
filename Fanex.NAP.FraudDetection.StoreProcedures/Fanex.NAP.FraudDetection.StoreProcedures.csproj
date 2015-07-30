@@ -56,6 +56,12 @@
     <Content Include="Case\dbo.FD_CaseInsert.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseUpdate.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseUpdateStatus.StoredProcedure.sql" />
+    <Content Include="Common\dbo.FD_CustomerWinlostGetByIds.sql" />
+    <Content Include="Common\dbo.FD_GetBalanceUpDay.sql" />
+    <Content Include="Common\dbo.FD_GetMatchInfoFromDB02.sql" />
+    <Content Include="Common\dbo.FD_GetMatchInfoFromDBArchive.sql" />
+    <Content Include="Common\dbo.FD_GetUsernameByCustId.sql" />
+    <Content Include="Common\dbo.FD_MemberMatchGet.sql" />
     <Content Include="Common\dbo.FD_WriteLog.StoredProcedure.sql" />
     <Content Include="ConfigsParams\dbo.FD_ConfigGetAll.StoredProcedure.sql" />
     <Content Include="ConfigsParams\dbo.FD_ConfigUpdate.StoredProcedure.sql" />
@@ -64,6 +70,7 @@
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupDeleteCustomer.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetAll.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetById.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetCustomerByName.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupInsert.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupInsertCustomer.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupUpdate.StoredProcedure.sql" />
