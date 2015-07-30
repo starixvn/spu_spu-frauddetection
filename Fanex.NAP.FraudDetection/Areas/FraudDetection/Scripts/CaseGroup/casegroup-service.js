@@ -1,4 +1,4 @@
-﻿var CaseGroupService = (function ($) {
+﻿var caseGroupService = (function ($) {
 
     var service = {};
 
@@ -48,7 +48,7 @@
     var bindEventOnElements = function() {
         $("#spu-dialog-frame #btn_addGroup").on("click", function (event) {
             event.preventDefault();
-            CaseGroupService.addCustomerGroupToCase();
+            caseGroupService.addCustomerGroupToCase();
         });
 
         $("#spu-dialog-frame #btn_Cancel").on("click", function () {
@@ -74,23 +74,11 @@
 
     var getAvailableCustomerGroups = function (caseId) {
 
-        var url = SPU.getAbsoluteUrl("CaseGroup/GetAvailableCustomerGroups?caseId=" + caseId);
+        caseGroupFactory.getAvailableCustomerGroups(caseId).success(function (data) {
+            var gridOptions = getGridOption(data);
+            $("#AvailableGroups").fanexGrid(gridOptions);
 
-        $.ajax({
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            cache: false,
-            url: url,
-            error: function (error) {
-                alert(error);
-            },
-            success: function (data) {
-                var gridOptions = getGridOption(data);
-                $("#AvailableGroups").fanexGrid(gridOptions);
-
-                bindEventOnElements();
-            }
+            bindEventOnElements();
         });
     };
 
@@ -110,41 +98,28 @@
     };
 
     service.addCustomerGroupToCase = function() {
-        var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase");
-
+        
         if (validateCustomerGroup() === false) {
             AlertServiceOnPopup.showAlert('Please select at least one customer group!');
             return;
         };
 
-        var param = {
+        var criteria = {
             caseId: caseId,
             groupIds: collectSelectedCustomerGroups().join(',')
         };
 
-        $.ajax({
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            data: JSON.stringify(param),
-            cache: false,
-            url: url,
-            error: function (error) {
-                alert(error);
-            },
-            success: function (data) {
-                if (data.IsSuccessful) {
-                    setTimeout(function () {
-                        DialogService.closeDialog();
-                    }, 3000);
+        caseGroupFactory.addCustomerGroupToCase(criteria).success(function (data) {
+            if (data.IsSuccessful) {
+                setTimeout(function () {
+                    DialogService.closeDialog();
+                }, 3000);
 
-                    CaseGroupGridService.getCustomerGroupByCase();
-                }
-
-                
-                AlertServiceOnPopup.showAlert(data);
+                caseDetailService.getCustomerGroupByCase();
             }
-        });
+
+            AlertServiceOnPopup.showAlert(data);
+        });       
     };
 
     service.init = function () {
@@ -157,5 +132,5 @@
 })(jQuery);
 
 (function ($) {
-    CaseGroupService.init();
+    caseGroupService.init();
 })(jQuery);

@@ -445,7 +445,6 @@
     <Content Include="Areas\FraudDetection\Scripts\Case\case-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Case\case-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Case\case-detail-service.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Case\case-group-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-factory.js" />
