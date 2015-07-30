@@ -16,7 +16,7 @@
 
         var searchParams = {
             PageSize: groupService._pageSize,
-            PageIndex: groupService._pageIndex
+            PageIndex: groupService._pageIndex + 1
         };
 
         groupFactory.getGroups(searchParams).success(function (result) {
@@ -109,9 +109,7 @@
         });
     };
 
-    function renderGroupTable(results) {
-        results = results.replace(/\n/g, "<\/br>");
-        results = FraudDetectionScripts.formatFanexGridStringResult(results);
+    function renderGroupTable(groupList) {
         groupService.gridOptions =
             {
                 columns: [
@@ -122,38 +120,46 @@
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
-                bodyRows: results[0].data,
+                bodyRows: createGroupTable(groupList.Groups),
                 hideYBackGroundScroller: true,
                 gridExpandHeight: 180,
                 allowTruncate: true,
                 enableHiddenColumns: false,
                 hiddenColumns: [1],
-                //numberOfFrozenColumn: 2,
                 showPager: true,
                 customPager: true,
                 pagerOption: {
                     itemsPerPage: groupService._pageSize,
                     currentPage: groupService._pageIndex,
-                    totalItem: results[1].totalItem,
+                    totalItem: groupList.TotalItem,
                     itemsPerPageArray: [10, 20, 50, 100, 500],
                     pagerSelectCallBack: reRenderAfterPaged
                 }
             };
 
-        for (var i = 0; i < groupService.gridOptions.bodyRows.length; i++) {
-            // Modify "Active" column
-            groupService.gridOptions.bodyRows[i].Columns[4].Row = i;
-            groupService.gridOptions.bodyRows[i].Columns[4].CustomCellRender = activeColumn;
+        $("#SearchResult").fanexGrid(groupService.gridOptions);
+    }
 
-            // Modify "Edit" column
-            groupService.gridOptions.bodyRows[i].Columns = FraudDetectionScripts.insertAtIndex(
-                    groupService.gridOptions.bodyRows[i].Columns,
-                    5,
-                    { Name: "Edit", Row: i });
-            groupService.gridOptions.bodyRows[i].Columns[5].CustomCellRender = editColumn;
+    /*
+    * Create the data for rendering.
+    */
+    function createGroupTable(groups) {
+        var rows = [];
+
+        for (var index = 0; index < groups.length; index++) {
+            var group = groups[index];
+            rows.push({
+                Columns: [
+                    { Name: "Row", Value: group.Row },
+                    { Name: "GroupName", Value: group.GroupName },
+                    { Name: "GroupDesc", Value: group.GroupDesc },
+                    { Name: "Active", Value: group, CustomCellRender: activeColumn },
+                    { Name: "Edit", Value: group.GroupId, CustomCellRender: editColumn }
+                ]
+            });
         }
 
-        $("#SearchResult").fanexGrid(groupService.gridOptions);
+        return rows;
     }
 
     function reRenderAfterPaged(pageIndex, itemsPerPage) {
@@ -175,9 +181,9 @@
     }
 
     function activeColumn(cell) {
-        var groupId = groupService.gridOptions.bodyRows[cell.Row].Columns[1].Value;
+        var groupId = cell.Value.GroupId;
 
-        if (cell.Value == "True") {
+        if (cell.Value.IsActive) {
             return "<img title='Deactivate this Group' class='ico-tick' alt='' onclick='groupService.editGroupStatus(this," + groupId + ")'/>";
         }
         else {
@@ -186,7 +192,7 @@
     }
 
     function editColumn(cell) {
-        var groupId = groupService.gridOptions.bodyRows[cell.Row].Columns[1].Value;
+        var groupId = cell.Value;
 
         return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='groupService.openPopupEditGroup(" + groupId + ")'/>";
     }

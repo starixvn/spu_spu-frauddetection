@@ -116,6 +116,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\FD.Lib.DTO.dll</HintPath>
     </Reference>
+    <Reference Include="FD.Lib.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\FD.Lib.Model.dll</HintPath>
+    </Reference>
     <Reference Include="FD.Lib.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\FD.Lib.Service.dll</HintPath>
@@ -466,6 +470,7 @@
     <Content Include="Dependencies\FD.Lib.Criteria.dll" />
     <Content Include="Dependencies\FD.Lib.DataAccess.dll" />
     <Content Include="Dependencies\FD.Lib.DTO.dll" />
+    <Content Include="Dependencies\FD.Lib.Model.dll" />
     <Content Include="Dependencies\FD.Lib.Service.dll" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />

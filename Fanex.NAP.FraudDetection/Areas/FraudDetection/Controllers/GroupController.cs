@@ -44,12 +44,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [Compress]
         public JsonResult GetGroupList(GroupGetAllCriteria criteria)
         {
-            criteria.PageIndex++;
+            var result = _groupService.GetGroups(criteria);
 
-            var dataReader = _groupService.GetGroups(criteria);
-            var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
-
-            return Json(results, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

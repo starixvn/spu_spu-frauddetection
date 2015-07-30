@@ -14,7 +14,7 @@
 
         var searchParams = {
             PageSize: caseService._pageSize,
-            PageIndex: caseService._pageIndex
+            PageIndex: caseService._pageIndex + 1
         };
 
         caseFactory.getCases(searchParams).success(function (result) {
@@ -110,9 +110,7 @@
         });
     };
 
-    function renderCaseTable(result) {
-        result = result.replace(/\n/g, "<\/br>");
-        result = FraudDetectionScripts.formatFanexGridStringResult(result);
+    function renderCaseTable(caseList) {
         caseService.gridOptions =
             {
                 columns: [
@@ -123,7 +121,7 @@
                     { HeaderText: "Active", Width: 50, Name: "Active", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
-                bodyRows: result[0].data,
+                bodyRows: createCaseTable(caseList.Cases),
                 hideYBackGroundScroller: true,
                 gridExpandHeight: 180,
                 allowTruncate: true,
@@ -134,31 +132,36 @@
                 pagerOption: {
                     itemsPerPage: caseService._pageSize,
                     currentPage: caseService._pageIndex,
-                    totalItem: result[1].totalItem,
+                    totalItem: caseList.TotalItem,
                     itemsPerPageArray: [10, 20, 50, 100, 500],
                     pagerSelectCallBack: reRenderAfterPaged
                 }
             };
 
-        for (var i = 0; i < caseService.gridOptions.bodyRows.length; i++) {
-            // Modify "Case Name" column
-            caseService.gridOptions.bodyRows[i].Columns[2].Row = i;
-            caseService.gridOptions.bodyRows[i].Columns[2].CustomCellRender = caseNameColumn;
-
-            // Modify "Active" column
-            caseService.gridOptions.bodyRows[i].Columns[4].Row = i;
-            caseService.gridOptions.bodyRows[i].Columns[4].CustomCellRender = activeColumn;
-
-            // Modify "Action" column
-            caseService.gridOptions.bodyRows[i].Columns = FraudDetectionScripts.insertAtIndex(
-                    caseService.gridOptions.bodyRows[i].Columns,
-                    5,
-                    { Name: "Edit", Row: i });
-            caseService.gridOptions.bodyRows[i].Columns[5].CustomCellRender = editColumn;
-        }
-
         $("#SearchResult").fanexGrid(caseService.gridOptions);
     };
+
+    /*
+    * Create the data for rendering.
+    */
+    function createCaseTable(cases) {
+        var rows = [];
+
+        for (var index = 0; index < cases.length; index++) {
+            var fraudCase = cases[index];
+            rows.push({
+                Columns: [
+                    { Name: "Row", Value: fraudCase.Row },
+                    { Name: "CaseName", Value: fraudCase, CustomCellRender: caseNameColumn },
+                    { Name: "CaseDesc", Value: fraudCase.CaseDesc },
+                    { Name: "Active", Value: fraudCase, CustomCellRender: activeColumn },
+                    { Name: "Edit", Value: fraudCase.CaseId, CustomCellRender: editColumn }
+                ]
+            });
+        }
+
+        return rows;
+    }
 
     function reRenderAfterPaged(pageIndex, itemsPerPage) {
         if (itemsPerPage != $('#PageSize').val()) {
@@ -179,17 +182,17 @@
     }
 
     function caseNameColumn(cell) {
-        var caseId = caseService.gridOptions.bodyRows[cell.Row].Columns[1].Value;
-        var caseName = caseService.gridOptions.bodyRows[cell.Row].Columns[2].Value;
+        var caseId = cell.Value.CaseId;
+        var caseName = cell.Value.CaseName;
 
         var url = "Case/GetCaseDetail?caseId=" + caseId;
         return "<a href=" + url + ">" + caseName + "</a>";
     }
 
     function activeColumn(cell) {
-        var caseId = caseService.gridOptions.bodyRows[cell.Row].Columns[1].Value;
+        var caseId = cell.Value.CaseId;
 
-        if (cell.Value == "True") {
+        if (cell.Value.IsActive) {
             return "<img title='Deactivate this case' class='ico-tick' alt='' onclick='caseService.editCaseStatus(this," + caseId + ")'/>";
         }
         else {
@@ -198,7 +201,7 @@
     }
 
     function editColumn(cell) {
-        var caseId = caseService.gridOptions.bodyRows[cell.Row].Columns[1].Value;
+        var caseId = cell.Value;
 
         return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='caseService.editCaseInfo(" + caseId + ")'/>";
     }

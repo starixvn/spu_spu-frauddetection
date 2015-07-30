@@ -49,12 +49,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [Compress]
         public JsonResult GetCaseList(CaseGetAllCriteria criteria)
         {
-            criteria.PageIndex++;
+            var cases = _caseService.GetCases(criteria);
 
-            var dataReader = _caseService.GetCases(criteria);
-            var results = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
-
-            return Json(results, JsonRequestBehavior.AllowGet);
+            return Json(cases, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
