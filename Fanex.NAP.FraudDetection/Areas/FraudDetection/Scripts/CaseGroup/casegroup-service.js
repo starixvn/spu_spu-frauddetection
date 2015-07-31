@@ -32,7 +32,7 @@
             showNumberColumn: true,
             showPager: true,
             fullHeight: false,
-            gridHeight: 400,
+            gridExpandHeight: 400,
             allowTruncate: true,
             pagerOption: {
                 itemsPerPage: 10,
