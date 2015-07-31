@@ -16,4 +16,9 @@
     $("#btn_Cancel").click(function () {
         DialogService.closeDialog();
     });
+
+    $("form").submit(function () {
+        return false;
+    });
+
 })();
