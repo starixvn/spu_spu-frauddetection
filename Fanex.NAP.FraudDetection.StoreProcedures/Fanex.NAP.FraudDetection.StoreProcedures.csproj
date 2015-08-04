@@ -56,6 +56,7 @@
     <Content Include="Case\dbo.FD_CaseInsert.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseUpdate.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseUpdateStatus.StoredProcedure.sql" />
+    <Content Include="Common\dbo.FD_SportBettypeMatrix_Get.sql" />
     <Content Include="Common\dbo.FD_CustomerWinlostGetByIds.sql" />
     <Content Include="Common\dbo.FD_GetBalanceUpDay.sql" />
     <Content Include="Common\dbo.FD_GetMatchInfoFromDB02.sql" />
@@ -88,7 +89,7 @@
     <Content Include="MailMaster\dbo.FD_MailMasterInsert.StoredProcedure.sql" />
     <Content Include="MailMaster\dbo.FD_MailMasterUpdate.StoredProcedure.sql" />
     <Content Include="MailMaster\dbo.FD_MailMasterUpdateStatus.StoredProcedure.sql" />
-    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciouCustomerGetAll.StoredProcedure.sql" />
+    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetAll.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetByGroup.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetCount.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerReportGetAll.StoredProcedure.sql" />
