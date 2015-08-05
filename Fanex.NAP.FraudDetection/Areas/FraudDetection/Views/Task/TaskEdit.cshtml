@@ -310,17 +310,17 @@
                             configIdsForEachRule += rule.ConfigId + "#";
                         }
                         configIdsForEachRule = configIdsForEachRule.Remove(configIdsForEachRule.Length - 1);
-                            <tr id="@ruleRowName">
-                                <td>
-                                    <input id="cb_@ruleRowName" type="checkbox">
-                                </td>
-                                <td style="width: 610px;">
-                                    <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
-                                </td>
-                                <td>
-                                    <img alt="" onclick="taskService.RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;">
-                                </td>
-                            </tr>
+                                    <tr id="@ruleRowName">
+                                        <td>
+                                            <input id="cb_@ruleRowName" type="checkbox">
+                                        </td>
+                                        <td style="width: 610px;">
+                                            <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
+                                        </td>
+                                        <td>
+                                            <img alt="" onclick="taskService.RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;">
+                                        </td>
+                                    </tr>
                         ruleCounter++;
                     }
 
@@ -360,6 +360,26 @@
             Perform</h3>
         <div>
             <table class="table-popup font-size-small">
+                @{
+                    var selectedGroupId = 0;
+                    var selectedMailId = 0;
+                    var targetIds = Model.TaskInformation.NextActionTargetIdList.Split(',');
+                    if (Model.TaskInformation.NextActionIdList.Contains(','))
+                    {
+                        selectedGroupId = int.Parse(targetIds[0]);
+                        selectedMailId = int.Parse(targetIds[1]);
+                    }
+                    else
+                    {
+                        if (Model.TaskInformation.NextActionIdList == "1")
+                        {
+                            selectedGroupId = int.Parse(targetIds[0]);
+                        }
+                        else
+                        {
+                            selectedMailId = int.Parse(targetIds[0]);
+                        }
+                    }
                 <tr>
                     <td>
                         <div>
@@ -371,7 +391,7 @@
                         <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;">
                             @foreach (var group in Model.GroupList)
                             {
-                                <option value="@group.GroupId" @(Model.TaskInformation.NextActionTargetIdList.Contains(group.GroupId.ToString()) ? "selected" : "")>@group.GroupName</option>
+                                <option value="@group.GroupId" @(selectedGroupId == group.GroupId ? "selected" : "")>@group.GroupName</option>
                             }
                         </select>
                     </td>
@@ -387,11 +407,12 @@
                         <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
                             @foreach (var mailMaster in Model.MaiMasterList)
                             {
-                                <option value="@mailMaster.MailId" @(Model.TaskInformation.NextActionTargetIdList.Contains(mailMaster.MailId.ToString()) ? "selected" : "")>@mailMaster.MailCode</option>
+                                <option value="@mailMaster.MailId" @(selectedMailId == mailMaster.MailId ? "selected" : "")>@mailMaster.MailCode</option>
                             }
                         </select>
                     </td>
                 </tr>
+                }
             </table>
         </div>
     </div>
