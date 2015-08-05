@@ -760,31 +760,40 @@
     </Content>
     <Content Include="WebConfigs\Web.UAT.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="WebConfigs\Web.PRO.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="WebConfigs\Web.AppSettings.PRO.config">
+    <Content Include="WebConfigs\Web.AppSettings.PRO.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="WebConfigs\Web.AppSettings.UAT.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebConfigs\Web.AppSettings.UAT.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="WebConfigs\Web.AppSettings.LOCAL.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebConfigs\Web.AppSettings.LOCAL.config">
       <SubType>Designer</SubType>
-    </None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WebConfigs\Web.LOCAL.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="WebConfigs\Web.ConnectionString.PRO.config">
+    <Content Include="WebConfigs\Web.ConnectionString.PRO.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="WebConfigs\Web.ConnectionString.UAT.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebConfigs\Web.ConnectionString.UAT.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="WebConfigs\Web.ConnectionString.LOCAL.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebConfigs\Web.ConnectionString.LOCAL.config">
       <SubType>Designer</SubType>
-    </None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\UserLogin\Models\" />
