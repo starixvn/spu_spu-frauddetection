@@ -18,6 +18,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Criteria.Config;
     using FD.Lib.Criteria.Event;
     using FD.Lib.Criteria.MailMaster;
+    using FD.Lib.Criteria.Parameter;
     using FD.Lib.Criteria.Task;
     using FD.Lib.DTO;
     using FD.Lib.QueryGenerator;
@@ -70,10 +71,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return new JsonResult { Data = new { IsSuccessful = false, Message = dataCheckResults } };
             }
 
+            var configService = new ConfigurationsService();
+            var matchParams =
+                configService.GetParameters(new ParameterGetAllCriteria()).Where(t => t.ParamName == "ChunkOfMatches");
+            var matchSize = matchParams.FirstOrDefault() != null ? matchParams.FirstOrDefault().ParamValue : 10;
+
             var queryGeneratorFactory = new QueryGeneratorFactory(
                     criteria.CaseId,
                     criteria,
-                    int.Parse(ConfigurationManager.AppSettings["ChunkOfMatchesToScan"]));
+                    matchSize);
             criteria.TaskPreconditions = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.PreCondition).GenerateQuery();
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();
 
@@ -117,10 +123,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return new JsonResult { Data = new { IsSuccessful = false, Message = dataCheckResults } };
             }
 
+            var configService = new ConfigurationsService();
+            var matchParams =
+                configService.GetParameters(new ParameterGetAllCriteria()).Where(t => t.ParamName == "ChunkOfMatches");
+            var matchSize = matchParams.FirstOrDefault() != null ? matchParams.FirstOrDefault().ParamValue : 10;
+
             var queryGeneratorFactory = new QueryGeneratorFactory(
                     int.Parse(caseId),
                     criteria,
-                    int.Parse(ConfigurationManager.AppSettings["ChunkOfMatchesToScan"]));
+                    matchSize);
             criteria.TaskPreconditions = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.PreCondition).GenerateQuery();
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();
             
