@@ -232,7 +232,7 @@
         caseFactory.addCustomerGroupToCase(caseId).success(function (response) {
             DialogService.openDialogContent(response, "Add Customer Group To Case", {
                 width: 580,
-                maxHeight: 400
+                maxHeight: 450
             });
         });
     };
