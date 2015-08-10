@@ -54,7 +54,7 @@
         $('#preconditionConfigControlDatetimePicker').datepicker();
 
         $("#btn_Cancel").click(function () {
-            window.location.href = '/Case/GetCaseDetail?caseId=' + $("#caseid").text();
+            window.history.back();
         });
 
         $("#btn_AddRule").click(function () {

@@ -17,7 +17,7 @@
     });
 
     $("#btn_cancelMail").click(function () {
-        window.location.href = '/MailMaster';
+        window.history.back();
     });
 
     $("#btn_editMail").click(function () {
