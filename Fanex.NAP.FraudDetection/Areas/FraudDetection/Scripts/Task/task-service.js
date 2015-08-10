@@ -54,7 +54,8 @@
         $('#preconditionConfigControlDatetimePicker').datepicker();
 
         $("#btn_Cancel").click(function () {
-            window.history.back();
+            var url = "/Case/GetCaseDetail?caseId=" + $("#caseid").text();
+            window.location.href = window.location.href.split('/Task', 1)[0].toString() + url;
         });
 
         $("#btn_AddRule").click(function () {
@@ -110,9 +111,8 @@
 
                 taskFactory.addTask(param).success(function (response) {
                     if (response.IsSuccessful) {
-                        // redirect to case detail page
-                        var url = "Case/GetCaseDetail?caseId=" + $("#caseid").text();
-                        window.location.replace(url);
+                        var url = "/Case/GetCaseDetail?caseId=" + $("#caseid").text();
+                        window.location.href = window.location.href.split('/Task', 1)[0].toString() + url;
                     } else {
                         AlertService.showAlert(response);
                     }

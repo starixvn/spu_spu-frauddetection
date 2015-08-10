@@ -2,6 +2,8 @@
     "use strict";
     var mailMasterService = {};
 
+    mailMasterService.mailUlr = '';
+
     mailMasterService.queryMail = function () {
         mailMasterFactory.getMails().success(function (result) {
             renderMailTable(result);
@@ -70,7 +72,7 @@
     };
 
     mailMasterService.updateMail = function (mailId) {
-        window.location.href = '/MailMaster/EditMail?mailId=' + mailId;
+        window.location.href = window.location.href.toString() + '/EditMail?mailId=' + mailId;
     };
 
     mailMasterService.showAction = function (mailId) {
@@ -103,7 +105,7 @@
     mailMasterService.addMail = function (mail) {
         mailMasterFactory.addMail(mail).success(function (result) {
             if (result.IsSuccessful) {
-                window.location.href = '/MailMaster';
+                window.location.href = window.location.href.split('/AddMail', 1)[0].toString();
             } else {
                 AlertService.showAlert(result);
             }
@@ -113,7 +115,7 @@
     mailMasterService.editMail = function (mail) {
         mailMasterFactory.editMail(mail).success(function (result) {
             if (result.IsSuccessful) {
-                window.location.href = '/MailMaster';
+                window.location.href = window.location.href.split('/EditMail', 1)[0].toString();
             } else {
                 AlertService.showAlert(result);
             }
