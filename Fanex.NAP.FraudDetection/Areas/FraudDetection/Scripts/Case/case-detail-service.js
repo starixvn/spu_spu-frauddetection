@@ -27,7 +27,8 @@
     };
 
     caseDetailService.editTask = function (taskId) {
-        window.location.href = "/Task/EditTask" + "?taskId=" + taskId;
+        var url = "/Task/EditTask" + "?taskId=" + taskId;
+        window.location.href = window.location.href.split('/Case', 1)[0].toString() + url;
     };
 
     /*

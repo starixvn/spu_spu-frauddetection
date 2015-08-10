@@ -9,7 +9,6 @@
     caseService._pageSize = 50;
 
     caseService.Search = function () {
-        debugger;
         $('#PageSize').val(caseService._pageSize);
         $('#PageIndex').val(caseService._pageIndex);
 
