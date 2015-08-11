@@ -359,7 +359,8 @@
 
         var blockOfTableRow = "<tr id='" + tableName + rowNumber + "'><td><input type='checkbox' id='cb_" + tableName + rowNumber + "' /></td>";
         blockOfTableRow += "<td style='width: 610px;'><div id='div_" + tableName + rowNumber + "' data-configid='" + configIds + "' data-rawcontent='" + ruleString + "' data-formattedcontent='" + formattedRuleString + "'>" + ruleString + "</div></td>";
-        blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='/Areas/FraudDetection/App_Themes/Images/Delete.gif' onclick='taskService.RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
+        var url = SPU.getAbsoluteUrl('Areas/FraudDetection/App_Themes/Images/Delete.gif');
+        blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='"+ url + "' onclick='taskService.RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
         blockOfTableRow = blockOfTableRow.replace(/@/g, '"');
 
         var targetObject = "#" + tableName + " tr:last";
