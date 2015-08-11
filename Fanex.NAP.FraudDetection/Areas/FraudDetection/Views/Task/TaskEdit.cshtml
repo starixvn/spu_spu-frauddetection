@@ -193,7 +193,7 @@
                                     <div id="div_@rowName" data-formattedcontent="@configsFormatter[i]" data-rawcontent="@configsOriginal[i]" data-configid="@configIdsForEachPrecond">@configsOriginal[i].Replace("#", " ")</div>
                                 </td>
                                 <td>
-                                    <img alt="" onclick="taskService.RemoveOneRuleFromTable('preconditionTable',@counter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;">
+                                    <img alt="" onclick="taskService.RemoveOneRuleFromTable('preconditionTable',@counter)" src='@Url.Content("~/Areas/FraudDetection/App_Themes/Images/Delete.gif")' style="cursor: pointer; cursor: hand;">
                                 </td>
                             </tr>
                         counter++;
