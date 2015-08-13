@@ -15,6 +15,12 @@
     <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />
 }
 
+<style type="text/css">
+    .favorite, .bettype, .match, .league {
+        display: none;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-5">
         <h4>
@@ -23,7 +29,7 @@
         <table class="table table-bordered">
             <tr>
                 <td class="text-right font-bold">Event</td>
-                <td>@Html.Raw(string.Format("<b>{0}</b> vs <b>{1}</b>", Model.Summary.HomeName, Model.Summary.AwayName))</td>
+                <td>@Html.Raw(string.Format("<b>{0}</b> -vs- <b>{1}</b>", Model.Summary.HomeName, Model.Summary.AwayName))</td>
             </tr>
             <tr>
                 <td class="text-right font-bold"># Members</td>
@@ -36,8 +42,6 @@
         </table>
     </div>
 </div>
-
-<div class="newline"> &nbsp;</div>
 
 <div id="fraudCaseDetailReportId" class="freegrid content-grid"></div>
 

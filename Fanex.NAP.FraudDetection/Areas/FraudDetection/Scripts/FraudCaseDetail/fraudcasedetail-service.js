@@ -19,7 +19,7 @@
                     { Name: "Stake", CustomCellRender: function () { return element.Stake; } },
                     { Name: "WinLoss", Value: element.WinLoss },
                     { Name: "Status", Value: element.Status },
-                    { Name: "IP", Value: element.IP },
+                    { Name: "IP", Value: element.IP }
                 ]
             });
         });
@@ -33,11 +33,11 @@
         var gridOptions = {
             columns: [
                 { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Member", Width: 150, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Member", Width: 100, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet Type", Width: 80, Name: "BetType", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Choice", Width: 300, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Choice", Width: 200, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Score", Width: 70, Name: "Score", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Odds", Width: 70, Name: "Odds", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Stake", Width: 100, Name: "Stake", HeaderAlign: "center", CellAlign: "right" },
@@ -54,7 +54,7 @@
             bodyRows: getBodyRows(data),
             showNumberColumn: true,
             showPager: true,
-            fullHeight: false,
+            fullHeight: true,
             gridExpandHeight: 400,
             allowTruncate: true,
             pagerOption: {
