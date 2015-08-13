@@ -22,6 +22,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,20 +46,20 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="BundleTransformer.Core, Version=1.9.52.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+    <Reference Include="BundleTransformer.Core, Version=1.9.69.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\BundleTransformer.Core.1.9.52\lib\net40\BundleTransformer.Core.dll</HintPath>
+      <HintPath>..\packages\BundleTransformer.Core.1.9.69\lib\net40\BundleTransformer.Core.dll</HintPath>
     </Reference>
-    <Reference Include="BundleTransformer.Less, Version=1.9.54.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+    <Reference Include="BundleTransformer.Less, Version=1.9.69.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\BundleTransformer.Less.1.9.54\lib\net40\BundleTransformer.Less.dll</HintPath>
+      <HintPath>..\packages\BundleTransformer.Less.1.9.69\lib\net40\BundleTransformer.Less.dll</HintPath>
     </Reference>
     <Reference Include="ClearScript, Version=5.4.1.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.2.4\lib\net40\ClearScript.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Couchbase">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
@@ -66,8 +68,8 @@
       <HintPath>..\packages\dotless.1.5.0\lib\dotless.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
@@ -84,8 +86,9 @@
     <Reference Include="Fanex.Common">
       <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Data">
-      <HintPath>..\packages\Fanex.Data.0.5.404.62\lib\net40\Fanex.Data.dll</HintPath>
+    <Reference Include="Fanex.Data, Version=0.5.404.63, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging">
       <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
@@ -93,11 +96,12 @@
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.MailDelivery.Client">
-      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+    <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core">
-      <HintPath>..\packages\Fanex.NAP.Core.1.0.0.2\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.NAP.Core.2.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
@@ -196,11 +200,11 @@
     <Reference Include="NPOI">
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
     </Reference>
-    <Reference Include="Quartz">
-      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Quartz.dll</HintPath>
+    <Reference Include="Quartz, Version=2.2.4.400, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\Quartz.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1000,7 +1004,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52128</DevelopmentServerPort>
+          <DevelopmentServerPort>53863</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:52129/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
@@ -1012,6 +1016,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

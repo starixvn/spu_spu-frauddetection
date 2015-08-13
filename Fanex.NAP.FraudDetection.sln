@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection", "Fanex.NAP.FraudDetection\Fanex.NAP.FraudDetection.csproj", "{0970FB24-9D16-4C86-A170-C2A2156C97EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.Model", "Fanex.NAP.FraudDetection.Model\Fanex.NAP.FraudDetection.Model.csproj", "{F07AB61E-FC65-4292-A968-F124C5A28F30}"
@@ -13,6 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6CB0135A-AE21-4955-A9D8-A3C448DC09CA}"
 	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
@@ -27,6 +28,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.StoreProcedures", "Fanex.NAP.FraudDetection.StoreProcedures\Fanex.NAP.FraudDetection.StoreProcedures.csproj", "{BFE3A017-2B3F-4F1D-83E4-BEA4356CE9D3}"
 EndProject
 Global
+	GlobalSection(JSLint) = preSolution
+		SolutionConfigurationLocation = JSLintOptions.xml
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -89,8 +93,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(JSLint) = preSolution
-		SolutionConfigurationLocation = JSLintOptions.xml
 	EndGlobalSection
 EndGlobal
