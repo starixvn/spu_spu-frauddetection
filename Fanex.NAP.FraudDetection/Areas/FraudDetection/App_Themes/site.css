@@ -75,10 +75,6 @@ select.request
     width: 16px;
 }
 
-.btn-action:hover
-{
-}
-
 .data .action-wrp.active .actions {
     display: block;
 }

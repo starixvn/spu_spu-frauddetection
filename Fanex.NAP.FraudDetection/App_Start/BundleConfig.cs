@@ -82,6 +82,10 @@ namespace Fanex.NAP.FraudDetection.AppStart
               "~/Areas/FraudDetection/Scripts/Reports/customer-report-factory.js",
               "~/Areas/FraudDetection/Scripts/Reports/customer-report-service.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/App/MatchMonitoringReport").Include(
+              "~/Areas/FraudDetection/Scripts/Reports/matchmonitoring-report-factory.js",
+              "~/Areas/FraudDetection/Scripts/Reports/matchmonitoring-report-service.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/App/Task").Include(
              "~/Areas/FraudDetection/Scripts/Task/task-factory.js",
              "~/Areas/FraudDetection/Scripts/Task/task-service.js"));

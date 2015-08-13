@@ -291,8 +291,10 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\basic-icon.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="Areas\FraudDetection\Controllers\FraudCaseDetailController.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\MatchMonitoringController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\SuspiciousCustomerController.cs" />
@@ -334,7 +336,6 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\arrow-button.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\arrow.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\asc.png" />
-    <Content Include="Areas\FraudDetection\App_Themes\Images\basic-icon.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\bg-demo-docs-param.gif" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\bg.jpg" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\bg.png" />
@@ -460,6 +461,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\matchmonitoring.css" />
     <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
     <Content Include="Areas\FraudDetection\Scripts\FraudCaseDetail\fraudcasedetail-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\FraudCaseDetail\fraudcasedetail-service.js" />
@@ -481,6 +483,9 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-edit.js" />
@@ -633,6 +638,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\FraudDetection\Views\FraudCaseDetail\Index.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Reports\MatchMonitoringReport.cshtml" />
     <None Include="Content\jquery-ui\base\all.css.nk" />
     <Content Include="Content\jquery-ui\base\autocomplete.css" />
     <None Include="Content\jquery-ui\base\base.css.bk" />

@@ -54,6 +54,10 @@
     <Setting Key="FD_SuspiciousCustomerReportGetAll" SpName="FD_SuspiciousCustomerReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_SuspiciousCustomerGetByGroup" SpName="FD_SuspiciousCustomerGetByGroup" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_SuspiciousCustomerGetCount" SpName="FD_SuspiciousCustomerGetCount" DbName="DBFD.FraudDetection.bodbSPUNet" />
+
+    <Setting Key="FD_MatchMonitoringReportGetAll" SpName="FD_MatchMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_LeagueGetAllByDate" SpName="FD_LeagueGetAllByDate" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="FD_Suspicious_Customer">

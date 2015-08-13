@@ -1,0 +1,21 @@
+﻿.ico-notscanned {
+    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -36px -137px transparent;    
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.ico-scannednosuspicious {
+    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -19px -138px transparent;    
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.ico-scannedhassuspicious {
+    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -67px -59px transparent;    
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+}
