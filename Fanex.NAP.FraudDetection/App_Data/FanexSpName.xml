@@ -89,5 +89,9 @@
     <Setting Key="FD_CustomerGroupInsert" SpName="FD_CustomerGroupInsert"
              DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
+
+  <Function Name="FD_FraudCaseDetails">
+    <Setting Key="FD_FraudCaseDetailGetByMatchId" SpName="FD_FraudCaseDetailGetByMatchId" DbName="DBFD.FraudDetection.bodbSPUNet" />
+  </Function>
   
 </Functions>
