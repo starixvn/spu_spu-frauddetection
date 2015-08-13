@@ -1,0 +1,256 @@
+﻿div.fn-rs-content-header
+{
+    border: 1px solid #cbc9ca;
+    padding-right: 15px;
+}
+div.fn-rs-content-scroll
+{
+    max-height: 740px;
+    overflow-y: scroll;
+    -ms-overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-x: hidden;
+    width: 100%;
+    max-height: 780px;
+}
+table
+{
+    font-family: Tahoma,Arial,Helvetica,sans-serif;
+    font-size: 11px;
+}
+table.popup
+{
+    min-width: 650px !important;
+}
+table.fn-rs
+{
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 1000px;
+    line-height: 17px;
+    text-align: center;
+}
+table.fn-rs thead th
+{
+    border-right: 1px solid #cbc9ca;
+    font-weight: normal;
+    vertical-align: middle;
+    text-align: center;
+    color: #FFF !important;
+}
+table.fn-rs thead th.cl-title
+{
+    color: #1d3968;
+    background: #ccc;
+}
+table.fn-rs .header, table.fn-rs .sub-header
+{
+    color: #fff;
+    background-color: #0d94c3;
+}
+table.fn-rs tbody tr.even
+{
+    background-color: #e5ebf2;
+}
+table.fn-rs tbody td
+{
+    border: solid 1px #cbc9ca;
+    padding: 1px;
+    vertical-align: middle;
+}
+table.fn-rs tbody .cl-league
+{
+    color: #1d3968;
+    background: #ccc;
+    vertical-align: middle;
+    border: 0;
+    font-weight: bold;
+    text-align: left;
+    line-height: 7px;
+    height: 21px;
+}
+table.fn-rs tbody .cl-match
+{
+    text-align: left;
+    font-weight: normal;
+    font-size: 12px;
+    padding-left: 3px;
+}
+table.fn-rs tbody .cl-match.home
+{
+    color: #6678e0;
+}
+table.fn-rs tbody .cl-match.away
+{
+    color: #008d95;
+}
+table.fn-rs tbody .cl-match div
+{
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+}
+table.fn-rs tbody .cl-match div.first-goal
+{
+    background: url("images/goal-icon.png") no-repeat -9px -32px;
+}
+table.fn-rs tbody .cl-match div.last-goal
+{
+    background: url("images/goal-icon.png") no-repeat -9px -16px;
+}
+table.fn-rs tbody .cl-match div.first-half-first-goal
+{
+    background: url("images/goal-icon.png") no-repeat -9px -65px;
+}
+table.fn-rs tbody .cl-match div.first-half-last-goal
+{
+    background: url("images/goal-icon.png") no-repeat no-repeat -9px -83px;
+}
+table.fn-rs tbody .cl-match div.home
+{
+    color: #6678e0;
+}
+table.fn-rs tbody .cl-match div.away
+{
+    color: #008d95;
+}
+table.fn-rs tbody .cl-match div.home, table.fn-rs tbody .cl-match div.away
+{
+    width: 100%;
+    display: inline-block;
+    margin-top: 10px;
+}
+table.fn-rs tbody .cl-ht-score
+{
+    color: #0065FE;
+}
+table.fn-rs tbody .cl-f-score
+{
+    color: #fd537d;
+}
+table.fn-rs .cl-m-code
+{
+    width: 112px;
+}
+table.fn-rs .cl-m-code .m-code
+{
+    color: #599ced;
+}
+table.fn-rs .cl-ko-time
+{
+    width: 90px;
+}
+table.fn-rs .cl-match
+{
+    min-width: 82px;
+}
+table.fn-rs .cl-s, table.fn-rs .cl-ot, table.fn-rs .cl-ei
+{
+    width: 40px;
+}
+table.fn-rs .cl-totalgames, table.fn-rs .cl-totalpoint
+{
+    width: 42px;
+    color: #6877b4;
+}
+table.fn-rs .cl-totalset
+{
+    width: 38px;
+    color: #fd537d;
+}
+table.fn-rs .cl-ht-score, table.fn-rs .cl-f-score
+{
+    width: 38px;
+}
+table.fn-rs .cl-status
+{
+    text-transform: capitalize;
+    width: 94px;
+}
+table.fn-rs .cl-status .detail-link
+{
+    color: #0273FF;
+    cursor: pointer;
+    text-decoration: none;
+}
+table.fn-rs .cl-status .detail-link:hover
+{
+    color: #D2592D;
+}
+table.number-game
+{
+}
+table.number-game .cl-result
+{
+    width: 150px;
+}
+table.number-game .cl-warrior, table.number-game .cl-lblOEFT, table.number-game .cl-lbl1stball, table.number-game .cl-lastball
+{
+    width: 70px;
+}
+table.number-game span.ball
+{
+    padding: 5px 5px;
+    background: -moz-linear-gradient(top, #f2f2f2 0%, #fff 25%, #fff 50%, #fff 75%, #d1cdcd);
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), color-stop(0.25, #fff), color-stop(0.5, #fff), color-stop(0.75, #fff), to(#d1cdcd));
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    border: 1px solid #5c5757;
+    text-shadow: 1px 0px 0px rgba(0, 0, 0, 0.4),1px 1px 0px rgba(255, 255, 255, 0.4);
+    width: 27px !important;
+    display: inline-block;
+    text-align: center;
+    margin-left: 2px;
+}
+table.casino
+{
+}
+table.casino .cl-result
+{
+    width: 334px;
+}
+table.racing
+{
+}
+table.racing .cl-race
+{
+    width: 180px;
+}
+table.racing .cl-result
+{
+    font-weight: bold;
+    text-align: left;
+}
+table.racing .cl-win, table.racing .cl-place
+{
+    width: 100px;
+}
+table.racing .cl-status
+{
+    width: 150px;
+}
+table.racing .cl-status .official
+{
+    color: red;
+    font-weight: bold;
+}
+table.racing .cl-race-name
+{
+    width: 83px;
+}
+table.racing .cl-placing
+{
+    width: 50px;
+}
+table.racing .cl-engine-no
+{
+    width: 48px;
+}
+table .row-noinfo
+{
+    border: 1px solid #cbc9ca;
+    border-top: 0;
+    text-align: center;
+    padding: 4px;
+}

@@ -1,0 +1,13 @@
+﻿/* File Created: March 10, 2015 */
+body {
+    position: relative;
+}
+.popup .container-fluid
+{
+    margin: 0 0;
+}
+    
+.underdog, span.stake, span.handicap
+{
+    font-weight: bold;
+}

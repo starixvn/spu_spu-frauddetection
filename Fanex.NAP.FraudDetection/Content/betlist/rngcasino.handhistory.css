@@ -1,0 +1,69 @@
+﻿div.history-link
+{
+    cursor: pointer;
+    background: url(Images/undo.png) no-repeat scroll center #FFEFDE;
+    width: 22px;
+    height: 22px;
+    float: left;
+    margin-right: 10px;
+    margin-top: -2px;
+    float: right;
+}
+
+.detail-header-row
+{
+    background-color: #A3D1E1;
+    text-align: center;
+}
+.detail-content-row
+{
+    text-align: center;
+}
+.player-total-row
+{
+    background-color: #F4E8D4;
+    text-align: center;
+}
+.casino-detail-table tr td
+{
+    border-left: 1px solid #A3D1E1;
+    border-top: 1px solid #A3D1E1;
+    text-align: center;
+    padding: 2px;
+    font-size: 14px;
+}
+.game-type-text
+{
+    color: #666666;
+    font-weight: bold;
+}
+.casino-detail-table
+{
+    border-right: 1px solid #A3D1E1;
+    border-bottom: 1px solid #A3D1E1;
+}
+.align-right
+{
+    text-align: right !important;
+}
+.align-left
+{
+    text-align: left !important;
+}
+.negative
+{
+    color: #ff0000 !important;
+}
+a.hand-history-detail-link
+{
+    font-weight: normal !important;
+    color: #1E1EEB !important;
+}
+.ui-jqgrid tr.jqgrow td
+{
+    word-wrap: break-word; /* IE 5.5+ and CSS3 */
+    white-space: pre-wrap; /* CSS3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+}

@@ -89,6 +89,7 @@
     <Content Include="MailMaster\dbo.FD_MailMasterInsert.StoredProcedure.sql" />
     <Content Include="MailMaster\dbo.FD_MailMasterUpdate.StoredProcedure.sql" />
     <Content Include="MailMaster\dbo.FD_MailMasterUpdateStatus.StoredProcedure.sql" />
+    <Content Include="Reports\FraudCaseDetail\dbo.FD_FraudCaseDetailGetByMatchId.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetAll.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetByGroup.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetCount.StoredProcedure.sql" />

@@ -1,0 +1,555 @@
+﻿/* Common */
+html
+{
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    margin: 0;
+    cursor: default;
+}
+body
+{
+    background: #ffffff fixed;
+    padding: 2px;
+    margin: 0;
+    min-width: 0 !important;
+}
+select, input[type=text]
+{
+    font-weight: normal;
+    font-size: 11px;
+    width: 100px;
+    border: 1px solid #A3D1E1;
+}
+
+select
+{
+    height: 18px;
+}
+
+input[type=text]
+{
+    height: 16px;
+}
+
+table
+{
+    border-collapse: collapse;
+}
+
+a
+{
+    text-decoration: none;
+    font-size: 11px;
+}
+a:hover
+{
+    text-decoration: none;
+}
+a:link, a:visited, .link
+{
+    cursor: pointer;
+    text-decoration: underline;
+    white-space: nowrap;
+    color: #1E1EEB;
+    font-weight: bold;
+}
+
+input[type=password]
+{
+    width: 120px;
+    font-size: 11px;
+}
+
+select.based-currency
+{
+    width: 60px;
+}
+/* common*/
+.hide
+{
+    display: none;
+}
+.show
+{
+    display: block;
+}
+.highlight
+{
+    background-color: #F8F1A0 !important;
+}
+/* Content */
+.content-title
+{
+    /* title of page*/
+    font-weight: bold;
+    font-size: 15px;
+    vertical-align: text-bottom;
+    padding: 2px 0 0 35px;
+    margin: 0 0 5px 0;
+    line-height: 20px;
+    height: 26px;
+    min-width: 650px;
+    background: url(images/icon_title.gif) no-repeat left top;
+    color: #D2592D;
+}
+
+/* Filter */
+
+.content-filter
+{
+    margin-bottom: 2px;
+    padding-top: 4px;
+    padding-bottom: 3px;
+    font-size: 11px;
+    font-weight: normal;
+    background: url("images/bg_boxTop.jpg") repeat-x scroll center top #E7E7E7;
+    border: 1px solid #CACACA;
+}
+.autocomplete-w1
+{
+    background: url(images/shadow.png) no-repeat bottom right;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 8px 0 0 6px; /* IE6 fix: */
+    _background: none;
+    _margin: 0;
+    font-size: 12px;
+    line-height: 16px;
+}
+.autocomplete
+{
+    border: 1px solid #999;
+    background: #FFF;
+    cursor: default;
+    text-align: left;
+    max-height: 350px;
+    overflow: auto;
+    margin: -6px 6px 6px -6px; /* IE6 specific: */
+    _height: 350px;
+    _margin: 0;
+    _overflow-x: hidden;
+}
+.autocomplete .selected
+{
+}
+.autocomplete div
+{
+    padding: 2px 5px;
+    white-space: nowrap;
+}
+.autocomplete div:hover
+{
+    background: #C7E9F5;
+}
+.autocomplete strong
+{
+    font-weight: normal;
+    color: #D2592D;
+}
+/* End Filter */
+div.content-main
+{
+    clear: both;
+}
+/* End content */
+
+/* Text*/
+.positive
+{
+    color: #036;
+    font-weight: bold;
+}
+
+.negative
+{
+    color: #B50000 !important;
+}
+
+.italic
+{
+    font-style: italic;
+}
+
+.no-border
+{
+    border: none;
+}
+
+.top-left-border
+{
+    border-top: 1px solid #A3D1E1;
+    border-left: 1px solid #A3D1E1;
+}
+.right-bottom-border
+{
+    border-right: 1px solid #A3D1E1;
+    border-bottom: 1px solid #A3D1E1;
+}
+
+.no-bold
+{
+    font-weight: normal !important;
+}
+
+.title-text, .date-data
+{
+    text-align: center !important;
+}
+
+.text-data
+{
+    text-align: left !important;
+}
+
+.number-data
+{
+    text-align: right !important;
+}
+
+.no-hover:hover
+{
+    background-color: #fff;
+}
+
+.align-right
+{
+    text-align: right !important;
+}
+.filter-label, .filter-input
+{
+    padding-top: 5px;
+}
+.filter-label *, .filter-input *
+{
+    vertical-align: middle;
+}
+
+.filter-label
+{
+    text-align: right;
+    margin-right: 5px;
+}
+
+.filter-label label
+{
+    padding-top: 2px;
+    display: block;
+}
+
+.filter-input, .filter-input *
+{
+    text-align: left;
+    margin-left: 0;
+}
+.bold
+{
+    font-weight: bold;
+}
+.hand
+{
+    cursor: pointer;
+}
+.calendar
+{
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    background: url(images/calendar.png) no-repeat left top;
+    display: block;
+}
+
+/* End Text*/
+
+/* Button */
+
+.button
+{
+    height: 19px;
+    cursor: pointer;
+    padding: 0 5px 2px 0;
+    font-size: 11px;
+    line-height: 15px;
+    background: url(images/bg_buttonsite.jpg) repeat-x top;
+    border: 1px #4d4d4d solid;
+}
+
+.button:hover
+{
+    background: url(images/bg_buttonsiteOV.jpg) repeat-x top;
+    border: 1px #984d1a solid;
+    color: #cc4800;
+}
+
+.export-excel
+{
+    float: right;
+}
+
+.downline-link
+{
+    cursor: pointer;
+    float: left;
+    font-weight: bold;
+    text-decoration: none;
+    color: #5672AB;
+}
+
+.downline-link:hover
+{
+    text-decoration: underline;
+}
+
+/* End Button */
+
+/* Block UI */
+
+div.loading
+{
+    background: url(Images/loader.gif) no-repeat;
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 100px;
+    height: 100px;
+    z-index: 10001;
+}
+
+div.block-body
+{
+    background: transparent;
+    border: none;
+    background-color: #ffffff;
+    position: absolute;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+div.blockOverlay
+{
+    background-color: inherit !important;
+}
+
+div.blockMsg
+{
+    border: none !important;
+    background-color: inherit !important;
+}
+
+/* End of Block UI */
+
+#dvDateRangeNote
+{
+    background: url(images/more.gif) no-repeat scroll left center transparent;
+    color: #454545;
+    font-weight: normal;
+    height: 15px;
+    margin: 8px 0 2px 5px;
+    padding-left: 16px;
+    padding-top: 3px;
+    text-align: left;
+}
+
+div.note-message
+{
+    background: url(images/more.gif) no-repeat scroll left center transparent;
+    color: #454545;
+    font-weight: normal;
+    height: 15px;
+    margin: 2px 0 2px;
+    padding-left: 16px;
+    padding-top: 3px;
+    text-align: left;
+    float: left;
+    clear: both;
+}
+/*report-title*/
+.report-title
+{
+    text-transform: none;
+    font-weight: bold;
+    padding: 0 0 0 24px;
+    padding-top: 7px;
+    text-align: left;
+    vertical-align: middle;
+    height: 22px;
+    background: url(images/icon_content.gif) no-repeat scroll 5px center #FFEFDE;
+    border: 1px solid #A3D1E1;
+    margin-top: 5px;
+}
+/*report-title*/
+/* formater*/
+.text-data
+{
+    text-align: left !important;
+}
+.title-text
+{
+    text-align: center !important;
+}
+.text-text-left
+{
+    text-align: left !important;
+}
+/* formater*/
+
+.currency-link
+{
+    color: #1E1EEB;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+/* Filter */
+.new-line
+{
+    clear: both;
+}
+
+/* Date Picker */
+.date-picker-wrapper input, .date-picker-wrapper img
+{
+    display: block;
+    float: left;
+}
+.date-picker-wrapper img
+{
+    margin-top: 6px;
+}
+.date-picker-wrapper .ui-datepicker-trigger
+{
+    position: absolute;
+    left: 80px;
+    top: 0;
+    cursor: pointer;
+}
+.date-picker-wrapper #dateoption
+{
+    height: 20px !important;
+}
+.date-picker-wrapper .hasDatepicker
+{
+    width: 75px;
+}
+.date-picker-wrapper .group-range-date div
+{
+    float: left;
+    margin-left: 10px;
+    position: relative;
+}
+.date-picker-wrapper .group-range-date div.group
+{
+    margin-left: 25px;
+}
+
+/* Date Range Picker */
+input.date-range
+{
+    width: 75px;
+    margin-right: 3px;
+}
+
+.ui-daterangepicker-trigger
+{
+    cursor: pointer;
+}
+
+/* Option List - Check-Box List or Radio - List */
+
+.option-list input, .option-list label
+{
+    display: block;
+    float: left;
+    vertical-align: middle;
+}
+
+.option-list input
+{
+    margin-left: 0;
+}
+
+.option-list label
+{
+    margin-right: 8px;
+    padding-top: 2px;
+    min-width: 15px;
+}
+
+/* Submit Wrapper */
+
+/* Month Picker*/
+
+.month-picker > div
+{
+    float: left;
+    margin-right: 10px;
+}
+
+/*ProductList*/
+
+#ProductList input
+{
+    margin-left: 0;
+}
+
+/* Sorting */
+.sort-asc, .sort-desc
+{
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+}
+.sort-asc
+{
+    background: url("images/up.png") no-repeat;
+}
+
+.sort-desc
+{
+    background: url("images/down.png") no-repeat;
+}
+
+.sort-heading
+{
+    cursor: pointer;
+    position: relative;
+}
+
+.sorted-heading .grid-header-two-line, .sorted-heading, .sort-heading .grid-header-two-line:hover, .sort-heading:hover
+{
+    text-decoration: underline;
+}
+
+/* Bread Crumb */
+.level-link
+{
+    font-weight: bold;
+    cursor: pointer;
+    color: #1e1eeb;
+}
+
+/*Misc*/
+.header-title-arrow
+{
+    font-size: 20px;
+}
+.alert
+{
+    font-size: 1.3em;
+    padding: 1em;
+    text-align: center;
+    white-space:pre-wrap;
+    width: auto;
+    min-width: 200px;
+    max-width: 300px;
+    word-wrap: normal;
+    overflow:hidden;
+	
+}

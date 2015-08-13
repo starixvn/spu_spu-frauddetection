@@ -1,0 +1,48 @@
+﻿/* system parlay detail */
+.system-parlay-header th
+{
+    background-color: #C7E9F5;
+    border-left: 1px solid #FFFFFF;
+    color: #024584;
+    background-image: url("images/tab_topbg.gif");
+    background-position: center bottom;
+    background-repeat: repeat-x;
+    font-size: 11px;
+    font-weight: normal;
+    height: 28px;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.system-parlay-detail td
+{
+    border-top: 1px solid #A3D1E1 !important;
+    border-bottom: 1px solid #A3D1E1;
+    border-left: 1px solid #A3D1E1;
+    color: #454545;
+    font-size: 11px;
+    height: 22px;
+    padding: 2px;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.system-parlay-outstanding
+{
+    background-color: #F8F1A0;
+    color: #003333;
+    font-weight: bold !important;
+    margin: 5px 0;
+    text-align: right;
+}
+
+.system-parlay-subtotal
+{
+    background-color: #FFA07A;
+}
+
+.system-parlay-total
+{
+    background-color: #B2DFEF;
+}

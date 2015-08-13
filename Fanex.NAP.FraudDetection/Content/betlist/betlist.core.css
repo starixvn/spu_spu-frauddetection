@@ -1,0 +1,278 @@
+﻿a
+{
+    text-decoration: none;
+}
+.line
+{
+    border-bottom: 1px solid #A0A0A0;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    text-align: left;
+    width: 100%;
+}
+.underdog
+{
+    color: #01122B;
+    font-weight: bold !important;
+    white-space: normal;
+}
+.stake
+{
+    font-weight: bold !important;
+}
+.favorite
+{
+    color: #B50000;
+    font-weight: bold !important;
+    display: inline;
+    text-align: right;
+}
+.handicap .odds
+{
+    color: #003399;
+    font-size: 8pt;
+}
+div.match + div.league
+{
+    color: #666666;
+    line-height: 15px;
+    margin-top: 1px;
+}
+div.match + div.league
+{
+    background: none repeat scroll 0 0 transparent;
+    font-weight: normal;
+    text-align: right;
+    text-transform: none;
+}
+.bettype
+{
+    color: #003399;
+    font-weight: 600;
+    text-align: right;
+}
+.firstGoal
+{
+    background: url("images/firstGoal.gif") no-repeat scroll center center transparent;
+    display: inline;
+    height: 10px;
+    padding: 0 4px;
+    width: 14px;
+}
+.lastGoal
+{
+    background: url("images/lastGoal.gif") no-repeat scroll center center transparent;
+    display: inline;
+    height: 10px;
+    padding: 0 4px;
+    width: 14px;
+}
+.match
+{
+    color: #000000;
+    font-weight: normal;
+    line-height: 15px;
+    text-align: right;
+    white-space: normal;
+}
+.leagueName
+{
+    white-space: normal;
+}
+.oddstype
+{
+    color: #586985;
+    font-weight: bold;
+}
+.colorHandicap, .handicap
+{
+    color: #606060;
+}
+.handicap.custom
+{
+    font-weight: bold;
+}
+.sport
+{
+    color: #0066CC;
+}
+.lic-win-loss
+{
+    background-color: #F5E3E3;
+    font-weight: bold;
+}
+.negative-number
+{
+    color: #b50000;
+}
+.detail
+{
+    background: url("images/q_Icon2_1.png") no-repeat scroll center center transparent;
+    color: #755200;
+    display: inline;
+    font-weight: bold;
+    height: 10px;
+    line-height: 20px;
+    padding: 0 1px 0 65px;
+    width: 14px;
+}
+.detail:hover
+{
+    background: url("images/q_Icon_2.png") no-repeat scroll center center transparent;
+    color: #755200;
+    cursor: pointer;
+    display: inline;
+    font-weight: bold;
+    height: 10px;
+    padding: 0 1px 0 65px;
+    width: 14px;
+}
+.combinationLink
+{
+    line-height: 20px;
+}
+
+.time
+{
+    color: #434343;
+    font-size: 7pt;
+    font-weight: normal;
+    text-align: center;
+    margin: 10px 0 0 0;
+}
+
+.status
+{
+    color: #606060;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.result
+{
+    color: #1BA4ED;
+    cursor: pointer;
+}
+
+.ip
+{
+    display: none;
+}
+
+/* jqgrid customize */
+
+.ui-jqgrid-ftable .ui-widget-content
+{
+    background: #FFEFE3;
+    border-top: 2px solid #FF6600;
+    font-weight: bold;
+}
+.theme_jqGrid .ui-widget-content .no-info-row, .theme_jqGrid .ui-widget-content .no-info-row td, .no-info-row td
+{
+    border: none;
+}
+.ui-jqgrid tr.footrow td
+{
+    height: 22px;
+    padding: 2px;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-hbox, .ui-jqgrid-bdiv
+{
+    border-left: 1px solid #A3D1E1;
+}
+.theme_jqGrid .ui-jqgrid-sdiv .ui-jqgrid-hbox
+{
+    border-top: none medium;
+}
+
+.ui-jqgrid span.ui-jqgrid-resize
+{
+    height: 14px !important;
+}
+
+.theme_jqGrid .ui-jqgrid-btable tr.jqgrow td
+{
+    vertical-align: top;
+}
+.theme_jqGrid .ui-jqgrid-btable tr.jqgrow td a
+{
+    color: #0000FF;
+}
+
+/* Grid 26 customize*/
+
+.bet-list-popup .container_26, .bet-list-popup .container_26 .grid_26
+{
+    width: auto;
+}
+
+/*ul.h-list li a*/
+.selected
+{
+    color: Gray !important;
+}
+.base-currency
+{
+    font-size: 14px;
+    color: rgb(2, 69, 132);
+}
+
+.export-excel
+{
+    overflow: auto;
+    float: right;
+}
+div.history-link
+{
+    background: url("images/undo.png") no-repeat scroll center center #FFEFDE;
+    cursor: pointer;
+    float: left;
+    height: 22px;
+    margin-right: 10px;
+    margin-top: -2px;
+    width: 22px;
+}
+
+/* Link */
+
+span.inactive-switch-link
+{
+    font-size: 16px;
+    font-weight: bold;
+    cursor: default;
+    text-decoration: none;
+}
+
+span.active-switch-link
+{
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+span.inactive-switch-link
+{
+    color: #88003E;
+}
+
+span.active-switch-link
+{
+    color: #3547E3;
+}
+
+.blue
+{
+    color: #2673CE;
+}
+/*to make line-through for void-parlay-ticket*/
+div.mx-parlay div.void span, div.mx-parlay div.void div
+{
+    text-decoration: line-through;
+}
+div.mx-parlay div.void > div.match, div.mx-parlay div.void div.firstGoal, div.mx-parlay div.void div.lastGoal
+{
+    text-decoration: none;
+}
