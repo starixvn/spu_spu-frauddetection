@@ -40,13 +40,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public ActionResult Index(FraudCaseDetailReportCriteria criteria)
         {
-            criteria = new FraudCaseDetailReportCriteria
-            {
-                CaseId = 4,
-                MatchId = 14337488,
-                EventDate = new DateTime(2015, 8, 5)
-            };
-
             var model = _service.GetFraudCaseDetails(criteria);
 
             return View("~/Areas/FraudDetection/Views/FraudCaseDetail/Index.cshtml", model);
