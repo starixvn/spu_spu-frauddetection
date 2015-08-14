@@ -8,6 +8,7 @@
 // </history>
 
 using System.Linq;
+using FD.Lib.Criteria.SuspiciousStatistic;
 using FD.Lib.DTO;
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
@@ -31,7 +32,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         private readonly CaseService _caseService;
         private readonly int ALLSUSPICIOUSSTATUS = 0;
         private readonly int EXISTSUSPICIOUSCASE = 1;
-        private readonly int NOTEXISTSUSPICIOUSCASE = 2;
 
         public MatchMonitoringController()
         {
@@ -58,13 +58,26 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Get Match Monitoring report data.
         /// </summary>
         /// <param name="criteria">MatchMonitoringReportGetAllCriteria.</param>
+        /// <param name="suspiciousStatus">Suspicious Status.</param>
         /// <returns>Match monitoring report data.</returns>
         [HttpGet]
-        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria)
+        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria, int suspiciousStatus)
         {
-            var matchesInfo = _matchMonitoringReportService.GetMatchMonitoringReport(criteria);
-            matchesInfo = FilterDataOnSearch(matchesInfo, criteria.SuspiciousStatus);
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
 
+            var matchesInfo = new List<MatchMonitoring>();
+            if (criteria.EventDate > balanceUpMoveBetDates.BalanceUpDay)
+            {
+                criteria.IsLatestData = criteria.EventDate > balanceUpMoveBetDates.MoveBetsDay;
+                matchesInfo = _matchMonitoringReportService.GetMatchMonitoringReport(criteria);
+            }
+            else
+            {
+                
+            }
+
+            matchesInfo = FilterDataOnSearch(matchesInfo, suspiciousStatus);
             var result = new
             {
                 MatchMonitoring = matchesInfo,

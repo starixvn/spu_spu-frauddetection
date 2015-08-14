@@ -32,15 +32,18 @@
         $("#btnSearch").click(function (event) {
             event.preventDefault();
 
+            waitingDialog.show("Please wait...", { dialogSize: 'sm' });
             var param = {
                 "EventDate": $("#EventDate").val(),
                 "LeagueId": $("#Leagues").val(),
                 "MatchStatus": $("#MatchStatus").val(),
-                "SuspiciousStatus": $("#SuspiciousStatus").val()
+                "suspiciousStatus": $("#SuspiciousStatus").val()
             };
 
             matchMonitoringReportFactory.Search(param).success(function (data) {
                 matchMonitoringReportService.renderReportTable(data);
+
+                waitingDialog.hide();
             });
         });
     };
@@ -58,7 +61,7 @@
             ],
             bodyRows: matchMonitoringReportService.createReportTable(data.MatchMonitoring),
             hideYBackGroundScroller: true,
-            gridExpandHeight: 180,
+            gridExpandHeight: 210,
             enableHiddenColumns: false,
             hiddenColumns: [1],
             autoResizeColumn: true,
@@ -140,4 +143,65 @@
     };
 
     return matchMonitoringReportService;
+})(jQuery);
+
+var waitingDialog = waitingDialog || (function ($) {
+    'use strict';
+
+    // Creating modal dialog's DOM
+    var $dialog = $(
+        '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
+        '<div class="modal-dialog modal-m">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header"><h4 style="margin:0;"></h4></div>' +
+        '<div class="modal-body">' +
+        '<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
+        '</div>' +
+        '</div></div></div>');
+
+    return {
+        /**
+        * Opens our dialog
+        * @param message Custom message
+        * @param options Custom options:
+        options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
+        options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
+        */
+        show: function (message, options) {
+            // Assigning defaults
+            if (typeof options === 'undefined') {
+                options = {};
+            }
+            if (typeof message === 'undefined') {
+                message = 'Loading';
+            }
+            var settings = $.extend({
+                dialogSize: 'm',
+                progressType: '',
+                onHide: null // This callback runs after the dialog was hidden
+            }, options);
+
+            // Configuring dialog
+            $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
+            $dialog.find('.progress-bar').attr('class', 'progress-bar');
+            if (settings.progressType) {
+                $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+            }
+            $dialog.find('h4').text(message);
+            // Adding callbacks
+            if (typeof settings.onHide === 'function') {
+                $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function () {
+                    settings.onHide.call($dialog);
+                });
+            }
+            // Opening dialog
+            $dialog.modal();
+        },
+        /**
+        * Closes dialog
+        */
+        hide: function () {
+            $dialog.modal('hide');
+        }
+    };
 })(jQuery);
