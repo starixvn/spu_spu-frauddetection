@@ -134,7 +134,7 @@
         matchMonitoringReportFactory.GetCaseIdFromCaseName(caseName).success(function (data) {
             caseId = data;
             var url = "FraudCaseDetail/Index?" + "MatchId=" + matchId;
-            url += "&CasedId=" + caseId;
+            url += "&CaseId=" + caseId;
             url += "&EventDate=" + eventDate;
 
             window.open(url, '_blank');
