@@ -148,8 +148,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public ActionResult GetLeaguesByDate(string eventDate)
         {
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+
             var result = _matchMonitoringReportService.GetLeaguesByDate(new LeagueGetAllByDateCriteria
             {
+                IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
                 EventDate = DateTime.Parse(eventDate)
             });
 
