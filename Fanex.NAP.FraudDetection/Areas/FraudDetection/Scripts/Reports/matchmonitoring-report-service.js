@@ -73,9 +73,11 @@
             }
         };
 
-        for (var key in data.MatchMonitoring[0].SuspiciousCases) {
-            matchMonitoringReportService.gridOptions.columns.push(
-                { HeaderText: key, Width: 100, Name: key, HeaderAlign: "center", CellAlign: "center", CanResize: true });
+        if (data.MatchMonitoring.length > 0) {
+            for (var key in data.MatchMonitoring[0].SuspiciousCases) {
+                matchMonitoringReportService.gridOptions.columns.push(
+                    { HeaderText: key, Width: 100, Name: key, HeaderAlign: "center", CellAlign: "center", CanResize: true });
+            }
         }
 
         $("#matchMonitoringReport").fanexGrid(matchMonitoringReportService.gridOptions);
