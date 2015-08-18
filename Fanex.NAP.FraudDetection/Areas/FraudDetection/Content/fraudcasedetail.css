@@ -2,6 +2,6 @@
     font-size: 13px;
 }
 
-.favorite, .bettype, .match, .league {
+.bettype, .match, .league, .favorite .favorite, .underdog .favorite{
     display: none;
 }

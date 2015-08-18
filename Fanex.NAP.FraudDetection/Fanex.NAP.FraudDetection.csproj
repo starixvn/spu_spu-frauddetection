@@ -465,6 +465,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\fraudcasedetail.css" />
     <Content Include="Areas\FraudDetection\Content\matchmonitoring.css" />
     <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
     <Content Include="Areas\FraudDetection\Scripts\FraudCaseDetail\fraudcasedetail-factory.js" />
