@@ -58,7 +58,7 @@
             gridExpandHeight: 400,
             allowTruncate: true,
             pagerOption: {
-                itemsPerPage: 10,
+                itemsPerPage: 50,
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true

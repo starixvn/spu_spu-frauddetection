@@ -1,0 +1,7 @@
+﻿body, table {
+    font-size: 13px;
+}
+
+.favorite, .bettype, .match, .league {
+    display: none;
+}

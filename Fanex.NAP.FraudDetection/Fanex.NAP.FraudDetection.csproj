@@ -520,6 +520,12 @@
     <Content Include="Content\betlist\images\up.png" />
     <Content Include="Content\betlist\rngcasino.handhistory.css" />
     <Content Include="Content\betlist\systemparlay.detail.css" />
+    <Content Include="Content\Core\site.css">
+      <DependentUpon>site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Core\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="Dependencies\FD.Lib.BusinessManager.dll" />
     <Content Include="Dependencies\FD.Lib.Core.dll" />
     <Content Include="Dependencies\FD.Lib.Criteria.dll" />
@@ -643,6 +649,9 @@
     </Content>
     <Content Include="Areas\FraudDetection\Views\FraudCaseDetail\Index.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\MatchMonitoringReport.cshtml" />
+    <Content Include="Content\Core\site.css.map">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <None Include="Content\jquery-ui\base\all.css.nk" />
     <Content Include="Content\jquery-ui\base\autocomplete.css" />
     <None Include="Content\jquery-ui\base\base.css.bk" />

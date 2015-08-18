@@ -10,16 +10,11 @@
 {
     @Styles.Render("~/bundles/FanexGrid/FanexGridCss")
     @Styles.Render("~/bundles/FanexBetListCss")
-    
-    <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionCss")" />
-    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />
-}
 
-<style type="text/css">
-    .favorite, .bettype, .match, .league {
-        display: none;
-    }
-</style>
+    <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionCss")" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css"/>
+    <link href="~/Areas/FraudDetection/Content/fraudcasedetail.css" rel="stylesheet" />
+}
 
 <div class="row">
     <div class="col-md-5">
@@ -28,6 +23,10 @@
         </h4>
         <table class="table table-bordered">
             <tr>
+                <td class="text-right font-bold">Case Name</td>
+                <td><b>@Model.Summary.CaseName</b></td>
+            </tr>
+            <tr>
                 <td class="text-right font-bold">Event</td>
                 <td>@Html.Raw(string.Format("<b>{0}</b> -vs- <b>{1}</b>", Model.Summary.HomeName, Model.Summary.AwayName))</td>
             </tr>
@@ -35,7 +34,7 @@
                 <td class="text-right font-bold"># Members</td>
                 <td>@Model.Summary.CustomerCount</td>
             </tr>
-            <tr> 
+            <tr>
                 <td class="text-right font-bold"># Tickets</td>
                 <td>@Model.Summary.BetCount</td>
             </tr>

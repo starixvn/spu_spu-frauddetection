@@ -24,7 +24,7 @@
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
 }
 <h4>
-    <b>Customer Report</b></h4>
+    <b>Match Monitoring</b></h4>
 <br>
 @using (Html.BeginForm("Search", "MatchMonitoring", FormMethod.Get, new { @id = "formSearch", @class = "form-inline col-sm-12 filter-forml" }))
 {
@@ -51,7 +51,7 @@
     <div class="form-group col-sm-12">
         <div class="col-sm-6">
             <label class="col-sm-3 text-right">
-                Status</label>
+                Match Status</label>
             <select style="height: 25px; width: 118px;" id="MatchStatus">
                 <option value="All">All</option>
                 <option value="Completed">Completed</option>
@@ -60,7 +60,7 @@
         </div>
         <div class="col-sm-6">
             <label class="col-sm-3 text-right">
-                Suspicious</label>
+               Has Suspicious Customer(s)</label>
             <select style="height: 25px; width: 100px;" id="SuspiciousStatus">
                 <option value="0">All</option>
                 <option value="1">Yes</option>
