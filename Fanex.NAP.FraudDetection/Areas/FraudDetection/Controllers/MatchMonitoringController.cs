@@ -7,19 +7,17 @@
 //   <change who="Long.Luu" date="2015.08.13">Created</change>
 // </history>
 
-using System.Linq;
-using FD.Lib.Criteria.SuspiciousStatistic;
-using FD.Lib.DTO;
-using Fanex.Data.Repository;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Data.Repository;
     using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Common;
     using FD.Lib.Criteria.Reports;
+    using FD.Lib.Criteria.SuspiciousStatistic;
+    using FD.Lib.DTO;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using RemotingRef;
@@ -31,8 +29,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     {
         private readonly MatchMonitoringReportService _matchMonitoringReportService;
         private readonly CaseService _caseService;
-        private readonly int ALLSUSPICIOUSSTATUS = 0;
-        private readonly int EXISTSUSPICIOUSCASE = 1;
 
         public MatchMonitoringController()
         {
@@ -91,13 +87,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         private void MapRemotingRefData(List<MatchMonitoring> data)
         {
-            var HomeName = string.Empty;
-            var AwayName = string.Empty;
-
             foreach (var match in data)
             {
-                HomeName = RefData.GetTeamName(match.HomeId.ToString(), "en", string.Empty);
-                AwayName = RefData.GetTeamName(match.AwayId.ToString(), "en", string.Empty);
+                var HomeName = RefData.GetTeamName(match.HomeId.ToString(), "en", string.Empty);
+                var AwayName = RefData.GetTeamName(match.AwayId.ToString(), "en", string.Empty);
 
                 match.Event = "<b>" + HomeName + "</b>" + " vs " + "<b>" + AwayName + "</b>";
             }

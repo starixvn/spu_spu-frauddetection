@@ -64,7 +64,7 @@
             ],
             bodyRows: matchMonitoringReportService.createReportTable(data.MatchMonitoring),
             hideYBackGroundScroller: true,
-            gridExpandHeight: 210,
+            gridExpandHeight: 230,
             enableHiddenColumns: false,
             hiddenColumns: [1],
             autoResizeColumn: true,
