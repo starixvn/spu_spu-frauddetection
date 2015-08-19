@@ -156,7 +156,10 @@ namespace Fanex.NAP.FraudDetection.Areas.UserLogin.Controllers
                                     {
                                         if (UserIsActiveOnThisSite(siteLevelList))
                                         {
-                                            return Redirect(FormsAuthentication.DefaultUrl);
+
+                                            var returnUrl = FormsAuthentication.GetRedirectUrl(username, true);
+                                            returnUrl = string.IsNullOrEmpty(returnUrl) ? FormsAuthentication.DefaultUrl : returnUrl;
+                                            return Redirect(returnUrl);
                                         }
 
                                         DoSignOut();
