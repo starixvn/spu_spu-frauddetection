@@ -14,19 +14,9 @@
             $('#EventDate').datepicker("show");
         });
 
+        matchMonitoringReportService.renderLeagues($("#EventDate").val());
         $('#EventDate').on('change', function (e) {
-            var eventDate = $("#EventDate").val();
-
-            matchMonitoringReportFactory.getLeaguesByDate(eventDate).success(function (response) {
-                $('#Leagues').find('option').remove().end();
-                $('#Leagues').append($('<option value="-1">All Leagues</option>'));
-                $.each(response, function (i, league) {
-                    $('#Leagues').append($('<option>', {
-                        value: league.LeagueId,
-                        text: league.LeagueName
-                    }));
-                });
-            });
+            matchMonitoringReportService.renderLeagues($("#EventDate").val());
         });
 
         $("#btnSearch").click(function (event) {
@@ -37,7 +27,7 @@
                 "EventDate": $("#EventDate").val(),
                 "LeagueId": $("#Leagues").val(),
                 "MatchStatus": $("#MatchStatus").val(),
-                "suspiciousStatus": $("#SuspiciousStatus").val()
+                "SuspiciousStatus": $("#SuspiciousStatus").val()
             };
 
             matchMonitoringReportFactory.Search(param).success(function (data) {
@@ -48,6 +38,19 @@
         });
     };
 
+    matchMonitoringReportService.renderLeagues = function (eventDate) {
+        matchMonitoringReportFactory.getLeaguesByDate(eventDate).success(function (response) {
+            $('#Leagues').find('option').remove().end();
+            $('#Leagues').append($('<option value="-1">All Leagues</option>'));
+            $.each(response, function (i, league) {
+                $('#Leagues').append($('<option>', {
+                    value: league.LeagueId,
+                    text: league.LeagueName
+                }));
+            });
+        });
+    };
+    
     matchMonitoringReportService.renderReportTable = function (data) {
         matchMonitoringReportService.gridOptions =
         {

@@ -53,6 +53,7 @@
     <Content Include="CaseGroup\dbo.FD_CaseGroupInsert.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseGetAll.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseGetById.StoredProcedure.sql" />
+    <Content Include="Case\dbo.FD_CaseGetByName.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseInsert.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseUpdate.StoredProcedure.sql" />
     <Content Include="Case\dbo.FD_CaseUpdateStatus.StoredProcedure.sql" />
@@ -92,6 +93,10 @@
     <Content Include="Reports\FraudCaseDetail\dbo.FD_BetTicketGetByTransListFromDBArchive.StoredProcedure.sql" />
     <Content Include="Reports\FraudCaseDetail\dbo.FD_BetTicketGetByTransList.StoredProcedure.sql" />
     <Content Include="Reports\FraudCaseDetail\dbo.FD_FraudCaseDetailSummaryGetByMatchId.StoredProcedure.sql" />
+    <Content Include="Reports\MatchMonitoring\dbo.FD_LeagueGetAllByDate.StoredProcedure.sql" />
+    <Content Include="Reports\MatchMonitoring\dbo.FD_LeagueGetAllByDate_DBArchive.StoredProcedure.sql" />
+    <Content Include="Reports\MatchMonitoring\dbo.FD_MatchMonitoringReportGetAll.StoredProcedure.sql" />
+    <Content Include="Reports\MatchMonitoring\dbo.FD_MatchMonitoringReportGetAll_DBArchive.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetAll.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetByGroup.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetCount.StoredProcedure.sql" />

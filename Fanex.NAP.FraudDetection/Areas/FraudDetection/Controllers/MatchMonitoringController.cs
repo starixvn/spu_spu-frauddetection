@@ -10,6 +10,7 @@
 using System.Linq;
 using FD.Lib.Criteria.SuspiciousStatistic;
 using FD.Lib.DTO;
+using Fanex.Data.Repository;
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
@@ -58,26 +59,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Get Match Monitoring report data.
         /// </summary>
         /// <param name="criteria">MatchMonitoringReportGetAllCriteria.</param>
-        /// <param name="suspiciousStatus">Suspicious Status.</param>
         /// <returns>Match monitoring report data.</returns>
         [HttpGet]
-        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria, int suspiciousStatus)
+        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria)
         {
-            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
-            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+            var matchesInfo = GenerateMatchMonitoringData(criteria);
 
-            var matchesInfo = new List<MatchMonitoring>();
-            if (criteria.EventDate > balanceUpMoveBetDates.BalanceUpDay)
-            {
-                criteria.IsLatestData = criteria.EventDate > balanceUpMoveBetDates.MoveBetsDay;
-                matchesInfo = _matchMonitoringReportService.GetMatchMonitoringReport(criteria);
-            }
-            else
-            {
-                
-            }
-
-            matchesInfo = FilterDataOnSearch(matchesInfo, suspiciousStatus);
             var result = new
             {
                 MatchMonitoring = matchesInfo,
@@ -87,44 +74,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        private List<MatchMonitoring> FilterDataOnSearch(List<MatchMonitoring> matches, int suspiciousStatus)
+        private List<MatchMonitoring> GenerateMatchMonitoringData(MatchMonitoringReportGetAllCriteria criteria)
         {
-            var resultData = new List<MatchMonitoring>();
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+            criteria.IsLatestData = criteria.EventDate > balanceUpMoveBetDates.MoveBetsDay;
 
-            if (suspiciousStatus == ALLSUSPICIOUSSTATUS)
-            {
-                resultData = matches;
-            }
-            else
-            {
-                var existSuspiciousCase = new List<MatchMonitoring>();
-                var notExistSuspiciousCase = new List<MatchMonitoring>();
+            var reportData = criteria.EventDate > balanceUpMoveBetDates.BalanceUpDay
+                       ? _matchMonitoringReportService.GetMatchMonitoringReport(criteria)
+                       : _matchMonitoringReportService.GetMatchMonitoringReportFromDBArchive(
+                           new MatchMonitoringReportGetAllDBArchiveCriteria(criteria));
 
-                foreach (var match in matches)
-                {
-                    var existSus = false;
-                    foreach (var dictItem in match.SuspiciousCases.Where(dictItem => dictItem.Value > 0))
-                    {
-                        existSus = true;
-                    }
-
-                    if (existSus)
-                    {
-                        existSuspiciousCase.Add(match);
-                    }
-                    else
-                    {
-                        notExistSuspiciousCase.Add(match);
-                    }
-                }
-
-                resultData = suspiciousStatus == EXISTSUSPICIOUSCASE
-                                       ? existSuspiciousCase
-                                       : notExistSuspiciousCase;
-            }
-
-            MapRemotingRefData(resultData);
-            return resultData;
+            MapRemotingRefData(reportData);
+            return reportData;
         }
 
         private void MapRemotingRefData(List<MatchMonitoring> data)
@@ -151,11 +113,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var balanceUpMoveBetService = new MoveBetsBalanceUpService();
             var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
 
-            var result = _matchMonitoringReportService.GetLeaguesByDate(new LeagueGetAllByDateCriteria
-            {
-                IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
-                EventDate = DateTime.Parse(eventDate)
-            });
+            var criteria = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay
+                               ? (ICriteria) new LeagueGetAllByDateCriteria
+                                   {
+                                       IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
+                                       EventDate = DateTime.Parse(eventDate)
+                                   }
+                               : new LeagueGetAllByDateFromDBArchiveCriteria
+                                   {
+                                       EventDate = DateTime.Parse(eventDate)
+                                   };
+            var result = _matchMonitoringReportService.GetLeaguesByDate(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
