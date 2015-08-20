@@ -201,7 +201,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 return "The next actions are left blank. Please add next action(s) for the new Task.";
             }
 
-            return string.Empty;
+            var nextActionTargetIds = criteria.NextActionTargetIdList.Split(',');
+            var result = true;
+            foreach (var nextActionTargetId in nextActionTargetIds)
+            {
+                int id;
+                result &= int.TryParse(nextActionTargetId, out id);
+            }
+
+            return !result ? "The next action targets are left blank. Please add Group(s)/Mail Template(s) for the Case." : string.Empty;
         }
 
         /// <summary>
