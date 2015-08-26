@@ -52,8 +52,6 @@
 
   <Function Name="Reports">
     <Setting Key="FD_SuspiciousCustomerReportGetAll" SpName="FD_SuspiciousCustomerReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_SuspiciousCustomerGetByGroup" SpName="FD_SuspiciousCustomerGetByGroup" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_SuspiciousCustomerGetCount" SpName="FD_SuspiciousCustomerGetCount" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
     <Setting Key="FD_MatchMonitoringReportGetAll" SpName="FD_MatchMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_MatchMonitoringReportGetAll_DBArchive" SpName="FD_MatchMonitoringReportGetAll_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />

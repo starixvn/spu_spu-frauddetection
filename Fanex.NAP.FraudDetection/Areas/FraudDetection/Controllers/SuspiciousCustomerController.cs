@@ -49,23 +49,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <summary>
         /// Query the suspicious customers.
         /// </summary>
-        /// <param name="memberName">The customer name.</param>
-        /// <param name="groupId">The Group ID.</param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns>A list of customers.</returns>
-        [HttpGet]
-        public ActionResult Search(string memberName, int groupId)
+        [HttpPost]
+        public ActionResult Search(SuspiciousCustomerReportGetAllCriteria criteria)
         {
-            var criteria = new SuspiciousCustomerReportGetAllCriteria
-            {
-                CustName = memberName,
-                GroupId = groupId
-            };
-
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
             var result = new
             {
-                SuspiciousCustomers = suspiciousCustomers,
+                suspiciousCustomers.SuspiciousCustomers,
+                suspiciousCustomers.TotalItem,
                 Months = GetThreeLatestMonths()
             };
 

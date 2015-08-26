@@ -2,8 +2,8 @@
     "use strict";
 
     return {
-        getSuspiciousCustomerReport: function (memberName, groupId) {
-            return $.get('SuspiciousCustomer/Search', { memberName: memberName, groupId: groupId });
+        getSuspiciousCustomerReport: function (criteria) {
+            return $.post('SuspiciousCustomer/Search', criteria);
         }
     };
 })(jQuery);

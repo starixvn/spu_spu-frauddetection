@@ -4,10 +4,12 @@
     var formSearch = $('#formSearch').submit(function (event) {
         event.preventDefault();
 
-        var memberName = $("#memberName").val();
-        var groupId = $("#groupId").val();
+        suspiciousCustomerReportService.searchParams.CustName = $("#memberName").val();
+        suspiciousCustomerReportService.searchParams.GroupId = $("#groupId").val();
+        suspiciousCustomerReportService._pageIndex = 0;
+        suspiciousCustomerReportService._pageSize = 50;
 
-        suspiciousCustomerReportService.querySuspiciousCustomer(memberName, groupId);
+        suspiciousCustomerReportService.querySuspiciousCustomer();
     });
 
     formSearch.submit();

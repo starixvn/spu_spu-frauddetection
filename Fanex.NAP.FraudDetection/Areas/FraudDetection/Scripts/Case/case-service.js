@@ -164,7 +164,7 @@
     }
 
     function reRenderAfterPaged(pageIndex, itemsPerPage) {
-        if (itemsPerPage != $('#PageSize').val()) {
+        if (itemsPerPage !== $('#PageSize').val()) {
             $('#PageIndex').val(0);
             caseService._pageIndex = 0;
         } else {

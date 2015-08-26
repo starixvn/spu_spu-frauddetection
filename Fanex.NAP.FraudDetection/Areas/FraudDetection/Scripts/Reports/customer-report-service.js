@@ -3,9 +3,23 @@
 
     var suspiciousCustomerReportService = {};
 
-    suspiciousCustomerReportService.querySuspiciousCustomer = function (memberName, groupId) {
+    suspiciousCustomerReportService.gridOptions = '';
+    suspiciousCustomerReportService._pageIndex = 0;
+    suspiciousCustomerReportService._pageSize = 50;
+
+    suspiciousCustomerReportService.searchParams = {
+        CustName: '',
+        GroupId: -1,
+        PageSize: suspiciousCustomerReportService._pageSize,
+        PageIndex: suspiciousCustomerReportService._pageIndex + 1
+    };
+
+    suspiciousCustomerReportService.querySuspiciousCustomer = function () {
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
-        suspiciousCustomerReportFactory.getSuspiciousCustomerReport(memberName, groupId).success(function (result) {
+        suspiciousCustomerReportService.searchParams.PageSize = suspiciousCustomerReportService._pageSize;
+        suspiciousCustomerReportService.searchParams.PageIndex = suspiciousCustomerReportService._pageIndex + 1;
+
+        suspiciousCustomerReportFactory.getSuspiciousCustomerReport(suspiciousCustomerReportService.searchParams).success(function (result) {
             renderCustomerReportTable(result);
 
             waitingDialog.hide();
@@ -13,61 +27,49 @@
     };
 
     /*
-    * Grid options.
-    */
-    var gridOptions = {
-        customizeHeader: true,
-        gridExpandHeight: 180,
-        marginRight: 0,
-        showTree: true,
-        showPager: true,
-        showColumnsShowHide: false,
-        sortOption: {},
-        pagerOption: {
-            itemsPerPage: 50,
-            currentPage: 0,
-            itemsPerPageArray: [10, 20, 50, 100, 500]
-        }
-    };
-
-    /*
     * Render customer report.
     */
     var renderCustomerReportTable = function (data) {
+
         var suspiciousCustomers = data.SuspiciousCustomers;
         var months = data.Months;
         var columnHeaders = generateColumnHeaders(months);
         var customHeader = generateCustomColumnHeaders(months);
         var bodyRows = generateBodyRows(months, suspiciousCustomers);
 
-        gridOptions.bodyRows = bodyRows;
-        gridOptions.groupHeaderRows = customHeader;
-        gridOptions.columns = columnHeaders;
-        gridOptions.sortOption = {
-            afterGridSorted: reRenderBodyAfterSort
-        };
-        gridOptions.pagerOption = {
-            itemsPerPage: 50,
-            currentPage: 0,
-            itemsPerPageArray: [10, 20, 50, 100, 500]
+        suspiciousCustomerReportService.gridOptions = {
+            customizeHeader: true,
+            gridExpandHeight: 180,
+            marginRight: 0,
+            showTree: true,
+            showPager: true,
+            customPager: true,
+            pagerOption: {
+                itemsPerPage: suspiciousCustomerReportService._pageSize,
+                currentPage: suspiciousCustomerReportService._pageIndex,
+                totalItem: data.TotalItem,
+                itemsPerPageArray: [10, 20, 50, 100, 500],
+                pagerSelectCallBack: reRenderAfterPaged
+            }
         };
 
-        $("#customerReportId").fanexGrid(gridOptions);
+        suspiciousCustomerReportService.gridOptions.bodyRows = bodyRows;
+        suspiciousCustomerReportService.gridOptions.groupHeaderRows = customHeader;
+        suspiciousCustomerReportService.gridOptions.columns = columnHeaders;
+
+        $("#customerReportId").fanexGrid(suspiciousCustomerReportService.gridOptions);
     };
 
     /*
-    * Re-render customer report.
+    * Re-rendering.
     */
-    function reRenderBodyAfterSort(rows) {
-        $.each(rows, function (index, item) {
-            item.Columns[0].Value = index + 1;
-        });
+    function reRenderAfterPaged(pageIndex, itemsPerPage) {
+        suspiciousCustomerReportService._pageSize = itemsPerPage;
+        suspiciousCustomerReportService._pageIndex = pageIndex;
+        suspiciousCustomerReportService.gridOptions.pagerOption.currentPage = pageIndex;
+        suspiciousCustomerReportService.querySuspiciousCustomer();
 
-        gridOptions.bodyRows = rows;
-
-        $('#customerReportId').fanexGrid(gridOptions);
-
-        return rows;
+        return false;
     }
 
     /*
@@ -83,7 +85,7 @@
             var suspiciousCustomer = suspiciousCustomers[i];
             var currentRow = {
                 Columns: [
-                        { Name: "Row", Value: i + 1 },
+                        { Name: "Row", Value: suspiciousCustomer.Row },
                         { Name: "Member", Value: suspiciousCustomer.Customer.CustName },
                         { Name: "Group", Value: suspiciousCustomer.Group.GroupName },
                         { Name: "SuspiciousTime", Value: suspiciousCustomer.SuspiciousTime },
@@ -113,9 +115,7 @@
             { HeaderText: "#", Width: 50, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Member", Width: 120, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Group", Width: 250, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Suspicious Time", Width: 125, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right",
-                Sort: true, SortType: 'number'
-            },
+            { HeaderText: "Suspicious Time", Width: 125, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right" },
             { HeaderText: month1, Width: 110, Name: month1 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
                 FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$'
             },
