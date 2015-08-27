@@ -49,6 +49,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="SuspiciousCustomer\dbo.FD_NewSuspiciousCustomersGet.StoredProcedure.sql" />
+    <Content Include="SuspiciousCustomer\dbo.FD_SuspiciousCustomerGetById.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_SuspiciousCustomerInsert.StoredProcedure.sql" />
     <Content Include="CaseGroup\dbo.FD_CaseGroupDelete.StoredProcedure.sql" />
     <Content Include="CaseGroup\dbo.FD_CaseGroupGetAll.StoredProcedure.sql" />
