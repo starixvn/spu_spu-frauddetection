@@ -292,7 +292,7 @@ input[type="submit"], .btn-primary,
 
 /* Start modify the datetimepicker control */
 [class^="icon-"], [class*=" icon-"] {
-    background-image: url("/Areas/FraudDetection/App_Themes/Images/glyphicons-halflings.png");
+    background-image: url("../App_Themes/Images/glyphicons-halflings.png");
     background-position: -192px -120px;
     background-repeat: no-repeat;
     display: inline-block;
@@ -337,7 +337,7 @@ input[type="submit"], .btn-primary,
 /* Start More Information */
 .more-info
 {
-    background-image: url("/Areas/FraudDetection/App_Themes/Images/icons.png");
+    background-image: url("../App_Themes/Images/icons.png");
     background-position: -28px -28px;
     background-repeat: no-repeat;
     display: inline-block;

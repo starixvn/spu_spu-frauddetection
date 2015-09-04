@@ -296,6 +296,7 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\basic-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\glyphicons-halflings.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="Areas\FraudDetection\Controllers\FraudCaseDetailController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MatchMonitoringController.cs" />
