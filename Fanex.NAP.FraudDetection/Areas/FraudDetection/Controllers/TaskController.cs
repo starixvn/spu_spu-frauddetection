@@ -133,7 +133,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     matchSize);
             criteria.TaskPreconditions = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.PreCondition).GenerateQuery();
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();
-            
+
+            Fanex.Logging.Logger.Log.Error("TaskRules: " + criteria.TaskRules, "Fraud-Detection-Auto-UAT");
             var result = _taskService.UpdateTask(criteria);
             if (result.Code == 0)
             {
