@@ -34,7 +34,7 @@
     <div id="caseid" style="display: none;">@Model.TaskInformation.CaseId</div>
     <div id="taskid" style="display: none;">@Model.TaskInformation.TaskId</div>
     <div id="onUserid" style="display: none;">@Model.OnUserId</div>
-    <div id="accordion" style="width: 720px;">
+    <div id="accordion" style="width: 800px;">
         <h3 id="accordionBlockTaskInfo">
             Task Information</h3>
         <div>
@@ -189,7 +189,7 @@
                                 <td>
                                     <input id="cb_@rowName" type="checkbox">
                                 </td>
-                                <td style="width: 610px;">
+                                <td style="width: 690px;">
                                     <div id="div_@rowName" data-formattedcontent="@configsFormatter[i]" data-rawcontent="@configsOriginal[i]" data-configid="@configIdsForEachPrecond">@configsOriginal[i].Replace("#", " ")</div>
                                 </td>
                                 <td>
@@ -249,6 +249,7 @@
                     <option value="LessThan"><</option>
                     <option value="LessThanOrEqual"><=</option>
                 </select>
+                <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
                 <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                     @foreach (var config in Model.RuleConfigurations)
                     {
@@ -271,7 +272,6 @@
                         <option value="@bettype.BettypeId">@bettype.BettypeName</option>
                     }
                 </select>
-                <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
                 <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"
                     style="display: none;"></i>
@@ -314,7 +314,7 @@
                                         <td>
                                             <input id="cb_@ruleRowName" type="checkbox">
                                         </td>
-                                        <td style="width: 610px;">
+                                        <td style="width: 690px;">
                                             <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
                                         </td>
                                         <td>

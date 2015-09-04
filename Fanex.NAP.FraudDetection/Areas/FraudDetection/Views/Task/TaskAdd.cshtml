@@ -33,7 +33,7 @@
 {
     <div id="caseid" style="display: none;">@Model.TaskInformation.CaseId</div>
     <div id="onUserid" style="display: none;">@Model.OnUserId</div>
-    <div id="accordion" style="width: 720px;">
+    <div id="accordion" style="width: 800px;">
         <h3 id="accordionBlockTaskInfo">
             Task Information</h3>
         <div>
@@ -221,6 +221,7 @@
                     <option value="LessThan"><</option>
                     <option value="LessThanOrEqual"><=</option>
                 </select>
+                <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
                 <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                     @foreach (var config in Model.RuleConfigurations)
                     {
@@ -250,7 +251,6 @@
                         <option value="@group.GroupId" >@group.GroupName</option>
                     }
                 </select>
-                <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
                 <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"
                     style="display: none;"></i>

@@ -190,8 +190,11 @@
         if (keySelectedValue == "Match State") {
             if (valueSelectedValue.toLowerCase() == "scanned") {
                 taskService.IsCheckNotScanned = false;
-            }
-            ;
+            };
+        }
+
+        if ($("#ruleConfigCompare").prop("checked") == true && keySelectedValue == "Stake") {
+            valueSelectedValue = $("#ruleConfigControlTextbox").val() + " " + valueSelectedValue;
         }
 
         return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
@@ -241,6 +244,11 @@
 
         if (keySelectedValue == "TransDate" && valueSelectedValue == "In Danger Period")
             return "NEARTHEGOAL";
+
+        if ($("#ruleConfigCompare").prop("checked") == true && keySelectedValue == "Stake") {
+            valueSelectedValue = $("#ruleConfigControlTextbox").val() + "*0.01*" + valueSelectedValue;
+        }
+
         return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
     };
 
@@ -358,9 +366,9 @@
         var configIds = taskService.GetSelectedConfigIds(parentName);
 
         var blockOfTableRow = "<tr id='" + tableName + rowNumber + "'><td><input type='checkbox' id='cb_" + tableName + rowNumber + "' /></td>";
-        blockOfTableRow += "<td style='width: 610px;'><div id='div_" + tableName + rowNumber + "' data-configid='" + configIds + "' data-rawcontent='" + ruleString + "' data-formattedcontent='" + formattedRuleString + "'>" + ruleString + "</div></td>";
+        blockOfTableRow += "<td style='width: 690px;'><div id='div_" + tableName + rowNumber + "' data-configid='" + configIds + "' data-rawcontent='" + ruleString + "' data-formattedcontent='" + formattedRuleString + "'>" + ruleString + "</div></td>";
         var url = SPU.getAbsoluteUrl('Areas/FraudDetection/App_Themes/Images/Delete.gif');
-        blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='"+ url + "' onclick='taskService.RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
+        blockOfTableRow += "<td><img style='cursor: pointer; cursor: hand;' src='" + url + "' onclick='taskService.RemoveOneRuleFromTable(@" + tableName + "@," + rowNumber + ")' /></td></tr>";
         blockOfTableRow = blockOfTableRow.replace(/@/g, '"');
 
         var targetObject = "#" + tableName + " tr:last";
@@ -394,6 +402,13 @@
         } else {
             if ($("#ruleConfigCompare").prop("checked") == false) {
                 taskService.renderConfigControl("ruleConfigControl", selectedValue, controlType);
+            } else {
+                var selectingRuleKey = $('#ruleConfigKey').val();
+                if (selectingRuleKey == "Stake") {
+                    $("#ruleConfigControlTextbox").css("display", "inline-block");
+                } else {
+                    $("#ruleConfigControlTextbox").css("display", "none");
+                }
             }
         }
     };
@@ -484,6 +499,15 @@
         if ($(currentObj).prop("checked") == true) {
             var relevantObjects = '[id^="' + parentName + 'Control"]';
             $(relevantObjects).css("display", "none");
+            var selectingRuleKey = $('#ruleConfigKey').val();
+            if (!isPrecondition) {
+                if (selectingRuleKey == "Stake") {
+                    $("#" + parentName + "ControlTextbox").css("display", "inline-block");
+                } else {
+                    $("#" + parentName + "ControlTextbox").css("display", "none");
+                }
+            }
+
             $("#" + parentName + "ControlComboBoxKeyClone").css("display", "inline-block");
         } else {
             var selectedOption = $("#" + parentName + "Key").find(":selected");
