@@ -7,6 +7,8 @@
     suspiciousCustomerReportService._pageIndex = 0;
     suspiciousCustomerReportService._pageSize = 50;
 
+    suspiciousCustomerReportService.customersDetailed = [];
+
     suspiciousCustomerReportService.searchParams = {
         CustName: '',
         GroupId: -1,
@@ -15,6 +17,7 @@
     };
 
     suspiciousCustomerReportService.querySuspiciousCustomer = function () {
+        suspiciousCustomerReportService.customersDetailed = [];
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
         suspiciousCustomerReportService.searchParams.PageSize = suspiciousCustomerReportService._pageSize;
         suspiciousCustomerReportService.searchParams.PageIndex = suspiciousCustomerReportService._pageIndex + 1;
@@ -26,19 +29,61 @@
         });
     };
 
+    suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId) {
+        if (suspiciousCustomerReportService.customersDetailed.indexOf(custId) === -1) {
+            suspiciousCustomerReportFactory.getSuspiciousCustomerStatistic(custId).success(function (result) {
+                $('#' + custId).css('color', 'blue');
+                $('#' + custId).attr('title', 'tooltip');
+                $('#' + custId).tooltip({
+                    content: createCusomerWinlossTable(result),
+                    position: {
+                        my: "left bottom",
+                        at: "left top-10"
+                    }
+                });
+
+                suspiciousCustomerReportService.customersDetailed.push(custId);
+
+                $('#' + custId).mouseout();
+                $('#' + custId).mouseover();
+
+                setTimeout(function () { $('#' + custId).mouseout(); }, 3000);
+            });
+        }
+    };
+
+    function createCusomerWinlossTable(customerWinloss) {
+        var result = "<table>" +
+            "<tr><th>Month</th><th>Turnover</th><th>Win Loss</th><th>Margin</th></tr>";
+
+        for (var i = 0; i < customerWinloss.length; i++) {
+            var month = customerWinloss[i].Month;
+            var turnover = customerWinloss[i].Turnover !== null ? numeral(customerWinloss[i].Turnover).format(formatConstant.TWO_DECIMAL_NUMBER) : 'N/A';
+            var winLoss = customerWinloss[i].MemberWinlost !== null ? numeral(customerWinloss[i].MemberWinlost).format(formatConstant.TWO_DECIMAL_NUMBER) : 'N/A';
+            var margin = customerWinloss[i].Margin !== null ? numeral(customerWinloss[i].Margin).format(formatConstant.TWO_DECIMAL_PERCENT_NUMBER) : 'N/A';
+
+            result += "<tr><td>" + month +
+                "</td><td>" + turnover +
+                "</td><td>" + winLoss +
+                "</td><td>" + margin +
+                "</td></tr>";
+        }
+
+        result += "</table>";
+
+        return result;
+    }
+
     /*
     * Render customer report.
     */
     var renderCustomerReportTable = function (data) {
-
         var suspiciousCustomers = data.SuspiciousCustomers;
         var months = data.Months;
-        var columnHeaders = generateColumnHeaders(months);
-        var customHeader = generateCustomColumnHeaders(months);
+        var columnHeaders = generateColumnHeaders();
         var bodyRows = generateBodyRows(months, suspiciousCustomers);
 
         suspiciousCustomerReportService.gridOptions = {
-            customizeHeader: true,
             gridExpandHeight: 180,
             marginRight: 0,
             showTree: true,
@@ -54,7 +99,6 @@
         };
 
         suspiciousCustomerReportService.gridOptions.bodyRows = bodyRows;
-        suspiciousCustomerReportService.gridOptions.groupHeaderRows = customHeader;
         suspiciousCustomerReportService.gridOptions.columns = columnHeaders;
 
         $("#customerReportId").fanexGrid(suspiciousCustomerReportService.gridOptions);
@@ -64,6 +108,8 @@
     * Re-rendering.
     */
     function reRenderAfterPaged(pageIndex, itemsPerPage) {
+        suspiciousCustomerReportService.customersDetailed = [];
+
         suspiciousCustomerReportService._pageSize = itemsPerPage;
         suspiciousCustomerReportService._pageIndex = pageIndex;
         suspiciousCustomerReportService.gridOptions.pagerOption.currentPage = pageIndex;
@@ -77,9 +123,6 @@
     */
     var generateBodyRows = function (months, suspiciousCustomers) {
         var rows = [];
-        var month1 = months[0];
-        var month2 = months[1];
-        var month3 = months[2];
 
         for (var i = 0; i < suspiciousCustomers.length; i++) {
             var suspiciousCustomer = suspiciousCustomers[i];
@@ -89,12 +132,7 @@
                         { Name: "Member", Value: suspiciousCustomer.Customer.CustName },
                         { Name: "Group", Value: suspiciousCustomer.Group.GroupName },
                         { Name: "SuspiciousTime", Value: suspiciousCustomer.SuspiciousTime },
-                        { Name: month1 + "WinLoss", Value: suspiciousCustomer.WinLoss[0] !== null ? suspiciousCustomer.WinLoss[0] : "N/A" },
-                        { Name: month2 + "WinLoss", Value: suspiciousCustomer.WinLoss[1] !== null ? suspiciousCustomer.WinLoss[1] : "N/A" },
-                        { Name: month3 + "WinLoss", Value: suspiciousCustomer.WinLoss[2] !== null ? suspiciousCustomer.WinLoss[2] : "N/A" },
-                        { Name: month1 + "Margin", Value: suspiciousCustomer.Margins[0] !== null ? suspiciousCustomer.Margins[0] : "N/A" },
-                        { Name: month2 + "Margin", Value: suspiciousCustomer.Margins[1] !== null ? suspiciousCustomer.Margins[1] : "N/A" },
-                        { Name: month3 + "Margin", Value: suspiciousCustomer.Margins[2] !== null ? suspiciousCustomer.Margins[2] : "N/A" }
+                        { Name: "WinlossDetail", Value: suspiciousCustomer.Customer, CustomCellRender: statisticColumn }
                     ]
             };
 
@@ -107,56 +145,16 @@
     /*
     * Create the header for rendering.
     */
-    var generateColumnHeaders = function (months) {
-        var month1 = months[0];
-        var month2 = months[1];
-        var month3 = months[2];
+    var generateColumnHeaders = function () {
         var columnHeaders = [
-            { HeaderText: "#", Width: 50, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Member", Width: 120, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Group", Width: 250, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Suspicious Time", Width: 125, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: month1, Width: 110, Name: month1 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$'
-            },
-            { HeaderText: month2, Width: 110, Name: month2 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$'
-            },
-            { HeaderText: month3, Width: 110, Name: month3 + "WinLoss", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_NUMBER, IsAbs: false, FormatNegative: '$'
-            },
-            { HeaderText: month1, Width: 85, Name: month1 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$'
-            },
-            { HeaderText: month2, Width: 85, Name: month2 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$'
-            },
-            { HeaderText: month3, Width: 85, Name: month3 + "Margin", HeaderAlign: "center", CellAlign: "right",
-                FormatNumber: formatConstant.TWO_DECIMAL_PERCENT_NUMBER, IsAbs: false, FormatNegative: '$'
-            }
+            { HeaderText: "#", Width: 70, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Member", Width: 150, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Group", Width: 300, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Suspicious Time", Width: 70, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: "Winloss Detail", Width: 80, Name: "WinlossDetail", HeaderAlign: "center", CellAlign: "center" }
         ];
 
         return columnHeaders;
-    };
-
-    /*
-    * Create the custom header for rendering.
-    */
-    var generateCustomColumnHeaders = function (months) {
-        var customColumnHeaders = [
-            {
-                Columns: [
-                    { HeaderText: "#", Name: "Row", HeaderAlign: "center", MergeRowNumber: 2 },
-                    { HeaderText: "Member", Name: "Member", HeaderAlign: "center", MergeRowNumber: 2 },
-                    { HeaderText: "Group", Name: "Group", HeaderAlign: "center", MergeRowNumber: 2 },
-                    { HeaderText: "Suspicious Time", Name: "SuspiciousTime", HeaderAlign: "center", MergeRowNumber: 2 },
-                    { HeaderText: "Win Loss", Name: months[0] + "WinLoss", HeaderAlign: "center", MergeColNumber: 3 },
-                    { HeaderText: "Margin %", Name: months[0] + "Margin", HeaderAlign: "center", MergeColNumber: 3 }
-                ]
-            }
-        ];
-
-        return customColumnHeaders;
     };
 
     /*
@@ -178,66 +176,11 @@
         MMM_DD_YYYY_H_M_STRING: 'MMM DD, YYYY HH:mm'
     };
 
+    function statisticColumn(cell) {
+        return "<span id='" + cell.Value.CustId + "' class='glyphicon glyphicon-stats' title='Click to show Winloss Detail'" +
+            "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic(" + cell.Value.CustId + ");' " +
+            "style='cursor: pointer'>";
+    }
+
     return suspiciousCustomerReportService;
-})(jQuery);
-
-var waitingDialog = waitingDialog || (function ($) {
-    'use strict';
-
-    // Creating modal dialog's DOM
-    var $dialog = $(
-        '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
-        '<div class="modal-dialog modal-m">' +
-        '<div class="modal-content">' +
-        '<div class="modal-header"><h4 style="margin:0;"></h4></div>' +
-        '<div class="modal-body">' +
-        '<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
-        '</div>' +
-        '</div></div></div>');
-
-    return {
-        /**
-        * Opens our dialog
-        * @param message Custom message
-        * @param options Custom options:
-        options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
-        options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
-        */
-        show: function (message, options) {
-            // Assigning defaults
-            if (typeof options === 'undefined') {
-                options = {};
-            }
-            if (typeof message === 'undefined') {
-                message = 'Loading';
-            }
-            var settings = $.extend({
-                dialogSize: 'm',
-                progressType: '',
-                onHide: null // This callback runs after the dialog was hidden
-            }, options);
-
-            // Configuring dialog
-            $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
-            $dialog.find('.progress-bar').attr('class', 'progress-bar');
-            if (settings.progressType) {
-                $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
-            }
-            $dialog.find('h4').text(message);
-            // Adding callbacks
-            if (typeof settings.onHide === 'function') {
-                $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function () {
-                    settings.onHide.call($dialog);
-                });
-            }
-            // Opening dialog
-            $dialog.modal();
-        },
-        /**
-        * Closes dialog
-        */
-        hide: function () {
-            $dialog.modal('hide');
-        }
-    };
 })(jQuery);

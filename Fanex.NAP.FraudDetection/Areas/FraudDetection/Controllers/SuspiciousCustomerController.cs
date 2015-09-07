@@ -16,6 +16,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Web.Mvc;
     using FD.Lib.Criteria.Group;
     using FD.Lib.Criteria.Reports;
+    using FD.Lib.Criteria.SuspiciousStatistic;
+    using FD.Lib.DTO;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
 
@@ -28,11 +30,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         private readonly CustomerReportService _customerReportService;
 
+        private readonly CustomerService _customerService;
+
         public SuspiciousCustomerController()
         {
             _groupService = new GroupService();
 
             _customerReportService = new CustomerReportService();
+
+            _customerService = new CustomerService();
         }
 
         /// <summary>
@@ -59,9 +65,27 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var result = new
             {
                 suspiciousCustomers.SuspiciousCustomers,
-                suspiciousCustomers.TotalItem,
-                Months = GetThreeLatestMonths()
+                suspiciousCustomers.TotalItem
             };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Get Suspicious Customer Statistic.
+        /// </summary>
+        /// <param name="custId">The customer ID.</param>
+        /// <returns>The ActionResult.</returns>
+        [HttpGet]
+        public ActionResult GetSuspiciousCustomerStatistic(int custId)
+        {
+            var marginCriteria = new CustomerWinlostSelectCriteria
+            {
+                ListCustIDs = custId.ToString(CultureInfo.InvariantCulture)
+            };
+
+            var statistic = _customerService.GetMarginCustomerByCustId(marginCriteria);
+            var result = GetThreeLatestMonthStatistic(statistic);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -69,16 +93,26 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <summary>
         /// Get 3 latest months.
         /// </summary>
-        /// <returns>List of months.</returns>
-        private static IEnumerable<string> GetThreeLatestMonths()
+        /// <param name="margins">The margins statistic.</param>
+        /// <returns>List of result.</returns>
+        private static IEnumerable<dynamic> GetThreeLatestMonthStatistic(IEnumerable<RawMarginCustomer> margins)
         {
-            var result = new List<string>();
+            var result = new List<dynamic>();
             var startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-2);
             for (var i = 0; i < 3; i++)
             {
                 var month = startMonth.AddMonths(i);
+                var margin = margins.FirstOrDefault(m => m.WinlostDate == month);
 
-                result.Add(month.ToString("MMM-yyyy"));
+                var customerWinloss = new
+                {
+                    Month = month.ToString("MMM-yyyy"),
+                    Turnover = margin != null ? margin.Turnover : null,
+                    MemberWinlost = margin != null ? margin.MemberWinlost : null,
+                    Margin = margin != null ? margin.Margin : null
+                };
+
+                result.Add(customerWinloss);
             }
 
             return result;

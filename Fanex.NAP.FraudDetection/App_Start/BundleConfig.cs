@@ -36,7 +36,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
             BundleResolver.Current = new CustomBundleResolver();
 
             var css = new Bundle("~/bundles/coreCss")
-            .IncludeDirectory("~/Content/jquery-ui/base/", "*.css")
+            .Include("~/Content/jquery-ui/base/jquery-ui.css")
             .Include("~/Content/bootstrap/bootstrap.less")
             .Include("~/Content/Plugin/multi-select-control.css")
             .Include("~/Content/Core/site.less");
@@ -102,13 +102,14 @@ namespace Fanex.NAP.FraudDetection.AppStart
             var coreJs = new Bundle("~/bundles/coreJs")
                 .Include(
                 "~/Scripts/jquery-1.9.0.js",
-                "~/Scripts/jquery-ui-1.11.1.js",
+                "~/Scripts/jquery-ui-1.11.4.js",
                 "~/Scripts/jquery.number.js",
                 "~/Scripts/Plugin/multi-select-control.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/Core/site.js",
                 "~/Scripts/Core/AlertService.js",
                 "~/Scripts/Core/DialogService.js",
+                "~/Scripts/Core/waiting-dialog.js",
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
