@@ -31,6 +31,7 @@
             confirm: function () {
                 mailMasterFactory.editMailStatus(mailId, !isActive).success(function (result) {
                     if (result.IsSuccessful) {
+                        isActive = !isActive;
                         mailMasterService.queryMail();
                     }
 
@@ -46,6 +47,14 @@
             },
             confirmButton: "OK",
             cancelButton: "Cancel"
+        });
+
+        $(document).on('hidden.bs.modal', function () {
+            if (!isActive) {
+                $(obj).removeClass('ico-tick').addClass('ico-untick');
+            } else {
+                $(obj).removeClass('ico-untick').addClass('ico-tick');
+            }
         });
     };
 

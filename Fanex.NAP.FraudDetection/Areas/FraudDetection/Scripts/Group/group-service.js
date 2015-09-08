@@ -94,6 +94,7 @@
             text: "Are you sure you really want to " + active + "this group?",
             confirm: function () {
                 groupFactory.editGroupStatus(groupId, !isActive).success(function (response) {
+                    isActive = !isActive;
                     AlertService.showAlert(response);
                 });
             },
@@ -106,6 +107,14 @@
             },
             confirmButton: "OK",
             cancelButton: "Cancel"
+        });
+
+        $(document).on('hidden.bs.modal', function () {
+            if (!isActive) {
+                $(obj).removeClass('ico-tick').addClass('ico-untick');
+            } else {
+                $(obj).removeClass('ico-untick').addClass('ico-tick');
+            }
         });
     };
 

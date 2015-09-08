@@ -61,6 +61,7 @@
 
                 caseFactory.editTaskStatus(criteria).success(function (response) {
                     if (response.IsSuccessful) {
+                        isActive = !isActive;
                         caseDetailService.Search();
                     }
 
@@ -76,6 +77,14 @@
             },
             confirmButton: "OK",
             cancelButton: "Cancel"
+        });
+
+        $(document).on('hidden.bs.modal', function () {
+            if (!isActive) {
+                $(obj).removeClass('ico-tick').addClass('ico-untick');
+            } else {
+                $(obj).removeClass('ico-untick').addClass('ico-tick');
+            }
         });
     };
 

@@ -113,7 +113,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
-                "~/Scripts/jquery.confirm.min.js",
+                "~/Scripts/jquery.confirm.js",
                 "~/Scripts/numeral.min.js");
 
             var angularJs = new Bundle("~/bundles/angularJs")

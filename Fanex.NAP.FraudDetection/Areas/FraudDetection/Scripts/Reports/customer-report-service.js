@@ -8,6 +8,7 @@
     suspiciousCustomerReportService._pageSize = 50;
 
     suspiciousCustomerReportService.customersDetailed = [];
+    suspiciousCustomerReportService.isSearchable = true;
 
     suspiciousCustomerReportService.searchParams = {
         CustName: '',
@@ -17,23 +18,27 @@
     };
 
     suspiciousCustomerReportService.querySuspiciousCustomer = function () {
-        removeTooltip();
-        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
-        suspiciousCustomerReportService.searchParams.PageSize = suspiciousCustomerReportService._pageSize;
-        suspiciousCustomerReportService.searchParams.PageIndex = suspiciousCustomerReportService._pageIndex + 1;
+        if (suspiciousCustomerReportService.isSearchable) {
+            removeTooltip();
+            waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+            suspiciousCustomerReportService.searchParams.PageSize = suspiciousCustomerReportService._pageSize;
+            suspiciousCustomerReportService.searchParams.PageIndex = suspiciousCustomerReportService._pageIndex + 1;
 
-        suspiciousCustomerReportFactory.getSuspiciousCustomerReport(suspiciousCustomerReportService.searchParams).success(function (result) {
-            renderCustomerReportTable(result);
+            suspiciousCustomerReportFactory.getSuspiciousCustomerReport(suspiciousCustomerReportService.searchParams).success(function(result) {
+                renderCustomerReportTable(result);
 
-            waitingDialog.hide();
-        });
+                waitingDialog.hide();
+            });
+        }
     };
 
     suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId) {
-        if (suspiciousCustomerReportService.customersDetailed.indexOf(custId) === -1) {
+        if (suspiciousCustomerReportService.customersDetailed.indexOf(custId) === -1 && suspiciousCustomerReportService.isSearchable) {
             waitingTooltip(custId);
-
+            suspiciousCustomerReportService.isSearchable = false;
             suspiciousCustomerReportFactory.getSuspiciousCustomerStatistic(custId).success(function (result) {
+                suspiciousCustomerReportService.isSearchable = true;
+
                 $('#' + custId).tooltip({
                     content: createCusomerWinlossTable(result)
                 });
@@ -75,7 +80,7 @@
                 "<div class='spinner-loader'>Loading…</div></div></div>",
             position: {
                 my: "left bottom",
-                at: "left top-10"
+                at: "left+30 top+16"
             }
         }).click(function () {
             if ($(this).tooltip('option', 'disabled')) {
