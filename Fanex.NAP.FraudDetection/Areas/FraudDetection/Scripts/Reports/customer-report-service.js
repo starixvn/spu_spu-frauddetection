@@ -31,27 +31,16 @@
 
     suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId) {
         if (suspiciousCustomerReportService.customersDetailed.indexOf(custId) === -1) {
-            waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+            waitingTooltip(custId);
 
             suspiciousCustomerReportFactory.getSuspiciousCustomerStatistic(custId).success(function (result) {
-                waitingDialog.hide();
-
-                $('#' + custId).css('color', 'blue');
-                $('#' + custId).attr('title', 'tooltip');
                 $('#' + custId).tooltip({
-                    content: createCusomerWinlossTable(result),
-                    position: {
-                        my: "left bottom",
-                        at: "left top-10"
-                    }
+                    content: createCusomerWinlossTable(result)
                 });
 
+                $('#' + custId).css('color', 'blue');
+
                 suspiciousCustomerReportService.customersDetailed.push(custId);
-
-                $('#' + custId).mouseout();
-                $('#' + custId).mouseover();
-
-                setTimeout(function () { $('#' + custId).mouseout(); }, 3000);
             });
         }
     };
@@ -78,11 +67,33 @@
         return result;
     }
 
+    function waitingTooltip(custId) {
+        $('#' + custId).attr('title', 'tooltip');
+        $('#' + custId).tooltip({
+            content: "<div style='width: 300px; height: 145px;'>" +
+                "<div style='position:absolute;left:45%;top:40%;'>" +
+                "<div class='spinner-loader'>Loading…</div></div></div>",
+            position: {
+                my: "left bottom",
+                at: "left top-10"
+            }
+        }).click(function () {
+            if ($(this).tooltip('option', 'disabled')) {
+                $(this).tooltip('option', { disabled: false }).tooltip('open');
+                $('#' + custId).css('color', 'blue');
+            }
+        }).on('mouseout focusout mouseover mouseenter mouseleave', function (event) {
+            event.stopImmediatePropagation();
+        });
+
+        $('#' + custId).tooltip("open");
+    }
+
     function removeTooltip() {
         for (var i = 0; i < suspiciousCustomerReportService.customersDetailed.length; i++) {
             var custId = suspiciousCustomerReportService.customersDetailed[i];
 
-            $('#' + custId).mouseout();
+            $('#' + custId).tooltip("destroy");
         }
 
         suspiciousCustomerReportService.customersDetailed = [];
@@ -165,7 +176,7 @@
             { HeaderText: "Member", Width: 150, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Group", Width: 300, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Suspicious Time", Width: 70, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Winloss Detail", Width: 80, Name: "WinlossDetail", HeaderAlign: "center", CellAlign: "center" }
+            { HeaderText: "Win Loss Detail", Width: 80, Name: "WinlossDetail", HeaderAlign: "center", CellAlign: "center" }
         ];
 
         return columnHeaders;
@@ -191,7 +202,7 @@
     };
 
     function statisticColumn(cell) {
-        return "<span id='" + cell.Value.CustId + "' class='glyphicon glyphicon-stats' title='Click to show Winloss Detail'" +
+        return "<span id='" + cell.Value.CustId + "' class='glyphicon glyphicon-stats' title='Click to show Win Loss Detail'" +
             "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic(" + cell.Value.CustId + ");' " +
             "style='cursor: pointer'>";
     }
