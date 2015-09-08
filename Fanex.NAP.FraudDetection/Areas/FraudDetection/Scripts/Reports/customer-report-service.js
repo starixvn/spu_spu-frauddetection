@@ -17,7 +17,7 @@
     };
 
     suspiciousCustomerReportService.querySuspiciousCustomer = function () {
-        suspiciousCustomerReportService.customersDetailed = [];
+        removeTooltip();
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
         suspiciousCustomerReportService.searchParams.PageSize = suspiciousCustomerReportService._pageSize;
         suspiciousCustomerReportService.searchParams.PageIndex = suspiciousCustomerReportService._pageIndex + 1;
@@ -31,7 +31,11 @@
 
     suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId) {
         if (suspiciousCustomerReportService.customersDetailed.indexOf(custId) === -1) {
+            waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+
             suspiciousCustomerReportFactory.getSuspiciousCustomerStatistic(custId).success(function (result) {
+                waitingDialog.hide();
+
                 $('#' + custId).css('color', 'blue');
                 $('#' + custId).attr('title', 'tooltip');
                 $('#' + custId).tooltip({
@@ -74,6 +78,16 @@
         return result;
     }
 
+    function removeTooltip() {
+        for (var i = 0; i < suspiciousCustomerReportService.customersDetailed.length; i++) {
+            var custId = suspiciousCustomerReportService.customersDetailed[i];
+
+            $('#' + custId).mouseout();
+        }
+
+        suspiciousCustomerReportService.customersDetailed = [];
+    }
+
     /*
     * Render customer report.
     */
@@ -108,7 +122,7 @@
     * Re-rendering.
     */
     function reRenderAfterPaged(pageIndex, itemsPerPage) {
-        suspiciousCustomerReportService.customersDetailed = [];
+        removeTooltip();
 
         suspiciousCustomerReportService._pageSize = itemsPerPage;
         suspiciousCustomerReportService._pageIndex = pageIndex;
