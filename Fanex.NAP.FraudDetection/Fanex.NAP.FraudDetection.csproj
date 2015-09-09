@@ -530,7 +530,7 @@
       <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="Content\jquery-ui\base\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
-    <Content Include="Content\jquery-ui\base\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <None Include="Content\jquery-ui\base\images\ui-bg_diagonals-thick_20_666666_40x40.png.bk" />
     <Content Include="Content\jquery-ui\base\images\ui-bg_flat_10_000000_40x100.png" />
     <Content Include="Content\jquery-ui\base\images\ui-bg_glass_100_f6f6f6_1x400.png" />
     <Content Include="Content\jquery-ui\base\images\ui-bg_glass_100_fdf5ce_1x400.png" />

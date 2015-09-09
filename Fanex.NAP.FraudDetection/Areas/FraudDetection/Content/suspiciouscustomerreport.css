@@ -33,6 +33,10 @@ th, td
     font-weight: bold;
 }
 
+.suspicious-customer-report-form-search {
+    min-width: 712px;
+}
+
 @-moz-keyframes spinner-loader {
   0% {
     -moz-transform: rotate(0deg);

@@ -87,7 +87,6 @@
         } else {
             $(obj).removeClass('ico-untick').addClass('ico-tick');
         }
-
         $.confirm({
             confirmButtonClass: 'btn-green btn-customConfirm',
             cancelButtonClass: 'btn-green btn-customCancel',
@@ -100,11 +99,6 @@
                 });
             },
             cancel: function () {
-                if (!isActive) {
-                    $(obj).removeClass('ico-tick').addClass('ico-untick');
-                } else {
-                    $(obj).removeClass('ico-untick').addClass('ico-tick');
-                }
             },
             confirmButton: "OK",
             cancelButton: "Cancel"
@@ -116,6 +110,8 @@
             } else {
                 $(obj).removeClass('ico-untick').addClass('ico-tick');
             }
+
+            $(document).off('hidden.bs.modal');
         });
     };
 

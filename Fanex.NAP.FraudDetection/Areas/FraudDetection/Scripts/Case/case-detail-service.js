@@ -60,20 +60,11 @@
                 };
 
                 caseFactory.editTaskStatus(criteria).success(function (response) {
-                    if (response.IsSuccessful) {
-                        isActive = !isActive;
-                        caseDetailService.Search();
-                    }
-
+                    isActive = !isActive;
                     AlertService.showAlert(response);
                 });
             },
             cancel: function () {
-                if (!isActive) {
-                    $(obj).removeClass('ico-tick').addClass('ico-untick');
-                } else {
-                    $(obj).removeClass('ico-untick').addClass('ico-tick');
-                }
             },
             confirmButton: "OK",
             cancelButton: "Cancel"
@@ -85,6 +76,8 @@
             } else {
                 $(obj).removeClass('ico-untick').addClass('ico-tick');
             }
+
+            $(document).off('hidden.bs.modal');
         });
     };
 

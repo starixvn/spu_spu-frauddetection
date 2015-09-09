@@ -30,20 +30,11 @@
             text: "Are you sure you really want to " + active + " this mail template?",
             confirm: function () {
                 mailMasterFactory.editMailStatus(mailId, !isActive).success(function (result) {
-                    if (result.IsSuccessful) {
-                        isActive = !isActive;
-                        mailMasterService.queryMail();
-                    }
-
+                    isActive = !isActive;
                     AlertService.showAlert(result);
                 });
             },
             cancel: function () {
-                if (!isActive) {
-                    $(obj).removeClass('ico-tick').addClass('ico-untick');
-                } else {
-                    $(obj).removeClass('ico-untick').addClass('ico-tick');
-                }
             },
             confirmButton: "OK",
             cancelButton: "Cancel"
@@ -55,6 +46,8 @@
             } else {
                 $(obj).removeClass('ico-untick').addClass('ico-tick');
             }
+
+            $(document).off('hidden.bs.modal');
         });
     };
 

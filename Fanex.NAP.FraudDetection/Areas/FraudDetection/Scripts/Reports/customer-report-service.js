@@ -8,6 +8,7 @@
     suspiciousCustomerReportService._pageSize = 50;
 
     suspiciousCustomerReportService.customersDetailed = [];
+    suspiciousCustomerReportService.customerList = [];
     suspiciousCustomerReportService.isSearchable = true;
 
     suspiciousCustomerReportService.searchParams = {
@@ -20,6 +21,7 @@
     suspiciousCustomerReportService.querySuspiciousCustomer = function () {
         if (suspiciousCustomerReportService.isSearchable) {
             removeTooltip();
+            suspiciousCustomerReportService.customerList = [];
             waitingDialog.show("Please wait...", { dialogSize: 'sm' });
             suspiciousCustomerReportService.searchParams.PageSize = suspiciousCustomerReportService._pageSize;
             suspiciousCustomerReportService.searchParams.PageIndex = suspiciousCustomerReportService._pageIndex + 1;
@@ -139,6 +141,7 @@
     */
     function reRenderAfterPaged(pageIndex, itemsPerPage) {
         removeTooltip();
+        suspiciousCustomerReportService.customerList = [];
 
         suspiciousCustomerReportService._pageSize = itemsPerPage;
         suspiciousCustomerReportService._pageIndex = pageIndex;
@@ -207,9 +210,15 @@
     };
 
     function statisticColumn(cell) {
-        return "<span id='" + cell.Value.CustId + "' class='glyphicon glyphicon-stats' title='Click to show Win Loss Detail'" +
-            "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic(" + cell.Value.CustId + ",\"" + cell.Value.CustName + "\");'" +
-            "style='cursor: pointer'>";
+        if (suspiciousCustomerReportService.customerList.indexOf(cell.Value.CustId) === -1) {
+            suspiciousCustomerReportService.customerList.push(cell.Value.CustId);
+
+            return "<span id='" + cell.Value.CustId + "' class='glyphicon glyphicon-stats' title='Click to show Win Loss Detail'" +
+                "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic(" + cell.Value.CustId + ",\"" + cell.Value.CustName + "\");'" +
+                "style='cursor: pointer'>";
+        } else {
+            return "";
+        }
     }
 
     return suspiciousCustomerReportService;
