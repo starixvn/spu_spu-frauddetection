@@ -24,7 +24,7 @@
             suspiciousCustomerReportService.searchParams.PageSize = suspiciousCustomerReportService._pageSize;
             suspiciousCustomerReportService.searchParams.PageIndex = suspiciousCustomerReportService._pageIndex + 1;
 
-            suspiciousCustomerReportFactory.getSuspiciousCustomerReport(suspiciousCustomerReportService.searchParams).success(function(result) {
+            suspiciousCustomerReportFactory.getSuspiciousCustomerReport(suspiciousCustomerReportService.searchParams).success(function (result) {
                 renderCustomerReportTable(result);
 
                 waitingDialog.hide();
@@ -32,7 +32,7 @@
         }
     };
 
-    suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId) {
+    suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId, custName) {
         if (suspiciousCustomerReportService.customersDetailed.indexOf(custId) === -1 && suspiciousCustomerReportService.isSearchable) {
             waitingTooltip(custId);
             suspiciousCustomerReportService.isSearchable = false;
@@ -40,7 +40,7 @@
                 suspiciousCustomerReportService.isSearchable = true;
 
                 $('#' + custId).tooltip({
-                    content: createCusomerWinlossTable(result)
+                    content: createCusomerWinlossTable(custName, result)
                 });
 
                 $('#' + custId).css('color', 'blue');
@@ -50,8 +50,8 @@
         }
     };
 
-    function createCusomerWinlossTable(customerWinloss) {
-        var result = "<table>" +
+    function createCusomerWinlossTable(custName, customerWinloss) {
+        var result = "<table class='customer-report-statistic'>" + "<caption>Member: <b>" + custName + "</b></caption>" +
             "<tr><th>Month</th><th>Turnover</th><th>Win Loss</th><th>Margin</th></tr>";
 
         for (var i = 0; i < customerWinloss.length; i++) {
@@ -60,7 +60,7 @@
             var winLoss = customerWinloss[i].MemberWinlost !== null ? numeral(customerWinloss[i].MemberWinlost).format(formatConstant.TWO_DECIMAL_NUMBER) : 'N/A';
             var margin = customerWinloss[i].Margin !== null ? numeral(customerWinloss[i].Margin).format(formatConstant.TWO_DECIMAL_PERCENT_NUMBER) : 'N/A';
 
-            result += "<tr><td>" + month +
+            result += "<tr><td class='customer-report-statistic-month'>" + month +
                 "</td><td>" + turnover +
                 "</td><td>" + winLoss +
                 "</td><td>" + margin +
@@ -75,7 +75,7 @@
     function waitingTooltip(custId) {
         $('#' + custId).attr('title', 'tooltip');
         $('#' + custId).tooltip({
-            content: "<div style='width: 300px; height: 145px;'>" +
+            content: "<div style='width: 300px; height: 152px;'>" +
                 "<div style='position:absolute;left:45%;top:40%;'>" +
                 "<div class='spinner-loader'>Loading…</div></div></div>",
             position: {
@@ -208,7 +208,7 @@
 
     function statisticColumn(cell) {
         return "<span id='" + cell.Value.CustId + "' class='glyphicon glyphicon-stats' title='Click to show Win Loss Detail'" +
-            "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic(" + cell.Value.CustId + ");' " +
+            "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic(" + cell.Value.CustId + ",\"" + cell.Value.CustName + "\");'" +
             "style='cursor: pointer'>";
     }
 
