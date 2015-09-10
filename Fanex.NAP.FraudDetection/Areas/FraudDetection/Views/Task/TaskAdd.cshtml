@@ -254,6 +254,13 @@
                         <option value="@currency.CurrencyId">@currency.CurrencyName</option>
                     }
                 </select>
+                <select name="ruleConfigControlComboBoxcustomergroup" id="ruleConfigControlComboBoxcustomergroup"
+                    style="height: 25px; display: none;">
+                    @foreach (var group in Model.GroupList)
+                    {
+                        <option value="@group.GroupId" >@group.GroupName</option>
+                    }
+                </select>
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
                 <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"
                     style="display: none;"></i>
