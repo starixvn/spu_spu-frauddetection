@@ -26,7 +26,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
             List<CaseGroup> groups,
             List<Sport> sportList,
             List<Bettype> bettypeList,
-            List<MailMasterInfo> mailMasterList)
+            List<MailMasterInfo> mailMasterList,
+            List<Currency> currencyList)
         {
             EventList = events;
             ConfigurationList = configs;
@@ -34,6 +35,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
             SportList = sportList;
             BettypeList = bettypeList;
             MaiMasterList = mailMasterList;
+            CurrencyList = currencyList;
         }
 
         // On User ID
@@ -44,6 +46,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
 
         // Actions
         public List<Event> EventList { get; set; }
+
+        // Currencies
+        public List<Currency> CurrencyList { get; set; }
         
         // Bettypes and Sports
         public List<Bettype> BettypeList { get; set; }

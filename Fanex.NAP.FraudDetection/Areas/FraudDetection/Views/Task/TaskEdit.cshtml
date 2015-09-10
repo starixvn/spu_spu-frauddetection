@@ -266,10 +266,17 @@
                     <option value="0">Running</option>
                 </select>
                 <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype"
-                    style="height: 25px; display: none;">
+                        style="height: 25px; display: none;">
                     @foreach (var bettype in Model.BettypeList)
                     {
                         <option value="@bettype.BettypeId">@bettype.BettypeName</option>
+                    }
+                </select>
+                <select name="ruleConfigControlComboBoxcurrency" id="ruleConfigControlComboBoxcurrency"
+                    style="height: 25px; display: none;">
+                    @foreach (var currency in Model.CurrencyList)
+                    {
+                        <option value="@currency.CurrencyId">@currency.CurrencyName</option>
                     }
                 </select>
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })

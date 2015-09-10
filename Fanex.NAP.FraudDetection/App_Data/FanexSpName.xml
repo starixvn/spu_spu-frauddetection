@@ -33,6 +33,7 @@
              DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_TaskGetForExecuting" SpName="FD_TaskGetForExecuting"
          DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CurrencyGetAll" SpName="FD_CurrencyGetAll" DbName="DBFD.bodb02.bodbSPUNet" />
   </Function>
 
   <Function Name="FD_Configurations">

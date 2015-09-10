@@ -8,6 +8,8 @@
 //   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
+using FD.Lib.Criteria.Common;
+
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
@@ -174,13 +176,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var bettypes = bettypeService.GetAllSBBettypes(new BettypeGetAllCriteria());
             var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria());
 
+            // Currency
+            var currencyService = new CurrencyService();
+            var currencies = currencyService.GetCurrencies(new CurrencyGetAllCriteria());
+
             var taskViewModel = new TaskViewModel(
                 events.ToList(),
                 configs.ToList(),
                 groups,
                 sports.ToList(),
                 bettypes.ToList(),
-                mailMasters.ToList()) { OnUserId = currentUserId, TaskInformation = new Task { CaseId = fraudCaseId, IsActive = true } };
+                mailMasters.ToList(),
+                currencies.ToList()) { OnUserId = currentUserId, TaskInformation = new Task { CaseId = fraudCaseId, IsActive = true } };
 
             return taskViewModel;
         }
