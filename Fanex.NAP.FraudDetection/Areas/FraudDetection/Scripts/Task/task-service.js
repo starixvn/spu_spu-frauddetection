@@ -244,7 +244,10 @@
 
         if (keySelectedValue == "TransDate" && valueSelectedValue == "In Danger Period")
             return "NEARTHEGOAL";
-
+        
+        if (keySelectedValue == "Arbitrage" && valueSelectedValue == "Yes")
+            return "Arbitrage";
+        
         if ($("#ruleConfigCompare").prop("checked") == true && keySelectedValue == "Stake") {
             valueSelectedValue = $("#ruleConfigControlTextbox").val() + "*0.01*" + valueSelectedValue;
         }
