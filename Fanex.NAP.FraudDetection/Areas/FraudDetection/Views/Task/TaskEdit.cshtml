@@ -145,6 +145,13 @@
                         <option value="@sport.SportId">@sport.SportName</option>
                     }
                 </select>
+                <select name="preconditionConfigControlComboBoxcustomergroup" id="preconditionConfigControlComboBoxcustomergroup"
+                    style="height: 25px; display: none;">
+                    @foreach (var group in Model.GroupList)
+                    {
+                        <option value="@group.GroupId" >@group.GroupName</option>
+                    }
+                </select>
                 <input type="text" id="preconditionConfigControlTextbox" style="width: 100px; height: 25px;
                     display: none;" />
                 @Html.TextBox("preconditionConfigControlDatetimePicker", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:100px;" })
@@ -266,7 +273,7 @@
                     <option value="0">Running</option>
                 </select>
                 <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     @foreach (var bettype in Model.BettypeList)
                     {
                         <option value="@bettype.BettypeId">@bettype.BettypeName</option>
@@ -317,17 +324,17 @@
                             configIdsForEachRule += rule.ConfigId + "#";
                         }
                         configIdsForEachRule = configIdsForEachRule.Remove(configIdsForEachRule.Length - 1);
-                                    <tr id="@ruleRowName">
-                                        <td>
-                                            <input id="cb_@ruleRowName" type="checkbox">
-                                        </td>
-                                        <td style="width: 690px;">
-                                            <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
-                                        </td>
-                                        <td>
-                                            <img alt="" onclick="taskService.RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;">
-                                        </td>
-                                    </tr>
+                            <tr id="@ruleRowName">
+                                <td>
+                                    <input id="cb_@ruleRowName" type="checkbox">
+                                </td>
+                                <td style="width: 690px;">
+                                    <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
+                                </td>
+                                <td>
+                                    <img alt="" onclick="taskService.RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;">
+                                </td>
+                            </tr>
                         ruleCounter++;
                     }
 
@@ -387,38 +394,38 @@
                             selectedMailId = int.Parse(targetIds[0]);
                         }
                     }
-                <tr>
-                    <td>
-                        <div>
-                            <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" @(Model.TaskInformation.NextActionIdList.Contains("1") ? "checked" : "") />
-                            <span style="padding-bottom: 5px;">Allocate customer group to:</span>
-                        </div>
-                    </td>
-                    <td>
-                        <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;">
-                            @foreach (var group in Model.GroupList)
-                            {
-                                <option value="@group.GroupId" @(selectedGroupId == group.GroupId ? "selected" : "")>@group.GroupName</option>
-                            }
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <input type="checkbox" id="nextaction_sendMail" data-actionid="2" @(Model.TaskInformation.NextActionIdList.Contains("2") ? "checked" : "") />
-                            Send Mail
-                        </div>
-                    </td>
-                    <td>
-                        <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
-                            @foreach (var mailMaster in Model.MaiMasterList)
-                            {
-                                <option value="@mailMaster.MailId" @(selectedMailId == mailMaster.MailId ? "selected" : "")>@mailMaster.MailCode</option>
-                            }
-                        </select>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <input type="checkbox" id="nextaction_assignGroup" data-actionid="1" @(Model.TaskInformation.NextActionIdList.Contains("1") ? "checked" : "") />
+                                <span style="padding-bottom: 5px;">Allocate customer group to:</span>
+                            </div>
+                        </td>
+                        <td>
+                            <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;">
+                                @foreach (var group in Model.GroupList)
+                                {
+                                    <option value="@group.GroupId" @(selectedGroupId == group.GroupId ? "selected" : "")>@group.GroupName</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <input type="checkbox" id="nextaction_sendMail" data-actionid="2" @(Model.TaskInformation.NextActionIdList.Contains("2") ? "checked" : "") />
+                                Send Mail
+                            </div>
+                        </td>
+                        <td>
+                            <select name="nextaction_sendMail_value" id="nextaction_sendMail_value" style="height: 25px;">
+                                @foreach (var mailMaster in Model.MaiMasterList)
+                                {
+                                    <option value="@mailMaster.MailId" @(selectedMailId == mailMaster.MailId ? "selected" : "")>@mailMaster.MailCode</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
                 }
             </table>
         </div>
