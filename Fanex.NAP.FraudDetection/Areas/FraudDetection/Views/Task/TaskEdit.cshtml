@@ -108,7 +108,15 @@
                     onchange="taskService.changeConfigSelection(this, true)">
                     @foreach (var config in Model.PreconditionConfigurations)
                     {
+                        if (config.ConfigName.Equals("Today"))
+                        {
+                        <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
+                        else
+                        {
                         <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
+
                     }
                 </select>
                 <select style="height: 25px;" id="preconditionConfigOperator">
@@ -245,7 +253,14 @@
                 <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="taskService.changeConfigSelection(this, false)">
                     @foreach (var config in Model.RuleConfigurations)
                     {
+                        if (config.ConfigName.Equals("Has changed from original"))
+                        {
+                        <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
+                        else
+                        {
                         <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
                     }
                 </select>
                 <select style="height: 25px;" id="ruleConfigOperator">
@@ -276,7 +291,7 @@
                     <option value="Yes">Yes</option>
                 </select>
                 <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     @foreach (var bettype in Model.BettypeList)
                     {
                         <option value="@bettype.BettypeId">@bettype.BettypeName</option>
@@ -288,6 +303,16 @@
                     {
                         <option value="@currency.CurrencyId">@currency.CurrencyName</option>
                     }
+                </select>
+                <select name="ruleConfigControlComboBoxchoice" id="ruleConfigControlComboBoxchoice"
+                    style="height: 25px; display: none;">
+                    <option value="1,h">HDP: Home</option>
+                    <option value="1,a">HDP: Away</option>
+                    <option value="3,h">OU: Over</option>
+                    <option value="3,a">OU: Under</option>
+                    <option value="5,1">1X2: 1</option>
+                    <option value="5,x">1X2: X</option>
+                    <option value="5,2">1X2: 2</option>
                 </select>
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
                 <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"

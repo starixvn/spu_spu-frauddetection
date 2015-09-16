@@ -178,7 +178,10 @@
                 valueSelectedValue = $('#' + parentName + 'ControlDatetimePicker').val();
                 break;
             case "Compare":
+                var additionValue = $('#' + parentName + 'ControlTextbox').val();
+
                 valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').text();
+                valueSelectedValue += additionValue.length > 0 ? additionValue : "";
                 break;
             case "TextBoxNumber":
                 valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
@@ -233,7 +236,13 @@
                 valueSelectedValue = '%' + $('#' + parentName + 'ControlDatetimePicker').val() + '%';
                 break;
             case "Compare":
+                var additionValue = $('#' + parentName + 'ControlTextbox').val();
+
                 valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').text();
+                valueSelectedValue += additionValue.length > 0 ? additionValue : "";
+
+                if (valueSelectedValue.toString().indexOf("Today") >= 0)
+                    valueSelectedValue = "CONVERT(date," + valueSelectedValue + ")";
                 break;
             case "TextBoxNumber":
                 valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
@@ -244,12 +253,39 @@
 
         if (keySelectedValue == "TransDate" && valueSelectedValue == "In Danger Period")
             return "NEARTHEGOAL";
-        
+
         if (keySelectedValue == "Arbitrage" && valueSelectedValue == "Yes")
             return "Arbitrage";
-        
-        if ($("#ruleConfigCompare").prop("checked") == true && keySelectedValue == "Stake") {
+
+        if ($("#ruleConfigCompare").prop("checked") == true && keySelectedValue == "Stake" && valueSelectedValue !== "Has changed from original") {
             valueSelectedValue = $("#ruleConfigControlTextbox").val() + "*0.01*" + valueSelectedValue;
+        }
+
+        if (keySelectedValue === "Choice" && valueSelectedValue !== "Has changed from original") {
+            var choice = valueSelectedValue.split(",");
+            return "(ans.bettype=" + choice[0] + " and ans.betteam=%" + choice[1] + "%)";
+        }
+        else if (valueSelectedValue === "Has changed from original") {
+            var result = keySelectedValue + " <> ";
+            switch (keySelectedValue) {
+                case "Choice":
+                    result = "(ans.bettype <> b.bettype and ans.betteam <> b.betteam)";
+                    break;
+                case "Stake":
+                    result = "(ans.stake <> b.stake and ans.actualrate <> b.actualrate)";
+                    break;
+                case "Odds":
+                    result += "b.odds";
+                    break;
+                case "SMA PT":
+                    result += "b.tpositiontaking";
+                    break;
+                default:
+                    result = "";
+                    break;
+            }
+
+            return result;
         }
 
         return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;
@@ -512,6 +548,7 @@
             }
 
             $("#" + parentName + "ControlComboBoxKeyClone").css("display", "inline-block");
+            $("#" + parentName + "ControlTextbox").css("display", "inline-block");
         } else {
             var selectedOption = $("#" + parentName + "Key").find(":selected");
             var controlType = $(selectedOption).attr("data-controltype");

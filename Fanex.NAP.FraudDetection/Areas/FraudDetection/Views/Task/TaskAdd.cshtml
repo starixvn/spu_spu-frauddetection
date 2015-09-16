@@ -101,9 +101,17 @@
             <div class="table-popup font-size-small">
                 <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;"
                     onchange="taskService.changeConfigSelection(this, true)">
-                    @foreach (var config in Model.PreconditionConfigurations)
+                     @foreach (var config in Model.PreconditionConfigurations)
                     {
+                        if (config.ConfigName.Equals("Today"))
+                        {
+                        <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
+                        else
+                        {
                         <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
+
                     }
                 </select>
                 <select style="height: 25px;" id="preconditionConfigOperator">
@@ -141,7 +149,7 @@
                     }
                 </select>
                 <select name="preconditionConfigControlComboBoxcustomergroup" id="preconditionConfigControlComboBoxcustomergroup"
-                    style="height: 25px; display: none;">
+                        style="height: 25px; display: none;">
                     @foreach (var group in Model.GroupList)
                     {
                         <option value="@group.GroupId" >@group.GroupName</option>
@@ -225,7 +233,14 @@
                 <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                     @foreach (var config in Model.RuleConfigurations)
                     {
-                        <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        if (config.ConfigName.Equals("Has changed from original"))
+                        {
+                        <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
+                        else
+                        {
+                        <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        }
                     }
                 </select>
                 <select style="height: 25px; display: none;" id="ruleConfigControlComboBoxticketstatus">
@@ -255,11 +270,21 @@
                     }
                 </select>
                 <select name="ruleConfigControlComboBoxcustomergroup" id="ruleConfigControlComboBoxcustomergroup"
-                    style="height: 25px; display: none;">
+                        style="height: 25px; display: none;">
                     @foreach (var group in Model.GroupList)
                     {
                         <option value="@group.GroupId" >@group.GroupName</option>
                     }
+                </select>
+                <select name="ruleConfigControlComboBoxchoice" id="ruleConfigControlComboBoxchoice"
+                    style="height: 25px; display: none;">
+                    <option value="1,h">HDP: Home</option>
+                    <option value="1,a">HDP: Away</option>
+                    <option value="3,h">OU: Over</option>
+                    <option value="3,a">OU: Under</option>
+                    <option value="5,1">1X2: 1</option>
+                    <option value="5,x">1X2: X</option>
+                    <option value="5,2">1X2: 2</option>
                 </select>
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
                 <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"
