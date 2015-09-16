@@ -26,6 +26,7 @@
             var param = {
                 "EventDate": $("#EventDate").val(),
                 "LeagueId": $("#Leagues").val(),
+                "MatchCode": $("#MatchCode").val(),
                 "MatchStatus": $("#MatchStatus").val(),
                 "SuspiciousStatus": $("#SuspiciousStatus").val()
             };
