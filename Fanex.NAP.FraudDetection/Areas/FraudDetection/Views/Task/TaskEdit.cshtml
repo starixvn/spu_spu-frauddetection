@@ -253,7 +253,7 @@
                 <select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="taskService.changeConfigSelection(this, false)">
                     @foreach (var config in Model.RuleConfigurations)
                     {
-                        if (config.ConfigName.Equals("Has changed from original"))
+                        if (config.ConfigName.Equals("Has Changed From Original"))
                         {
                         <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
                         }

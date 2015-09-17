@@ -257,22 +257,27 @@
         if (keySelectedValue == "Arbitrage" && valueSelectedValue == "Yes")
             return "Arbitrage";
 
-        if ($("#ruleConfigCompare").prop("checked") == true && keySelectedValue == "Stake" && valueSelectedValue !== "Has changed from original") {
+        if ($("#ruleConfigCompare").prop("checked") == true && keySelectedValue == "Stake" && valueSelectedValue !== "Has Changed From Original") {
             valueSelectedValue = $("#ruleConfigControlTextbox").val() + "*0.01*" + valueSelectedValue;
         }
 
-        if (keySelectedValue === "Choice" && valueSelectedValue !== "Has changed from original") {
+        if (keySelectedValue === "Choice" && valueSelectedValue !== "Has Changed From Original") {
             var choice = valueSelectedValue.split(",");
-            return "(ans.bettype=" + choice[0] + " and ans.betteam=%" + choice[1] + "%)";
+            debugger;
+            if (selectedOperator === "=") {
+                return "(ans.bettype=" + choice[0] + " and ans.betteam=%" + choice[1] + "%)";
+            } else {
+                return "(ans.bettype<>" + choice[0] + " and ans.betteam<>%" + choice[1] + "%)";
+            }
         }
-        else if (valueSelectedValue === "Has changed from original") {
+        else if (valueSelectedValue === "Has Changed From Original") {
             var result = keySelectedValue + " <> ";
             switch (keySelectedValue) {
                 case "Choice":
                     result = "(ans.bettype <> b.bettype and ans.betteam <> b.betteam)";
                     break;
                 case "Stake":
-                    result = "(ans.stake <> b.stake and ans.actualrate <> b.actualrate)";
+                    result = "ans.stake <> b.stake";
                     break;
                 case "Odds":
                     result += "b.odds";
@@ -494,7 +499,7 @@
             var currentContent = $(this).attr("data-rawcontent");
             var currentRawContent = $(this).attr("data-formattedcontent");
             if (currentContent.indexOf("Match State") >= 0) {
-                currentRawContent = currentRawContent.replace("Match State = notscanned", "1=1").replace("Match State = scanned", "1=1");
+                currentRawContent = currentRawContent.replace("Match State = notscanned", "$MatchState$").replace("Match State = scanned", "$MatchState$");
             }
 
             rawFormula += currentRawContent + "@";
@@ -505,18 +510,18 @@
     };
 
     taskService.GetAllConfigIds = function (parentName) {
-        var configids = "";
+        var configids = [];
         $('div[id^="div_' + parentName + '"]').each(function () {
             var configs = $(this).attr("data-configid").split("#");
             for (var i = 0; i < configs.length; i++) {
                 if (configids.indexOf(configs[i]) < 0) {
-                    configids += configs[i] + "#";
+                    configids.push(configs[i]);
                 }
             }
         });
 
-        configids = configids.slice(0, -1);
-        return configids;
+        //configids = configids.slice(0, -1);
+        return configids.join("#");
     };
 
     taskService.CheckFormula = function (parentName) {
