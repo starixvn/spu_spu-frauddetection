@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="CustomerBettingGroup\dbo.FD_BettingGroupAutomaticallyCreate.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupsMerge.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_CustomersIntoBettingGroupInsert.StoredProcedure.sql" />
+    <Content Include="CustomerBettingGroup\dbo.FD_RelatedBettingGroupGet.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_NewSuspiciousCustomersGet.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_SuspiciousCustomerGetById.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_SuspiciousCustomerInsert.StoredProcedure.sql" />
@@ -101,9 +105,8 @@
     <Content Include="Reports\MatchMonitoring\dbo.FD_MatchMonitoringReportGetAll.StoredProcedure.sql" />
     <Content Include="Reports\MatchMonitoring\dbo.FD_MatchMonitoringReportGetAll_DBArchive.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetAll.StoredProcedure.sql" />
-    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetByGroup.StoredProcedure.sql" />
-    <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerGetCount.StoredProcedure.sql" />
     <Content Include="Reports\SuspiciousCustomers\dbo.FD_SuspiciousCustomerReportGetAll.StoredProcedure.sql" />
+    <Content Include="SuspiciousGroupInfo\dbo.FD_SuspiciousGroupInfoInsert.StoredProcedure.sql" />
     <Content Include="Task\dbo.FD_CurrencyGetAll.StoredProcedure.sql" />
     <Content Include="Task\dbo.FD_EventGetAll.StoredProcedure.sql" />
     <Content Include="Task\dbo.FD_MatchInsert.StoredProcedure.sql" />
