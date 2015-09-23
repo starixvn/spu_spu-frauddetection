@@ -32,6 +32,8 @@
                 mailMasterFactory.editMailStatus(mailId, !isActive).success(function (result) {
                     isActive = !isActive;
                     AlertService.showAlert(result);
+
+                    $(".confirmation-modal").modal("hide");
                 });
             },
             cancel: function () {
@@ -58,6 +60,8 @@
             title: "Delete confirmation",
             text: "Are you sure you really want to delete this mail?",
             confirm: function () {
+                $(".confirmation-modal").modal("hide");
+
                 mailMasterFactory.deleteMail(mailId).success(function (result) {
                     if (result.IsSuccessful) {
                         mailMasterService.queryMail();

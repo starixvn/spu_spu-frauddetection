@@ -62,6 +62,8 @@
                 caseFactory.editTaskStatus(criteria).success(function (response) {
                     isActive = !isActive;
                     AlertService.showAlert(response);
+
+                    $(".confirmation-modal").modal("hide");
                 });
             },
             cancel: function () {
@@ -165,8 +167,8 @@
     }
 
     /*
-     * Case Group Grid Service
-     */
+    * Case Group Grid Service
+    */
 
     //private methods
 
@@ -197,7 +199,7 @@
                 { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center", CustomAttr: "title='demo title'" },
                 { HeaderText: "Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Description", Width: 300, Name: "GroupDescription", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center" }],
+                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center"}],
             bodyRows: getBodyRowsForCaseGroupTable(data),
             showNumberColumn: true,
             showTitle: true,
@@ -228,7 +230,7 @@
             $("#CaseGroupResult").fanexGrid(gridOptions);
         }).error(function (error) {
             alert(error);
-        });        
+        });
     };
 
     caseDetailService.addCustomerGroupToCase = function (caseId) {
@@ -249,6 +251,8 @@
             title: "Delete confirmation",
             text: "Are you sure you really want to remove this group from the fraud case?",
             confirm: function () {
+                $(".confirmation-modal").modal("hide");
+
                 caseFactory.removeCustomerGroupFromCase(caseId, groupId).success(function (data) {
                     if (data.IsSuccessful) {
                         caseDetailService.getCustomerGroupByCase(caseId);

@@ -109,6 +109,8 @@
             title: "Delete confirmation",
             text: "Are you sure you really want to delete this betting group?",
             confirm: function () {
+                $(".confirmation-modal").modal("hide");
+
                 customerBettingGroupModel.deleteGroup(groupId).then(function () {
                     var result = customerBettingGroupModel.serverResult;
 
@@ -165,6 +167,8 @@
             title: "Delete confirmation",
             text: "Are you sure you really want to delete this customer from betting group?",
             confirm: function () {
+                $(".confirmation-modal").modal("hide");
+
                 customerBettingGroupModel.deleteCustomer(custId, groupId).then(function () {
                     var result = customerBettingGroupModel.serverResult;
 

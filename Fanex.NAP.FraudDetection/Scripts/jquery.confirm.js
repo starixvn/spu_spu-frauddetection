@@ -100,7 +100,7 @@
                             modalHeader +
                             '<div class="modal-body">' + settings.text + '</div>' +
                             '<div class="modal-footer">' +
-                                '<button class="confirm btn ' + settings.confirmButtonClass + '" type="button" data-dismiss="modal">' +
+                                '<button class="confirm btn ' + settings.confirmButtonClass + '" type="button">' +
                                     settings.confirmButton +
                                 '</button>' +
                                 '<button class="cancel btn ' + settings.cancelButtonClass + '" type="button" data-dismiss="modal">' +

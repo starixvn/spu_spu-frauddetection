@@ -96,6 +96,8 @@
                 caseFactory.editCaseStatus(caseId, !isActive).success(function (response) {
                     isActive = !isActive;
                     AlertService.showAlert(response);
+
+                    $(".confirmation-modal").modal("hide");
                 });
             },
             cancel: function () {

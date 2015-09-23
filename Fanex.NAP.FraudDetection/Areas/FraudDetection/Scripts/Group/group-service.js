@@ -96,6 +96,8 @@
                 groupFactory.editGroupStatus(groupId, !isActive).success(function (response) {
                     isActive = !isActive;
                     AlertService.showAlert(response);
+
+                    $(".confirmation-modal").modal("hide");
                 });
             },
             cancel: function () {

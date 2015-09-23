@@ -34,20 +34,21 @@
         }
     };
 
-    suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId, custName) {
-        if (suspiciousCustomerReportService.customersDetailed.indexOf(custId) === -1 && suspiciousCustomerReportService.isSearchable) {
-            waitingTooltip(custId);
+    suspiciousCustomerReportService.getSuspiciousCustomerStatistic = function (custId, groupId, custName) {
+        var id = custId + "" + groupId;
+        if (suspiciousCustomerReportService.customersDetailed.indexOf(id) === -1 && suspiciousCustomerReportService.isSearchable) {
+            waitingTooltip(id);
             suspiciousCustomerReportService.isSearchable = false;
             suspiciousCustomerReportFactory.getSuspiciousCustomerStatistic(custId).success(function (result) {
                 suspiciousCustomerReportService.isSearchable = true;
 
-                $('#' + custId).tooltip({
+                $('#' + id).tooltip({
                     content: createCusomerWinlossTable(custName, result)
                 });
 
-                $('#' + custId).css('color', 'blue');
+                $('#' + id).css('color', 'blue');
 
-                suspiciousCustomerReportService.customersDetailed.push(custId);
+                suspiciousCustomerReportService.customersDetailed.push(id);
             });
         }
     };
@@ -74,9 +75,9 @@
         return result;
     }
 
-    function waitingTooltip(custId) {
-        $('#' + custId).attr('title', 'tooltip');
-        $('#' + custId).tooltip({
+    function waitingTooltip(id) {
+        $('#' + id).attr('title', 'tooltip');
+        $('#' + id).tooltip({
             content: "<div style='width: 300px; height: 152px;'>" +
                 "<div style='position:absolute;left:45%;top:40%;'>" +
                 "<div class='spinner-loader'>Loading…</div></div></div>",
@@ -87,20 +88,20 @@
         }).click(function () {
             if ($(this).tooltip('option', 'disabled')) {
                 $(this).tooltip('option', { disabled: false }).tooltip('open');
-                $('#' + custId).css('color', 'blue');
+                $('#' + id).css('color', 'blue');
             }
         }).on('mouseout focusout mouseover mouseenter mouseleave', function (event) {
             event.stopImmediatePropagation();
         });
 
-        $('#' + custId).tooltip("open");
+        $('#' + id).tooltip("open");
     }
 
     function removeTooltip() {
         for (var i = 0; i < suspiciousCustomerReportService.customersDetailed.length; i++) {
-            var custId = suspiciousCustomerReportService.customersDetailed[i];
+            var id = suspiciousCustomerReportService.customersDetailed[i];
 
-            $('#' + custId).tooltip("destroy");
+            $('#' + id).tooltip("destroy");
         }
 
         suspiciousCustomerReportService.customersDetailed = [];
@@ -165,7 +166,7 @@
                         { Name: "Member", Value: suspiciousCustomer.Customer.CustName },
                         { Name: "Group", Value: suspiciousCustomer.Group.GroupName },
                         { Name: "SuspiciousTime", Value: suspiciousCustomer.SuspiciousTime },
-                        { Name: "WinlossDetail", Value: suspiciousCustomer.Customer, CustomCellRender: statisticColumn }
+                        { Name: "WinlossDetail", Value: suspiciousCustomer, CustomCellRender: statisticColumn }
                     ]
             };
 
@@ -211,10 +212,15 @@
 
     function statisticColumn(cell) {
         if (suspiciousCustomerReportService.customerList.indexOf(cell.Value.CustId) === -1) {
-            suspiciousCustomerReportService.customerList.push(cell.Value.CustId);
+            var customer = cell.Value.Customer;
+            var group = cell.Value.Group;
+            var id = customer.CustId + "" + group.GroupId;
 
-            return "<span id='" + cell.Value.CustId + "' class='glyphicon glyphicon-stats' title='Click to show Win Loss Detail'" +
-                "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic(" + cell.Value.CustId + ",\"" + cell.Value.CustName + "\");'" +
+            suspiciousCustomerReportService.customerList.push(id);
+
+            return "<span id='" + id + "' class='glyphicon glyphicon-stats' title='Click to show Win Loss Detail'" +
+                "onclick='suspiciousCustomerReportService.getSuspiciousCustomerStatistic("
+                + customer.CustId + "," + group.GroupId + ",\"" + customer.CustName + "\");'" +
                 "style='cursor: pointer'>";
         } else {
             return "";
