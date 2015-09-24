@@ -54,7 +54,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <summary>
         /// Get Match Monitoring report data.
         /// </summary>
-        /// <param name="criteria">MatchMonitoringReportGetAllCriteria.</param>
+        /// <param name="criteria">Match Monitoring Report Get All Criteria.</param>
         /// <returns>Match monitoring report data.</returns>
         [HttpGet]
         public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria)
@@ -70,35 +70,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        private List<MatchMonitoring> GenerateMatchMonitoringData(MatchMonitoringReportGetAllCriteria criteria)
-        {
-            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
-            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            criteria.IsLatestData = criteria.EventDate > balanceUpMoveBetDates.MoveBetsDay;
-
-            var reportData = criteria.EventDate > balanceUpMoveBetDates.BalanceUpDay
-                       ? _matchMonitoringReportService.GetMatchMonitoringReport(criteria)
-                       : _matchMonitoringReportService.GetMatchMonitoringReportFromDBArchive(
-                           new MatchMonitoringReportGetAllDBArchiveCriteria(criteria));
-
-            MapRemotingRefData(reportData);
-            return reportData;
-        }
-
-        private void MapRemotingRefData(List<MatchMonitoring> data)
-        {
-            foreach (var match in data)
-            {
-                var HomeName = RefData.GetTeamName(match.HomeId.ToString(), "en", string.Empty);
-                var AwayName = RefData.GetTeamName(match.AwayId.ToString(), "en", string.Empty);
-
-                match.Event = "<b>" + HomeName + "</b>" + " vs " + "<b>" + AwayName + "</b>";
-            }
-        }
-
         /// <summary>
         /// Get all leagues by event date.
         /// </summary>
+        /// <param name="eventDate">Event Date.</param>
         /// <returns>The SelectListItem.</returns>
         [HttpGet]
         public ActionResult GetLeaguesByDate(string eventDate)
@@ -106,8 +81,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var balanceUpMoveBetService = new MoveBetsBalanceUpService();
             var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
 
-            var criteria = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay
-                               ? (ICriteria) new LeagueGetAllByDateCriteria
+            var criteria = DateTime.Parse(eventDate) > balanceUpMoveBetDates.BalanceUpDay
+                               ? (ICriteria)new LeagueGetAllByDateCriteria
                                    {
                                        IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
                                        EventDate = DateTime.Parse(eventDate)
@@ -130,6 +105,32 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             });
 
             return caseInfo.CaseId;
+        }
+
+        private List<MatchMonitoring> GenerateMatchMonitoringData(MatchMonitoringReportGetAllCriteria criteria)
+        {
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+            criteria.IsLatestData = criteria.EventDate > balanceUpMoveBetDates.MoveBetsDay;
+
+            var reportData = criteria.EventDate > balanceUpMoveBetDates.BalanceUpDay
+                       ? _matchMonitoringReportService.GetMatchMonitoringReport(criteria)
+                       : _matchMonitoringReportService.GetMatchMonitoringReportFromDBArchive(
+                           new MatchMonitoringReportGetAllDBArchiveCriteria(criteria));
+
+            MapRemotingRefData(reportData);
+            return reportData;
+        }
+
+        private void MapRemotingRefData(List<MatchMonitoring> data)
+        {
+            foreach (var match in data)
+            {
+                var homeName = RefData.GetTeamName(match.HomeId.ToString(), "en", string.Empty);
+                var awayName = RefData.GetTeamName(match.AwayId.ToString(), "en", string.Empty);
+
+                match.Event = "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
+            }
         }
     }
 }

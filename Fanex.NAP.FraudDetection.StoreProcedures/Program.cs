@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Fanex.NAP.FraudDetection.StoreProcedures
+﻿namespace Fanex.NAP.FraudDetection.StoreProcedures
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
         }
     }

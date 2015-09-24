@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="CaseGroupController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="FraudCaseDetailController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,11 +10,7 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System;
-    using System.Linq;
     using System.Web.Mvc;
-    using FD.Lib.Criteria.CaseGroup;
-    using FD.Lib.Criteria.Group;
     using FD.Lib.Criteria.Reports;
     using FD.Lib.Service.Implement;
     using FD.Lib.Service.Interface;

@@ -52,6 +52,5 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return viewModel;
         }
-
     }
 }

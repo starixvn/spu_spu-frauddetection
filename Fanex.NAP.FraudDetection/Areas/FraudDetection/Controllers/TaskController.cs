@@ -8,14 +8,13 @@
 //   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
-using FD.Lib.Criteria.Common;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
     using FD.Lib.Criteria.Bettype;
     using FD.Lib.Criteria.CaseGroup;
+    using FD.Lib.Criteria.Common;
     using FD.Lib.Criteria.Config;
     using FD.Lib.Criteria.Event;
     using FD.Lib.Criteria.MailMaster;
