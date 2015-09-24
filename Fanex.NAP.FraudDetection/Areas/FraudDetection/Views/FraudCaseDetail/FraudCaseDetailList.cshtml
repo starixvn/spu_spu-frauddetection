@@ -1,0 +1,58 @@
+﻿@using FD.Lib.Criteria.Reports
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Fraud Case Details";
+}
+@model FD.Lib.Model.Reports.FraudCaseDetail.FraudCaseDetailReportViewModel
+@section HeadCss
+{
+    @Styles.Render("~/bundles/FanexBetListCss")
+    <link href="~/Areas/FraudDetection/Content/fraudcasedetail.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="col-md-8">
+        <h4>
+            <b>Fraud Case Detail</b>
+        </h4>
+        <table class="table table-bordered">
+            <tr>
+                <td class="text-right font-bold col-md-2">
+                    Case Name
+                </td>
+                <td>
+                    <b>@Model.Summary.CaseName</b>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right font-bold col-md-2">
+                    Event
+                </td>
+                <td>@Html.Raw(string.Format("<b>{0}</b> -vs- <b>{1}</b>", Model.Summary.HomeName, Model.Summary.AwayName))
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right font-bold col-md-2">
+                    # Members
+                </td>
+                <td>@Model.Summary.CustomerCount
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right font-bold col-md-2">
+                    # Tickets
+                </td>
+                <td>@Model.Summary.BetCount
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="fraudCaseDetailReportId" class="freegrid content-grid">
+</div>
+@section FooterJs
+{
+    <script type="text/javascript">
+        var data = @Html.Raw(Json.Encode(Model.Body));
+    </script>
+    @Scripts.Render("~/bundles/App/FraudCaseDetail")
+}

@@ -6,25 +6,20 @@
 @section HeadCss
 {
     <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/Content/case.css" />
-    <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FanexGridCss")" />
-    <link rel="Stylesheet" type="text/css" href="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionCss")" />
-    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/App_Themes/site.css" />
 }
 @section FooterJs
 {
     @Scripts.Render("~/bundles/App/Case")
-    <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FanexGridJs")" type="text/ecmascript"></script>
-    <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionJs")" type="text/ecmascript"></script>
     <script src="~/Areas/FraudDetection/Scripts/Case/case-detail-list.js" type="text/javascript"></script>
 }
 <div>
     @Html.HiddenFor(a => a.CaseId)
-    
+
     <span class="infor-text">Case Details </span>
     <span class="button-action">
         <a class="back-button" onclick="window.location.href = window.location.href.split('/GetCaseDetail', 1)[0].toString();">← Back To List </a>
     </span>
-    
+
     <div class="newline">
         &nbsp;
     </div>
@@ -32,14 +27,18 @@
     <input type="button" id="btn_AddNewTask" value="+ Add Task" class="btn-green" />
 </div>
 <div class="newline">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="grid-container">
     <div id="SearchResult" class="freegrid  content-grid">
-        &nbsp;</div>
+        &nbsp;
+    </div>
 </div>
 <div class="newline" style="clear: both;">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="grid-container">
     <div id="CaseGroupResult" class="freegrid  content-grid">
-        &nbsp;</div>
+        &nbsp;
+    </div>
 </div>

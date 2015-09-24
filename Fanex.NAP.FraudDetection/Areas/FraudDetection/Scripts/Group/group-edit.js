@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿(function () {
+    "use strict";
+
     $("#btn_editGroup").click(function (event) {
         event.preventDefault();
 
@@ -19,4 +21,4 @@
     $("form").submit(function () {
         return false;
     });
-});
+})();

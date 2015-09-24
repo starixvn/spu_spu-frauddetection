@@ -1,12 +1,11 @@
 ﻿@using System.Web.Optimization;
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @RenderSection("HeadCss", false)
-    @Styles.Render("~/bundles/coreCss")
+    @Styles.Render("~/bundles/coreCss", "~/bundles/coreLess")
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~/")';
         var SPU = {};
@@ -17,17 +16,16 @@
 </head>
 <body class="popup" ng-app="spuApp">
     <div style="position: relative">
-        <div id="sentAlert" class="alert alert-danger collapse" style="position: absolute;  padding: 5px; margin-bottom: 10px;width: 100%">
+        <div id="sentAlert" class="alert alert-danger collapse" style="position: absolute;
+            padding: 5px; margin-bottom: 10px; width: 100%">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <div></div>
+            <div>
+            </div>
         </div>
     </div>
-
-        @RenderBody()
-
-        @RenderSection("Foot", false)
-        @Scripts.Render("~/bundles/coreJs")
-        @Scripts.Render("~/bundles/angularJs")
+    @RenderBody()
+    @RenderSection("Foot", false)
+    @Scripts.Render("~/bundles/coreJs")
 </body>
-    @RenderSection("FooterJs", false)
+@RenderSection("FooterJs", false)
 </html>

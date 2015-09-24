@@ -1,5 +1,4 @@
 ﻿@using System.Web.Optimization;
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -7,18 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
     @RenderSection("HeadCss", false)
-    @Styles.Render("~/bundles/coreCss")
+    @Styles.Render("~/bundles/coreCss", "~/bundles/coreLess")
 </head>
 <body class="popup">
     <div style="position: relative">
-        <div id="sentAlertOnPopup" class="alert alert-danger collapse" style="position: absolute;  padding: 5px; margin-bottom: 10px; width: 100%; z-index: 99999;">
+        <div id="sentAlertOnPopup" class="alert alert-danger collapse" style="position: absolute;
+            padding: 5px; margin-bottom: 10px; width: 100%; z-index: 99999;">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <div></div>
+            <div>
+            </div>
         </div>
     </div>
-@RenderBody()
+    @RenderBody()
 </body>
-
-<script src="~/Scripts/Core/AlertServiceOnPopup.js"></script>
-@RenderSection("FooterJs",false)
+@Scripts.Render("~/bundles/alertServiceOnPopup")
+@RenderSection("FooterJs", false)
 </html>

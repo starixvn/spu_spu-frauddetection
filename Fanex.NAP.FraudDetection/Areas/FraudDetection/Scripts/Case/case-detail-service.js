@@ -20,10 +20,11 @@
         };
 
         caseFactory.getCaseDetail(searchParams).success(function (result) {
-            renderCaseDetailTable(result);
+            caseFactory.getCustomerGroupByCase(caseId).success(function (data) {
+                renderCaseDetailTable(result);
+                renderCaseGroupTable(data)
+            });
         });
-
-        caseDetailService.getCustomerGroupByCase();
     };
 
     caseDetailService.editTask = function (taskId) {
@@ -82,6 +83,12 @@
             $(document).off('hidden.bs.modal');
         });
     };
+
+    function renderCaseGroupTable(data) {
+        var gridOptions = getGridOptionForCaseGroupTable(data);
+
+        $("#CaseGroupResult").fanexGrid(gridOptions);
+    }
 
     function renderCaseDetailTable(result) {
         result = result.replace(/\n/g, "<\/br>");
@@ -199,7 +206,7 @@
                 { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center", CustomAttr: "title='demo title'" },
                 { HeaderText: "Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Description", Width: 300, Name: "GroupDescription", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center"}],
+                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center" }],
             bodyRows: getBodyRowsForCaseGroupTable(data),
             showNumberColumn: true,
             showTitle: true,

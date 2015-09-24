@@ -10,8 +10,8 @@
 <head>
     <meta charset="utf-8">
     <title>Fraud Detection</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">    
-    @Styles.Render("~/bundles/coreCss")
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    @Styles.Render("~/bundles/coreCss", "~/bundles/coreLess", "~/bundles/FraudDetectionCss")
     @RenderSection("HeadCss", false)
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~/")';
@@ -37,11 +37,11 @@
             </div>
         </header>
         <section id="headline" class="row title-bar">
-        @RenderSection("Headline", false)
+            @RenderSection("Headline", false)
         </section>
         <section id="body" class="row body">
             <div style="position: relative">
-                <div id="sentAlert" class="col-md-offset-4 alert alert-danger collapse" 
+                <div id="sentAlert" class="col-md-offset-4 alert alert-danger collapse"
                      style="position: absolute; padding: 5px; top: -5px; left: 0; width: auto; min-width: 200px;">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
                     <div>Group for customers who violate many bets case</div>
@@ -53,12 +53,12 @@
         </section>
     </div>
     @RenderSection("Foot", false)
-    @Scripts.Render("~/bundles/coreJs")
+    @Scripts.Render("~/bundles/coreJs", "~/bundles/FraudDetectionJs")
     @if (NapSettings.Settings.EnableReCheckIn)
     {
         <script src="~/Areas/UserLogin/scripts/ReCheckIn.js" type="text/javascript"> </script>
     }
 
 </body>
-@RenderSection("FooterJs",false)
+@RenderSection("FooterJs", false)
 </html>
