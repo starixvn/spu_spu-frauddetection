@@ -78,7 +78,7 @@
     function waitingTooltip(id) {
         $('#' + id).attr('title', 'tooltip');
         $('#' + id).tooltip({
-            content: "<div style='width: 300px; height: 152px;'>" +
+            content: "<div style='width: 300px; height: 143px;'>" +
                 "<div style='position:absolute;left:45%;top:40%;'>" +
                 "<div class='spinner-loader'>Loading…</div></div></div>",
             position: {

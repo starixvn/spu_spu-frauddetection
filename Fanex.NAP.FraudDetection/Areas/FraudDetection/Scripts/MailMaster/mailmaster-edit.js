@@ -3,7 +3,7 @@
         mode: "specific_textareas",
         editor_selector: "editor",
         height: "350",
-        content_css: "/Content/tinymce/tinymce.css",
+        content_css: "/Content/Common/tinymce.css",
         theme: "modern",
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak",

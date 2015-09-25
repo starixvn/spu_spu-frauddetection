@@ -25,22 +25,23 @@ namespace Fanex.NAP.FraudDetection.AppStart
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/bundles/coreCss").Include(
-                "~/Content/jquery-ui/base/jquery-ui.css",
-                "~/Content/Plugin/multi-select-control.css",
-                "~/Content/Fanex.Grid/Fanex.Grid.css",
-                "~/Content/Fanex.Grid/Fanex.Pagination.css",
+            bundles.Add(new StyleBundle("~/Content/Common/css").Include(
+                "~/Areas/FraudDetection/App_Themes/Core/*.css",
+                "~/Content/Common/bootstrap-theme.min.css",
+                "~/Content/Common/bootstrap.css",
+                "~/Content/Common/jquery-ui.css",
+                "~/Content/Common/Fanex.Grid.css",
+                "~/Content/Common/Fanex.Pagination.css",
+                "~/Content/Common/multi-select-control.css"));
+
+            bundles.Add(new StyleBundle("~/Areas/FraudDetection/App_Themes/css").Include(
                 "~/Areas/FraudDetection/App_Themes/site.css"));
 
             bundles.AddAndInclude(
-                "~/bundles/coreLess",
-                "~/Content/bootstrap/bootstrap.less",
+                "~/Content/Core/less",
                 "~/Content/Core/site.less");
 
-            bundles.Add(new StyleBundle("~/bundles/FraudDetectionCss").IncludeDirectory(
-                "~/Areas/FraudDetection/App_Themes/Core", "*.css", true));
-
-            bundles.Add(new StyleBundle("~/bundles/FanexBetListCss").IncludeDirectory(
+            bundles.Add(new StyleBundle("~/Content/betlist/FanexBetListCss").IncludeDirectory(
                 "~/Content/betlist", "*.css", true));
 
             bundles.Add(new ScriptBundle("~/bundles/coreJs").Include(
@@ -53,7 +54,6 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Scripts/Core/AlertService.js",
                 "~/Scripts/Core/DialogService.js",
                 "~/Scripts/Core/waiting-dialog.js",
-                "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/jquery.confirm.js",
@@ -126,6 +126,9 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/FraudDetectionJs").IncludeDirectory(
                 "~/Areas/FraudDetection/Scripts/Core", "*.js", true));
+
+            bundles.Add(new ScriptBundle("~/Scripts/tinymce/tinymceJs").Include(
+                "~/Scripts/tinymce/tinymce.min.js"));
         }
     }
 }

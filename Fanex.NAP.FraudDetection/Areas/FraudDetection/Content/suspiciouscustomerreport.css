@@ -3,6 +3,7 @@
     border: 1px solid black;
     border-collapse: collapse;
     border-color: burlywood;
+    font-size: small;
 }
 th, td
 {
@@ -22,6 +23,8 @@ th, td
 .customer-report-statistic>caption {
     color: navy;
     padding-bottom: 5px;
+    padding-top: 0;
+    text-align: center;
 }
 
 .customer-report-statistic>tbody>tr>th {
