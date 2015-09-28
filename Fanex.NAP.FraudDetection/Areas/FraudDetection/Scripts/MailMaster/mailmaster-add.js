@@ -1,9 +1,12 @@
 ﻿$(document).ready(function () {
     tinyMCE.init({
+        document_base_url: window.location.href.split('/MailMaster', 1)[0].toString(),
+        relative_urls: false,
+        remove_script_host: false,
         mode: "specific_textareas",
         editor_selector: "editor",
         height: "350",
-        content_css: "/Content/Common/tinymce.css",
+        content_css: "Content/Common/tinymce.css",
         theme: "modern",
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak",

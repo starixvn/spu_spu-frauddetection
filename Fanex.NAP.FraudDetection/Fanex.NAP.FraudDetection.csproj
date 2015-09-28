@@ -767,6 +767,7 @@
     <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />

@@ -126,9 +126,6 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/FraudDetectionJs").IncludeDirectory(
                 "~/Areas/FraudDetection/Scripts/Core", "*.js", true));
-
-            bundles.Add(new ScriptBundle("~/Scripts/tinymce/tinymceJs").Include(
-                "~/Scripts/tinymce/tinymce.min.js"));
         }
     }
 }
