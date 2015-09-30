@@ -110,5 +110,10 @@
     <Setting Key="FD_SumWinLossByTransIdsGet" SpName="FD_SumWinLossByTransIdsGet" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_SumWinLossByTransIdsGetFromDBArchive" SpName="FD_SumWinLossByTransIdsGetFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
   </Function>
+   
+  <Function Name="DataCapture">
+    <Setting Key="FD_DataCaptureInsert" SpName="FD_DataCaptureInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_DataTypeCaptureGetAll" SpName="FD_DataTypeCaptureGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
+  </Function>
 
 </Functions>

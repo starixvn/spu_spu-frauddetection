@@ -1,6 +1,5 @@
-﻿@using System.Web.Optimization
-@using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task;
-@model Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task.TaskViewModel
+﻿@using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task;
+@model TaskViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Adding Task";
@@ -8,14 +7,14 @@
 @section HeadCss
 {
     <link href="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css"
-          rel="stylesheet" type="text/css" />
+        rel="stylesheet" type="text/css" />
 }
 @section FooterJs
 {
     @Scripts.Render("~/bundles/App/Task")
     <script src="~/Areas/FraudDetection/Scripts/Task/task-add.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js"
-            type="text/javascript"></script>
+        type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/Scripts/Core/mathformula-validation.js" type="text/javascript"></script>
 }
@@ -104,16 +103,16 @@
         <div>
             <div class="table-popup font-size-small">
                 <select name="PreconditionConfigs" id="preconditionConfigKey" style="height: 25px;"
-                        onchange="taskService.changeConfigSelection(this, true)">
+                    onchange="taskService.changeConfigSelection(this, true)">
                     @foreach (var config in Model.PreconditionConfigurations)
                     {
                         if (config.ConfigName.Equals("Today"))
                         {
-                            <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
                         }
                         else
                         {
-                            <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
                         }
 
                     }
@@ -146,14 +145,14 @@
                     <option value="gue.IsMainMarket">Other Markets</option>
                 </select>
                 <select name="preconditionConfigControlComboBoxsport" id="preconditionConfigControlComboBoxsport"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     @foreach (var sport in Model.SportList)
                     {
                         <option value="@sport.SportId">@sport.SportName</option>
                     }
                 </select>
                 <select name="preconditionConfigControlComboBoxcustomergroup" id="preconditionConfigControlComboBoxcustomergroup"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     @foreach (var group in Model.GroupList)
                     {
                         <option value="@group.GroupId">@group.GroupName</option>
@@ -163,7 +162,7 @@
                     display: none;" />
                 @Html.TextBox("preconditionConfigControlDatetimePicker", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:100px;" })
                 <i class="icon-calendar icon-event-date-calendar" id="preconditionConfigControlDatetimePickerIcon"
-                   style=""></i>
+                    style=""></i>
                 <input type="button" id="btn_AddPrecondition" value="Add to List" class="btn-green font-size-small" />
                 <div class="newline">
                     &nbsp;
@@ -178,9 +177,12 @@
                 <div style="border: 1px solid #000000;">
                     <table id="preconditionTable" class="table-items">
                         <tr id="preconditionTable1" style="display: none">
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -188,31 +190,31 @@
                     &nbsp;
                 </div>
                 <label id="preconditionTableFormula" data-rawcontent="" data-formattedcontent=""
-                       data-configids="">
+                    data-configids="">
                 </label>
                 <div class="newline">
                     &nbsp;
                 </div>
                 <div>
                     <input type="button" onclick="taskService.AddFormulaElement(true, '(#', true)" value="(+"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(true, '(#')" value="(-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
                     <input type="button" onclick="taskService.AddFormulaElement(true, '#)', false)" value=")+"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(true, '#)')" value=")-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
                     <input type="button" onclick="taskService.AddFormulaElement(true, 'AND#', true)"
-                           value="AND+" class="btn-green font-size-small" />
+                        value="AND+" class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(true, 'AND#')" value="AND-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
                     <input type="button" onclick="taskService.AddFormulaElement(true, 'OR#', true)" value="OR+"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(true, 'OR#')" value="OR-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                 </div>
             </div>
         </div>
@@ -226,11 +228,11 @@
                     {
                         if (config.ConfigName.Equals("Has Changed From Original"))
                         {
-                            <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
                         }
                         else
                         {
-                            <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                        <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
                         }
                     }
                 </select>
@@ -262,28 +264,28 @@
                     <option value="Yes">Yes</option>
                 </select>
                 <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     @foreach (var bettype in Model.BettypeList)
                     {
                         <option value="@bettype.BettypeId">@bettype.BettypeName</option>
                     }
                 </select>
                 <select name="ruleConfigControlComboBoxcurrency" id="ruleConfigControlComboBoxcurrency"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     @foreach (var currency in Model.CurrencyList)
                     {
                         <option value="@currency.CurrencyId">@currency.CurrencyName</option>
                     }
                 </select>
                 <select name="ruleConfigControlComboBoxcustomergroup" id="ruleConfigControlComboBoxcustomergroup"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     @foreach (var group in Model.GroupList)
                     {
                         <option value="@group.GroupId">@group.GroupName</option>
                     }
                 </select>
                 <select name="ruleConfigControlComboBoxchoice" id="ruleConfigControlComboBoxchoice"
-                        style="height: 25px; display: none;">
+                    style="height: 25px; display: none;">
                     <option value="1,h">HDP: Home</option>
                     <option value="1,a">HDP: Away</option>
                     <option value="3,h">OU: Over</option>
@@ -294,7 +296,7 @@
                 </select>
                 @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
                 <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"
-                   style="display: none;"></i>
+                    style="display: none;"></i>
                 <input type="button" id="btn_AddRule" value="Add to List" class="btn-green font-size-small" />
                 <div class="newline">
                     &nbsp;
@@ -309,9 +311,12 @@
                 <div style="border: 1px solid #000000;">
                     <table id="ruleTable" class="table-items">
                         <tr id="ruleTable1" style="display: none">
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -325,24 +330,24 @@
                 </div>
                 <div>
                     <input type="button" onclick="taskService.AddFormulaElement(false, '(', true)" value="(+"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(false, '(')" value="(-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
                     <input type="button" onclick="taskService.AddFormulaElement(false, ')', false)" value=")+"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(false, ')')" value=")-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
                     <input type="button" onclick="taskService.AddFormulaElement(false, 'AND#', true)"
-                           value="AND+" class="btn-green font-size-small" />
+                        value="AND+" class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(false, 'AND#')" value="AND-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                     &nbsp;&nbsp;
                     <input type="button" onclick="taskService.AddFormulaElement(false, 'OR#', true)"
-                           value="OR+" class="btn-green font-size-small" />
+                        value="OR+" class="btn-green font-size-small" />
                     <input type="button" onclick="taskService.RemoveFormulaElement(false, 'OR#')" value="OR-"
-                           class="btn-green font-size-small" />
+                        class="btn-green font-size-small" />
                 </div>
             </div>
         </div>
@@ -385,6 +390,32 @@
                         </select>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <div style="position: absolute; top: 90px;">
+                            <input type="checkbox" id="nextaction_captureData" data-actionid="3" />
+                            Capture Data
+                            <span data-placement="top" data-toggle="tooltip" title="Generated data will be kept in 14 days only." style="margin-left: 5px; cursor: pointer;" class="glyphicon glyphicon-question-sign"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                                Choose data type <span class="caret"></span>
+                            </button>
+                             <br>
+                            <ul class="dropdown-menu dropdown-menu-form" style="position: relative; min-width: 200px;">
+                                @foreach (var dataTypeCapture in Model.DataTypeCaptureList)
+                                {
+                                    <li>
+                                        <input style="margin: 5px;" type="checkbox" id="captureData_value_@dataTypeCapture.DataId" value="@dataTypeCapture.DataId" />
+                                        <label style="font-weight: normal; font-size: small;" for="captureData_value_@dataTypeCapture.DataId">@dataTypeCapture.DataName</label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -396,5 +427,3 @@
         <input type="button" id="btn_Cancel" value="Cancel" class="btn-green btn-customCancel font-size-small" />
     </div>
 }
-<div id="SearchResult" class="freegrid  content-grid">
-</div>

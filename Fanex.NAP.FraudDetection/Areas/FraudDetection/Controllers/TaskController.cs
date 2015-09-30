@@ -179,6 +179,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var currencyService = new CurrencyService();
             var currencies = currencyService.GetCurrencies(new CurrencyGetAllCriteria());
 
+            // Currency
+            var dataTypesCaptureList = _taskService.GetAllDataTypeCapture(new DataTypeCaptureGetAllCriteria());
+
             var taskViewModel = new TaskViewModel(
                 events.ToList(),
                 configs.ToList(),
@@ -186,7 +189,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 sports.ToList(),
                 bettypes.ToList(),
                 mailMasters.ToList(),
-                currencies.ToList()) { OnUserId = currentUserId, TaskInformation = new Task { CaseId = fraudCaseId, IsActive = true } };
+                currencies.ToList(),
+                dataTypesCaptureList.ToList()) { OnUserId = currentUserId, TaskInformation = new Task { CaseId = fraudCaseId, IsActive = true } };
 
             return taskViewModel;
         }

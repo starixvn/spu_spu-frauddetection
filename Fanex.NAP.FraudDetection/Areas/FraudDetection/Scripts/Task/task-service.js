@@ -297,6 +297,9 @@
     };
 
     taskService.GenerateNextActions = function () {
+        var nextActionIdList = [],
+            nextActionTargetIdList = [];
+
         taskService.NextActionIdList = "";
         taskService.NextActionTargetIdList = "";
 
@@ -305,13 +308,23 @@
                 var nextAction = $(this).attr('id');
                 var nextTargetAction = nextAction + "_value";
 
-                taskService.NextActionIdList += $("#" + nextAction).attr("data-actionid") + ",";
-                taskService.NextActionTargetIdList += $("#" + nextTargetAction).find(":selected").val() + ",";
+                if (nextAction === "nextaction_captureData") {
+                    $("input:checkbox[id^=captureData_value_]").each(function () {
+                        if ($(this).prop('checked')) {
+                            nextActionIdList.push($("#" + nextAction).attr("data-actionid"));
+                            nextActionTargetIdList.push($(this).val());
+                        }
+                    });
+                }
+                else {
+                    nextActionIdList.push($("#" + nextAction).attr("data-actionid"));
+                    nextActionTargetIdList.push($("#" + nextTargetAction).find(":selected").val());
+                }
             }
         });
 
-        taskService.NextActionIdList = taskService.NextActionIdList.slice(0, -1);
-        taskService.NextActionTargetIdList = taskService.NextActionTargetIdList.slice(0, -1);
+        taskService.NextActionIdList = nextActionIdList.join(',');
+        taskService.NextActionTargetIdList = nextActionTargetIdList.join(',');
     };
 
     taskService.SetupCalendar = function (strdatetime, txtdate) {
