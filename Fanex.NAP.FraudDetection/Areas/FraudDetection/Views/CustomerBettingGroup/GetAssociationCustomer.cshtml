@@ -1,0 +1,18 @@
+﻿@model IList<FD.Lib.Model.Reports.BettingGroup.AssociationCustomer>
+@{
+    ViewBag.Title = "Get Association Customers";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+}
+
+<div id="fraudCaseDetailReportId" class="freegrid content-grid"></div>
+
+@section FooterJs
+{
+    @Scripts.Render("~/bundles/App/Reports")
+    <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FanexGridJs")" type="text/ecmascript"></script>
+    <script src="@BundleTable.Bundles.ResolveBundleUrl("~/bundles/FraudDetectionJs")" type="text/ecmascript"></script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Json.Encode(Model));
+    </script>
+    <script src="~/Areas/FraudDetection/Scripts/CustomerBettingGroup/betting-group-report-service.js"></script>
+}

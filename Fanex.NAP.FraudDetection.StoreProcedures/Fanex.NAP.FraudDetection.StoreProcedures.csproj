@@ -48,10 +48,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="CustomerBettingGroup\dbo.FD_AssociationCustomersGet.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_BettingGroupAutomaticallyCreate.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupsMerge.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomersIntoBettingGroupInsert.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_RelatedBettingGroupGet.StoredProcedure.sql" />
+    <Content Include="Reports\BettingGroup\dbo.FD_SumWinLossByTransIdsGetFromDBArchive.StoredProcedure.sql" />
+    <Content Include="Reports\BettingGroup\dbo.FD_SumWinLossByTransIdsGet.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_NewSuspiciousCustomersGet.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_SuspiciousCustomerGetById.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_SuspiciousCustomerInsert.StoredProcedure.sql" />
@@ -80,9 +83,6 @@
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetAll.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetById.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupGetCustomerByName.sql" />
-    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupInsert.StoredProcedure.sql" />
-    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupInsertCustomer.StoredProcedure.sql" />
-    <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupUpdate.StoredProcedure.sql" />
     <Content Include="CustomerGroup\dbo.FD_CustomerGroupInsert.StoredProcedure.sql" />
     <Content Include="CustomerGroup\dbo.FD_CustomerGroupUpdate.StoredProcedure.sql" />
     <Content Include="CustomerGroup\dbo.FD_GroupGetAll.StoredProcedure.sql" />

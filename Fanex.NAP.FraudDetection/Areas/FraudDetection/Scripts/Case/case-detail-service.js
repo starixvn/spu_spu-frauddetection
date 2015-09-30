@@ -135,7 +135,6 @@
         }
 
         $("#SearchResult").fanexGrid(caseDetailService.gridOptions);
-
     }
 
     function reRenderAfterPaged(pageIndex, itemsPerPage) {

@@ -8,12 +8,6 @@
         getCustomers: function () {
             return $.get('CustomerBettingGroup/GetAllBettingGroups');
         },
-        getEmptyGroup: function () {
-            return $.get('CustomerBettingGroup/AddBettingGroup');
-        },
-        addGroup: function (group) {
-            return $.post('CustomerBettingGroup/AddBettingGroup', group);
-        },
         deleteGroup: function (groupId) {
             return $.get('CustomerBettingGroup/DeleteBettingGroup', { groupId: groupId });
         },
@@ -34,6 +28,10 @@
         },
         getGroupById: function (groupId) {
             return $.get('CustomerBettingGroup/GetGroupById', { groupId: groupId });
+        },
+
+        getAssociationCustomers: function (custId) {
+            return $.get('CustomerBettingGroup/GetAssociationCustomers', { custId: custId });
         }
     };
 })(jQuery);

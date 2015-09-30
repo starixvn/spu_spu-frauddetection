@@ -469,6 +469,8 @@
     <Content Include="Areas\FraudDetection\Content\fraudcasedetail.css" />
     <Content Include="Areas\FraudDetection\Content\matchmonitoring.css" />
     <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\betting-group-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\FraudCaseDetail\fraudcasedetail-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\FraudCaseDetail\fraudcasedetail-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\CaseGroup\casegroup-factory.js" />
@@ -477,11 +479,7 @@
     <Content Include="Areas\FraudDetection\Scripts\Case\case-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Case\case-detail-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-controller.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-factory.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add-customer.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-add.js" />
-    <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-factory.js" />
@@ -671,7 +669,7 @@
     <Content Include="Areas\FraudDetection\Views\Case\CaseEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\SuspiciousCustomerReport.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CaseGroup\CaseGroupAdd.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\GetAssociationCustomer.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\CustomerBettingGroup\CustomerBettingGroupEditCustomer.cshtml" />
@@ -943,9 +941,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53863</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52129/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:52129/</IISAppRootUrl>
+          <IISUrl>http://localhost:52128/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

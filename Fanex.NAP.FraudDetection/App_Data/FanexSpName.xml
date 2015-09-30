@@ -105,4 +105,10 @@
     <Setting Key="FD_BetTicketGetByTransListFromDBArchive" SpName="FD_BetTicketGetByTransListFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
   </Function>
 
+  <Function Name="BettingGroupReport">
+    <Setting Key="FD_AssociationCustomersGet" SpName="FD_AssociationCustomersGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_SumWinLossByTransIdsGet" SpName="FD_SumWinLossByTransIdsGet" DbName="DBFD.bodb02.bodbSPUNet" />
+    <Setting Key="FD_SumWinLossByTransIdsGetFromDBArchive" SpName="FD_SumWinLossByTransIdsGetFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
+  </Function>
+
 </Functions>
