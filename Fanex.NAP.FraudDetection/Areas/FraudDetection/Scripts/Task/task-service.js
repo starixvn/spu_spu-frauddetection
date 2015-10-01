@@ -181,7 +181,9 @@
                 var additionValue = $('#' + parentName + 'ControlTextbox').val();
 
                 valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').text();
-                valueSelectedValue += additionValue.length > 0 ? additionValue : "";
+
+                if (parentName === "preconditionConfig")
+                    valueSelectedValue += additionValue.length > 0 ? additionValue : "";
                 break;
             case "TextBoxNumber":
                 valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
@@ -239,7 +241,9 @@
                 var additionValue = $('#' + parentName + 'ControlTextbox').val();
 
                 valueSelectedValue = $('#' + parentName + 'ControlComboBoxKeyClone option:selected').text();
-                valueSelectedValue += additionValue.length > 0 ? additionValue : "";
+
+                if (parentName === "preconditionConfig")
+                    valueSelectedValue += additionValue.length > 0 ? additionValue : "";
 
                 if (valueSelectedValue.toString().indexOf("Today") >= 0)
                     valueSelectedValue = "CONVERT(date," + valueSelectedValue + ")";
@@ -263,7 +267,6 @@
 
         if (keySelectedValue === "Choice" && valueSelectedValue !== "Has Changed From Original") {
             var choice = valueSelectedValue.split(",");
-            debugger;
             if (selectedOperator === "=") {
                 return "(ans.bettype=" + choice[0] + " and ans.betteam=%" + choice[1] + "%)";
             } else {
@@ -291,6 +294,10 @@
             }
 
             return result;
+        }
+
+        if (valueSelectedValue === "Has Changed From Latest Capture") {
+            selectedOperator = "<>";
         }
 
         return keySelectedValue + " " + selectedOperator + " " + valueSelectedValue;

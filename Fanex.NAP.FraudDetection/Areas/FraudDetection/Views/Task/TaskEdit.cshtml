@@ -1,6 +1,7 @@
-﻿@using System.Globalization
+﻿﻿@using System.Web.Optimization
+@using System.Globalization
 @using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task;
-@model TaskViewModel
+@model Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task.TaskViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Edit Task";
@@ -357,7 +358,7 @@
                                     <div id="div_@ruleRowName" data-formattedcontent="@ruleConfigsFormatter[i]" data-rawcontent="@ruleConfigsOriginal[i]" data-configid="@configIdsForEachRule">@ruleConfigsOriginal[i].Replace("#", " ")</div>
                                 </td>
                                 <td>
-                                    <img alt="" onclick="taskService.RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="/Areas/FraudDetection/App_Themes/Images/Delete.gif" style="cursor: pointer; cursor: hand;">
+                                    <img alt="" onclick="taskService.RemoveOneRuleFromTable('ruleTable',@ruleCounter)" src="@Url.Content("~/Areas/FraudDetection/App_Themes/Images/Delete.gif")" style="cursor: pointer; cursor: hand;">
                                 </td>
                             </tr>
                         ruleCounter++;
@@ -400,23 +401,20 @@
         <div>
             <table class="table-popup font-size-small">
                 @{
-                    var selectedGroupId = 0;
-                    var selectedMailId = 0;
                     var targetIds = Model.TaskInformation.NextActionTargetIdList.Split(',');
-                    if (Model.TaskInformation.NextActionIdList.Contains(','))
+                    var nextActionIds = Model.TaskInformation.NextActionIdList.Split(',');
+
+                    var indexGroup = nextActionIds.ToList().IndexOf("1") > 0 ? nextActionIds.ToList().IndexOf("1") : 0;
+                    var indexMail = nextActionIds.ToList().IndexOf("2") > 0 ? nextActionIds.ToList().IndexOf("2") : 0;
+                    var selectedGroupId = int.Parse(targetIds[indexGroup]);
+                    var selectedMailId = int.Parse(targetIds[indexMail]);
+
+                    var selectedDataTypes = new List<string>();
+                    for (var i = 0; i < nextActionIds.Count(); i++)
                     {
-                        selectedGroupId = int.Parse(targetIds[0]);
-                        selectedMailId = int.Parse(targetIds[1]);
-                    }
-                    else
-                    {
-                        if (Model.TaskInformation.NextActionIdList == "1")
+                        if (nextActionIds.ElementAt(i) == "3")
                         {
-                            selectedGroupId = int.Parse(targetIds[0]);
-                        }
-                        else
-                        {
-                            selectedMailId = int.Parse(targetIds[0]);
+                            selectedDataTypes.Add(targetIds.ElementAt(i));
                         }
                     }
                     <tr>
@@ -427,7 +425,8 @@
                             </div>
                         </td>
                         <td>
-                            <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px; width: 250px;">
+                            <select name="nextaction_assignGroup_value" id="nextaction_assignGroup_value" style="height: 25px;
+                                width: 250px;">
                                 @foreach (var group in Model.GroupList)
                                 {
                                     <option value="@group.GroupId" @(selectedGroupId == group.GroupId ? "selected" : "")>@group.GroupName</option>
@@ -471,7 +470,7 @@
                                     {
                                         <li>
                                             <input style="margin: 5px;" type="checkbox" id="captureData_value_@dataTypeCapture.DataId"
-                                             value="@dataTypeCapture.DataId" @(Model.TaskInformation.NextActionTargetIdList.Contains(dataTypeCapture.DataId.ToString(CultureInfo.InvariantCulture)) ? "checked" : "") />
+                                             value="@dataTypeCapture.DataId" @(selectedDataTypes.IndexOf(dataTypeCapture.DataId.ToString()) >= 0 ? "checked" : "") />
                                             <label style="font-weight: normal; font-size: small;" for="captureData_value_@dataTypeCapture.DataId">@dataTypeCapture.DataName</label>
                                         </li>
                                     }

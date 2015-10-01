@@ -32,9 +32,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     {
         private readonly TaskService _taskService;
 
+        private readonly DataCaptureService _dataCaptureService;
+
         public TaskController()
         {
             _taskService = new TaskService();
+            _dataCaptureService = new DataCaptureService();
         }
 
         #region Add Task
@@ -180,7 +183,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var currencies = currencyService.GetCurrencies(new CurrencyGetAllCriteria());
 
             // Currency
-            var dataTypesCaptureList = _taskService.GetAllDataTypeCapture(new DataTypeCaptureGetAllCriteria());
+            var dataTypesCaptureList = _dataCaptureService.GetAllDataTypeCapture(new DataTypeCaptureGetAllCriteria());
 
             var taskViewModel = new TaskViewModel(
                 events.ToList(),

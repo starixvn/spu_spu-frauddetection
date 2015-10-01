@@ -10,11 +10,9 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Collections.Generic;
     using System.Web.Mvc;
     using FD.Lib.Criteria.CustomerBettingGroup;
     using FD.Lib.Criteria.Reports;
-    using FD.Lib.Model.Reports.BettingGroup;
     using FD.Lib.Service.Implement;
     using FD.Lib.Service.Interface;
     using NAP.FraudDetection.Controllers;

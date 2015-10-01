@@ -53,6 +53,11 @@
     <Content Include="CustomerBettingGroup\dbo.FD_CustomerBettingGroupsMerge.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_CustomersIntoBettingGroupInsert.StoredProcedure.sql" />
     <Content Include="CustomerBettingGroup\dbo.FD_RelatedBettingGroupGet.StoredProcedure.sql" />
+    <Content Include="DataCapture\FD_DataCaptureGetAllNotComparedMatches.sql" />
+    <Content Include="DataCapture\FD_DataCaptureInsert.sql" />
+    <Content Include="DataCapture\FD_DataCaptureUpdate.sql" />
+    <Content Include="DataCapture\FD_DataTypeCaptureGetAll.sql" />
+    <Content Include="DataCapture\FD_SuspiciousCapturedDataInsert.sql" />
     <Content Include="Reports\BettingGroup\dbo.FD_SumWinLossByTransIdsGetFromDBArchive.StoredProcedure.sql" />
     <Content Include="Reports\BettingGroup\dbo.FD_SumWinLossByTransIdsGet.StoredProcedure.sql" />
     <Content Include="SuspiciousCustomer\dbo.FD_NewSuspiciousCustomersGet.StoredProcedure.sql" />
