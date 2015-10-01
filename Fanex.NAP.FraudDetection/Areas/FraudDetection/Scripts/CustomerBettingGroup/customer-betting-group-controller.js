@@ -48,7 +48,7 @@
         currentGroup = groupId;
         customerBettingGroupModel.getGroupById(groupId).then(function () {
             var group = customerBettingGroupModel.group;
-            renderCustomerTable(group.Customers);
+            renderCustomerTable(group.Customers, groupId);
         });
     };
 
@@ -100,7 +100,7 @@
         var gridOptions = {
             columns:
             [
-                { HeaderText: "#", Width: 30, Name: "Row", HeaderAlign: "center", CellAlign: "center" },                
+                { HeaderText: "Group Id", Width: 60, Name: "GroupId", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Currency", Width: 300, Name: "Currency", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "# Customer", Width: 100, Name: "Customers", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Delete", Width: 60, Name: "Delete", HeaderAlign: "center", CellAlign: "center" }
@@ -116,6 +116,7 @@
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true
             },
+            showHighlightRow: true,
             showTitle: true,
             titleInfo:
                 {
@@ -135,7 +136,7 @@
         for (var index = 0; index < groups.length; index++) {
             rows.push({
                 Columns: [
-                    { Name: "Row", Value: index + 1 },
+                    { Name: "GroupId", Value: groups[index].GroupId },
                     { Name: "Currency", Value: groups[index].Currencies },
                     { Name: "Customers", Value: groups[index].Customers.length },
                     { Name: "Delete", Value: groups[index].GroupId, CustomCellRender: actionColumn }
@@ -158,7 +159,7 @@
     /*
     * Render customer.
     */
-    var renderCustomerTable = function (customers) {
+    var renderCustomerTable = function (customers, groupId) {
         var gridOptions = {
             columns:
             [
@@ -180,7 +181,7 @@
             showTitle: true,
             titleInfo:
                 {
-                    text: "Member List"
+                    text: "Member List - Group " + groupId
                 }
         };
 

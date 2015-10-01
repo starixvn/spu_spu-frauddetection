@@ -8,9 +8,9 @@
             bodyRows.push({
                 Columns: [
                     { Name: "EventDateStr", Value: element.EventDateStr },
-                    { Name: "Match", Value: element.HomeName + ' -vs-' + element.AwayName },
+                    { Name: "Match", Value: element.HomeName + ' -vs- ' + element.AwayName },
                     { Name: "AssociationMembers", Value: element.AssociationMembers },
-                    { Name: "WinLoss", Value: element.WinLoss },
+                    { Name: "WinLoss", Value: element.WinLoss, TdClass: 'font-bold' },
                     { Name: "Ip", Value: element.Ip }
                 ]
             });
@@ -28,18 +28,22 @@
                 { HeaderText: "Match", Width: 200, Name: "Match", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Association Members", Width: 200, Name: "AssociationMembers", HeaderAlign: "center", CellAlign: "left" },
                 {
-                    HeaderText: "Win Loss", Width: 100, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                    HeaderText: "Win Loss",
+                    Width: 100,
+                    Name: "WinLoss",
+                    HeaderAlign: "center",
+                    CellAlign: "right",
                     IsCurrency: true,
                     FormatNumber: formatNumber,
                     FormatNegative: '($)',
-                    IsAbs: true                    
+                    IsAbs: true
                 },
-                { HeaderText: "IP", Width: 100, Name: "Ip", HeaderAlign: "center", CellAlign: "center" }                
+                { HeaderText: "IP", Width: 100, Name: "Ip", HeaderAlign: "center", CellAlign: "center" }
             ],
             bodyRows: getBodyRows(data),
             showPager: true,
-            fullHeight: true,
-            gridExpandHeight: 300,
+            fullHeight: false,
+            gridExpandHeight: 250,
             allowTruncate: true,
             pagerOption: {
                 itemsPerPage: 50,
