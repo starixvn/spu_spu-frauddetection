@@ -540,7 +540,6 @@
             }
         });
 
-        //configids = configids.slice(0, -1);
         return configids.join("#");
     };
 
@@ -564,16 +563,13 @@
             var relevantObjects = '[id^="' + parentName + 'Control"]';
             $(relevantObjects).css("display", "none");
             var selectingRuleKey = $('#ruleConfigKey').val();
-            if (!isPrecondition) {
-                if (selectingRuleKey == "Stake") {
-                    $("#" + parentName + "ControlTextbox").css("display", "inline-block");
-                } else {
-                    $("#" + parentName + "ControlTextbox").css("display", "none");
-                }
-            }
 
             $("#" + parentName + "ControlComboBoxKeyClone").css("display", "inline-block");
             $("#" + parentName + "ControlTextbox").css("display", "inline-block");
+
+            if (!isPrecondition && selectingRuleKey !== "Stake") {
+                $("#" + parentName + "ControlTextbox").css("display", "none");
+            }
         } else {
             var selectedOption = $("#" + parentName + "Key").find(":selected");
             var controlType = $(selectedOption).attr("data-controltype");
