@@ -307,6 +307,10 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Content Include="Areas\FraudDetection\AddOns\TagIt\jquery.tagit.css" />
+    <Content Include="Areas\FraudDetection\AddOns\TagIt\tag-it.js" />
+    <Content Include="Areas\FraudDetection\AddOns\TagIt\tag-it.min.js" />
+    <Content Include="Areas\FraudDetection\AddOns\TagIt\tagit.ui-zendesk.css" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\basic-icon.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\glyphicons-halflings.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
@@ -625,6 +629,7 @@
     <Content Include="Dependencies\FD.Lib.DTO.dll" />
     <Content Include="Dependencies\FD.Lib.Model.dll" />
     <Content Include="Dependencies\FD.Lib.Service.dll" />
+    <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />

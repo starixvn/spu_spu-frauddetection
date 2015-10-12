@@ -58,6 +58,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/jquery.confirm.js",
+                "~/Scripts/jquery.blockUI.js",
                 "~/Scripts/Fanex.Grid/Fanex.Grid.js",
                 "~/Scripts/Fanex.Grid/Fanex.Pagination.js",
                 "~/Scripts/Fanex.Grid/moment.min.js",
@@ -71,6 +72,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/alertServiceOnPopup").Include(
                 "~/Scripts/Core/AlertServiceOnPopup.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/App/CustomerBettingGroup").Include(
                 "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-factory.js",
@@ -126,6 +128,13 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/HomeJs").Include(
                 "~/Scripts/Page/Home/home.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/TagItCss").Include(
+                "~/Areas/FraudDetection/AddOns/TagIt/jquery.tagit.css",
+                "~/Areas/FraudDetection/AddOns/TagIt/tagit.ui-zendesk.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/TagItJs").Include(
+                "~/Areas/FraudDetection/AddOns/TagIt/tag-it.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/DefaultBetSettingJs").Include(
                 "~/Scripts/Page/DefaultBetSetting/addnew.js",

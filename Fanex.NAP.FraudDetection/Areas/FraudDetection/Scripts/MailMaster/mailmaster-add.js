@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    $.blockUI();
     tinyMCE.init({
         document_base_url: window.location.href.split('/MailMaster', 1)[0].toString(),
         relative_urls: false,
@@ -19,13 +20,20 @@
         image_advtab: true
     });
 
+    initializeTagIt();
+
     $("#btn_cancelMail").click(function () {
-        window.history.back();
+        //window.history.back();
+        //alert(getTags($('#To').tagit("tags")));
+        var a = $("#To").tagit("assignedTags");
+        alert(getTags($("#To").tagit("assignedTags")));
     });
 
     $("#btn_addMail").click(function () {
         addMail.submit();
     });
+
+    $.unblockUI();
 
     var addMail = $('#addNewMailForm').submit(function (event) {
         event.preventDefault();
@@ -43,4 +51,31 @@
 function insertSuspiciousStatistic(name) {
     var data = '&lt;placeholder&gt;' + name + '&lt;/placeholder&gt;';
     tinyMCE.execCommand('mceInsertContent', false, data);
+}
+
+function initializeTagIt() {
+
+    $('#To').tagit({
+        beforeTagAdded: function (event, ui) {
+            return isEmail(ui.tagLabel);
+        }
+    });
+    
+    $('#CcTo').tagit();
+    $('#BccTo').tagit();
+
+    $('input[id^="Fake"').hide();
+}
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
+function getTags(tags) {
+    var tagsString = "";
+    for (var i in tags)
+        tagsString += tags[i] + ";";
+
+    return tagsString.slice(0, -1); ;
 }

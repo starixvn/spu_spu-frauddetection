@@ -26,16 +26,16 @@
 </div>
 @using (Html.BeginForm("Search", "MatchMonitoring", FormMethod.Get, new { @id = "formSearch", @class = "form-inline col-sm-12 filter-forml" }))
 {
-    <div class="form-group col-sm-12" style="margin-left: -30px;">
-        <div class="col-sm-3">
-            <label style="width: 110px; text-align: right; padding-right: 20px;">
+    <div class="form-group col-sm-12" style="margin-left: -70px;">
+        <div class="col-sm-3" style="text-align: right;">
+            <label class="text-right" style="margin-right: 10px;">
                 Event Date
             </label>
             @Html.TextBox("EventDate", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:75px;" })
             <i class="icon-calendar icon-event-date-calendar" id="eventDateDatetimePickerIcon" style=""></i>
         </div>
         <div class="col-sm-9">
-             <label style="width: 110px; text-align: right; padding-right: 20px;">
+            <label class="col-sm-2 text-right">
                 League
             </label>
             <select name="Leagues" id="Leagues" style="height: 25px; width: 520px;">
@@ -48,23 +48,25 @@
         </div>
     </div>
     <div id="" style="height: 35px;">&nbsp;</div>
-    <div class="form-group col-sm-12" style="margin-left: -30px;">
-        <div class="col-sm-3">
-            <label style="width: 110px; text-align: right; padding-right: 20px;">
+    <div class="form-group col-sm-12" style="margin-left: -70px;">
+        <div class="col-sm-3" style="text-align: right;">
+            <label class="text-right" style="margin-right: 10px;">
                 Match Code
             </label>
             <input style="height: 25px; width: 93px;" id="MatchCode"></input>
         </div>
-        <div class="col-sm-9">
-            <label style="width: 110px; text-align: right; padding-right: 20px;">
+        <div class="col-sm-3" style="margin-left: -8px;">
+            <label class="col-sm-7 text-right">
                 Match Status
             </label>
-            <select style="height: 25px; width: 90px;" id="MatchStatus">
+            <select style="height: 25px; width: 83px; margin-left: -2px" id="MatchStatus">
                 <option value="All">All</option>
                 <option value="Completed">Completed</option>
                 <option value="running">Running</option>
             </select>
-            <label style="width: 220px; text-align: right; padding-right: 20px; padding-left: 20px;">
+        </div>
+        <div class="col-sm-6" style="margin-left: -90px;">
+            <label class="col-sm-6 text-right">
                 Has Suspicious Customer(s)
             </label>
             <select style="height: 25px; width: 92px;" id="SuspiciousStatus">
@@ -72,11 +74,13 @@
                 <option value="1">Yes</option>
                 <option value="2">No</option>
             </select>
-            <button class="btn-green" style="width: 95px; margin: 1px 0 0 10px;" id="btnSearch">Generate</button>
+            <button class="btn-green" style="width: 100px; margin: 1px 0 0 10px;" id="btnSearch">Search</button>
         </div>
     </div>
 }
-<div class="newline">&nbsp;</div>
+<div id="matchSearch" class="newline">
+    &nbsp;
+</div>
 <div class="form-group col-sm-10" style="margin: 0 0 0 -10px;">
     <div class="col-sm-4">
         <img class="ico-scannednosuspicious" alt="" title='Scanned and has no suspicious case.' />
@@ -96,10 +100,6 @@
             : Is not scanned
         </label>
     </div>
-</div>
-<div class="newline">&nbsp;</div>
-<div class="hidden report-header" id="report-header">
-    <div class="export-excel-icon" id="btnExportExcel"></div>
 </div>
 <div id="matchMonitoringReport" class="freegrid content-grid">
 </div>
