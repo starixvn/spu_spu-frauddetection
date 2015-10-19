@@ -55,7 +55,7 @@
             </label>
             <input style="height: 25px; width: 93px;" id="MatchCode"></input>
         </div>
-        <div class="col-sm-3" style="margin-left: -8px;">
+        <div class="col-sm-3" style="margin-left: -24px;">
             <label class="col-sm-7 text-right">
                 Match Status
             </label>
@@ -65,7 +65,7 @@
                 <option value="running">Running</option>
             </select>
         </div>
-        <div class="col-sm-6" style="margin-left: -51px;">
+        <div class="col-sm-6" style="margin-left: -199px;">
             <label class="col-sm-6 text-right">
                 Has Suspicious Customer(s)
             </label>
@@ -75,6 +75,7 @@
                 <option value="2">No</option>
             </select>
             <button class="btn-green" style="width: 100px; margin: 1px 0 0 10px;" id="btnSearch">Search</button>
+            <button class="btn-green" style="width: 100px; margin: 1px 0 0 10px;" id="btnExportExcel">Export Excel</button>
         </div>
     </div>
 }
@@ -100,6 +101,9 @@
             : Is not scanned
         </label>
     </div>
+</div>
+<div class="hidden report-header" id="report-header">
+    <div class="export-excel-icon" id="btnExportExcel"></div>
 </div>
 <div id="matchMonitoringReport" class="freegrid content-grid">
 </div>

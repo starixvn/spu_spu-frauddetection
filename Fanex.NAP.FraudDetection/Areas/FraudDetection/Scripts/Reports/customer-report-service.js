@@ -135,6 +135,8 @@
         suspiciousCustomerReportService.gridOptions.columns = columnHeaders;
 
         $("#customerReportId").fanexGrid(suspiciousCustomerReportService.gridOptions);
+        $("#report-header").width($("#customerReportId").width());
+        $("#report-header").removeClass("hidden");
     };
 
     /*

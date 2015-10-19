@@ -360,3 +360,24 @@ input[type="submit"], .btn-primary,
 .font-bold {
     font-weight: bold;
 }
+
+.report-header 
+{
+    background-color: #FFCC34;
+    border-color: #D2B24D;
+    border-style: solid;
+    border-width: 1px;
+    height: 30px;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.export-excel-icon {
+    background-image: url("../App_Themes/Images/icons.png");
+    background-position: -147px -148px;
+    background-repeat: no-repeat;
+    height: 16px;
+    width: 16px;
+    margin-top: 4px;
+    float: right;
+}

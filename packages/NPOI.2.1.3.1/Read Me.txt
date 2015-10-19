@@ -11,7 +11,8 @@ used to create search engines).
 ==================
 *  NPOI Website *
 ==================
-http://npoi.googlecode.com (Latest source code available)
+https://github.com/tonyqus/npoi/ (Latest source code available)
+http://npoi.googlecode.com (No latest source code available)
 http://npoi.codeplex.com (No latest source code available)
 http://tonyqus.sinaapp.com (Official Tutorial in Chinese)
 
@@ -26,9 +27,11 @@ medium trust environment in ASP.NET
 =================
 *  NPOI on SNS  *
 =================
-QQ群: 124527967, 116053476, 78142590
 Twitter: http://twitter.com/tonyqus 
+User Group[Linkedin]: http://www.linkedin.com/groups/NPOI-User-Group-6655065 
 新浪微博: http://t.sina.com.cn/npoi 
+企业客户QQ群: 116053476
+个人客户QQ群：20144214
 
 ================
 * Team Members *
@@ -57,7 +60,7 @@ Time Zone: GMT+8
 Main Contribution: NPOI 1.2 Chinese Tutorial
 
 --------------------------------------------------------------------------------
-NPOI 1.2.3 above
+NPOI 1.2.3 - NPOI 1.2.5
 --------------------------------------------------------------------------------
 Antony - developer
 ------------------------------
@@ -82,6 +85,47 @@ Leon Wang - developer
 From: Xi'an, China
 Time Zone: GMT+8
 Main contribution: NPOIFS/POIFS
+
+NPOI 2.0
+--------------------------------------------------------------------------------
+Tony Qu - chief developer
+-------------------------------
+From: Shanghai, China
+Time Zone: GMT+8
+Main Contribution: OpenXml4Net, OpenXmlFormats, NPOI.XSSF, NPOI.XWPF implementation
+
+Antony - developer
+------------------------------
+From: Guangzhou, China
+Time Zone: GMT+8
+Main Contribution: XWPF implementation, OpenXmlFormats
+
+Christian Leutloff - developer
+------------------------------
+From: Germany
+Time Zone: GMT+1
+Main Contribution: OpenXmlFormats, Excel 2007 comment read
+
+Jeff Stedfast - developer
+------------------------------
+From: Cambridge, MA, USA
+Time Zone: GMT
+Main contribution: Mono version of NPOI, enumeration changes and compilation optimization
+
+Paul Kratt - developer
+------------------------------
+From: Greater Milwaukee Area, Wisconsin, USA
+Time Zone: GMT
+Main contribution: CopyTo, CopySheet functions in HSSFSheet
+
+NPOI 2.1
+--------------------------------------------------------------------------------
+Tony Qu - main contributor
+Antony - fix some poi bugs
+
+Phil Rykoff - developer
+------------------------------
+Main contribution: XSSF bug fixing and feature implement
 
 ==================
 * How to join us *

@@ -37,6 +37,25 @@
                 waitingDialog.hide();
             });
         });
+
+        $("#btnExportExcel").click(function (event) {
+            event.preventDefault();
+
+            waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+            var param = {
+                "EventDate": $("#EventDate").val(),
+                "LeagueId": $("#Leagues").val(),
+                "MatchCode": $("#MatchCode").val(),
+                "MatchStatus": $("#MatchStatus").val(),
+                "SuspiciousStatus": $("#SuspiciousStatus").val()
+            };
+
+            matchMonitoringReportFactory.ExportExcel(param).success(function (data) {
+                alert(data.Msg);
+
+                waitingDialog.hide();
+            });
+        });
     };
 
     matchMonitoringReportService.renderLeagues = function (eventDate) {
@@ -85,6 +104,8 @@
         }
 
         $("#matchMonitoringReport").fanexGrid(matchMonitoringReportService.gridOptions);
+        $("#report-header").width($("#matchMonitoringReport").width());
+        $("#report-header").removeClass("hidden");
     };
 
     matchMonitoringReportService.createReportTable = function (matches) {

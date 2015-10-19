@@ -9,6 +9,10 @@
         Search: function (param) {
             return $.get('MatchMonitoring/Search', param);
         },
+
+        ExportExcel: function (param) {
+            return $.get('MatchMonitoring/ExportExcel', param);
+        },
         
         GetCaseIdFromCaseName: function (caseName) {
             return $.get('MatchMonitoring/GetCaseIdFromName', { caseName: caseName });
