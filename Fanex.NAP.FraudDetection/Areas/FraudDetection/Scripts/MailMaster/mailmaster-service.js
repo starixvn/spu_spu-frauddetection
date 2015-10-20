@@ -4,6 +4,8 @@
 
     mailMasterService.mailUlr = '';
 
+    mailMasterService.isHostPermission = false;
+
     mailMasterService.queryMail = function () {
         mailMasterFactory.getMails().success(function (result) {
             renderMailTable(result);
@@ -82,30 +84,50 @@
     };
 
     mailMasterService.showAction = function (mailId) {
-        $.contextMenu({
-            selector: '#edit' + mailId,
-            items: {
-                deleteMail: {
-                    name: "Delete this mail",
-                    height: 25,
-                    className: "iconDelAff",
-                    callback: function () {
-                        mailMasterService.deleteMail(mailId);
+        if (!mailMasterService.isHostPermission) {
+            $.contextMenu({
+                selector: '#edit' + mailId,
+                items: {
+                    editInfo: {
+                        name: "See mail content",
+                        height: 25,
+                        className: "iconEditInfo",
+                        callback: function () {
+                            mailMasterService.updateMail(mailId);
+                        }
                     }
                 },
-                editInfo: {
-                    name: "Edit information",
-                    height: 25,
-                    className: "iconEditInfo",
-                    callback: function () {
-                        mailMasterService.updateMail(mailId);
+                trigger: "left",
+                ignoreRightClick: true,
+                autoHide: true
+            });
+        } else {
+            $.contextMenu({
+                selector: '#edit' + mailId,
+                items: {
+                    deleteMail: {
+                        name: "Delete this mail",
+                        height: 25,
+                        className: "iconDelAff",
+                        callback: function () {
+                            mailMasterService.deleteMail(mailId);
+                        }
+                    },
+                    editInfo: {
+                        name: "Edit information",
+                        height: 25,
+                        className: "iconEditInfo",
+                        callback: function () {
+                            mailMasterService.updateMail(mailId);
+                        }
                     }
-                }
-            },
-            trigger: "left",
-            ignoreRightClick: true,
-            autoHide: true
-        });
+                },
+                trigger: "left",
+                ignoreRightClick: true,
+                autoHide: true
+            });
+        }
+
     };
 
     mailMasterService.addMail = function (mail) {
@@ -144,6 +166,7 @@
             bodyRows: createMailTable(mailTemplates),
             gridExpandHeight: 180,
             showPager: true,
+            enableHiddenColumns: false,
             pagerOption:
             {
                 itemsPerPage: 50,
@@ -152,6 +175,10 @@
                 showDetail: true
             }
         };
+
+        if (!mailMasterService.isHostPermission) {
+            gridOptions.hiddenColumns = [3];
+        }
 
         $("#mailMasterId").fanexGrid(gridOptions);
     }

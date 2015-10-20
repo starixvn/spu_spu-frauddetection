@@ -11,6 +11,9 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.CustomerBettingGroup;
     using FD.Lib.Criteria.Reports;
     using FD.Lib.Service.Implement;
@@ -31,12 +34,14 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _bettingGroupReportService = new BettingGroupReportService();
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerBettingGroup, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/CustomerBettingGroup/CustomerBettingGroupList.cshtml");
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerBettingGroup, Policy = Constant.Policy.Read)]
         public ActionResult GetAllBettingGroups()
         {
             var criteria = new CustomerBettingGroupGetAllCriteria();
@@ -51,6 +56,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="groupId">The group ID.</param>
         /// <returns>The ActionResult.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerBettingGroup, Policy = Constant.Policy.Host)]
         public ActionResult DeleteBettingGroup(int groupId)
         {
             var criteria = new CustomerBettingGroupDeleteCriteria
@@ -71,6 +77,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="groupId">The group ID.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerBettingGroup, Policy = Constant.Policy.Host)]
         public ActionResult DeleteCustomer(int custId, int groupId)
         {
             var criteria = new CustomerBettingGroupDeleteCustomerCriteria
@@ -86,6 +93,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerBettingGroup, Policy = Constant.Policy.Read)]
         public ActionResult GetGroupById(int groupId)
         {
             var criteria = new CustomerBettingGroupGetByIdCriteria
@@ -98,6 +106,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerBettingGroup, Policy = Constant.Policy.Read)]
         public ActionResult GetAssociationCustomers(AssociationCustomersGetCriteria criteria)
         {
             var group = _bettingGroupReportService.GetAssociationCustomers(criteria);

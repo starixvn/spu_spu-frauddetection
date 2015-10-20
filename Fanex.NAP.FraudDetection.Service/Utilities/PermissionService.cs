@@ -12,8 +12,8 @@ namespace Fanex.NAP.FraudDetection.Service.Utilities
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Core.Business;
-    using Core.Model.ValueObject;
+    using NAP.Core.Business;
+    using NAP.Core.Model.ValueObject;
 
     /// <summary>
     /// TODO: Update summary.

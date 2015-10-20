@@ -1,4 +1,6 @@
-﻿@model FD.Lib.Criteria.Case.CaseGetAllCriteria
+﻿@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
+@model FD.Lib.Criteria.Case.CaseGetAllCriteria
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "All Fraud Cases";
@@ -7,11 +9,17 @@
 @section FooterJs
 {
     @Scripts.Render("~/bundles/App/Case")
+    <script type="text/javascript">
+        var isHost = "@PermissionService.HasHostPermission(FDFunctionKeys.FraudCase)" === "True";
+    </script>
     <script src="~/Areas/FraudDetection/Scripts/Case/case-list.js" type="text/javascript"></script>
 }
 <div>
     <span class="infor-text">@ViewBag.Title</span>
-    <input type="button" id="btn_addNewCase" value="+ Add Case" class="btn-green" />
+    @if (PermissionService.HasHostPermission(FDFunctionKeys.FraudCase))
+    {
+        <input type="button" id="btn_addNewCase" value="+ Add Case" class="btn-green" />
+    }
 </div>
 <div class="newline">
     &nbsp;

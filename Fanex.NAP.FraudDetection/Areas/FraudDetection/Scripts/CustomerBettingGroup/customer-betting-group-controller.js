@@ -3,6 +3,8 @@
 
     var customerBettingGroupController = {};
 
+    customerBettingGroupController.isHostPermission = false;
+
     customerBettingGroupController.queryGroup = function () {
         customerBettingGroupModel.getGroups().then(function () {
             renderCustomerBettingGroupTable(customerBettingGroupModel.groups);
@@ -41,7 +43,7 @@
             cancelButton: "Cancel"
         });
     };
-  
+
     var currentGroup = 0;
 
     customerBettingGroupController.openPopupEditCustomer = function (groupId) {
@@ -109,6 +111,7 @@
             gridExpandHeight: 180,
             showPager: true,
             allowTruncate: true,
+            enableHiddenColumns: false,
             pagerOption:
             {
                 itemsPerPage: 50,
@@ -123,6 +126,10 @@
                     text: "Customer Betting Group List"
                 }
         };
+
+        if (!customerBettingGroupController.isHostPermission) {
+            gridOptions.hiddenColumns = [3];
+        }
 
         $("#customer-betting-group").fanexGrid(gridOptions);
     };
@@ -155,7 +162,7 @@
     var actionColumn = function (cell) {
         return "<div style='cursor: pointer;' class='glyphicon glyphicon-trash' onclick=\"customerBettingGroupController.deleteGroup(" + cell.Value + ");\"></div>";
     };
- 
+
     /*
     * Render customer.
     */
@@ -171,6 +178,7 @@
             bodyRows: createCustomerTable(customers),
             gridExpandHeight: 500,
             showPager: true,
+            enableHiddenColumns: false,
             pagerOption:
             {
                 itemsPerPage: 50,
@@ -185,6 +193,10 @@
                 }
         };
 
+        if (!customerBettingGroupController.isHostPermission) {
+            gridOptions.hiddenColumns = [3];
+        }
+
         $("#customers-in-betting-group").fanexGrid(gridOptions);
     };
 
@@ -198,7 +210,7 @@
             rows.push({
                 Columns: [
                     { Name: "Row", Value: index + 1 },
-                    { Name: "Member", Value: customers[index], CustomCellRender: memberColumn},
+                    { Name: "Member", Value: customers[index], CustomCellRender: memberColumn },
                     { Name: "Currency", Value: customers[index].Currency.CurrencyName },
                     { Name: "Remove", Value: customers[index], CustomCellRender: deleteColumn }
                 ]

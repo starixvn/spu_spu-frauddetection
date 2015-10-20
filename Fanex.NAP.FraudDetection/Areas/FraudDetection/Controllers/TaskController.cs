@@ -12,6 +12,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Bettype;
     using FD.Lib.Criteria.CaseGroup;
     using FD.Lib.Criteria.Common;
@@ -47,6 +50,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="caseId">Fraud Case ID.</param>
         /// <returns>Action Result.</returns>
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult Index(string caseId)
         {
             int fraudCase;
@@ -66,6 +70,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Task Insert Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult AddTask(TaskInsertCriteria criteria)
         {
             var dataCheckResults = CheckTaskDataIsCorrect(criteria);
@@ -100,6 +105,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         #region Edit Task
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult EditTask(int taskId)
         {
             var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoGetCriteria { TaskId = taskId });
@@ -118,6 +124,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="caseId">Work flow ID.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult EditTask(TaskUpdateCriteria criteria, string caseId)
         {
             var dataCheckResults = CheckTaskDataIsCorrect(criteria);

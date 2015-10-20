@@ -11,6 +11,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Config;
     using FD.Lib.Criteria.Parameter;
     using FD.Lib.Service.Implement;
@@ -20,6 +23,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
     public class ParameterController : BaseController
     {
+        [NapAuth(FunctionKey = FDFunctionKeys.Parameter, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Parameter/ParameterEdit.cshtml", GenerateViewModel());
@@ -31,6 +35,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Config Parameter Update Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.Parameter, Policy = Constant.Policy.Host)]
         public ActionResult UpdateParameter(ConfigUpdateCriteria criteria)
         {
             var configService = new ConfigurationsService();

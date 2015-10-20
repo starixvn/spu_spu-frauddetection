@@ -10,6 +10,8 @@
 
     groupService.gridOptions = '';
 
+    groupService.isHostPermission = false;
+
     groupService.Search = function () {
         $('#PageSize').val(groupService._pageSize);
         $('#PageIndex').val(groupService._pageIndex);
@@ -144,6 +146,10 @@
                     pagerSelectCallBack: reRenderAfterPaged
                 }
             };
+
+            if (!groupService.isHostPermission) {
+            groupService.gridOptions.hiddenColumns = [1, 4, 5];
+        }
 
         $("#SearchResult").fanexGrid(groupService.gridOptions);
     }

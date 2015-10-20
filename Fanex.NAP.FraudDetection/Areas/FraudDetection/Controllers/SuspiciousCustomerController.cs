@@ -14,6 +14,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Group;
     using FD.Lib.Criteria.Reports;
     using FD.Lib.Criteria.SuspiciousStatistic;
@@ -45,6 +48,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Main page.
         /// </summary>
         /// <returns>The ActionResult.</returns>
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             var groups = GetAllGroups();
@@ -58,6 +62,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The criteria.</param>
         /// <returns>A list of customers.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult Search(SuspiciousCustomerReportGetAllCriteria criteria)
         {
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
@@ -77,6 +82,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="custId">The customer ID.</param>
         /// <returns>The ActionResult.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult GetSuspiciousCustomerStatistic(int custId)
         {
             var marginCriteria = new CustomerWinlostSelectCriteria

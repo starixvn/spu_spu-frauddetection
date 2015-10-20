@@ -1,6 +1,8 @@
 ﻿(function () {
     "use strict";
-    
+
+    caseDetailService.isHostPermission = isHost;
+
     caseDetailService._caseId = $("#CaseId").val();
     caseDetailService.Search();
 

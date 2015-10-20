@@ -12,6 +12,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.MailMaster;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
@@ -28,11 +31,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _mailMasterService = new MailMasterService();
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterList.cshtml");
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Host)]
         public ActionResult AddMail()
         {
             return View("~/Areas/FraudDetection/Views/MailMaster/MailMasterAdd.cshtml");
@@ -43,6 +48,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <returns>The ActionResult.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Read)]
         public ActionResult GetAllMails()
         {
             var criteria = new MailMasterGetAllCriteria();
@@ -58,6 +64,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>The ActionResult.</returns>
         [HttpPost]
         [ValidateInput(false)]
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Host)]
         public ActionResult AddMail(MailMasterInsertCriteria criteria)
         {
             if (ModelState.IsValid)
@@ -84,6 +91,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="mailId">The Mail ID.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMail(int mailId)
         {
             var criteria = new MailMasterDeleteCriteria
@@ -102,6 +110,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="mailId">The Mail ID.</param>
         /// <returns>The ActionResult.</returns>
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Read)]
         public ActionResult EditMail(int? mailId)
         {
             var criteria = new MailMasterGetByIdCriteria
@@ -131,6 +140,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <returns>The ActionResult.</returns>
         [HttpPost]
         [ValidateInput(false)]
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Host)]
         public ActionResult EditMail(MailMasterUpdateCriteria criteria)
         {
             if (ModelState.IsValid)
@@ -158,6 +168,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="isActive">True or False.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Host)]
         public ActionResult EditMailStatus(int mailId, bool isActive)
         {
             var criteria = new MailMasterUpdateStatusCriteria

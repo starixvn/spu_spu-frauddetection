@@ -1,6 +1,8 @@
 ﻿(function () {
     "use strict";
 
+    customerBettingGroupController.isHostPermission = isHost;
+
     customerBettingGroupController.queryGroup();
 
     $('body').on('click', '.betting-group-row', function () {

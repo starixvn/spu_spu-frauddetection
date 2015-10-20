@@ -1,28 +1,35 @@
-﻿@model FD.Lib.Criteria.Group.GroupGetAllCriteria
+﻿@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
+@model FD.Lib.Criteria.Group.GroupGetAllCriteria
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Groups";
 
 }
-
 @section FooterJs
 {
     @Scripts.Render("~/bundles/App/Group")
+    <script type="text/javascript">
+        var isHost = "@PermissionService.HasHostPermission(FDFunctionKeys.CustomerGroup)" === "True";
+    </script>
     <script src="~/Areas/FraudDetection/Scripts/Group/group-list.js" type="text/javascript"></script>
 }
 <div>
     <span class="infor-text">All Groups</span>
-    <input type="button" id="btn_AddNewGroup" value="+ Add Group" class="btn-green" />
+    @if (PermissionService.HasHostPermission(FDFunctionKeys.CustomerGroup))
+    {
+        <input type="button" id="btn_AddNewGroup" value="+ Add Group" class="btn-green" />
+    }
 </div>
 <div class="newline">
     &nbsp;
 </div>
 <form id="myForm" method="get" action="">
-    <div class="formSearch">
-        @Html.HiddenFor(s => s.PageSize)
-        @Html.HiddenFor(s => s.PageIndex)
-        @Html.HiddenFor(s => s.PageCount)
-    </div>
+<div class="formSearch">
+    @Html.HiddenFor(s => s.PageSize)
+    @Html.HiddenFor(s => s.PageIndex)
+    @Html.HiddenFor(s => s.PageCount)
+</div>
 </form>
 <div id="SearchResult" class="freegrid  content-grid">
 </div>

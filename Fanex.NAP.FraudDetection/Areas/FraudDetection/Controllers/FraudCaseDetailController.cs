@@ -11,6 +11,9 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Reports;
     using FD.Lib.Service.Implement;
     using FD.Lib.Service.Interface;
@@ -34,6 +37,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult Index(FraudCaseDetailReportCriteria criteria)
         {
             var model = _service.GetFraudCaseDetails(criteria);

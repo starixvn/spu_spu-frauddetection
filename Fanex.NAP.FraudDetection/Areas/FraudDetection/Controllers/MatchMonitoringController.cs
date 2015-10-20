@@ -7,15 +7,16 @@
 //   <change who="Long.Luu" date="2015.08.13">Created</change>
 // </history>
 
-using System.Linq;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
+    using System.Linq;
     using System.Web.Mvc;
     using Data.Repository;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Core.ExportExcel;
     using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Common;
@@ -25,7 +26,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using RemotingRef;
-    using System.ComponentModel;
 
     /// <summary>
     /// The controller of Customer Report.
@@ -45,6 +45,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Main page.
         /// </summary>
         /// <returns>The ActionResult.</returns>
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             ViewBag.Leagues = _matchMonitoringReportService.GetLeaguesByDate(
@@ -62,6 +63,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Match Monitoring Report Get All Criteria.</param>
         /// <returns>Match monitoring report data.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria)
         {
             var matchesInfo = GenerateMatchMonitoringData(criteria);
@@ -82,6 +84,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Match Monitoring Report Get All Criteria.</param>
         /// <returns>Match monitoring report data.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria)
         {
             var fileName = DoExportExcel(criteria);
@@ -101,9 +104,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var headers = GetMatchMonitoringHeaders(matchesInfo);
 
             var excelExporter = new FDExportExcelMatchMonitoring(
-                "", 
-                "Match Monitoring", 
-                GetMatchMonitoringReportInfo(criteria), 
+                string.Empty,
+                "Match Monitoring",
+                GetMatchMonitoringReportInfo(criteria),
                 headers,
                 matchesInfo);
 
@@ -144,12 +147,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return headers;
         }
 
-            /// <summary>
+        /// <summary>
         /// Get all leagues by event date.
         /// </summary>
         /// <param name="eventDate">Event Date.</param>
         /// <returns>The SelectListItem.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetLeaguesByDate(string eventDate)
         {
             var balanceUpMoveBetService = new MoveBetsBalanceUpService();
@@ -171,6 +175,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public int GetCaseIdFromName(string caseName)
         {
             var caseInfo = _caseService.GetCaseByName(new CaseGetByNameCriteria
@@ -179,18 +184,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             });
 
             return caseInfo.CaseId;
-        }
-
-        private List<MatchMonitoring> GenerateMatchMonitoringData(MatchMonitoringReportGetAllCriteria criteria)
-        {
-            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
-            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            criteria.IsLatestData = criteria.EventDate > balanceUpMoveBetDates.MoveBetsDay;
-
-            return criteria.EventDate > balanceUpMoveBetDates.BalanceUpDay
-                       ? _matchMonitoringReportService.GetMatchMonitoringReport(criteria)
-                       : _matchMonitoringReportService.GetMatchMonitoringReportFromDBArchive(
-                           new MatchMonitoringReportGetAllDBArchiveCriteria(criteria));
         }
 
         private static void MapRemotingRefData(List<MatchMonitoring> data, bool plainText = false)
@@ -204,6 +197,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     ? homeName + " vs " + awayName
                     : "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
             }
+        }
+
+        private List<MatchMonitoring> GenerateMatchMonitoringData(MatchMonitoringReportGetAllCriteria criteria)
+        {
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+            criteria.IsLatestData = criteria.EventDate > balanceUpMoveBetDates.MoveBetsDay;
+
+            return criteria.EventDate > balanceUpMoveBetDates.BalanceUpDay
+                       ? _matchMonitoringReportService.GetMatchMonitoringReport(criteria)
+                       : _matchMonitoringReportService.GetMatchMonitoringReportFromDBArchive(
+                           new MatchMonitoringReportGetAllDBArchiveCriteria(criteria));
         }
     }
 }

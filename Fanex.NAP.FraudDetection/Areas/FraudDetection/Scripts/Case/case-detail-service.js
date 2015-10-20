@@ -9,6 +9,8 @@
     caseDetailService._pageIndex = 0;
     caseDetailService._pageSize = 50;
 
+    caseDetailService.isHostPermission = false;
+
     caseDetailService.Search = function () {
         $('#PageSize').val(caseDetailService._pageSize);
         $('#PageIndex').val(caseDetailService._pageIndex);
@@ -22,7 +24,7 @@
         caseFactory.getCaseDetail(searchParams).success(function (result) {
             caseFactory.getCustomerGroupByCase(caseId).success(function (data) {
                 renderCaseDetailTable(result);
-                renderCaseGroupTable(data)
+                renderCaseGroupTable(data);
             });
         });
     };
@@ -87,6 +89,10 @@
     function renderCaseGroupTable(data) {
         var gridOptions = getGridOptionForCaseGroupTable(data);
 
+        if (!caseDetailService.isHostPermission) {
+            gridOptions.hiddenColumns = [3];
+        }
+
         $("#CaseGroupResult").fanexGrid(gridOptions);
     }
 
@@ -132,6 +138,10 @@
                     6,
                     { Name: "Edit", Row: i });
             caseDetailService.gridOptions.bodyRows[i].Columns[6].CustomCellRender = actionColumn;
+        }
+
+        if (!caseDetailService.isHostPermission) {
+            caseDetailService.gridOptions.hiddenColumns = [1, 5];
         }
 
         $("#SearchResult").fanexGrid(caseDetailService.gridOptions);
@@ -205,16 +215,17 @@
                 { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center", CustomAttr: "title='demo title'" },
                 { HeaderText: "Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Description", Width: 300, Name: "GroupDescription", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center" }],
+                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center"}],
             bodyRows: getBodyRowsForCaseGroupTable(data),
             showNumberColumn: true,
             showTitle: true,
             allowTruncate: true,
+            enableHiddenColumns: false,
             titleInfo:
             {
                 text: "Customer Groups In This Case",
                 showButtonsWhenNoData: true,
-                customButtons: "<span class='glyphicon glyphicon-plus' onclick='caseDetailService.addCustomerGroupToCase({0});' style='cursor: pointer'/>&nbsp;".format(caseId)
+                customButtons: caseDetailService.isHostPermission ? "<span class='glyphicon glyphicon-plus' onclick='caseDetailService.addCustomerGroupToCase({0});' style='cursor: pointer'/>&nbsp;".format(caseId) : ""
             },
             showPager: true,
             pagerOption: {
@@ -233,6 +244,7 @@
     caseDetailService.getCustomerGroupByCase = function () {
         caseFactory.getCustomerGroupByCase(caseId).success(function (data) {
             var gridOptions = getGridOptionForCaseGroupTable(data);
+
             $("#CaseGroupResult").fanexGrid(gridOptions);
         }).error(function (error) {
             alert(error);

@@ -5,5 +5,6 @@
         groupService.openPopupAddGroup();
     });
 
+    groupService.isHostPermission = isHost;
     groupService.Search();
 })();

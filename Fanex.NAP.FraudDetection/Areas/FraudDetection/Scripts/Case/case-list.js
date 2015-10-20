@@ -5,6 +5,6 @@
         caseService.getEmptyCase();
     });
 
-    
+    caseService.isHostPermission = isHost;
     caseService.Search();
 })();

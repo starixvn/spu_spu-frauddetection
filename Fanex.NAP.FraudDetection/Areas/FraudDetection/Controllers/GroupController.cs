@@ -12,8 +12,10 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Core.Attribute;
-    using FD.Lib.Core.Utilities;
     using FD.Lib.Criteria.Group;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
@@ -31,6 +33,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         #region List Groups
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Group/GroupList.cshtml");
@@ -42,6 +45,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Read)]
         public JsonResult GetGroupList(GroupGetAllCriteria criteria)
         {
             var result = _groupService.GetGroups(criteria);
@@ -56,6 +60,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <returns>HTML string.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Host)]
         public string AddGroup()
         {
             var groupInfo = new GroupInsertCriteria();
@@ -69,6 +74,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Group Insert Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Host)]
         public ActionResult AddGroup(GroupInsertCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.GroupName))
@@ -91,6 +97,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="groupId">The group ID.</param>
         /// <returns>A template view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Host)]
         public string EditGroup(int? groupId)
         {
             var criteria = new GroupGetByIdCriteria
@@ -117,6 +124,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Group Update Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Host)]
         public ActionResult EditGroup(GroupUpdateCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.GroupName))
@@ -137,6 +145,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="isActive">The new status.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Host)]
         public ActionResult EditGroupStatus(int groupId, bool isActive)
         {
             var criteria = new GroupUpdateStatusCriteria

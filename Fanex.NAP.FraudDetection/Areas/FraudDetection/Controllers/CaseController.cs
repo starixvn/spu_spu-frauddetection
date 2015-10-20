@@ -11,6 +11,8 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Web.Mvc;
+    using Core.Business;
+    using Core.Web.Attribute;
     using FD.Lib.Core.Attribute;
     using FD.Lib.Core.Utilities;
     using FD.Lib.Criteria.Case;
@@ -18,6 +20,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.QueueManagement.SendingTasks;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
+    using Service.Core;
 
     /// <summary>
     /// The CaseController.
@@ -36,6 +39,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         #region List Fraud Cases
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Case/CaseList.cshtml");
@@ -47,6 +51,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public JsonResult GetCaseList(CaseGetAllCriteria criteria)
         {
             var cases = _caseService.GetCases(criteria);
@@ -61,6 +66,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <returns>HTML string.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public string AddCase()
         {
             var criteria = new CaseInsertCriteria();
@@ -74,6 +80,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Case Insert Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult AddCase(CaseInsertCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
@@ -96,6 +103,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="caseId">The Case ID.</param>
         /// <returns>Action Result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetCaseDetail(int caseId)
         {
             var caseInfo = _caseService.GetCaseById(new CaseGetByIdCriteria { CaseId = caseId });
@@ -111,6 +119,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
         [Compress]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public JsonResult GetCaseDetail(TaskGetAllByCaseIdCriteria criteria)
         {
             criteria.PageIndex++;
@@ -128,6 +137,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="caseId">The case ID.</param>
         /// <returns>A template view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public string EditCaseInfo(int? caseId)
         {
             var criteria = new CaseGetByIdCriteria
@@ -153,6 +163,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Case Update Criteria.</param>
         /// <returns>Action Result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult EditCaseInfo(CaseUpdateCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria.CaseName))
@@ -173,6 +184,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="isActive">The new status.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult EditCaseStatus(int caseId, bool isActive)
         {
             var criteria = new CaseUpdateStatusCriteria
@@ -202,6 +214,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">The input criteria.</param>
         /// <returns>The ActionResult.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult EditTaskStatus(TaskUpdateStatusCriteria criteria)
         {
             criteria.CreatorId = 1;

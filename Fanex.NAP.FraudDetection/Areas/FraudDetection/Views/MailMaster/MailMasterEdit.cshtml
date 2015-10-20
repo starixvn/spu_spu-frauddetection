@@ -1,4 +1,6 @@
-﻿@model FD.Lib.Criteria.MailMaster.MailMasterUpdateCriteria
+﻿@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
+@model FD.Lib.Criteria.MailMaster.MailMasterUpdateCriteria
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Update Mail";
@@ -56,7 +58,10 @@
     </div>
     
     <div class="form-group text-center col-md-12">
-        <input id="btn_editMail" type="button" value="Submit" class="btn-green" />
+        @if (PermissionService.HasHostPermission(FDFunctionKeys.MailMaster))
+        {
+            <input id="btn_editMail" type="button" value="Submit" class="btn-green" />
+        }
         <input id="btn_cancelMail" type="button" value="Cancel" class="btn-green" />
     </div>
 }

@@ -12,6 +12,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.CaseGroup;
     using FD.Lib.Criteria.Group;
     using FD.Lib.Service.Implement;
@@ -39,6 +42,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _groupService = groupService;
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetCustomerGroupsInCase(CaseGroupGetAllCriteria criteria)
         {
             var caseGroups = _caseGroupService.GetCaseGroup(criteria);
@@ -47,6 +51,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult AddCustomerGroupToCase(int caseId)
         {
             ViewBag.CaseId = caseId;
@@ -55,6 +60,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult GetAvailableCustomerGroups(int caseId)
         {
             var groups = _groupService.GetAvailableGroupsForCase(new GroupGetAvailableGroupsForCaseCriteria
@@ -68,6 +74,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult AddCustomerGroupToCase(CaseGroupInsertCriteria criteria)
         {
             var commandResult = _caseGroupService.InsertCaseGroup(criteria);
@@ -75,6 +82,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(commandResult, JsonRequestBehavior.DenyGet);
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult RemoveCustomerGroupFromCase(CaseGroupDeleteCriteria criteria)
         {
             var commandResult = _caseGroupService.DeleteCaseGroup(criteria);

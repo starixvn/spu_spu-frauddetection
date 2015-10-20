@@ -1,5 +1,7 @@
 ﻿﻿@using System.Web.Optimization
 @using Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task;
+@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
 @model Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task.TaskViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -424,7 +426,10 @@
         &nbsp;
     </div>
     <div style="width: 700px; text-align: center;">
-        <input type="button" id="btn_AddTask" value="Submit" class="btn-green font-size-small" />
+        @if (PermissionService.HasHostPermission(FDFunctionKeys.FraudCase))
+        {
+            <input type="button" id="btn_EditTask" value="Submit" class="btn-green font-size-small font-size-small" />
+        }
         <input type="button" id="btn_Cancel" value="Cancel" class="btn-green btn-customCancel font-size-small" />
     </div>
 }

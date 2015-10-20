@@ -1,10 +1,11 @@
-﻿@model Fanex.NAP.FraudDetection.Models.ViewModel.Paramater.ParameterViewModel
+﻿@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
+@model Fanex.NAP.FraudDetection.Models.ViewModel.Paramater.ParameterViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Configure Parameters";
 
 }
-
 @section FooterJs
 {
     @Scripts.Render("~/bundles/App/Parameter")
@@ -23,23 +24,27 @@
         @{
     foreach (var param in Model.ParameterList)
     {
-        <tr>
-            <td align="right">
-                <span>@param.ParamDisplayName</span>
-            </td>
-            <td>
-                <input type="text" id="tb_param_@param.ParamId" value="@param.ParamValue" style="text-align: right;" />
-                <label>@param.ParamUnit</label>
-                <div class="more-info" title="@param.ParamDesc">
-                </div>
-            </td>
-        </tr>
+            <tr>
+                <td align="right">
+                    <span>@param.ParamDisplayName</span>
+                </td>
+                <td>
+                    <input type="text" id="tb_param_@param.ParamId" value="@param.ParamValue" style="text-align: right;" />
+                    <label>@param.ParamUnit</label>
+                    <div class="more-info" title="@param.ParamDesc">
+                    </div>
+                </td>
+            </tr>
     }
         }
         <tr>
-            <td></td>
             <td>
-                <input type="button" id="btn_UpdateParameter" value="Submit" class="btn-green  font-size-small" />
+            </td>
+            <td>
+                @if (PermissionService.HasHostPermission(FDFunctionKeys.Parameter))
+                {
+                    <input type="button" id="btn_UpdateParameter" value="Submit" class="btn-green  font-size-small" />
+                }
             </td>
         </tr>
     </table>
