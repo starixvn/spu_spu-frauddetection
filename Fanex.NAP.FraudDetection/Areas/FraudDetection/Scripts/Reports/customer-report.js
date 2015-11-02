@@ -14,6 +14,21 @@
         }
     });
 
+    $("#btnExportExcel").click(function (event) {
+        event.preventDefault();
+
+        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+        var param = {
+            "CustName": $("#memberName").val(),
+            "GroupId": $("#groupId").val(),
+            "groupName": $("#groupId option:selected").text(),
+            "PageIndex": 1
+        };
+
+        FraudDetectionScripts.downloadFile("SuspiciousCustomer/ExportExcel", param);
+        waitingDialog.hide();
+    });
+
     var formSearch = $('#formSearch').submit(function (event) {
         event.preventDefault();
 

@@ -55,7 +55,7 @@
             showNumberColumn: true,
             showPager: true,
             fullHeight: true,
-            gridExpandHeight: 250,
+            gridExpandHeight: 280,
             allowTruncate: true,
             pagerOption: {
                 itemsPerPage: 50,
@@ -71,10 +71,26 @@
     service.getFraudCaseDetails = function () {
         var gridOptions = getGridOption(data);
         $("#fraudCaseDetailReportId").fanexGrid(gridOptions);
+        $("#report-header").width($("#fraudCaseDetailReportId").width());
+        $("#report-header").removeClass("hidden");
     };
 
     service.init = function () {
         service.getFraudCaseDetails();
+
+        $("#btnExportExcel").click(function (event) {
+            event.preventDefault();
+
+            waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+            var param = {
+                "MatchId": $("#MatchId").text(),
+                "CaseId": $("#CaseId").text(),
+                "EventDate": $("#EventDate").text()
+            };
+
+            FraudDetectionScripts.downloadFile("ExportExcel", param);
+            waitingDialog.hide();
+        });
     };
 
     return service;

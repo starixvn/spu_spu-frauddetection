@@ -311,6 +311,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\glyphicons-halflings.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="App_Start\BundleExtensions.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\DailyDataMonitoringController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\FraudCaseDetailController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MatchMonitoringController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
@@ -501,6 +502,9 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report.js" />
@@ -821,6 +825,7 @@
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Deployment.ignore" />
+    <Content Include="Areas\FraudDetection\Views\Reports\DailyDataMonitoringReport.cshtml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />

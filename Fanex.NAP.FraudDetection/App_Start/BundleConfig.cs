@@ -99,6 +99,13 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Areas/FraudDetection/Scripts/Reports/matchmonitoring-report-factory.js",
                 "~/Areas/FraudDetection/Scripts/Reports/matchmonitoring-report-service.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/App/DailyDataMonitoringReport").Include(
+                "~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js",
+                "~/Areas/FraudDetection/AddOns/TimePicker/date-format.js",
+                "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report-service.js",
+                "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/App/Task").Include(
                 "~/Areas/FraudDetection/Scripts/Task/task-factory.js",
                 "~/Areas/FraudDetection/Scripts/Task/task-service.js"));

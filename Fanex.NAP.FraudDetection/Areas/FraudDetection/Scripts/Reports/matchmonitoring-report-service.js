@@ -50,11 +50,8 @@
                 "SuspiciousStatus": $("#SuspiciousStatus").val()
             };
 
-            matchMonitoringReportFactory.ExportExcel(param).success(function (data) {
-                alert(data.Msg);
-
-                waitingDialog.hide();
-            });
+            FraudDetectionScripts.downloadFile("MatchMonitoring/ExportExcel", param);
+            waitingDialog.hide();
         });
     };
 
@@ -84,7 +81,7 @@
             ],
             bodyRows: matchMonitoringReportService.createReportTable(data.MatchMonitoring),
             hideYBackGroundScroller: true,
-            gridExpandHeight: 230,
+            gridExpandHeight: 250,
             enableHiddenColumns: false,
             hiddenColumns: [1],
             autoResizeColumn: true,

@@ -15,6 +15,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Business;
+    using FD.Lib.Core.ExportExcel;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Group;
@@ -23,6 +24,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.DTO;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
+    using NPOI.SS.UserModel;
 
     /// <summary>
     /// The controller of Customer Report.
@@ -75,6 +77,59 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// Export the suspicious customers report to Excel file.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="groupName">Selected group name.</param>
+        /// <returns>A list of customers.</returns>
+        [HttpGet]
+        public ActionResult ExportExcel(SuspiciousCustomerReportGetAllCriteria criteria, string groupName)
+        {
+            criteria.PageSize = int.MaxValue;
+            criteria.PageIndex = 1;
+            var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
+
+            var excelExporter = new FDExportExcelSuspiciousCustomer(
+                Server.MapPath("~/ExcelFiles"), 
+                "CustomerReport",
+                new List<Legend>
+                {
+                    new Legend("Member", criteria.CustName),
+                    new Legend("Group", groupName)
+                },
+                GetSuspiciousCustomerHeaders(),
+                suspiciousCustomers.SuspiciousCustomers);
+
+            var saveAsFileName = excelExporter.GenerateExcelFile();
+            ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);
+
+            return new EmptyResult();
+        }
+
+        #region Export Excel
+        
+        public void ResponseStreamExcel(IWorkbook workbook, string fileName)
+        {
+            Response.Clear();
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.AddHeader("Content-Disposition", string.Format("attachment; filename={0}.xls", fileName));
+            workbook.Write(Response.OutputStream);
+        }
+
+        public List<string> GetSuspiciousCustomerHeaders()
+        {
+            var headers = new List<string>();
+            headers.Insert(0, "#");
+            headers.Insert(1, "Member");
+            headers.Insert(2, "Group");
+            headers.Insert(3, "Suspicious Time");
+
+            return headers;
+        }
+
+        #endregion
 
         /// <summary>
         /// Get Suspicious Customer Statistic.

@@ -26,9 +26,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using RemotingRef;
+    using NPOI.SS.UserModel;
 
     /// <summary>
-    /// The controller of Customer Report.
+    /// The controller of Match Monitoring Report.
     /// </summary>
     public class MatchMonitoringController : BaseController
     {
@@ -87,30 +88,29 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria)
         {
-            var fileName = DoExportExcel(criteria);
-
-            var result = new
-            {
-                Msg = fileName
-            };
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public string DoExportExcel(MatchMonitoringReportGetAllCriteria criteria)
-        {
             var matchesInfo = GenerateMatchMonitoringData(criteria);
             MapRemotingRefData(matchesInfo, true);
             var headers = GetMatchMonitoringHeaders(matchesInfo);
 
             var excelExporter = new FDExportExcelMatchMonitoring(
-                string.Empty,
-                "Match Monitoring",
+                Server.MapPath("~/ExcelFiles"),
+                "MatchMonitoring",
                 GetMatchMonitoringReportInfo(criteria),
                 headers,
                 matchesInfo);
 
-            return excelExporter.ExportFile();
+            var saveAsFileName = excelExporter.GenerateExcelFile();
+            ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);
+
+            return new EmptyResult();
+        }
+
+        public void ResponseStreamExcel(IWorkbook workbook, string fileName)
+        {
+            Response.Clear();
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.AddHeader("Content-Disposition", string.Format("attachment; filename={0}.xls", fileName));
+            workbook.Write(Response.OutputStream);
         }
 
         public List<Legend> GetMatchMonitoringReportInfo(MatchMonitoringReportGetAllCriteria criteria)

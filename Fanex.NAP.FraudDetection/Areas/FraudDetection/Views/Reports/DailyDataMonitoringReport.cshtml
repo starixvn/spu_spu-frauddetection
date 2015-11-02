@@ -1,0 +1,45 @@
+﻿@model FD.Lib.Criteria.Reports.MatchMonitoringReportGetAllCriteria
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Daily Data Monitoring";
+
+}
+@section HeadCss
+{
+    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/Content/matchmonitoring.css" />
+    <link href="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css"
+          rel="stylesheet" type="text/css" />
+}
+@section FooterJs
+{
+    @Scripts.Render("~/bundles/App/DailyDataMonitoringReport")
+}
+<div>
+    <span class="infor-text">@ViewBag.Title</span>
+</div>
+<div class="newline">
+    &nbsp;
+</div>
+@using (Html.BeginForm("Search", "DailyDataMonitoring", FormMethod.Get, new { @id = "formSearch", @class = "form-inline col-sm-12 filter-forml" }))
+{
+    <div style="display: inline-block; vertical-align: middle; margin-left: 20px;">
+        <label class="text-right" style="margin-right: 10px;">
+            Event Date
+        </label>
+        @Html.TextBox("EventDateFrom", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:75px;" })
+        <i class="icon-calendar icon-event-date-calendar" id="eventDateFromDatetimePickerIcon" style=""></i>
+        &nbsp;&nbsp;&nbsp;
+        @Html.TextBox("EventDateTo", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:75px;" })
+        <i class="icon-calendar icon-event-date-calendar" id="eventDateToDatetimePickerIcon" style=""></i>
+
+        <button class="btn-green" style="width: 100px; margin: 1px 0 0 10px;" id="btnSearch">Generate</button>
+    </div>
+}
+<div id="matchSearch" class="newline">&nbsp;</div>
+
+<div class="hidden report-header" id="report-header">
+    <div class="export-excel-icon" id="btnExportExcel"></div>
+</div>
+
+<div id="dailyDataMonitoringReport" class="freegrid content-grid">
+</div>
