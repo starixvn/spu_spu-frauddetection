@@ -85,6 +85,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="groupName">Selected group name.</param>
         /// <returns>A list of customers.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(SuspiciousCustomerReportGetAllCriteria criteria, string groupName)
         {
             criteria.PageSize = int.MaxValue;
@@ -96,6 +97,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 "CustomerReport",
                 new List<Legend>
                 {
+                    new Legend("Event Date From", criteria.EventDateFrom.ToShortDateString()),
+                    new Legend("Event Date To", criteria.EventDateTo.ToShortDateString()),
                     new Legend("Member", criteria.CustName),
                     new Legend("Group", groupName)
                 },

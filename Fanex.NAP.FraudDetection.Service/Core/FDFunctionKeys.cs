@@ -8,10 +8,12 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 10/20/2015 10:12:44 AM
+// Lasted generated date: 11/2/2015 4:10:07 PM
 // </history>
 namespace Fanex.NAP.FraudDetection.Service.Core
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// Function keys.
     /// </summary>
@@ -30,6 +32,8 @@ namespace Fanex.NAP.FraudDetection.Service.Core
         public const string CustomerBettingGroup = "CustomerBettingGroup";
 
         public const string CustomerGroup = "CustomerGroup";
+
+        public const string DailyDataMonitoring = "DailyDataMonitoring";
 
         public const string FraudCase = "FraudCase";
 
@@ -54,5 +58,6 @@ namespace Fanex.NAP.FraudDetection.Service.Core
         public const string SuspiciousCustomer = "SuspiciousCustomer";
 
         public const string SystemConfiguration = "SystemConfiguration";
+
     }
 }

@@ -7,6 +7,10 @@
 //   <change who="Long.Luu" date="2015.08.13">Created</change>
 // </history>
 
+using Fanex.NAP.Core.Business;
+using Fanex.NAP.Core.Web.Attribute;
+using Fanex.NAP.FraudDetection.Service.Core;
+
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
@@ -40,6 +44,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Main page.
         /// </summary>
         /// <returns>The ActionResult.</returns>
+        [NapAuth(FunctionKey = FDFunctionKeys.DailyDataMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Reports/DailyDataMonitoringReport.cshtml");
@@ -51,6 +56,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Daily Data Monitoring Report Get All Criteria.</param>
         /// <returns>Daily data monitoring report data.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.DailyDataMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Search(DailyDataMonitoringReportGetAllCriteria criteria)
         {
             var dailyDataMonitoring = FormatReportData(GenerateDailyDataMonitoringData(criteria));
@@ -69,6 +75,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// <param name="criteria">Daily Data Monitoring Report Get All Criteria.</param>
         /// <returns>Daily Data monitoring report data.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.DailyDataMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(DailyDataMonitoringReportGetAllCriteria criteria)
         {
             var dailyDataMonitoring = FormatReportData(GenerateDailyDataMonitoringData(criteria), true);

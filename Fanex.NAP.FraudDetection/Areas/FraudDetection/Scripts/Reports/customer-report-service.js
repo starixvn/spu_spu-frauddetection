@@ -12,6 +12,8 @@
     suspiciousCustomerReportService.isSearchable = true;
 
     suspiciousCustomerReportService.searchParams = {
+        EventDateFrom: '2015-10-22',
+        EventDateTo: '2015-12-31',
         CustName: '',
         GroupId: -1,
         PageSize: suspiciousCustomerReportService._pageSize,
@@ -117,7 +119,7 @@
         var bodyRows = generateBodyRows(months, suspiciousCustomers);
 
         suspiciousCustomerReportService.gridOptions = {
-            gridExpandHeight: 180,
+            gridExpandHeight: 230,
             marginRight: 0,
             showTree: true,
             showPager: true,

@@ -19,6 +19,8 @@
 
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
         var param = {
+            "EventDateFrom": $("#eventDateFrom").val(),
+            "EventDateTo": $("#eventDateTo").val(),
             "CustName": $("#memberName").val(),
             "GroupId": $("#groupId").val(),
             "groupName": $("#groupId option:selected").text(),
@@ -28,10 +30,23 @@
         FraudDetectionScripts.downloadFile("SuspiciousCustomer/ExportExcel", param);
         waitingDialog.hide();
     });
+    
+    $('#eventDateFrom').datepicker();
+    $('#eventDateTo').datepicker();
+
+    $('#eventDateDatetimePickerIconFrom').click(function () {
+        $('#eventDateFrom').datepicker("show");
+    });
+
+    $('#eventDateDatetimePickerIconTo').click(function () {
+        $('#eventDateTo').datepicker("show");
+    });
 
     var formSearch = $('#formSearch').submit(function (event) {
         event.preventDefault();
 
+        suspiciousCustomerReportService.searchParams.EventDateFrom = $("#eventDateFrom").val();
+        suspiciousCustomerReportService.searchParams.EventDateTo = $("#eventDateTo").val();
         suspiciousCustomerReportService.searchParams.CustName = $("#memberName").val();
         suspiciousCustomerReportService.searchParams.GroupId = $("#groupId").val();
         suspiciousCustomerReportService._pageIndex = 0;
