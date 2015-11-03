@@ -78,46 +78,48 @@
     * Activate/deactivate a case.
     */
     caseService.editCaseStatus = function (obj, caseId) {
-        var active = "activate ";
-        var isActive = false;
-        if ($(obj).hasClass('ico-tick')) {
-            active = "deactivate ";
-            isActive = true;
-        }
+        if (caseService.isHostPermission) {
+            var active = "activate ";
+            var isActive = false;
+            if ($(obj).hasClass('ico-tick')) {
+                active = "deactivate ";
+                isActive = true;
+            }
 
-        if (isActive) {
-            $(obj).removeClass('ico-tick').addClass('ico-untick');
-        } else {
-            $(obj).removeClass('ico-untick').addClass('ico-tick');
-        }
-        $.confirm({
-            confirmButtonClass: 'btn-green btn-customConfirm',
-            cancelButtonClass: 'btn-green btn-customCancel',
-            title: "Confirmation",
-            text: "Are you sure you really want to " + active + "this Case?",
-            confirm: function () {
-                caseFactory.editCaseStatus(caseId, !isActive).success(function (response) {
-                    isActive = !isActive;
-                    AlertService.showAlert(response);
-
-                    $(".confirmation-modal").modal("hide");
-                });
-            },
-            cancel: function () {
-            },
-            confirmButton: "OK",
-            cancelButton: "Cancel"
-        });
-
-        $(document).on('hidden.bs.modal', function () {
-            if (!isActive) {
+            if (isActive) {
                 $(obj).removeClass('ico-tick').addClass('ico-untick');
             } else {
                 $(obj).removeClass('ico-untick').addClass('ico-tick');
             }
+            $.confirm({
+                confirmButtonClass: 'btn-green btn-customConfirm',
+                cancelButtonClass: 'btn-green btn-customCancel',
+                title: "Confirmation",
+                text: "Are you sure you really want to " + active + "this Case?",
+                confirm: function () {
+                    caseFactory.editCaseStatus(caseId, !isActive).success(function (response) {
+                        isActive = !isActive;
+                        AlertService.showAlert(response);
 
-            $(document).off('hidden.bs.modal');
-        });
+                        $(".confirmation-modal").modal("hide");
+                    });
+                },
+                cancel: function () {
+                },
+                confirmButton: "OK",
+                cancelButton: "Cancel"
+            });
+
+            $(document).on('hidden.bs.modal', function () {
+                if (!isActive) {
+                    $(obj).removeClass('ico-tick').addClass('ico-untick');
+                } else {
+                    $(obj).removeClass('ico-untick').addClass('ico-tick');
+                }
+
+                $(document).off('hidden.bs.modal');
+            });
+        }
     };
 
     function renderCaseTable(caseList) {
@@ -148,8 +150,8 @@
                 }
             };
 
-            if (!caseService.isHostPermission) {
-            caseService.gridOptions.hiddenColumns = [1, 4, 5];
+        if (!caseService.isHostPermission) {
+            caseService.gridOptions.hiddenColumns = [1, 5];
         }
 
         $("#SearchResult").fanexGrid(caseService.gridOptions);

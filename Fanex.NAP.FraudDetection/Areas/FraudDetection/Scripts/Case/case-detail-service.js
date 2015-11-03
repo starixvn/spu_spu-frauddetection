@@ -38,52 +38,54 @@
     * Activate/deactivate a task.
     */
     caseDetailService.editTaskStatus = function (obj, taskId) {
-        var active = "activate ";
-        var isActive = false;
-        if ($(obj).hasClass('ico-tick')) {
-            active = "deactivate ";
-            isActive = true;
-        }
+        if (caseDetailService.isHostPermission) {
+            var active = "activate ";
+            var isActive = false;
+            if ($(obj).hasClass('ico-tick')) {
+                active = "deactivate ";
+                isActive = true;
+            }
 
-        if (isActive) {
-            $(obj).removeClass('ico-tick').addClass('ico-untick');
-        } else {
-            $(obj).removeClass('ico-untick').addClass('ico-tick');
-        }
-
-        $.confirm({
-            confirmButtonClass: 'btn-green btn-customConfirm',
-            cancelButtonClass: 'btn-green btn-customCancel',
-            title: "Confirmation",
-            text: "Are you sure you really want to " + active + "this Task?",
-            confirm: function () {
-                var criteria = {
-                    "TaskId": taskId,
-                    "IsActive": !isActive
-                };
-
-                caseFactory.editTaskStatus(criteria).success(function (response) {
-                    isActive = !isActive;
-                    AlertService.showAlert(response);
-
-                    $(".confirmation-modal").modal("hide");
-                });
-            },
-            cancel: function () {
-            },
-            confirmButton: "OK",
-            cancelButton: "Cancel"
-        });
-
-        $(document).on('hidden.bs.modal', function () {
-            if (!isActive) {
+            if (isActive) {
                 $(obj).removeClass('ico-tick').addClass('ico-untick');
             } else {
                 $(obj).removeClass('ico-untick').addClass('ico-tick');
             }
 
-            $(document).off('hidden.bs.modal');
-        });
+            $.confirm({
+                confirmButtonClass: 'btn-green btn-customConfirm',
+                cancelButtonClass: 'btn-green btn-customCancel',
+                title: "Confirmation",
+                text: "Are you sure you really want to " + active + "this Task?",
+                confirm: function () {
+                    var criteria = {
+                        "TaskId": taskId,
+                        "IsActive": !isActive
+                    };
+
+                    caseFactory.editTaskStatus(criteria).success(function (response) {
+                        isActive = !isActive;
+                        AlertService.showAlert(response);
+
+                        $(".confirmation-modal").modal("hide");
+                    });
+                },
+                cancel: function () {
+                },
+                confirmButton: "OK",
+                cancelButton: "Cancel"
+            });
+
+            $(document).on('hidden.bs.modal', function () {
+                if (!isActive) {
+                    $(obj).removeClass('ico-tick').addClass('ico-untick');
+                } else {
+                    $(obj).removeClass('ico-untick').addClass('ico-tick');
+                }
+
+                $(document).off('hidden.bs.modal');
+            });
+        }
     };
 
     function renderCaseGroupTable(data) {
@@ -141,7 +143,7 @@
         }
 
         if (!caseDetailService.isHostPermission) {
-            caseDetailService.gridOptions.hiddenColumns = [1, 5];
+            caseDetailService.gridOptions.hiddenColumns = [1];
         }
 
         $("#SearchResult").fanexGrid(caseDetailService.gridOptions);
