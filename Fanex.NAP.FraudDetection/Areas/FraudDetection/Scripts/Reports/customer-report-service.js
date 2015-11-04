@@ -186,8 +186,8 @@
     var generateColumnHeaders = function () {
         var columnHeaders = [
             { HeaderText: "#", Width: 70, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Member", Width: 150, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Group", Width: 300, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Member", Width: 163, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Group", Width: 380, Name: "Group", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Suspicious Time", Width: 70, Name: "SuspiciousTime", HeaderAlign: "center", CellAlign: "right" },
             { HeaderText: "Win Loss Detail", Width: 80, Name: "WinlossDetail", HeaderAlign: "center", CellAlign: "center" }
         ];

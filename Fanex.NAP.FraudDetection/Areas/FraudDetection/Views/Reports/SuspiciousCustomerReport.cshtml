@@ -26,42 +26,34 @@
 @using (Html.BeginForm("Search", "SuspiciousCustomer", FormMethod.Get, new { @id = "formSearch", @class = "suspicious-customer-report-form-search form-inline filter-forml", @style = "text-align: left;" }))
 {
     <div class="form-group col-sm-12" style="margin-left: -30px;">
-        <div class="col-sm-2" style="text-align: left;">
-            <label class="text-left">
+        <div class="col-sm-4" style="text-align: left;">
+            <label style="width: 110px; text-align: right; padding-right: 20px;">
                 Event Date
             </label>
-        </div>
-        <div class="col-sm-3" style="text-align: left;  margin-left: -30px;">
             @Html.TextBox("eventDateFrom", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:75px;" })
             <i class="icon-calendar icon-event-date-calendar" id="eventDateDatetimePickerIconFrom"
                 style=""></i>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-7">
             @Html.TextBox("eventDateTo", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:75px;" })
             <i class="icon-calendar icon-event-date-calendar" id="eventDateDatetimePickerIconTo"
                 style=""></i>
         </div>
     </div>
-    <br>
-    <br>
+   <div id="" style="height: 35px;">&nbsp;</div>
     <div class="form-group col-sm-12" style="margin-left: -30px;">
-        <div class="col-sm-2" >
-            <label>
+        <div class="col-sm-4" >
+            <label style="width: 110px; text-align: right; padding-right: 20px;">
                 Member
             </label>
+            @Html.TextBox("memberName", null, new { style = "height:25px; width:93px;" })
         </div>
-        <div class="col-sm-3" style="text-align: left;  margin-left: -30px;">
-            @Html.TextBox("memberName", null)
-        </div>
-        <div class="col-sm-1">
-            <label>
+        <div class="col-sm-7">
+            <label style="text-align: right; padding-right: 20px;">
                 Group
             </label>
-        </div>
-        <div class="col-sm-4">
             @Html.DropDownList("groupId", Model, new { @style = "height: 25px;" })
-        </div>
-        <div class="col-sm-2" style="text-align: right; margin-left: 30px; padding-right: 0px;">
+             <label style="padding-left: 20px;"></label>
             <button class="btn-green" id="btnSearch">
                 Search
             </button>
