@@ -53,6 +53,10 @@
     taskService.OnInitialize = function () {
         $('#preconditionConfigControlDatetimePicker').datepicker();
 
+        $("#ruleConfigControlIpAddress").ipAddress();
+        $("#ruleConfigControlIpAddressFrom").ipAddress();
+        $("#ruleConfigControlIpAddressTo").ipAddress();
+
         $("#btn_Cancel").click(function () {
             var url = "/Case/GetCaseDetail?caseId=" + $("#caseid").text();
             window.location.href = window.location.href.split('/Task', 1)[0].toString() + url;
@@ -188,6 +192,13 @@
             case "TextBoxNumber":
                 valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
                 break;
+            case "IpAddress":
+                if (selectedOperator === "between") {
+                    valueSelectedValue = $('#' + parentName + 'ControlIpAddressFrom').val() + " and " + $('#' + parentName + 'ControlIpAddressTo').val();
+                } else {
+                    valueSelectedValue = $('#' + parentName + 'ControlIpAddress').val();
+                }
+                break;
             default:
                 valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
         }
@@ -250,6 +261,21 @@
                 break;
             case "TextBoxNumber":
                 valueSelectedValue = $('#' + parentName + 'ControlTextbox').val();
+                break;
+            case "IpAddress":
+                if (selectedOperator === "between") {
+                    var rangeFrom = $('#' + parentName + 'ControlIpAddressFrom').val();
+                    var rangeTo = $('#' + parentName + 'ControlIpAddressTo').val();
+                    var searchLike = rangeTo.split(".")[0] + "." + rangeTo.split(".")[1] + "." + rangeTo.split(".")[2] + ".";
+
+                    keySelectedValue += " LIKE %" + searchLike + "$LIKE$%";
+                    keySelectedValue += " and CAST(PARSENAME(ans.ip,1) AS TINYINT)";
+                    valueSelectedValue = rangeFrom.split(".")[3] + " and " + rangeTo.split(".")[3];
+
+                    debugger;
+                } else {
+                    valueSelectedValue = '%' + $('#' + parentName + 'ControlIpAddress').val() + '%';
+                }
                 break;
             default:
                 valueSelectedValue = '%' + $('#' + parentName + 'ControlTextbox').val() + '%';
@@ -453,6 +479,33 @@
         $('#selectedActionDesc').text(actionDesc);
     };
 
+    taskService.changeruleConfigOperator = function (currentObj, isPrecondition) {
+        var selectedOption = $(currentObj).find(":selected");
+        var selectedValue = $(selectedOption).val();
+
+        if (isPrecondition) {
+            //
+        } else {
+            var configKey = $('#ruleConfigKey').val();
+            switch (selectedValue) {
+                case "Between":
+                    if (configKey === "IP") {
+                        $("#ruleConfigControlIpAddress").css("display", "none");
+                        $("#ruleConfigControlIpAddressFrom").css("display", "inline-block");
+                        $("#ruleConfigControlIpAddressTo").css("display", "inline-block");
+                    }
+                    break;
+                default:
+                    if (configKey === "IP") {
+                        $("#ruleConfigControlIpAddress").css("display", "inline-block");
+                        $("#ruleConfigControlIpAddressFrom").css("display", "none");
+                        $("#ruleConfigControlIpAddressTo").css("display", "none");
+                    }
+                    break;
+            }
+        }
+    };
+
     taskService.changeConfigSelection = function (currentObj, isPrecondition) {
         var selectedOption = $(currentObj).find(":selected");
         var controlType = $(selectedOption).attr("data-controltype");
@@ -488,6 +541,9 @@
             case "DatetimePicker":
                 $('[id^="' + parentName + 'DatetimePicker"]').css("display", "inline-block");
                 $('[id^="' + parentName + 'DatetimePickerIcon"]').css("display", "inline-block");
+                break;
+            case "IpAddress":
+                $('#ruleConfigControlIpAddress').css("display", "inline-block");
                 break;
             default:
                 $('[id^="' + parentName + 'Textbox"]').css("display", "inline-block");

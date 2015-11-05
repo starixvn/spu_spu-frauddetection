@@ -21,6 +21,7 @@
         type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/Scripts/Core/mathformula-validation.js" type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/Scripts/Core/jquery.input-ip-address-control.js" type="text/javascript"></script>
 }
 <div>
     <span class="infor-text">Edit Task</span>
@@ -263,15 +264,19 @@
                         }
                     }
                 </select>
-                <select style="height: 25px;" id="ruleConfigOperator">
+                <select style="height: 25px;" id="ruleConfigOperator"  onchange="taskService.changeruleConfigOperator(this, false)">
                     <option value="Equal">=</option>
                     <option value="Unequal"><></option>
                     <option value="LargerThan">></option>
                     <option value="LargerThanOrEqual">>=</option>
                     <option value="LessThan"><</option>
                     <option value="LessThanOrEqual"><=</option>
+                    <option value="Between">between</option>
                 </select>
                 <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
+                <input type="text" id="ruleConfigControlIpAddress" style="width: 120px; height: 25px; display: none;" />
+                <input type="text" id="ruleConfigControlIpAddressFrom" style="width: 120px; height: 25px; display: none;" />
+                <input type="text" id="ruleConfigControlIpAddressTo" style="width: 120px; height: 25px; display: none;" />
                 <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
                     @foreach (var config in Model.RuleConfigurations)
                     {

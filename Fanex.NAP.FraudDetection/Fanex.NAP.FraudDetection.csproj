@@ -484,6 +484,7 @@
     <Content Include="Areas\FraudDetection\Content\fraudcasedetail.css" />
     <Content Include="Areas\FraudDetection\Content\matchmonitoring.css" />
     <Content Include="Areas\FraudDetection\Content\mailmaster.css" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\jquery.input-ip-address-control.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\betting-group-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\FraudCaseDetail\fraudcasedetail-factory.js" />
