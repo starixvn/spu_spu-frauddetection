@@ -55,6 +55,6 @@
         suspiciousCustomerReportService.querySuspiciousCustomer();
     });
 
-    formSearch.submit();
+    // formSearch.submit();
 
 })();

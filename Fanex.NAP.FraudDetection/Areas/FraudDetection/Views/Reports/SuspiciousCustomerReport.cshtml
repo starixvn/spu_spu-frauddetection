@@ -48,18 +48,19 @@
             </label>
             @Html.TextBox("memberName", null, new { style = "height:25px; width:93px;" })
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             <label style="text-align: right; padding-right: 20px;">
                 Group
             </label>
             @Html.DropDownList("groupId", Model, new { @style = "height: 25px;" })
              <label style="padding-left: 20px;"></label>
-            <button class="btn-green" id="btnSearch">
-                Search
+            <button class="btn-green" id="btnSearch" style="width: 95px; margin: 1px 0 0 10px;">
+                Generate
             </button>
         </div>
     </div>
 }
+<div class="newline">&nbsp;</div>
 
 <div class="hidden report-header" id="report-header">
     <div class="export-excel-icon" id="btnExportExcel">
