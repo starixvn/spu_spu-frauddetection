@@ -63,6 +63,25 @@
         });
 
         $("#btn_AddRule").click(function () {
+            if ($('#ruleConfigKey').val() === "IP") {
+                $("#ruleConfigControlIpAddress").css("color", "black");
+                $("#ruleConfigControlIpAddressFrom").css("color", "black");
+                $("#ruleConfigControlIpAddressTo").css("color", "black");
+
+                if ($('#ruleConfigOperator').val() !== "Between") {
+                    if (!isIpAddress($('#ruleConfigControlIpAddress').val())) {
+                        $("#ruleConfigControlIpAddress").css("color", "red");
+                        return;
+                    }
+                } else {
+                    if (!checkIpRange($('#ruleConfigControlIpAddressFrom').val(), $('#ruleConfigControlIpAddressTo').val())) {
+                        $("#ruleConfigControlIpAddressFrom").css("color", "red");
+                        $("#ruleConfigControlIpAddressTo").css("color", "red");
+                        return;
+                    }
+                }
+            }
+
             var currentRowNum = $('#ruleTable tr:last').attr('id').replace("ruleTable", "");
             taskService.AddingOneMoreRuleToTable("ruleTable", parseInt(currentRowNum) + 1, "ruleConfig");
         });
@@ -194,9 +213,10 @@
                 break;
             case "IpAddress":
                 if (selectedOperator === "between") {
-                    valueSelectedValue = $('#' + parentName + 'ControlIpAddressFrom').val() + " and " + $('#' + parentName + 'ControlIpAddressTo').val();
+                    valueSelectedValue = formatIpAddress($('#' + parentName + 'ControlIpAddressFrom').val())
+                        + " and " + formatIpAddress($('#' + parentName + 'ControlIpAddressTo').val());
                 } else {
-                    valueSelectedValue = $('#' + parentName + 'ControlIpAddress').val();
+                    valueSelectedValue = formatIpAddress($('#' + parentName + 'ControlIpAddress').val());
                 }
                 break;
             default:
@@ -264,17 +284,16 @@
                 break;
             case "IpAddress":
                 if (selectedOperator === "between") {
-                    var rangeFrom = $('#' + parentName + 'ControlIpAddressFrom').val();
-                    var rangeTo = $('#' + parentName + 'ControlIpAddressTo').val();
-                    var searchLike = rangeTo.split(".")[0] + "." + rangeTo.split(".")[1] + "." + rangeTo.split(".")[2] + ".";
+                    var ip1 = $('#' + parentName + 'ControlIpAddressFrom').val().split(".");
+                    var ip2 = $('#' + parentName + 'ControlIpAddressTo').val().split(".");
+                    var searchLike = parseInt(ip1[0]) + "." + parseInt(ip1[1]) + "." + parseInt(ip1[2]) + ".";
 
                     keySelectedValue += " LIKE %" + searchLike + "$LIKE$%";
                     keySelectedValue += " and CAST(PARSENAME(ans.ip,1) AS TINYINT)";
-                    valueSelectedValue = rangeFrom.split(".")[3] + " and " + rangeTo.split(".")[3];
+                    valueSelectedValue = parseInt(ip1[3]) + " and " + parseInt(ip2[3]);
 
-                    debugger;
                 } else {
-                    valueSelectedValue = '%' + $('#' + parentName + 'ControlIpAddress').val() + '%';
+                    valueSelectedValue = '%' + formatIpAddress($('#' + parentName + 'ControlIpAddress').val()) + '%';
                 }
                 break;
             default:
@@ -543,7 +562,15 @@
                 $('[id^="' + parentName + 'DatetimePickerIcon"]').css("display", "inline-block");
                 break;
             case "IpAddress":
-                $('#ruleConfigControlIpAddress').css("display", "inline-block");
+                if ($('#ruleConfigOperator').val() === "Between") {
+                    $('#ruleConfigControlIpAddress').css("display", "none");
+                    $('#ruleConfigControlIpAddressFrom').css("display", "inline-block");
+                    $('#ruleConfigControlIpAddressTo').css("display", "inline-block");
+                } else {
+                    $('#ruleConfigControlIpAddress').css("display", "inline-block");
+                    $('#ruleConfigControlIpAddressFrom').css("display", "none");
+                    $('#ruleConfigControlIpAddressTo').css("display", "none");
+                }
                 break;
             default:
                 $('[id^="' + parentName + 'Textbox"]').css("display", "inline-block");
@@ -643,6 +670,31 @@
         }
         return true;
     };
+
+    function isIpAddress(ipAddress) {
+        return ipAddress.isIpv4();
+    }
+
+    function checkIpRange(ipAddressFrom, ipAddressTo) {
+        if (isIpAddress(ipAddressFrom) && isIpAddress(ipAddressTo)) {
+            var from = ipAddressFrom.split("."),
+                to = ipAddressTo.split(".");
+            for (var i = 0; i < 3; i++) {
+                if (parseInt(from[i]) !== parseInt(to[i]))
+                    return false;
+            }
+
+            return !(parseInt(from[3]) > parseInt(to[3]));
+        }
+
+        return false;
+    }
+
+    function formatIpAddress(ipAddress) {
+        var ip = ipAddress.split(".");
+
+        return parseInt(ip[0]) + "." + parseInt(ip[1]) + "." + parseInt(ip[2]) + "." + parseInt(ip[3]);
+    }
 
     return taskService;
 })(jQuery);
