@@ -8,6 +8,8 @@
 //   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
+using FD.Lib.Criteria.Activity;
+
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
@@ -56,9 +58,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             int fraudCase;
             if (int.TryParse(caseId, out fraudCase))
             {
+                var result = new TaskModel
+                {
+                    CaseId = fraudCase,
+                    UserId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0
+                };
+
+                GenerateViewModel(result.UserId, result.CaseId);
+
                 return View(
-                    "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml",
-                    GenerateViewModel(AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0, fraudCase));
+                    "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", result);
             }
 
             return View("~/Views/Error/AccessDenied.cshtml");
@@ -158,7 +167,59 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         #endregion Edit Task
 
         #region Utilities
-        
+
+        [HttpGet]
+        public ActionResult GetEvents()
+        {
+            var events = new CommonService().GetEvents(new EventGetAllCriteria());
+
+            return Json(events, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetActivities()
+        {
+            var activities = new CommonService().GetActivities(new ActivityGetAllCriteria());
+
+            return Json(activities, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetSports()
+        {
+            var sports = new BettypeService().GetAllSBSports(new SportGetAllCriteria());
+
+            return Json(sports, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetConfigsByActivity(int? activityId)
+        {
+            var criteria = new ConfigsGetByActivityCriteria
+            {
+                ActivityId = activityId
+            };
+            var configs = new CommonService().GetConfigsByActivity(criteria);
+
+            return Json(configs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetCustomerGroupByCase(int caseId)
+        {
+            var groups = new CaseGroupService().GetCaseGroup(new CaseGroupGetAllCriteria { CaseId = caseId });
+
+            return Json(groups, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetBackGroundTasksByCase(int caseId)
+        {
+            var tasks = new TaskService().GetBackGroundTasksByCase(new TaskBackGroundGetByCaseIdCriteria { CaseId = caseId });
+
+            return Json(tasks, JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// Generate Task View Model.
         /// </summary>
@@ -200,7 +261,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 bettypes.ToList(),
                 mailMasters.ToList(),
                 currencies.ToList(),
-                dataTypesCaptureList.ToList()) { OnUserId = currentUserId, TaskInformation = new Task { CaseId = fraudCaseId, IsActive = true } };
+                dataTypesCaptureList.ToList())
+                {
+                    OnUserId = currentUserId, 
+                    TaskInformation = new Task { CaseId = fraudCaseId, IsActive = true }
+                };
 
             return taskViewModel;
         }

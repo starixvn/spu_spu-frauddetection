@@ -19,7 +19,9 @@
 
   <Function Name="FD_Task">
     <Setting Key="FD_EventGetAll" SpName="FD_EventGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_ActivityGetAll" SpName="FD_ActivityGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_ConfigGetAll" SpName="FD_ConfigGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_ConfigsGetByActivity" SpName="FD_ConfigsGetByActivity" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_SBSportGetAll" SpName="FD_SBSportGetAll" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_SBBettypeGetAll" SpName="FD_SBBettypeGetAll" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_TaskInsert" SpName="FD_TaskInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
@@ -28,6 +30,7 @@
     <Setting Key="FD_TaskUpdate" SpName="FD_TaskUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_TaskUpdateStatus" SpName="FD_TaskUpdateStatus" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_TaskGetAllByCaseId" SpName="FD_TaskGetAllByCaseId" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_TaskBackGroundGetByCaseId" SpName="FD_TaskBackGroundGetByCaseId" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_TaskGetByCaseId" SpName="FD_TaskGetByCaseId" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_SuspiciousCustomerGetAll" SpName="FD_SuspiciousCustomerGetAll"
              DbName="DBFD.FraudDetection.bodbSPUNet" />

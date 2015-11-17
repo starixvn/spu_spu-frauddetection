@@ -1,0 +1,247 @@
+﻿<div ng-show="taskCtr.tab.rule" style="width: 800px; display: inline-block;">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="accordion">
+                <h3 id="accordionBlockPrecondition">
+                    Pre-condition
+                </h3>
+                <div>
+                    <div class="table-popup font-size-small">
+                        <select ng-model="taskCtr.preconditionRow.Param" style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.Preconditions | filter:taskCtr.showInPrecondition"
+                            ng-change="taskCtr.changePreCondition()">
+                        </select>
+                        <select ng-model="taskCtr.preconditionRow.Operator" style="height: 25px;" ng-options="operator as operator.Name for operator in taskCtr.Operators"
+                            ng-change="">
+                        </select>
+                        <select ng-model="taskCtr.preconditionRow.Value" ng-show="taskCtr.CompareWithOtherField.InPrecondition"
+                            style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.ComparePreconditions"
+                            ng-change="">
+                        </select>
+                        <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match Status' && !taskCtr.CompareWithOtherField.InPrecondition"
+                            ng-options="matchStatus as matchStatus.Name for matchStatus in taskCtr.MatchStatuses"
+                            ng-change="">
+                        </select>
+                        <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match State' && !taskCtr.CompareWithOtherField.InPrecondition"
+                            ng-options="matchState as matchState.Name for matchState in taskCtr.MatchStates"
+                            ng-change="">
+                        </select>
+                        <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'League Type' && !taskCtr.CompareWithOtherField.InPrecondition"
+                            ng-options="league as league.Name for league in taskCtr.LeagueTypes" ng-change="">
+                        </select>
+                        <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Sport' && !taskCtr.CompareWithOtherField.InPrecondition"
+                            ng-options="sport as sport.SportName for sport in taskCtr.Sports" ng-change="">
+                        </select>
+                        <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Customer Group' && !taskCtr.CompareWithOtherField.InPrecondition"
+                            ng-options="group as group.GroupName for group in taskCtr.CustomerGroups" ng-change="">
+                        </select>
+                        <input type="text" ng-model="taskCtr.preconditionRow.Value" style="width: 100px;
+                            height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match Code' && !taskCtr.CompareWithOtherField.InPrecondition" />
+                        <input type="date" readonly="readonly" style="width: 100px; height: 25px;" id="preconditionDateTimePicker"
+                            ng-click="taskCtr.openCalendar('#preconditionDateTimePicker')" ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition" />
+                        <span class="icon-calendar icon-event-date-calendar" ng-click="taskCtr.openCalendar('#preconditionDateTimePicker')"
+                            ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition">
+                        </span>
+                        <input type="button" ng-click="taskCtr.addPrecondition()" value="Add to List" class="btn-green font-size-small" />
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <div>
+                            <input type="checkbox" ng-model="taskCtr.CompareWithOtherField.InPrecondition" />
+                            Compare with another field
+                        </div>
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <div style="border: 1px solid #000000;">
+                            <table class="table-items">
+                                <tr ng-repeat="item in taskCtr.preconditionTable">
+                                    <td>
+                                        <input ng-model="item.IsChecked" type="checkbox" />
+                                    </td>
+                                    <td style="width: 800px;">
+                                        {{ taskCtr.preconditionRowFormula(item) }}
+                                    </td>
+                                    <td>
+                                        <img ng-click="taskCtr.removePrecondition(item)" src="{{ taskCtr.deleteIcon }}" style="cursor: pointer;
+                                            cursor: hand;" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <label>
+                            {{ taskCtr.preconditionTableFormula() }}
+                        </label>
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <div>
+                            <input ng-repeat="item in taskCtr.FormulaElements" type="button" ng-click="taskCtr.addRemoveFormulaElement(item)"
+                                value="{{item.Name}}" class="btn-green font-size-small" />
+                        </div>
+                    </div>
+                </div>
+                <h3 id="accordionBlockRule">
+                    Rule
+                </h3>
+                <div>
+                    <div class="table-popup font-size-small">
+                        <select ng-model="taskCtr.ruleRow.Param" style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.Rules | filter:taskCtr.showInRule"
+                            ng-change="taskCtr.changeRule()">
+                        </select>
+                        <select ng-model="taskCtr.ruleRow.Operator" style="height: 25px;" ng-options="operator as operator.Name for operator in taskCtr.Operators"
+                            ng-change="">
+                        </select>
+                        <select ng-model="taskCtr.ruleRow.Value" ng-show="taskCtr.CompareWithOtherField.InRule"
+                                style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.Rules"
+                                ng-change="">
+                        </select>
+                        <div>
+                            <input type="checkbox" ng-model="taskCtr.CompareWithOtherField.InRule" />
+                            Compare with another field
+                        </div>
+                        @*<select name="RuleConfigs" id="ruleConfigKey" style="height: 25px;" onchange="taskService.changeConfigSelection(this, false)">
+                            @foreach (var config in Model.RuleConfigurations)
+                            {
+                                if (config.ConfigName.Equals("Has Changed From Original"))
+                                {
+                                <option style="display: none;" value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                                }
+                                else
+                                {
+                                <option value="@config.ConfigName" data-controltype="@config.ConfigControlType" data-configid="@config.ConfigId">@config.ConfigName</option>
+                                }
+                            }
+                        </select>
+                        <select style="height: 25px;" id="ruleConfigOperator" onchange="taskService.changeruleConfigOperator(this, false)">
+                            <option value="Equal">=</option>
+                            <option value="Unequal">&lt;&gt;</option>
+                            <option value="LargerThan">&gt;</option>
+                            <option value="LargerThanOrEqual">&gt;=</option>
+                            <option value="LessThan">&lt;</option>
+                            <option value="LessThanOrEqual">&lt;=</option>
+                            <option value="Between">between</option>
+                        </select>
+                        <input type="text" id="ruleConfigControlTextbox" style="width: 100px; height: 25px;" />
+                        <input type="text" id="ruleConfigControlIpAddress" style="width: 120px; height: 25px;
+                            display: none;" />
+                        <input type="text" id="ruleConfigControlIpAddressFrom" style="width: 120px; height: 25px;
+                            display: none;" />
+                        <input type="text" id="ruleConfigControlIpAddressTo" style="width: 120px; height: 25px;
+                            display: none;" />
+                        <select id="ruleConfigControlComboBoxKeyClone" style="height: 25px; display: none;">
+                            @foreach (var config in Model.RuleConfigurations)
+                            {
+                                <option value="@config.ConfigName" data-configid="@config.ConfigId">@config.ConfigName</option>
+                            }
+                        </select>
+                        <select style="height: 25px; display: none;" id="ruleConfigControlComboBoxticketstatus">
+                            <option value="112">Won</option>
+                            <option value="113">Lose</option>
+                            <option value="111">Draw</option>
+                            <option value="102">Void</option>
+                            <option value="103">Refund</option>
+                            <option value="101">Reject</option>
+                            <option value="0">Running</option>
+                        </select>
+                        <select style="height: 25px; display: none;" id="ruleConfigControlComboBoxarbitrage">
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <select name="ruleConfigControlComboBoxbettype" id="ruleConfigControlComboBoxbettype"
+                            style="height: 25px; display: none;">
+                            @foreach (var bettype in Model.BettypeList)
+                            {
+                                <option value="@bettype.BettypeId">@bettype.BettypeName</option>
+                            }
+                        </select>
+                        <select name="ruleConfigControlComboBoxcurrency" id="ruleConfigControlComboBoxcurrency"
+                            style="height: 25px; display: none;">
+                            @foreach (var currency in Model.CurrencyList)
+                            {
+                                <option value="@currency.CurrencyId">@currency.CurrencyName</option>
+                            }
+                        </select>
+                        <select name="ruleConfigControlComboBoxcustomergroup" id="ruleConfigControlComboBoxcustomergroup"
+                            style="height: 25px; display: none;">
+                            @foreach (var group in Model.GroupList)
+                            {
+                                <option value="@group.GroupId">@group.GroupName</option>
+                            }
+                        </select>
+                        <select name="ruleConfigControlComboBoxchoice" id="ruleConfigControlComboBoxchoice"
+                            style="height: 25px; display: none;">
+                            <option value="1,h">HDP: Home</option>
+                            <option value="1,a">HDP: Away</option>
+                            <option value="3,h">OU: Over</option>
+                            <option value="3,a">OU: Under</option>
+                            <option value="5,1">1X2: 1</option>
+                            <option value="5,x">1X2: X</option>
+                            <option value="5,2">1X2: 2</option>
+                        </select>
+                        @Html.TextBox("ruleConfigControlDatetimePicker", string.Empty, new { @readonly = "readonly", @class = "txtCalendar width-120", style = "height:25px; display: none;" })
+                        <i class="icon-calendar icon-event-date-calendar" id="ruleConfigControlDatetimePickerIcon"
+                            style="display: none;"></i>
+                        <input type="button" id="btn_AddRule" value="Add to List" class="btn-green font-size-small" />
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <div>
+                            <input type="checkbox" id="ruleConfigCompare" onchange="taskService.onCompareWithOtherField(this, false)" />
+                            Compare with another field
+                        </div>
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <div style="border: 1px solid #000000;">
+                            <table id="ruleTable" class="table-items">
+                                <tr id="ruleTable1" style="display: none">
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <label id="ruleTableFormula" data-rawcontent="" data-formattedcontent="" data-configids="">
+                        </label>
+                        <div class="newline">
+                            &nbsp;
+                        </div>
+                        <div>
+                            <input type="button" onclick="taskService.AddFormulaElement(false, '(', true)" value="(+"
+                                class="btn-green font-size-small" />
+                            <input type="button" onclick="taskService.RemoveFormulaElement(false, '(')" value="(-"
+                                class="btn-green font-size-small" />
+                            &nbsp;&nbsp;
+                            <input type="button" onclick="taskService.AddFormulaElement(false, ')', false)" value=")+"
+                                class="btn-green font-size-small" />
+                            <input type="button" onclick="taskService.RemoveFormulaElement(false, ')')" value=")-"
+                                class="btn-green font-size-small" />
+                            &nbsp;&nbsp;
+                            <input type="button" onclick="taskService.AddFormulaElement(false, 'AND#', true)"
+                                value="AND+" class="btn-green font-size-small" />
+                            <input type="button" onclick="taskService.RemoveFormulaElement(false, 'AND#')" value="AND-"
+                                class="btn-green font-size-small" />
+                            &nbsp;&nbsp;
+                            <input type="button" onclick="taskService.AddFormulaElement(false, 'OR#', true)"
+                                value="OR+" class="btn-green font-size-small" />
+                            <input type="button" onclick="taskService.RemoveFormulaElement(false, 'OR#')" value="OR-"
+                                class="btn-green font-size-small" />
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 800px; text-align: center;">
+        <input type="button" ng-click="taskCtr.backToActivity()" value="Back" class="btn-green btn-customConfirm font-size-small" />
+        <input type="button" ng-click="taskCtr.addTask()" value="Submit" class="btn-green btn-customConfirm font-size-small" />
+    </div>
+</div>

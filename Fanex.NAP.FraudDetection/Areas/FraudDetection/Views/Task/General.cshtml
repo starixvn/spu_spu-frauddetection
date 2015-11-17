@@ -1,0 +1,36 @@
+﻿<div ng-show="taskCtr.tab.general" style="width: 800px; display: inline-block;">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table-popup font-size-small">
+                <tr>
+                    <td width="100px;">
+                        <span>Task Name</span>
+                    </td>
+                    <td>
+                        <input ng-model="taskCtr.Model.General.TaskName" style="width: 400px;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Description</span>
+                    </td>
+                    <td>
+                        <textarea ng-model="taskCtr.Model.General.TaskDesc" style="width: 400px;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Active</span>
+                    </td>
+                    <td>
+                        <input type="checkbox" ng-model="taskCtr.Model.General.IsActive"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width: 800px; text-align: center;">
+        <input type="button" ng-click="taskCtr.cancel()" value="Cancel" class="btn-green btn-customCancel font-size-small" />
+        <input type="button" ng-click="taskCtr.nextToEvent()" value="Next" class="btn-green btn-customConfirm font-size-small" />
+    </div>
+</div>

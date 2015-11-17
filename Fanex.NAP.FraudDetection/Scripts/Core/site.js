@@ -2,6 +2,7 @@
 /* File Created: August 20, 2014 */
 /*exported site */
 /* global MultiSelectControl */
+
 var site = (function () {
     "use strict";
     var me = {};

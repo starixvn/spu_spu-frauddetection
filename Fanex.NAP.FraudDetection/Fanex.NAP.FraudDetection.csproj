@@ -322,7 +322,8 @@
     <Compile Include="Areas\FraudDetection\Controllers\TaskController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\GroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseController.cs" />
-    <Compile Include="Areas\FraudDetection\FraudDetectionAreaRegistration.cs" />
+    <Compile Include="Areas\FraudDetection\Models\ViewModel\Task\TaskModel.cs" />
+    <Compile Include="Areas\FraudDetection\Scripts\FraudDetectionAreaRegistration.cs" />
     <Compile Include="Areas\FraudDetection\Models\ViewModel\Paramater\ParameterViewModel.cs" />
     <Compile Include="Areas\FraudDetection\Models\ViewModel\Task\TaskViewModel.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
@@ -480,6 +481,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\task.css" />
     <Content Include="Areas\FraudDetection\Content\suspiciouscustomerreport.css" />
     <Content Include="Areas\FraudDetection\Content\fraudcasedetail.css" />
     <Content Include="Areas\FraudDetection\Content\matchmonitoring.css" />
@@ -511,6 +513,8 @@
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Task\task-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
@@ -679,12 +683,12 @@
     <Content Include="Areas\FraudDetection\Views\Group\GroupAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseDetail.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\TaskAdd_.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Parameter\ParameterEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MailMaster\MailMasterEdit.cshtml" />
-    <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\TaskEdit_.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Case\CaseEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\SuspiciousCustomerReport.cshtml" />
@@ -720,6 +724,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionApp.js" />
     <Content Include="Scripts\Core\waiting-dialog.js" />
     <Content Include="Scripts\Core\DialogService.js" />
     <Content Include="Scripts\Fanex.Grid\Fanex.Grid.js" />
@@ -828,6 +833,13 @@
     <Content Include="Views\Web.config" />
     <Content Include="Deployment.ignore" />
     <Content Include="Areas\FraudDetection\Views\Reports\DailyDataMonitoringReport.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\General.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\Event.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\Activity.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\Rule.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\ProgressBar.cshtml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />

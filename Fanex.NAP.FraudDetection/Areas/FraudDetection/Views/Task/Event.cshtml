@@ -1,0 +1,45 @@
+﻿<div ng-show="taskCtr.tab.event" style="width: 800px; display: inline-block;">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table-popup font-size-small">
+                <tr>
+                    <td>
+                        <span>Event Name</span>
+                    </td>
+                    <td>
+                        <select ng-model="taskCtr.Model.Event.EventId" style="height: 25px; width: 186px;" 
+                                ng-options="event.EventId as event.EventName for event in taskCtr.Events"
+                                ng-change="taskCtr.changeEvent()">
+                        </select>
+                    </td>
+                </tr>
+                <tr ng-show="taskCtr.Model.Event.EventId == 1">
+                    <td>
+                        <span>Executed Timer</span>
+                    </td>
+                    <td>
+                        <input type="text"ng-model="taskCtr.Model.Event.Timer" style="width: 100px; height: 23px;" />
+                        
+                        <select ng-model="taskCtr.Model.Event.TimerUnit" style="height: 25px" 
+                                ng-options="timer.Value as timer.Name for timer in taskCtr.Timers">
+                        </select>
+                    </td>
+                </tr>
+                <tr ng-show="taskCtr.Model.Event.EventId == 2">
+                    <td>
+                        <span>Executed Affter</span>
+                    </td>
+                    <td>
+                        <select ng-model="taskCtr.Model.Event.BackGroundTaskId" style="height: 25px; width: 186px;" 
+                                ng-options="task.TaskId as task.TaskName for task in taskCtr.BackGroundTasks">
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width: 800px; text-align: center;">
+        <input type="button" ng-click="taskCtr.backToGeneral()" value="Back" class="btn-green btn-customConfirm font-size-small" />
+        <input type="button" ng-click="taskCtr.nextToActivity()" value="Next" class="btn-green btn-customConfirm font-size-small" />
+    </div>
+</div>

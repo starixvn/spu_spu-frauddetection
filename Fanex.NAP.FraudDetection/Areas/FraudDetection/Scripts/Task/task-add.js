@@ -7,5 +7,5 @@
         }
     });
 
-    taskService.initialize();
+    //taskService.initialize();
 });

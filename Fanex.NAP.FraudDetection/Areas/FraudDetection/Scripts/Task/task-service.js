@@ -2,10 +2,63 @@
     "use strict";
 
     var taskService = {};
+    var configStep = {
+        general: 1,
+        event: 2,
+        activity: 3,
+        rule: 4
+    };
 
     taskService.NextActionIdList = "";
     taskService.NextActionTargetIdList = "";
     taskService.IsCheckNotScanned = true;
+
+    taskService.doneConfigStep = configStep.general;
+
+    taskService.goToStep = function (step) {
+        if (taskService.doneConfigStep >= step) {
+            switch (step) {
+                case configStep.general:
+                    $(".step-menu-tab").removeClass("active");
+                    $(".step-menu-tab-general").addClass("active");
+                    $("#general-tab").addClass("active");
+                    $("#task-general").css("display", "inline-block");
+                    $("#task-event").css("display", "none");
+                    $("#task-activity").css("display", "none");
+                    $("#task-rule").css("display", "none");
+                    break;
+                case configStep.event:
+                    $(".step-menu-tab").removeClass("active");
+                    $(".step-menu-tab-event").addClass("active");
+                    $("#event-tab").addClass("active");
+                    $("#task-general").css("display", "none");
+                    $("#task-event").css("display", "inline-block");
+                    $("#task-activity").css("display", "none");
+                    $("#task-rule").css("display", "none");
+                    break;
+                case configStep.activity:
+                    $(".step-menu-tab").removeClass("active");
+                    $(".step-menu-tab-activity").addClass("active");
+                    $("#activity-tab").addClass("active");
+                    $("#task-general").css("display", "none");
+                    $("#task-event").css("display", "none");
+                    $("#task-activity").css("display", "inline-block");
+                    $("#task-rule").css("display", "none");
+                    break;
+                case configStep.rule:
+                    $(".step-menu-tab").removeClass("active");
+                    $(".step-menu-tab-rule").addClass("active");
+                    $("#rule-tab").addClass("active");
+                    $("#task-general").css("display", "none");
+                    $("#task-event").css("display", "none");
+                    $("#task-activity").css("display", "none");
+                    $("#task-rule").css("display", "inline-block");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     taskService.initialize = function () {
         taskService.OnAccordionInitialize();
@@ -104,8 +157,102 @@
             $('#ruleConfigControlDatetimePicker').datetimepicker("show");
         });
 
+        $("#btn_NextToEvent").click(function (event) {
+            event.preventDefault();
+
+            $(".step-menu-tab-general").removeClass("active").removeClass("done").addClass("done");
+            $(".step-menu-tab-event").removeClass("active").addClass("active");
+
+            $("#event-tab").addClass("active");
+
+            $("#task-general").css("display", "none");
+            $("#task-event").css("display", "inline-block");
+            $("#task-activity").css("display", "none");
+            $("#task-rule").css("display", "none");
+
+            if (taskService.doneConfigStep < 2)
+                taskService.doneConfigStep++;
+        });
+
+        $("#btn_NextToActivity").click(function (event) {
+            event.preventDefault();
+
+            $(".step-menu-tab-event").removeClass("active").removeClass("done").addClass("done");
+            $(".step-menu-tab-activity").removeClass("active").addClass("active");
+
+            $("#activity-tab").addClass("active");
+            
+            $("#task-general").css("display", "none");
+            $("#task-event").css("display", "none");
+            $("#task-activity").css("display", "inline-block");
+            $("#task-rule").css("display", "none");
+
+            if (taskService.doneConfigStep < 3)
+                taskService.doneConfigStep++;
+        });
+
+        $("#btn_NextToRule").click(function (event) {
+            event.preventDefault();
+
+            $(".step-menu-tab-activity").removeClass("active").removeClass("done").addClass("done");
+            $(".step-menu-tab-rule").removeClass("active").addClass("active");
+            
+            $("#rule-tab").addClass("active");
+            
+            $("#task-general").css("display", "none");
+            $("#task-event").css("display", "none");
+            $("#task-activity").css("display", "none");
+            $("#task-rule").css("display", "inline-block");
+
+            if (taskService.doneConfigStep < 4)
+                taskService.doneConfigStep++;
+        });
+
+        $("#btn_BackToGeneral").click(function (event) {
+            event.preventDefault();
+
+            $(".step-menu-tab-general").removeClass("active").addClass("active");
+            $(".step-menu-tab-event").removeClass("active");
+
+            $("#general-tab").addClass("active");
+            
+            $("#task-general").css("display", "inline-block");
+            $("#task-event").css("display", "none");
+            $("#task-activity").css("display", "none");
+            $("#task-rule").css("display", "none");
+        });
+
+        $("#btn_BackToEvent").click(function (event) {
+            event.preventDefault();
+
+            $(".step-menu-tab-event").removeClass("active").addClass("active");
+            $(".step-menu-tab-activity").removeClass("active");
+            
+            $("#event-tab").addClass("active");
+            
+            $("#task-general").css("display", "none");
+            $("#task-event").css("display", "inline-block");
+            $("#task-activity").css("display", "none");
+            $("#task-rule").css("display", "none");
+        });
+
+        $("#btn_BackToActivity").click(function (event) {
+            event.preventDefault();
+
+            $(".step-menu-tab-activity").removeClass("active").addClass("active");
+            $(".step-menu-tab-rule").removeClass("active");
+            
+            $("#activity-tab").addClass("active");
+            
+            $("#task-general").css("display", "none");
+            $("#task-event").css("display", "none");
+            $("#task-activity").css("display", "inline-block");
+            $("#task-rule").css("display", "none");
+        });
+
         $("#btn_AddTask").click(function (event) {
             event.preventDefault();
+
             var formulaIsCorrect = taskService.CheckFormula("preconditionTable") && taskService.CheckFormula("ruleTable");
             if (formulaIsCorrect) {
                 taskService.GenerateNextActions();

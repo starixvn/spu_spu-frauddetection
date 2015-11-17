@@ -46,6 +46,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/coreJs").Include(
                 "~/Scripts/jquery-1.9.0.js",
+                "~/Scripts/angular.js",
                 "~/Scripts/jquery-ui-1.11.4.js",
                 "~/Scripts/jquery.number.js",
                 "~/Scripts/Plugin/multi-select-control.js",
@@ -107,8 +108,9 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/Task").Include(
+                "~/Areas/FraudDetection/Scripts/Task/task-controller.js",
                 "~/Areas/FraudDetection/Scripts/Task/task-factory.js",
-                "~/Areas/FraudDetection/Scripts/Task/task-service.js"));
+                "~/Areas/FraudDetection/Scripts/Task/task-model.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/Parameter").Include(
                 "~/Areas/FraudDetection/Scripts/Parameter/parameter-factory.js",
