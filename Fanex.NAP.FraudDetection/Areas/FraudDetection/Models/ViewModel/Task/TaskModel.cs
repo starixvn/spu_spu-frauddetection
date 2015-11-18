@@ -20,5 +20,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Models.ViewModel.Task
         public int UserId { get; set; }
 
         public int CaseId { get; set; }
+
+        public int TaskId { get; set; }
     }
 }

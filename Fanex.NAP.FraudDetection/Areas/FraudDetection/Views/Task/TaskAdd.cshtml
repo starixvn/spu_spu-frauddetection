@@ -23,7 +23,7 @@
 <div>
     <span class="infor-text">Add New Task</span>
 </div>
-<div ng-controller="taskController as taskCtr">
+<div ng-controller="taskAddController as taskCtr">
     <div id="caseid" style="display: none;">@Model.CaseId</div>
     <div id="onUserid" style="display: none;">@Model.UserId</div>
 
@@ -34,20 +34,3 @@
     @Html.Partial("~/Areas/FraudDetection/Views/Task/Activity.cshtml")
     @Html.Partial("~/Areas/FraudDetection/Views/Task/Rule.cshtml")
 </div>
-
-@*<label id="addTaskResult" style="color: Red; font-weight: normal;">
-</label>
-@Html.Partial("~/Areas/FraudDetection/Views/Task/ProgressBar.cshtml")
-<div class="newline">
-    &nbsp;
-</div>
-@using (Html.BeginForm("AddTask", "Task", FormMethod.Post, new { @id = "AddTaskForm" }))
-{
-    <div id="caseid" style="display: none;">@Model.TaskInformation.CaseId</div>
-    <div id="onUserid" style="display: none;">@Model.OnUserId</div>
-
-    @Html.Partial("~/Areas/FraudDetection/Views/Task/General.cshtml", @Model.TaskInformation)
-    @Html.Partial("~/Areas/FraudDetection/Views/Task/Event.cshtml")
-    @Html.Partial("~/Areas/FraudDetection/Views/Task/Activity.cshtml")
-    @Html.Partial("~/Areas/FraudDetection/Views/Task/Rule.cshtml")
-}*@

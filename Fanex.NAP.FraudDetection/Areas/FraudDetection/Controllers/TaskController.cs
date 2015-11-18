@@ -14,9 +14,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.FraudDetection.Service.Core;
+    using Core.Business;
+    using Core.Web.Attribute;
     using FD.Lib.Criteria.Bettype;
     using FD.Lib.Criteria.CaseGroup;
     using FD.Lib.Criteria.Common;
@@ -25,24 +24,21 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Criteria.MailMaster;
     using FD.Lib.Criteria.Parameter;
     using FD.Lib.Criteria.Task;
-    using FD.Lib.DTO;
     using FD.Lib.QueryGenerator;
     using FD.Lib.QueueManagement.SendingTasks;
     using FD.Lib.Service.Implement;
     using Models.ViewModel.Task;
     using NAP.FraudDetection.Controllers;
     using Service;
+    using Service.Core;
 
     public class TaskController : BaseController
     {
         private readonly TaskService _taskService;
 
-        private readonly DataCaptureService _dataCaptureService;
-
         public TaskController()
         {
             _taskService = new TaskService();
-            _dataCaptureService = new DataCaptureService();
         }
 
         #region Add Task
@@ -63,8 +59,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     CaseId = fraudCase,
                     UserId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0
                 };
-
-                GenerateViewModel(result.UserId, result.CaseId);
 
                 return View(
                     "~/Areas/FraudDetection/Views/Task/TaskAdd.cshtml", result);
@@ -118,12 +112,14 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult EditTask(int taskId)
         {
             var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoGetCriteria { TaskId = taskId });
-            var viewModel = GenerateViewModel(
-                AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
-                taskInfo.CaseId);
-            viewModel.TaskInformation = taskInfo;
-
-            return View("~/Areas/FraudDetection/Views/Task/TaskEdit.cshtml", viewModel);
+            
+            var result = new TaskModel
+            {
+                CaseId = taskInfo.CaseId,
+                UserId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
+                TaskId = taskId
+            };
+            return View("~/Areas/FraudDetection/Views/Task/TaskEdit.cshtml", result);
         }
 
         /// <summary>
@@ -154,7 +150,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.TaskPreconditions = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.PreCondition).GenerateQuery();
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();
 
-            Fanex.Logging.Logger.Log.Error("TaskRules: " + criteria.TaskRules, "Fraud-Detection-Auto-UAT");
+            Logging.Logger.Log.Error("TaskRules: " + criteria.TaskRules, "Fraud-Detection-Auto-UAT");
             var result = _taskService.UpdateTask(criteria);
             if (result.Code == 0)
             {
@@ -169,11 +165,35 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         #region Utilities
 
         [HttpGet]
+        public ActionResult GetTaskInfo(int taskId)
+        {
+            var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoGetCriteria { TaskId = taskId });
+
+            return Json(taskInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult GetEvents()
         {
             var events = new CommonService().GetEvents(new EventGetAllCriteria());
 
             return Json(events, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetMails()
+        {
+            var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria());
+
+            return Json(mailMasters, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetCurrencies()
+        {
+            var currencies = new CurrencyService().GetCurrencies(new CurrencyGetAllCriteria());
+
+            return Json(currencies, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -190,6 +210,22 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var sports = new BettypeService().GetAllSBSports(new SportGetAllCriteria());
 
             return Json(sports, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetBetTypes()
+        {
+            var betTypes = new BettypeService().GetAllSBBettypes(new BettypeGetAllCriteria());
+
+            return Json(betTypes, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetDataTypes()
+        {
+            var dataTypes = new DataCaptureService().GetAllDataTypeCapture(new DataTypeCaptureGetAllCriteria());
+
+            return Json(dataTypes, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -218,56 +254,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var tasks = new TaskService().GetBackGroundTasksByCase(new TaskBackGroundGetByCaseIdCriteria { CaseId = caseId });
 
             return Json(tasks, JsonRequestBehavior.AllowGet);
-        }
-
-        /// <summary>
-        /// Generate Task View Model.
-        /// </summary>
-        /// <param name="currentUserId">Current User ID.</param>
-        /// <param name="fraudCaseId">Fraud Case ID.</param>
-        /// <returns>Task View Model.</returns>
-        private TaskViewModel GenerateViewModel(int currentUserId, int fraudCaseId)
-        {
-            // Actions
-            var eventService = new EventService();
-            var events = eventService.GetEvents(new EventGetAllCriteria());
-
-            // Configurations
-            var configurationService = new ConfigurationsService();
-            var configs = configurationService.GetFormattedConfigs(new ConfigGetAllCriteria(), fraudCaseId);
-
-            // Groups
-            var caseGroupService = new CaseGroupService();
-            var groups = caseGroupService.GetCaseGroup(new CaseGroupGetAllCriteria { CaseId = fraudCaseId }).ToList();
-
-            // Bettypes and Sports
-            var bettypeService = new BettypeService();
-            var sports = bettypeService.GetAllSBSports(new SportGetAllCriteria());
-            var bettypes = bettypeService.GetAllSBBettypes(new BettypeGetAllCriteria());
-            var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria());
-
-            // Currency
-            var currencyService = new CurrencyService();
-            var currencies = currencyService.GetCurrencies(new CurrencyGetAllCriteria());
-
-            // Currency
-            var dataTypesCaptureList = _dataCaptureService.GetAllDataTypeCapture(new DataTypeCaptureGetAllCriteria());
-
-            var taskViewModel = new TaskViewModel(
-                events.ToList(),
-                configs.ToList(),
-                groups,
-                sports.ToList(),
-                bettypes.ToList(),
-                mailMasters.ToList(),
-                currencies.ToList(),
-                dataTypesCaptureList.ToList())
-                {
-                    OnUserId = currentUserId, 
-                    TaskInformation = new Task { CaseId = fraudCaseId, IsActive = true }
-                };
-
-            return taskViewModel;
         }
 
         /// <summary>
