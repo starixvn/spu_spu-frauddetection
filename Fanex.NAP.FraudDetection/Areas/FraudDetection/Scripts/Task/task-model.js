@@ -301,11 +301,6 @@ function (taskFactory) {
                 case "Choice":
                     result = configRow.Value;
                     break;
-                case "IP":
-                    result.Name = $('#IpAddress').val();
-                    result.Value = $('#IpAddress').val();
-                    result.Id = $('#IpAddress').val();
-                    break;
                 default:
                     result.Name = configRow.Value;
                     result.Value = configRow.Value;
@@ -445,14 +440,19 @@ function (taskFactory) {
 
         var data = key + " " + operator + " " + value;
 
-        if (row.Param.Name == "TransDate" && row.Value.Name == "In Danger Period")
+        if (row.Param.Name === "TransDate" && row.Value.Name === "In Danger Period")
             data = "NEARTHEGOAL";
 
-        if (row.Param.Name == "Arbitrage" && row.Value.Name == "Yes")
+        if (row.Param.Name === "Arbitrage" && row.Value.Name === "Yes")
             data = "Arbitrage";
 
-        if (row.Param.Name == "Stake" && row.Value.Name !== "Has Changed From Original") {
-            value = value + "*0.01*" + row.Value.Value;
+        if (row.IsCompare && row.Param.Name === "Stake" && row.Value.Name !== "Has Changed From Original") {
+            value = row.AdditionalValue + "*0.01*" + row.Value.Name;
+            data = key + " " + operator + " " + value;
+        }
+
+        if (row.Param.Name === "Match State") {
+            data = "$MatchState$";
         }
 
         if (row.Param.Name === "Choice" && row.Value.Name !== "Has Changed From Original") {
@@ -523,8 +523,40 @@ function (taskFactory) {
         }
     };
 
+    taskModel.getSpecialParamValue = function (row, isRule) {
+        if (!row.IsCompare) {
+            switch (row.Param.Type) {
+                case 'DatetimePicker':
+                    if (isRule) {
+                        var dateRule = $("#ruleDateTimePicker").val();
+                        row.Value.Name = dateRule;
+                        row.Value.Value = dateRule;
+                        row.Value.Id = dateRule;
+                    } else {
+                        var datePrecondition = $("#preconditionDateTimePicker").val();
+                        row.Value.Name = datePrecondition;
+                        row.Value.Value = datePrecondition;
+                        row.Value.Id = datePrecondition;
+                    }
+                    break;
+                case 'ComboBox':
+                    break;
+                case 'TextBox':
+                    break;
+                case 'IpAddress':
+                    var ip = formatIpAddress($("#IpAddress").val());
+                    row.Value.Name = ip;
+                    row.Value.Value = ip;
+                    row.Value.Id = ip;
+                default:
+                    break;
+            }
+        }
+    };
+
     taskModel.checkFormula = function (table, tableId) {
-        var formula = taskModel.getRawFormula(table);
+        var isRule = tableId === "#ruleTableFormula";
+        var formula = taskModel.getRawFormula(table, isRule);
         formula = formula.replace(/@/g, "#");
         var formulaCheckResults = expVal.validateLogicExpession(formula, "#").split(",");
 
@@ -536,19 +568,20 @@ function (taskFactory) {
         }
     };
 
-    taskModel.getRawFormula = function (table) {
+    taskModel.getRawFormula = function (table, isRule) {
         var result = [];
         angular.forEach(table, function (row) {
-            result.push(taskModel.getRowRawFormula(row));
+            result.push(taskModel.getRowRawFormula(row, isRule));
         });
 
         return result.join("@");
     };
 
-    taskModel.getRowRawFormula = function (row) {
-        var result,
+    taskModel.getRowRawFormula = function (row, isRule) {
+        var result = [],
             prefixFormula = '',
-            postfixFormula = '';
+            postfixFormula = '',
+            additionalValue = '';
 
         angular.forEach(row.FormulaElements, function (formulaElement) {
             if (formulaElement.IsPrefix) {
@@ -558,14 +591,25 @@ function (taskFactory) {
             }
         });
 
-        if (prefixFormula.length > 0)
-            prefixFormula += " ";
-        if (postfixFormula.length > 0)
-            postfixFormula = " " + postfixFormula;
+        if (row.IsCompare && row.AdditionalValue.length > 0) {
+            additionalValue = row.AdditionalValue;
+        }
 
-        result = prefixFormula + row.Param.Name + " " + row.Operator.Name + " " + row.Value.Name + " " + row.AdditionalValue + postfixFormula;
+        result.push(prefixFormula);
+        result.push(row.Param.Name);
+        result.push(row.Operator.Name);
 
-        return result;
+        if (isRule) {
+            result.push(additionalValue);
+            result.push(row.Value.Name);
+        } else {
+            result.push(row.Value.Name);
+            result.push(additionalValue);
+        }
+
+        result.push(postfixFormula);
+
+        return result.join(" ");
     };
 
     taskModel.getRowFormula = function (row) {
@@ -738,11 +782,197 @@ function (taskFactory) {
         }
     };
 
-    var formatIpAddress = function (ipAddress) {
+    taskModel.IsCheckNotScanned = function (table) {
+        var result = false;
+        angular.forEach(table, function (row) {
+            if (row.Param.Name === "Match State" && row.Value.Name === "Not Scanned") {
+                result = true;
+            }
+        });
+
+        return result;
+    };
+
+    taskModel.goToStep = function (taskProgress, tab, stepNumber) {
+        switch (stepNumber) {
+            case 1:
+                taskProgress.general = 'active';
+                taskProgress.event = '';
+                taskProgress.activity = '';
+                taskProgress.rule = '';
+
+                tab.general = true;
+                tab.event = false;
+                tab.activity = false;
+                tab.rule = false;
+                break;
+            case 2:
+                taskProgress.general = 'done';
+                taskProgress.event = 'active';
+                taskProgress.activity = '';
+                taskProgress.rule = '';
+
+                tab.general = false;
+                tab.event = true;
+                tab.activity = false;
+                tab.rule = false;
+                break;
+            case 3:
+                taskProgress.general = 'done';
+                taskProgress.event = 'done';
+                taskProgress.activity = 'active';
+                taskProgress.rule = '';
+
+                tab.general = false;
+                tab.event = false;
+                tab.activity = true;
+                tab.rule = false;
+                break;
+            case 4:
+                taskProgress.general = 'done';
+                taskProgress.event = 'done';
+                taskProgress.activity = 'done';
+                taskProgress.rule = 'active';
+
+                tab.general = false;
+                tab.event = false;
+                tab.activity = false;
+                tab.rule = true;
+                break;
+            default:
+                taskProgress.general = 'active';
+                tab.general = true;
+                tab.event = false;
+                tab.activity = false;
+                tab.rule = false;
+                break;
+        }
+    };
+
+    taskModel.changeRule = function (vm) {
+        switch (vm.ruleRow.Param.ConfigName) {
+            case "Ticket Status":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.TicketStatuses[0];
+                break;
+            case "Bet Type":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.BetTypes[0];
+                break;
+            case "Currency":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.Currencies[0];
+                break;
+            case "Choice":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.Choices[0];
+                break;
+            case "Arbitrage":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.Arbitrages[0];
+                break;
+            case "TransDate":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = false;
+                vm.DataInRule.DateTime = true;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = angular.copy($('#ruleDateTimePicker').val());
+                break;
+            case "IP":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = false;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = true;
+
+                vm.ruleRow.Value = $('#IpAddress').val();
+                break;
+            default:
+                vm.DataInRule.TextBox = true;
+                vm.DataInRule.ComboBox = false;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = '';
+                break;
+        }
+    };
+
+    taskModel.changePreCondition = function (vm) {
+        switch (vm.preconditionRow.Param.ConfigName) {
+            case "Customer Group":
+                vm.preconditionRow.Value = vm.CustomerGroups[0];
+                break;
+            case "Match Date":
+                vm.preconditionRow.Value = angular.copy($('#preconditionDateTimePicker').val());
+                break;
+            case "Match Status":
+                vm.preconditionRow.Value = vm.MatchStatuses[0];
+                break;
+            case "Match State":
+                vm.preconditionRow.Value = vm.MatchStates[0];
+                break;
+            case "Match Code":
+                vm.preconditionRow.Value = '';
+                break;
+            case "League Type":
+                vm.preconditionRow.Value = vm.LeagueTypes[0];
+                break;
+            case "Sport":
+                vm.preconditionRow.Value = vm.Sports[0];
+                break;
+            case "Scanned Date":
+                vm.preconditionRow.Value = angular.copy($('#preconditionDateTimePicker').val());
+                break;
+            default:
+                break;
+        }
+    };
+
+    function isIpAddress(ipAddress) {
+        return ipAddress.isIpv4();
+    }
+
+    function checkIpRange(ipAddressFrom, ipAddressTo) {
+        if (isIpAddress(ipAddressFrom) && isIpAddress(ipAddressTo)) {
+            var from = ipAddressFrom.split("."),
+                to = ipAddressTo.split(".");
+            for (var i = 0; i < 3; i++) {
+                if (parseInt(from[i]) !== parseInt(to[i]))
+                    return false;
+            }
+
+            return !(parseInt(from[3]) > parseInt(to[3]));
+        }
+
+        return false;
+    }
+
+    function formatIpAddress(ipAddress) {
         var ip = ipAddress.split(".");
 
         return parseInt(ip[0]) + "." + parseInt(ip[1]) + "." + parseInt(ip[2]) + "." + parseInt(ip[3]);
-    };
+    }
 
     var getParamValue = function (configRow, value) {
         var result = '', index;

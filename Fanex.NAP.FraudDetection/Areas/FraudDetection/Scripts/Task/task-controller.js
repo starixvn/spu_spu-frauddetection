@@ -115,8 +115,7 @@ function (taskModel) {
         general: 'active',
         event: '',
         activity: '',
-        rule: '',
-        doneStep: 4
+        rule: ''
     };
 
     /*
@@ -129,13 +128,7 @@ function (taskModel) {
 
     vm.nextToEvent = function () {
         if (taskModel.checkGeneralTab(vm.Model.General)) {
-            vm.taskProgress.general = progressStatus.done;
-            vm.taskProgress.event = activateProgress(vm.taskProgress.event);
-
-            vm.tab.general = false;
-            vm.tab.event = true;
-            if (vm.taskProgress.doneStep === 1)
-                vm.taskProgress.doneStep++;
+            vm.goToStep(2);
         } else {
             AlertService.showAlert("The task should have a name!");
         }
@@ -143,108 +136,30 @@ function (taskModel) {
 
     vm.nextToActivity = function () {
         if (taskModel.checkEventTab(vm.Model.Event)) {
-            vm.taskProgress.event = progressStatus.done;
-            vm.taskProgress.activity = activateProgress(vm.taskProgress.activity);
-
-            vm.tab.event = false;
-            vm.tab.activity = true;
-            if (vm.taskProgress.doneStep === 2)
-                vm.taskProgress.doneStep++;
+            vm.goToStep(3);
         } else {
             AlertService.showAlert("Please input the timer value!");
         }
     };
 
     vm.nextToRule = function () {
-        vm.taskProgress.activity = progressStatus.done;
-        vm.taskProgress.rule = activateProgress(vm.taskProgress.rule);
-
-        vm.tab.activity = false;
-        vm.tab.rule = true;
-        if (vm.taskProgress.doneStep === 3)
-            vm.taskProgress.doneStep++;
+        vm.goToStep(4);
     };
 
     vm.backToGeneral = function () {
-        vm.taskProgress.general = activateProgress(vm.taskProgress.general);
-        vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-
-        vm.tab.event = false;
-        vm.tab.general = true;
+        vm.goToStep(1);
     };
 
     vm.backToEvent = function () {
-        vm.taskProgress.event = activateProgress(vm.taskProgress.event);
-        vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-
-        vm.tab.activity = false;
-        vm.tab.event = true;
+        vm.goToStep(2);
     };
 
     vm.backToActivity = function () {
-        vm.taskProgress.activity = activateProgress(vm.taskProgress.activity);
-        vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-        vm.tab.rule = false;
-        vm.tab.activity = true;
+        vm.goToStep(3);
     };
 
     vm.goToStep = function (stepNumber) {
-        if (vm.taskProgress.doneStep >= stepNumber) {
-            switch (stepNumber) {
-                case 1:
-                    vm.taskProgress.general = activateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = true;
-                    vm.tab.event = false;
-                    vm.tab.activity = false;
-                    vm.tab.rule = false;
-                    break;
-                case 2:
-                    vm.taskProgress.general = deactivateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = activateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = false;
-                    vm.tab.event = true;
-                    vm.tab.activity = false;
-                    vm.tab.rule = false;
-                    break;
-                case 3:
-                    vm.taskProgress.general = deactivateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = activateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = false;
-                    vm.tab.event = false;
-                    vm.tab.activity = true;
-                    vm.tab.rule = false;
-                    break;
-                case 4:
-                    vm.taskProgress.general = deactivateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = activateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = false;
-                    vm.tab.event = false;
-                    vm.tab.activity = false;
-                    vm.tab.rule = true;
-                    break;
-                default:
-                    vm.taskProgress.general = activateProgress(vm.taskProgress.general);
-                    vm.tab.general = true;
-                    vm.tab.event = false;
-                    vm.tab.activity = false;
-                    vm.tab.rule = false;
-                    break;
-            }
-        }
+        taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
     };
 
     vm.changeComparePrecondition = function () {
@@ -281,103 +196,11 @@ function (taskModel) {
     };
 
     vm.changePreCondition = function () {
-        switch (vm.preconditionRow.Param.ConfigName) {
-            case "Customer Group":
-                vm.preconditionRow.Value = vm.CustomerGroups[0];
-                break;
-            case "Match Date":
-                vm.preconditionRow.Value = angular.copy($('#preconditionDateTimePicker').val());
-                break;
-            case "Match Status":
-                vm.preconditionRow.Value = vm.MatchStatuses[0];
-                break;
-            case "Match State":
-                vm.preconditionRow.Value = vm.MatchStates[0];
-                break;
-            case "Match Code":
-                vm.preconditionRow.Value = '';
-                break;
-            case "League Type":
-                vm.preconditionRow.Value = vm.LeagueTypes[0];
-                break;
-            case "Sport":
-                vm.preconditionRow.Value = vm.Sports[0];
-                break;
-            case "Scanned Date":
-                vm.preconditionRow.Value = angular.copy($('#preconditionDateTimePicker').val());
-                break;
-            default:
-                break;
-        }
+        taskModel.changePreCondition(vm);
     };
 
     vm.changeRule = function () {
-        switch (vm.ruleRow.Param.ConfigName) {
-            case "Ticket Status":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.TicketStatuses[0];
-                break;
-            case "Bet Type":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.BetTypes[0];
-                break;
-            case "Currency":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.Currencies[0];
-                break;
-            case "Choice":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.Choices[0];
-                break;
-            case "Arbitrage":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.Arbitrages[0];
-                break;
-            case "TransDate":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = false;
-                vm.DataInRule.DateTime = true;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = angular.copy($('#ruleDateTimePicker').val());
-                break;
-            case "IP":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = false;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = true;
-
-                vm.ruleRow.Value = $('#IpAddress').val();
-                break;
-            default:
-                vm.DataInRule.TextBox = true;
-                vm.DataInRule.ComboBox = false;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = '';
-                break;
-        }
+        taskModel.changeRule(vm);
     };
 
     taskModel.getConfigsByActivity(vm.Model.Activity.ActivityId).then(function () {
@@ -426,9 +249,7 @@ function (taskModel) {
             IsCompare: vm.preconditionRow.IsCompare
         };
 
-        if (preconditionRow.Param.Name === "Match State" && preconditionRow.Value.Name === "Not Scanned") {
-            vm.IsCheckNotScanned = true;
-        }
+        taskModel.getSpecialParamValue(preconditionRow, false);
 
         vm.Model.Rule.PreconditionTable.push(angular.copy(preconditionRow));
 
@@ -444,6 +265,8 @@ function (taskModel) {
             AdditionalValue: vm.ruleRow.AdditionalValue,
             IsCompare: vm.ruleRow.IsCompare
         };
+
+        taskModel.getSpecialParamValue(ruleRow, true);
 
         vm.Model.Rule.RuleTable.push(angular.copy(ruleRow));
 
@@ -472,12 +295,12 @@ function (taskModel) {
         vm.IsCheckingRule = true;
     };
 
-    vm.tableFormula = function (table) {
-        return taskModel.getRawFormula(table).replace(/@/g, " ").replace(/#/g, " ");
+    vm.tableFormula = function (table, isRule) {
+        return taskModel.getRawFormula(table, isRule).replace(/@/g, " ").replace(/#/g, " ");
     };
 
-    vm.rowFormula = function (row) {
-        return taskModel.getRowRawFormula(row).replace(/@/g, " ").replace(/#/g, " ");
+    vm.rowFormula = function (row, isRule) {
+        return taskModel.getRowRawFormula(row, isRule).replace(/@/g, " ").replace(/#/g, " ");
     };
 
     vm.addRemoveFormulaElementInPrecondition = function (formulaElement) {
@@ -520,8 +343,9 @@ function (taskModel) {
                     "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData),
                     "PreconConfigs": taskModel.getConfigIds(vm.Model.Rule.PreconditionTable),
                     "RuleConfigs": taskModel.getConfigIds(vm.Model.Rule.RuleTable),
-                    "IsCheckNotScanned": vm.IsCheckNotScanned
+                    "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable)
                 };
+
                 taskModel.addTask(param);
             } else {
                 vm.IsCheckingRule = false;
@@ -571,28 +395,6 @@ function (taskModel) {
     taskModel.getBetTypes().then(function () {
         vm.BetTypes = taskModel.BetTypes;
     });
-
-    var progressStatus = {
-        active: 'active',
-        done: 'done',
-        doneActive: 'done active'
-    };
-
-    var activateProgress = function (progress) {
-        if (progress.indexOf('done') >= 0) {
-            return progressStatus.doneActive;
-        } else {
-            return progressStatus.active;
-        }
-    };
-
-    var deactivateProgress = function (progress) {
-        if (progress.indexOf('done') >= 0) {
-            return progressStatus.done;
-        } else {
-            return '';
-        }
-    };
 } ]);
 
 taskModule.controller('taskEditController',
@@ -609,7 +411,6 @@ function (taskModel) {
     */
     vm.IsCheckingPrecondition = true;
     vm.IsCheckingRule = true;
-    vm.IsCheckNotScanned = false;
 
     vm.CaseId = $("#caseid").text();
     vm.OnUserId = $("#onUserid").text();
@@ -725,13 +526,7 @@ function (taskModel) {
 
     vm.nextToEvent = function () {
         if (taskModel.checkGeneralTab(vm.Model.General)) {
-            vm.taskProgress.general = progressStatus.done;
-            vm.taskProgress.event = activateProgress(vm.taskProgress.event);
-
-            vm.tab.general = false;
-            vm.tab.event = true;
-            if (vm.taskProgress.doneStep === 1)
-                vm.taskProgress.doneStep++;
+            vm.goToStep(2);
         } else {
             AlertService.showAlert("The task should have a name!");
         }
@@ -739,108 +534,30 @@ function (taskModel) {
 
     vm.nextToActivity = function () {
         if (taskModel.checkEventTab(vm.Model.Event)) {
-            vm.taskProgress.event = progressStatus.done;
-            vm.taskProgress.activity = activateProgress(vm.taskProgress.activity);
-
-            vm.tab.event = false;
-            vm.tab.activity = true;
-            if (vm.taskProgress.doneStep === 2)
-                vm.taskProgress.doneStep++;
+            vm.goToStep(3);
         } else {
             AlertService.showAlert("Please input the timer value!");
         }
     };
 
     vm.nextToRule = function () {
-        vm.taskProgress.activity = progressStatus.done;
-        vm.taskProgress.rule = activateProgress(vm.taskProgress.rule);
-
-        vm.tab.activity = false;
-        vm.tab.rule = true;
-        if (vm.taskProgress.doneStep === 3)
-            vm.taskProgress.doneStep++;
+        vm.goToStep(4);
     };
 
     vm.backToGeneral = function () {
-        vm.taskProgress.general = activateProgress(vm.taskProgress.general);
-        vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-
-        vm.tab.event = false;
-        vm.tab.general = true;
+        vm.goToStep(1);
     };
 
     vm.backToEvent = function () {
-        vm.taskProgress.event = activateProgress(vm.taskProgress.event);
-        vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-
-        vm.tab.activity = false;
-        vm.tab.event = true;
+        vm.goToStep(2);
     };
 
     vm.backToActivity = function () {
-        vm.taskProgress.activity = activateProgress(vm.taskProgress.activity);
-        vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-        vm.tab.rule = false;
-        vm.tab.activity = true;
+        vm.goToStep(3);
     };
 
     vm.goToStep = function (stepNumber) {
-        if (vm.taskProgress.doneStep >= stepNumber) {
-            switch (stepNumber) {
-                case 1:
-                    vm.taskProgress.general = activateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = true;
-                    vm.tab.event = false;
-                    vm.tab.activity = false;
-                    vm.tab.rule = false;
-                    break;
-                case 2:
-                    vm.taskProgress.general = deactivateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = activateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = false;
-                    vm.tab.event = true;
-                    vm.tab.activity = false;
-                    vm.tab.rule = false;
-                    break;
-                case 3:
-                    vm.taskProgress.general = deactivateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = activateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = deactivateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = false;
-                    vm.tab.event = false;
-                    vm.tab.activity = true;
-                    vm.tab.rule = false;
-                    break;
-                case 4:
-                    vm.taskProgress.general = deactivateProgress(vm.taskProgress.general);
-                    vm.taskProgress.event = deactivateProgress(vm.taskProgress.event);
-                    vm.taskProgress.activity = deactivateProgress(vm.taskProgress.activity);
-                    vm.taskProgress.rule = activateProgress(vm.taskProgress.rule);
-
-                    vm.tab.general = false;
-                    vm.tab.event = false;
-                    vm.tab.activity = false;
-                    vm.tab.rule = true;
-                    break;
-                default:
-                    vm.taskProgress.general = activateProgress(vm.taskProgress.general);
-                    vm.tab.general = true;
-                    vm.tab.event = false;
-                    vm.tab.activity = false;
-                    vm.tab.rule = false;
-                    break;
-            }
-        }
+        taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
     };
 
     vm.changeComparePrecondition = function () {
@@ -877,103 +594,11 @@ function (taskModel) {
     };
 
     vm.changePreCondition = function () {
-        switch (vm.preconditionRow.Param.ConfigName) {
-            case "Customer Group":
-                vm.preconditionRow.Value = vm.CustomerGroups[0];
-                break;
-            case "Match Date":
-                vm.preconditionRow.Value = angular.copy($('#preconditionDateTimePicker').val());
-                break;
-            case "Match Status":
-                vm.preconditionRow.Value = vm.MatchStatuses[0];
-                break;
-            case "Match State":
-                vm.preconditionRow.Value = vm.MatchStates[0];
-                break;
-            case "Match Code":
-                vm.preconditionRow.Value = '';
-                break;
-            case "League Type":
-                vm.preconditionRow.Value = vm.LeagueTypes[0];
-                break;
-            case "Sport":
-                vm.preconditionRow.Value = vm.Sports[0];
-                break;
-            case "Scanned Date":
-                vm.preconditionRow.Value = angular.copy($('#preconditionDateTimePicker').val());
-                break;
-            default:
-                break;
-        }
+        taskModel.changePreCondition(vm);
     };
 
     vm.changeRule = function () {
-        switch (vm.ruleRow.Param.ConfigName) {
-            case "Ticket Status":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.TicketStatuses[0];
-                break;
-            case "Bet Type":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.BetTypes[0];
-                break;
-            case "Currency":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.Currencies[0];
-                break;
-            case "Choice":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.Choices[0];
-                break;
-            case "Arbitrage":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = true;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = vm.Arbitrages[0];
-                break;
-            case "TransDate":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = false;
-                vm.DataInRule.DateTime = true;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = angular.copy($('#ruleDateTimePicker').val());
-                break;
-            case "IP":
-                vm.DataInRule.TextBox = false;
-                vm.DataInRule.ComboBox = false;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = true;
-
-                vm.ruleRow.Value = $('#IpAddress').val();
-                break;
-            default:
-                vm.DataInRule.TextBox = true;
-                vm.DataInRule.ComboBox = false;
-                vm.DataInRule.DateTime = false;
-                vm.DataInRule.IpAddress = false;
-
-                vm.ruleRow.Value = '';
-                break;
-        }
+        taskModel.changeRule(vm);
     };
 
     vm.openCalendar = function (dateTimePicker) {
@@ -1003,9 +628,7 @@ function (taskModel) {
             IsCompare: vm.preconditionRow.IsCompare
         };
 
-        if (preconditionRow.Param.Name === "Match State" && preconditionRow.Value.Name === "Not Scanned") {
-            vm.IsCheckNotScanned = true;
-        }
+        taskModel.getSpecialParamValue(preconditionRow, false);
 
         vm.Model.Rule.PreconditionTable.push(angular.copy(preconditionRow));
 
@@ -1021,6 +644,8 @@ function (taskModel) {
             AdditionalValue: vm.ruleRow.AdditionalValue,
             IsCompare: vm.ruleRow.IsCompare
         };
+
+        taskModel.getSpecialParamValue(ruleRow, true);
 
         vm.Model.Rule.RuleTable.push(angular.copy(ruleRow));
 
@@ -1049,12 +674,12 @@ function (taskModel) {
         vm.IsCheckingRule = true;
     };
 
-    vm.tableFormula = function (table) {
-        return taskModel.getRawFormula(table).replace(/@/g, " ").replace(/#/g, " ");
+    vm.tableFormula = function (table, isRule) {
+        return taskModel.getRawFormula(table, isRule).replace(/@/g, " ").replace(/#/g, " ");
     };
 
-    vm.rowFormula = function (row) {
-        return taskModel.getRowRawFormula(row).replace(/@/g, " ").replace(/#/g, " ");
+    vm.rowFormula = function (row, isRule) {
+        return taskModel.getRowRawFormula(row, isRule).replace(/@/g, " ").replace(/#/g, " ");
     };
 
     vm.addRemoveFormulaElementInPrecondition = function (formulaElement) {
@@ -1098,8 +723,9 @@ function (taskModel) {
                     "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData),
                     "PreconConfigs": taskModel.getConfigIds(vm.Model.Rule.PreconditionTable),
                     "RuleConfigs": taskModel.getConfigIds(vm.Model.Rule.RuleTable),
-                    "IsCheckNotScanned": vm.IsCheckNotScanned
+                    "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable)
                 };
+
                 taskModel.editTask(param);
             } else {
                 vm.IsCheckingRule = false;
@@ -1149,7 +775,6 @@ function (taskModel) {
             OutputId: ''
         };
 
-
         taskModel.getDataTypes().then(function () {
             vm.DataTypes = taskModel.DataTypes;
             taskModel.getCurrencies().then(function () {
@@ -1180,7 +805,6 @@ function (taskModel) {
 
                                 vm.Model.Rule.PreconditionTable = taskModel.makeFormula(vm.Task.TaskPreconditionsOriginal);
                                 vm.Model.Rule.RuleTable = taskModel.makeFormula(vm.Task.TaskRulesOriginal);
-
                                 taskModel.makeNextActions(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.Task.NextActionIdList, vm.Task.NextActionTargetIdList);
                             });
                         });
@@ -1189,26 +813,4 @@ function (taskModel) {
             });
         });
     });
-
-    var progressStatus = {
-        active: 'active',
-        done: 'done',
-        doneActive: 'done active'
-    };
-
-    var activateProgress = function (progress) {
-        if (progress.indexOf('done') >= 0) {
-            return progressStatus.doneActive;
-        } else {
-            return progressStatus.active;
-        }
-    };
-
-    var deactivateProgress = function (progress) {
-        if (progress.indexOf('done') >= 0) {
-            return progressStatus.done;
-        } else {
-            return '';
-        }
-    };
 } ]);

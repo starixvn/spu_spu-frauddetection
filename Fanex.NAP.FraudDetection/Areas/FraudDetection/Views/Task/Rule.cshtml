@@ -61,7 +61,7 @@
                                         <input ng-model="item.IsChecked" type="checkbox" />
                                     </td>
                                     <td style="width: 800px;">
-                                        {{ taskCtr.rowFormula(item) }}
+                                        {{ taskCtr.rowFormula(item, false) }}
                                     </td>
                                     <td>
                                         <img ng-click="taskCtr.removePrecondition(item)" src="{{ taskCtr.deleteIcon }}" style="cursor: pointer;
@@ -74,7 +74,7 @@
                             &nbsp;
                         </div>
                         <label ng-show="taskCtr.IsCheckingPrecondition">
-                            {{ taskCtr.tableFormula(taskCtr.Model.Rule.PreconditionTable) }}
+                            {{ taskCtr.tableFormula(taskCtr.Model.Rule.PreconditionTable, false) }}
                         </label>
                         <label id="preconditionTableFormula" ng-show="!taskCtr.IsCheckingPrecondition">
                         </label>
@@ -96,8 +96,10 @@
                             ng-change="taskCtr.changeRule()">
                         </select>
                         <select ng-model="taskCtr.ruleRow.Operator" style="height: 25px;" ng-options="operator as operator.Name for operator in taskCtr.Operators"
-                            ng-change="">
+                                ng-change="">
                         </select>
+                        <input type="text" ng-model="taskCtr.ruleRow.AdditionalValue" style="width: 100px;
+                            height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Stake' && taskCtr.CompareWithOtherField.InRule" />
                         <select ng-model="taskCtr.ruleRow.Value" ng-show="taskCtr.CompareWithOtherField.InRule"
                             style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.CompareRules"
                             ng-change="">
@@ -129,7 +131,8 @@
                             ng-change="">
                         </select>
                         @*IP Address*@
-                        <input type="text" id="IpAddress" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name != 'between'" />
+                        <input type="text" id="IpAddress" style="width: 120px; height: 25px;"
+                               ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name != 'between'" />
                         <input type="text" id="IpAddressFrom" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name == 'between'" />
                         <input type="text" id="IpAddressTo" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name == 'between'" />
                         <input type="button" ng-click="taskCtr.addRule()" value="Add to List" class="btn-green font-size-small" />
@@ -147,7 +150,7 @@
                                         <input ng-model="item.IsChecked" type="checkbox" />
                                     </td>
                                     <td style="width: 800px;">
-                                        {{ taskCtr.rowFormula(item) }}
+                                        {{ taskCtr.rowFormula(item, true) }}
                                     </td>
                                     <td>
                                         <img ng-click="taskCtr.removeRule(item)" src="{{ taskCtr.deleteIcon }}" style="cursor: pointer;
@@ -160,7 +163,7 @@
                             &nbsp;
                         </div>
                         <label ng-show="taskCtr.IsCheckingRule">
-                            {{ taskCtr.tableFormula(taskCtr.Model.Rule.RuleTable) }}
+                            {{ taskCtr.tableFormula(taskCtr.Model.Rule.RuleTable, true) }}
                         </label>
                         <label id="ruleTableFormula" ng-show="!taskCtr.IsCheckingRule">
                         </label>
