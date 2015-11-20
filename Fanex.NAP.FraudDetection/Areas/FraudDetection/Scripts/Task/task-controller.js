@@ -106,14 +106,16 @@ function (taskModel) {
         general: true,
         event: false,
         activity: false,
-        rule: false
+        rule: false,
+        summary: false
     };
 
     vm.taskProgress = {
         general: 'active',
         event: '',
         activity: '',
-        rule: ''
+        rule: '',
+        summary: ''
     };
 
     /*
@@ -144,6 +146,10 @@ function (taskModel) {
         vm.goToStep(4);
     };
 
+    vm.nextToSummary = function () {
+        vm.goToStep(5);
+    };
+
     vm.backToGeneral = function () {
         vm.goToStep(1);
     };
@@ -154,6 +160,10 @@ function (taskModel) {
 
     vm.backToActivity = function () {
         vm.goToStep(3);
+    };
+
+    vm.backToRule = function () {
+        vm.goToStep(4);
     };
 
     vm.goToStep = function (stepNumber) {
@@ -273,7 +283,17 @@ function (taskModel) {
     };
 
     vm.showInRule = function (config) {
-        return (config.ConfigName !== 'Has Changed From Original');
+        return (config.ConfigName !== 'Has Changed From Original'
+            && config.ConfigName !== 'Has Changed From Latest Capture'
+            && config.ConfigName !== '% Max Bet'
+            && config.ConfigName !== 'In Danger Period');
+    };
+
+    vm.showInCompareRule = function (config) {
+        return (config.ConfigName === 'Has Changed From Original'
+            || config.ConfigName === 'Has Changed From Latest Capture'
+            || config.ConfigName === '% Max Bet'
+            || config.ConfigName === 'In Danger Period');
     };
 
     vm.addPrecondition = function () {
@@ -457,7 +477,6 @@ function (taskModel) {
     Old data.
     */
     vm.OldModel = [];
-    vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
 
     /*
     Value on pages.
@@ -543,7 +562,8 @@ function (taskModel) {
         general: true,
         event: false,
         activity: false,
-        rule: false
+        rule: false,
+        summary: false
     };
 
     vm.taskProgress = {
@@ -551,7 +571,7 @@ function (taskModel) {
         event: '',
         activity: '',
         rule: '',
-        doneStep: 4
+        summary: ''
     };
 
     /*
@@ -578,6 +598,10 @@ function (taskModel) {
         }
     };
 
+    vm.nextToSummary = function () {
+        vm.goToStep(5);
+    };
+
     vm.nextToRule = function () {
         vm.goToStep(4);
     };
@@ -592,6 +616,10 @@ function (taskModel) {
 
     vm.backToActivity = function () {
         vm.goToStep(3);
+    };
+
+    vm.backToRule = function () {
+        vm.goToStep(4);
     };
 
     vm.goToStep = function (stepNumber) {
@@ -692,7 +720,17 @@ function (taskModel) {
     };
 
     vm.showInRule = function (config) {
-        return (config.ConfigName !== 'Has Changed From Original');
+        return (config.ConfigName !== 'Has Changed From Original'
+            && config.ConfigName !== 'Has Changed From Latest Capture'
+            && config.ConfigName !== '% Max Bet'
+            && config.ConfigName !== 'In Danger Period');
+    };
+
+    vm.showInCompareRule = function (config) {
+        return (config.ConfigName === 'Has Changed From Original'
+            || config.ConfigName === 'Has Changed From Latest Capture'
+            || config.ConfigName === '% Max Bet'
+            || config.ConfigName === 'In Danger Period');
     };
 
     vm.addPrecondition = function () {
@@ -823,6 +861,14 @@ function (taskModel) {
 
     taskModel.getBackGroundTasksByCase(vm.CaseId).then(function () {
         vm.BackGroundTasks = taskModel.BackGroundTasks;
+
+        var index = vm.BackGroundTasks.map(function (e) {
+            return e.TaskId;
+        }).indexOf(parseInt(vm.TaskId));
+
+        if (index > -1) {
+            vm.BackGroundTasks.splice(index, 1);
+        }
     });
 
     taskModel.getActivities().then(function () {
@@ -862,6 +908,7 @@ function (taskModel) {
                         vm.CustomerGroups = taskModel.CustomerGroups;
                         taskModel.getBetTypes().then(function () {
                             vm.BetTypes = taskModel.BetTypes;
+                            vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
                             taskModel.getConfigsByActivity(vm.Model.Activity.ActivityId).then(function () {
                                 vm.Configs = taskModel.Configs;
                                 vm.Preconditions = [];

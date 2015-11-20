@@ -837,6 +837,7 @@
     <Content Include="Areas\FraudDetection\Views\Task\TaskAdd.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\ProgressBar.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Task\Summary.cshtml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />

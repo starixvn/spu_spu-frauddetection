@@ -1,0 +1,95 @@
+﻿<div ng-show="taskCtr.tab.summary" style="width: 800px;">
+    <div class="row">
+        <div class="col-md-12">
+            @*        <h4>
+            <b>Task Configuration Summary</b>
+        </h4>*@
+            <table class="table table-bordered">
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Task Name
+                    </td>
+                    <td>
+                        <b>{{ taskCtr.Model.General.TaskName }}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Description
+                    </td>
+                    <td>
+                        <b>{{ taskCtr.Model.General.TaskDesc }}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Active
+                    </td>
+                    <td ng-show="taskCtr.Model.General.IsActive">
+                        <b>Yes</b>
+                    </td>
+                    <td ng-show="!taskCtr.Model.General.IsActive">
+                        <b>No</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Event Name
+                    </td>
+                    <td ng-show="1 == taskCtr.Model.Event.EventId">
+                        <b>Background Processing ({{ taskCtr.Model.Event.Timer }} {{ taskCtr.Model.Event.TimerUnit
+                            }}s)</b>
+                    </td>
+                    <td ng-show="2 == taskCtr.Model.Event.EventId">
+                        <b ng-show="task.TaskId == taskCtr.Model.Event.BackGroundTaskId" ng-repeat="task in taskCtr.BackGroundTasks">
+                            Trigger By Another Task (Executed Affter: {{ task.TaskName}})</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Activity
+                    </td>
+                    <td>
+                        <b ng-show="activity.ActivityId == taskCtr.Model.Activity.ActivityId" ng-repeat="activity in taskCtr.Activities">
+                            {{ activity.ActivityName}}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Precondition
+                    </td>
+                    <td>
+                        <b>{{ taskCtr.tableFormula(taskCtr.Model.Rule.PreconditionTable, false) }}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Rule
+                    </td>
+                    <td>
+                        <b>{{ taskCtr.tableFormula(taskCtr.Model.Rule.RuleTable, true) }}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right font-bold col-md-2">
+                        Next Actions
+                    </td>
+                    <td>
+                        <b ng-show="taskCtr.nextActionAssignGroup.IsTicked">{{ taskCtr.NextActions[0].Name }}
+                            ( <span ng-show="group.GroupId == taskCtr.nextActionAssignGroup.ActionTargetId" ng-repeat="group in taskCtr.CustomerGroups">
+                                {{ group.GroupName }} </span>)</b> <b ng-show="taskCtr.nextActionSendMail.IsTicked">
+                                    {{ taskCtr.NextActions[1].Name }} ( <span ng-show="mail.MailId == taskCtr.nextActionSendMail.ActionTargetId"
+                                        ng-repeat="mail in taskCtr.Mails">{{ mail.MailCode }} </span>)</b>
+                        <b ng-show="taskCtr.nextActionCaptureData.IsTicked">{{ taskCtr.NextActions[2].Name }}
+                            ( <span ng-show="dataType.IsChecked" ng-repeat="dataType in taskCtr.DataTypes">{{ dataType.DataName
+                                }}; </span>)</b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width: 800px; text-align: center;">
+        <input type="button" ng-click="taskCtr.backToRule()" value="Back" class="btn-green btn-customConfirm font-size-small" />
+        <input type="button" ng-click="taskCtr.addEditTask()" value="Submit" class="btn-green btn-customConfirm font-size-small" />
+    </div>
+</div>

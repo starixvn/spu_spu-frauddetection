@@ -830,44 +830,65 @@ function (taskFactory) {
                 taskProgress.event = '';
                 taskProgress.activity = '';
                 taskProgress.rule = '';
+                taskProgress.summary = '';
 
                 tab.general = true;
                 tab.event = false;
                 tab.activity = false;
                 tab.rule = false;
+                tab.summary = false;
                 break;
             case 2:
                 taskProgress.general = 'done';
                 taskProgress.event = 'active';
                 taskProgress.activity = '';
                 taskProgress.rule = '';
+                taskProgress.summary = '';
 
                 tab.general = false;
                 tab.event = true;
                 tab.activity = false;
                 tab.rule = false;
+                tab.summary = false;
                 break;
             case 3:
                 taskProgress.general = 'done';
                 taskProgress.event = 'done';
                 taskProgress.activity = 'active';
                 taskProgress.rule = '';
+                taskProgress.summary = '';
 
                 tab.general = false;
                 tab.event = false;
                 tab.activity = true;
                 tab.rule = false;
+                tab.summary = false;
                 break;
             case 4:
                 taskProgress.general = 'done';
                 taskProgress.event = 'done';
                 taskProgress.activity = 'done';
                 taskProgress.rule = 'active';
+                taskProgress.summary = '';
 
                 tab.general = false;
                 tab.event = false;
                 tab.activity = false;
                 tab.rule = true;
+                tab.summary = false;
+                break;
+            case 5:
+                taskProgress.general = 'done';
+                taskProgress.event = 'done';
+                taskProgress.activity = 'done';
+                taskProgress.rule = 'done';
+                taskProgress.summary = 'active';
+
+                tab.general = false;
+                tab.event = false;
+                tab.activity = false;
+                tab.rule = false;
+                tab.summary = true;
                 break;
             default:
                 taskProgress.general = 'active';

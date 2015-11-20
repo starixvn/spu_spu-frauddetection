@@ -38,7 +38,7 @@
                             height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match Code' && !taskCtr.CompareWithOtherField.InPrecondition" />
                         <input type="text" ng-model="taskCtr.preconditionRow.AdditionalValue" style="width: 100px;
                             height: 25px;" ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && taskCtr.CompareWithOtherField.InPrecondition" />
-                        <input type="date" readonly="readonly" style="width: 100px; height: 25px;" id="preconditionDateTimePicker"
+                        <input type="text" readonly="readonly" style="width: 100px; height: 25px;" id="preconditionDateTimePicker"
                             ng-click="taskCtr.openCalendar('#preconditionDateTimePicker')" ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition" />
                         <span class="icon-calendar icon-event-date-calendar" ng-click="taskCtr.openCalendar('#preconditionDateTimePicker')"
                             ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition">
@@ -81,9 +81,9 @@
                         <div class="newline">
                             &nbsp;
                         </div>
-                        <div>
-                            <input ng-repeat="item in taskCtr.FormulaElements" type="button" ng-click="taskCtr.addRemoveFormulaElementInPrecondition(item)"
-                                value="{{item.Name}}" class="btn-green font-size-small" />
+                        <div ng-repeat="item in taskCtr.FormulaElements" style="display: inline-block;">
+                            <input type="button" ng-click="taskCtr.addRemoveFormulaElementInPrecondition(item)"
+                                value="{{item.Name}}" class="btn-green font-size-small" />&nbsp;
                         </div>
                     </div>
                 </div>
@@ -96,19 +96,19 @@
                             ng-change="taskCtr.changeRule()">
                         </select>
                         <select ng-model="taskCtr.ruleRow.Operator" style="height: 25px;" ng-options="operator as operator.Name for operator in taskCtr.Operators"
-                                ng-change="">
+                            ng-change="">
                         </select>
                         <input type="text" ng-model="taskCtr.ruleRow.AdditionalValue" style="width: 100px;
                             height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Stake' && taskCtr.CompareWithOtherField.InRule" />
                         <select ng-model="taskCtr.ruleRow.Value" ng-show="taskCtr.CompareWithOtherField.InRule"
-                            style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.CompareRules"
+                            style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.CompareRules | filter:taskCtr.showInCompareRule"
                             ng-change="">
                         </select>
                         @*Text box*@
                         <input type="text" ng-model="taskCtr.ruleRow.Value" style="width: 100px; height: 25px;"
                             ng-show="taskCtr.DataInRule.TextBox && !taskCtr.CompareWithOtherField.InRule" />
                         @*Date Time*@
-                        <input type="date" readonly="readonly" style="width: 100px; height: 25px;" id="ruleDateTimePicker"
+                        <input type="text" readonly="readonly" style="width: 100px; height: 25px;" id="ruleDateTimePicker"
                             ng-click="taskCtr.openCalendar('#ruleDateTimePicker')" ng-show="taskCtr.DataInRule.DateTime && !taskCtr.CompareWithOtherField.InRule" />
                         <span class="icon-calendar icon-event-date-calendar" ng-click="taskCtr.openCalendar('#ruleDateTimePicker')"
                             ng-show="taskCtr.DataInRule.DateTime && !taskCtr.CompareWithOtherField.InRule">
@@ -131,8 +131,7 @@
                             ng-change="">
                         </select>
                         @*IP Address*@
-                        <input type="text" id="IpAddress" style="width: 120px; height: 25px;"
-                               ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name != 'between'" />
+                        <input type="text" id="IpAddress" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name != 'between'" />
                         <input type="text" id="IpAddressFrom" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name == 'between'" />
                         <input type="text" id="IpAddressTo" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name == 'between'" />
                         <input type="button" ng-click="taskCtr.addRule()" value="Add to List" class="btn-green font-size-small" />
@@ -170,9 +169,9 @@
                         <div class="newline">
                             &nbsp;
                         </div>
-                        <div>
-                            <input ng-repeat="item in taskCtr.FormulaElements" type="button" ng-click="taskCtr.addRemoveFormulaElementInRule(item)"
-                                value="{{item.Name}}" class="btn-green font-size-small" />
+                        <div ng-repeat="item in taskCtr.FormulaElements" style="display: inline-block;">
+                            <input type="button" ng-click="taskCtr.addRemoveFormulaElementInRule(item)"
+                                value="{{item.Name}}" class="btn-green font-size-small" />&nbsp;
                         </div>
                     </div>
                 </div>
@@ -239,6 +238,6 @@
     </div>
     <div style="width: 800px; text-align: center;">
         <input type="button" ng-click="taskCtr.backToActivity()" value="Back" class="btn-green btn-customConfirm font-size-small" />
-        <input type="button" ng-click="taskCtr.addEditTask()" value="Submit" class="btn-green btn-customConfirm font-size-small" />
+        <input type="button" ng-click="taskCtr.nextToSummary()" value="Next" class="btn-green btn-customConfirm font-size-small" />
     </div>
 </div>
