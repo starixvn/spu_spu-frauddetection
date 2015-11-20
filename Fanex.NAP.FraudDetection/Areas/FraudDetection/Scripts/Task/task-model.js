@@ -6,7 +6,7 @@ taskModule.factory('taskModel',
 function (taskFactory) {
     var taskModel = {};
 
-    taskModel.Model = [];
+    taskModel.Model = {};
 
     taskModel.Model.General = {
         TaskName: '',
@@ -36,17 +36,17 @@ function (taskFactory) {
     taskModel.nextActionAssignGroup = {
         ActionId: 1,
         IsTicked: false,
-        ActionTargetId: 0
+        ActionTargetId: -1
     };
     taskModel.nextActionSendMail = {
         ActionId: 2,
         IsTicked: false,
-        ActionTargetId: 0
+        ActionTargetId: -1
     };
     taskModel.nextActionCaptureData = {
         ActionId: 3,
         IsTicked: false,
-        ActionTargetId: 0
+        ActionTargetId: []
     };
 
     taskModel.Task = [];
@@ -338,7 +338,8 @@ function (taskFactory) {
             separator: ' ',
             showButtonPanel: true
         });
-        //dateFormat(new Date(year, month, day, 0, 0, 0), 'mmm dd, yyyy HH:MM:ss')
+        //var strdatetime = dateFormat(new Date(year, month, day, 0, 0, 0), 'mmm dd, yyyy HH:MM:ss');
+        //$('#ruleDateTimePicker').val(strdatetime).datetimepicker('setDate', (new Date(strdatetime)));
         $('#ruleDateTimePicker').datetimepicker('setDate', (new Date()));
 
         $("#IpAddress").ipAddress();
@@ -428,7 +429,15 @@ function (taskFactory) {
                 value = '%' + value + '%';
                 break;
             case 'IpAddress':
-                value = '%' + formatIpAddress(value) + '%';
+                if (row.Operator.Name === 'between') {
+                    var ip = row.Value.Value.split(" and ");
+                    var ip1 = ip[0].split("."), ip2 = ip[1].split(".");
+                    var searchLike = parseInt(ip1[0]) + "." + parseInt(ip1[1]) + "." + parseInt(ip1[2]) + ".";
+                    key += " LIKE %" + searchLike + "$LIKE$%" + " and CAST(PARSENAME(ans.ip,1) AS TINYINT)";
+                    value = parseInt(ip1[3]) + " and " + parseInt(ip2[3]);
+                } else {
+                    value = '%' + formatIpAddress(value) + '%';
+                }
                 break;
             default:
                 break;
@@ -544,14 +553,35 @@ function (taskFactory) {
                 case 'TextBox':
                     break;
                 case 'IpAddress':
-                    var ip = formatIpAddress($("#IpAddress").val());
-                    row.Value.Name = ip;
-                    row.Value.Value = ip;
-                    row.Value.Id = ip;
+                    if (row.Operator.Name !== 'between') {
+                        var ip = formatIpAddress($("#IpAddress").val());
+                        if (isIpAddress(ip)) {
+                            row.Value.Name = ip;
+                            row.Value.Value = ip;
+                            row.Value.Id = ip;
+                        } else {
+                            AlertService.showAlert("Please have a check the IP Address!");
+                            return false;
+                        }
+                    } else {
+                        var ipFrom = formatIpAddress($("#IpAddressFrom").val());
+                        var ipTo = formatIpAddress($("#IpAddressTo").val());
+                        if (checkIpRange(ipFrom, ipTo)) {
+                            var value = ipFrom + " and " + ipTo;
+                            row.Value.Name = value;
+                            row.Value.Value = value;
+                            row.Value.Id = value;
+                        } else {
+                            AlertService.showAlert("Please have a check the IP range!");
+                            return false;
+                        }
+                    }
                 default:
                     break;
             }
         }
+
+        return true;
     };
 
     taskModel.checkFormula = function (table, tableId) {

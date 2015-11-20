@@ -17,6 +17,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Core.Utilities;
     using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Task;
+    using FD.Lib.QueryGenerator;
     using FD.Lib.QueueManagement.SendingTasks;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
@@ -219,7 +220,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             criteria.CreatorId = 1;
             var result = _taskService.UpdateTask(criteria);
-            if (result.Code == 0)
+            var task = _taskService.GetTaskInfoByTaskId(new TaskInfoGetCriteria
+            {
+                TaskId = criteria.TaskId
+            });
+            if (result.Code == 0 && task.EventId == (int)EventType.BackGround)
             {
                 var syncNewTask = SendingMessageFactory.GetSender(SendingType.UpdatingTask);
                 syncNewTask.Send(criteria.TaskId);

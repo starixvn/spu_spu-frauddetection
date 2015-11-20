@@ -8,7 +8,20 @@ function (taskModel) {
 
     var vm = this;
 
-    vm.Model = [];
+    vm.Model = angular.copy(taskModel.Model);
+
+    /*
+    Next action model.
+    */
+    vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
+    vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
+    vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
+
+    /*
+    Old data.
+    */
+    vm.OldModel = [];
+    vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
 
     /*
     Value on pages.
@@ -44,14 +57,6 @@ function (taskModel) {
     vm.Choices = taskModel.Choices;
     vm.Arbitrages = taskModel.Arbitrages;
     vm.NextActions = taskModel.NextActions;
-
-    /*
-    Model.
-    */
-    vm.Model.General = taskModel.Model.General;
-    vm.Model.Event = taskModel.Model.Event;
-    vm.Model.Activity = taskModel.Model.Activity;
-    vm.Model.Rule = taskModel.Model.Rule;
 
     /*
     Show/hide variables.
@@ -93,13 +98,6 @@ function (taskModel) {
         AdditionalValue: '',
         IsCompare: vm.CompareWithOtherField.InRule
     };
-
-    /*
-    Next action model.
-    */
-    vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
-    vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
-    vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
 
     /*
     Tab control.
@@ -175,6 +173,42 @@ function (taskModel) {
     };
 
     vm.changeActivity = function () {
+        var index = vm.OldModel.map(function (e) {
+            return e.ActivityId;
+        }).indexOf(vm.OldActivityId);
+
+        var backupModel = {
+            ActivityId: vm.OldActivityId,
+            Rule: vm.Model.Rule,
+            NexActions: [vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData]
+        };
+
+        if (index > -1) {
+            vm.OldModel.splice(index, 1);
+        }
+
+        vm.OldModel.push(angular.copy(backupModel));
+
+        index = vm.OldModel.map(function (e) {
+            return e.ActivityId;
+        }).indexOf(vm.Model.Activity.ActivityId);
+
+        if (index > -1) {
+            vm.Model.Rule.PreconditionTable = angular.copy(vm.OldModel[index].Rule.PreconditionTable);
+            vm.Model.Rule.RuleTable = angular.copy(vm.OldModel[index].Rule.RuleTable);
+            vm.nextActionAssignGroup = angular.copy(vm.OldModel[index].NexActions[0]);
+            vm.nextActionSendMail = angular.copy(vm.OldModel[index].NexActions[1]);
+            vm.nextActionCaptureData = angular.copy(vm.OldModel[index].NexActions[2]);
+        } else {
+            vm.Model.Rule.PreconditionTable = [];
+            vm.Model.Rule.RuleTable = [];
+            vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
+            vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
+            vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
+        }
+
+        vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
+
         taskModel.getConfigsByActivity(vm.Model.Activity.ActivityId).then(function () {
             vm.Configs = taskModel.Configs;
             vm.Preconditions = [];
@@ -192,6 +226,9 @@ function (taskModel) {
             vm.CompareRules = angular.copy(vm.Rules);
             vm.preconditionRow.Param = vm.Preconditions.length > 0 ? vm.Preconditions[0] : '';
             vm.ruleRow.Param = vm.Rules.length > 0 ? vm.Rules[0] : '';
+
+            vm.changePreCondition();
+            vm.changeRule();
         });
     };
 
@@ -266,9 +303,9 @@ function (taskModel) {
             IsCompare: vm.ruleRow.IsCompare
         };
 
-        taskModel.getSpecialParamValue(ruleRow, true);
-
-        vm.Model.Rule.RuleTable.push(angular.copy(ruleRow));
+        if (taskModel.getSpecialParamValue(ruleRow, true)) {
+            vm.Model.Rule.RuleTable.push(angular.copy(ruleRow));
+        }
 
         vm.IsCheckingRule = true;
     };
@@ -404,7 +441,23 @@ function (taskModel) {
 
     var vm = this;
 
-    vm.Model = [];
+    /*
+    Model.
+    */
+    vm.Model = angular.copy(taskModel.Model);
+
+    /*
+    Next action model.
+    */
+    vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
+    vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
+    vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
+
+    /*
+    Old data.
+    */
+    vm.OldModel = [];
+    vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
 
     /*
     Value on pages.
@@ -441,14 +494,6 @@ function (taskModel) {
     vm.Choices = taskModel.Choices;
     vm.Arbitrages = taskModel.Arbitrages;
     vm.NextActions = taskModel.NextActions;
-
-    /*
-    Model.
-    */
-    vm.Model.General = angular.copy(taskModel.Model.General);
-    vm.Model.Event = angular.copy(taskModel.Model.Event);
-    vm.Model.Activity = angular.copy(taskModel.Model.Activity);
-    vm.Model.Rule = angular.copy(taskModel.Model.Rule);
 
     /*
     Show/hide variables.
@@ -490,13 +535,6 @@ function (taskModel) {
         AdditionalValue: '',
         IsCompare: vm.CompareWithOtherField.InRule
     };
-
-    /*
-    Next action model.
-    */
-    vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
-    vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
-    vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
 
     /*
     Tab control.
@@ -573,6 +611,42 @@ function (taskModel) {
     };
 
     vm.changeActivity = function () {
+        var index = vm.OldModel.map(function (e) {
+            return e.ActivityId;
+        }).indexOf(vm.OldActivityId);
+
+        var backupModel = {
+            ActivityId: vm.OldActivityId,
+            Rule: vm.Model.Rule,
+            NexActions: [vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData]
+        };
+
+        if (index > -1) {
+            vm.OldModel.splice(index, 1);
+        }
+
+        vm.OldModel.push(angular.copy(backupModel));
+
+        index = vm.OldModel.map(function (e) {
+            return e.ActivityId;
+        }).indexOf(vm.Model.Activity.ActivityId);
+
+        if (index > -1) {
+            vm.Model.Rule.PreconditionTable = angular.copy(vm.OldModel[index].Rule.PreconditionTable);
+            vm.Model.Rule.RuleTable = angular.copy(vm.OldModel[index].Rule.RuleTable);
+            vm.nextActionAssignGroup = angular.copy(vm.OldModel[index].NexActions[0]);
+            vm.nextActionSendMail = angular.copy(vm.OldModel[index].NexActions[1]);
+            vm.nextActionCaptureData = angular.copy(vm.OldModel[index].NexActions[2]);
+        } else {
+            vm.Model.Rule.PreconditionTable = [];
+            vm.Model.Rule.RuleTable = [];
+            vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
+            vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
+            vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
+        }
+
+        vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
+
         taskModel.getConfigsByActivity(vm.Model.Activity.ActivityId).then(function () {
             vm.Configs = taskModel.Configs;
             vm.Preconditions = [];
@@ -590,6 +664,9 @@ function (taskModel) {
             vm.CompareRules = angular.copy(vm.Rules);
             vm.preconditionRow.Param = vm.Preconditions.length > 0 ? vm.Preconditions[0] : '';
             vm.ruleRow.Param = vm.Rules.length > 0 ? vm.Rules[0] : '';
+
+            vm.changePreCondition();
+            vm.changeRule();
         });
     };
 
@@ -645,9 +722,9 @@ function (taskModel) {
             IsCompare: vm.ruleRow.IsCompare
         };
 
-        taskModel.getSpecialParamValue(ruleRow, true);
-
-        vm.Model.Rule.RuleTable.push(angular.copy(ruleRow));
+        if (taskModel.getSpecialParamValue(ruleRow, true)) {
+            vm.Model.Rule.RuleTable.push(angular.copy(ruleRow));
+        }
 
         vm.IsCheckingRule = true;
     };

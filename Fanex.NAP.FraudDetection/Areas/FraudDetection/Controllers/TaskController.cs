@@ -95,7 +95,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();
 
             var result = _taskService.InsertTask(criteria);
-            if (result.Code == 0)
+            if (result.Code == 0 && criteria.EventId == (int)EventType.BackGround)
             {
                 RunTask(int.Parse(result.Message), SendingType.AddingTask);
             }
@@ -152,7 +152,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             Logging.Logger.Log.Error("TaskRules: " + criteria.TaskRules, "Fraud-Detection-Auto-UAT");
             var result = _taskService.UpdateTask(criteria);
-            if (result.Code == 0)
+            if (result.Code == 0 && criteria.EventId == (int)EventType.BackGround)
             {
                 RunTask(criteria.TaskId, SendingType.UpdatingTask);
             }
