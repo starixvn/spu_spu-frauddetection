@@ -167,7 +167,28 @@ function (taskModel) {
     };
 
     vm.goToStep = function (stepNumber) {
-        taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
+        if (stepNumber === 1) {
+            taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
+            return;
+        }
+
+        if (!taskModel.checkGeneralTab(vm.Model.General) && stepNumber !== 1) {
+            AlertService.showAlert("The task should have a name!");
+            taskModel.goToStep(vm.taskProgress, vm.tab, 1);
+        } else {
+            if (!taskModel.checkEventTab(vm.Model.Event) && stepNumber !== 2) {
+                AlertService.showAlert("Please input the timer value!");
+                taskModel.goToStep(vm.taskProgress, vm.tab, 2);
+            } else {
+                taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
+            }
+        }
+    };
+
+    vm.changeEvent = function () {
+        if (vm.Model.Event.EventId === 2) {
+            vm.Model.Event.BackGroundTaskId = vm.BackGroundTasks.length > 0 ? vm.BackGroundTasks[0].TaskId : 0;
+        }
     };
 
     vm.changeComparePrecondition = function () {
@@ -623,7 +644,28 @@ function (taskModel) {
     };
 
     vm.goToStep = function (stepNumber) {
-        taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
+        if (stepNumber === 1) {
+            taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
+            return;
+        }
+
+        if (!taskModel.checkGeneralTab(vm.Model.General) && stepNumber !== 1) {
+            AlertService.showAlert("The task should have a name!");
+            taskModel.goToStep(vm.taskProgress, vm.tab, 1);
+        } else {
+            if (!taskModel.checkEventTab(vm.Model.Event) && stepNumber !== 2) {
+                AlertService.showAlert("Please input the timer value!");
+                taskModel.goToStep(vm.taskProgress, vm.tab, 2);
+            } else {
+                taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
+            }
+        }
+    };
+
+    vm.changeEvent = function () {
+        if (vm.Model.Event.EventId === 2) {
+            vm.Model.Event.BackGroundTaskId = vm.BackGroundTasks.length > 0 ? vm.BackGroundTasks[0].TaskId : 0;
+        }
     };
 
     vm.changeComparePrecondition = function () {
