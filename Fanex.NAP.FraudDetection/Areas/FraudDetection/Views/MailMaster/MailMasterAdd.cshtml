@@ -1,5 +1,4 @@
-﻿@using System.ComponentModel
-@model FD.Lib.Criteria.MailMaster.MailMasterInsertCriteria
+﻿@model FD.Lib.Criteria.MailMaster.MailMasterInsertCriteria
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Add Mail";
@@ -18,7 +17,7 @@
             <div class="col-sm-6">
                 <label class="col-sm-3 text-right">
                     Description</label>
-                @Html.TextBoxFor(model => model.MailingListId, new { @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px" })
+                @Html.TextBoxFor(model => model.MailDesc, new { @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px" })
             </div>
         </div>
         <div class="col-sm-12">
@@ -40,14 +39,14 @@
                 <label class="col-sm-3 text-right">
                     CC</label>
                 <ul id="CcTo" style="width: 380px;"></ul>
-                @Html.TextBoxFor(model => model.To, new { @id = "FakeCcTo", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+                @Html.TextBoxFor(model => model.CcTo, new { @id = "FakeCcTo", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
                 
             </div>
             <div class="col-sm-6">
                 <label class="col-sm-3 text-right">
                     BCC</label>
                 <ul id="BccTo" style="width: 380px;"></ul>
-                @Html.TextBoxFor(model => model.To, new { @id = "FakeBccTo", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+                @Html.TextBoxFor(model => model.BccTo, new { @id = "FakeBccTo", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
                 
             </div>
         </div>

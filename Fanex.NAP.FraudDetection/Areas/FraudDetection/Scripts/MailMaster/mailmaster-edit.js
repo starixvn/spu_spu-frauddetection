@@ -19,6 +19,8 @@
         image_advtab: true
     });
 
+    initializeTagIt();
+
     $("#btn_cancelMail").click(function () {
         window.history.back();
     });
@@ -35,6 +37,9 @@
         $('#editor').text(tinyMCE.activeEditor.getContent());
 
         if ($('#editMailForm').valid()) {
+            $('#FakeTo').val(getTags($("#To").tagit("assignedTags")));
+            $('#FakeCcTo').val(getTags($("#CcTo").tagit("assignedTags")));
+            $('#FakeBccTo').val(getTags($("#BccTo").tagit("assignedTags")));
             mailMasterService.editMail($(this).serialize());
         }
     });
@@ -43,4 +48,50 @@
 function insertSuspiciousStatistic(name) {
     var data = '&lt;placeholder&gt;' + name + '&lt;/placeholder&gt;';
     tinyMCE.execCommand('mceInsertContent', false, data);
+}
+
+function initializeTagIt() {
+
+    $('#To').tagit({
+        beforeTagAdded: function (event, ui) {
+            return isEmail(ui.tagLabel);
+        }
+    });
+    initializeMailTags("To");
+
+    $('#CcTo').tagit({
+        beforeTagAdded: function (event, ui) {
+            return isEmail(ui.tagLabel);
+        }
+    });
+    initializeMailTags("CcTo");
+
+    $('#BccTo').tagit({
+        beforeTagAdded: function (event, ui) {
+            return isEmail(ui.tagLabel);
+        }
+    });
+    initializeMailTags("BccTo");
+
+    $('input[id^="Fake"').hide();
+}
+
+function initializeMailTags(parentName) {
+    var emails = $("#Fake" + parentName).val().split(';');
+    emails.forEach(function (email) {
+        $("#" + parentName).tagit("createTag", email);
+    });
+}
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
+function getTags(tags) {
+    var tagsString = "";
+    for (var i in tags)
+        tagsString += tags[i] + ";";
+
+    return tagsString.slice(0, -1); ;
 }

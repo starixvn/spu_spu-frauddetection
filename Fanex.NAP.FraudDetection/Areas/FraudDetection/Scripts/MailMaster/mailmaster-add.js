@@ -23,10 +23,8 @@
     initializeTagIt();
 
     $("#btn_cancelMail").click(function () {
-        //window.history.back();
-        //alert(getTags($('#To').tagit("tags")));
-        var a = $("#To").tagit("assignedTags");
-        alert(getTags($("#To").tagit("assignedTags")));
+        window.history.back();
+        //alert(getTags($("#To").tagit("assignedTags")));
     });
 
     $("#btn_addMail").click(function () {
@@ -43,6 +41,9 @@
         $('#editor').text(tinyMCE.activeEditor.getContent());
 
         if ($('#addNewMailForm').valid()) {
+            $('#FakeTo').val(getTags($("#To").tagit("assignedTags")));
+            $('#FakeCcTo').val(getTags($("#CcTo").tagit("assignedTags")));
+            $('#FakeBccTo').val(getTags($("#BccTo").tagit("assignedTags")));
             mailMasterService.addMail($(this).serialize());
         }
     });
@@ -60,9 +61,18 @@ function initializeTagIt() {
             return isEmail(ui.tagLabel);
         }
     });
+
+    $('#CcTo').tagit({
+        beforeTagAdded: function (event, ui) {
+            return isEmail(ui.tagLabel);
+        }
+    });
     
-    $('#CcTo').tagit();
-    $('#BccTo').tagit();
+    $('#BccTo').tagit({
+        beforeTagAdded: function (event, ui) {
+            return isEmail(ui.tagLabel);
+        }
+    });
 
     $('input[id^="Fake"').hide();
 }
