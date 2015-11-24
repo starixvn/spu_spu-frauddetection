@@ -585,6 +585,12 @@ function (taskFactory) {
     };
 
     taskModel.checkFormula = function (table, tableId) {
+        if (table.length <= 0) {
+            AlertService.showAlert("Please input the precondition or rule!");
+
+            return false;
+        }
+
         var isRule = tableId === "#ruleTableFormula";
         var formula = taskModel.getRawFormula(table, isRule);
         formula = formula.replace(/@/g, "#");

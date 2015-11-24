@@ -147,7 +147,16 @@ function (taskModel) {
     };
 
     vm.nextToSummary = function () {
-        vm.goToStep(5);
+        if (taskModel.checkFormula(vm.Model.Rule.PreconditionTable, '#preconditionTableFormula')) {
+            if (taskModel.checkFormula(vm.Model.Rule.RuleTable, '#ruleTableFormula')) {
+                vm.goToStep(5);
+            } else {
+                vm.IsCheckingRule = false;
+            }
+        }
+        else {
+            vm.IsCheckingPrecondition = false;
+        }
     };
 
     vm.backToGeneral = function () {
@@ -180,6 +189,20 @@ function (taskModel) {
                 AlertService.showAlert("Please input the timer value!");
                 taskModel.goToStep(vm.taskProgress, vm.tab, 2);
             } else {
+                if (stepNumber === 5) {
+                    if (taskModel.checkFormula(vm.Model.Rule.PreconditionTable, '#preconditionTableFormula')) {
+                        if (taskModel.checkFormula(vm.Model.Rule.RuleTable, '#ruleTableFormula')) {
+                            taskModel.goToStep(vm.taskProgress, vm.tab, 5);
+                        } else {
+                            vm.IsCheckingRule = false;
+                        }
+                    } else {
+                        vm.IsCheckingPrecondition = false;
+                    }
+
+                    return;
+                }
+
                 taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
             }
         }
@@ -620,7 +643,16 @@ function (taskModel) {
     };
 
     vm.nextToSummary = function () {
-        vm.goToStep(5);
+        if (taskModel.checkFormula(vm.Model.Rule.PreconditionTable, '#preconditionTableFormula')) {
+            if (taskModel.checkFormula(vm.Model.Rule.RuleTable, '#ruleTableFormula')) {
+                vm.goToStep(5);
+            } else {
+                vm.IsCheckingRule = false;
+            }
+        }
+        else {
+            vm.IsCheckingPrecondition = false;
+        }
     };
 
     vm.nextToRule = function () {
@@ -657,6 +689,20 @@ function (taskModel) {
                 AlertService.showAlert("Please input the timer value!");
                 taskModel.goToStep(vm.taskProgress, vm.tab, 2);
             } else {
+                if (stepNumber === 5) {
+                    if (taskModel.checkFormula(vm.Model.Rule.PreconditionTable, '#preconditionTableFormula')) {
+                        if (taskModel.checkFormula(vm.Model.Rule.RuleTable, '#ruleTableFormula')) {
+                            taskModel.goToStep(vm.taskProgress, vm.tab, 5);
+                        } else {
+                            vm.IsCheckingRule = false;
+                        }
+                    } else {
+                        vm.IsCheckingPrecondition = false;
+                    }
+
+                    return;
+                }
+
                 taskModel.goToStep(vm.taskProgress, vm.tab, stepNumber);
             }
         }
