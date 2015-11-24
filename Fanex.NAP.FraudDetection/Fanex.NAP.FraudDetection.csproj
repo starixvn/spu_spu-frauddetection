@@ -629,6 +629,11 @@
     <Content Include="Content\Common\bootstrap-theme.css.map" />
     <Content Include="Content\Common\bootstrap.css.map" />
     <Content Include="Content\Common\Images\ui-bg_diagonals-thick_20_666666_40x40.png.bk" />
+    <Content Include="Dependencies\Fanex.MailDelivery.Admin\EasyNetQ.dll" />
+    <Content Include="Dependencies\Fanex.MailDelivery.Admin\Fanex.MailDelivery.Admin.dll" />
+    <Content Include="Dependencies\Fanex.MailDelivery.Admin\Fanex.MailDelivery.Client.dll" />
+    <Content Include="Dependencies\Fanex.MailDelivery.Admin\Fanex.MailDelivery.Core.dll" />
+    <Content Include="Dependencies\Fanex.MailDelivery.Admin\RabbitMQ.Client.dll" />
     <Content Include="Dependencies\FD.Lib.BusinessManager.dll" />
     <Content Include="Dependencies\FD.Lib.Core.dll" />
     <Content Include="Dependencies\FD.Lib.Criteria.dll" />
