@@ -165,6 +165,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         #region Utilities
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetTaskInfo(int taskId)
         {
             var taskInfo = _taskService.GetTaskInfoByTaskId(new TaskInfoGetCriteria { TaskId = taskId });
@@ -173,6 +174,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetEvents()
         {
             var events = new CommonService().GetEvents(new EventGetAllCriteria());
@@ -181,14 +183,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetMails()
         {
-            var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria());
+            var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria()).Where(m=>m.IsActive);
 
             return Json(mailMasters, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetCurrencies()
         {
             var currencies = new CurrencyService().GetCurrencies(new CurrencyGetAllCriteria());
@@ -197,6 +201,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetActivities()
         {
             var activities = new CommonService().GetActivities(new ActivityGetAllCriteria());
@@ -205,6 +210,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetSports()
         {
             var sports = new BettypeService().GetAllSBSports(new SportGetAllCriteria());
@@ -213,6 +219,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetBetTypes()
         {
             var betTypes = new BettypeService().GetAllSBBettypes(new BettypeGetAllCriteria());
@@ -221,6 +228,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetDataTypes()
         {
             var dataTypes = new DataCaptureService().GetAllDataTypeCapture(new DataTypeCaptureGetAllCriteria());
@@ -229,6 +237,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetConfigsByActivity(int? activityId)
         {
             var criteria = new ConfigsGetByActivityCriteria
@@ -241,6 +250,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetCustomerGroupByCase(int caseId)
         {
             var groups = new CaseGroupService().GetCaseGroup(new CaseGroupGetAllCriteria { CaseId = caseId });
@@ -249,6 +259,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetBackGroundTasksByCase(int caseId)
         {
             var tasks = new TaskService().GetBackGroundTasksByCase(new TaskBackGroundGetByCaseIdCriteria { CaseId = caseId });

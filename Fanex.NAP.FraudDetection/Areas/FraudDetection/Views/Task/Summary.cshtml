@@ -87,13 +87,13 @@
                     </td>
                     <td>
                         <span ng-show="taskCtr.nextActionAssignGroup.IsTicked">{{ taskCtr.NextActions[0].Name
-                            }} ( <span ng-show="group.GroupId == taskCtr.nextActionAssignGroup.ActionTargetId"
-                                ng-repeat="group in taskCtr.CustomerGroups">{{ group.GroupName }} </span>)</span>
-                        <span ng-show="taskCtr.nextActionSendMail.IsTicked">{{ taskCtr.NextActions[1].Name }}
-                            ( <span ng-show="mail.MailId == taskCtr.nextActionSendMail.ActionTargetId" ng-repeat="mail in taskCtr.Mails">
-                                  {{ mail.MailCode }} </span>)</span> 
-                        <span ng-show="taskCtr.nextActionCaptureData.IsTicked"> {{ taskCtr.NextActions[2].Name }} ( 
-                                <span ng-show="dataType.IsChecked" ng-repeat="dataType in taskCtr.DataTypes">{{ dataType.DataName }}; </span>)</span>
+                            }} (<span ng-show="group.GroupId == taskCtr.nextActionAssignGroup.ActionTargetId"
+                                ng-repeat="group in taskCtr.CustomerGroups">{{ group.GroupName }}</span>)<br/></span>
+                        <span ng-show="taskCtr.nextActionSendMail.IsTicked">{{ taskCtr.NextActions[1].Name
+                            }} (<span ng-show="mail.MailId == taskCtr.nextActionSendMail.ActionTargetId"
+                                ng-repeat="mail in taskCtr.Mails">{{ mail.MailCode }}</span>)<br/></span>
+                        <span ng-show="taskCtr.nextActionCaptureData.IsTicked"> {{ taskCtr.NextActions[2].Name
+                            }} (<span ng-show="dataType.IsChecked" ng-repeat="dataType in taskCtr.DataTypes">{{ dataType.DataName }};</span>)</span>
                     </td>
                 </tr>
             </table>

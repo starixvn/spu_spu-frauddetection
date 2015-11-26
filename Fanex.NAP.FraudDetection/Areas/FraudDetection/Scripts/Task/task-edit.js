@@ -6,6 +6,4 @@
             e.stopPropagation();
         }
     });
-
-    taskService.initialize();
 });
