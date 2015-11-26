@@ -1,9 +1,8 @@
-﻿<div ng-show="taskCtr.tab.summary" style="width: 800px;">
-    <div class="row" style="width: 800px; height: 630px; overflow-x: hidden; overflow-y: auto;">
+﻿@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
+<div ng-show="taskCtr.tab.summary" style="width: 800px;">
+    <div class="row">
         <div class="col-md-12">
-            @*        <h4>
-            <b>Task Configuration Summary</b>
-        </h4>*@
             <table class="table table-bordered">
                 <tr>
                     <td class="text-right font-bold col-md-2">
@@ -102,6 +101,10 @@
     </div>
     <div style="width: 800px; text-align: center;">
         <input type="button" ng-click="taskCtr.backToRule()" value="Back" class="btn-green btn-customConfirm font-size-small" />
-        <input type="button" ng-click="taskCtr.addEditTask()" value="Submit" class="btn-green btn-customConfirm font-size-small" />
+        @if (PermissionService.HasHostPermission(FDFunctionKeys.FraudCase))
+        {
+             <input type="button" ng-click="taskCtr.addEditTask()" value="Finish" class="btn-green btn-customConfirm font-size-small" />
+        }
     </div>
+    <br>
 </div>

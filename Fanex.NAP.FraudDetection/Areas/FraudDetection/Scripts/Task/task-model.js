@@ -338,49 +338,12 @@ function (taskFactory) {
             separator: ' ',
             showButtonPanel: true
         });
-        //var strdatetime = dateFormat(new Date(year, month, day, 0, 0, 0), 'mmm dd, yyyy HH:MM:ss');
-        //$('#ruleDateTimePicker').val(strdatetime).datetimepicker('setDate', (new Date(strdatetime)));
+
         $('#ruleDateTimePicker').datetimepicker('setDate', (new Date()));
 
         $("#IpAddress").ipAddress();
         $("#IpAddressFrom").ipAddress();
         $("#IpAddressTo").ipAddress();
-
-        $("#accordion").accordion({
-            heightStyle: "content",
-            collapsible: true,
-
-            beforeActivate: function (event, ui) {
-                // The accordion believes a panel is being opened
-                var currHeader;
-                var currContent;
-                if (ui.newHeader[0]) {
-                    currHeader = ui.newHeader;
-                    currContent = currHeader.next('.ui-accordion-content'); // The accordion believes a panel is being closed
-                } else {
-                    currHeader = ui.oldHeader;
-                    currContent = currHeader.next('.ui-accordion-content');
-                }
-                // Since we've changed the default behavior, this detects the actual status
-                var isPanelSelected = currHeader.attr('aria-selected') == 'true';
-
-                // Toggle the panel's header
-                currHeader.toggleClass('ui-corner-all', isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top', !isPanelSelected).attr('aria-selected', ((!isPanelSelected).toString()));
-
-                // Toggle the panel's icon
-                currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
-
-                // Toggle the panel's content
-                currContent.toggleClass('accordion-content-active', !isPanelSelected);
-                if (isPanelSelected) {
-                    currContent.slideUp();
-                } else {
-                    currContent.slideDown();
-                }
-
-                return false; // Cancel the default action
-            }
-        });
     };
 
     taskModel.generateFormattedConfig = function (table) {

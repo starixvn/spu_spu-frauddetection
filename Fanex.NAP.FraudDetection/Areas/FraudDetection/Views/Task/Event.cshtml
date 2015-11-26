@@ -7,7 +7,7 @@
                         <span>Event Name</span>
                     </td>
                     <td>
-                        <select ng-model="taskCtr.Model.Event.EventId" style="height: 25px; width: 186px;" 
+                        <select ng-model="taskCtr.Model.Event.EventId" style="height: 25px; width: 190px;" 
                                 ng-options="event.EventId as event.EventName for event in taskCtr.Events"
                                 ng-change="taskCtr.changeEvent()">
                         </select>
@@ -18,9 +18,9 @@
                         <span>Executed Timer</span>
                     </td>
                     <td>
-                        <input type="text"ng-model="taskCtr.Model.Event.Timer" style="width: 100px; height: 23px;" />
+                        <input type="text"ng-model="taskCtr.Model.Event.Timer" style="width: 100px; height: 25px; text-align: right;" />
                         
-                        <select ng-model="taskCtr.Model.Event.TimerUnit" style="height: 25px" 
+                        <select ng-model="taskCtr.Model.Event.TimerUnit" style="height: 25px; width: 86px;" 
                                 ng-options="timer.Value as timer.Name for timer in taskCtr.Timers">
                         </select>
                     </td>

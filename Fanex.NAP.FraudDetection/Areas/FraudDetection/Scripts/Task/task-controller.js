@@ -294,6 +294,18 @@ function (taskModel) {
         taskModel.changeRule(vm);
     };
 
+    vm.changeAssignGroup = function () {
+        if (vm.nextActionAssignGroup.IsTicked) {
+            vm.nextActionAssignGroup.ActionTargetId = vm.CustomerGroups.length > 0 ? vm.CustomerGroups[0].GroupId : -1;
+        }
+    };
+
+    vm.changeSendMail = function () {
+        if (vm.nextActionSendMail.IsTicked) {
+            vm.nextActionSendMail.ActionTargetId = vm.Mails.length > 0 ? vm.Mails[0].MailId : -1;
+        }
+    };
+
     taskModel.getConfigsByActivity(vm.Model.Activity.ActivityId).then(function () {
         vm.Configs = taskModel.Configs;
         vm.Preconditions = [];
@@ -603,19 +615,19 @@ function (taskModel) {
     Tab control.
     */
     vm.tab = {
-        general: true,
+        general: false,
         event: false,
         activity: false,
         rule: false,
-        summary: false
+        summary: true
     };
 
     vm.taskProgress = {
-        general: 'active',
-        event: '',
-        activity: '',
-        rule: '',
-        summary: ''
+        general: 'done',
+        event: 'done',
+        activity: 'done',
+        rule: 'done',
+        summary: 'active'
     };
 
     /*
@@ -792,6 +804,18 @@ function (taskModel) {
 
     vm.changeRule = function () {
         taskModel.changeRule(vm);
+    };
+
+    vm.changeAssignGroup = function () {
+        if (vm.nextActionAssignGroup.IsTicked) {
+            vm.nextActionAssignGroup.ActionTargetId = vm.CustomerGroups.length > 0 ? vm.CustomerGroups[0].GroupId : -1;
+        }
+    };
+
+    vm.changeSendMail = function () {
+        if (vm.nextActionSendMail.IsTicked) {
+            vm.nextActionSendMail.ActionTargetId = vm.Mails.length > 0 ? vm.Mails[0].MailId : -1;
+        }
     };
 
     vm.openCalendar = function (dateTimePicker) {
@@ -1017,6 +1041,7 @@ function (taskModel) {
 
                                 vm.Model.Rule.PreconditionTable = taskModel.makeFormula(vm.Task.TaskPreconditionsOriginal);
                                 vm.Model.Rule.RuleTable = taskModel.makeFormula(vm.Task.TaskRulesOriginal);
+
                                 taskModel.makeNextActions(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.Task.NextActionIdList, vm.Task.NextActionTargetIdList);
                             });
                         });
