@@ -129,7 +129,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
             bundles.Add(new ScriptBundle("~/bundles/HomeJs").Include(
                 "~/Scripts/Page/Home/home.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/TagItCss").Include(
+            bundles.Add(new StyleBundle("~/bundles/TagItCss").Include(
                 "~/Areas/FraudDetection/AddOns/TagIt/jquery.tagit.css",
                 "~/Areas/FraudDetection/AddOns/TagIt/tagit.ui-zendesk.css"));
 
