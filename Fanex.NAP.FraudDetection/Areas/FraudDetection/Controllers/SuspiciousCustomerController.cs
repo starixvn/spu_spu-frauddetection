@@ -14,10 +14,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Business;
+    using Core.Business;
+    using Core.Web.Attribute;
     using FD.Lib.Core.ExportExcel;
-    using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Group;
     using FD.Lib.Criteria.Reports;
     using FD.Lib.Criteria.SuspiciousStatistic;
@@ -25,6 +24,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using NPOI.SS.UserModel;
+    using Service.Core;
 
     /// <summary>
     /// The controller of Customer Report.
@@ -53,9 +53,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
-            var groups = GetAllGroups();
-
-            return View("~/Areas/FraudDetection/Views/Reports/SuspiciousCustomerReport.cshtml", groups);
+            return View("~/Areas/FraudDetection/Views/Reports/SuspiciousCustomerReport.cshtml");
         }
 
         /// <summary>

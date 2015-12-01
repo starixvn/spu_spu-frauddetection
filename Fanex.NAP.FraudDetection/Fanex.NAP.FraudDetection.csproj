@@ -523,6 +523,9 @@
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-edit.js" />
