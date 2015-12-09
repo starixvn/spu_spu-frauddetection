@@ -25,82 +25,115 @@
 <div ng-controller="suspiciousCustomerReportController as scrCtrl">
     <div class="form-inline filter-forml col-sm-12">
         <div class="form-group col-sm-12">
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 110px; text-align: right; padding-right: 20px;">
-                    Event Date
-                </label>
-                <select ng-model="scrCtrl.eventDateValue" style="width: 125px; height: 25px;" ng-options="eventDate.Value as eventDate.Name for eventDate in scrCtrl.EventDateFilters"
-                    ng-change="scrCtrl.changeEventDate()">
-                </select>
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        Event Date
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <select ng-model="scrCtrl.eventDateValue" style="width: 125px; height: 25px;" ng-options="eventDate.Value as eventDate.Name for eventDate in scrCtrl.EventDateFilters"
+                        ng-change="scrCtrl.changeEventDate()">
+                    </select>
+                </div>
             </div>
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 135px; text-align: right; padding-right: 20px;">
-                    From Date
-                </label>
-                <input datetimepicker type="text" readonly="readonly" style="width: 107px; height: 25px;"
-                    id="eventDateFrom" ng-click="scrCtrl.openCalendar('#eventDateFrom')" ng-model="scrCtrl.filter.EventDateFrom"
-                    ng-change="scrCtrl.changeEventDateFromTo()" />
-                <span class="icon-calendar icon-event-date-calendar" ng-click="scrCtrl.openCalendar('#eventDateFrom')">
-                </span>
+            <div class="col-sm-4">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        From Date
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input datetimepicker type="text" readonly="readonly" style="width: 107px; height: 25px;" id="eventDateFrom"
+                        ng-click="scrCtrl.openCalendar('#eventDateFrom')" ng-model="scrCtrl.filter.EventDateFrom"
+                        ng-change="scrCtrl.changeEventDateFromTo()" />
+                    <span class="icon-calendar icon-event-date-calendar" ng-click="scrCtrl.openCalendar('#eventDateFrom')">
+                    </span>
+                </div>
             </div>
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 135px; text-align: right; padding-right: 20px;">
-                    To Date
-                </label>
-                <input type="text" readonly="readonly" style="width: 107px; height: 25px;" id="eventDateTo"
-                    ng-click="scrCtrl.openCalendar('#eventDateTo')" ng-model="scrCtrl.filter.EventDateTo"
-                    ng-change="scrCtrl.changeEventDateFromTo()" />
-                <span class="icon-calendar icon-event-date-calendar" ng-click="scrCtrl.openCalendar('#eventDateTo')">
-                </span>
-            </div>
-        </div>
-        <div style="height: 35px;">
-            &nbsp;</div>
-        <div class="form-group col-sm-12">
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 110px; text-align: right; padding-right: 20px;">
-                    Member
-                </label>
-                <input type="text" ng-model="scrCtrl.filter.MemberName" style="width: 125px; height: 25px;" />
-            </div>
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 135px; text-align: right; padding-right: 20px;">
-                    Total Violations &ge;
-                </label>
-                <input type="text" ng-model="scrCtrl.filter.TotalViolations" style="width: 125px;
-                    height: 25px;" />
-            </div>
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 135px; text-align: right; padding-right: 20px;">
-                    New Violations &ge;
-                </label>
-                <input type="text" ng-model="scrCtrl.filter.NewViolations" style="width: 125px; height: 25px;" />
+            <div class="col-sm-4">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        To Date
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input datetimepicker type="text" readonly="readonly" style="width: 107px; height: 25px;" id="eventDateTo" ng-click="scrCtrl.openCalendar('#eventDateTo')"
+                        ng-model="scrCtrl.filter.EventDateTo" ng-change="scrCtrl.changeEventDateFromTo()" />
+                    <span class="icon-calendar icon-event-date-calendar" ng-click="scrCtrl.openCalendar('#eventDateTo')">
+                    </span>
+                </div>
             </div>
         </div>
         <div style="height: 35px;">
             &nbsp;</div>
         <div class="form-group col-sm-12">
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 110px; text-align: right; padding-right: 20px;">
-                    Delinquency
-                </label>
-                <select ng-model="scrCtrl.filter.IsDelinquent" style="width: 125px; height: 25px;"
-                    ng-options="delinquent.Value as delinquent.Name for delinquent in scrCtrl.DelinquentStatuses">
-                </select>
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        Member
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="text" ng-model="scrCtrl.filter.MemberName" style="width: 125px; height: 25px;" />
+                </div>
             </div>
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 135px; text-align: right; padding-right: 20px;">
-                    Verification
-                </label>
-                <select ng-model="scrCtrl.filter.IsVerified" style="width: 125px; height: 25px;"
-                    ng-options="verification.Value as verification.Name for verification in scrCtrl.VerificationStatuses">
-                </select>
+            <div class="col-sm-4">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        Total Violations &ge;
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="text" ng-model="scrCtrl.filter.TotalViolations" style="width: 125px; height: 25px;" />
+                </div>
             </div>
-            <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 135px; text-align: right; padding-right: 20px;">
-                </label>
-                <button class="btn-green" style="width: 95px; margin-left: 1px;" ng-click="scrCtrl.generateSuspiciousCustomerReport()">
-                    Generate</button>
+            <div class="col-sm-4">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        New Violations &ge;
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="text" ng-model="scrCtrl.filter.NewViolations" style="width: 125px; height: 25px;" />
+                </div>
+            </div>
+        </div>
+        <div style="height: 35px;">
+            &nbsp;</div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        Delinquency
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <select ng-model="scrCtrl.filter.IsDelinquent" style="width: 125px; height: 25px;"
+                        ng-options="delinquent.Value as delinquent.Name for delinquent in scrCtrl.DelinquentStatuses">
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                        Verification
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <select ng-model="scrCtrl.filter.IsVerified" style="width: 125px; height: 25px;"
+                        ng-options="verification.Value as verification.Name for verification in scrCtrl.VerificationStatuses">
+                    </select></div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label>
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <button class="btn-green" style="width: 95px; margin-left: 1px;" ng-click="scrCtrl.generateSuspiciousCustomerReport()">
+                        Generate</button>
+                </div>
             </div>
         </div>
     </div>
@@ -112,8 +145,7 @@
                 <div class="export-excel-icon" ng-click="scrCtrl.exportExcel()">
                 </div>
             </div>
-            <div class="freegrid" data-fanex-grid-suspicious-customer-report
-                data-grid-data="scrCtrl.SuspiciousCustomers"
+            <div class="freegrid" data-fanex-grid-suspicious-customer-report data-grid-data="scrCtrl.SuspiciousCustomers"
                 data-page-option="scrCtrl.filter" data-on-page-changing="scrCtrl.pagingReport">
             </div>
         </div>

@@ -9,8 +9,8 @@ suspiciousCustomerReportModule.factory('suspiciousCustomerReportFactory', ['$htt
         exportExcel: function (criteria) {
             return $http.get('SuspiciousCustomer/ExportExcel', criteria);
         },
-        getSuspiciousCustomerStatistic: function (custId) {
-            return $http.get('SuspiciousCustomer/GetSuspiciousCustomerStatistic', {
+        getNotes: function (custId) {
+            return $http.get('SuspiciousCustomer/GetNotes', {
                 params:
                     { custId: custId }
             });

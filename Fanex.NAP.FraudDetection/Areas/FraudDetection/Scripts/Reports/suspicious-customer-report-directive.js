@@ -62,7 +62,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
         var result = "";
         var custId = cell.Value.Customer.CustId;
         if (cell.Value.HasNote) {
-            result = "<div class='glyphicon glyphicon-list-alt' style='cursor: pointer;' " +
+            result = "<div class='suspicious-customer-note'" +
                 "data-custid='" + custId + "'></div>";
         }
 
@@ -70,9 +70,9 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
     }
 
     function verifiedColumn(cell) {
-        var result = "<input type='checkbox' DISABLED>";
+        var result = "";
         if (cell.Value) {
-            result = "<input type='checkbox' checked DISABLED>";
+            result = "<div class='suspicious-customer-review-done'>";
         }
 
         return result;
@@ -86,36 +86,63 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
         return "<a href=" + url + ">" + custName + "</a>";
     }
 
+    function createNotesTable(notes) {
+        var result = "<table class='customer-report-statistic'>" +
+            "<tr><th>Date</th><th>Description</th><th>Author</th><th>Type</th></tr>";
+
+        for (var i = 0; i < notes.length; i++) {
+            var date = notes[i].DateString;
+            var description = notes[i].Description;
+            var author = notes[i].Author;
+            var type = notes[i].Type;
+
+            result += "<tr><td>" + date +
+                "</td><td style='text-align:left;'>" + description +
+                "</td><td>" + author +
+                "</td><td>" + type +
+                "</td></tr>";
+        }
+
+        result += "</table>";
+
+        return result;
+    }
+
     var registerViewNoteEvent = function () {
-        var noteElement = $(".freegrid .table-cell .glyphicon-list-alt");
+        var noteElement = $(".freegrid .table-cell .suspicious-customer-note");
 
         noteElement.off("click");
         noteElement.on("click", function (event) {
             event.preventDefault();
 
-            var custId = $(this).data("custid");
+            var toolTip = $(this);
+            var custId = toolTip.data("custid");
+            suspiciousCustomerReportModel.getNotes(custId).then(function () {
+                toolTip.attr('title', 'tooltip');
+                toolTip.tooltip({
+                    content: createNotesTable(suspiciousCustomerReportModel.Notes),
+                    position: {
+                        my: "left top",
+                        at: "left+30 top+20"
+                    }
+                }).on('mouseout focusout mouseover mouseenter mouseleave', function (eventTooltip) {
+                    eventTooltip.stopImmediatePropagation();
+                });
 
-            $(this).attr('title', 'tooltip');
-            $(this).tooltip({
-                content: "<div id='note-grid' class='freegrid  content-grid'></div>",
-                position: {
-                    my: "left bottom",
-                    at: "left+30 top+16"
-                }
-            }).click(function () {
-                if ($(this).tooltip('option', 'disabled')) {
-                    $(this).tooltip('option', { disabled: false }).tooltip('open');
-                }
-            }).on('mouseout focusout mouseover mouseenter mouseleave', function (eventTooltip) {
-                eventTooltip.stopImmediatePropagation();
+                toolTip.tooltip("open");
+                toolTip.css('color', 'blue');
 
-                $(this).tooltip('option', { disabled: true }).tooltip('close');
-                $(this).tooltip("destroy");
+                $(document).mouseup(function (e) {
+                    var container = $(".ui-tooltip");
+                    if (!container.is(e.target) && container.has(e.target).length === 0) {
+                        toolTip.css('color', 'black');
+                        toolTip.removeAttr('title');
+                        toolTip.tooltip('option', { disabled: true }).tooltip('close');
+                        toolTip.tooltip("destroy");
+                        $(document).off('mouseup');
+                    }
+                });
             });
-
-            $(this).tooltip("open");
-
-            suspiciousCustomerReportModel.getNotes(custId);
         });
     };
 

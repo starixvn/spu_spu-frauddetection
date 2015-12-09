@@ -7,6 +7,7 @@ function (suspiciousCustomerReportFactory) {
     var suspiciousCustomerReportModel = {};
 
     suspiciousCustomerReportModel.SuspiciousCustomers = [];
+    suspiciousCustomerReportModel.Notes = [];
 
     suspiciousCustomerReportModel.EventDateFilters = [
         { Value: 1, Name: "Today" },
@@ -39,6 +40,21 @@ function (suspiciousCustomerReportFactory) {
         });
     };
 
+    suspiciousCustomerReportModel.getNotes = function (custId) {
+        return suspiciousCustomerReportFactory.getNotes(custId).success(function (notes) {
+            suspiciousCustomerReportModel.Notes = notes;
+        });
+    };
+
+    suspiciousCustomerReportModel.formatDate = function (date) {
+        var d = date.getDate();
+        var m = date.getMonth() + 1;
+        var y = date.getFullYear();
+        var result = '' + (m <= 9 ? '0' + m : m) + '/' + (d <= 9 ? '0' + d : d) + '/' + y;
+
+        return result;
+    };
+    
     suspiciousCustomerReportModel.changeEventDate = function (eventDateValue, filter) {
         var today = new Date();
         var fistDayOfWeek = today.getDate() - today.getDay() + 1;
@@ -127,19 +143,6 @@ function (suspiciousCustomerReportFactory) {
 
     suspiciousCustomerReportModel.openCalendar = function (dateTimePickerId) {
         $(dateTimePickerId).datepicker('show');
-    };
-
-    suspiciousCustomerReportModel.formatDate = function (date) {
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-        var result = '' + (m <= 9 ? '0' + m : m) + '/' + (d <= 9 ? '0' + d : d) + '/' + y;
-
-        return result;
-    };
-
-    suspiciousCustomerReportModel.getNotes = function (custId) {
-        alert(custId);
     };
 
     return suspiciousCustomerReportModel;

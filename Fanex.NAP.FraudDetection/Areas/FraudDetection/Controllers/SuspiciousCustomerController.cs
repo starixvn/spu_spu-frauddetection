@@ -89,6 +89,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return new EmptyResult();
         }
 
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetNotes(int custId)
+        {
+            var notes = _customerReportService.GetNotes(new SuspiciousCustomerReportGetNotesCriteria
+            {
+                CustId = custId
+            });
+
+            return Json(notes, JsonRequestBehavior.AllowGet);
+        }
+
         #region Export Excel
 
         public void ResponseStreamExcel(IWorkbook workbook, string fileName)
