@@ -9,18 +9,12 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System;
     using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
     using System.Web.Mvc;
     using Core.Business;
     using Core.Web.Attribute;
     using FD.Lib.Core.ExportExcel;
-    using FD.Lib.Criteria.Group;
     using FD.Lib.Criteria.Reports;
-    using FD.Lib.Criteria.SuspiciousStatistic;
-    using FD.Lib.DTO;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using NPOI.SS.UserModel;
@@ -31,19 +25,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     /// </summary>
     public class SuspiciousCustomerController : BaseController
     {
-        private readonly GroupService _groupService;
-
         private readonly CustomerReportService _customerReportService;
-
-        private readonly CustomerService _customerService;
 
         public SuspiciousCustomerController()
         {
-            _groupService = new GroupService();
-
             _customerReportService = new CustomerReportService();
-
-            _customerService = new CustomerService();
         }
 
         /// <summary>
@@ -67,13 +53,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
-            var result = new
-            {
-                suspiciousCustomers.SuspiciousCustomers,
-                suspiciousCustomers.TotalItem
-            };
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(suspiciousCustomers, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -91,7 +71,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
             var excelExporter = new FDExportExcelSuspiciousCustomer(
-                Server.MapPath("~/ExcelFiles"), 
+                Server.MapPath("~/ExcelFiles"),
                 "CustomerReport",
                 new List<Legend>
                 {
@@ -110,7 +90,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         #region Export Excel
-        
+
         public void ResponseStreamExcel(IWorkbook workbook, string fileName)
         {
             Response.Clear();
@@ -131,81 +111,5 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         #endregion
-
-        /// <summary>
-        /// Get Suspicious Customer Statistic.
-        /// </summary>
-        /// <param name="custId">The customer ID.</param>
-        /// <returns>The ActionResult.</returns>
-        [HttpGet]
-        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
-        public ActionResult GetSuspiciousCustomerStatistic(int custId)
-        {
-            var marginCriteria = new CustomerWinlostSelectCriteria
-            {
-                ListCustIDs = custId.ToString(CultureInfo.InvariantCulture)
-            };
-
-            var statistic = _customerService.GetMarginCustomerByCustId(marginCriteria);
-            var result = GetThreeLatestMonthStatistic(statistic);
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        /// <summary>
-        /// Get 3 latest months.
-        /// </summary>
-        /// <param name="margins">The margins statistic.</param>
-        /// <returns>List of result.</returns>
-        private static IEnumerable<dynamic> GetThreeLatestMonthStatistic(IEnumerable<RawMarginCustomer> margins)
-        {
-            var result = new List<dynamic>();
-            var startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-2);
-            for (var i = 0; i < 3; i++)
-            {
-                var month = startMonth.AddMonths(i);
-                var margin = margins.FirstOrDefault(m => m.WinlostDate == month);
-
-                var customerWinloss = new
-                {
-                    Month = month.ToString("MMM-yyyy"),
-                    Turnover = margin != null ? margin.Turnover : null,
-                    MemberWinlost = margin != null ? margin.MemberWinlost : null,
-                    Margin = margin != null ? margin.Margin : null
-                };
-
-                result.Add(customerWinloss);
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Get all suspicious groups.
-        /// </summary>
-        /// <returns>The SelectListItem.</returns>
-        private IEnumerable<SelectListItem> GetAllGroups()
-        {
-            var criteria = new GroupGetAllCriteria
-            {
-                PageCount = 0,
-                PageIndex = 1,
-                PageSize = int.MaxValue,
-                RowCount = 0
-            };
-
-            var result = _groupService.GetAllGroups(criteria);
-            var groups = result.Select(s => new SelectListItem
-            {
-                Text = s.GroupName,
-                Value = s.GroupId.ToString(CultureInfo.InvariantCulture)
-            });
-
-            var all = new[] { new SelectListItem { Selected = true, Text = "All Groups", Value = "-1" } };
-
-            groups = all.Concat(groups);
-
-            return groups;
-        }
     }
 }

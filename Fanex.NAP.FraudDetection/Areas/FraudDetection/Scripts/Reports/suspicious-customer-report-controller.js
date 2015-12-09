@@ -8,20 +8,29 @@ function (suspiciousCustomerReportModel) {
 
     vm.EventDateFilters = suspiciousCustomerReportModel.EventDateFilters;
     vm.DelinquentStatuses = suspiciousCustomerReportModel.DelinquentStatuses;
+    vm.VerificationStatuses = suspiciousCustomerReportModel.VerificationStatuses;
     vm.SuspiciousCustomers = suspiciousCustomerReportModel.SuspiciousCustomers;
 
     vm.filter = {
         EventDateFrom: suspiciousCustomerReportModel.formatDate(new Date()),
         EventDateTo: suspiciousCustomerReportModel.formatDate(new Date()),
         CustName: '',
-        ViolationTimes: '',
-        DelinquentId: 1,
-        GroupId: -1,
+        TotalViolations: '',
+        NewViolations: '',
+        IsDelinquent: null,
+        IsVerified: null,
         PageSize: 50,
-        PageIndex: 1
+        PageIndex: 0
     };
 
-    vm.eventDateId = 1;
+    vm.eventDateValue = 1;
+
+    vm.generateSuspiciousCustomerReport = function () {
+        vm.filter.PageSize = 50;
+        vm.filter.PageIndex = 0;
+
+        vm.querySuspiciousCustomers();
+    };
 
     vm.querySuspiciousCustomers = function () {
         suspiciousCustomerReportModel.getSuspiciousCustomerReport(vm.filter).then(function () {
@@ -30,7 +39,7 @@ function (suspiciousCustomerReportModel) {
     };
 
     vm.changeEventDate = function () {
-        suspiciousCustomerReportModel.changeEventDate(vm.eventDateId, vm.filter);
+        suspiciousCustomerReportModel.changeEventDate(vm.eventDateValue, vm.filter);
     };
 
     vm.openCalendar = function (dateTimePickerId) {
@@ -45,6 +54,13 @@ function (suspiciousCustomerReportModel) {
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
         FraudDetectionScripts.downloadFile("SuspiciousCustomer/ExportExcel", vm.filter);
         waitingDialog.hide();
+    };
+
+    vm.pagingReport = function (pageIndex, itemsPerPage) {
+        vm.filter.PageSize = itemsPerPage;
+        vm.filter.PageIndex = pageIndex;
+
+        vm.querySuspiciousCustomers();
     };
 
     suspiciousCustomerReportModel.initialDateTimePicker();

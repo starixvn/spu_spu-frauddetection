@@ -29,7 +29,7 @@
                 <label style="width: 110px; text-align: right; padding-right: 20px;">
                     Event Date
                 </label>
-                <select ng-model="scrCtrl.eventDateId" style="width: 125px; height: 25px;" ng-options="eventDate.Id as eventDate.Name for eventDate in scrCtrl.EventDateFilters"
+                <select ng-model="scrCtrl.eventDateValue" style="width: 125px; height: 25px;" ng-options="eventDate.Value as eventDate.Name for eventDate in scrCtrl.EventDateFilters"
                     ng-change="scrCtrl.changeEventDate()">
                 </select>
             </div>
@@ -44,7 +44,7 @@
                 </span>
             </div>
             <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 110px; text-align: right; padding-right: 20px;">
+                <label style="width: 135px; text-align: right; padding-right: 20px;">
                     To Date
                 </label>
                 <input type="text" readonly="readonly" style="width: 107px; height: 25px;" id="eventDateTo"
@@ -65,32 +65,57 @@
             </div>
             <div class="col-sm-3" style="text-align: left;">
                 <label style="width: 135px; text-align: right; padding-right: 20px;">
-                    Violation Times &ge;
+                    Total Violations &ge;
                 </label>
-                <input type="text" ng-model="scrCtrl.filter.ViolationTimes" style="width: 125px;
+                <input type="text" ng-model="scrCtrl.filter.TotalViolations" style="width: 125px;
                     height: 25px;" />
             </div>
             <div class="col-sm-3" style="text-align: left;">
-                <label style="width: 110px; text-align: right; padding-right: 20px;">
-                    Del. Status
+                <label style="width: 135px; text-align: right; padding-right: 20px;">
+                    New Violations &ge;
                 </label>
-                <select ng-model="scrCtrl.filter.DelinquentId" style="width: 125px; height: 25px;"
-                    ng-options="delinquent.Id as delinquent.Name for delinquent in scrCtrl.DelinquentStatuses"
-                    ng-change="scrCtrl.changeEventDate()">
+                <input type="text" ng-model="scrCtrl.filter.NewViolations" style="width: 125px; height: 25px;" />
+            </div>
+        </div>
+        <div style="height: 35px;">
+            &nbsp;</div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3" style="text-align: left;">
+                <label style="width: 110px; text-align: right; padding-right: 20px;">
+                    Delinquency
+                </label>
+                <select ng-model="scrCtrl.filter.IsDelinquent" style="width: 125px; height: 25px;"
+                    ng-options="delinquent.Value as delinquent.Name for delinquent in scrCtrl.DelinquentStatuses">
                 </select>
             </div>
-            <div class="col-sm-2" style="text-align: left;">
-                <button class="btn-green" style="width: 95px; margin-left: -20px;" ng-click="scrCtrl.querySuspiciousCustomers()">
+            <div class="col-sm-3" style="text-align: left;">
+                <label style="width: 135px; text-align: right; padding-right: 20px;">
+                    Verification
+                </label>
+                <select ng-model="scrCtrl.filter.IsVerified" style="width: 125px; height: 25px;"
+                    ng-options="verification.Value as verification.Name for verification in scrCtrl.VerificationStatuses">
+                </select>
+            </div>
+            <div class="col-sm-3" style="text-align: left;">
+                <label style="width: 135px; text-align: right; padding-right: 20px;">
+                </label>
+                <button class="btn-green" style="width: 95px; margin-left: 1px;" ng-click="scrCtrl.generateSuspiciousCustomerReport()">
                     Generate</button>
             </div>
         </div>
     </div>
     <div class="newline">
         &nbsp;</div>
-    <div class="hidden report-header" id="report-header">
-        <div class="export-excel-icon" ng-click="scrCtrl.exportExcel()">
+    <div class="row" ng-show="scrCtrl.SuspiciousCustomers">
+        <div class="col-sm-12">
+            <div class="report-header hidden" id="report-header">
+                <div class="export-excel-icon" ng-click="scrCtrl.exportExcel()">
+                </div>
+            </div>
+            <div class="freegrid" data-fanex-grid-suspicious-customer-report
+                data-grid-data="scrCtrl.SuspiciousCustomers"
+                data-page-option="scrCtrl.filter" data-on-page-changing="scrCtrl.pagingReport">
+            </div>
         </div>
-    </div>
-    <div id="customerReportId" class="freegrid content-grid">
     </div>
 </div>

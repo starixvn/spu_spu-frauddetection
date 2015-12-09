@@ -518,6 +518,7 @@
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-directive.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report.js" />
