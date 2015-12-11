@@ -63,14 +63,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// Export the suspicious customers report to Excel file.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <param name="groupName">Selected group name.</param>
+        /// <param name="caseName">Selected group name.</param>
         /// <returns>A list of customers.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
-        public ActionResult ExportExcel(SuspiciousCustomerReportGetAllCriteria criteria, string groupName)
+        public ActionResult ExportExcel(SuspiciousCustomerReportGetAllCriteria criteria, string caseName)
         {
             criteria.PageSize = int.MaxValue;
-            criteria.PageIndex = 1;
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
             var excelExporter = new FDExportExcelSuspiciousCustomer(
@@ -78,10 +77,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 "CustomerReport",
                 new List<Legend>
                 {
-                    new Legend("Event Date From", criteria.EventDateFrom.ToShortDateString()),
-                    new Legend("Event Date To", criteria.EventDateTo.ToShortDateString()),
+                    new Legend("From Date", criteria.EventDateFrom.ToShortDateString()),
+                    new Legend("To Date", criteria.EventDateTo.ToShortDateString()),
                     new Legend("Member", criteria.CustName),
-                    new Legend("Group", groupName)
+                    new Legend("Total Violations ≥", criteria.TotalViolations.ToString()),
+                    new Legend("New Violations ≥", criteria.NewViolations.ToString()),
+                    new Legend("Verification", criteria.IsVerified == null ? "" : (criteria.IsVerified.Value ? "Yes" : "No")),
+                    new Legend("Fraud Case", caseName)
                 },
                 GetSuspiciousCustomerHeaders(),
                 suspiciousCustomers.SuspiciousCustomers);
@@ -132,9 +134,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var headers = new List<string>();
             headers.Insert(0, "#");
-            headers.Insert(1, "Member");
-            headers.Insert(2, "Group");
-            headers.Insert(3, "Suspicious Time");
+            headers.Insert(1, "Delinquent");
+            headers.Insert(2, "Verified");
+            headers.Insert(3, "Member");
+            headers.Insert(4, "Total Violations");
+            headers.Insert(5, "New Violations");
+            headers.Insert(6, "Violated Cases");
+            headers.Insert(7, "Assignees");
 
             return headers;
         }

@@ -23,12 +23,6 @@ function (suspiciousCustomerReportFactory) {
         { Value: 10, Name: "Specific Date" }
     ];
 
-    suspiciousCustomerReportModel.DelinquentStatuses = [
-        { Value: null, Name: "All" },
-        { Value: true, Name: "Delinquent" },
-        { Value: false, Name: "Not Delinquent" }
-    ];
-
     suspiciousCustomerReportModel.VerificationStatuses = [
         { Value: null, Name: "All" },
         { Value: true, Name: "Verified" },

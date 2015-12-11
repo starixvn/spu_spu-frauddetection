@@ -53,7 +53,26 @@ function (suspiciousCustomerReportModel) {
 
     vm.exportExcel = function () {
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
-        FraudDetectionScripts.downloadFile("SuspiciousCustomer/ExportExcel", vm.filter);
+        var index = vm.FraudCases.map(function (e) {
+            return e.CaseId;
+        }).indexOf(vm.filter.CaseId);
+
+        var caseName = vm.FraudCases[index].CaseName;
+
+        var criteria = {
+            EventDateFrom: vm.filter.EventDateFrom,
+            EventDateTo: vm.filter.EventDateTo,
+            CustName: vm.filter.CustName,
+            TotalViolations: vm.filter.TotalViolations,
+            NewViolations: vm.filter.NewViolations,
+            IsVerified: vm.filter.IsVerified,
+            CaseId: vm.filter.CaseId,
+            PageSize: vm.filter.PageSize,
+            PageIndex: vm.filter.PageIndex,
+            caseName: caseName
+        };
+
+        FraudDetectionScripts.downloadFile("SuspiciousCustomer/ExportExcel", criteria);
         waitingDialog.hide();
     };
 
