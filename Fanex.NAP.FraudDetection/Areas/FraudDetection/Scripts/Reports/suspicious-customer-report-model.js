@@ -48,8 +48,8 @@ function (suspiciousCustomerReportFactory) {
     };
 
     suspiciousCustomerReportModel.getAllCases = function () {
-        return suspiciousCustomerReportFactory.getAllCases().success(function (result) {
-            suspiciousCustomerReportModel.FraudCases = result.Cases;
+        return suspiciousCustomerReportFactory.getAllCases().success(function (cases) {
+            suspiciousCustomerReportModel.FraudCases = cases;
         });
     };
 

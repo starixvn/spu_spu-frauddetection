@@ -12,6 +12,7 @@ using FD.Lib.Criteria.Case;
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using Core.Business;
     using Core.Web.Attribute;
@@ -112,7 +113,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             {
                 PageSize = int.MaxValue,
                 PageIndex = 1
-            });
+            }).Cases.Where(c => !c.IsInternal);
 
             return Json(cases, JsonRequestBehavior.AllowGet);
         }

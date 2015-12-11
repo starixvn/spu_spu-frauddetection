@@ -70,7 +70,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public string AddCase()
         {
-            var criteria = new CaseInsertCriteria();
+            var criteria = new CaseInsertCriteria
+            {
+                IsActive = true,
+                IsInternal = true
+            };
 
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Case/CaseAdd.cshtml", criteria);
         }
@@ -152,7 +156,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 CaseId = caseInfo.CaseId,
                 CaseName = caseInfo.CaseName,
                 CaseDesc = caseInfo.CaseDesc,
-                IsActive = caseInfo.IsActive
+                IsActive = caseInfo.IsActive,
+                IsInternal = caseInfo.IsInternal
             };
 
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Case/CaseEdit.cshtml", model);

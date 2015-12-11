@@ -5,7 +5,7 @@
     Model.IsActive = true;
 }
 
-@using (Html.BeginForm("AddNewCase", "Case", FormMethod.Post, new { @id = "AddCaseForm" }))
+@using (Html.BeginForm("AddCase", "Case", FormMethod.Post, new { @id = "AddCaseForm" }))
 {
     <table class="table-popup">
         <tr>
@@ -19,6 +19,10 @@
         <tr>
             <td align="right"><span>Active</span></td>
             <td>@Html.CheckBoxFor(l => l.IsActive)</td>
+        </tr>
+        <tr>
+            <td align="right"><span>Internal</span></td>
+            <td>@Html.CheckBoxFor(l => l.IsInternal)</td>
         </tr>
         <tr>
             <td></td>

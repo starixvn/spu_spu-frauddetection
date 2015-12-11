@@ -28,6 +28,13 @@
             </td>
         </tr>
         <tr>
+            <td align="right">
+                <span>Internal</span>
+            </td>
+            <td>@Html.CheckBoxFor(l => l.IsInternal)
+            </td>
+        </tr>
+        <tr>
             <td>
             </td>
             <td>
@@ -38,7 +45,6 @@
     </table>
     @Html.HiddenFor(l => l.CaseId)
 }
-
 @section FooterJs
 {
     <script src="~/Areas/FraudDetection/Scripts/Case/case-edit.js" type="text/javascript"></script>
