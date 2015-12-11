@@ -1,10 +1,19 @@
 ﻿.suspicious-customer-note {
     background-image: url("../App_Themes/Images/icons.png");
-    background-position: -77px -4px;
+    /*background-position: -77px -4px;*/
+    background-position: -51px -246px;
     background-repeat: no-repeat;
     height: 18px;
     width: 18px;
     cursor: pointer;
+}
+
+.suspicious-customer-delinquency {
+     background-image: url("../App_Themes/Images/icons.png");
+    background-position: -173px -101px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 18px;
 }
 
 .suspicious-customer-review-done {
@@ -15,11 +24,11 @@
     width: 18px;
 }
 
-.customer-report-statistic 
+.customer-report-statistic
 {
     width: 100%;
     max-height:200px; 
-    overflow-y:scroll;
+    overflow-y:auto;
     overflow-x: hidden;
     display:block;
 }
@@ -29,7 +38,7 @@ table, th, td
 {
     border: 1px solid black;
     border-collapse: collapse;
-    border-color: burlywood;
+    border-color: darkgrey;
     font-size: small;
 }
 th, td
@@ -55,7 +64,8 @@ th, td
 }
 
 .customer-report-statistic>tbody>tr>th {
-    color: brown;
+    color: white;
+    background-color: #3c5ea5;
 }
 
 .customer-report-statistic-month {

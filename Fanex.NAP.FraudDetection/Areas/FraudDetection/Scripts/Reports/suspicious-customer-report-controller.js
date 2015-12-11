@@ -10,6 +10,7 @@ function (suspiciousCustomerReportModel) {
     vm.DelinquentStatuses = suspiciousCustomerReportModel.DelinquentStatuses;
     vm.VerificationStatuses = suspiciousCustomerReportModel.VerificationStatuses;
     vm.SuspiciousCustomers = suspiciousCustomerReportModel.SuspiciousCustomers;
+    vm.FraudCases = suspiciousCustomerReportModel.FraudCases;
 
     vm.filter = {
         EventDateFrom: suspiciousCustomerReportModel.formatDate(new Date()),
@@ -17,8 +18,8 @@ function (suspiciousCustomerReportModel) {
         CustName: '',
         TotalViolations: '',
         NewViolations: '',
-        IsDelinquent: null,
         IsVerified: null,
+        CaseId: 0,
         PageSize: 50,
         PageIndex: 0
     };
@@ -47,7 +48,7 @@ function (suspiciousCustomerReportModel) {
     };
 
     vm.changeEventDateFromTo = function () {
-        vm.eventDateId = 10;
+        vm.eventDateValue = 10;
     };
 
     vm.exportExcel = function () {
@@ -62,6 +63,17 @@ function (suspiciousCustomerReportModel) {
 
         vm.querySuspiciousCustomers();
     };
+
+    suspiciousCustomerReportModel.getAllCases().then(function () {
+        vm.FraudCases = suspiciousCustomerReportModel.FraudCases;
+
+        var defaultCase = {
+            CaseId: 0,
+            CaseName: 'All'
+        };
+
+        vm.FraudCases.unshift(defaultCase);
+    });
 
     suspiciousCustomerReportModel.initialDateTimePicker();
 } ]);

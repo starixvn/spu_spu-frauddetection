@@ -522,8 +522,6 @@
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-service.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-model.js" />
@@ -648,7 +646,6 @@
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\Utilities.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-edit.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\FraudDetectionScripts.js" />
     <Content Include="Areas\FraudDetection\Scripts\Core\jquery.contextmenu.js" />

@@ -14,6 +14,9 @@ suspiciousCustomerReportModule.factory('suspiciousCustomerReportFactory', ['$htt
                 params:
                     { custId: custId }
             });
+        },
+        getAllCases: function () {
+            return $http.get('SuspiciousCustomer/GetAllCases');
         }
     };
 }]);

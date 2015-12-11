@@ -13,9 +13,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
             { HeaderText: "Total Violations", Width: 80, Name: "TotalViolations", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "New Violations", Width: 80, Name: "NewViolations", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Violated Cases", Width: 80, Name: "ViolatedCases", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Assignees", Width: 200, Name: "Assignees", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Last Verified Date", Width: 150, Name: "LastVerifiedDate", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Last Verified By", Width: 80, Name: "LastVerifiedBy", HeaderAlign: "center", CellAlign: "center" }
+            { HeaderText: "Assignees", Width: 200, Name: "Assignees", HeaderAlign: "center", CellAlign: "center" }
         ];
 
         return columnHeaders;
@@ -37,9 +35,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
                     { Name: "TotalViolations", Value: suspiciousCustomer.TotalViolations },
                     { Name: "NewViolations", Value: suspiciousCustomer.NewViolations },
                     { Name: "ViolatedCases", Value: suspiciousCustomer.ViolatedCases },
-                    { Name: "Assignees", Value: suspiciousCustomer.Assignees !== null ? suspiciousCustomer.Assignees : "-" },
-                    { Name: "LastVerifiedDate", Value: suspiciousCustomer.LastVerifiedDate !== null ? suspiciousCustomer.LastVerifiedDateString : "-" },
-                    { Name: "LastVerifiedBy", Value: suspiciousCustomer.LastVerifiedBy !== null ? suspiciousCustomer.LastVerifiedBy : "-" }
+                    { Name: "Assignees", Value: suspiciousCustomer.Assignees !== null ? suspiciousCustomer.Assignees : "-" }
                 ]
             };
 
@@ -124,22 +120,24 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
                     position: {
                         my: "left top",
                         at: "left+30 top+20"
+                    },
+                    track: true,
+                    show: {
+                        effect: "slideDown"
                     }
                 }).on('mouseout focusout mouseover mouseenter mouseleave', function (eventTooltip) {
                     eventTooltip.stopImmediatePropagation();
                 });
 
                 toolTip.tooltip("open");
-                toolTip.css('color', 'blue');
 
-                $(document).mouseup(function (e) {
+                $(document).on('mousedown', function (e) {
                     var container = $(".ui-tooltip");
                     if (!container.is(e.target) && container.has(e.target).length === 0) {
-                        toolTip.css('color', 'black');
-                        toolTip.removeAttr('title');
                         toolTip.tooltip('option', { disabled: true }).tooltip('close');
                         toolTip.tooltip("destroy");
-                        $(document).off('mouseup');
+                        $(document).off('mousedown');
+                        toolTip.removeAttr('title');
                     }
                 });
             });
@@ -156,7 +154,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
         link: function ($scope, iElement) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
-                    if (gridData) {
+                    if (gridData.SuspiciousCustomers !== undefined) {
                         var bodyRows = generateBodyRows(gridData.SuspiciousCustomers);
                         var columnHeaders = generateColumnHeaders();
 

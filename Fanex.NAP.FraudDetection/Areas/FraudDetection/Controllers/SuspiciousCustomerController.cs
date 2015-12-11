@@ -7,6 +7,8 @@
 //   <change who="Aaron.Cao" date="2015.06.23">Created</change>
 // </history>
 
+using FD.Lib.Criteria.Case;
+
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System.Collections.Generic;
@@ -99,6 +101,20 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             });
 
             return Json(notes, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetAllCases()
+        {
+            var caseService = new CaseService();
+            var cases = caseService.GetCases(new CaseGetAllCriteria
+            {
+                PageSize = int.MaxValue,
+                PageIndex = 1
+            });
+
+            return Json(cases, JsonRequestBehavior.AllowGet);
         }
 
         #region Export Excel

@@ -8,6 +8,7 @@ function (suspiciousCustomerReportFactory) {
 
     suspiciousCustomerReportModel.SuspiciousCustomers = [];
     suspiciousCustomerReportModel.Notes = [];
+    suspiciousCustomerReportModel.FraudCases = [];
 
     suspiciousCustomerReportModel.EventDateFilters = [
         { Value: 1, Name: "Today" },
@@ -43,6 +44,12 @@ function (suspiciousCustomerReportFactory) {
     suspiciousCustomerReportModel.getNotes = function (custId) {
         return suspiciousCustomerReportFactory.getNotes(custId).success(function (notes) {
             suspiciousCustomerReportModel.Notes = notes;
+        });
+    };
+
+    suspiciousCustomerReportModel.getAllCases = function () {
+        return suspiciousCustomerReportFactory.getAllCases().success(function (result) {
+            suspiciousCustomerReportModel.FraudCases = result.Cases;
         });
     };
 
