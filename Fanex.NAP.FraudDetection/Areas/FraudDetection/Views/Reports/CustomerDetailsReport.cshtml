@@ -1,0 +1,81 @@
+﻿@model FD.Lib.Criteria.Reports.MatchMonitoringReportGetAllCriteria
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customer Details";
+
+}
+@section HeadCss
+{
+    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/Content/matchmonitoring.css" />
+    <link href="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css"
+          rel="stylesheet" type="text/css" />
+}
+@section FooterJs
+{
+    @Scripts.Render("~/bundles/App/DailyDataMonitoringReport")
+}
+<div>
+    <span class="infor-text">@ViewBag.Title</span>
+</div>
+<div class="newline">
+    &nbsp;
+</div>
+@using (Html.BeginForm("Index", "CustomerDetails", FormMethod.Get, new { @id = "formSearch", @class = "form-inline col-sm-12 filter-forml" }))
+{
+    <div style="display: inline-block; vertical-align: middle; text-align: center; font-weight: bold;">
+        Customer: Member01(UUS)   Date Range: 2015/01/01 to 2015/12/01
+    </div>
+}
+<div class="newline">&nbsp;</div>
+<div style="margin-left: 20px;">
+    <label>Follow Up Detail</label>
+    <div style="margin-left: 10px;">
+        <table style="border: none;; cell-spacing: 10px;">
+            <tr>
+                <td style="width: 100px;">Assignees</td>
+                <td>Tracy</td>
+            </tr>
+            <tr>
+                <td>Fraud Case</td>
+                <td><div id="gridFraudCase" class="freegrid content-grid"></div></td>
+            </tr>
+            <tr>
+                <td>Logs/Notes</td>
+                <td><div id="gridLogsNotes" class="freegrid content-grid"></div></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Delinquency</td>
+                <td><input type="checkbox"/></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="newline">&nbsp;</div>
+    <label>Daily Violated Tickets</label>
+    <div id="gridViolatedTickets" class="freegrid content-grid"></div>
+
+    <div class="newline">&nbsp;</div>
+    <label>Win Loss Statistic</label>
+    <div style="margin-left: 10px;">
+        <table style="border: none; cell-spacing: 10px;">
+            <tr>
+                <td><div id="gridSummary" class="freegrid content-grid"></div></td>
+                <td><div id="gridEventChoice" class="freegrid content-grid"></div></td>
+            </tr>
+            <tr>
+                <td><div id="gridSportsByMargin" class="freegrid content-grid"></div></td>
+                <td><div id="gridBettypesByMargin" class="freegrid content-grid"></div></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="hidden report-header" id="report-header">
+        <div class="export-excel-icon" id="btnExportExcel"></div>
+    </div>
+
+    <div id="dailyDataMonitoringReport" class="freegrid content-grid"></div>
+</div>

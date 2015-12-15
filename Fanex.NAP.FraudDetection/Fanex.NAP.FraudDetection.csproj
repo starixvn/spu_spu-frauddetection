@@ -322,6 +322,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\glyphicons-halflings.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="App_Start\BundleExtensions.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\CustomerDetailsController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\DailyDataMonitoringController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\FraudCaseDetailController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MatchMonitoringController.cs" />
@@ -855,6 +856,7 @@
     <Content Include="Areas\FraudDetection\Views\Task\TaskEdit.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\ProgressBar.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Task\Summary.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Reports\CustomerDetailsReport.cshtml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\tinymce\langs\readme.md" />
