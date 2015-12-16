@@ -11,18 +11,7 @@ function (suspiciousCustomerReportModel) {
     vm.VerificationStatuses = suspiciousCustomerReportModel.VerificationStatuses;
     vm.SuspiciousCustomers = suspiciousCustomerReportModel.SuspiciousCustomers;
     vm.FraudCases = suspiciousCustomerReportModel.FraudCases;
-
-    vm.filter = {
-        EventDateFrom: suspiciousCustomerReportModel.formatDate(new Date()),
-        EventDateTo: suspiciousCustomerReportModel.formatDate(new Date()),
-        CustName: '',
-        TotalViolations: '',
-        NewViolations: '',
-        IsVerified: null,
-        CaseId: 0,
-        PageSize: 50,
-        PageIndex: 0
-    };
+    vm.filter = suspiciousCustomerReportModel.filter;
 
     vm.eventDateValue = 1;
 

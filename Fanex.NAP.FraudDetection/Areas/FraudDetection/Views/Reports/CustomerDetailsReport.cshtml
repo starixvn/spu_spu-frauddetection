@@ -1,81 +1,127 @@
-﻿@model FD.Lib.Criteria.Reports.MatchMonitoringReportGetAllCriteria
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Customer Details";
 
 }
 @section HeadCss
 {
-    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/Content/matchmonitoring.css" />
-    <link href="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css"
-          rel="stylesheet" type="text/css" />
+    <link href="~/Areas/FraudDetection/Content/suspiciouscustomerdetailreport.css" rel="stylesheet"
+        type="text/css" />
 }
 @section FooterJs
 {
-    @Scripts.Render("~/bundles/App/DailyDataMonitoringReport")
+    @Scripts.Render("~/bundles/App/CustomerDetailsReport")
 }
-<div>
-    <span class="infor-text">@ViewBag.Title</span>
-</div>
-<div class="newline">
-    &nbsp;
-</div>
-@using (Html.BeginForm("Index", "CustomerDetails", FormMethod.Get, new { @id = "formSearch", @class = "form-inline col-sm-12 filter-forml" }))
-{
-    <div style="display: inline-block; vertical-align: middle; text-align: center; font-weight: bold;">
-        Customer: Member01(UUS)   Date Range: 2015/01/01 to 2015/12/01
+<div ng-controller="customerDetailsReportController as cdrCtrl">
+    <div>
+        <span class="infor-text">@ViewBag.Title
+            <a class="back-button" ng-click="cdrCtrl.goBack()">← Back To List </a></span>
     </div>
-}
-<div class="newline">&nbsp;</div>
-<div style="margin-left: 20px;">
-    <label>Follow Up Detail</label>
-    <div style="margin-left: 10px;">
-        <table style="border: none;; cell-spacing: 10px;">
-            <tr>
-                <td style="width: 100px;">Assignees</td>
-                <td>Tracy</td>
-            </tr>
-            <tr>
-                <td>Fraud Case</td>
-                <td><div id="gridFraudCase" class="freegrid content-grid"></div></td>
-            </tr>
-            <tr>
-                <td>Logs/Notes</td>
-                <td><div id="gridLogsNotes" class="freegrid content-grid"></div></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Delinquency</td>
-                <td><input type="checkbox"/></td>
-            </tr>
-        </table>
+    <div class="newline">
+        &nbsp;
     </div>
-
-    <div class="newline">&nbsp;</div>
-    <label>Daily Violated Tickets</label>
-    <div id="gridViolatedTickets" class="freegrid content-grid"></div>
-
-    <div class="newline">&nbsp;</div>
-    <label>Win Loss Statistic</label>
-    <div style="margin-left: 10px;">
-        <table style="border: none; cell-spacing: 10px;">
-            <tr>
-                <td><div id="gridSummary" class="freegrid content-grid"></div></td>
-                <td><div id="gridEventChoice" class="freegrid content-grid"></div></td>
-            </tr>
-            <tr>
-                <td><div id="gridSportsByMargin" class="freegrid content-grid"></div></td>
-                <td><div id="gridBettypesByMargin" class="freegrid content-grid"></div></td>
-            </tr>
-        </table>
+    <div class="form-inline col-sm-12 filter-forml">
+        <div class="col-sm-12" style="display: inline-block; vertical-align: middle; text-align: center;
+            font-weight: bold;">
+            <span style="padding-right: 50px;">
+                Customer: {{ cdrCtrl.CustInfo.UserName }} ({{ cdrCtrl.CustInfo.CurrencyCode }})
+            </span>
+           <span>
+                Date Range: {{ cdrCtrl.GeneralInfo.FromDate }} ~ {{ cdrCtrl.GeneralInfo.ToDate }}
+            </span>
+        </div>
     </div>
-
-    <div class="hidden report-header" id="report-header">
-        <div class="export-excel-icon" id="btnExportExcel"></div>
+    <div class="newline">
+        &nbsp;</div>
+    <div>
+        <label>
+            Follow Up Detail</label>
+        <div class="suspicious-customer-follow-up-detail" style="margin-left: 10px;">
+            <table class=" col-sm-12">
+                <tr>
+                    <td valign="top">
+                        Assignees
+                    </td>
+                    <td>
+                        Tracy
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        Fraud Case
+                    </td>
+                    <td>
+                        <div class="freegrid" data-fanex-grid-customer-details-report-fraud-case data-grid-data="cdrCtrl.FraudCaseDetails">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        Logs/Notes
+                    </td>
+                    <td>
+                        <div class="freegrid" data-fanex-grid-customer-details-report-log-notes data-grid-data="cdrCtrl.LogNotes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="cdrCtrl.Note" placeholder="Input your notes here..."
+                            style="width: 400px;" />
+                        <button ng-click="cdrCtrl.addNote()" class="btn-green">
+                            Add</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Delinquency
+                    </td>
+                    <td>
+                        <input type="checkbox" ng-model="cdrCtrl.CustInfo.IsDelinquent" ng-change="cdrCtrl.updateDelinquency()" />
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-
-    <div id="dailyDataMonitoringReport" class="freegrid content-grid"></div>
+    <div class="newline">
+        &nbsp;</div>
+    <div style="display: block;">
+        <div style="font-weight: bold;">
+            Daily Violated Tickets</div>
+        <div style="float: none;" class="freegrid" data-fanex-grid-customer-details-report-daily-violated-tickets
+            data-grid-data="cdrCtrl.DailyViolatedTickets">
+        </div>
+    </div>
+    <div class="newline">
+        &nbsp;</div>
+    <div style="display: block;">
+        <div style="font-weight: bold;">
+            Win Loss Statistic</div>
+        <div>
+            <table>
+                <tr>
+                    <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
+                        <div class="freegrid" data-fanex-grid-customer-details-report-summary data-grid-data="cdrCtrl.Summary">
+                        </div>
+                    </td>
+                    <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
+                        <div class="freegrid" data-fanex-grid-customer-details-report-event-choice data-grid-data="cdrCtrl.EventChoices">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
+                        <div class="freegrid" data-fanex-grid-customer-details-report-sport data-grid-data="cdrCtrl.SportsByMargin">
+                        </div>
+                    </td>
+                    <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
+                        <div class="freegrid" data-fanex-grid-customer-details-report-bettype data-grid-data="cdrCtrl.BettypesByMargin">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

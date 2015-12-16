@@ -492,6 +492,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\suspiciouscustomerdetailreport.css" />
     <Content Include="Areas\FraudDetection\Content\task.css" />
     <Content Include="Areas\FraudDetection\Content\suspiciouscustomerreport.css" />
     <Content Include="Areas\FraudDetection\Content\fraudcasedetail.css" />
@@ -516,6 +517,10 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report.js" />
@@ -528,8 +533,6 @@
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-controller.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Task\task-edit.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Task\task-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
     <Content Include="Content\betlist\betlist.core.css" />
     <Content Include="Content\betlist\betList.css" />

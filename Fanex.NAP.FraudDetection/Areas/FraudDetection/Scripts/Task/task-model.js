@@ -313,6 +313,12 @@ function (taskFactory) {
     };
 
     taskModel.onAccordionInitialize = function () {
+        $('.dropdown-menu').on('click', function (e) {
+            if ($(this).hasClass('dropdown-menu-form')) {
+                e.stopPropagation();
+            }
+        });
+
         $('#preconditionDateTimePicker').datepicker();
         $('#preconditionDateTimePicker').datetimepicker({
             showSecond: true,

@@ -77,8 +77,10 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
     function memberNameColumn(cell) {
         var custId = cell.Value.CustId;
         var custName = cell.Value.CustName;
+        var fromDate = suspiciousCustomerReportModel.filter.EventDateFrom;
+        var toDate = suspiciousCustomerReportModel.filter.EventDateTo;
 
-        var url = "SuspiciousCustomer/SuspiciousCustomerDetail?custId=" + custId;
+        var url = "/CustomerDetails?custId=" + custId + "&fromDate=" + fromDate + '&toDate=' + toDate;
         return "<a href=" + url + ">" + custName + "</a>";
     }
 
@@ -191,3 +193,20 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
         }
     };
 } ]);
+
+suspiciousCustomerReportModule.directive('datetimepicker', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModelCtrl) {
+            element.datetimepicker({
+                change: function (date) {
+                    scope.$apply(function () {
+                        ngModelCtrl.$setViewValue(date);
+                    });
+
+                }
+            });
+        }
+    };
+});

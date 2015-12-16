@@ -9,18 +9,14 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using System;
     using System.Web.Mvc;
     using Core.Business;
     using Core.Web.Attribute;
-    using FD.Lib.Criteria.Reports;
-    using FD.Lib.Criteria.SuspiciousStatistic;
-    using FD.Lib.DTO;
-    using FD.Lib.Model.Reports.DailyDataMonitoring;
+    using FD.Lib.Criteria.Reports.CustomerDetails;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
-    using RemotingRef;
+    using Service;
     using Service.Core;
 
     /// <summary>
@@ -28,72 +24,120 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     /// </summary>
     public class CustomerDetailsController : BaseController
     {
-        private readonly DailyDataMonitoringReportService _dailyDataMonitoringReportService;
+        private readonly CustomerDetailsReportService _customerDetailsReportService;
 
         public CustomerDetailsController()
         {
-            _dailyDataMonitoringReportService = new DailyDataMonitoringReportService();
+            _customerDetailsReportService = new CustomerDetailsReportService();
         }
 
         /// <summary>
         /// Main page.
         /// </summary>
         /// <returns>The ActionResult.</returns>
-        [NapAuth(FunctionKey = FDFunctionKeys.DailyDataMonitoring, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/Reports/CustomerDetailsReport.cshtml");
         }
 
-        /// <summary>
-        /// Get Daily Data Monitoring report data.
-        /// </summary>
-        /// <param name="criteria">Daily Data Monitoring Report Get All Criteria.</param>
-        /// <returns>Daily data monitoring report data.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = FDFunctionKeys.DailyDataMonitoring, Policy = Constant.Policy.Read)]
-        public ActionResult Search(DailyDataMonitoringReportGetAllCriteria criteria)
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetCustInfoById(int custId)
         {
-            var dailyDataMonitoring = FormatReportData(GenerateDailyDataMonitoringData(criteria));
+            var criteria = new CustomerDetailsReportCustInfoCriteria(custId);
+            var custInfo = _customerDetailsReportService.GetCustomerInfo(criteria);
 
-            var result = new
-            {
-                dailyDataMonitoring
-            };
+            return Json(custInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetFraudCaseDetails(int custId, DateTime fromDate, DateTime toDate)
+        {
+            var criteria = new CustomerDetailsReportFraudCaseCriteria(custId, fromDate, toDate);
+            var fraudCaseDetails = _customerDetailsReportService.GetFraudCasesDetails(criteria);
+
+            return Json(fraudCaseDetails, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetLogNotes(int custId)
+        {
+            var criteria = new CustomerDetailsReportLogNoteCriteria(custId);
+            var logNotes = _customerDetailsReportService.GetLogsNotes(criteria);
+
+            return Json(logNotes, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetWinlossStatistic(int custId, DateTime fromDate, DateTime toDate)
+        {
+            var criteria = new CustomerDetailsReportWinlossStatisticCriteria(custId, fromDate, toDate);
+            var result = _customerDetailsReportService.GetWinlossStatistic(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #region Utilities
-
-        private IEnumerable<DailyDataMonitoring> GenerateDailyDataMonitoringData(DailyDataMonitoringReportGetAllCriteria criteria)
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetDailyViolatedTickets(int custId, DateTime fromDate, DateTime toDate)
         {
-            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
-            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            criteria.MoveBetDate = balanceUpMoveBetDates.MoveBetsDay;
-            criteria.BalanceUpDate = balanceUpMoveBetDates.BalanceUpDay;
+            var result = _customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
 
-            return _dailyDataMonitoringReportService.GetDailyDataMonitoringReport(criteria).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        private IEnumerable<DailyDataMonitoringModel> FormatReportData(IEnumerable<DailyDataMonitoring> data, bool plainText = false)
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult AddNote(int custId, string note)
         {
-            var dailyDataMonitoringReport = new List<DailyDataMonitoringModel>();
-            foreach (var records in data)
+            var criteria = new CustomerNoteInsertCriteria
             {
-                var homeName = RefData.GetTeamName(records.HomeId.ToString(), "en", string.Empty);
-                var awayName = RefData.GetTeamName(records.AwayId.ToString(), "en", string.Empty);
+                CustId = custId,
+                AuthorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
+                CaseId = 0,
+                LogDesc = note
+            };
 
-                records.Event = plainText
-                    ? homeName + " vs " + awayName
-                    : "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
+            var result = _customerDetailsReportService.InsertCustomerNote(criteria);
 
-                dailyDataMonitoringReport.Add(new DailyDataMonitoringModel(records));
-            }
-
-            return dailyDataMonitoringReport;
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult VerifyCustomer(int custId, int caseId)
+        {
+            var criteria = new CustomerVerifyInsertCriteria
+            {
+                CustId = custId,
+                AuthorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
+                CaseId = caseId,
+                AuthorName = AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty
+            };
+
+            var result = _customerDetailsReportService.InsertCustomerLog(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult UpdateDelinquency(int custId, bool isDelinquent)
+        {
+            var criteria = new CustomerDelinquentUpdateCriteria
+            {
+                CustId = custId,
+                AuthorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
+                IsDelinquent = isDelinquent
+            };
+
+            var result = _customerDetailsReportService.UpdateCustomerDelinquent(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

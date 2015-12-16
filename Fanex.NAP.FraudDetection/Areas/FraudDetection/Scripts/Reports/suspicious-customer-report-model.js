@@ -28,6 +28,18 @@ function (suspiciousCustomerReportFactory) {
         { Value: true, Name: "Verified" },
         { Value: false, Name: "Not Verified" }
     ];
+    
+    suspiciousCustomerReportModel.filter = {
+        EventDateFrom: formatDate(new Date()),
+        EventDateTo: formatDate(new Date()),
+        CustName: '',
+        TotalViolations: '',
+        NewViolations: '',
+        IsVerified: null,
+        CaseId: 0,
+        PageSize: 50,
+        PageIndex: 0
+    };
 
     suspiciousCustomerReportModel.getSuspiciousCustomerReport = function (criteria) {
         return suspiciousCustomerReportFactory.getSuspiciousCustomerReport(criteria).success(function (customers) {
@@ -46,15 +58,6 @@ function (suspiciousCustomerReportFactory) {
             suspiciousCustomerReportModel.FraudCases = cases;
         });
     };
-
-    suspiciousCustomerReportModel.formatDate = function (date) {
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-        var result = '' + (m <= 9 ? '0' + m : m) + '/' + (d <= 9 ? '0' + d : d) + '/' + y;
-
-        return result;
-    };
     
     suspiciousCustomerReportModel.changeEventDate = function (eventDateValue, filter) {
         var today = new Date();
@@ -63,63 +66,63 @@ function (suspiciousCustomerReportFactory) {
 
         switch (eventDateValue) {
             case 1:
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 2:
                 var yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(yesterday);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(yesterday);
+                filter.EventDateFrom = formatDate(yesterday);
+                filter.EventDateTo = formatDate(yesterday);
                 break;
             case 3:
                 startDate = new Date(today.getFullYear(), today.getMonth(), fistDayOfWeek);
                 endDate = new Date(today.getFullYear(), today.getMonth(), fistDayOfWeek + 6);
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 4:
                 startDate = new Date(today.getFullYear(), today.getMonth(), fistDayOfWeek - 7);
                 endDate = new Date(today.getFullYear(), today.getMonth(), fistDayOfWeek - 1);
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 5:
                 startDate = new Date(today.getFullYear(), today.getMonth(), 1);
                 endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 6:
                 startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
                 endDate = new Date(today.getFullYear(), today.getMonth(), 0);
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 7:
                 startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
                 endDate = today;
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 8:
                 startDate = new Date(today.getFullYear(), today.getMonth() - 2, 1);
                 endDate = today;
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 9:
                 startDate = new Date(today.getFullYear(), today.getMonth() - 5, 1);
                 endDate = today;
 
-                filter.EventDateFrom = suspiciousCustomerReportModel.formatDate(startDate);
-                filter.EventDateTo = suspiciousCustomerReportModel.formatDate(endDate);
+                filter.EventDateFrom = formatDate(startDate);
+                filter.EventDateTo = formatDate(endDate);
                 break;
             case 10:
                 break;
@@ -145,6 +148,15 @@ function (suspiciousCustomerReportFactory) {
     suspiciousCustomerReportModel.openCalendar = function (dateTimePickerId) {
         $(dateTimePickerId).datepicker('show');
     };
+
+    function formatDate(date) {
+        var d = date.getDate();
+        var m = date.getMonth() + 1;
+        var y = date.getFullYear();
+        var result = '' + (m <= 9 ? '0' + m : m) + '/' + (d <= 9 ? '0' + d : d) + '/' + y;
+
+        return result;
+    }
 
     return suspiciousCustomerReportModel;
 } ]);
