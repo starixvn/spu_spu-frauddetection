@@ -10,6 +10,8 @@ function ($window, customerDetailsReportModel) {
     vm.CustInfo = customerDetailsReportModel.CustInfo;
     vm.Summary = customerDetailsReportModel.Summary;
     vm.EventChoices = customerDetailsReportModel.EventChoices;
+    vm.SportsByMargin = customerDetailsReportModel.SportsByMargin;
+    vm.BettypesByMargin = customerDetailsReportModel.BettypesByMargin;
     vm.FraudCaseDetails = customerDetailsReportModel.FraudCaseDetails;
     vm.LogNotes = customerDetailsReportModel.LogNotes;
     vm.DailyViolatedTickets = customerDetailsReportModel.DailyViolatedTickets;
