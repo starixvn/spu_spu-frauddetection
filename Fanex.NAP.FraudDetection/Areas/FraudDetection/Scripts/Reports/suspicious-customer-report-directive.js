@@ -81,7 +81,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
         var toDate = suspiciousCustomerReportModel.filter.EventDateTo;
 
         var url = "/CustomerDetails?custId=" + custId + "&fromDate=" + fromDate + '&toDate=' + toDate;
-        return "<a href=" + url + ">" + custName + "</a>";
+        return "<a target='_blank' href=" + url + ">" + custName + "</a>";
     }
 
     function createNotesTable(notes) {

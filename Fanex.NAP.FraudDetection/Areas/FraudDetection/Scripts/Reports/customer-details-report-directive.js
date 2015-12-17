@@ -70,6 +70,15 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
             });
         };
 
+        var registerMenuClickEvent = function () {
+            var menuElement = $(".ng-scope .header .menu a");
+
+            menuElement.off("click");
+            menuElement.on("click", function (event) {
+                event.stopPropagation();
+            });
+        };
+
         return {
             restrict: "A",
             scope: {
@@ -96,6 +105,8 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
                             $(iElement).fanexGrid(gridOptions);
 
                             registerVerifyEvent();
+
+                            registerMenuClickEvent();
                         }
                     });
                 });

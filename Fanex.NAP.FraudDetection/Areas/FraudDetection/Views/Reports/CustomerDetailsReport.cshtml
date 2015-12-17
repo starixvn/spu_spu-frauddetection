@@ -16,7 +16,8 @@
 <div ng-controller="customerDetailsReportController as cdrCtrl">
     <div>
         <span class="infor-text">@ViewBag.Title
-            <a class="back-button" ng-click="cdrCtrl.goBack()">← Back To List </a></span>
+            @*<a class="back-button" ng-click="cdrCtrl.goBack()">← Back To List </a>*@
+        </span>
     </div>
     <div class="newline">
         &nbsp;
@@ -36,14 +37,14 @@
             Follow Up Detail</label>
         <div class="suspicious-customer-follow-up-detail" style="margin-left: 10px;">
             <table class=" col-sm-12">
-                <tr>
+                @*<tr>
                     <td valign="top">
                         Assignees
                     </td>
                     <td>
                         Tracy
                     </td>
-                </tr>
+                </tr>*@
                 <tr>
                     <td valign="top">
                         Fraud Case
