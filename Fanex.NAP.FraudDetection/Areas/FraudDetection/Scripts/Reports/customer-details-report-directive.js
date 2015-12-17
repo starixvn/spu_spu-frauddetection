@@ -32,7 +32,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
                     { Name: "Verified", Value: fraudCaseDetail.VerifiedViolations },
                     { Name: "Unverified", Value: fraudCaseDetail.UnverifiedViolations },
                     { Name: "LastVerifiedDate", Value: fraudCaseDetail.LastVerifiedDateString },
-                    { Name: "LastVerifiedBy", Value: fraudCaseDetail.LastVerifiedBy },
+                    { Name: "LastVerifiedBy", Value: fraudCaseDetail.LastVerifiedBy !== null ? fraudCaseDetail.LastVerifiedBy : '-' },
                     { Name: "VerifyAll", Value: fraudCaseDetail, CustomCellRender: verifyColumn }
                 ]
                 };
@@ -61,9 +61,9 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
                 var custId = $(this).data("custid");
                 var caseId = $(this).data("caseid");
 
-                customerDetailsReportModel.verifyCustomer(custId, caseId).then(function() {
+                customerDetailsReportModel.verifyCustomer(custId, caseId).then(function () {
                     var scope = angular.element($(".freegrid")).scope();
-                    
+
                     scope.cdrCtrl.getFraudCaseDetails();
                     scope.cdrCtrl.getLogNotes();
                 });
@@ -169,13 +169,28 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
 } ]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', ['$timeout', function ($timeout) {
+    var formatNumber = '0,0.00';
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
-            { HeaderText: "Turnover", Width: 100, Name: "Turnover", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Win Loss", Width: 80, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Margin (%)", Width: 80, Name: "Margin", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Bet Count", Width: 80, Name: "BetCount", HeaderAlign: "center", CellAlign: "right" }
+            { HeaderText: "Turnover", Width: 120, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Win Loss", Width: 120, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Margin (%)", Width: 120, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Bet Count", Width: 120, Name: "BetCount", HeaderAlign: "center", CellAlign: "right", FormatNumber: '0,0' }
         ];
 
         return columnHeaders;
@@ -231,13 +246,28 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', [
 } ]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice', ['$timeout', function ($timeout) {
+    var formatNumber = '0,0.00';
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
-            { HeaderText: "Sport", Width: 100, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Turnover", Width: 80, Name: "Turnover", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Win Loss", Width: 80, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Margin (%)", Width: 80, Name: "Margin", HeaderAlign: "center", CellAlign: "right" }
+            { HeaderText: "Sport", Width: 120, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Turnover", Width: 120, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Win Loss", Width: 120, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Margin (%)", Width: 120, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            }
         ];
 
         return columnHeaders;
@@ -295,13 +325,28 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice
 } ]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$timeout', function ($timeout) {
+    var formatNumber = '0,0.00';
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
-            { HeaderText: "Sport", Width: 100, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Turnover", Width: 80, Name: "Turnover", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Win Loss", Width: 80, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Margin (%)", Width: 80, Name: "Margin", HeaderAlign: "center", CellAlign: "right" }
+            { HeaderText: "Sport", Width: 120, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Turnover", Width: 120, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Win Loss", Width: 120, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Margin (%)", Width: 120, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            }
         ];
 
         return columnHeaders;
@@ -359,13 +404,28 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$
 } ]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', ['$timeout', function ($timeout) {
+    var formatNumber = '0,0.00';
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
-            { HeaderText: "Sport", Width: 100, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Turnover", Width: 80, Name: "Turnover", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Win Loss", Width: 80, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Margin (%)", Width: 80, Name: "Margin", HeaderAlign: "center", CellAlign: "right" }
+            { HeaderText: "Sport", Width: 120, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Turnover", Width: 120, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Win Loss", Width: 120, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                IsCurrency: true,
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            },
+            { HeaderText: "Margin (%)", Width: 120, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+                FormatNumber: formatNumber,
+                FormatNegative: '-$',
+                IsAbs: true
+            }
         ];
 
         return columnHeaders;
@@ -429,18 +489,17 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
         [
             { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Member", Width: 100, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet Type", Width: 100, Name: "BetType", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Choice", Width: 220, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Score", Width: 70, Name: "Score", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Choice", Width: 280, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Score", Width: 40, Name: "Score", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Odds", Width: 70, Name: "Odds", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Stake", Width: 100, Name: "Stake", HeaderAlign: "center", CellAlign: "right" },
                 {
                     HeaderText: "Win Loss", Width: 100, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
                     IsCurrency: true,
                     FormatNumber: formatNumber,
-                    FormatNegative: '($)',
+                    FormatNegative: '-$',
                     IsAbs: true
                 },
                 { HeaderText: "Status", Width: 50, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
@@ -457,7 +516,6 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                 Columns: [
                     { Name: "No", Value: index + 1 },
                     { Name: "TransDate", Value: element.TransDate },
-                    { Name: "CustName", Value: element.CustName },
                     { Name: "TransId", Value: element.TransId },
                     { Name: "BetType", Value: element.BetType },
                     { Name: "Choice", CustomCellRender: function () { return element.Choice; } },

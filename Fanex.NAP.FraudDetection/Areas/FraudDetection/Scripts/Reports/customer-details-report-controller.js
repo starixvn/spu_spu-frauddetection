@@ -54,8 +54,9 @@ function ($window, customerDetailsReportModel) {
 
         vm.getLogNotes();
 
-        //                customerDetailsReportModel.getDailyViolatedTickets(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {
-        //                    vm.DailyViolatedTickets = customerDetailsReportModel.DailyViolatedTickets;
+        customerDetailsReportModel.getDailyViolatedTickets(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {
+            vm.DailyViolatedTickets = customerDetailsReportModel.DailyViolatedTickets;
+        });
 
         customerDetailsReportModel.getWinlossStatistic(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {
             vm.Summary = customerDetailsReportModel.Summary;
@@ -63,6 +64,5 @@ function ($window, customerDetailsReportModel) {
             vm.SportsByMargin = customerDetailsReportModel.SportsByMargin;
             vm.BettypesByMargin = customerDetailsReportModel.BettypesByMargin;
         });
-        //                });
     });
 } ]);

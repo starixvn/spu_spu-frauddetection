@@ -2,7 +2,7 @@
 html
 {
     font-family: Arial,Helvetica,sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     margin: 0;
     cursor: default;
 }
@@ -13,22 +13,10 @@ body
     margin: 0;
     min-width: 0 !important;
 }
-select, input[type=text]
-{
-    font-weight: normal;
-    font-size: 11px;
-    width: 100px;
-    border: 1px solid #A3D1E1;
-}
 
 select
 {
     height: 18px;
-}
-
-input[type=text]
-{
-    height: 16px;
 }
 
 table
@@ -36,28 +24,10 @@ table
     border-collapse: collapse;
 }
 
-a
-{
-    text-decoration: none;
-    font-size: 11px;
-}
-a:hover
-{
-    text-decoration: none;
-}
-a:link, a:visited, .link
-{
-    cursor: pointer;
-    text-decoration: underline;
-    white-space: nowrap;
-    color: #1E1EEB;
-    font-weight: bold;
-}
-
 input[type=password]
 {
     width: 120px;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 select.based-currency
@@ -100,7 +70,7 @@ select.based-currency
     margin-bottom: 2px;
     padding-top: 4px;
     padding-bottom: 3px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: normal;
     background: url("images/bg_boxTop.jpg") repeat-x scroll center top #E7E7E7;
     border: 1px solid #CACACA;
@@ -268,7 +238,7 @@ div.content-main
     height: 19px;
     cursor: pointer;
     padding: 0 5px 2px 0;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 15px;
     background: url(images/bg_buttonsite.jpg) repeat-x top;
     border: 1px #4d4d4d solid;
@@ -539,17 +509,4 @@ input.date-range
 .header-title-arrow
 {
     font-size: 20px;
-}
-.alert
-{
-    font-size: 1.3em;
-    padding: 1em;
-    text-align: center;
-    white-space:pre-wrap;
-    width: auto;
-    min-width: 200px;
-    max-width: 300px;
-    word-wrap: normal;
-    overflow:hidden;
-	
 }
