@@ -46,7 +46,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
         function verifyColumn(cell) {
             var custId = customerDetailsReportModel.GeneralInfo.CustId;
             var caseId = cell.Value.CaseId;
-            var result = "<a href=''  class='suspicious-customer-details-verify' data-custid='" + custId + "' data-caseid='" + caseId + "'>Verify</a>";
+            var result = "<a href='javascript:void(0);'  class='suspicious-customer-details-verify' data-custid='" + custId + "' data-caseid='" + caseId + "'>Verify</a>";
 
             return result;
         }
