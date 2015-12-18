@@ -87,7 +87,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetDailyViolatedTickets(int custId, DateTime fromDate, DateTime toDate)
         {
             var result = _customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
-            result = result.OrderByDescending(l => l.TransDate);
+            //result = result.OrderByDescending(l => l.TransDate);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
