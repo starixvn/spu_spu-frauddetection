@@ -80,7 +80,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
         var fromDate = suspiciousCustomerReportModel.filter.EventDateFrom;
         var toDate = suspiciousCustomerReportModel.filter.EventDateTo;
 
-        var url = "/CustomerDetails?custId=" + custId + "&fromDate=" + fromDate + '&toDate=' + toDate;
+        var url = "CustomerDetails/Index?custId=" + custId + "&fromDate=" + fromDate + '&toDate=' + toDate;
         return "<a target='_blank' href=" + url + ">" + custName + "</a>";
     }
 

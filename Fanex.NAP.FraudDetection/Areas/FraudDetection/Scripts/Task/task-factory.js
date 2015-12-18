@@ -4,67 +4,93 @@
 taskModule.factory('taskFactory', ['$http', function ($http) {
     return {
         addTask: function (criteria) {
-            return $http.post('/Task/AddTask', criteria);
+            var url = SPU.getAbsoluteUrl("Task/AddTask");
+
+            return $http.post(url, criteria);
         },
 
         editTask: function (criteria) {
-            return $http.post('/Task/EditTask', criteria);
-        }, 
-        
+            var url = SPU.getAbsoluteUrl("Task/EditTask");
+
+            return $http.post(url, criteria);
+        },
+
         getTaskInfo: function (taskId) {
-            return $http.get('/Task/GetTaskInfo', {
+            var url = SPU.getAbsoluteUrl("Task/GetTaskInfo");
+
+            return $http.get(url, {
                 params:
                     { taskId: taskId }
             });
         },
 
         getEvents: function () {
-            return $http.get('/Task/GetEvents');
+            var url = SPU.getAbsoluteUrl("Task/GetEvents");
+
+            return $http.get(url);
         },
 
         getActivities: function () {
-            return $http.get('/Task/GetActivities');
+            var url = SPU.getAbsoluteUrl("Task/GetActivities");
+
+            return $http.get(url);
         },
 
         getSports: function () {
-            return $http.get('/Task/GetSports');
+            var url = SPU.getAbsoluteUrl("Task/GetSports");
+
+            return $http.get(url);
         },
 
         getConfigsByActivity: function (activityId) {
-            return $http.get('/Task/GetConfigsByActivity', {
+            var url = SPU.getAbsoluteUrl("Task/GetConfigsByActivity");
+
+            return $http.get(url, {
                 params:
                     { activityId: activityId }
             });
         },
 
         getCustomerGroupByCase: function (caseId) {
-            return $http.get('/Task/GetCustomerGroupByCase', {
+            var url = SPU.getAbsoluteUrl("Task/GetCustomerGroupByCase");
+
+            return $http.get(url, {
                 params:
                     { caseId: caseId }
             });
         },
 
         getBackGroundTasksByCase: function (caseId) {
-            return $http.get('/Task/GetBackGroundTasksByCase', {
+            var url = SPU.getAbsoluteUrl("Task/GetBackGroundTasksByCase");
+
+            return $http.get(url, {
                 params:
                     { caseId: caseId }
             });
         },
 
         getBetTypes: function () {
-            return $http.get('/Task/GetBetTypes');
+            var url = SPU.getAbsoluteUrl("Task/GetBetTypes");
+
+            return $http.get(url);
         },
 
         getCurrencies: function () {
-            return $http.get('/Task/GetCurrencies');
+            var url = SPU.getAbsoluteUrl("Task/GetCurrencies");
+
+            return $http.get(url);
         },
 
         getDataTypes: function () {
-            return $http.get('/Task/GetDataTypes');
+            var url = SPU.getAbsoluteUrl("Task/GetDataTypes");
+
+            return $http.get(url);
         },
 
         getMails: function () {
-            return $http.get('/Task/GetMails');
+            var url = SPU.getAbsoluteUrl("Task/GetMails");
+
+            return $http.get(url);
         }
     };
 } ]);

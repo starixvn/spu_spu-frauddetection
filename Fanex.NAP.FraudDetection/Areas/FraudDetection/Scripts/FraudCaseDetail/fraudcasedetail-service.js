@@ -45,7 +45,7 @@
                     HeaderText: "Win Loss", Width: 100, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
                     IsCurrency: true,
                     FormatNumber: formatNumber,
-                    FormatNegative: '($)',
+                    FormatNegative: '-$',
                     IsAbs: true
                 },
                 { HeaderText: "Status", Width: 50, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
