@@ -16,8 +16,7 @@
 <div ng-controller="customerDetailsReportController as cdrCtrl">
     <div>
         <span class="infor-text">@ViewBag.Title
-            @*<a class="back-button" ng-click="cdrCtrl.goBack()">← Back To List </a>*@
-        </span>
+            @*<a class="back-button" ng-click="cdrCtrl.goBack()">← Back To List </a>*@ </span>
     </div>
     <div class="newline">
         &nbsp;
@@ -50,7 +49,10 @@
                         Fraud Case
                     </td>
                     <td>
-                        <div class="freegrid" data-fanex-grid-customer-details-report-fraud-case data-grid-data="cdrCtrl.FraudCaseDetails">
+                        <div class="freegrid" 
+                             data-fanex-grid-customer-details-report-fraud-case 
+                             data-grid-data="cdrCtrl.FraudCaseDetails"
+                             id="customer-details-report-fraud-case">
                         </div>
                     </td>
                 </tr>
@@ -59,7 +61,10 @@
                         Logs/Notes
                     </td>
                     <td>
-                        <div class="freegrid" data-fanex-grid-customer-details-report-log-notes data-grid-data="cdrCtrl.LogNotes">
+                        <div class="freegrid" 
+                             data-fanex-grid-customer-details-report-log-notes 
+                             data-grid-data="cdrCtrl.LogNotes"
+                             id="customer-details-report-log-notes">
                         </div>
                     </td>
                 </tr>
@@ -89,8 +94,13 @@
     <div style="display: block;">
         <div style="font-weight: bold;">
             Daily Violated Tickets</div>
-        <div style="float: none;" class="freegrid" data-fanex-grid-customer-details-report-daily-violated-tickets
-            data-grid-data="cdrCtrl.DailyViolatedTickets">
+        <div ng-if="cdrCtrl.DailyViolatedTickets.length == 0">
+            <b style="color: red;">Loading…</b>
+        </div>
+        <div ng-if="cdrCtrl.DailyViolatedTickets.length > 0" style="float: none;" class="freegrid"
+             data-fanex-grid-customer-details-report-daily-violated-tickets 
+             data-grid-data="cdrCtrl.DailyViolatedTickets"
+             id="customer-details-report-daily-violated-tickets">
         </div>
     </div>
     <div class="newline">
@@ -98,7 +108,10 @@
     <div style="display: block;">
         <div style="font-weight: bold;">
             Win Loss Statistic</div>
-        <div>
+        <div ng-if="cdrCtrl.EventChoices.length == 0">
+            <b style="color: red;">Loading…</b>
+        </div>
+        <div ng-if="cdrCtrl.EventChoices.length > 0">
             <table>
                 <tr>
                     <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
@@ -107,7 +120,10 @@
                                 Summary
                             </div>
                         </div>
-                        <div class="freegrid" data-fanex-grid-customer-details-report-summary data-grid-data="cdrCtrl.Summary">
+                        <div class="freegrid" 
+                             data-fanex-grid-customer-details-report-summary 
+                             data-grid-data="cdrCtrl.Summary"
+                             id="customer-details-report-summary">
                         </div>
                     </td>
                     <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
@@ -116,7 +132,10 @@
                                 Event Choice
                             </div>
                         </div>
-                        <div class="freegrid" data-fanex-grid-customer-details-report-event-choice data-grid-data="cdrCtrl.EventChoices">
+                        <div class="freegrid"
+                             data-fanex-grid-customer-details-report-event-choice
+                             data-grid-data="cdrCtrl.EventChoices"
+                             id="customer-details-report-event-choice">
                         </div>
                     </td>
                 </tr>
@@ -127,7 +146,10 @@
                                 Top 5 sports by margin(%)
                             </div>
                         </div>
-                        <div class="freegrid" data-fanex-grid-customer-details-report-sport data-grid-data="cdrCtrl.SportsByMargin">
+                        <div class="freegrid"
+                             data-fanex-grid-customer-details-report-sport
+                             data-grid-data="cdrCtrl.SportsByMargin"
+                             id="customer-details-report-sport">
                         </div>
                     </td>
                     <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
@@ -136,7 +158,10 @@
                                 Top 5 bet types by margin(%)
                             </div>
                         </div>
-                        <div class="freegrid" data-fanex-grid-customer-details-report-bettype data-grid-data="cdrCtrl.BettypesByMargin">
+                        <div class="freegrid"
+                             data-fanex-grid-customer-details-report-bettype
+                             data-grid-data="cdrCtrl.BettypesByMargin"
+                             id="customer-details-report-bettype">
                         </div>
                     </td>
                 </tr>

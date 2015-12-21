@@ -84,7 +84,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
             scope: {
                 gridData: "="
             },
-            link: function ($scope, iElement) {
+            link: function ($scope) {
                 $scope.$watch('gridData', function (gridData) {
                     $timeout(function () {
                         if (gridData) {
@@ -102,7 +102,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
                             gridOptions.columns = columnHeaders;
                             gridOptions.bodyRows = bodyRows;
 
-                            $(iElement).fanexGrid(gridOptions);
+                            $('#customer-details-report-fraud-case').fanexGrid(gridOptions);
 
                             registerVerifyEvent();
 
@@ -153,7 +153,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
         scope: {
             gridData: "="
         },
-        link: function ($scope, iElement) {
+        link: function ($scope) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
                     if (gridData) {
@@ -171,7 +171,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
                         gridOptions.columns = columnHeaders;
                         gridOptions.bodyRows = bodyRows;
 
-                        $(iElement).fanexGrid(gridOptions);
+                        $('#customer-details-report-log-notes').fanexGrid(gridOptions);
                     }
                 });
             });
@@ -230,7 +230,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', [
         scope: {
             gridData: "="
         },
-        link: function ($scope, iElement) {
+        link: function ($scope) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
                     if (gridData) {
@@ -248,7 +248,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', [
                         gridOptions.columns = columnHeaders;
                         gridOptions.bodyRows = bodyRows;
 
-                        $(iElement).fanexGrid(gridOptions);
+                        $('#customer-details-report-summary').fanexGrid(gridOptions);
                     }
                 });
             });
@@ -309,7 +309,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice
         scope: {
             gridData: "="
         },
-        link: function ($scope, iElement) {
+        link: function ($scope) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
                     if (gridData) {
@@ -327,7 +327,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice
                         gridOptions.columns = columnHeaders;
                         gridOptions.bodyRows = bodyRows;
 
-                        $(iElement).fanexGrid(gridOptions);
+                        $('#customer-details-report-event-choice').fanexGrid(gridOptions);
                     }
                 });
             });
@@ -388,7 +388,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$
         scope: {
             gridData: "="
         },
-        link: function ($scope, iElement) {
+        link: function ($scope) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
                     if (gridData) {
@@ -406,7 +406,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$
                         gridOptions.columns = columnHeaders;
                         gridOptions.bodyRows = bodyRows;
 
-                        $(iElement).fanexGrid(gridOptions);
+                        $('#customer-details-report-sport').fanexGrid(gridOptions);
                     }
                 });
             });
@@ -467,7 +467,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', [
         scope: {
             gridData: "="
         },
-        link: function ($scope, iElement) {
+        link: function ($scope) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
                     if (gridData) {
@@ -485,7 +485,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', [
                         gridOptions.columns = columnHeaders;
                         gridOptions.bodyRows = bodyRows;
 
-                        $(iElement).fanexGrid(gridOptions);
+                        $('#customer-details-report-bettype').fanexGrid(gridOptions);
                     }
                 });
             });
@@ -548,7 +548,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
         scope: {
             gridData: "="
         },
-        link: function ($scope, iElement) {
+        link: function ($scope) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
                     if (gridData) {
@@ -564,15 +564,15 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                             pagerOption: {
                                 itemsPerPage: 50,
                                 currentPage: 0,
-                                itemsPerPageArray: [10, 20, 50, 100, 500],
-                                showDetail: true
-                            }
+                                itemsPerPageArray: [10, 20, 50, 100, 500]
+                            },
+                            
                         };
 
                         gridOptions.columns = columnHeaders;
                         gridOptions.bodyRows = bodyRows;
 
-                        $(iElement).fanexGrid(gridOptions);
+                        $('#customer-details-report-daily-violated-tickets').fanexGrid(gridOptions);
                     }
                 });
             });

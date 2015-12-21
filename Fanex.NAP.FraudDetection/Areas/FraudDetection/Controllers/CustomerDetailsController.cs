@@ -10,8 +10,8 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System;
-    using System.Linq;
     using System.Web.Mvc;
+    using System.Web.SessionState;
     using Core.Business;
     using Core.Web.Attribute;
     using FD.Lib.Criteria.Reports.CustomerDetails;
@@ -23,6 +23,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     /// <summary>
     /// The controller of Customer Details Report.
     /// </summary>
+    [SessionState(SessionStateBehavior.ReadOnly)]
     public class CustomerDetailsController : BaseController
     {
         private readonly CustomerDetailsReportService _customerDetailsReportService;
