@@ -23,3 +23,10 @@ body, table
 {
     font-size: 13px;
 }
+
+.customer-details-header-icon {
+    background-image: url("../App_Themes/Images/basic-icon.png");
+    background-position: -83px -95px;
+    background-repeat: no-repeat;
+    height: 18px;
+}

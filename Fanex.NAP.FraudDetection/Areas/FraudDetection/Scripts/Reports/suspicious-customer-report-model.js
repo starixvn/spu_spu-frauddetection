@@ -25,8 +25,8 @@ function (suspiciousCustomerReportFactory) {
 
     suspiciousCustomerReportModel.VerificationStatuses = [
         { Value: null, Name: "All" },
-        { Value: true, Name: "Verified" },
-        { Value: false, Name: "Not Verified" }
+        { Value: true, Name: "Yes" },
+        { Value: false, Name: "No" }
     ];
     
     suspiciousCustomerReportModel.filter = {

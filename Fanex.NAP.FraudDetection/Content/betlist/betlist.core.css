@@ -16,6 +16,7 @@
     color: #01122B;
     font-weight: bold !important;
     white-space: normal;
+    text-align: right !important;
 }
 .stake
 {
@@ -26,7 +27,7 @@
     color: #B50000;
     font-weight: bold !important;
     display: inline;
-    text-align: right;
+    text-align: right !important;
 }
 .handicap .odds
 {

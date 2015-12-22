@@ -6,9 +6,9 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
         var columnHeaders =
         [
             { HeaderText: "#", Width: 70, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "", Width: 60, Name: "Delinquent", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "", Width: 60, Name: "Note", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "", Width: 60, Name: "Verified", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Delq.", Width: 60, Name: "Delinquent", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Logs Notes", Width: 60, Name: "Note", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Verified", Width: 60, Name: "Verified", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Member", Width: 150, Name: "Member", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Total Violations", Width: 80, Name: "TotalViolations", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "New Violations", Width: 80, Name: "NewViolations", HeaderAlign: "center", CellAlign: "center" },
