@@ -16,7 +16,30 @@ function ($window, customerDetailsReportModel) {
     vm.LogNotes = customerDetailsReportModel.LogNotes;
     vm.DailyViolatedTickets = customerDetailsReportModel.DailyViolatedTickets;
     vm.GeneralInfo = customerDetailsReportModel.GeneralInfo;
+    vm.EditAssingee = customerDetailsReportModel.EditAssingee;
+    vm.IsHost = customerDetailsReportModel.IsHost;
     vm.Note = '';
+
+    vm.editAssingee = function () {
+        vm.EditAssingee.isEditAssignee = !vm.EditAssingee.isEditAssignee;
+    };
+
+    vm.cancelEditAssingee = function () {
+        vm.EditAssingee.isEditAssignee = !vm.EditAssingee.isEditAssignee;
+    };
+
+    vm.saveEditAssingee = function () {
+        vm.EditAssingee.isEditAssignee = !vm.EditAssingee.isEditAssignee;
+
+        var assignees = [];
+        angular.forEach(vm.EditAssingee.AssigneesTicked, function (assignee) {
+            assignees.push(assignee.name);
+        });
+
+        vm.EditAssingee.assignees = assignees.join(',');
+
+        customerDetailsReportModel.insertAssignees(vm.GeneralInfo.CustId, vm.EditAssingee.assignees);
+    };
 
     vm.getLogNotes = function () {
         customerDetailsReportModel.getLogNotes(vm.GeneralInfo.CustId).then(function () {
@@ -47,8 +70,32 @@ function ($window, customerDetailsReportModel) {
         });
     };
 
+    customerDetailsReportModel.getHostPermission().then(function () {
+        vm.IsHost = customerDetailsReportModel.IsHost;
+    });
+
     customerDetailsReportModel.getCustInfoById(vm.GeneralInfo.CustId).then(function () {
         vm.CustInfo = customerDetailsReportModel.CustInfo;
+    });
+
+    customerDetailsReportModel.getAssigneesById(vm.GeneralInfo.CustId).then(function () {
+        vm.EditAssingee.assignees = customerDetailsReportModel.EditAssingee.assignees;
+
+        customerDetailsReportModel.getUsers().then(function () {
+            vm.EditAssingee.Assignees = customerDetailsReportModel.EditAssingee.Assignees;
+
+            var assignees = vm.EditAssingee.assignees.split(',');
+
+            angular.forEach(assignees, function (assignee) {
+                angular.forEach(vm.EditAssingee.Assignees, function (item) {
+                    if (item.name === assignee) {
+                        item.ticked = true;
+
+                        vm.EditAssingee.AssigneesTicked.push(item);
+                    }
+                });
+            });
+        });
     });
 
     customerDetailsReportModel.getFraudCaseDetails(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {

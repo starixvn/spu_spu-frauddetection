@@ -14,6 +14,13 @@ function (customerDetailsReportFactory, $location) {
     customerDetailsReportModel.SportsByMargin = [];
     customerDetailsReportModel.BettypesByMargin = [];
     customerDetailsReportModel.DailyViolatedTickets = [];
+    customerDetailsReportModel.IsHost = false;
+    customerDetailsReportModel.EditAssingee = {
+        isEditAssignee: false,
+        assignees: '',
+        Assignees: [],
+        AssigneesTicked: []
+    };
 
     var params = $location.search();
 
@@ -21,6 +28,39 @@ function (customerDetailsReportFactory, $location) {
         CustId: parseInt(params.custId),
         FromDate: params.fromDate,
         ToDate: params.toDate
+    };
+
+    customerDetailsReportModel.getHostPermission = function () {
+        return customerDetailsReportFactory.getHostPermission().success(function (result) {
+            customerDetailsReportModel.IsHost = result;
+        });
+    };
+
+    customerDetailsReportModel.insertAssignees = function (custId, assignees) {
+        return customerDetailsReportFactory.insertAssignees(custId, assignees).success(function (result) {
+            AlertService.showAlert(result);
+        });
+    };
+
+    customerDetailsReportModel.getAssigneesById = function (custId) {
+        return customerDetailsReportFactory.getAssigneesById(custId).success(function (assignees) {
+            customerDetailsReportModel.EditAssingee.assignees = assignees;
+        });
+    };
+
+    customerDetailsReportModel.getUsers = function () {
+        return customerDetailsReportFactory.getUsers().success(function (users) {
+            customerDetailsReportModel.EditAssingee.Assignees = [];
+
+            angular.forEach(users, function (user) {
+                var newUser = {
+                    name: user.Username,
+                    ticked: false
+                };
+
+                customerDetailsReportModel.EditAssingee.Assignees.push(newUser);
+            });
+        });
     };
 
     customerDetailsReportModel.updateDelinquency = function (custId, isDelinquent) {

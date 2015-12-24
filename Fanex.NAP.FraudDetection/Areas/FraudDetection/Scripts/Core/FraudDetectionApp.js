@@ -1,6 +1,10 @@
 ﻿/*exported fraudDetectionModule, taskModule, suspiciousCustomerReportModule */
 
-var fraudDetectionModule = angular.module("fraudDetectionModule", ['taskModule', 'suspiciousCustomerReportModule', 'customerDetailsReportModule']);
+var fraudDetectionModule = angular.module("fraudDetectionModule",
+    ['taskModule',
+    'suspiciousCustomerReportModule',
+    'customerDetailsReportModule',
+    'isteven-multi-select']);
 
 var taskModule = angular.module("taskModule", []);
 

@@ -420,7 +420,7 @@ Format styles
 }
 
 /*to make line-through for void-parlay-ticket*/
-div.mx-parlay div.refund span, div.mx-parlay div.refund div,
+div.mx-parlay div.refund span, div.mx-parlay div.refund div
 {
     text-decoration: line-through;
 }
@@ -428,7 +428,7 @@ div.mx-parlay div.refund > div.match, div.mx-parlay div.refund div.firstGoal, di
 {
     text-decoration: none;
 }
-div.mx-parlay div.reject span, div.mx-parlay div.reject div,
+div.mx-parlay div.reject span, div.mx-parlay div.reject div
 {
     text-decoration: line-through;
 }

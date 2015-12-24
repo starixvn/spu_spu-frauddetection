@@ -30,3 +30,20 @@ body, table
     background-repeat: no-repeat;
     height: 18px;
 }
+
+.btn-edit 
+{
+    height: 18px;
+    width: 18px;
+    background: rgba(0, 0, 0, 0) url(../App_Themes/Images/edit-ico.png) no-repeat scroll 0 0;
+}
+
+.btn-cancel {
+    padding: 0 0 0 18px;
+    background: rgba(0, 0, 0, 0) url(../App_Themes/Images/delete.png) no-repeat scroll 0 0;
+}
+
+.btn-apply {
+    background: rgba(0, 0, 0, 0) url(../App_Themes/Images/accept.png) no-repeat scroll 0 0;
+    padding: 0 0 0 18px;
+}

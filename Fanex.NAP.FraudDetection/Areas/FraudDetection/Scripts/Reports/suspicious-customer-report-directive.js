@@ -13,7 +13,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
             { HeaderText: "Total Violations", Width: 80, Name: "TotalViolations", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "New Violations", Width: 80, Name: "NewViolations", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Violated Cases", Width: 80, Name: "ViolatedCases", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Assignees", Width: 200, Name: "Assignees", HeaderAlign: "center", CellAlign: "center" }
+            { HeaderText: "Assignees", Width: 200, Name: "Assignees", HeaderAlign: "center", CellAlign: "left" }
         ];
 
         return columnHeaders;

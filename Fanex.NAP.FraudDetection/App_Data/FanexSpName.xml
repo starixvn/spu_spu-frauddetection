@@ -127,6 +127,8 @@
   </Function>
 
   <Function Name="CustomerDetails">
+    <Setting Key="FD_CustomerDetailsAssigneesGetByCustId" SpName="FD_CustomerDetailsAssigneesGetByCustId" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsAssigneesInsert" SpName="FD_CustomerDetailsAssigneesInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDelinquentUpdate" SpName="FD_CustomerDelinquentUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerVerifyInsert" SpName="FD_CustomerVerifyInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerNoteInsert" SpName="FD_CustomerNoteInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />

@@ -73,6 +73,36 @@ customerDetailsReportModule.factory('customerDetailsReportFactory', ['$http', fu
                 params:
                     { custId: custId, isDelinquent: isDelinquent }
             });
+        },
+
+        getUsers: function () {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/GetUsers");
+
+            return $http.get(url);
+        },
+
+        getAssigneesById: function (custId) {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/GetAssigneesById");
+
+            return $http.get(url, {
+                params:
+                    { custId: custId }
+            });
+        },
+
+        insertAssignees: function (custId, assignees) {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/InsertAssignees");
+
+            return $http.get(url, {
+                params:
+                    { custId: custId, assignees: assignees }
+            });
+        },
+
+        getHostPermission: function () {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/GetHostPermission");
+
+            return $http.get(url);
         }
     };
 } ]);

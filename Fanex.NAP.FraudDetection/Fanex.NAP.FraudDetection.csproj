@@ -318,7 +318,10 @@
     <Content Include="Areas\FraudDetection\AddOns\TagIt\tag-it.js" />
     <Content Include="Areas\FraudDetection\AddOns\TagIt\tag-it.min.js" />
     <Content Include="Areas\FraudDetection\AddOns\TagIt\tagit.ui-zendesk.css" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\accept.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\basic-icon.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\delete.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\edit-ico.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\glyphicons-halflings.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="App_Start\BundleExtensions.cs" />
@@ -535,7 +538,7 @@
     <Content Include="Areas\FraudDetection\Scripts\Task\task-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
     <Content Include="Content\betlist\betlist.core.css" />
-    <Content Include="Content\betlist\betList.css" />
+    <None Include="Content\betlist\betList.css1" />
     <Content Include="Content\betlist\custom-betlist.css" />
     <Content Include="Content\betlist\fanex.result.css" />
     <Content Include="Content\betlist\global.content.css" />
@@ -619,6 +622,7 @@
     <Content Include="Content\Common\Images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\Common\Images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\Common\Images\white-top-bottom.gif" />
+    <Content Include="Content\Common\isteven-multi-select.css" />
     <Content Include="Content\Common\jquery-ui.css" />
     <Content Include="Content\Common\jquery-ui.min.css" />
     <Content Include="Content\Common\multi-select-control.css" />
@@ -646,6 +650,7 @@
     <Content Include="Dependencies\FD.Lib.DTO.dll" />
     <Content Include="Dependencies\FD.Lib.Model.dll" />
     <Content Include="Dependencies\FD.Lib.Service.dll" />
+    <Content Include="Areas\FraudDetection\Scripts\Core\isteven-multi-select.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />

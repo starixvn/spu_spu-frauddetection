@@ -10,15 +10,19 @@
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System;
+    using System.Configuration;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using System.Collections.Generic;
     using Core.Business;
+    using Core.Service.Impl;
     using Core.Web.Attribute;
     using FD.Lib.Criteria.Reports.CustomerDetails;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using Service;
     using Service.Core;
+    using Service.Utilities;
 
     /// <summary>
     /// The controller of Customer Details Report.
@@ -88,7 +92,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetDailyViolatedTickets(int custId, DateTime fromDate, DateTime toDate)
         {
             var result = _customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
-            //result = result.OrderByDescending(l => l.TransDate);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -141,6 +144,63 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var result = _customerDetailsReportService.UpdateCustomerDelinquent(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Host)]
+        public ActionResult GetUsers()
+        {
+            var users = new UserService().GetBySite(int.Parse(ConfigurationManager.AppSettings["SiteId"]));
+            var result = new List<Core.Domain.IUser>();
+            foreach (var user in users)
+            {
+                if (user.Group == null)
+                {
+                    result.Add(user);
+                }
+                else if (user.Group.Name != "IT")
+                {
+                    result.Add(user);
+                }
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetAssigneesById(int custId)
+        {
+            var assignees = _customerDetailsReportService.GetAssignees(new CustomerDetailsAssigneesGetByIdCriteria
+            {
+                CustId = custId
+            });
+
+            return Json(assignees, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Host)]
+        public ActionResult InsertAssignees(int custId, string assignees)
+        {
+            var criteria = new CustomerDetailsAssigneesInsertCriteria
+            {
+                CustId = custId,
+                Assignees = assignees,
+                AuthorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0
+            };
+
+            var result = _customerDetailsReportService.InsertAssignees(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetHostPermission()
+        {
+            var permission = PermissionService.HasHostPermission(FDFunctionKeys.SuspiciousCustomer);
+            return Json(permission, JsonRequestBehavior.AllowGet);
         }
     }
 }
