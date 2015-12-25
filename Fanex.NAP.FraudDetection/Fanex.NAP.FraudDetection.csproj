@@ -520,6 +520,10 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-directive.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-model.js" />
@@ -528,9 +532,6 @@
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-directive.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-factory.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report-service.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\matchmonitoring-report.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-model.js" />

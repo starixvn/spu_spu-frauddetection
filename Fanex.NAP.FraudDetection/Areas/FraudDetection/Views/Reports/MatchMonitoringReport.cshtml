@@ -7,15 +7,12 @@
 @section HeadCss
 {
     <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/Content/matchmonitoring.css" />
-    <link href="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.css"
-          rel="stylesheet" type="text/css" />
 }
 @section FooterJs
 {
     @Scripts.Render("~/bundles/App/MatchMonitoringReport")
-    <script src="~/Areas/FraudDetection/Scripts/Reports/matchmonitoring-report.js" type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js"
-            type="text/javascript"></script>
+        type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
 }
 <div>
@@ -24,82 +21,118 @@
 <div class="newline">
     &nbsp;
 </div>
-@using (Html.BeginForm("Search", "MatchMonitoring", FormMethod.Get, new { @id = "formSearch", @class = "form-inline col-sm-12 filter-forml" }))
-{
-    <div class="form-group col-sm-12" style="margin-left: -70px;">
-        <div class="col-sm-3" style="text-align: right;">
-            <label class="text-right" style="margin-right: 10px;">
-                Event Date
-            </label>
-            @Html.TextBox("EventDate", DateTime.Now.ToShortDateString(), new { @readonly = "readonly", style = "height:25px; width:75px;" })
-            <i class="icon-calendar icon-event-date-calendar" id="eventDateDatetimePickerIcon" style=""></i>
+<div ng-controller="matchMonitoringReportController as mmrCtrl">
+    <div class="form-inline filter-forml col-sm-12">
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Event Date
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input datetimepicker type="text" readonly="readonly" style="width: 80px; height: 25px;"
+                        id="eventDate" ng-click="mmrCtrl.openCalendar('#eventDate')" ng-model="mmrCtrl.filter.EventDate"
+                        ng-change="mmrCtrl.changeEventDate()" />
+                    <span class="icon-calendar icon-event-date-calendar" ng-click="mmrCtrl.openCalendar('#eventDate')">
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        League
+                    </label>
+                </div>
+                <div class="col-sm-10">
+                    <select ng-model="mmrCtrl.filter.LeagueId" style="height: 25px;" ng-options="league.LeagueId as league.LeagueName for league in mmrCtrl.Leagues">
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-9">
-            <label class="col-sm-2 text-right">
-                League
-            </label>
-            <select name="Leagues" id="Leagues" style="height: 25px; width: 520px;">
-                <option value="-1">All Leagues</option>
-                @foreach (var league in ViewBag.Leagues)
-                {
-                    <option value="@league.LeagueId">@league.LeagueName</option>
-                }
-            </select>
+        <div style="height: 35px;">
+            &nbsp;</div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Match Code
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="text" ng-model="mmrCtrl.filter.MatchCode" style="width: 97px; height: 25px;" />
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Match Status
+                    </label>
+                </div>
+                <div class="col-sm-2">
+                    <select ng-model="mmrCtrl.filter.MatchStatus" style="width: 97px; height: 25px;"
+                        ng-options="status.Value as status.Name for status in mmrCtrl.MatchStatuses">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div style="height: 35px;">
+            &nbsp;</div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Suspicious
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <select ng-model="mmrCtrl.filter.SuspiciousStatus" style="width: 97px; height: 25px;"
+                        ng-options="status.Value as status.Name for status in mmrCtrl.SuspiciousStatuses">
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: right;">
+                </div>
+                <div class="col-sm-10">
+                    <button style="width: 97px; height: 25px;" class="btn-green" ng-click="mmrCtrl.queryMatchMonitoringReport()">
+                        Generate</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="" style="height: 35px;">&nbsp;</div>
-    <div class="form-group col-sm-12" style="margin-left: -70px;">
-        <div class="col-sm-3" style="text-align: right;">
-            <label class="text-right" style="margin-right: 10px;">
-                Match Code
-            </label>
-            <input style="height: 25px; width: 93px;" id="MatchCode"></input>
-        </div>
-        <div class="col-sm-3" style="margin-left: -8px;">
-            <label class="col-sm-7 text-right">
-                Match Status
-            </label>
-            <select style="height: 25px; width: 100px; margin-left: -2px" id="MatchStatus">
-                <option value="All">All</option>
-                <option value="Completed">Completed</option>
-                <option value="running">Running</option>
-            </select>
-        </div>
-        <div class="col-sm-6">
-            <label class="text-right">
-                Has Suspicious Customer(s)
-            </label>
-            <select style="height: 25px; width: 92px;" id="SuspiciousStatus">
-                <option value="0">All</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
-            </select>
-            <button class="btn-green" id="btnSearch">Search</button>
+    <div class="newline">
+        &nbsp;</div>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <div class="col-sm-4" style="text-align: center;">
+                <img class="ico-scannednosuspicious" alt="" title='Scanned and has no suspicious case.' />
+                <label class="text-right">
+                    : Has NO suspicious Customer
+                </label>
+            </div>
+            <div class="col-sm-4" style="text-align: center;">
+                <img class="ico-scannedhassuspicious" alt="" title='Scanned and has suspicious cases.' />
+                <label class="text-right">
+                    : Has suspicious Customer(s)
+                </label>
+            </div>
+            <div class="col-sm-4" style="text-align: center;">
+                <img class="ico-notscanned" alt="" title='Not scanned.' />
+                <label class="text-right" style="margin-right: 10px;">
+                    : Is not scanned
+                </label>
+            </div>
         </div>
     </div>
-}
-<div id="matchSearch" class="newline">
-    &nbsp;
-</div>
-<div class="form-group col-sm-10" style="margin: 0 0 0 -10px;">
-    <div class="col-sm-4">
-        <img class="ico-scannednosuspicious" alt="" title='Scanned and has no suspicious case.' />
-        <label class="text-right">
-            : Has NO suspicious Customer
-        </label>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <div class="report-header hidden" id="report-header">
+                <div class="export-excel-icon" ng-click="mmrCtrl.exportExcel()">
+                </div>
+            </div>
+            <div id="match-monitoring-report" class="freegrid" data-fanex-grid-match-monitoring-report data-grid-data="mmrCtrl.MatchMonitoringReport">
+            </div>
+        </div>
     </div>
-    <div class="col-sm-4">
-        <img class="ico-scannedhassuspicious" alt="" title='Scanned and has suspicious cases.' />
-        <label class="text-right">
-            : Has suspicious Customer(s)
-        </label>
-    </div>
-    <div class="col-sm-3">
-        <img class="ico-notscanned" alt="" title='Not scanned.' />
-        <label class="text-right" style="margin-right: 10px;">
-            : Is not scanned
-        </label>
-    </div>
-</div>
-<div id="matchMonitoringReport" class="freegrid content-grid">
 </div>

@@ -63,7 +63,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">Match Monitoring Report Get All Criteria.</param>
         /// <returns>Match monitoring report data.</returns>
-        [HttpGet]
+        [HttpPost]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria)
         {

@@ -4,6 +4,7 @@ var fraudDetectionModule = angular.module("fraudDetectionModule",
     ['taskModule',
     'suspiciousCustomerReportModule',
     'customerDetailsReportModule',
+    'matchMonitoringReportModule',
     'isteven-multi-select']);
 
 var taskModule = angular.module("taskModule", []);
@@ -16,4 +17,6 @@ customerDetailsReportModule.config(['$locationProvider', function ($locationProv
         enabled: true,
         requireBase: false
     });
-}]);
+} ]);
+
+var matchMonitoringReportModule = angular.module("matchMonitoringReportModule", []);
