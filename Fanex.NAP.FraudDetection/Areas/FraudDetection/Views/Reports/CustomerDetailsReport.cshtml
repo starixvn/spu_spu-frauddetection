@@ -132,10 +132,10 @@
                 Win Loss Statistic</div>
         </div>
         <div class="suspicious-customer-follow-up-detail" style="margin-left: 20px;">
-            <div ng-if="cdrCtrl.EventChoices.length == 0">
+            <div ng-if="cdrCtrl.Summary.BetCount == null">
                 <b style="color: red;">Loading…</b>
             </div>
-            <div ng-if="cdrCtrl.EventChoices.length > 0">
+            <div ng-if="cdrCtrl.Summary.BetCount >= 0">
                 <table>
                     <tr>
                         <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
