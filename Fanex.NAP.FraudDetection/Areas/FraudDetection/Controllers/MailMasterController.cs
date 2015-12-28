@@ -14,17 +14,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Configuration;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.FraudDetection.Service.Core;
+    using Core.Business;
+    using Core.Web.Attribute;
     using FD.Lib.Criteria.MailMaster;
     using FD.Lib.DTO;
     using FD.Lib.Service.Implement;
-    using MailDelivery.Admin.Handlers;
-    using MailDelivery.Client.Messages.MailManage;
-    using MailDelivery.Client.Messages.Recipient;
-    using MailDelivery.Client.Models;
+    using MailDelivery.Admin.Messaging.ManageMail;
+    using MailDelivery.Admin.Messaging.ManageRecipient;
+    using MailDelivery.Admin.Services.Mail;
+    using MailDelivery.Admin.Services.Recipient;
     using NAP.FraudDetection.Controllers;
+    using Service.Core;
 
     /// <summary>
     /// The controller of mail master.
@@ -33,9 +33,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     {
         private readonly MailMasterService _mailMasterService;
 
+        private readonly IMailService _mailService;
+
+        private readonly IRecipientService _recipientService;
+
         public MailMasterController()
         {
             _mailMasterService = new MailMasterService();
+            _mailService = new MailService();
+            _recipientService = new RecipientService();
         }
 
         [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Read)]
@@ -81,26 +87,24 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             if (ModelState.IsValid)
             {
-                MailAdminHandler.Start();
-                var mailModel =  MailAdminHandler.RequestGetMailMessage(criteria.MailCode);
-                if (mailModel.Count > 0)
+                var mailListRequest = GenerateMailListRequest(criteria.MailCode);
+                var mailListResponse = _mailService.GetMailList(mailListRequest);
+                if (mailListResponse.MailModels.Count > 0)
                 {
-                    MailAdminHandler.Stop();
                     return Json(new { ErrCode = 1, IsSuccessful = false, Message = "This Mail Master has existed!" }, JsonRequestBehavior.AllowGet);
                 }
 
-                var mailRegisterResult = MailAdminHandler.RequestCreateMailMessage(GenerateInsertMailModel(criteria));
-                if (mailRegisterResult.ErrCode > 0)
+                var mailRegisterRequest = GenerateFunctionMailRequest(criteria);
+                var mailRegisterResponse = _mailService.CreateFunctionMail(mailRegisterRequest);
+                if (mailRegisterResponse.ErrCode > 0)
                 {
-                    MailAdminHandler.Stop();
-                    return Json(new { mailRegisterResult.ErrCode, IsSuccessful = false, Message = mailRegisterResult.ErrMsg }, JsonRequestBehavior.AllowGet);
+                    return Json(new { mailRegisterResponse.ErrCode, IsSuccessful = false, Message = mailRegisterResponse.ErrMsg }, JsonRequestBehavior.AllowGet);
                 }
 
-                var mailInfo = MailAdminHandler.RequestGetMailMessage(criteria.MailCode);
+                mailListResponse = _mailService.GetMailList(mailListRequest);
                 criteria.CreatorId = 1;
-                criteria.MailingListId = mailInfo[0].MailId;
+                criteria.MailingListId = mailListResponse.MailModels[0].MailId;
                 var result = _mailMasterService.InsertMail(criteria);
-                MailAdminHandler.Stop();
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -115,42 +119,54 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return new JsonResult { Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage } };
         }
 
+        private GetMailListRequest GenerateMailListRequest(string mailName)
+        {
+            return new GetMailListRequest
+            {
+                MailName = mailName,
+                Status = 1,
+                TriggerType = -1,
+                SiteId = int.Parse(ConfigurationManager.AppSettings["SiteId"])
+            };
+        }
+
         private string GenerateRecipientIdList(string emailList)
         {
             var emails = emailList.Split(';');
             var emailIds = string.Empty;
             foreach (var email in emails)
             {
-                var recipientInfo = MailAdminHandler.RequestGetRecipientMessage(email);
-                if (recipientInfo.Count <= 0)
+                var recipientInfoRequest = new GetRecipientListRequest { Emails = email };
+                var recipientInfoResponse = _recipientService.GetRecipientList(recipientInfoRequest);
+                if (recipientInfoResponse.RecipientModels.Count <= 0)
                 {
-                    MailAdminHandler.RequestCreateRecipientMessage(new CreateRecipientMessage
-                        {
-                            Email1 = email,
-                            Status = true
-                        });
-                    recipientInfo = MailAdminHandler.RequestGetRecipientMessage(email);
+                    _recipientService.CreateRecipient(new CreateRecipientRequest
+                    {
+                        Email1 = email,
+                        Status = true
+                    });
+                    recipientInfoResponse = _recipientService.GetRecipientList(recipientInfoRequest);
                 }
-                emailIds += recipientInfo[0].EmailID1 + ",";
+                emailIds += recipientInfoResponse.RecipientModels[0].EmailId1 + ",";
             }
 
             return emailIds.Remove(emailIds.Length - 1);
         }
 
-        private CreateMailMessage GenerateInsertMailModel(MailMasterInsertCriteria criteria)
+        private CreateFunctionMailRequest GenerateFunctionMailRequest(MailMasterInsertCriteria criteria)
         {
-            return new CreateMailMessage
-                {
-                    MailName = criteria.MailCode,
-                    Description = criteria.MailDesc,
-                    MailFrom = "Automated Fraud Detection",
-                    MailTo = string.IsNullOrEmpty(criteria.To) ? string.Empty : GenerateRecipientIdList(criteria.To),
-                    MailCc = string.IsNullOrEmpty(criteria.CcTo) ? string.Empty : GenerateRecipientIdList(criteria.CcTo),
-                    MailBcc = string.IsNullOrEmpty(criteria.BccTo) ? string.Empty : GenerateRecipientIdList(criteria.BccTo),
-                    MailGroupId = int.Parse(ConfigurationManager.AppSettings["MailGroupId"]),
-                    SiteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]),
-                    IsActive = true
-                };
+            return new CreateFunctionMailRequest
+            {
+                MailName = criteria.MailCode,
+                Description = criteria.MailDesc,
+                MailTo = string.IsNullOrEmpty(criteria.To) ? string.Empty : GenerateRecipientIdList(criteria.To),
+                MailCc = string.IsNullOrEmpty(criteria.CcTo) ? string.Empty : GenerateRecipientIdList(criteria.CcTo),
+                MailBcc = string.IsNullOrEmpty(criteria.BccTo) ? string.Empty : GenerateRecipientIdList(criteria.BccTo),
+                GroupId = int.Parse(ConfigurationManager.AppSettings["MailGroupId"]),
+                SiteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]),
+                IsActive = true,
+
+            };
         }
 
         #endregion
@@ -201,8 +217,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         private MailMasterUpdateCriteria GenerateMailMasterModel(MailMasterInfo mailMasterInfo)
         {
-            MailAdminHandler.Start();
-            var mailInfo = MailAdminHandler.RequestGetMailMessage(mailMasterInfo.MailCode);
+            var mailListRequest = GenerateMailListRequest(mailMasterInfo.MailCode);
+            var mailListResponse = _mailService.GetMailList(mailListRequest);
             var mailMasterUpdateCriteria = new MailMasterUpdateCriteria
             {
                 IsActive = mailMasterInfo.IsActive,
@@ -212,11 +228,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 MailId = mailMasterInfo.MailId,
                 MailingListId = mailMasterInfo.MailingListId,
                 MailSubject = mailMasterInfo.MailSubject,
-                To = mailInfo[0].MailTo,
-                CcTo = mailInfo[0].MailCc,
-                BccTo = mailInfo[0].MailBcc
+                To = mailListResponse.MailModels[0].MailTo,
+                CcTo = mailListResponse.MailModels[0].MailCc,
+                BccTo = mailListResponse.MailModels[0].MailBcc
             };
-            MailAdminHandler.Stop();
 
             return mailMasterUpdateCriteria;
         }
@@ -231,33 +246,30 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.MailMaster, Policy = Constant.Policy.Host)]
         public ActionResult EditMail(MailMasterUpdateCriteria criteria)
         {
-            MailAdminHandler.Start();
-            var mailRegisterResult = MailAdminHandler.RequestUpdateMailMessage(GenerateUpdateMailModel(criteria));
-            if (mailRegisterResult.ErrCode > 0)
+            var updateMailRequest = GenerateUpdateMailRequest(criteria);
+            var updateMailResponse = _mailService.UpdateFunctionMail(updateMailRequest);
+            if (updateMailResponse.ErrCode > 0)
             {
-                MailAdminHandler.Stop();
-                return Json(new { mailRegisterResult.ErrCode, IsSuccessful = false, Message = mailRegisterResult.ErrMsg }, JsonRequestBehavior.AllowGet);
+                return Json(new { updateMailResponse.ErrCode, IsSuccessful = false, Message = updateMailResponse.ErrMsg }, JsonRequestBehavior.AllowGet);
             }
 
             criteria.CreatorId = 1;
             var result = _mailMasterService.UpdateMail(criteria);
-            MailAdminHandler.Stop();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        private UpdateMailMessage GenerateUpdateMailModel(MailMasterUpdateCriteria criteria)
+        private UpdateFunctionMailRequest GenerateUpdateMailRequest(MailMasterUpdateCriteria criteria)
         {
-            var a = new UpdateMailMessage
+            var a = new UpdateFunctionMailRequest
             {
                 MailId = criteria.MailingListId,
                 MailName = criteria.MailCode,
                 Description = criteria.MailDesc,
-                MailFrom = "Automated Fraud Detection",
                 MailTo = string.IsNullOrEmpty(criteria.To) ? string.Empty : GenerateRecipientIdList(criteria.To),
                 MailCc = string.IsNullOrEmpty(criteria.CcTo) ? string.Empty : GenerateRecipientIdList(criteria.CcTo),
                 MailBcc = string.IsNullOrEmpty(criteria.BccTo) ? string.Empty : GenerateRecipientIdList(criteria.BccTo),
-                MailGroupId = int.Parse(ConfigurationManager.AppSettings["MailGroupId"]),
+                GroupId = int.Parse(ConfigurationManager.AppSettings["MailGroupId"]),
                 SiteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]),
                 IsActive = true
             };
@@ -285,7 +297,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
+
+        protected override void Dispose(bool disposing)
+        {
+            _mailService.Dispose();
+            base.Dispose(disposing);
+        }
+
         #endregion
     }
 }

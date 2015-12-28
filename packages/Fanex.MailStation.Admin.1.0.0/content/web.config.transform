@@ -1,0 +1,6 @@
+﻿<configuration>
+    <configSections>
+        <section name="Fanex.MailDelivery.Admin" type="Fanex.MailDelivery.Admin.Configurations.MailAdminSection, Fanex.MailDelivery.Admin" />
+    </configSections>
+   <Fanex.MailDelivery.Admin rabbitMQConnectionString="host=localhost;virtualHost=/QCLocalTest;username=rabbitclient" clientNotifyTimeOutInSecond="20" />
+</configuration>
