@@ -24,6 +24,22 @@ matchMonitoringReportModule.factory('matchMonitoringReportFactory', ['$http', fu
             return $http.get(url, {
                 params: { caseName: caseName }
             });
+        },
+
+        updateDelinquency: function (matchId, isActive) {
+            var url = SPU.getAbsoluteUrl("MatchMonitoring/UpdateDelinquency");
+
+            return $http.get(url, {
+                params: { matchId: matchId, isActive: isActive }
+            });
+        },
+
+        updateVerification: function (matchId, isActive) {
+            var url = SPU.getAbsoluteUrl("MatchMonitoring/UpdateVerification");
+
+            return $http.get(url, {
+                params: { matchId: matchId, isActive: isActive }
+            });
         }
     };
 } ]);

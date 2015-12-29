@@ -9,6 +9,7 @@ function (matchMonitoringReportFactory) {
     matchMonitoringReportModel.Leagues = [];
     matchMonitoringReportModel.MatchMonitoringReport = {};
     matchMonitoringReportModel.CaseId = '';
+    matchMonitoringReportModel.IsUpdated = false;
 
     matchMonitoringReportModel.MatchStatuses = [
         { Value: 'All', Name: "All" },
@@ -52,6 +53,20 @@ function (matchMonitoringReportFactory) {
     matchMonitoringReportModel.getCaseIdFromCaseName = function (caseName) {
         return matchMonitoringReportFactory.getCaseIdFromCaseName(caseName).success(function (caseId) {
             matchMonitoringReportModel.CaseId = caseId;
+        });
+    };
+
+    matchMonitoringReportModel.updateDelinquency = function (matchId, isActive) {
+        return matchMonitoringReportFactory.updateDelinquency(matchId, isActive).success(function (result) {
+            matchMonitoringReportModel.IsUpdated = result.IsSuccessful;
+            AlertService.showAlert(result);
+        });
+    };
+
+    matchMonitoringReportModel.updateVerification = function (matchId, isActive) {
+        return matchMonitoringReportFactory.updateVerification(matchId, isActive).success(function (result) {
+            matchMonitoringReportModel.IsUpdated = result.IsSuccessful;
+            AlertService.showAlert(result);
         });
     };
 

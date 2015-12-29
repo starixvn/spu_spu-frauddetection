@@ -11,12 +11,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
+    using Core.Business;
+    using Core.Web.Attribute;
     using Data.Repository;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Core.ExportExcel;
     using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Common;
@@ -25,12 +25,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.DTO;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
-    using RemotingRef;
     using NPOI.SS.UserModel;
+    using RemotingRef;
+    using Service;
+    using Service.Core;
 
-    /// <summary>
-    /// The controller of Match Monitoring Report.
-    /// </summary>
     public class MatchMonitoringController : BaseController
     {
         private readonly MatchMonitoringReportService _matchMonitoringReportService;
@@ -42,10 +41,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _caseService = new CaseService();
         }
 
-        /// <summary>
-        /// Main page.
-        /// </summary>
-        /// <returns>The ActionResult.</returns>
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
@@ -58,11 +53,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return View("~/Areas/FraudDetection/Views/Reports/MatchMonitoringReport.cshtml");
         }
 
-        /// <summary>
-        /// Get Match Monitoring report data.
-        /// </summary>
-        /// <param name="criteria">Match Monitoring Report Get All Criteria.</param>
-        /// <returns>Match monitoring report data.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria)
@@ -79,11 +69,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>
-        /// Export Match Monitoring report to Excel file.
-        /// </summary>
-        /// <param name="criteria">Match Monitoring Report Get All Criteria.</param>
-        /// <returns>Match monitoring report data.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria)
@@ -118,7 +103,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return new List<Legend>
                 {
                     new Legend("Event Date", criteria.EventDate.ToShortDateString()),
-                    new Legend("League", criteria.LeagueId == -1 ? "All Leagues" : RefData.GetLeagueName(criteria.LeagueId.ToString(), "en", "All Leagues")),
+                    new Legend("League", criteria.LeagueId == -1 ? "All Leagues" : RefData.GetLeagueName(criteria.LeagueId.ToString(CultureInfo.InvariantCulture), "en", "All Leagues")),
                     new Legend("Match Code", criteria.MatchCode),
                     new Legend("Match Status", criteria.MatchStatus),
                     new Legend("Has Suspicious Customer(s)", criteria.SuspiciousStatus == 0 ? "All" : (criteria.SuspiciousStatus == 1 ? "Yes" : "No"))
@@ -147,11 +132,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return headers;
         }
 
-        /// <summary>
-        /// Get all leagues by event date.
-        /// </summary>
-        /// <param name="eventDate">Event Date.</param>
-        /// <returns>The SelectListItem.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetLeaguesByDate(string eventDate)
@@ -176,6 +156,33 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        public ActionResult UpdateDelinquency(int matchId, bool isActive)
+        {
+            var result = _matchMonitoringReportService.UpdateDelinquency(new MatchMonitoringReportUpdateDelinquentCriteria
+            {
+                IsDelinquent = isActive,
+                MatchId = matchId
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        public ActionResult UpdateVerification(int matchId, bool isActive)
+        {
+            var result = _matchMonitoringReportService.UpdateVerification(new MatchMonitoringReportUpdateVerifiedCriteria
+            {
+                IsVerified = isActive,
+                MatchId = matchId,
+                VerifiedBy = AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public int GetCaseIdFromName(string caseName)
         {
             var caseInfo = _caseService.GetCaseByName(new CaseGetByNameCriteria
@@ -190,8 +197,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             foreach (var match in data)
             {
-                var homeName = RefData.GetTeamName(match.HomeId.ToString(), "en", string.Empty);
-                var awayName = RefData.GetTeamName(match.AwayId.ToString(), "en", string.Empty);
+                var homeName = RefData.GetTeamName(match.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
+                var awayName = RefData.GetTeamName(match.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
 
                 match.Event = plainText
                     ? homeName + " vs " + awayName

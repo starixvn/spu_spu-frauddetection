@@ -5,8 +5,11 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
-            { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "#", Width: 40, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "MatchId", Width: 10, Name: "MatchId", HeaderAlign: "center", CellAlign: "left", CanResize: true },
+            { HeaderText: "Delq.", Width: 52, Name: "Delinquent", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Verified", Width: 52, Name: "Verified", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Last Verified By", Width: 100, Name: "LastVerifiedBy", HeaderAlign: "center", CellAlign: "center", CanResize: true },
             { HeaderText: "League", Width: 30, Name: "LeagueName", HeaderAlign: "center", CellAlign: "left", CanResize: true },
             { HeaderText: "Match Code", Width: 10, Name: "MatchCode", HeaderAlign: "center", CellAlign: "center", CanResize: true },
             { HeaderText: "Event", Width: 30, Name: "Event", HeaderAlign: "center", CellAlign: "left", CanResize: true },
@@ -25,6 +28,9 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
                 Columns: [
                     { Name: "Row", Value: index + 1 },
                     { Name: "MatchId", Value: match.MatchId },
+                    { Name: "Delinquent", Value: match, CustomCellRender: delinquentColumn },
+                    { Name: "Verified", Value: match, CustomCellRender: verifiedColumn },
+                    { Name: "LastVerifiedBy", Value: match, CustomCellRender: lastVerifiedByColumn },
                     { Name: "LeagueName", Value: match.LeagueName },
                     { Name: "MatchCode", Value: match.MatchCode },
                     { Name: "Event", Value: match.Event },
@@ -45,6 +51,45 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
         }
 
         return rows;
+    };
+
+    var delinquentColumn = function (cell) {
+        var matchId = cell.Value.MatchId;
+        var result = "<img alt='' " +
+            "data-matchid='" + matchId + "' " +
+            "id='d" + matchId + "' ";
+
+        if (cell.Value.IsDelinquent) {
+            result += "class='macth-monitoring-delinquent ico-tick'>";
+        } else {
+            result += "class='macth-monitoring-delinquent ico-untick'>";
+        }
+
+        return result;
+    };
+
+    var verifiedColumn = function (cell) {
+        var matchId = cell.Value.MatchId;
+        var result = "<img alt='' " +
+            "data-matchid='" + matchId + "' " +
+            "id='v" + matchId + "' ";
+
+        if (cell.Value.IsVerified) {
+            result += "class='macth-monitoring-verified ico-tick'>";
+        } else {
+            result += "class='macth-monitoring-verified ico-untick'>";
+        }
+
+        return result;
+    };
+
+    var lastVerifiedByColumn = function (cell) {
+        var matchId = cell.Value.MatchId;
+        var user = cell.Value.LastVerifiedBy.length > 0 ? cell.Value.LastVerifiedBy : "-";
+        var result = "<span " +
+            "id='lvb" + matchId + "'>" + user + "</span>";
+
+        return result;
     };
 
     var caseColumn = function (cell) {
@@ -91,6 +136,58 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
         });
     };
 
+    var registerUpdateVerifiedEvent = function () {
+        var element = $(".freegrid .table-cell .macth-monitoring-verified");
+
+        element.die("click");
+        element.live("click", function (event) {
+            event.preventDefault();
+
+            var matchId = $(this).data("matchid");
+            var isActive = false;
+            if ($(this).hasClass('ico-tick')) {
+                isActive = true;
+            }
+
+            matchMonitoringReportModel.updateVerification(matchId, !isActive).then(function () {
+                if (matchMonitoringReportModel.IsUpdated) {
+                    if (isActive) {
+                        $('#v' + matchId).removeClass('ico-tick').addClass('ico-untick');
+                    } else {
+                        $('#v' + matchId).removeClass('ico-untick').addClass('ico-tick');
+                    }
+
+                    $('#lvb' + matchId).text($('.account-name').text());
+                }
+            });
+        });
+    };
+
+    var registerUpdateDelinquentEvent = function () {
+        var element = $(".freegrid .table-cell .macth-monitoring-delinquent");
+
+        element.die("click");
+        element.live("click", function (event) {
+            event.preventDefault();
+
+            var matchId = $(this).data("matchid");
+            var isActive = false;
+            if ($(this).hasClass('ico-tick')) {
+                isActive = true;
+            }
+
+            matchMonitoringReportModel.updateDelinquency(matchId, !isActive).then(function () {
+                if (matchMonitoringReportModel.IsUpdated) {
+                    if (isActive) {
+                        $('#d' + matchId).removeClass('ico-tick').addClass('ico-untick');
+                    } else {
+                        $('#d' + matchId).removeClass('ico-untick').addClass('ico-tick');
+                    }
+                }
+            });
+        });
+    };
+
     return {
         restrict: "A",
         scope: {
@@ -133,6 +230,10 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
                         $('#match-monitoring-report').fanexGrid(gridOptions);
 
                         registerViewDetailsEvent();
+
+                        registerUpdateDelinquentEvent();
+
+                        registerUpdateVerifiedEvent();
 
                         $("#report-header").width($('#match-monitoring-report').width());
                         $("#report-header").removeClass("hidden");
