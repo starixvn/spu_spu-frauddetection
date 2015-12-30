@@ -114,14 +114,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var headers = new List<string>();
             headers.Insert(0, "#");
-            headers.Insert(1, "League");
-            headers.Insert(2, "Match Code");
-            headers.Insert(3, "Event");
-            headers.Insert(4, "Status");
+            headers.Insert(1, "Delinquent");
+            headers.Insert(2, "Verified");
+            headers.Insert(3, "League");
+            headers.Insert(4, "Last Verified By");
+            headers.Insert(5, "Match Code");
+            headers.Insert(6, "Event");
+            headers.Insert(7, "Status");
 
             if (data.Any())
             {
-                var columnCount = 5;
+                var columnCount = 8;
                 foreach (var record in data[0].SuspiciousCases)
                 {
                     headers.Insert(columnCount, record.Key);
