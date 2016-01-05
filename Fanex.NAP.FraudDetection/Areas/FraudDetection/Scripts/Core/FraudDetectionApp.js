@@ -1,10 +1,12 @@
-﻿/*exported fraudDetectionModule, taskModule, suspiciousCustomerReportModule */
+﻿/*exported fraudDetectionModule, taskModule, suspiciousCustomerReportModule, customerDetailsReportModule,
+matchMonitoringReportModule, officeIPsReportModule, isteven-multi-select*/
 
 var fraudDetectionModule = angular.module("fraudDetectionModule",
     ['taskModule',
     'suspiciousCustomerReportModule',
     'customerDetailsReportModule',
     'matchMonitoringReportModule',
+    'officeIPsReportModule',
     'isteven-multi-select']);
 
 var taskModule = angular.module("taskModule", []);
@@ -20,3 +22,4 @@ customerDetailsReportModule.config(['$locationProvider', function ($locationProv
 } ]);
 
 var matchMonitoringReportModule = angular.module("matchMonitoringReportModule", []);
+var officeIPsReportModule = angular.module("officeIPsReportModule", []);

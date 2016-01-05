@@ -118,6 +118,12 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report-service.js",
                 "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/App/OfficeIPsReport").Include(
+                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-controller.js",
+                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-directive.js",
+                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-model.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/App/Task").Include(
                 "~/Areas/FraudDetection/Scripts/Task/task-controller.js",
                 "~/Areas/FraudDetection/Scripts/Task/task-factory.js",

@@ -143,4 +143,8 @@
     <Setting Key="FD_CustomerDetailsWinlossStatisticGet" SpName="FD_CustomerDetailsWinlossStatisticGet" DbName="DBFD.bodb_dwrs.bodbSPUNet" />
   </Function>
 
+  <Function Name="OfficeIPs">
+    <Setting Key="FD_OfficeIPsTransListGetByCaseId" SpName="FD_OfficeIPsTransListGetByCaseId" DbName="DBFD.FraudDetection.bodbSPUNet" />
+  </Function>
+
 </Functions>

@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Office IPs";
+}
+@section HeadCss
+{
+    @Styles.Render("~/Content/betlist/FanexBetListCss")
+    <link href="~/Areas/FraudDetection/Content/fraudcasedetail.css" rel="stylesheet" />
+}
+@section FooterJs
+{
+    @Scripts.Render("~/bundles/App/OfficeIPsReport")
+    <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js"
+        type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
+}
+<div>
+    <span class="infor-text">@ViewBag.Title</span>
+</div>
+<div class="newline">
+    &nbsp;
+</div>
+<div ng-controller="officeIPsReportController as oipCtrl">
+    <div class="form-inline filter-forml col-sm-12">
+        <div class="col-sm-6">
+            <div class="col-sm-3" style="text-align: right;">
+                <label style="padding-top: 5px;">
+                    Event Date
+                </label>
+            </div>
+            <div class="col-sm-3">
+                <input datetimepicker type="text" readonly="readonly" style="width: 80px; height: 25px;"
+                    id="eventDateFrom" ng-click="oipCtrl.openCalendar('#eventDateFrom')" ng-model="oipCtrl.filter.FromDate" />
+                <span class="icon-calendar icon-event-date-calendar" ng-click="oipCtrl.openCalendar('#eventDateFrom')">
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <input datetimepicker type="text" readonly="readonly" style="width: 80px; height: 25px;"
+                    id="eventDateTo" ng-click="oipCtrl.openCalendar('#eventDateTo')" ng-model="oipCtrl.filter.ToDate" />
+                <span class="icon-calendar icon-event-date-calendar" ng-click="oipCtrl.openCalendar('#eventDateTo')">
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <button class="btn-green" style="" ng-click="oipCtrl.query()">
+                    Generate</button>
+            </div>
+        </div>
+    </div>
+    <div class="newline">
+        &nbsp;
+    </div>
+    <div class="row" ng-if="oipCtrl.isReady">
+        <div class="col-sm-12">
+            <div class="report-header hidden" id="report-header">
+                <div class="export-excel-icon" ng-click="oipCtrl.exportExcel()">
+                </div>
+            </div>
+            <div id="office-ip-report" class="freegrid" data-fanex-grid-office-ip-report data-grid-data="oipCtrl.SuspiciousTickets">
+            </div>
+        </div>
+    </div>
+</div>

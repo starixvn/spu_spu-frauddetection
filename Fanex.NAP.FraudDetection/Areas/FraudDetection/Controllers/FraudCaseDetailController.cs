@@ -46,7 +46,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var model = _service.GetFraudCaseDetails(criteria);
 
-            return View("~/Areas/FraudDetection/Views/FraudCaseDetail/FraudCaseDetailList.cshtml", model);
+            return View("~/Areas/FraudDetection/Views/Reports/FraudCaseDetailList.cshtml", model);
         }
 
         /// <summary>

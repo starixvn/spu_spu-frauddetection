@@ -325,6 +325,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\glyphicons-halflings.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="App_Start\BundleExtensions.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\OfficeIPsController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerDetailsController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\DailyDataMonitoringController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\FraudCaseDetailController.cs" />
@@ -520,6 +521,10 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-directive.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-factory.js" />
@@ -539,6 +544,7 @@
     <Content Include="Areas\FraudDetection\Scripts\Task\task-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
     <Content Include="Content\betlist\betlist.core.css" />
+    <Content Include="Areas\FraudDetection\Views\Reports\OfficeIpReport.cshtml" />
     <None Include="Content\betlist\betList.css1" />
     <Content Include="Content\betlist\custom-betlist.css" />
     <Content Include="Content\betlist\fanex.result.css" />
@@ -730,7 +736,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\FraudDetection\Views\FraudCaseDetail\FraudCaseDetailList.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Reports\FraudCaseDetailList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\MatchMonitoringReport.cshtml" />
     <Content Include="Content\Core\site.css.map">
       <DependentUpon>site.css</DependentUpon>
