@@ -26,5 +26,11 @@ function (officeIPsReportModel) {
         officeIPsReportModel.openCalendar(dateTimePickerId);
     };
 
+    vm.exportExcel = function () {
+        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+        FraudDetectionScripts.downloadFile("OfficeIPs/ExportExcel", vm.filter);
+        waitingDialog.hide();
+    };
+
     officeIPsReportModel.initialDateTimePicker();
 } ]);

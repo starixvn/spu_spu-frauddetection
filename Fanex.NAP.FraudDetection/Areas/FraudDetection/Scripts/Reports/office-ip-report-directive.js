@@ -11,7 +11,7 @@ officeIPsReportModule.directive('fanexGridOfficeIpReport', ['$timeout', function
             { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Bet Type", Width: 90, Name: "BetType", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Choice", Width: 90, Name: "Choice", HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: "Choice", Width: 180, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Score", Width: 70, Name: "Score", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Odds", Width: 70, Name: "Odds", HeaderAlign: "center", CellAlign: "right" },
             { HeaderText: "Stake", Width: 100, Name: "Stake", HeaderAlign: "center", CellAlign: "right" },
