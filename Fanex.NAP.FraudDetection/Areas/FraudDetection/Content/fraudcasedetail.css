@@ -2,6 +2,10 @@
     font-size: 13px;
 }
 
+body {
+    padding: 0 !important;
+}
+
 .bettype, .match, .league, .favorite .favorite, .underdog .favorite{
     display: none;
 }

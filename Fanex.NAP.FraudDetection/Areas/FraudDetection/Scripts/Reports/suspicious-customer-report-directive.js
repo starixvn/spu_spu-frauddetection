@@ -35,7 +35,8 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
                     { Name: "TotalViolations", Value: suspiciousCustomer.TotalViolations },
                     { Name: "NewViolations", Value: suspiciousCustomer.NewViolations },
                     { Name: "ViolatedCases", Value: suspiciousCustomer.ViolatedCases },
-                    { Name: "Assignees", Value: suspiciousCustomer.Assignees !== null ? suspiciousCustomer.Assignees : "-" }
+                    { Name: "Assignees", Value: suspiciousCustomer.Assignees !== null ? 
+                        (suspiciousCustomer.Assignees.length > 0 ? suspiciousCustomer.Assignees : "-") : "-" }
                 ]
             };
 

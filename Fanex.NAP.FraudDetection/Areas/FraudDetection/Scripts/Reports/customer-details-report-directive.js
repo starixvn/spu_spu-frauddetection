@@ -531,7 +531,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                 { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet Type", Width: 90, Name: "BetType", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Choice", Width: 260, Name: "Choice", HeaderAlign: "center", CellAlign: "right" },
-                { HeaderText: "Result", Width: 70, Name: "Score", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Result", Width: 70, Name: "Score", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Odds", Width: 70, Name: "Odds", HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: "Stake", Width: 100, Name: "Stake", HeaderAlign: "center", CellAlign: "right" },
                 {

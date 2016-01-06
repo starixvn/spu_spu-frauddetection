@@ -99,16 +99,16 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
         var caseName = cell.Name;
 
         if (susCount == 0) {
-            return "<img title='Scanned and has no suspicious case.' class='ico-scannednosuspicious' alt=''/>";
+            return "<img class='ico-scannednosuspicious' alt=''/>";
         }
         else if (susCount > 0) {
-            return "<img title='Scanned and has suspicious cases.' class='ico-scannedhassuspicious' " +
+            return "<img class='ico-scannedhassuspicious' " +
                 "data-matchid='" + matchId + "' " +
                 "data-casename='" + caseName + "' " +
                 "data-eventdate='" + eventDate + "'/>";
         }
         else {
-            return "<img title='Not scanned.' class='ico-notscanned' alt=''/>";
+            return "<img class='ico-notscanned' alt=''/>";
         }
     };
 
