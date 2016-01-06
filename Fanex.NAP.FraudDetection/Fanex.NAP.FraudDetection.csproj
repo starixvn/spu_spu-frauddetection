@@ -314,6 +314,24 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Content Include="App_Data\LOCAL\FanexSpName.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\LOCAL\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\FanexSpName.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\FanexSpName.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\FraudDetection\AddOns\TagIt\jquery.tagit.css" />
     <Content Include="Areas\FraudDetection\AddOns\TagIt\tag-it.js" />
     <Content Include="Areas\FraudDetection\AddOns\TagIt\tag-it.min.js" />
@@ -356,12 +374,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="%40JSense.js" />
-    <Content Include="App_Data\FanexSpName.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\NAPFrameworkSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\date-format.js" />
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.css" />
     <Content Include="Areas\FraudDetection\AddOns\TimePicker\jquery-ui-timepicker-addon.js" />
