@@ -150,17 +150,23 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Host)]
         public ActionResult GetUsers()
         {
-            var users = new UserService().GetBySite(int.Parse(ConfigurationManager.AppSettings["SiteId"]));
+            const string functionKey = FDFunctionKeys.SuspiciousCustomer;
+            var siteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]);
+            var suspiciousCustomerFunction = new FunctionService().GetByKeyAndSite(functionKey, siteId);
+            var users = new UserService().GetByFunctionAndSite(suspiciousCustomerFunction.Id, siteId);
             var result = new List<Core.Domain.IUser>();
+            
             foreach (var user in users)
             {
-                if (user.Group == null)
+                if (user.Policy != (decimal)Constant.Policy.Read) continue;
+
+                if (user.User.Group == null)
                 {
-                    result.Add(user);
+                    result.Add(user.User);
                 }
-                else if (user.Group.Name != "IT")
+                else if (!user.User.Group.Name.Equals("IT"))
                 {
-                    result.Add(user);
+                    result.Add(user.User);
                 }
             }
 

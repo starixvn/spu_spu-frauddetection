@@ -197,6 +197,22 @@
     <Setting Key="NAP_Function_GetByUserAndSiteIncludeGroup" SpName="NAP_Function_GetByUserAndSiteIncludeGroup"
              DbName="DBNAP.bodb_NAP.bodbAdminNet">
     </Setting>
+    <Setting Key="NAP_Function_GetByKeyAndSite" SpName="NAP_Function_GetByKeyAndSite"
+             DbName="DBNAP.bodb_NAP.bodbAdminNet">
+      <Setting Key="NAP_Function_GetByKeyAndSite" SpName="NAP_Function_GetByKeyAndSite" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+        <Mapping DataField="FunctionId" ObjectProperty="Id" />
+        <Mapping DataField="FunctionName" ObjectProperty="Name" />
+        <Mapping DataField="FunctionKey" ObjectProperty="Key" />
+        <Mapping DataField="ParentId" ObjectProperty="Id" />
+        <Mapping DataField="ParentName" ObjectProperty="Name" />
+        <Mapping DataField="SiteId" ObjectProperty="Id" />
+        <Mapping DataField="SiteName" ObjectProperty="Name" />
+        <Mapping DataField="CreatorId" ObjectProperty="Id" />
+        <Mapping DataField="CreatorUsername" ObjectProperty="Username" />
+        <Mapping DataField="ModifierId" ObjectProperty="Id" />
+        <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+      </Setting>
+    </Setting>
   </Function>
   <Function Name="MenuItem">
     <Setting Key="NAP_MenuItem_GetAll" SpName="NAP_MenuItem_GetAll" DbName="DBNAP.bodb_NAP.bodbAdminNet"></Setting>
