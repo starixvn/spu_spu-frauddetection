@@ -23,8 +23,12 @@ function (suspiciousCustomerReportModel) {
     };
 
     vm.querySuspiciousCustomers = function () {
+        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+        
         suspiciousCustomerReportModel.getSuspiciousCustomerReport(vm.filter).then(function () {
             vm.SuspiciousCustomers = suspiciousCustomerReportModel.SuspiciousCustomers;
+
+            waitingDialog.hide();
         });
     };
 
