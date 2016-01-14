@@ -92,11 +92,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
                             var columnHeaders = generateColumnHeaders();
 
                             var gridOptions = {
-                                gridExpandHeight: 700,
                                 marginRight: 0,
                                 showTree: true,
                                 customPager: true,
-                                allowTruncate: true
+                                allowTruncate: true,
+                                fullHeight: false,
+                                gridHeight: 200
                             };
 
                             gridOptions.columns = columnHeaders;
@@ -161,11 +162,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
-                            gridExpandHeight: 700,
                             marginRight: 0,
                             showTree: true,
                             customPager: true,
-                            allowTruncate: true
+                            allowTruncate: true,
+                            fullHeight: false,
+                            gridHeight: 200
                         };
 
                         gridOptions.columns = columnHeaders;
@@ -238,11 +240,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', [
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
-                            gridExpandHeight: 700,
                             marginRight: 0,
                             showTree: true,
                             customPager: true,
-                            allowTruncate: true
+                            allowTruncate: true,
+                            fullHeight: false,
+                            gridHeight: 700
                         };
 
                         gridOptions.columns = columnHeaders;
@@ -317,11 +320,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
-                            gridExpandHeight: 700,
                             marginRight: 0,
                             showTree: true,
                             customPager: true,
-                            allowTruncate: true
+                            allowTruncate: true,
+                            fullHeight: false,
+                            gridHeight: 200
                         };
 
                         gridOptions.columns = columnHeaders;
@@ -410,11 +414,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
-                            gridExpandHeight: 700,
                             marginRight: 0,
                             showTree: true,
                             customPager: true,
-                            allowTruncate: true
+                            allowTruncate: true,
+                            fullHeight: false,
+                            gridHeight: 200
                         };
 
                         gridOptions.columns = columnHeaders;
@@ -503,11 +508,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', [
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
-                            gridExpandHeight: 700,
                             marginRight: 0,
                             showTree: true,
                             customPager: true,
-                            allowTruncate: true
+                            allowTruncate: true,
+                            fullHeight: false,
+                            gridHeight: 200
                         };
 
                         gridOptions.columns = columnHeaders;
