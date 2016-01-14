@@ -158,7 +158,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             
             foreach (var user in users)
             {
-                if (user.Policy != (decimal)Constant.Policy.Read) continue;
+                if (user.Policy != (decimal)Constant.Policy.Read && user.Policy != (decimal)Constant.Policy.Host) continue;
 
                 if (user.User.Group == null)
                 {
