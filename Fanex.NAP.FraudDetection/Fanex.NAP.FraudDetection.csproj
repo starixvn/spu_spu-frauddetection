@@ -304,8 +304,9 @@
     <Reference Include="TplCore">
       <HintPath>..\packages\TplCore.1.0.4694.29951\lib\net40\TplCore.dll</HintPath>
     </Reference>
-    <Reference Include="UMControllerLibrary">
-      <HintPath>..\packages\UMControllerLibrary.1.0.0\lib\net40\UMControllerLibrary.dll</HintPath>
+    <Reference Include="UMControllerLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\UMController\UMControllerLibrary.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -670,6 +671,7 @@
     <Content Include="Dependencies\FD.Lib.Model.dll" />
     <Content Include="Dependencies\FD.Lib.Service.dll" />
     <Content Include="Areas\FraudDetection\Scripts\Core\isteven-multi-select.js" />
+    <Content Include="Dependencies\UMController\UMControllerLibrary.dll" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\Core\AlertServiceOnPopup.js" />
     <Content Include="Scripts\Core\AlertService.js" />
