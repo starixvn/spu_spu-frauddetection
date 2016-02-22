@@ -124,5 +124,17 @@ namespace Fanex.NAP.FraudDetection.Controllers
 
             return htmlStringFromView;
         }
+
+        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return new JsonResult()
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior,
+                MaxJsonLength = System.Int32.MaxValue
+            };
+        }
     }
 }
