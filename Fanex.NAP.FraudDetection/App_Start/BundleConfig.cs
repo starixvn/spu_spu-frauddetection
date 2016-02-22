@@ -73,7 +73,6 @@ namespace Fanex.NAP.FraudDetection.AppStart
             bundles.Add(new ScriptBundle("~/bundles/alertServiceOnPopup").Include(
                 "~/Scripts/Core/AlertServiceOnPopup.js"));
 
-
             bundles.Add(new ScriptBundle("~/bundles/App/CustomerBettingGroup").Include(
                 "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-factory.js",
                 "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-model.js",

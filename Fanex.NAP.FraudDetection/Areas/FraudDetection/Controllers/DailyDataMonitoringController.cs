@@ -7,16 +7,11 @@
 //   <change who="Long.Luu" date="2015.08.13">Created</change>
 // </history>
 
-using Fanex.NAP.Core.Business;
-using Fanex.NAP.Core.Web.Attribute;
-using Fanex.NAP.FraudDetection.Service.Core;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Core.ExportExcel;
     using FD.Lib.Criteria.Reports;
     using FD.Lib.Criteria.SuspiciousStatistic;
@@ -24,9 +19,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Model.Reports.DailyDataMonitoring;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
-    using RemotingRef;
     using NPOI.SS.UserModel;
+    using RemotingRef;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
     using System.Web;
+    using System.Web.Mvc;
 
     /// <summary>
     /// The controller of Daily Data Monitoring Report.

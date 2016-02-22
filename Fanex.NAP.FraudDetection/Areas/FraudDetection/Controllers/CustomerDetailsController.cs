@@ -9,11 +9,6 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System;
-    using System.Configuration;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
-    using System.Collections.Generic;
     using Core.Business;
     using Core.Service.Impl;
     using Core.Web.Attribute;
@@ -23,6 +18,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Service;
     using Service.Core;
     using Service.Utilities;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
 
     /// <summary>
     /// The controller of Customer Details Report.
@@ -150,15 +150,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Host)]
         public ActionResult GetUsers()
         {
-            const string functionKey = FDFunctionKeys.SuspiciousCustomer;
+            const string FunctionKey = FDFunctionKeys.SuspiciousCustomer;
             var siteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]);
-            var suspiciousCustomerFunction = new FunctionService().GetByKeyAndSite(functionKey, siteId);
+            var suspiciousCustomerFunction = new FunctionService().GetByKeyAndSite(FunctionKey, siteId);
             var users = new UserService().GetByFunctionAndSite(suspiciousCustomerFunction.Id, siteId);
             var result = new List<Core.Domain.IUser>();
             
             foreach (var user in users)
             {
-                if (user.Policy != (decimal)Constant.Policy.Read && user.Policy != (decimal)Constant.Policy.Host) continue;
+                if (user.Policy != (decimal)Constant.Policy.Read && user.Policy != (decimal)Constant.Policy.Host)
+                {
+                    continue;
+                }
 
                 if (user.User.Group == null)
                 {

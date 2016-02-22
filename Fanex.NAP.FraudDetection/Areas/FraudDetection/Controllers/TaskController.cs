@@ -8,14 +8,11 @@
 //   <change who="Long.Luu" date="2015.07.24">Refactored</change>
 // </history>
 
-using FD.Lib.Criteria.Activity;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Linq;
-    using System.Web.Mvc;
     using Core.Business;
     using Core.Web.Attribute;
+    using FD.Lib.Criteria.Activity;
     using FD.Lib.Criteria.Bettype;
     using FD.Lib.Criteria.CaseGroup;
     using FD.Lib.Criteria.Common;
@@ -31,6 +28,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using NAP.FraudDetection.Controllers;
     using Service;
     using Service.Core;
+    using System.Linq;
+    using System.Web.Mvc;
 
     public class TaskController : BaseController
     {
@@ -186,7 +185,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetMails()
         {
-            var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria()).Where(m=>m.IsActive);
+            var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria()).Where(m => m.IsActive);
 
             return Json(mailMasters, JsonRequestBehavior.AllowGet);
         }

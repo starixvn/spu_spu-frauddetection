@@ -82,7 +82,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             if (ModelState.IsValid)
             {
                 MailAdminHandler.Start();
-                var mailModel =  MailAdminHandler.RequestGetMailMessage(criteria.MailCode);
+                var mailModel = MailAdminHandler.RequestGetMailMessage(criteria.MailCode);
                 if (mailModel.Count > 0)
                 {
                     MailAdminHandler.Stop();
@@ -131,6 +131,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                         });
                     recipientInfo = MailAdminHandler.RequestGetRecipientMessage(email);
                 }
+
                 emailIds += recipientInfo[0].EmailID1 + ",";
             }
 

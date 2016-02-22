@@ -39,8 +39,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetSuspiciousTickets(DateTime fromDate, DateTime toDate)
         {
             //// HARD-CODE: The Scan Office IPs CaseId = 2!
-            const int caseId = 2;
-            var tickets = _officeIPsReportService.GetFraudTickets(caseId, fromDate, toDate);
+            const int CaseId = 2;
+            var tickets = _officeIPsReportService.GetFraudTickets(CaseId, fromDate, toDate);
 
             return Json(tickets, JsonRequestBehavior.AllowGet);
         }
@@ -48,8 +48,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.OfficeIPs, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(DateTime fromDate, DateTime toDate)
         {
-            const int caseId = 2;
-            var tickets = _officeIPsReportService.ExportExcel(caseId, fromDate, toDate);
+            const int CaseId = 2;
+            var tickets = _officeIPsReportService.ExportExcel(CaseId, fromDate, toDate);
 
             var excelExporter = new FDExportExcelOfficeIPs(
                 Server.MapPath("~/ExcelFiles"),

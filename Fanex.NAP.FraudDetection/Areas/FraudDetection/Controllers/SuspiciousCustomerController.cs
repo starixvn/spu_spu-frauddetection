@@ -7,21 +7,20 @@
 //   <change who="Aaron.Cao" date="2015.06.23">Created</change>
 // </history>
 
-using FD.Lib.Criteria.Case;
-
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
     using Core.Business;
     using Core.Web.Attribute;
     using FD.Lib.Core.ExportExcel;
+    using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Reports;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using NPOI.SS.UserModel;
     using Service.Core;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     /// <summary>
     /// The controller of Customer Report.
@@ -82,7 +81,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     new Legend("Member", criteria.CustName),
                     new Legend("Total Violations ≥", criteria.TotalViolations.ToString()),
                     new Legend("New Violations ≥", criteria.NewViolations.ToString()),
-                    new Legend("Verification", criteria.IsVerified == null ? "" : (criteria.IsVerified.Value ? "Yes" : "No")),
+                    new Legend("Verification", criteria.IsVerified == null ? string.Empty : (criteria.IsVerified.Value ? "Yes" : "No")),
                     new Legend("Fraud Case", caseName)
                 },
                 GetSuspiciousCustomerHeaders(),
