@@ -65,6 +65,8 @@
     <Setting Key="FD_MatchMonitoringReportGetAll_DBArchive" SpName="FD_MatchMonitoringReportGetAll_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDate" SpName="FD_LeagueGetAllByDate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDate_DBArchive" SpName="FD_LeagueGetAllByDate_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
+    <Setting Key="FD_LeagueGetAllByDateAndSport" SpName="FD_LeagueGetAllByDateAndSport" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_LeagueGetAllByDateAndSport_DBArchive" SpName="FD_LeagueGetAllByDateAndSport_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
     <Setting Key="FD_DailyDataMonitoringReportGetAll" SpName="FD_DailyDataMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />

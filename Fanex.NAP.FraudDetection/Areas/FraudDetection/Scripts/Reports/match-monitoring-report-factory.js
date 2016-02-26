@@ -3,12 +3,33 @@
 
 matchMonitoringReportModule.factory('matchMonitoringReportFactory', ['$http', function ($http) {
     return {
+        getSportsByDate: function (eventDate) {
+            var url = SPU.getAbsoluteUrl("MatchMonitoring/GetSportsByDate");
+
+            return $http.get(url, {
+                params:
+                    { eventDate: eventDate }
+            });
+        },
+
         getLeaguesByDate: function (eventDate) {
             var url = SPU.getAbsoluteUrl("MatchMonitoring/GetLeaguesByDate");
 
             return $http.get(url, {
                 params:
                     { eventDate: eventDate }
+            });
+        },
+
+        getLeaguesByDateAndSport: function (eventDate, sportId) {
+            var url = SPU.getAbsoluteUrl("MatchMonitoring/GetLeaguesByDateAndSport");
+
+            return $http.get(url, {
+                params:
+                    {
+                        eventDate: eventDate,
+                        sportId: sportId
+                    }
             });
         },
 

@@ -7,6 +7,7 @@ function (matchMonitoringReportModel) {
     var vm = this;
 
     vm.Leagues = matchMonitoringReportModel.Leagues;
+    vm.Sports = matchMonitoringReportModel.Sports;
     vm.MatchMonitoringReport = matchMonitoringReportModel.MatchMonitoringReport;
     vm.MatchStatuses = matchMonitoringReportModel.MatchStatuses;
     vm.SuspiciousStatuses = matchMonitoringReportModel.SuspiciousStatuses;
@@ -14,6 +15,13 @@ function (matchMonitoringReportModel) {
 
     vm.queryMatchMonitoringReport = function () {
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+
+        if (vm.filter.LeagueId === -1) {
+            vm.filter.LeagueIds = matchMonitoringReportModel.getLeagueIdList();
+        }
+        else {
+            vm.filter.LeagueIds = vm.filter.LeagueId;
+        }
 
         matchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
             vm.MatchMonitoringReport = matchMonitoringReportModel.MatchMonitoringReport;
@@ -23,15 +31,29 @@ function (matchMonitoringReportModel) {
     };
 
     vm.changeEventDate = function () {
-        vm.getLeaguesByDate(vm.filter.EventDate);
+        vm.filter.LeagueId = -1;
+
+        vm.getLeaguesByDateAndSport(vm.filter.EventDate, vm.filter.SportId);
+    };
+
+    vm.changeSport = function () {
+        vm.filter.LeagueId = -1;
+
+        vm.getLeaguesByDateAndSport(vm.filter.EventDate, vm.filter.SportId);
     };
 
     vm.openCalendar = function (dateTimePickerId) {
         matchMonitoringReportModel.openCalendar(dateTimePickerId);
     };
 
-    vm.getLeaguesByDate = function (date) {
-        matchMonitoringReportModel.getLeaguesByDate(date).then(function () {
+    vm.getSportsByDate = function (date) {
+        matchMonitoringReportModel.getSportsByDate(date).then(function () {
+            vm.Sports = matchMonitoringReportModel.Sports;
+        });
+    };
+
+    vm.getLeaguesByDateAndSport = function (date, sportId) {
+        matchMonitoringReportModel.getLeaguesByDateAndSport(date, sportId).then(function () {
             vm.Leagues = matchMonitoringReportModel.Leagues;
         });
     };
@@ -44,5 +66,7 @@ function (matchMonitoringReportModel) {
 
     matchMonitoringReportModel.initialDateTimePicker();
 
-    vm.getLeaguesByDate(vm.filter.EventDate);
-} ]);
+    vm.getSportsByDate(vm.filter.EventDate);
+
+    vm.getLeaguesByDateAndSport(vm.filter.EventDate, vm.filter.SportId);
+}]);

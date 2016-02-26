@@ -7,16 +7,20 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
         [
             { HeaderText: "#", Width: 40, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "MatchId", Width: 10, Name: "MatchId", HeaderAlign: "center", CellAlign: "left", CanResize: true },
-            { HeaderText: "Delq.", Width: 52, Name: "Delinquent", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Verified", Width: 52, Name: "Verified", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Last Verified By", Width: 100, Name: "LastVerifiedBy", HeaderAlign: "center", CellAlign: "center", CanResize: true },
-            { HeaderText: "League", Width: 30, Name: "LeagueName", HeaderAlign: "center", CellAlign: "left", CanResize: true },
-            { HeaderText: "Match Code", Width: 10, Name: "MatchCode", HeaderAlign: "center", CellAlign: "center", CanResize: true },
-            { HeaderText: "Event", Width: 30, Name: "Event", HeaderAlign: "center", CellAlign: "left", CanResize: true },
-            { HeaderText: "Status", Width: 10, Name: "EventStatus", HeaderAlign: "center", CellAlign: "center", CanResize: true }
+            { HeaderText: "Delq.", Width: 52, Name: "Delinquent", HeaderAlign: "center", CellAlign: "center", CustomCellRender: delinquentColumn },
+            { HeaderText: "Verified", Width: 52, Name: "Verified", HeaderAlign: "center", CellAlign: "center", CustomCellRender: verifiedColumn },
+            { HeaderText: "Last Verified By", Width: 100, Name: "LastVerifiedBy", HeaderAlign: "center", CellAlign: "center", CanResize: true, CustomCellRender: lastVerifiedByColumn },
+            { HeaderText: "League", Width: 300, Name: "LeagueName", HeaderAlign: "center", CellAlign: "left", CanResize: true },
+            { HeaderText: "Match Code", Width: 100, Name: "MatchCode", HeaderAlign: "center", CellAlign: "center", CanResize: true },
+            { HeaderText: "Event", Width: 300, Name: "Event", HeaderAlign: "center", CellAlign: "left", CanResize: true, CustomCellRender: eventRenderer},
+            { HeaderText: "Status", Width: 80, Name: "EventStatus", HeaderAlign: "center", CellAlign: "center", CanResize: true }
         ];
 
         return columnHeaders;
+    };
+
+    function eventRenderer(cell) {
+        return '<span title="' + cell.Value.titleData + '">' + cell.Value.eventData + '</span>';
     };
 
     var generateBodyRows = function (matches) {
@@ -28,12 +32,17 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
                 Columns: [
                     { Name: "Row", Value: index + 1 },
                     { Name: "MatchId", Value: match.MatchId },
-                    { Name: "Delinquent", Value: match, CustomCellRender: delinquentColumn },
-                    { Name: "Verified", Value: match, CustomCellRender: verifiedColumn },
-                    { Name: "LastVerifiedBy", Value: match, CustomCellRender: lastVerifiedByColumn },
+                    { Name: "Delinquent", Value: match },
+                    { Name: "Verified", Value: match },
+                    { Name: "LastVerifiedBy", Value: match },
                     { Name: "LeagueName", Value: match.LeagueName },
                     { Name: "MatchCode", Value: match.MatchCode },
-                    { Name: "Event", Value: match.Event },
+                    { Name: "Event", Value: 
+                        {
+                            eventData: match.Event,
+                            titleData: match.Event.split("<b>").join("").split("</b>").join("")
+                        }
+                    },
                     { Name: "EventStatus", Value: match.EventStatus }
                 ]
             };
@@ -204,10 +213,10 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
 
                         var gridOptions = {
                             hideYBackGroundScroller: true,
-                            gridExpandHeight: 350,
+                            gridExpandHeight: 300,
                             enableHiddenColumns: false,
                             hiddenColumns: [1],
-                            autoResizeColumn: true,
+                            allowTruncate: true,
                             showPager: true,
                             pagerOption: {
                                 itemsPerPage: 50,

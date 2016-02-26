@@ -7,6 +7,7 @@ function (matchMonitoringReportFactory) {
     var matchMonitoringReportModel = {};
 
     matchMonitoringReportModel.Leagues = [];
+    matchMonitoringReportModel.Sports = [];
     matchMonitoringReportModel.MatchMonitoringReport = {};
     matchMonitoringReportModel.CaseId = '';
     matchMonitoringReportModel.IsUpdated = false;
@@ -26,10 +27,40 @@ function (matchMonitoringReportFactory) {
     matchMonitoringReportModel.filter = {
         EventDate: formatDate(new Date()),
         LeagueId: -1,
+        LeagueIds: '',
+        SportId: -1,
         MatchCode: '',
         MatchStatus: 'All',
         SuspiciousStatus: 0
     };
+
+    matchMonitoringReportModel.getSportsByDate = function (date) {
+        return matchMonitoringReportFactory.getSportsByDate(date).success(function (sports) {
+            matchMonitoringReportModel.Sports = sports;
+
+            var defaultSport = {
+                SportId: -1,
+                SportName: 'All Sports'
+            };
+
+            matchMonitoringReportModel.Sports.unshift(defaultSport);
+        });
+    };
+
+    matchMonitoringReportModel.getLeaguesByDateAndSport = function (date, sportId) {
+        return matchMonitoringReportFactory.getLeaguesByDateAndSport(date, sportId).success(function (leagues) {
+            matchMonitoringReportModel.Leagues = leagues;
+
+            var defaultLeague = {
+                LeagueId: -1,
+                LeagueName: 'All Leagues'
+            };
+
+            matchMonitoringReportModel.Leagues.unshift(defaultLeague);
+        });
+    };
+
+
 
     matchMonitoringReportModel.getLeaguesByDate = function (date) {
         return matchMonitoringReportFactory.getLeaguesByDate(date).success(function (leagues) {
@@ -78,6 +109,16 @@ function (matchMonitoringReportFactory) {
         });
 
         $('#eventDate').datepicker("setDate", today);
+    };
+
+    matchMonitoringReportModel.getLeagueIdList = function () {
+        var result = [];
+
+        angular.forEach(matchMonitoringReportModel.Leagues, function (league) {
+            result.push(league.LeagueId);
+        });
+
+        return result.join(',');
     };
 
     matchMonitoringReportModel.openCalendar = function (dateTimePickerId) {

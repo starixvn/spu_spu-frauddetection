@@ -9,15 +9,11 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Web.Mvc;
     using Core.Business;
     using Core.Web.Attribute;
     using Data.Repository;
     using FD.Lib.Core.ExportExcel;
+    using FD.Lib.Criteria.Bettype;
     using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Common;
     using FD.Lib.Criteria.Reports;
@@ -29,6 +25,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using RemotingRef;
     using Service;
     using Service.Core;
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Web.Mvc;
 
     public class MatchMonitoringController : BaseController
     {
@@ -137,6 +138,35 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        public ActionResult GetLeaguesByDateAndSport(string eventDate, int sportId)
+        {
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+
+            var criteria = DateTime.Parse(eventDate) > balanceUpMoveBetDates.BalanceUpDay
+                               ? (ICriteria)new LeagueGetAllByDateAndSportCriteria
+                               {
+                                   IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
+                                   EventDate = DateTime.Parse(eventDate),
+                                   SportId = sportId
+                               }
+                               : new LeagueGetAllByDateAndSportFromDBArchiveCriteria
+                               {
+                                   EventDate = DateTime.Parse(eventDate),
+                                   SportId = sportId
+                               };
+            var result = _matchMonitoringReportService.GetLeaguesByDateAndSport(criteria);
+
+            if (result.Count() > 0)
+            {
+                result = result.OrderBy(t => t.LeagueName);
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetLeaguesByDate(string eventDate)
         {
             var balanceUpMoveBetService = new MoveBetsBalanceUpService();
@@ -155,6 +185,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var result = _matchMonitoringReportService.GetLeaguesByDate(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        public ActionResult GetSportsByDate(string eventDate)
+        {
+            var sports = new BettypeService().GetAllSBSports(new SportGetAllCriteria());
+
+            return Json(sports, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

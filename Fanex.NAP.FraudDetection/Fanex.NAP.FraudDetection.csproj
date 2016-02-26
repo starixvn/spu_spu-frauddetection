@@ -534,12 +534,12 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-directive.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-directive.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-controller.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-directive.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-directive.js" />
