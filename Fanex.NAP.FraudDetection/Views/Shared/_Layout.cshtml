@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>Fraud Detection</title>
+    <title>Fraud Sensor</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     @Styles.Render("~/Content/Common/css", "~/Areas/FraudDetection/App_Themes/css", "~/Content/Core/less")
     @RenderSection("HeadCss", false)
@@ -26,7 +26,7 @@
         <header class="row header">
             <a class="logo" href="@Url.Action("Index", "Home")">
                 Fraud
-                <span> Detection</span>
+                <span> Sensor</span>
             </a>
             @Html.Action("Menu", new RouteValueDictionary(new { controller = "Home", area = "" }))
             <div class="user-info">

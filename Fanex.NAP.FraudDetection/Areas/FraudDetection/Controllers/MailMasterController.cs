@@ -144,7 +144,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 {
                     MailName = criteria.MailCode,
                     Description = criteria.MailDesc,
-                    MailFrom = "Automated Fraud Detection",
+                    MailFrom = "Fraud Sensor",
                     MailTo = string.IsNullOrEmpty(criteria.To) ? string.Empty : GenerateRecipientIdList(criteria.To),
                     MailCc = string.IsNullOrEmpty(criteria.CcTo) ? string.Empty : GenerateRecipientIdList(criteria.CcTo),
                     MailBcc = string.IsNullOrEmpty(criteria.BccTo) ? string.Empty : GenerateRecipientIdList(criteria.BccTo),
@@ -254,7 +254,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 MailId = criteria.MailingListId,
                 MailName = criteria.MailCode,
                 Description = criteria.MailDesc,
-                MailFrom = "Automated Fraud Detection",
+                MailFrom = "Fraud Sensor",
                 MailTo = string.IsNullOrEmpty(criteria.To) ? string.Empty : GenerateRecipientIdList(criteria.To),
                 MailCc = string.IsNullOrEmpty(criteria.CcTo) ? string.Empty : GenerateRecipientIdList(criteria.CcTo),
                 MailBcc = string.IsNullOrEmpty(criteria.BccTo) ? string.Empty : GenerateRecipientIdList(criteria.BccTo),

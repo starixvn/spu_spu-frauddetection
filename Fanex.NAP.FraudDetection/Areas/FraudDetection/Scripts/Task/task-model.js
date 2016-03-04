@@ -85,8 +85,8 @@ function (taskFactory) {
         { Id: 2, Value: "scanned", Name: "Scanned" }
     ];
     taskModel.LeagueTypes = [
-        { Id: 1, Value: "gue.IsMainMarket", Name: "Main Markets" },
-        { Id: 2, Value: "gue.IsMainMarket", Name: "Other Markets" }
+        { Id: 1, Value: "1", Name: "Main Markets" },
+        { Id: 2, Value: "0", Name: "Other Markets" }
     ];
     taskModel.FormulaElements = [
         { Id: 1, Value: "(#", Name: "(+", IsPrefix: true },
