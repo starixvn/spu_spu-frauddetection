@@ -12,7 +12,7 @@
 {
     @Scripts.Render("~/bundles/App/MatchMonitoringReport")
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js"
-        type="text/javascript"></script>
+            type="text/javascript"></script>
     <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
 }
 <div>
@@ -32,8 +32,8 @@
                 </div>
                 <div class="col-sm-7">
                     <input datetimepicker type="text" readonly="readonly" style="width: 80px; height: 25px;"
-                        id="eventDate" ng-click="mmrCtrl.openCalendar('#eventDate')" ng-model="mmrCtrl.filter.EventDate"
-                        ng-change="mmrCtrl.changeEventDate()" />
+                           id="eventDate" ng-click="mmrCtrl.openCalendar('#eventDate')" ng-model="mmrCtrl.filter.EventDate"
+                           ng-change="mmrCtrl.changeEventDate()" />
                     <span class="icon-calendar icon-event-date-calendar" ng-click="mmrCtrl.openCalendar('#eventDate')">
                     </span>
                 </div>
@@ -57,13 +57,13 @@
                     </label>
                 </div>
                 <div class="col-sm-10">
-                    <select ng-model="mmrCtrl.filter.LeagueId" style="height: 25px;" ng-options="league.LeagueId as league.LeagueName for league in mmrCtrl.Leagues">
-                    </select>
+                    <select ng-model="mmrCtrl.filter.LeagueId" style="height: 25px; min-width: 97px;" ng-options="league.LeagueId as league.LeagueName for league in mmrCtrl.Leagues"></select>
                 </div>
             </div>
         </div>
         <div style="height: 35px;">
-            &nbsp;</div>
+            &nbsp;
+        </div>
         <div class="form-group col-sm-12">
             <div class="col-sm-3">
                 <div class="col-sm-5" style="text-align: right;">
@@ -83,8 +83,7 @@
                 </div>
                 <div class="col-sm-7">
                     <select ng-model="mmrCtrl.filter.MatchStatus" style="width: 180px; height: 25px;"
-                        ng-options="status.Value as status.Name for status in mmrCtrl.MatchStatuses">
-                    </select>
+                            ng-options="status.Value as status.Name for status in mmrCtrl.MatchStatuses"></select>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -104,9 +103,26 @@
                 </div>
             </div>
         </div>
+        <div style="height: 35px;">
+            &nbsp;
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                </div>
+                <div class="col-sm-7">
+                    <span class="checkbox">
+                        <input style="vertical-align: text-bottom;" id="checkboxMainMarket" type="checkbox"
+                               ng-model="mmrCtrl.filter.IsMainMarket" />
+                        <label style="cursor: pointer; font-weight: normal;" for="checkboxMainMarket">Main Market Only</label>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="newline">
-        &nbsp;</div>
+        &nbsp;
+    </div>
     <div class="row">
         <div class="form-group col-sm-12">
             <div class="col-sm-4" style="text-align: center;">
@@ -130,7 +146,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-sm-12">
+        <div class="form-group col-sm-12" style="margin-top: -20px;">
             <div class="report-header hidden" id="report-header">
                 <div class="export-excel-icon" ng-click="mmrCtrl.exportExcel()">
                 </div>

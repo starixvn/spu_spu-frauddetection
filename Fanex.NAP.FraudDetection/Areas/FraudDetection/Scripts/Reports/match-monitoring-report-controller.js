@@ -23,6 +23,10 @@ function (matchMonitoringReportModel) {
             vm.filter.LeagueIds = vm.filter.LeagueId;
         }
 
+        if (!vm.filter.IsMainMarket) {
+            vm.filter.IsMainMarket = null;
+        }
+
         matchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
             vm.MatchMonitoringReport = matchMonitoringReportModel.MatchMonitoringReport;
 

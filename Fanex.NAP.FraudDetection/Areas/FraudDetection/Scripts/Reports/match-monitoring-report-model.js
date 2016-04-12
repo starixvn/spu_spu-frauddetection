@@ -31,7 +31,8 @@ function (matchMonitoringReportFactory) {
         SportId: -1,
         MatchCode: '',
         MatchStatus: 'All',
-        SuspiciousStatus: 0
+        SuspiciousStatus: 0,
+        IsMainMarket: true
     };
 
     matchMonitoringReportModel.getSportsByDate = function (date) {
@@ -135,4 +136,4 @@ function (matchMonitoringReportFactory) {
     }
 
     return matchMonitoringReportModel;
-} ]);
+}]);
