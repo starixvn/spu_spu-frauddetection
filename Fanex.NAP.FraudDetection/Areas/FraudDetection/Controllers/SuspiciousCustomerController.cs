@@ -21,6 +21,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using System.Configuration;
+    using Fanex.NAP.Core.Service.Impl;
 
     /// <summary>
     /// The controller of Customer Report.
@@ -102,6 +104,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 CustId = custId
             });
 
+            var users = GetAllUsers();
+
+            foreach (var note in notes)
+            {
+                if (note.Author == null)
+                {
+                    note.Author = users.Where(t => t.Id == note.AuthorId).FirstOrDefault().Username;
+                }
+            }
+
             return Json(notes, JsonRequestBehavior.AllowGet);
         }
 
@@ -145,5 +157,33 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         #endregion
+
+        private List<Core.Domain.IUser> GetAllUsers()
+        {
+            const string FunctionKey = FDFunctionKeys.SuspiciousCustomer;
+            var siteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]);
+            var suspiciousCustomerFunction = new FunctionService().GetByKeyAndSite(FunctionKey, siteId);
+            var users = new UserService().GetByFunctionAndSite(suspiciousCustomerFunction.Id, siteId);
+            var result = new List<Core.Domain.IUser>();
+
+            foreach (var user in users)
+            {
+                if (user.Policy != (decimal)Constant.Policy.Read && user.Policy != (decimal)Constant.Policy.Host)
+                {
+                    continue;
+                }
+
+                if (user.User.Group == null)
+                {
+                    result.Add(user.User);
+                }
+                else if (!user.User.Group.Name.Equals("IT"))
+                {
+                    result.Add(user.User);
+                }
+            }
+
+            return result;
+        }
     }
 }

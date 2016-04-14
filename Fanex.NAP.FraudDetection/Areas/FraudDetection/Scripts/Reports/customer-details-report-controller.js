@@ -19,6 +19,8 @@ function ($window, customerDetailsReportModel) {
     vm.EditAssingee = customerDetailsReportModel.EditAssingee;
     vm.IsHost = customerDetailsReportModel.IsHost;
     vm.Note = '';
+    vm.DailyViolatedTicketsLoaded = false;
+    vm.WinlossStatisticLoaded = false;
 
     vm.editAssingee = function () {
         vm.EditAssingee.isEditAssignee = !vm.EditAssingee.isEditAssignee;
@@ -105,6 +107,8 @@ function ($window, customerDetailsReportModel) {
 
         customerDetailsReportModel.getDailyViolatedTickets(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {
             vm.DailyViolatedTickets = customerDetailsReportModel.DailyViolatedTickets;
+
+            vm.DailyViolatedTicketsLoaded = true;
         });
 
         customerDetailsReportModel.getWinlossStatistic(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {
@@ -112,6 +116,8 @@ function ($window, customerDetailsReportModel) {
             vm.EventChoices = customerDetailsReportModel.EventChoices;
             vm.SportsByMargin = customerDetailsReportModel.SportsByMargin;
             vm.BettypesByMargin = customerDetailsReportModel.BettypesByMargin;
+
+            vm.WinlossStatisticLoaded = true;
         });
     });
 } ]);

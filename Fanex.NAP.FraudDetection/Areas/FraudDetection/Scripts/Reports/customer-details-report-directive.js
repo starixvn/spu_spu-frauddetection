@@ -113,7 +113,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
                 });
             }
         };
-    } ]);
+    }]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', ['$timeout', function ($timeout) {
     var generateColumnHeaders = function () {
@@ -179,26 +179,29 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
             });
         }
     };
-} ]);
+}]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', ['$timeout', function ($timeout) {
     var formatNumber = '0,0.00';
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
-            { HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
@@ -211,18 +214,19 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', [
 
     var generateBodyRows = function (summary) {
         var rows = [];
+        if (summary.BetCount > 0) {
+            var currentRow = {
+                Columns:
+                    [
+                        { Name: "Turnover", Value: summary.SumTO },
+                        { Name: "WinLoss", Value: summary.SumWL },
+                        { Name: "Margin", Value: summary.Margin },
+                        { Name: "BetCount", Value: summary.BetCount }
+                    ]
+            };
 
-        var currentRow = {
-            Columns:
-                [
-                    { Name: "Turnover", Value: summary.SumTO },
-                    { Name: "WinLoss", Value: summary.SumWL },
-                    { Name: "Margin", Value: summary.Margin },
-                    { Name: "BetCount", Value: summary.BetCount }
-                ]
-        };
-
-        rows.push(currentRow);
+            rows.push(currentRow);
+        }
 
         return rows;
     };
@@ -257,7 +261,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSummary', [
             });
         }
     };
-} ]);
+}]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice', ['$timeout', function ($timeout) {
     var formatNumber = '0,0.00';
@@ -265,19 +269,22 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice
         var columnHeaders =
         [
             { HeaderText: "Sport", Width: 139, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
@@ -337,7 +344,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportEventChoice
             });
         }
     };
-} ]);
+}]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$timeout', function ($timeout) {
     var formatNumber = '0,0.00';
@@ -345,19 +352,22 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$
         var columnHeaders =
         [
             { HeaderText: "Sport", Width: 139, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
@@ -383,9 +393,9 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$
 
             rows.push(currentRow);
         }
-        
+
         for (i = sports.length + 1; i < 6; i++) {
-             currentRow = {
+            currentRow = {
                 Columns:
                 [
                     { Name: "Sport", Value: '' },
@@ -431,7 +441,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportSport', ['$
             });
         }
     };
-} ]);
+}]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', ['$timeout', function ($timeout) {
     var formatNumber = '0,0.00';
@@ -439,19 +449,22 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', [
         var columnHeaders =
         [
             { HeaderText: "Sport", Width: 139, Name: "Sport", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Turnover", Width: 139, Name: "Turnover", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Win Loss", Width: 139, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
                 IsCurrency: true,
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
             },
-            { HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
+            {
+                HeaderText: "Margin (%)", Width: 139, Name: "Margin", HeaderAlign: "center", CellAlign: "right",
                 FormatNumber: formatNumber,
                 FormatNegative: '-$',
                 IsAbs: true
@@ -477,9 +490,9 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', [
 
             rows.push(currentRow);
         }
-        
+
         for (i = bettypes.length + 1; i < 6; i++) {
-             currentRow = {
+            currentRow = {
                 Columns:
                 [
                     { Name: "Sport", Value: '' },
@@ -525,7 +538,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportBettype', [
             });
         }
     };
-} ]);
+}]);
 
 customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolatedTickets', ['$timeout', function ($timeout) {
     var generateColumnHeaders = function () {
@@ -600,7 +613,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                                 currentPage: 0,
                                 itemsPerPageArray: [10, 20, 50, 100, 500]
                             },
-                            
+
                         };
 
                         gridOptions.columns = columnHeaders;
@@ -612,4 +625,4 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
             });
         }
     };
-} ]);
+}]);
