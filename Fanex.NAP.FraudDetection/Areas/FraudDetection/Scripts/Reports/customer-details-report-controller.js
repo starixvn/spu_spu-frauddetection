@@ -18,6 +18,7 @@ function ($window, customerDetailsReportModel) {
     vm.GeneralInfo = customerDetailsReportModel.GeneralInfo;
     vm.EditAssingee = customerDetailsReportModel.EditAssingee;
     vm.IsHost = customerDetailsReportModel.IsHost;
+    vm.HasRemoveLogNotePermission = customerDetailsReportModel.HasRemoveLogNotePermission;
     vm.Note = '';
     vm.DailyViolatedTicketsLoaded = false;
     vm.WinlossStatisticLoaded = false;
@@ -74,6 +75,10 @@ function ($window, customerDetailsReportModel) {
 
     customerDetailsReportModel.getHostPermission().then(function () {
         vm.IsHost = customerDetailsReportModel.IsHost;
+    });
+
+    customerDetailsReportModel.getRemoveLogNotePermission().then(function () {
+        vm.HasRemoveLogNotePermission = customerDetailsReportModel.HasRemoveLogNotePermission;
     });
 
     customerDetailsReportModel.getCustInfoById(vm.GeneralInfo.CustId).then(function () {

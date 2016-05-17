@@ -8,10 +8,12 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 1/5/2016 1:25:50 PM
+// Lasted generated date: 5/18/2016 12:38:45 PM
 // </history>
 namespace Fanex.NAP.FraudDetection.Service.Core
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// Function keys.
     /// </summary>
@@ -52,6 +54,8 @@ namespace Fanex.NAP.FraudDetection.Service.Core
         public const string OfficeIPs = "OfficeIPs";
 
         public const string Parameter = "Parameter";
+
+        public const string RemoveLogNote = "RemoveLogNote";
 
         public const string Reports = "Reports";
 

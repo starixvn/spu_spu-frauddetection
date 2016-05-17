@@ -29,7 +29,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     /// The controller of Customer Details Report.
     /// </summary>
     [SessionState(SessionStateBehavior.ReadOnly)]
-    public class CustomerDetailsController: BaseController
+    public class CustomerDetailsController : BaseController
     {
         private readonly CustomerDetailsReportService _customerDetailsReportService;
 
@@ -198,6 +198,31 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetHostPermission()
         {
             var permission = PermissionService.HasHostPermission(FDFunctionKeys.SuspiciousCustomer);
+
+            return Json(permission, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.RemoveLogNote, Policy = Constant.Policy.Host)]
+        public ActionResult RemoveCustomerLog(int customerLogId)
+        {
+            var criteria = new CustomerLogNoteRemoveCriteria
+            {
+                CustomerLogId = customerLogId,
+                CreatorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0
+            };
+
+            var result = _customerDetailsReportService.RemoveCustomerLogNote(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetRemoveLogNotePermission()
+        {
+            var permission = PermissionService.HasHostPermission(FDFunctionKeys.RemoveLogNote);
+
             return Json(permission, JsonRequestBehavior.AllowGet);
         }
 

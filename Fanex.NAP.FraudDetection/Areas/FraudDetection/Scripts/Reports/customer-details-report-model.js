@@ -15,6 +15,7 @@ function (customerDetailsReportFactory, $location) {
     customerDetailsReportModel.BettypesByMargin = [];
     customerDetailsReportModel.DailyViolatedTickets = [];
     customerDetailsReportModel.IsHost = false;
+    customerDetailsReportModel.HasRemoveLogNotePermission = false;
     customerDetailsReportModel.EditAssingee = {
         isEditAssignee: false,
         assignees: '',
@@ -33,6 +34,12 @@ function (customerDetailsReportFactory, $location) {
     customerDetailsReportModel.getHostPermission = function () {
         return customerDetailsReportFactory.getHostPermission().success(function (result) {
             customerDetailsReportModel.IsHost = result;
+        });
+    };
+
+    customerDetailsReportModel.getRemoveLogNotePermission = function () {
+        return customerDetailsReportFactory.getRemoveLogNotePermission().success(function (result) {
+            customerDetailsReportModel.HasRemoveLogNotePermission = result;
         });
     };
 
@@ -110,6 +117,12 @@ function (customerDetailsReportFactory, $location) {
 
     customerDetailsReportModel.verifyCustomer = function (custId, caseId) {
         return customerDetailsReportFactory.verifyCustomer(custId, caseId).success(function (result) {
+            AlertService.showAlert(result);
+        });
+    };
+
+    customerDetailsReportModel.removeCustomerLog = function (customerLogId) {
+        return customerDetailsReportFactory.removeCustomerLog(customerLogId).success(function (result) {
             AlertService.showAlert(result);
         });
     };

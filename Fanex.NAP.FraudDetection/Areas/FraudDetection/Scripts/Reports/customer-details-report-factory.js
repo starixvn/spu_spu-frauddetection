@@ -103,6 +103,21 @@ customerDetailsReportModule.factory('customerDetailsReportFactory', ['$http', fu
             var url = SPU.getAbsoluteUrl("CustomerDetails/GetHostPermission");
 
             return $http.get(url);
+        },
+
+        removeCustomerLog: function (customerLogId) {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/RemoveCustomerLog");
+
+            return $http.get(url, {
+                params:
+                    { customerLogId: customerLogId }
+            });
+        },
+
+        getRemoveLogNotePermission: function () {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/GetRemoveLogNotePermission");
+
+            return $http.get(url);
         }
     };
 } ]);

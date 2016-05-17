@@ -136,6 +136,7 @@
     <Setting Key="FD_CustomerDelinquentUpdate" SpName="FD_CustomerDelinquentUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerVerifyInsert" SpName="FD_CustomerVerifyInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerNoteInsert" SpName="FD_CustomerNoteInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerLogNoteRemove" SpName="FD_CustomerLogNoteRemove" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsCustInfoGet" SpName="FD_CustomerDetailsCustInfoGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsFraudCaseDetailsGet" SpName="FD_CustomerDetailsFraudCaseDetailsGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsLogsNotesGet" SpName="FD_CustomerDetailsLogsNotesGet_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />

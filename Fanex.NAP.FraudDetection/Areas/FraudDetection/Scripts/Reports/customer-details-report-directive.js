@@ -115,14 +115,17 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportFraudCase',
         };
     }]);
 
-customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', ['$timeout', function ($timeout) {
+customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes',
+['$timeout', 'customerDetailsReportModel',
+function ($timeout, customerDetailsReportModel) {
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
             { HeaderText: "Date", Width: 80, Name: "Date", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Description", Width: 300, Name: "Description", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Author", Width: 60, Name: "Author", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Type", Width: 60, Name: "Type", HeaderAlign: "center", CellAlign: "center" }
+            { HeaderText: "Type", Width: 60, Name: "Type", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Remove", Width: 60, Name: "Remove", HeaderAlign: "center", CellAlign: "center" }
         ];
 
         return columnHeaders;
@@ -139,7 +142,8 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
                     { Name: "Date", Value: logsNote.LogDateString },
                     { Name: "Description", Value: logsNote.LogDesc },
                     { Name: "Author", Value: logsNote.AuthorName },
-                    { Name: "Type", Value: logsNote.CustLogTypeName }
+                    { Name: "Type", Value: logsNote.CustLogTypeName },
+                    { Name: "Remove", Value: logsNote.CustomerLogId, CustomCellRender: removeColumn }
                 ]
             };
 
@@ -147,6 +151,42 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
         }
 
         return rows;
+    };
+
+    function removeColumn(cell) {
+        var result = "<span class='glyphicon glyphicon-trash suspicious-customer-details-logs-remove' data-customerlogid='{0}' style='cursor: pointer'>".format(cell.Value);
+
+        return result;
+    }
+
+    var registerRemoveyEvent = function () {
+        var removeElement = $(".freegrid .table-cell .suspicious-customer-details-logs-remove");
+
+        removeElement.off("click");
+        removeElement.on("click", function (event) {
+            event.preventDefault();
+
+            var customerLogId = $(this).data("customerlogid");
+
+            $.confirm({
+                confirmButtonClass: 'btn-green btn-customConfirm',
+                cancelButtonClass: 'btn-green btn-customCancel',
+                title: "Confirmation",
+                text: "Are you sure you really want to remove this log/note?",
+                confirm: function () {
+                    $(".confirmation-modal").modal("hide");
+                    customerDetailsReportModel.removeCustomerLog(customerLogId).then(function () {
+                        var scope = angular.element($(".freegrid")).scope();
+
+                        scope.cdrCtrl.getLogNotes();
+                    });
+                },
+                cancel: function () {
+                },
+                confirmButton: "OK",
+                cancelButton: "Cancel"
+            });
+        });
     };
 
     return {
@@ -166,6 +206,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
                             showTree: true,
                             customPager: true,
                             allowTruncate: true,
+                            enableHiddenColumns: false,
                             fullHeight: false,
                             gridHeight: 200
                         };
@@ -173,7 +214,15 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportLogNotes', 
                         gridOptions.columns = columnHeaders;
                         gridOptions.bodyRows = bodyRows;
 
+                        if (!customerDetailsReportModel.HasRemoveLogNotePermission) {
+                            gridOptions.hiddenColumns = [4];
+                        }
+
                         $('#customer-details-report-log-notes').fanexGrid(gridOptions);
+
+                        if (customerDetailsReportModel.HasRemoveLogNotePermission) {
+                            registerRemoveyEvent();
+                        }
                     }
                 });
             });
