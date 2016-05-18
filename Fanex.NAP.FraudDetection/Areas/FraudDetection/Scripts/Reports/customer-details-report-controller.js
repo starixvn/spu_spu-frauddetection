@@ -22,6 +22,7 @@ function ($window, customerDetailsReportModel) {
     vm.Note = '';
     vm.DailyViolatedTicketsLoaded = false;
     vm.WinlossStatisticLoaded = false;
+    vm.HedgeInfo = 'The Hedge Account will always be marked as "Verified" on Suspicious Customer report.';
 
     vm.editAssingee = function () {
         vm.EditAssingee.isEditAssignee = !vm.EditAssingee.isEditAssignee;
@@ -62,6 +63,12 @@ function ($window, customerDetailsReportModel) {
 
     vm.updateDelinquency = function () {
         customerDetailsReportModel.updateDelinquency(vm.GeneralInfo.CustId, vm.CustInfo.IsDelinquent).then(function () {
+            vm.getLogNotes();
+        });
+    };
+
+    vm.updateHedgeAccount = function () {
+        customerDetailsReportModel.updateHedgeAccount(vm.GeneralInfo.CustId, vm.CustInfo.IsHedge).then(function () {
             vm.getLogNotes();
         });
     };

@@ -76,6 +76,12 @@ function (customerDetailsReportFactory, $location) {
         });
     };
 
+    customerDetailsReportModel.updateHedgeAccount = function (custId, isHedge) {
+        return customerDetailsReportFactory.updateHedgeAccount(custId, isHedge).success(function (result) {
+            AlertService.showAlert(result);
+        });
+    };
+
     customerDetailsReportModel.getCustInfoById = function (custId) {
         return customerDetailsReportFactory.getCustInfoById(custId).success(function (custInfo) {
             customerDetailsReportModel.CustInfo = custInfo;

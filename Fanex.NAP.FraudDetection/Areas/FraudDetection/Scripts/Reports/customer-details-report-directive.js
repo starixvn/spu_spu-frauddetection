@@ -154,7 +154,7 @@ function ($timeout, customerDetailsReportModel) {
     };
 
     function removeColumn(cell) {
-        var result = "<span class='glyphicon glyphicon-trash suspicious-customer-details-logs-remove' data-customerlogid='{0}' style='cursor: pointer'>".format(cell.Value);
+        var result = "<span class='glyphicon glyphicon-trash suspicious-customer-details-logs-remove' data-customerlogid='{0}' style='cursor: pointer;'>".format(cell.Value);
 
         return result;
     }

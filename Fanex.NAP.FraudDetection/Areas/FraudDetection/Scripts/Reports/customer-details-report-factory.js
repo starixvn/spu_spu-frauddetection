@@ -75,6 +75,15 @@ customerDetailsReportModule.factory('customerDetailsReportFactory', ['$http', fu
             });
         },
 
+        updateHedgeAccount: function (custId, isHedge) {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/UpdateHedgeAccount");
+
+            return $http.get(url, {
+                params:
+                    { custId: custId, isHedge: isHedge }
+            });
+        },
+
         getUsers: function () {
             var url = SPU.getAbsoluteUrl("CustomerDetails/GetUsers");
 

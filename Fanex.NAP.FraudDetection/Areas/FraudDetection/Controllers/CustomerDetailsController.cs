@@ -157,6 +157,22 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult UpdateHedgeAccount(int custId, bool isHedge)
+        {
+            var criteria = new CustomerHedgeUpdateCriteria
+            {
+                CustId = custId,
+                AuthorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0,
+                IsHedge = isHedge
+            };
+
+            var result = _customerDetailsReportService.UpdateCustomerHedge(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Host)]
         public ActionResult GetUsers()
         {
