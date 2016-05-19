@@ -57,13 +57,11 @@ function (suspiciousCustomerReportModel) {
             EventDateFrom: vm.filter.EventDateFrom,
             EventDateTo: vm.filter.EventDateTo,
             CustName: vm.filter.CustName,
-            TotalViolations: vm.filter.TotalViolations,
-            NewViolations: vm.filter.NewViolations,
             IsVerified: vm.filter.IsVerified,
             CaseId: vm.filter.CaseId,
-            PageSize: vm.filter.PageSize,
-            PageIndex: vm.filter.PageIndex,
-            caseName: caseName
+            caseName: caseName,
+            IsDelinquent: vm.filter.IsDelinquent,
+            IsHedge: vm.filter.IsHedge
         };
 
         FraudDetectionScripts.downloadFile("SuspiciousCustomer/ExportExcel", criteria);
