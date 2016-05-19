@@ -9,6 +9,7 @@ function ($window, customerDetailsReportModel) {
 
     vm.CustInfo = customerDetailsReportModel.CustInfo;
     vm.Summary = customerDetailsReportModel.Summary;
+    vm.WinlossMonthly = customerDetailsReportModel.WinlossMonthly;
     vm.EventChoices = customerDetailsReportModel.EventChoices;
     vm.SportsByMargin = customerDetailsReportModel.SportsByMargin;
     vm.BettypesByMargin = customerDetailsReportModel.BettypesByMargin;
@@ -49,6 +50,64 @@ function ($window, customerDetailsReportModel) {
         customerDetailsReportModel.getLogNotes(vm.GeneralInfo.CustId).then(function () {
             vm.LogNotes = customerDetailsReportModel.LogNotes;
         });
+    };
+
+    vm.getWinlossMonthly = function () {
+        customerDetailsReportModel.getWinlossMonthly(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {
+            vm.WinlossMonthly = customerDetailsReportModel.WinlossMonthly;
+
+            var toolTip = $("#btn_customermonthlywinloss");
+            toolTip.attr('title', 'tooltip');
+            toolTip.tooltip({
+                content: createMonthlyWinlossTable(customerDetailsReportModel.WinlossMonthly),
+                position: {
+                    my: "left top",
+                    at: "left+30 top+20"
+                },
+                track: true,
+                show: {
+                    effect: "slideDown"
+                }
+            }).on('mouseout focusout mouseover mouseenter mouseleave', function (eventTooltip) {
+                eventTooltip.stopImmediatePropagation();
+            });
+
+            toolTip.tooltip('open');
+
+            $(document).on('mousedown', function (e) {
+                var container = $(".ui-tooltip");
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    toolTip.tooltip('option', { disabled: true }).tooltip('close');
+                    toolTip.tooltip("destroy");
+                    $(document).off('mousedown');
+                    toolTip.removeAttr('title');
+                }
+            });
+        });
+    };
+
+    function createMonthlyWinlossTable(winlossMonthly) {
+        var result = "<table class='customer-report-statistic'>" +
+            "<tr><th>Month</th><th>Turnover</th><th>Win Loss</th><th>Margin(%)</th><th>Bet Count</th></tr>";
+
+        for (var i = 0; i < winlossMonthly.length; i++) {
+            var month = winlossMonthly[i].ReportDate;
+            var turnover = parseFloat(winlossMonthly[i].Turnover).toFixed(2);
+            var winloss = parseFloat(winlossMonthly[i].Winloss).toFixed(2);
+            var margin = parseFloat(winlossMonthly[i].Margin).toFixed(2);
+            var betcount = winlossMonthly[i].BetCount;
+
+            result += "<tr><td style='text-align:center;'>" + month +
+                "</td><td style='text-align:right;'>" + turnover +
+                "</td><td style='text-align:right;'>" + winloss +
+                "</td><td style='text-align:right;'>" + margin +
+                "</td><td style='text-align:center;'>" + betcount +
+                "</td></tr>";
+        }
+
+        result += "</table>";
+
+        return result;
     };
 
     vm.getFraudCaseDetails = function () {

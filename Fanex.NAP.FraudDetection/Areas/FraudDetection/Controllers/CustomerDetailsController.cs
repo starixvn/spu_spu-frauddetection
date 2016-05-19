@@ -99,6 +99,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
+        public ActionResult GetWinlossMonthly(int custId, DateTime fromDate, DateTime toDate)
+        {
+            var criteria = new CustomerDetailsReportMonthlyWinlossCriteria(custId, fromDate, toDate);
+            var result = _customerDetailsReportService.GetMonthlyWinloss(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult GetDailyViolatedTickets(int custId, DateTime fromDate, DateTime toDate)
         {
             var result = _customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);

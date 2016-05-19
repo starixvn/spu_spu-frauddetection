@@ -47,3 +47,60 @@ body, table
     background: rgba(0, 0, 0, 0) url(../App_Themes/Images/accept.png) no-repeat scroll 0 0;
     padding: 0 0 0 18px;
 }
+
+.detail-statistic-data {    
+    height: 15px;
+    width: 16px;
+    background: rgba(0, 0, 0, 0) url(../App_Themes/Images/graph_up_arrow.png) no-repeat scroll 0 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.customer-report-statistic
+{
+    width: 100%;
+    max-height:200px; 
+    overflow-y:auto;
+    overflow-x: hidden;
+    display:block;
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-color: darkgrey;
+    font-size: small;
+}
+table.customer-report-statistic th
+{
+    padding: 5px;
+    text-align: center;
+    border: 1px solid darkgrey;
+}
+
+table.customer-report-statistic td
+{
+    padding: 5px;
+    text-align: center;
+    border: 1px solid darkgrey;
+}
+
+.customer-report-statistic>caption {
+    color: navy;
+    padding-bottom: 5px;
+    padding-top: 0;
+    text-align: center;
+}
+
+.customer-report-statistic>tbody>tr>th {
+    color: white;
+    background-color: #3c5ea5;
+    padding: 5px;
+    text-align: center;
+}
+
+.ui-tooltip
+{
+    max-width: 500px !important;
+}
+.ui-tooltip-content
+{
+    max-width: 500px !important;
+}

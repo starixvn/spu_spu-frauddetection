@@ -99,6 +99,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Areas/FraudDetection/Scripts/Reports/suspicious-customer-report-model.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/CustomerDetailsReport").Include(
+                "~/Scripts/jquery-ui-1.11.4.js",
                 "~/Areas/FraudDetection/Scripts/Reports/customer-details-report-controller.js",
                 "~/Areas/FraudDetection/Scripts/Reports/customer-details-report-factory.js",
                 "~/Areas/FraudDetection/Scripts/Reports/customer-details-report-directive.js",

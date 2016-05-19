@@ -10,6 +10,7 @@ function (customerDetailsReportFactory, $location) {
     customerDetailsReportModel.FraudCaseDetails = [];
     customerDetailsReportModel.LogNotes = [];
     customerDetailsReportModel.Summary = {};
+    customerDetailsReportModel.WinlossMonthly = [];
     customerDetailsReportModel.EventChoices = [];
     customerDetailsReportModel.SportsByMargin = [];
     customerDetailsReportModel.BettypesByMargin = [];
@@ -106,6 +107,12 @@ function (customerDetailsReportFactory, $location) {
             customerDetailsReportModel.EventChoices = result.EventChoice;
             customerDetailsReportModel.SportsByMargin = result.TopSportsByMargin;
             customerDetailsReportModel.BettypesByMargin = result.TopBettypesByMargin;
+        });
+    };
+
+    customerDetailsReportModel.getWinlossMonthly = function (custId, fromDate, toDate) {
+        return customerDetailsReportFactory.getWinlossMonthly(custId, fromDate, toDate).success(function (winlossMonthly) {
+            customerDetailsReportModel.WinlossMonthly = winlossMonthly;
         });
     };
 

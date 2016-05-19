@@ -39,6 +39,15 @@ customerDetailsReportModule.factory('customerDetailsReportFactory', ['$http', fu
             });
         },
 
+        getWinlossMonthly: function (custId, fromDate, toDate) {
+            var url = SPU.getAbsoluteUrl("CustomerDetails/GetWinlossMonthly");
+
+            return $http.get(url, {
+                params:
+                    { custId: custId, fromDate: fromDate, toDate: toDate }
+            });
+        },
+
         getDailyViolatedTickets: function (custId, fromDate, toDate) {
             var url = SPU.getAbsoluteUrl("CustomerDetails/GetDailyViolatedTickets");
 

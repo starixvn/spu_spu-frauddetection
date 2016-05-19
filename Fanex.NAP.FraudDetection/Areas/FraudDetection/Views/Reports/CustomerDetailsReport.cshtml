@@ -6,10 +6,8 @@
 @section HeadCss
 {
     @Styles.Render("~/Content/betlist/FanexBetListCss")
-    <link href="~/Content/Common/isteven-multi-select.css" rel="stylesheet"
-          type="text/css" />
-    <link href="~/Areas/FraudDetection/Content/suspiciouscustomerdetailreport.css" rel="stylesheet"
-          type="text/css" />
+    <link href="~/Content/Common/isteven-multi-select.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/FraudDetection/Content/suspiciouscustomerdetailreport.css" rel="stylesheet" type="text/css" />
 }
 @section FooterJs
 {
@@ -163,7 +161,8 @@
                         <td valign="top" style="padding-right: 15px; padding-bottom: 15px;">
                             <div class="report-header" style="margin-top: 0;">
                                 <div style="font-weight: bold; margin-left: 5px; margin-top: 5px;">
-                                    Summary
+                                    Summary                                    
+                                    <div id="btn_customermonthlywinloss" class="detail-statistic-data" ng-click="cdrCtrl.getWinlossMonthly()"></div>
                                 </div>
                             </div>
                             <div class="freegrid" data-fanex-grid-customer-details-report-summary data-grid-data="cdrCtrl.Summary"
