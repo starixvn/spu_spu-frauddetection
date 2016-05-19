@@ -8,18 +8,19 @@ function (suspiciousCustomerReportModel) {
 
     vm.EventDateFilters = suspiciousCustomerReportModel.EventDateFilters;
     vm.DelinquentStatuses = suspiciousCustomerReportModel.DelinquentStatuses;
+    vm.HedgeStatuses = suspiciousCustomerReportModel.HedgeStatuses;
     vm.VerificationStatuses = suspiciousCustomerReportModel.VerificationStatuses;
     vm.SuspiciousCustomers = suspiciousCustomerReportModel.SuspiciousCustomers;
     vm.FraudCases = suspiciousCustomerReportModel.FraudCases;
     vm.filter = suspiciousCustomerReportModel.filter;
+    vm.Generated = false;
 
     vm.eventDateValue = 1;
 
     vm.generateSuspiciousCustomerReport = function () {
-        vm.filter.PageSize = 50;
-        vm.filter.PageIndex = 0;
-
         vm.querySuspiciousCustomers();
+
+        vm.Generated = true;
     };
 
     vm.querySuspiciousCustomers = function () {

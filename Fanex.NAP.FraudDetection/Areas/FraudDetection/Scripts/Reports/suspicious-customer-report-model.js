@@ -9,6 +9,8 @@ function (suspiciousCustomerReportFactory) {
     suspiciousCustomerReportModel.SuspiciousCustomers = [];
     suspiciousCustomerReportModel.Notes = [];
     suspiciousCustomerReportModel.FraudCases = [];
+    suspiciousCustomerReportModel.DelinquentStatuses = [];
+    suspiciousCustomerReportModel.HedgeStatuses = [];
 
     suspiciousCustomerReportModel.EventDateFilters = [
         { Value: 1, Name: "Today" },
@@ -21,6 +23,18 @@ function (suspiciousCustomerReportFactory) {
         { Value: 8, Name: "Last 3 Months" },
         { Value: 9, Name: "Last 6 Months" },
         { Value: 10, Name: "Specific Date" }
+    ];
+
+    suspiciousCustomerReportModel.DelinquentStatuses = [
+        { Value: null, Name: "All" },
+        { Value: true, Name: "Delq. Only" },
+        { Value: false, Name: "No-Delq. Only" }
+    ];
+
+    suspiciousCustomerReportModel.HedgeStatuses = [
+        { Value: null, Name: "All" },
+        { Value: true, Name: "Hedge Only" },
+        { Value: false, Name: "Non-Hedge Only" }
     ];
 
     suspiciousCustomerReportModel.VerificationStatuses = [
@@ -37,8 +51,8 @@ function (suspiciousCustomerReportFactory) {
         NewViolations: '',
         IsVerified: null,
         CaseId: 0,
-        PageSize: 50,
-        PageIndex: 0
+        IsDelinquent: null,
+        IsHedge: null
     };
 
     suspiciousCustomerReportModel.getSuspiciousCustomerReport = function (criteria) {

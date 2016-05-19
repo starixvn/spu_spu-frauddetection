@@ -70,7 +70,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(SuspiciousCustomerReportGetAllCriteria criteria, string caseName)
         {
-            criteria.PageSize = int.MaxValue;
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
             var excelExporter = new FDExportExcelSuspiciousCustomer(
@@ -87,7 +86,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     new Legend("Fraud Case", caseName)
                 },
                 GetSuspiciousCustomerHeaders(),
-                suspiciousCustomers.SuspiciousCustomers);
+                suspiciousCustomers);
 
             var saveAsFileName = excelExporter.GenerateExcelFile();
             ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);

@@ -27,16 +27,18 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
             var currentRow = {
                 Columns:
                 [
-                    { Name: "Row", Value: suspiciousCustomer.Row },
+                    { Name: "Row", Value: i + 1 },
                     { Name: "Delinquent", Value: suspiciousCustomer.IsDelinquent, CustomCellRender: delinquencyColumn },
                     { Name: "Note", Value: suspiciousCustomer, CustomCellRender: noteColumn },
-                    { Name: "Verified", Value: suspiciousCustomer.IsVerified, CustomCellRender: verifiedColumn },
+                    { Name: "Verified", Value: suspiciousCustomer, CustomCellRender: verifiedColumn },
                     { Name: "Member", Value: suspiciousCustomer.Customer, CustomCellRender: memberNameColumn },
                     { Name: "TotalViolations", Value: suspiciousCustomer.TotalViolations },
                     { Name: "NewViolations", Value: suspiciousCustomer.NewViolations },
                     { Name: "ViolatedCases", Value: suspiciousCustomer.ViolatedCases },
-                    { Name: "Assignees", Value: suspiciousCustomer.Assignees !== null ? 
-                        (suspiciousCustomer.Assignees.length > 0 ? suspiciousCustomer.Assignees : "-") : "-" }
+                    {
+                        Name: "Assignees", Value: suspiciousCustomer.Assignees !== null ?
+                          (suspiciousCustomer.Assignees.length > 0 ? suspiciousCustomer.Assignees : "-") : "-"
+                    }
                 ]
             };
 
@@ -68,8 +70,11 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
 
     function verifiedColumn(cell) {
         var result = "";
-        if (cell.Value) {
-            result = "<div class='suspicious-customer-review-done'>";
+        if (cell.Value.IsHedge) {
+            result = "<div class='glyphicon glyphicon-ok' style='color:red;' title='Hedge Account'>";
+        }
+        else if (cell.Value.IsVerified) {
+            result = "<div class='glyphicon glyphicon-ok' style='color:green;'>";
         }
 
         return result;
@@ -150,15 +155,13 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
     return {
         restrict: "A",
         scope: {
-            gridData: "=",
-            pageOption: '=',
-            onPageChanging: '='
+            gridData: "="
         },
         link: function ($scope, iElement) {
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
-                    if (gridData.SuspiciousCustomers !== undefined) {
-                        var bodyRows = generateBodyRows(gridData.SuspiciousCustomers);
+                    if (gridData !== undefined) {
+                        var bodyRows = generateBodyRows(gridData);
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
@@ -166,15 +169,17 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
                             marginRight: 0,
                             showTree: true,
                             showPager: true,
-                            customPager: true,
+                            customPager: false,
                             allowTruncate: true,
                             pagerOption: {
-                                itemsPerPage: $scope.pageOption.PageSize,
-                                currentPage: $scope.pageOption.PageIndex,
-                                totalItem: gridData.TotalItem,
+                                itemsPerPage: 50,
+                                currentPage: 0,
+                                totalItem: gridData.length,
                                 itemsPerPageArray: [10, 20, 50, 100, 500],
-                                pagerSelectCallBack: function (pageIndex, itemsPerPage) {
-                                    $scope.onPageChanging(pageIndex, itemsPerPage);
+                                afterPagedFunction: function (rows) {
+                                    registerViewNoteEvent();
+
+                                    return rows;
                                 }
                             }
                         };
@@ -193,7 +198,7 @@ suspiciousCustomerReportModule.directive('fanexGridSuspiciousCustomerReport', ['
             });
         }
     };
-} ]);
+}]);
 
 suspiciousCustomerReportModule.directive('datetimepicker', function () {
     return {

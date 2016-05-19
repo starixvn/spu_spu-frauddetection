@@ -24,6 +24,15 @@
     width: 18px;
 }
 
+.suspicious-customer-review-done-hedge{
+    background-image: url("../App_Themes/Images/icons.png");
+    background-position: -53px -4px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 18px;
+    color: red;
+}
+
 .customer-report-statistic
 {
     width: 100%;
