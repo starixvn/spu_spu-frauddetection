@@ -86,6 +86,10 @@ function ($window, customerDetailsReportModel) {
         });
     };
 
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     function createMonthlyWinlossTable(winlossMonthly) {
         var result = "<table class='customer-report-statistic'>" +
             "<tr><th>Month</th><th>Turnover</th><th>Win Loss</th><th>Margin(%)</th><th>Bet Count</th></tr>";
@@ -98,10 +102,10 @@ function ($window, customerDetailsReportModel) {
             var betcount = winlossMonthly[i].BetCount;
 
             result += "<tr><td style='text-align:center;'>" + month +
-                "</td><td style='text-align:right;'>" + turnover +
-                "</td><td style='text-align:right;'>" + winloss +
+                "</td><td style='text-align:right;'>" + numberWithCommas(turnover) +
+                "</td><td style='text-align:right;'>" + numberWithCommas(winloss) +
                 "</td><td style='text-align:right;'>" + margin +
-                "</td><td style='text-align:center;'>" + betcount +
+                "</td><td style='text-align:right;'>" + numberWithCommas(betcount) +
                 "</td></tr>";
         }
 
