@@ -11,6 +11,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using Core.Business;
     using Core.Web.Attribute;
+    using Fanex.NAP.Core.Service.Impl;
     using FD.Lib.Core.ExportExcel;
     using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Reports;
@@ -19,10 +20,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using NPOI.SS.UserModel;
     using Service.Core;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Configuration;
-    using Fanex.NAP.Core.Service.Impl;
 
     /// <summary>
     /// The controller of Customer Report.
@@ -60,12 +60,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(suspiciousCustomers, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>
-        /// Export the suspicious customers report to Excel file.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="caseName">Selected group name.</param>
-        /// <returns>A list of customers.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(SuspiciousCustomerReportGetAllCriteria criteria, string caseName)
@@ -80,9 +74,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     new Legend("From Date", criteria.EventDateFrom.ToShortDateString()),
                     new Legend("To Date", criteria.EventDateTo.ToShortDateString()),
                     new Legend("Member", criteria.CustName),
-                    new Legend("Total Violations ≥", criteria.TotalViolations.ToString()),
-                    new Legend("New Violations ≥", criteria.NewViolations.ToString()),
-                    new Legend("Verification", criteria.IsVerified == null ? string.Empty : (criteria.IsVerified.Value ? "Yes" : "No")),
+                    new Legend("Delinquency", criteria.IsDelinquent == null ? "All" : (criteria.IsDelinquent.Value ? "Delq. Only" : "Non-Delq. Only")),
+                    new Legend("Hedge Account", criteria.IsHedge == null ? "All" : (criteria.IsHedge.Value ? "Hedge Only" : "Non-Hedge Only")),
+                    new Legend("Verified", criteria.IsVerified == null ? "All" : (criteria.IsVerified.Value ? "Yes" : "No")),
                     new Legend("Fraud Case", caseName)
                 },
                 GetSuspiciousCustomerHeaders(),

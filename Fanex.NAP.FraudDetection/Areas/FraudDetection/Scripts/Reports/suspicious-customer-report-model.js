@@ -125,14 +125,14 @@ function (suspiciousCustomerReportFactory) {
                 filter.EventDateTo = formatDate(endDate);
                 break;
             case 8:
-                startDate = new Date(today.getFullYear(), today.getMonth() - 2, 1);
+                startDate = new Date(today.getFullYear(), today.getMonth() - 3, 1);
                 endDate = today;
 
                 filter.EventDateFrom = formatDate(startDate);
                 filter.EventDateTo = formatDate(endDate);
                 break;
             case 9:
-                startDate = new Date(today.getFullYear(), today.getMonth() - 5, 1);
+                startDate = new Date(today.getFullYear(), today.getMonth() - 6, 1);
                 endDate = today;
 
                 filter.EventDateFrom = formatDate(startDate);
