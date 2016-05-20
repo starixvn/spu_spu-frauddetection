@@ -103,7 +103,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             {
                 if (note.Author == null)
                 {
-                    note.Author = users.Where(t => t.Id == note.AuthorId).FirstOrDefault().Username;
+                    var user = users.Where(t => t.Id == note.AuthorId).FirstOrDefault();
+
+                    if (user != null)
+                    {
+                        note.Author = user.Username;
+                    }
                 }
             }
 
@@ -166,14 +171,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     continue;
                 }
 
-                if (user.User.Group == null)
-                {
-                    result.Add(user.User);
-                }
-                else if (!user.User.Group.Name.Equals("IT"))
-                {
-                    result.Add(user.User);
-                }
+                result.Add(user.User);
             }
 
             return result;

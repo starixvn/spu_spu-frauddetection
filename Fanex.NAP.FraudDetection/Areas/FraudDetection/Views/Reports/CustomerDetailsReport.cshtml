@@ -116,8 +116,8 @@
                         Hedge Account
                     </td>
                     <td>
-                        <input id="checkBoxHedge" type="checkbox" ng-model="cdrCtrl.CustInfo.IsHedge" ng-change="cdrCtrl.updateHedgeAccount()" />
-                        <label style="margin-left: 5px; cursor: pointer;" for="checkBoxHedge" class="glyphicon glyphicon-question-sign" title="{{ cdrCtrl.HedgeInfo }}"></label>
+                        <input type="checkbox" ng-model="cdrCtrl.CustInfo.IsHedge" ng-change="cdrCtrl.updateHedgeAccount()" />
+                        <label style="margin-left: 5px; cursor: pointer;" class="glyphicon glyphicon-question-sign" title="{{ cdrCtrl.HedgeInfo }}"></label>
                     </td>
                 </tr>
             </table>

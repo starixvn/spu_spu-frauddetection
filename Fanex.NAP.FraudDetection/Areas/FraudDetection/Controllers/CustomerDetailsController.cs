@@ -74,13 +74,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var criteria = new CustomerDetailsReportLogNoteCriteria(custId);
             var logNotes = _customerDetailsReportService.GetLogsNotes(criteria);
-            var users = GetAllUsers();
+            var users = GetUsersOfSuspiciousCustomerReport();
 
             foreach (var logNote in logNotes)
             {
                 if (logNote.AuthorName == null)
                 {
-                    logNote.AuthorName = users.Where(t => t.Id == logNote.AuthorId).FirstOrDefault().Username;
+                    var user = users.Where(t => t.Id == logNote.AuthorId).FirstOrDefault();
+                    
+                    if (user != null)
+                    {
+                        logNote.AuthorName = user.Username;
+                    }
                 }
             }
 
@@ -275,6 +280,27 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 {
                     result.Add(user.User);
                 }
+            }
+
+            return result;
+        }
+
+        private List<Core.Domain.IUser> GetUsersOfSuspiciousCustomerReport()
+        {
+            const string FunctionKey = FDFunctionKeys.SuspiciousCustomer;
+            var siteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]);
+            var suspiciousCustomerFunction = new FunctionService().GetByKeyAndSite(FunctionKey, siteId);
+            var users = new UserService().GetByFunctionAndSite(suspiciousCustomerFunction.Id, siteId);
+            var result = new List<Core.Domain.IUser>();
+
+            foreach (var user in users)
+            {
+                if (user.Policy != (decimal)Constant.Policy.Read && user.Policy != (decimal)Constant.Policy.Host)
+                {
+                    continue;
+                }
+
+                result.Add(user.User);
             }
 
             return result;
