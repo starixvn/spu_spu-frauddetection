@@ -19,8 +19,6 @@ function (suspiciousCustomerReportModel) {
 
     vm.generateSuspiciousCustomerReport = function () {
         vm.querySuspiciousCustomers();
-
-        vm.Generated = true;
     };
 
     vm.querySuspiciousCustomers = function () {
@@ -30,6 +28,7 @@ function (suspiciousCustomerReportModel) {
             vm.SuspiciousCustomers = suspiciousCustomerReportModel.SuspiciousCustomers;
 
             waitingDialog.hide();
+            vm.Generated = true;
         });
     };
 

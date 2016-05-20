@@ -145,7 +145,7 @@
     <Setting Key="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" SpName="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTransListGetByCustId" SpName="FD_CustomerDetailsTransListGetByCustId" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsWinlossStatisticGet" SpName="FD_CustomerDetailsWinlossStatisticGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsMonthlyWinlossGet" SpName="FD_CustomerDetailsMonthlyWinlossGet" DbName="DBFD.bodb_dwrs.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsMonthlyWinlossGet" SpName="FD_CustomerDetailsMonthlyWinlossGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="OfficeIPs">
