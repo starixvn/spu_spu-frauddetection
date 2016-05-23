@@ -53,11 +53,28 @@ function ($window, customerDetailsReportModel) {
     };
 
     vm.getWinlossMonthly = function () {
+        var toolTip = $("#btn_customermonthlywinloss");
+        toolTip.attr('title', 'tooltip');
+        toolTip.tooltip({
+            content: "<b style='color: red;'>Loading…</b>",
+            position: {
+                my: "left top",
+                at: "left+30 top+20"
+            },
+            track: true,
+            show: {
+                effect: "slideDown"
+            }
+        }).on('mouseout focusout mouseover mouseenter mouseleave', function (eventTooltip) {
+            eventTooltip.stopImmediatePropagation();
+        });
+
+        toolTip.tooltip('open');
+
         customerDetailsReportModel.getWinlossMonthly(vm.GeneralInfo.CustId, vm.GeneralInfo.FromDate, vm.GeneralInfo.ToDate).then(function () {
             vm.WinlossMonthly = customerDetailsReportModel.WinlossMonthly;
 
-            var toolTip = $("#btn_customermonthlywinloss");
-            toolTip.attr('title', 'tooltip');
+            toolTip.tooltip('close');
             toolTip.tooltip({
                 content: createMonthlyWinlossTable(customerDetailsReportModel.WinlossMonthly),
                 position: {
