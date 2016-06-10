@@ -31,31 +31,54 @@
                 <td class="text-right font-bold col-md-2">
                     Event
                 </td>
-                <td>@Html.Raw(string.Format("<b>{0}</b> -vs- <b>{1}</b>", Model.Summary.HomeName, Model.Summary.AwayName))
-                </td>
-            </tr>
+                <td>
+                    @Html.Raw(string.Format("<b>{0}</b> -vs- <b>{1}</b>", Model.Summary.HomeName, Model.Summary.AwayName))
+            </td>
+        </tr>
+        <tr>
+            <td class="text-right font-bold col-md-2">
+                HT Score
+            </td>
+            <td>
+                @Model.Summary.DisplayHTScore
+            </td>
+        </tr>
             <tr>
                 <td class="text-right font-bold col-md-2">
-                    # Members
+                    FT Score
                 </td>
-                <td>@Model.Summary.CustomerCount
-                </td>
-            </tr>
-            <tr>
-                <td class="text-right font-bold col-md-2">
-                    # Tickets
-                </td>
-                <td>@Model.Summary.BetCount
+                <td>
+                    @Model.Summary.DisplayFTScore
                 </td>
             </tr>
-        </table>
+        <tr>
+            <td class="text-right font-bold col-md-2">
+                # Members
+            </td>
+            <td>
+                @Model.Summary.CustomerCount
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right font-bold col-md-2">
+            # Tickets
+        </td>
+        <td>
+            @Model.Summary.BetCount
+    </td>
+</tr>
+</table>
+</div>
+</div>
+@foreach (var item in Model.Body)
+{
+    string bettype = item.Bettype.Replace(" ", string.Empty);
+    <div class="hidden report-header" id="report-header-@bettype">
+        <div class="export-excel-icon" id="btnExportExcel"></div>
     </div>
-</div>
-<div class="hidden report-header" id="report-header">
-    <div class="export-excel-icon" id="btnExportExcel"></div>
-</div>
-<div id="fraudCaseDetailReportId" class="freegrid content-grid">
-</div>
+    <div id="fraudCaseDetailReport-@bettype" class="freegrid content-grid">
+    </div>
+}
 @section FooterJs
 {
     <script type="text/javascript">

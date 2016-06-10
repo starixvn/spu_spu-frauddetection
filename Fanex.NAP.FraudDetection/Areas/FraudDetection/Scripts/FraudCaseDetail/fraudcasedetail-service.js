@@ -69,10 +69,15 @@
     };
 
     service.getFraudCaseDetails = function () {
-        var gridOptions = getGridOption(data);
-        $("#fraudCaseDetailReportId").fanexGrid(gridOptions);
-        $("#report-header").width($("#fraudCaseDetailReportId").width());
-        $("#report-header").removeClass("hidden");
+        for (var i = 0; i < data.length; i++) {
+            var gridOptions = getGridOption(data[i]);
+            var reportHeader = '#report-header-' + data[i].Bettype;
+            var grid = '#fraudCaseDetailReport-' + data[i].Bettype
+
+            $(grid).fanexGrid(gridOptions);
+            $(reportHeader).width($("#fraudCaseDetailReportId").width());
+            $(reportHeader).removeClass("hidden");
+        }
     };
 
     service.init = function () {

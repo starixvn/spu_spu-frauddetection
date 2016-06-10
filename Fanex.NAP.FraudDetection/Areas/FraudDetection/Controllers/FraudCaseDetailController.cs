@@ -28,23 +28,23 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     /// </summary>
     public class FraudCaseDetailController : BaseController
     {
-        private readonly IFraudCaseDetailReportService _service;
+        private readonly IFraudCaseDetailReportService service;
 
         public FraudCaseDetailController()
         {
-            _service = new FraudCaseDetailReportService();
+            service = new FraudCaseDetailReportService();
         }
 
         public FraudCaseDetailController(IFraudCaseDetailReportService service)
         {
-            _service = service;
+            this.service = service;
         }
 
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult Index(FraudCaseDetailReportCriteria criteria)
         {
-            var model = _service.GetFraudCaseDetails(criteria);
+            var model = service.GetFraudCaseDetails(criteria);
 
             return View("~/Areas/FraudDetection/Views/Reports/FraudCaseDetailList.cshtml", model);
         }
@@ -57,17 +57,17 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpGet]
         public ActionResult ExportExcel(FraudCaseDetailReportCriteria criteria)
         {
-            var model = _service.GetFraudCaseDetails(criteria, true);
+            var model = service.GetFraudCaseDetails(criteria, true);
 
-            var excelExporter = new FDExportExcelFraudCaseDetails(
-                Server.MapPath("~/ExcelFiles"), 
-                "FraudCaseDetails",
-                GetMatchMonitoringReportInfo(model.Summary),
-                GetMatchMonitoringHeaders(model.Body),
-                model.Body);
+            //var excelExporter = new FDExportExcelFraudCaseDetails(
+            //    Server.MapPath("~/ExcelFiles"), 
+            //    "FraudCaseDetails",
+            //    GetMatchMonitoringReportInfo(model.Summary),
+            //    GetMatchMonitoringHeaders(model.Body),
+            //    model.Body);
 
-            var saveAsFileName = excelExporter.GenerateExcelFile();
-            ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);
+            //var saveAsFileName = excelExporter.GenerateExcelFile();
+            //ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);
 
             return new EmptyResult();
         }

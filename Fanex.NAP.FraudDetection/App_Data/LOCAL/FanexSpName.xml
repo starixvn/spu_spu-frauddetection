@@ -112,7 +112,8 @@
 
   <Function Name="FD_FraudCaseDetails">
     <Setting Key="FD_FraudCaseDetailSummaryGetByMatchId" SpName="FD_FraudCaseDetailSummaryGetByMatchId" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList" DbName="DBFD.bodb02.bodbSPUNet" />
+    <!--<Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList" DbName="DBFD.bodb02.bodbSPUNet" />-->
+    <Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList_xtest" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_BetTicketGetByTransListFromDBArchive" SpName="FD_BetTicketGetByTransListFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
   </Function>
 
