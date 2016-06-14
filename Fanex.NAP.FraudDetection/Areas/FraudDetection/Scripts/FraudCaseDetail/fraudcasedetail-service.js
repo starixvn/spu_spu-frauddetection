@@ -12,14 +12,13 @@
                     { Name: "CustName", Value: element.CustName },
                     { Name: "TransDate", Value: element.TransDate },
                     { Name: "TransId", Value: element.TransId },
-                    { Name: "BetType", Value: element.BetType },
                     { Name: "Choice", CustomCellRender: function () { return element.Choice; } },
                     { Name: "Score", Value: element.Score },
                     { Name: "Odds", CustomCellRender: function () { return element.Odds; } },
                     { Name: "Stake", CustomCellRender: function () { return element.Stake; } },
                     { Name: "WinLoss", Value: element.WinLoss },
                     { Name: "Status", Value: element.Status },
-                    { Name: "IP", Value: element.IP }
+                    { Name: "IP", Value: element.DisplayIP }
                 ]
             });
         });
@@ -36,7 +35,6 @@
                 { HeaderText: "Member", Width: 100, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Bet Type", Width: 100, Name: "BetType", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Choice", Width: 220, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Score", Width: 70, Name: "Score", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Odds", Width: 70, Name: "Odds", HeaderAlign: "center", CellAlign: "right" },
@@ -51,17 +49,38 @@
                 { HeaderText: "Status", Width: 50, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "IP", Width: 120, Name: "IP", HeaderAlign: "center", CellAlign: "center" }
             ],
-            bodyRows: getBodyRows(data),
+            bodyRows: getBodyRows(data.FraudCaseDetailList),
             showNumberColumn: true,
             showPager: true,
             fullHeight: true,
             gridExpandHeight: 300,
             allowTruncate: true,
             pagerOption: {
-                itemsPerPage: 50,
+                itemsPerPage: 10,
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true
+            },
+            showTitle: true,
+            titleInfo:
+            {
+                text: data.Bettype,
+                showExcelButton: true,
+                exportExcelFunction: function (event) {
+                    event.preventDefault();
+                    var bettype = this.parentElement.parentElement.textContent;
+
+                    waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+                    var param = {
+                        "MatchId": $("#MatchId").text(),
+                        "CaseId": $("#CaseId").text(),
+                        "EventDate": $("#EventDate").text(),
+                        "Bettype": bettype
+                    };
+
+                    FraudDetectionScripts.downloadFile("ExportExcel", param);
+                    waitingDialog.hide();
+                }
             }
         };
 
@@ -71,13 +90,72 @@
     service.getFraudCaseDetails = function () {
         for (var i = 0; i < data.length; i++) {
             var gridOptions = getGridOption(data[i]);
-            var reportHeader = '#report-header-' + data[i].Bettype;
-            var grid = '#fraudCaseDetailReport-' + data[i].Bettype
+            //var reportHeader = '#report-header-' + i;
+            var grid = '#fraudCaseDetailReport-' + i;
 
             $(grid).fanexGrid(gridOptions);
-            $(reportHeader).width($("#fraudCaseDetailReportId").width());
-            $(reportHeader).removeClass("hidden");
+            //$(reportHeader).width($("#fraudCaseDetailReportId").width());
+            //$(reportHeader).removeClass("hidden");
         }
+    };
+
+    var renderTicketFromSameIPTable = function () {
+        var formatNumber = '0,0.00';
+        var gridOptions = {
+            columns: [
+                { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Member", Width: 100, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Bet Type", Width: 90, Name: "Bettype", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Choice", Width: 220, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Result", Width: 70, Name: "Result", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Odds", Width: 70, Name: "Odds", HeaderAlign: "center", CellAlign: "right" },
+                { HeaderText: "Stake", Width: 100, Name: "Stake", HeaderAlign: "center", CellAlign: "right" },
+                {
+                    HeaderText: "Win Loss", Width: 100, Name: "WinLoss", HeaderAlign: "center", CellAlign: "right",
+                    IsCurrency: true,
+                    FormatNumber: formatNumber,
+                    FormatNegative: '-$',
+                    IsAbs: true
+                },
+                { HeaderText: "Status", Width: 50, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
+            ],
+            //bodyRows: getBodyRows(data.FraudCaseDetailList),
+            showNumberColumn: true,
+            showPager: true,
+            fullHeight: true,
+            gridExpandHeight: 300,
+            allowTruncate: true,
+            pagerOption: {
+                itemsPerPage: 10,
+                currentPage: 0,
+                itemsPerPageArray: [10, 20, 50, 100, 500],
+                showDetail: true
+            }
+        };
+        
+        $(".link").click(function () {
+            $('<div id="popup"></div>')
+            .appendTo('body')
+            .html(function () {
+                var container = this.appendChild(document.createElement('div'));
+                container.id = 'container';
+                container.className = 'freegrid content-grid';
+                return $('#container').fanexGrid(gridOptions);
+            })
+            .dialog({
+                modal: true,
+                title: "Tickets of IP: xx.xx.xx.xx from mm/dd/yyyy",
+                zIndex: 10000,
+                autoOpen: true,
+                width: '1200px',
+                resizable: false,
+                close: function () {
+                    $(this).remove();
+                }
+            });
+        })
     };
 
     service.init = function () {
@@ -96,6 +174,8 @@
             FraudDetectionScripts.downloadFile("ExportExcel", param);
             waitingDialog.hide();
         });
+
+        renderTicketFromSameIPTable();
     };
 
     return service;

@@ -22,6 +22,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using NPOI.SS.UserModel;
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using System.Linq;
 
     /// <summary>
     /// The Case Group Controller.
@@ -59,15 +60,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             var model = service.GetFraudCaseDetails(criteria, true);
 
-            //var excelExporter = new FDExportExcelFraudCaseDetails(
-            //    Server.MapPath("~/ExcelFiles"), 
-            //    "FraudCaseDetails",
-            //    GetMatchMonitoringReportInfo(model.Summary),
-            //    GetMatchMonitoringHeaders(model.Body),
-            //    model.Body);
+            var excelExporter = new FDExportExcelFraudCaseDetails(
+                Server.MapPath("~/ExcelFiles"),
+                "FraudCaseDetails",
+                GetMatchMonitoringReportInfo(model.Summary),
+                GetMatchMonitoringHeaders(),
+                model.Body[0].FraudCaseDetailList);
 
-            //var saveAsFileName = excelExporter.GenerateExcelFile();
-            //ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);
+            var saveAsFileName = excelExporter.GenerateExcelFile();
+            ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);
 
             return new EmptyResult();
         }
@@ -91,7 +92,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 };
         }
 
-        public List<string> GetMatchMonitoringHeaders(IList<FraudCaseDetailItem> data)
+        public List<string> GetMatchMonitoringHeaders()
         {
             var columnCount = 0;
             var headers = new List<string>();

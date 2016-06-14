@@ -6,6 +6,19 @@ body {
     padding: 0 !important;
 }
 
-.bettype, .match, .league, .favorite .favorite, .underdog .favorite{
+.bettype, .match, .league, .favorite .favorite, .underdog .favorite {
     display: none;
+}
+
+.bettype-detail {
+    float: left;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.link {
+    display: inline-block;
+    width: 100%;
+    color: #4f82c6;
+    cursor: pointer;
 }
