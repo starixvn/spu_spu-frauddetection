@@ -38,10 +38,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _customerDetailsReportService = new CustomerDetailsReportService();
         }
 
-        /// <summary>
-        /// Main page.
-        /// </summary>
-        /// <returns>The ActionResult.</returns>
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

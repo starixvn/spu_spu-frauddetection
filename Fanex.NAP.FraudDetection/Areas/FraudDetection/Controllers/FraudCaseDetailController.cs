@@ -30,15 +30,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     public class FraudCaseDetailController : BaseController
     {
         private readonly IFraudCaseDetailReportService service;
+        private readonly ICustomerDetailsReportService customerDetailsReportService;
 
         public FraudCaseDetailController()
         {
             service = new FraudCaseDetailReportService();
+            customerDetailsReportService = new CustomerDetailsReportService();
         }
 
-        public FraudCaseDetailController(IFraudCaseDetailReportService service)
+        public FraudCaseDetailController(IFraudCaseDetailReportService service, ICustomerDetailsReportService customerDetailsReportService)
         {
             this.service = service;
+            this.customerDetailsReportService = customerDetailsReportService;
         }
 
         [HttpGet]
@@ -50,11 +53,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return View("~/Areas/FraudDetection/Views/Reports/FraudCaseDetailList.cshtml", model);
         }
 
-        /// <summary>
-        /// Export Fraud Case Details report to Excel file.
-        /// </summary>
-        /// <param name="criteria">Fraud Case Details Report Get All Criteria.</param>
-        /// <returns>Fraud Case Details report data.</returns>
+        public JsonResult GetAllTicketsByIp(string ip)
+        {
+            var result = customerDetailsReportService.GetFraudTicketsByIp("10.10.10.10");
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult ExportExcel(FraudCaseDetailReportCriteria criteria)
         {
