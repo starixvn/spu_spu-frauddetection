@@ -31,11 +31,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     [SessionState(SessionStateBehavior.ReadOnly)]
     public class CustomerDetailsController : BaseController
     {
-        private readonly CustomerDetailsReportService _customerDetailsReportService;
+        private readonly CustomerDetailsReportService customerDetailsReportService;
 
         public CustomerDetailsController()
         {
-            _customerDetailsReportService = new CustomerDetailsReportService();
+            customerDetailsReportService = new CustomerDetailsReportService();
         }
 
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
@@ -49,7 +49,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetCustInfoById(int custId)
         {
             var criteria = new CustomerDetailsReportCustInfoCriteria(custId);
-            var custInfo = _customerDetailsReportService.GetCustomerInfo(criteria);
+            var custInfo = customerDetailsReportService.GetCustomerInfo(criteria);
 
             return Json(custInfo, JsonRequestBehavior.AllowGet);
         }
@@ -59,7 +59,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetFraudCaseDetails(int custId, DateTime fromDate, DateTime toDate)
         {
             var criteria = new CustomerDetailsReportFraudCaseCriteria(custId, fromDate, toDate);
-            var fraudCaseDetails = _customerDetailsReportService.GetFraudCasesDetails(criteria);
+            var fraudCaseDetails = customerDetailsReportService.GetFraudCasesDetails(criteria);
 
             return Json(fraudCaseDetails, JsonRequestBehavior.AllowGet);
         }
@@ -69,7 +69,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetLogNotes(int custId)
         {
             var criteria = new CustomerDetailsReportLogNoteCriteria(custId);
-            var logNotes = _customerDetailsReportService.GetLogsNotes(criteria);
+            var logNotes = customerDetailsReportService.GetLogsNotes(criteria);
             var users = GetUsersOfSuspiciousCustomerReport();
 
             foreach (var logNote in logNotes)
@@ -93,7 +93,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetWinlossStatistic(int custId, DateTime fromDate, DateTime toDate)
         {
             var criteria = new CustomerDetailsReportWinlossStatisticCriteria(custId, fromDate, toDate);
-            var result = _customerDetailsReportService.GetWinlossStatistic(criteria);
+            var result = customerDetailsReportService.GetWinlossStatistic(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -103,7 +103,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetWinlossMonthly(int custId, DateTime fromDate, DateTime toDate)
         {
             var criteria = new CustomerDetailsReportMonthlyWinlossCriteria(custId, fromDate, toDate);
-            var result = _customerDetailsReportService.GetMonthlyWinloss(criteria);
+            var result = customerDetailsReportService.GetMonthlyWinloss(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -112,7 +112,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult GetDailyViolatedTickets(int custId, DateTime fromDate, DateTime toDate)
         {
-            var result = _customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
+            var result = customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -129,7 +129,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 LogDesc = note
             };
 
-            var result = _customerDetailsReportService.InsertCustomerNote(criteria);
+            var result = customerDetailsReportService.InsertCustomerNote(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -146,7 +146,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 AuthorName = AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty
             };
 
-            var result = _customerDetailsReportService.InsertCustomerLog(criteria);
+            var result = customerDetailsReportService.InsertCustomerLog(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -162,7 +162,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 IsDelinquent = isDelinquent
             };
 
-            var result = _customerDetailsReportService.UpdateCustomerDelinquent(criteria);
+            var result = customerDetailsReportService.UpdateCustomerDelinquent(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -178,7 +178,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 IsHedge = isHedge
             };
 
-            var result = _customerDetailsReportService.UpdateCustomerHedge(criteria);
+            var result = customerDetailsReportService.UpdateCustomerHedge(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -196,7 +196,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult GetAssigneesById(int custId)
         {
-            var assignees = _customerDetailsReportService.GetAssignees(new CustomerDetailsAssigneesGetByIdCriteria
+            var assignees = customerDetailsReportService.GetAssignees(new CustomerDetailsAssigneesGetByIdCriteria
             {
                 CustId = custId
             });
@@ -215,7 +215,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 AuthorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0
             };
 
-            var result = _customerDetailsReportService.InsertAssignees(criteria);
+            var result = customerDetailsReportService.InsertAssignees(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -239,7 +239,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 CreatorId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0
             };
 
-            var result = _customerDetailsReportService.RemoveCustomerLogNote(criteria);
+            var result = customerDetailsReportService.RemoveCustomerLogNote(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

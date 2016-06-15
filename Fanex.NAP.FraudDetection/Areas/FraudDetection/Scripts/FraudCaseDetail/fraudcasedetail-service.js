@@ -1,6 +1,7 @@
 ﻿var fraudCaseDetailService = (function ($) {
 
     var service = {};
+    var balanceUpDay = "";
 
     var getBodyRows = function (data) {
         var bodyRows = [];
@@ -26,15 +27,16 @@
         return bodyRows;
     };
 
-    var getDataAllTicketRows = function () {
+    var getDataAllTicketRows = function (ip) {
         var bodyRows = [];
         $.ajax({
-            url: '/FraudCaseDetail/GetAllTicketsByIp?10.10.10.10',
+            url: '/FraudCaseDetail/GetAllTicketsByIp?ip=' + ip,
             type: 'GET',
             async: false,
             dataType: 'json',
             success: function (data) {
-                $.each(data, function (index, element) {
+                balanceUpDay = moment(data.BalanceUpDay).format("DD/MM/YYYY");
+                $.each(data.BetList, function (index, element) {
                     bodyRows.push({
                         Columns: [
                             { Name: "No"},
@@ -43,7 +45,6 @@
                             { Name: "TransId", Value: element.TransId },
                             { Name: "Bettype", Value: element.BetType },
                             { Name: "Choice", CustomCellRender: function () { return element.Choice; } },
-                            //{ Name: "Choice", Value: element.Choice },
                             { Name: "Score", Value: element.Score },
                             { Name: "Odds", CustomCellRender: function () { return element.Odds; } },
                             { Name: "Stake", CustomCellRender: function () { return element.Stake; } },
@@ -53,7 +54,6 @@
                     });
                 });
             },
-
             error: function () {
                 //alert(_messages.errorTryAgain);
             }
@@ -94,7 +94,10 @@
                 itemsPerPage: 10,
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
-                showDetail: true
+                showDetail: true,
+                afterPagedFunction: function () {
+                    renderTicketFromSameIPTable();
+                }
             },
             showTitle: true,
             titleInfo:
@@ -138,6 +141,7 @@
         $(".link").click(function () {
             var formatNumber = '0,0.00';
             var displayIp = this.textContent;
+
             var gridOptions = {
                 columns: [
                     { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
@@ -158,7 +162,7 @@
                     },
                     { HeaderText: "Status", Width: 50, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
                 ],
-                bodyRows: getDataAllTicketRows(data.FraudCaseDetailList),
+                bodyRows: getDataAllTicketRows(displayIp),
                 showNumberColumn: true,
                 showPager: true,
                 fullHeight: true,
@@ -182,7 +186,7 @@
             })
             .dialog({
                 modal: true,
-                title: "Tickets of IP: " + displayIp + " from mm/dd/yyyy",
+                title: "Tickets of IP: " + displayIp + " from " + balanceUpDay,
                 zIndex: 10000,
                 autoOpen: true,
                 width: '1200px',

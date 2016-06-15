@@ -23,9 +23,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    /// <summary>
-    /// The Case Group Controller.
-    /// </summary>
     public class FraudCaseDetailController : BaseController
     {
         private readonly IFraudCaseDetailReportService service;
@@ -54,9 +51,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public JsonResult GetAllTicketsByIp(string ip)
         {
-            var result = customerDetailsReportService.GetFraudTicketsByIp("10.10.10.10");
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (ip != "127.0.0.1")
+            {
+                var result = customerDetailsReportService.GetFraudTicketsByIp(ip);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("");
+            }
         }
 
         [HttpGet]
@@ -91,6 +94,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 {
                     new Legend("Case Name", reportInfo.CaseName),
                     new Legend("Event", reportInfo.HomeName + " -vs- " + reportInfo.AwayName),
+                    new Legend("HT Score", reportInfo.DisplayHTScore),
+                    new Legend("FT Score", reportInfo.DisplayFTScore),
                     new Legend("# Members", reportInfo.CustomerCount.ToString()),
                     new Legend("# Tickets", reportInfo.BetCount.ToString())
                 };
