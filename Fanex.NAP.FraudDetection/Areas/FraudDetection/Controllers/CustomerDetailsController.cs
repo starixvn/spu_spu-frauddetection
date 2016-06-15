@@ -19,9 +19,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Service.Core;
     using Service.Utilities;
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Web.SessionState;
 

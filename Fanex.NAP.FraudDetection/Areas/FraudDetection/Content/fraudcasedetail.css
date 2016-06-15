@@ -22,3 +22,48 @@ body {
     color: #4f82c6;
     cursor: pointer;
 }
+/* Choice */
+.tickets .favorite {
+    display: initial;
+    color: #B50000;
+    font-weight: bold;
+}
+
+.tickets .handicap {
+    color: #606060;
+}
+
+.tickets .bettype {
+    display: block;
+    color: #003399;
+    font-weight: bold;
+}
+
+.tickets .sport {
+    color: #0066CC;
+}
+
+.tickets .underdog {
+    display: initial;
+    color: #01122B;
+    font-weight: bold !important;
+    white-space: normal;
+    text-align: right !important;
+}
+
+.tickets .match {
+    display: initial;
+    color: #000000;
+    font-weight: normal;
+    line-height: 15px;
+    text-align: right;
+    white-space: normal;
+}
+
+.tickets div.match + div.league {
+    display: initial;
+    background: none repeat scroll 0 0 transparent;
+    font-weight: normal;
+    text-align: right;
+    text-transform: none;
+}

@@ -115,7 +115,7 @@
     <!--<Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList" DbName="DBFD.bodb02.bodbSPUNet" />-->
     <Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList_xtest" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_BetTicketGetByTransListFromDBArchive" SpName="FD_BetTicketGetByTransListFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsTicketsGetByIP" SpName="FD_CustomerDetailsTicketsGetByIP" DbName="DBFD.bodb02.bodbSPUNet" />
+    <Setting Key="FD_BetTicketGetByIp" SpName="FD_BetTicketGetByIp" DbName="DBFD.bodb02.bodbSPUNet" />
   </Function>
 
   <Function Name="BettingGroupReport">

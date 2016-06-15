@@ -137,6 +137,7 @@
     var renderTicketFromSameIPTable = function () {
         $(".link").click(function () {
             var formatNumber = '0,0.00';
+            var displayIp = this.textContent;
             var gridOptions = {
                 columns: [
                     { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
@@ -144,7 +145,7 @@
                     { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Bet Type", Width: 90, Name: "Bettype", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "Choice", Width: 220, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Choice", Width: 220, Name: "Choice", HeaderAlign: "center", CellAlign: "right" },
                     { HeaderText: "Result", Width: 70, Name: "Score", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Odds", Width: 70, Name: "Odds", HeaderAlign: "center", CellAlign: "right" },
                     { HeaderText: "Stake", Width: 100, Name: "Stake", HeaderAlign: "center", CellAlign: "right" },
@@ -171,7 +172,7 @@
                 }
             };
 
-            $('<div id="popup"></div>')
+            $('<div id="popup" class="tickets"></div>')
             .appendTo('body')
             .html(function () {
                 var container = this.appendChild(document.createElement('div'));
@@ -181,7 +182,7 @@
             })
             .dialog({
                 modal: true,
-                title: "Tickets of IP: xx.xx.xx.xx from mm/dd/yyyy",
+                title: "Tickets of IP: " + displayIp + " from mm/dd/yyyy",
                 zIndex: 10000,
                 autoOpen: true,
                 width: '1200px',

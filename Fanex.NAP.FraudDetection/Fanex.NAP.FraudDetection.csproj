@@ -348,7 +348,9 @@
     <Compile Include="Areas\FraudDetection\Controllers\OfficeIPsController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerDetailsController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\DailyDataMonitoringController.cs" />
-    <Compile Include="Areas\FraudDetection\Controllers\FraudCaseDetailController.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\FraudCaseDetailController.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Areas\FraudDetection\Controllers\MatchMonitoringController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerBettingGroupController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CaseGroupController.cs" />

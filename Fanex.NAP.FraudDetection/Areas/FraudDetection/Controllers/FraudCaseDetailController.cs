@@ -22,7 +22,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using NPOI.SS.UserModel;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using System.Linq;
 
     /// <summary>
     /// The Case Group Controller.
