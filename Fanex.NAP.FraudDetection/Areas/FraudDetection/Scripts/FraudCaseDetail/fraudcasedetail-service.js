@@ -34,12 +34,15 @@
             type: 'GET',
             async: false,
             dataType: 'json',
+            beforeSend: function () {
+                waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+            },
             success: function (data) {
                 balanceUpDay = moment(data.BalanceUpDay).format("DD/MM/YYYY");
                 $.each(data.BetList, function (index, element) {
                     bodyRows.push({
                         Columns: [
-                            { Name: "No"},
+                            { Name: "No" },
                             { Name: "CustName", Value: element.CustName },
                             { Name: "TransDate", Value: element.TransDate },
                             { Name: "TransId", Value: element.TransId },
@@ -56,6 +59,9 @@
             },
             error: function () {
                 //alert(_messages.errorTryAgain);
+            },
+            complete: function () {
+                waitingDialog.hide();
             }
         });
         return bodyRows;
