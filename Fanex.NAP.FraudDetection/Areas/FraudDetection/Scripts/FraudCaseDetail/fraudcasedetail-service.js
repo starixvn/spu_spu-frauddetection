@@ -67,7 +67,7 @@
         var gridOptions = {
             columns: [
                 { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Member", Width: 100, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Member", Width: 130, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Choice", Width: 220, Name: "Choice", HeaderAlign: "center", CellAlign: "left" },
@@ -135,15 +135,15 @@
     };
 
     var renderTicketFromSameIPTable = function () {
-        $(".link").unbind("click");
-        $(".link").click(function () {
+        $(".all-ticketsip").unbind("click");
+        $(".all-ticketsip").click(function () {
             var formatNumber = '0,0.00';
             var displayIp = this.textContent;
 
             var gridOptions = {
                 columns: [
                     { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Member", Width: 100, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Member", Width: 130, Name: "CustName", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Bet Type", Width: 90, Name: "Bettype", HeaderAlign: "center", CellAlign: "left" },
@@ -194,7 +194,7 @@
                         });
                 },
                 autoOpen: true,
-                width: '1200px',
+                width: '1230px',
                 resizable: false,
                 close: function () {
                     $(this).remove();
