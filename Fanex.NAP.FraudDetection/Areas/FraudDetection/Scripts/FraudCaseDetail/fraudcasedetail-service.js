@@ -177,17 +177,24 @@
             };
 
             $('<div id="popup" class="tickets"></div>')
-            .appendTo('body')
-            .html(function () {
-                var container = this.appendChild(document.createElement('div'));
-                container.id = 'container';
-                container.className = 'freegrid content-grid';
-                return $('#container').fanexGrid(gridOptions);
-            })
             .dialog({
                 modal: true,
                 title: "Tickets of IP: " + displayIp + " from " + balanceUpDay,
                 zIndex: 10000,
+                appendTo: "body",
+                open: function () {
+                    var container = this.appendChild(document.createElement('div'));
+                    container.id = 'container';
+                    container.className = 'freegrid content-grid';
+                    $('#container').fanexGrid(gridOptions);
+                    $("#popup")
+                        .dialog("option", "position",
+                        {
+                            my: "center",
+                            at: "center",
+                            of: window
+                        });
+                },
                 autoOpen: true,
                 width: '1200px',
                 resizable: false,
