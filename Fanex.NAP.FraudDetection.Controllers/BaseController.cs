@@ -10,13 +10,14 @@
 
 namespace Fanex.NAP.FraudDetection.Controllers
 {
-    using System.IO;
-    using System.Web.Mvc;
     using Core.Configuration;
     using Core.Service.Impl;
     using Core.Service.Interface;
     using Core.Web.Context;
     using Core.Web.Session;
+    using System;
+    using System.IO;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Base controller.
@@ -133,7 +134,7 @@ namespace Fanex.NAP.FraudDetection.Controllers
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
                 JsonRequestBehavior = behavior,
-                MaxJsonLength = System.Int32.MaxValue
+                MaxJsonLength = Int32.MaxValue
             };
         }
     }

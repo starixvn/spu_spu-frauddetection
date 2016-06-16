@@ -128,16 +128,14 @@
     service.getFraudCaseDetails = function () {
         for (var i = 0; i < data.length; i++) {
             var gridOptions = getGridOption(data[i]);
-            //var reportHeader = '#report-header-' + i;
             var grid = '#fraudCaseDetailReport-' + i;
 
             $(grid).fanexGrid(gridOptions);
-            //$(reportHeader).width($("#fraudCaseDetailReportId").width());
-            //$(reportHeader).removeClass("hidden");
         }
     };
 
     var renderTicketFromSameIPTable = function () {
+        $(".link").unbind("click");
         $(".link").click(function () {
             var formatNumber = '0,0.00';
             var displayIp = this.textContent;

@@ -41,7 +41,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
-        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Index(FraudCaseDetailReportCriteria criteria)
         {
             var model = service.GetFraudCaseDetails(criteria);
@@ -51,15 +51,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public JsonResult GetAllTicketsByIp(string ip)
         {
-            if (ip != "127.0.0.1")
-            {
-                var result = customerDetailsReportService.GetFraudTicketsByIp(ip);
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json("");
-            }
+            var result = customerDetailsReportService.GetFraudTicketsByIp(ip);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
