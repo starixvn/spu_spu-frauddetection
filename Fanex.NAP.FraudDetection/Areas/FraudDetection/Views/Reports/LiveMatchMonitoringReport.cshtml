@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Live Match Monitoring";
+
+}
+@section HeadCss
+{
+    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/Content/matchmonitoring.css" />
+}
+@section FooterJs
+{
+    @Scripts.Render("~/bundles/App/MatchMonitoringReport")
+    <script src="~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js"
+            type="text/javascript"></script>
+    <script src="~/Areas/FraudDetection/AddOns/TimePicker/date-format.js" type="text/javascript"></script>
+}
+<div>
+    <span class="infor-text">@ViewBag.Title</span>
+</div>
+<div>
+    <div class="form-inline filter-forml col-sm-12">
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Event Date
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input datetimepicker type="text" readonly="readonly" style="width: 80px; height: 25px;"
+                           id="eventDate" ng-click="mmrCtrl.openCalendar('#eventDate')" ng-model="mmrCtrl.filter.EventDate"
+                           ng-change="mmrCtrl.changeEventDate()" />
+                    <span class="icon-calendar icon-event-date-calendar" ng-click="mmrCtrl.openCalendar('#eventDate')">
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Sport
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <select ng-model="mmrCtrl.filter.SportId" style="width: 180px; height: 25px;"
+                            ng-options="sport.SportId as sport.SportName for sport in mmrCtrl.Sports"
+                            ng-change="mmrCtrl.changeSport()"></select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Match Code
+                    </label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="text" ng-model="mmrCtrl.filter.MatchCode" style="width: 97px; height: 25px;" />
+                </div>
+            </div>
+        </div>
+        <div style="height: 35px;">
+            &nbsp;
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-6">
+                <div class="col-sm-2" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        League
+                    </label>
+                </div>
+                <div class="col-sm-10">
+                    <select ng-model="mmrCtrl.filter.LeagueId" style="height: 25px; min-width: 97px;" ng-options="league.LeagueId as league.LeagueName for league in mmrCtrl.Leagues"></select>
+                </div>
+            </div>
+        </div>
+        <div style="height: 35px;">
+            &nbsp;
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                </div>
+                <div class="col-sm-7">
+                    <span class="checkbox">
+                        <input style="vertical-align: text-bottom;" id="checkboxMainMarket" type="checkbox"
+                               ng-model="mmrCtrl.filter.IsMainMarket" />
+                        <label style="cursor: pointer; font-weight: normal;" for="checkboxMainMarket">Main Market Only</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="newline">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <div class="col-sm-4" style="text-align: center;">
+                <img class="ico-scannednosuspicious" alt="" title='Scanned and has no suspicious case.' />
+                <label class="text-right">
+                    Everything is fine
+                </label>
+            </div>
+            <div class="col-sm-4" style="text-align: center;">
+                <img class="ico-scannedhassuspicious" alt="" title='Scanned and has suspicious cases.' />
+                <label class="text-right">
+                    Fraud detected
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-12" style="margin-top: -20px;">
+            <div class="report-header hidden" id="report-header">
+                <div class="export-excel-icon" ng-click="mmrCtrl.exportExcel()">
+                </div>
+            </div>
+            <div id="match-monitoring-report" class="freegrid" data-fanex-grid-match-monitoring-report data-grid-data="mmrCtrl.MatchMonitoringReport">
+            </div>
+        </div>
+    </div>
+</div>

@@ -345,6 +345,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\graph_up_arrow.png" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="App_Start\BundleExtensions.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\LiveMatchMonitoringController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\OfficeIPsController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\CustomerDetailsController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\DailyDataMonitoringController.cs" />
@@ -561,6 +562,7 @@
     <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
     <Content Include="Content\betlist\betlist.core.css" />
     <Content Include="Areas\FraudDetection\Views\Reports\OfficeIpReport.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Reports\LiveMatchMonitoringReport.cshtml" />
     <None Include="Content\betlist\betList.css1" />
     <Content Include="Content\betlist\custom-betlist.css" />
     <Content Include="Content\betlist\fanex.result.css" />
