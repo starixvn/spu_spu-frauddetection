@@ -7,41 +7,44 @@
             <div>
                 <div class="table-popup font-size-small">
                     <select ng-model="taskCtr.preconditionRow.Param" style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.Preconditions | filter:taskCtr.showInPrecondition"
-                        ng-change="taskCtr.changePreCondition()">
-                    </select>
+                            ng-change="taskCtr.changePreCondition()"></select>
                     <select ng-model="taskCtr.preconditionRow.Operator" style="height: 25px;" ng-options="operator as operator.Name for operator in taskCtr.Operators"
-                        ng-change="">
-                    </select>
+                            ng-change=""></select>
                     <select ng-model="taskCtr.preconditionRow.Value" ng-show="taskCtr.CompareWithOtherField.InPrecondition"
-                        style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.ComparePreconditions | filter:taskCtr.showInComparePrecondition"
-                        ng-change="">
-                    </select>
+                            style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.ComparePreconditions | filter:taskCtr.showInComparePrecondition"
+                            ng-change=""></select>
                     <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match Status' && !taskCtr.CompareWithOtherField.InPrecondition"
-                        ng-options="matchStatus as matchStatus.Name for matchStatus in taskCtr.MatchStatuses"
-                        ng-change="">
-                    </select>
+                            ng-options="matchStatus as matchStatus.Name for matchStatus in taskCtr.MatchStatuses"
+                            ng-change=""></select>
                     <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match State' && !taskCtr.CompareWithOtherField.InPrecondition"
-                        ng-options="matchState as matchState.Name for matchState in taskCtr.MatchStates"
-                        ng-change="">
-                    </select>
+                            ng-options="matchState as matchState.Name for matchState in taskCtr.MatchStates"
+                            ng-change=""></select>
                     <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'League Type' && !taskCtr.CompareWithOtherField.InPrecondition"
-                        ng-options="league as league.Name for league in taskCtr.LeagueTypes" ng-change="">
-                    </select>
+                            ng-options="league as league.Name for league in taskCtr.LeagueTypes" ng-change=""></select>
                     <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Sport' && !taskCtr.CompareWithOtherField.InPrecondition"
-                        ng-options="sport as sport.SportName for sport in taskCtr.Sports" ng-change="">
-                    </select>
+                            ng-options="sport as sport.SportName for sport in taskCtr.Sports" ng-change=""></select>
                     <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Customer Group' && !taskCtr.CompareWithOtherField.InPrecondition"
-                        ng-options="group as group.GroupName for group in taskCtr.CustomerGroups" ng-change="">
-                    </select>
+                            ng-options="group as group.GroupName for group in taskCtr.CustomerGroups" ng-change=""></select>
                     <input type="text" ng-model="taskCtr.preconditionRow.Value" style="width: 100px;
                         height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match Code' && !taskCtr.CompareWithOtherField.InPrecondition" />
                     <input type="text" ng-model="taskCtr.preconditionRow.AdditionalValue" style="width: 100px;
                         height: 25px;" ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && taskCtr.CompareWithOtherField.InPrecondition" />
                     <input type="text" readonly="readonly" style="width: 100px; height: 25px;" id="preconditionDateTimePicker"
-                        ng-click="taskCtr.openCalendar('#preconditionDateTimePicker')" ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition" />
+                           ng-click="taskCtr.openCalendar('#preconditionDateTimePicker')" ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date'
+                           || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition" />
                     <span class="icon-calendar icon-event-date-calendar" ng-click="taskCtr.openCalendar('#preconditionDateTimePicker')"
-                        ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date' || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition">
+                          ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Match Date'
+                          || taskCtr.preconditionRow.Param.ConfigName == 'Scanned Date') && !taskCtr.CompareWithOtherField.InPrecondition">
                     </span>
+
+
+                    <input type="text" readonly="readonly" style="width: 150px; height: 25px;" id="preconditionKickoffTimePicker"
+                           ng-click="taskCtr.openCalendar('#preconditionKickoffTimePicker')" ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Kick-off Time') && !taskCtr.CompareWithOtherField.InPrecondition" />
+                    <span class="icon-calendar icon-event-date-calendar" ng-click="taskCtr.openCalendar('#preconditionKickoffTimePicker')"
+                          ng-show="(taskCtr.preconditionRow.Param.ConfigName == 'Kick-off Time') && !taskCtr.CompareWithOtherField.InPrecondition">
+                    </span>
+
+
                     <input type="button" ng-click="taskCtr.addPrecondition()" value="Add to List" class="btn-green font-size-small" />
                     <div class="newline">
                         &nbsp;
@@ -82,7 +85,7 @@
                     </div>
                     <div ng-repeat="item in taskCtr.FormulaElements" style="display: inline-block;">
                         <input type="button" ng-click="taskCtr.addRemoveFormulaElementInPrecondition(item)"
-                            value="{{item.Name}}" class="btn-green font-size-small" />&nbsp;
+                               value="{{item.Name}}" class="btn-green font-size-small" />&nbsp;
                     </div>
                 </div>
             </div>
@@ -92,43 +95,35 @@
             <div>
                 <div class="table-popup font-size-small">
                     <select ng-model="taskCtr.ruleRow.Param" style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.Rules | filter:taskCtr.showInRule"
-                        ng-change="taskCtr.changeRule()">
-                    </select>
+                            ng-change="taskCtr.changeRule()"></select>
                     <select ng-model="taskCtr.ruleRow.Operator" style="height: 25px;" ng-options="operator as operator.Name for operator in taskCtr.Operators"
-                        ng-change="">
-                    </select>
+                            ng-change=""></select>
                     <input type="text" ng-model="taskCtr.ruleRow.AdditionalValue" style="width: 100px;
                         height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Stake' && taskCtr.CompareWithOtherField.InRule" />
                     <select ng-model="taskCtr.ruleRow.Value" ng-show="taskCtr.CompareWithOtherField.InRule"
-                        style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.CompareRules | filter:taskCtr.showInCompareRule"
-                        ng-change="">
-                    </select>
+                            style="height: 25px;" ng-options="config as config.ConfigName for config in taskCtr.CompareRules | filter:taskCtr.showInCompareRule"
+                            ng-change=""></select>
                     @*Text box*@
                     <input type="text" ng-model="taskCtr.ruleRow.Value" style="width: 100px; height: 25px;"
-                        ng-show="taskCtr.DataInRule.TextBox && !taskCtr.CompareWithOtherField.InRule" />
+                           ng-show="taskCtr.DataInRule.TextBox && !taskCtr.CompareWithOtherField.InRule" />
                     @*Date Time*@
                     <input type="text" readonly="readonly" style="width: 100px; height: 25px;" id="ruleDateTimePicker"
-                        ng-click="taskCtr.openCalendar('#ruleDateTimePicker')" ng-show="taskCtr.DataInRule.DateTime && !taskCtr.CompareWithOtherField.InRule" />
+                           ng-click="taskCtr.openCalendar('#ruleDateTimePicker')" ng-show="taskCtr.DataInRule.DateTime && !taskCtr.CompareWithOtherField.InRule" />
                     <span class="icon-calendar icon-event-date-calendar" ng-click="taskCtr.openCalendar('#ruleDateTimePicker')"
-                        ng-show="taskCtr.DataInRule.DateTime && !taskCtr.CompareWithOtherField.InRule">
+                          ng-show="taskCtr.DataInRule.DateTime && !taskCtr.CompareWithOtherField.InRule">
                     </span>@*Combo box*@
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Ticket Status' && !taskCtr.CompareWithOtherField.InRule"
-                        ng-options="status as status.Name for status in taskCtr.TicketStatuses" ng-change="">
-                    </select>
+                            ng-options="status as status.Name for status in taskCtr.TicketStatuses" ng-change=""></select>
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Bet Type' && !taskCtr.CompareWithOtherField.InRule"
-                        ng-options="type as type.BettypeName for type in taskCtr.BetTypes" ng-change="">
-                    </select>
+                            ng-options="type as type.BettypeName for type in taskCtr.BetTypes" ng-change=""></select>
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Currency' && !taskCtr.CompareWithOtherField.InRule"
-                        ng-options="currency as currency.CurrencyName for currency in taskCtr.Currencies"
-                        ng-change="">
-                    </select>
+                            ng-options="currency as currency.CurrencyName for currency in taskCtr.Currencies"
+                            ng-change=""></select>
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Choice' && !taskCtr.CompareWithOtherField.InRule"
-                        ng-options="choice as choice.Name for choice in taskCtr.Choices" ng-change="">
-                    </select>
+                            ng-options="choice as choice.Name for choice in taskCtr.Choices" ng-change=""></select>
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Arbitrage' && !taskCtr.CompareWithOtherField.InRule"
-                        ng-options="arbitrage as arbitrage.Name for arbitrage in taskCtr.Arbitrages"
-                        ng-change="">
-                    </select>
+                            ng-options="arbitrage as arbitrage.Name for arbitrage in taskCtr.Arbitrages"
+                            ng-change=""></select>
                     @*IP Address*@
                     <input type="text" id="IpAddress" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name != 'between'" />
                     <input type="text" id="IpAddressFrom" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name == 'between'" />
@@ -170,7 +165,7 @@
                     </div>
                     <div ng-repeat="item in taskCtr.FormulaElements" style="display: inline-block;">
                         <input type="button" ng-click="taskCtr.addRemoveFormulaElementInRule(item)" value="{{item.Name}}"
-                            class="btn-green font-size-small" />&nbsp;
+                               class="btn-green font-size-small" />&nbsp;
                     </div>
                 </div>
             </div>
@@ -188,8 +183,7 @@
                         </td>
                         <td ng-show="taskCtr.nextActionAssignGroup.IsTicked">
                             <select ng-model="taskCtr.nextActionAssignGroup.ActionTargetId" style="height: 25px;"
-                                ng-options="group.GroupId as group.GroupName for group in taskCtr.CustomerGroups">
-                            </select>
+                                    ng-options="group.GroupId as group.GroupName for group in taskCtr.CustomerGroups"></select>
                         </td>
                     </tr>
                     <tr ng-show=" taskCtr.Model.Activity.ActivityId == 1 || taskCtr.Model.Activity.ActivityId == 2 ">
@@ -201,8 +195,7 @@
                         </td>
                         <td ng-show="taskCtr.nextActionSendMail.IsTicked">
                             <select ng-model="taskCtr.nextActionSendMail.ActionTargetId" style="height: 25px;"
-                                ng-options="mail.MailId as mail.MailCode for mail in taskCtr.Mails">
-                            </select>
+                                    ng-options="mail.MailId as mail.MailCode for mail in taskCtr.Mails"></select>
                         </td>
                     </tr>
                     <tr ng-show=" taskCtr.Model.Activity.ActivityId == 3 || taskCtr.Model.Activity.ActivityId == 4 ">
@@ -210,7 +203,7 @@
                             <div>
                                 <input type="checkbox" ng-model="taskCtr.nextActionCaptureData.IsTicked" />
                                 {{ taskCtr.NextActions[2].Name }} <span data-placement="top" data-toggle="tooltip"
-                                    title="Generated data will be kept in 14 days only." style="margin-left: 5px;
+                                                                        title="Generated data will be kept in 14 days only." style="margin-left: 5px;
                                     cursor: pointer;" class="glyphicon glyphicon-question-sign"></span>
                             </div>
                         </td>
@@ -224,7 +217,8 @@
                                     <li ng-repeat="dataType in taskCtr.DataTypes">
                                         <input style="margin: 5px;" type="checkbox" ng-model="dataType.IsChecked" id="captureData_value_{{ dataType.DataId }}" />
                                         <label style="font-weight: normal; font-size: small;" for="captureData_value_{{ dataType.DataId }}">
-                                            {{ dataType.DataName }}</label>
+                                            {{ dataType.DataName }}
+                                        </label>
                                     </li>
                                 </ul>
                             </div>

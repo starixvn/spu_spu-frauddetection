@@ -75,12 +75,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult AddTask(TaskInsertCriteria criteria)
         {
-            var dataCheckResults = CheckTaskDataIsCorrect(criteria);
-            if (!string.IsNullOrEmpty(dataCheckResults))
-            {
-                return new JsonResult { Data = new { IsSuccessful = false, Message = dataCheckResults } };
-            }
-
             var configService = new ConfigurationsService();
             var matchParams =
                 configService.GetParameters(new ParameterGetAllCriteria()).Where(t => t.ParamName == "ChunkOfMatches");
@@ -131,12 +125,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public ActionResult EditTask(TaskUpdateCriteria criteria, string caseId)
         {
-            var dataCheckResults = CheckTaskDataIsCorrect(criteria);
-            if (!string.IsNullOrEmpty(dataCheckResults))
-            {
-                return new JsonResult { Data = new { IsSuccessful = false, Message = dataCheckResults } };
-            }
-
             var configService = new ConfigurationsService();
             var matchParams =
                 configService.GetParameters(new ParameterGetAllCriteria()).Where(t => t.ParamName == "ChunkOfMatches");
@@ -263,34 +251,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var tasks = new TaskService().GetBackGroundTasksByCase(new TaskBackGroundGetByCaseIdCriteria { CaseId = caseId });
 
             return Json(tasks, JsonRequestBehavior.AllowGet);
-        }
-
-        /// <summary>
-        /// Check Whether Task Data Is Correct.
-        /// </summary>
-        /// <param name="criteria">Task Info Criteria.</param>
-        /// <returns>Check results.</returns>
-        private string CheckTaskDataIsCorrect(TaskInfoCriteria criteria)
-        {
-            if (string.IsNullOrEmpty(criteria.TaskPreconditions) && string.IsNullOrEmpty(criteria.TaskRules))
-            {
-                return "The conditions are left blank. Please add condition(s) for the new Task.";
-            }
-
-            if (string.IsNullOrEmpty(criteria.NextActionIdList) && string.IsNullOrEmpty(criteria.NextActionTargetIdList))
-            {
-                return "The next actions are left blank. Please add next action(s) for the new Task.";
-            }
-
-            var nextActionTargetIds = criteria.NextActionTargetIdList.Split(',');
-            var result = true;
-            foreach (var nextActionTargetId in nextActionTargetIds)
-            {
-                int id;
-                result &= int.TryParse(nextActionTargetId, out id);
-            }
-
-            return !result ? "The next action targets are left blank. Please add Group(s)/Mail Template(s) for the Case." : string.Empty;
         }
 
         /// <summary>

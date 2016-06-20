@@ -320,7 +320,7 @@ function (taskFactory) {
         });
 
         $('#preconditionDateTimePicker').datepicker();
-        $('#preconditionDateTimePicker').datetimepicker({
+        $('#preconditionKickoffTimePicker').datetimepicker({
             showSecond: true,
             dateFormat: 'mm/dd/yy',
             timeFormat: 'HH:mm:ss',
@@ -332,18 +332,19 @@ function (taskFactory) {
         });
 
         $('#preconditionDateTimePicker').datetimepicker('setDate', (new Date()));
+        $('#preconditionKickoffTimePicker').datetimepicker('setDate', (new Date()));
 
         $('#ruleDateTimePicker').datepicker();
-        $('#ruleDateTimePicker').datetimepicker({
-            showSecond: true,
-            dateFormat: 'mm/dd/yy',
-            timeFormat: 'HH:mm:ss',
-            hourGrid: 3,
-            minuteGrid: 5,
-            secondGrid: 5,
-            separator: ' ',
-            showButtonPanel: true
-        });
+        //$('#ruleDateTimePicker').datetimepicker({
+        //    showSecond: true,
+        //    dateFormat: 'mm/dd/yy',
+        //    timeFormat: 'HH:mm:ss',
+        //    hourGrid: 3,
+        //    minuteGrid: 5,
+        //    secondGrid: 5,
+        //    separator: ' ',
+        //    showButtonPanel: true
+        //});
 
         $('#ruleDateTimePicker').datetimepicker('setDate', (new Date()));
 
@@ -511,7 +512,15 @@ function (taskFactory) {
                         row.Value.Value = dateRule;
                         row.Value.Id = dateRule;
                     } else {
-                        var datePrecondition = $("#preconditionDateTimePicker").val();
+                        var datePrecondition = '';
+
+                        if (row.Param.Name === 'Kick-off Time') {
+                            datePrecondition = $("#preconditionKickoffTimePicker").val();
+                        }
+                        else {
+                            datePrecondition = $("#preconditionDateTimePicker").val();
+                        }
+
                         row.Value.Name = datePrecondition;
                         row.Value.Value = datePrecondition;
                         row.Value.Id = datePrecondition;
@@ -555,9 +564,9 @@ function (taskFactory) {
 
     taskModel.checkFormula = function (table, tableId) {
         if (table.length <= 0) {
-            AlertService.showAlert("Please input the precondition or rule!");
+            //AlertService.showAlert("Please input the precondition or rule!");
 
-            return false;
+            return true;
         }
 
         var isRule = tableId === "#ruleTableFormula";
@@ -656,9 +665,13 @@ function (taskFactory) {
 
     taskModel.makeFormula = function (stringData) {
         var table = [];
-        angular.forEach(stringData.split("@"), function (data) {
-            table.push(taskModel.makeRow(data));
-        });
+        var tableRows = stringData.split("@");
+
+        if (tableRows.length > 0 && tableRows[0].length > 0) {
+            angular.forEach(tableRows, function (data) {
+                table.push(taskModel.makeRow(data));
+            });
+        }
 
         return table;
     };
@@ -970,6 +983,9 @@ function (taskFactory) {
             case "Scanned Date":
                 vm.preconditionRow.Value = angular.copy($('#preconditionDateTimePicker').val());
                 break;
+            case "Kick-off Time":
+                vm.preconditionRow.Value = angular.copy($('#preconditionKickoffTimePicker').val());
+                break;
             default:
                 break;
         }
@@ -1091,4 +1107,4 @@ function (taskFactory) {
     };
 
     return taskModel;
-} ]);
+}]);

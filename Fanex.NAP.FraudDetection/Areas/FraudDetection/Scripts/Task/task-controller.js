@@ -823,12 +823,12 @@ function (taskModel) {
     };
 
     vm.showInPrecondition = function (config) {
-        return (config.ConfigName !== 'Today') && !vm.CompareWithOtherField.InPrecondition ||
-               (config.ConfigName === 'Match Date' || config.ConfigName === 'Scanned Date') && vm.CompareWithOtherField.InPrecondition;
+        return (config.ConfigName !== 'Today' && config.ConfigName !== 'Current Time') && !vm.CompareWithOtherField.InPrecondition ||
+               (config.ConfigName === 'Match Date' || config.ConfigName === 'Scanned Date' || config.ConfigName === 'Kick-off Time') && vm.CompareWithOtherField.InPrecondition;
     };
 
     vm.showInComparePrecondition = function (config) {
-        return (config.ConfigName === 'Today');
+        return (config.ConfigName === 'Today' || config.ConfigName === 'Current Time');
     };
 
     vm.showInRule = function (config) {

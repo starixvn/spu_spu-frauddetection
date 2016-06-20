@@ -1,67 +1,64 @@
-﻿select.AffiliateEdit
-{
-    border:1px solid #c8c8c8;
+﻿select.AffiliateEdit {
+    border: 1px solid #c8c8c8;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    -moz-box-shadow:    1px 1px 3px 3px #f2f2f2;
+    -moz-box-shadow: 1px 1px 3px 3px #f2f2f2;
     -webkit-box-shadow: 1px 1px 3px 3px #f2f2f2;
-    box-shadow:         1px 1px 3px 3px #f2f2f2;
+    box-shadow: 1px 1px 3px 3px #f2f2f2;
     padding: 4px;
     text-align: left;
     vertical-align: bottom;
-    margin-left:0px;    
-    min-width:auto;
+    margin-left: 0px;
+    min-width: auto;
 }
 
-select.request
-{
-     border:1px solid #c8c8c8;
+select.request {
+    border: 1px solid #c8c8c8;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    -moz-box-shadow:    1px 1px 3px 3px #f2f2f2;
+    -moz-box-shadow: 1px 1px 3px 3px #f2f2f2;
     -webkit-box-shadow: 1px 1px 3px 3px #f2f2f2;
-    box-shadow:         1px 1px 3px 3px #f2f2f2;
+    box-shadow: 1px 1px 3px 3px #f2f2f2;
     padding: 4px;
     text-align: left;
     vertical-align: bottom;
-    margin-left:0px;    
-    min-width:auto;   
+    margin-left: 0px;
+    min-width: auto;
 }
 
-#slDomain, #slAssignedDomain
-{
-    border:1px solid #c8c8c8;
+#slDomain, #slAssignedDomain {
+    border: 1px solid #c8c8c8;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    -moz-box-shadow:    1px 1px 3px 3px #f2f2f2;
+    -moz-box-shadow: 1px 1px 3px 3px #f2f2f2;
     -webkit-box-shadow: 1px 1px 3px 3px #f2f2f2;
-    box-shadow:         1px 1px 3px 3px #f2f2f2;
+    box-shadow: 1px 1px 3px 3px #f2f2f2;
     padding: 4px;
     text-align: left;
     vertical-align: bottom;
-    margin-left:0px;
-    min-width:300px;    
+    margin-left: 0px;
+    min-width: 300px;
 }
 
 .ico-tick {
-    background: url("images/tick-ico-16.png") no-repeat scroll 0 0 transparent;    
+    background: url("images/tick-ico-16.png") no-repeat scroll 0 0 transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
 }
 
 .ico-untick {
-    background: url("images/untick-ico-16.png") no-repeat scroll 0 0 transparent;    
+    background: url("images/untick-ico-16.png") no-repeat scroll 0 0 transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
 }
 
 .ico-untick-deactivate {
-    background: url("images/untick-ico-deactivate-16.png") no-repeat scroll 0 0 transparent;    
+    background: url("images/untick-ico-deactivate-16.png") no-repeat scroll 0 0 transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
@@ -79,7 +76,7 @@ select.request
     display: block;
 }
 
-.data .action-wrp .actions{
+.data .action-wrp .actions {
     background-color: #FFFFFF;
     border-bottom: 5px solid #549CBA;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
@@ -121,7 +118,8 @@ select.request
 .grid-fixed-table .action-wrp.active .actions {
     display: block;
 }
-.grid-fixed-table .action-wrp .actions{
+
+.grid-fixed-table .action-wrp .actions {
     background-color: #FFFFFF;
     border-bottom: 5px solid #549CBA;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
@@ -134,143 +132,129 @@ select.request
     transition: all 0.2s ease-in-out 0s;
     z-index: 99;
 }
-.grid-fixed-table .action-wrp .actions li .dd-editstep1, .dd-editstep2, .dd-editstep3 {
-    /*background: url("../img/actions/dd/permission-ico.png") no-repeat scroll right 5px transparent;*/
-    color: #666666;
-    display: block;
-    padding: 6px 44px 6px 12px;
-    text-align: left;
+
+    .grid-fixed-table .action-wrp .actions li .dd-editstep1, .dd-editstep2, .dd-editstep3 {
+        /*background: url("../img/actions/dd/permission-ico.png") no-repeat scroll right 5px transparent;*/
+        color: #666666;
+        display: block;
+        padding: 6px 44px 6px 12px;
+        text-align: left;
+    }
+
+    .grid-fixed-table .action-wrp .actions li .dd-delete {
+        /*background: url("../img/actions/dd/site-ico.png") no-repeat scroll right 2px transparent;*/
+        color: #666666;
+        display: block;
+        padding: 6px 44px 6px 12px;
+        text-align: left;
+    }
+
+    .grid-fixed-table .action-wrp .actions li {
+        clear: both;
+        display: block;
+    }
+
+.iconEditInfo {
+    background: url("images/editinfo.png") no-repeat scroll 0 transparent;
+    background-position: left center;
+    margin-left: 5px;
 }
 
-.grid-fixed-table .action-wrp .actions li .dd-delete {
-    /*background: url("../img/actions/dd/site-ico.png") no-repeat scroll right 2px transparent;*/
-    color: #666666;
-    display: block;
-    padding: 6px 44px 6px 12px;
-    text-align: left;
+.iconDelAff {
+    background: url("images/delaff.png") no-repeat scroll left 0 transparent;
+    background-position: left center;
+    margin-left: 5px;
 }
 
-.grid-fixed-table .action-wrp .actions li {
-    clear: both;
-    display: block;
+.iconEditSetting {
+    background: url("images/editsetting.png") no-repeat scroll left 0 transparent;
+    background-position: left center;
+    margin-left: 5px;
 }
 
-.iconEditInfo     
-{    
-    background: url("images/editinfo.png") no-repeat scroll 0 transparent; 
-    background-position:left center;
-    margin-left: 5px
+.iconOddProfile {
+    background: url("images/editodds.png") no-repeat scroll left 0 transparent;
+    background-position: left center;
+    margin-left: 5px;
 }
-.iconDelAff     
-{    
-    background: url("images/delaff.png") no-repeat scroll left 0 transparent; 
-    background-position:left center;
-    margin-left: 5px
+
+.iconResetPass {
+    background: url("images/repass.png") no-repeat scroll left 0 transparent;
+    background-position: left center;
+    margin-left: 5px;
 }
-.iconEditSetting     
-{    
-    background: url("images/editsetting.png") no-repeat scroll left 0 transparent; 
-    background-position:left center;
-    margin-left: 5px
-}
-.iconOddProfile
-{    
-    background: url("images/editodds.png") no-repeat scroll left 0 transparent; 
-    background-position:left center;
-    margin-left: 5px
-}
-.iconResetPass
-{
-    background: url("images/repass.png") no-repeat scroll left 0 transparent; 
-    background-position:left center;
-    margin-left: 5px
-}
-#IpTable td input[type="text"]
-{
+
+#IpTable td input[type="text"] {
     border: none;
     box-shadow: none;
 }
 
-.iconEditLicensee
-{    
-    background: url("images/editsystem.png") no-repeat scroll left 0 transparent; 
-    background-position:left center;
-    margin-left: 5px
+.iconEditLicensee {
+    background: url("images/editsystem.png") no-repeat scroll left 0 transparent;
+    background-position: left center;
+    margin-left: 5px;
 }
 
-.iconViewXMLURLs 
-{    
-    background: url("images/view-xml-urls.png") no-repeat scroll left 0 transparent; 
-    background-position:left center;
-    margin-left: 5px
+.iconViewXMLURLs {
+    background: url("images/view-xml-urls.png") no-repeat scroll left 0 transparent;
+    background-position: left center;
+    margin-left: 5px;
 }
 
-.grid9
-{
+.grid9 {
     width: 830px;
 }
 
-#ieOnly > .row.btndomain
-{    
-    margin-left:20px;
+#ieOnly > .row.btndomain {
+    margin-left: 20px;
 }
 
-.row.btndomain
-{
-    margin-left:-25px;    
+.row.btndomain {
+    margin-left: -25px;
 }
 
-.infor-text
-{
+.infor-text {
     font-size: large;
     font-weight: bold;
     padding-right: 10px;
 }
 
-.lbl-text
-{
-    font-size: small;    
+.lbl-text {
+    font-size: small;
     font-weight: bold;
     padding-right: 10px;
 }
 
-.result-text-success
-{    
+.result-text-success {
     display: block;
     font-weight: normal;
     color: Green;
 }
 
-.result-text-fail
-{
+.result-text-fail {
     display: block;
     font-weight: normal;
     color: Red;
 }
 
-.hidden
-{
+.hidden {
     display: none;
 }
 
-.table-popup
-{
+.table-popup {
     border: 0px;
 }
 
-.table-popup td
-{
-    padding: 5px;
-}
+    .table-popup td {
+        padding: 5px;
+    }
 
-.font-size-small
-{
+.font-size-small {
     font-size: 0.9em !important;
     font-family: Tahoma, Arial, Helvetica !important;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
-{
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     /*background: linear-gradient(#486cb8, #5a7dc1) repeat scroll 0 0 #5a7dc1 !important;
     color: #fff !important;*/
 }
@@ -280,12 +264,14 @@ input[type="submit"], .btn-primary,
     margin-right: 0px !important;
 }
 
-.table-items tr:nth-child(even) 
-{
+.table-items tr:nth-child(even) {
     background: #CCC;
     border: none;
 }
-.table-items tr:nth-child(odd) {background: #FFF}
+
+.table-items tr:nth-child(odd) {
+    background: #FFF;
+}
 /* Start modify the accordion control */
 
 /* End modify the accordion control */
@@ -304,39 +290,33 @@ input[type="submit"], .btn-primary,
     cursor: pointer;
 }
 
-.ui-tpicker-grid-label
-{
+.ui-tpicker-grid-label {
     display: none;
 }
 
-.ui_tpicker_time
-{
+.ui_tpicker_time {
     width: 140px;
     margin: -20px 0px 10px 60px;
 }
 
-.ui_tpicker_hour_slider
-{
+.ui_tpicker_hour_slider {
     width: 140px;
-    margin: -13px 0px 10px 60px;
+    /*margin: -13px 0px 10px 60px;*/
 }
 
-.ui_tpicker_minute_slider
-{
+.ui_tpicker_minute_slider {
     width: 140px;
-    margin: -13px 0px 10px 60px;
+    /*margin: -13px 0px 10px 60px;*/
 }
 
-.ui_tpicker_second_slider
-{
+.ui_tpicker_second_slider {
     width: 140px;
-    margin: -13px 0px 10px 60px;
+    /*margin: -13px 0px 10px 60px;*/
 }
 /* End modify the datetimepicker control */
 
 /* Start More Information */
-.more-info
-{
+.more-info {
     background-image: url("../App_Themes/Images/icons.png");
     background-position: -28px -28px;
     background-repeat: no-repeat;
@@ -349,8 +329,7 @@ input[type="submit"], .btn-primary,
     cursor: pointer;
 }
 
-.btn-customCancel
-{
+.btn-customCancel {
     background: #9e9e9e !important;
     border-color: #9e9e9e !important;
 }
@@ -361,8 +340,7 @@ input[type="submit"], .btn-primary,
     font-weight: bold;
 }
 
-.report-header 
-{
+.report-header {
     background-color: #FFCC34;
     border-color: #D2B24D;
     border-style: solid;
