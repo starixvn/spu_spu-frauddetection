@@ -27,7 +27,7 @@
             <div class="col-sm-3">
                 <div class="col-sm-5" style="text-align: right;">
                     <label style="padding-top: 5px;">
-                        Event Date
+                        @Labels.EventDate
                     </label>
                 </div>
                 <div class="col-sm-7">
@@ -41,7 +41,7 @@
             <div class="col-sm-3">
                 <div class="col-sm-5" style="text-align: right;">
                     <label style="padding-top: 5px;">
-                        Sport
+                        @Labels.Sport
                     </label>
                 </div>
                 <div class="col-sm-7">
@@ -53,7 +53,7 @@
             <div class="col-sm-6">
                 <div class="col-sm-2" style="text-align: right;">
                     <label style="padding-top: 5px;">
-                        League
+                        @Labels.League
                     </label>
                 </div>
                 <div class="col-sm-10">
@@ -68,7 +68,7 @@
             <div class="col-sm-3">
                 <div class="col-sm-5" style="text-align: right;">
                     <label style="padding-top: 5px;">
-                        Match Code
+                        @Labels.MatchCode
                     </label>
                 </div>
                 <div class="col-sm-7">
@@ -78,7 +78,7 @@
             <div class="col-sm-3">
                 <div class="col-sm-5" style="text-align: right;">
                     <label style="padding-top: 5px;">
-                        Match Status
+                        @Labels.MatchStatus
                     </label>
                 </div>
                 <div class="col-sm-7">
@@ -89,7 +89,7 @@
             <div class="col-sm-6">
                 <div class="col-sm-2" style="text-align: right;">
                     <label style="padding-top: 5px;">
-                        Suspicious
+                        @Labels.Suspicious
                     </label>
                 </div>
                 <div class="col-sm-2">
@@ -114,7 +114,9 @@
                     <span class="checkbox">
                         <input style="vertical-align: text-bottom;" id="checkboxMainMarket" type="checkbox"
                                ng-model="mmrCtrl.filter.IsMainMarket" />
-                        <label style="cursor: pointer; font-weight: normal;" for="checkboxMainMarket">Main Market Only</label>
+                        <label style="cursor: pointer; font-weight: normal;" for="checkboxMainMarket">
+                            @Labels.MainMarketOnly
+                        </label>
                     </span>
                 </div>
             </div>
@@ -128,19 +130,19 @@
             <div class="col-sm-4" style="text-align: center;">
                 <img class="ico-scannednosuspicious" alt="" title='Scanned and has no suspicious case.' />
                 <label class="text-right">
-                    : Has NO suspicious Customer
+                    @Labels.EverythingIsFine
                 </label>
             </div>
             <div class="col-sm-4" style="text-align: center;">
                 <img class="ico-scannedhassuspicious" alt="" title='Scanned and has suspicious cases.' />
                 <label class="text-right">
-                    : Has suspicious Customer(s)
+                    @Labels.FraudDetected
                 </label>
             </div>
             <div class="col-sm-4" style="text-align: center;">
                 <img class="ico-notscanned" alt="" title='Not scanned.' />
                 <label class="text-right" style="margin-right: 10px;">
-                    : Is not scanned
+                    @Labels.InQueue
                 </label>
             </div>
         </div>

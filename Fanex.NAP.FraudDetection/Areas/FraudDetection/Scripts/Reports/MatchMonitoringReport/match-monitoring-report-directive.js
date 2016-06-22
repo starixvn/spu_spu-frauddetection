@@ -10,8 +10,6 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
             { HeaderText: "Delq.", Width: 52, Name: "Delinquent", HeaderAlign: "center", CellAlign: "center", CustomCellRender: delinquentColumn },
             { HeaderText: "Verified", Width: 52, Name: "Verified", HeaderAlign: "center", CellAlign: "center", CustomCellRender: verifiedColumn },
             { HeaderText: "Last Verified By", Width: 100, Name: "LastVerifiedBy", HeaderAlign: "center", CellAlign: "center", CanResize: true, CustomCellRender: lastVerifiedByColumn },
-            { HeaderText: "League", Width: 300, Name: "LeagueName", HeaderAlign: "center", CellAlign: "left", CanResize: true },
-            { HeaderText: "Match Code", Width: 100, Name: "MatchCode", HeaderAlign: "center", CellAlign: "center", CanResize: true },
             { HeaderText: "Event", Width: 300, Name: "Event", HeaderAlign: "center", CellAlign: "left", CanResize: true, CustomCellRender: eventRenderer},
             { HeaderText: "Status", Width: 80, Name: "EventStatus", HeaderAlign: "center", CellAlign: "center", CanResize: true }
         ];
@@ -35,12 +33,11 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
                     { Name: "Delinquent", Value: match },
                     { Name: "Verified", Value: match },
                     { Name: "LastVerifiedBy", Value: match },
-                    { Name: "LeagueName", Value: match.LeagueName },
-                    { Name: "MatchCode", Value: match.MatchCode },
                     { Name: "Event", Value: 
                         {
                             eventData: match.Event,
                             titleData: match.Event.split("<b>").join("").split("</b>").join("")
+                                .split("</br>").join("").split("<span class='league'>").join("- ").split("</span>").join("")
                         }
                     },
                     { Name: "EventStatus", Value: match.EventStatus }

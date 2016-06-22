@@ -239,12 +239,14 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             foreach (var match in data)
             {
+                string displayEvent = "{0} (Code: {1}) </br><span class='league'>{2}</span>";
                 var homeName = RefData.GetTeamName(match.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
                 var awayName = RefData.GetTeamName(match.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
 
-                match.Event = plainText
+                string displayMatch = plainText
                     ? homeName + " vs " + awayName
                     : "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
+                match.Event = String.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
             }
         }
 

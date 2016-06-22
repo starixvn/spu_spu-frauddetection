@@ -93,36 +93,44 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/App/SuspiciousCustomerReport").Include(
                 "~/Scripts/jquery-ui-1.11.4.js",
-                "~/Areas/FraudDetection/Scripts/Reports/suspicious-customer-report-controller.js",
-                "~/Areas/FraudDetection/Scripts/Reports/suspicious-customer-report-factory.js",
-                "~/Areas/FraudDetection/Scripts/Reports/suspicious-customer-report-directive.js",
-                "~/Areas/FraudDetection/Scripts/Reports/suspicious-customer-report-model.js"));
+                "~/Areas/FraudDetection/Scripts/Reports/SuspiciousCustomerReport/suspicious-customer-report-controller.js",
+                "~/Areas/FraudDetection/Scripts/Reports/SuspiciousCustomerReport/suspicious-customer-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/SuspiciousCustomerReport/suspicious-customer-report-directive.js",
+                "~/Areas/FraudDetection/Scripts/Reports/SuspiciousCustomerReport/suspicious-customer-report-model.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/CustomerDetailsReport").Include(
                 "~/Scripts/jquery-ui-1.11.4.js",
-                "~/Areas/FraudDetection/Scripts/Reports/customer-details-report-controller.js",
-                "~/Areas/FraudDetection/Scripts/Reports/customer-details-report-factory.js",
-                "~/Areas/FraudDetection/Scripts/Reports/customer-details-report-directive.js",
-                "~/Areas/FraudDetection/Scripts/Reports/customer-details-report-model.js"));
+                "~/Areas/FraudDetection/Scripts/Reports/CustomerDetailReport/customer-details-report-controller.js",
+                "~/Areas/FraudDetection/Scripts/Reports/CustomerDetailReport/customer-details-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/CustomerDetailReport/customer-details-report-directive.js",
+                "~/Areas/FraudDetection/Scripts/Reports/CustomerDetailReport/customer-details-report-model.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/MatchMonitoringReport").Include(
-                "~/Areas/FraudDetection/Scripts/Reports/match-monitoring-report-controller.js",
-                "~/Areas/FraudDetection/Scripts/Reports/match-monitoring-report-factory.js",
-                "~/Areas/FraudDetection/Scripts/Reports/match-monitoring-report-directive.js",
-                "~/Areas/FraudDetection/Scripts/Reports/match-monitoring-report-model.js"));
+                "~/Areas/FraudDetection/Scripts/Reports/MatchMonitoringReport/match-monitoring-report-controller.js",
+                "~/Areas/FraudDetection/Scripts/Reports/MatchMonitoringReport/match-monitoring-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/MatchMonitoringReport/match-monitoring-report-directive.js",
+                "~/Areas/FraudDetection/Scripts/Reports/MatchMonitoringReport/match-monitoring-report-model.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/DailyDataMonitoringReport").Include(
                 "~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js",
                 "~/Areas/FraudDetection/AddOns/TimePicker/date-format.js",
-                "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report-factory.js",
-                "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report-service.js",
-                "~/Areas/FraudDetection/Scripts/Reports/dailydatamonitoring-report.js"));
+                "~/Areas/FraudDetection/Scripts/Reports/DailyMonitoringReport/dailydatamonitoring-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/DailyMonitoringReport/dailydatamonitoring-report-service.js",
+                "~/Areas/FraudDetection/Scripts/Reports/DailyMonitoringReport/dailydatamonitoring-report.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/OfficeIPsReport").Include(
-                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-controller.js",
-                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-factory.js",
-                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-directive.js",
-                "~/Areas/FraudDetection/Scripts/Reports/office-ip-report-model.js"));
+                "~/Areas/FraudDetection/Scripts/Reports/OfficeIpReport/office-ip-report-controller.js",
+                "~/Areas/FraudDetection/Scripts/Reports/OfficeIpReport/office-ip-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/OfficeIpReport/office-ip-report-directive.js",
+                "~/Areas/FraudDetection/Scripts/Reports/OfficeIpReport/office-ip-report-model.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/App/LiveMatchMonitoringReport").Include(
+                "~/Areas/FraudDetection/Scripts/Reports/LiveMatchMonitoringReport/live-match-monitoring-report-controller.js",
+                "~/Areas/FraudDetection/Scripts/Reports/LiveMatchMonitoringReport/live-match-monitoring-report-factory.js",
+                "~/Areas/FraudDetection/Scripts/Reports/LiveMatchMonitoringReport/live-match-monitoring-report-directive.js",
+                "~/Areas/FraudDetection/Scripts/Reports/LiveMatchMonitoringReport/live-match-monitoring-report-model.js",
+                "~/Areas/FraudDetection/AddOns/TimePicker/jquery-ui-timepicker-addon.js",
+                "~/Areas/FraudDetection/AddOns/TimePicker/date-format.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/Task").Include(
                 "~/Areas/FraudDetection/Scripts/Task/task-controller.js",

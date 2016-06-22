@@ -6,6 +6,7 @@ var fraudDetectionModule = angular.module("fraudDetectionModule",
     'suspiciousCustomerReportModule',
     'customerDetailsReportModule',
     'matchMonitoringReportModule',
+    'liveMatchMonitoringReportModule',
     'officeIPsReportModule',
     'isteven-multi-select']);
 
@@ -22,4 +23,5 @@ customerDetailsReportModule.config(['$locationProvider', function ($locationProv
 } ]);
 
 var matchMonitoringReportModule = angular.module("matchMonitoringReportModule", []);
+var liveMatchMonitoringReportModule = angular.module("liveMatchMonitoringReportModule", []);
 var officeIPsReportModule = angular.module("officeIPsReportModule", []);

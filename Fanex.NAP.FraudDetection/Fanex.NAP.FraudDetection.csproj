@@ -315,6 +315,11 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Resources\Labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
     <Content Include="App_Data\LOCAL\FanexSpName.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -513,6 +518,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\livematchmonitoring.css" />
     <Content Include="Areas\FraudDetection\Content\suspiciouscustomerdetailreport.css" />
     <Content Include="Areas\FraudDetection\Content\task.css" />
     <Content Include="Areas\FraudDetection\Content\suspiciouscustomerreport.css" />
@@ -538,25 +544,29 @@
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-directive.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-controller.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-directive.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-factory.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\office-ip-report-model.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-controller.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-factory.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\match-monitoring-report-model.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-directive.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-controller.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-model.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\customer-details-report-factory.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-factory.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report-service.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\dailydatamonitoring-report.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-directive.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-controller.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-factory.js" />
-    <Content Include="Areas\FraudDetection\Scripts\Reports\suspicious-customer-report-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\LiveMatchMonitoringReport\live-match-monitoring-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\MatchMonitoringReport\match-monitoring-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\MatchMonitoringReport\match-monitoring-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\MatchMonitoringReport\match-monitoring-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\MatchMonitoringReport\match-monitoring-report-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\OfficeIpReport\office-ip-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\OfficeIpReport\office-ip-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\OfficeIpReport\office-ip-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\OfficeIpReport\office-ip-report-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\LiveMatchMonitoringReport\live-match-monitoring-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\LiveMatchMonitoringReport\live-match-monitoring-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\LiveMatchMonitoringReport\live-match-monitoring-report-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\CustomerDetailReport\customer-details-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\CustomerDetailReport\customer-details-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\CustomerDetailReport\customer-details-report-model.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\CustomerDetailReport\customer-details-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\DailyMonitoringReport\dailydatamonitoring-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\DailyMonitoringReport\dailydatamonitoring-report-service.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\DailyMonitoringReport\dailydatamonitoring-report.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\SuspiciousCustomerReport\suspicious-customer-report-directive.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\SuspiciousCustomerReport\suspicious-customer-report-controller.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\SuspiciousCustomerReport\suspicious-customer-report-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Reports\SuspiciousCustomerReport\suspicious-customer-report-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
@@ -728,7 +738,9 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\FraudDetection\Views\Web.config" />
+    <Content Include="Areas\FraudDetection\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\FraudDetection\Views\Case\CaseList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupList.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Group\GroupAdd.cshtml" />
@@ -1006,6 +1018,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
