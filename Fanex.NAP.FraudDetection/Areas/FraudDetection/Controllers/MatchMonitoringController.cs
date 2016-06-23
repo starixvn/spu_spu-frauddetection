@@ -117,15 +117,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             headers.Insert(0, "#");
             headers.Insert(1, "Delinquent");
             headers.Insert(2, "Verified");
-            headers.Insert(3, "League");
-            headers.Insert(4, "Last Verified By");
-            headers.Insert(5, "Match Code");
-            headers.Insert(6, "Event");
-            headers.Insert(7, "Status");
+            headers.Insert(3, "Last Verified By");
+            headers.Insert(4, "Event");
+            headers.Insert(5, "Status");
 
             if (data.Any())
             {
-                var columnCount = 8;
+                var columnCount = 6;
                 foreach (var record in data[0].SuspiciousCases)
                 {
                     headers.Insert(columnCount, record.Key);
@@ -239,14 +237,21 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             foreach (var match in data)
             {
-                string displayEvent = "{0} (Code: {1}) </br><span class='league'>{2}</span>";
                 var homeName = RefData.GetTeamName(match.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
                 var awayName = RefData.GetTeamName(match.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
 
-                string displayMatch = plainText
-                    ? homeName + " vs " + awayName
-                    : "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
-                match.Event = String.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
+                if (plainText)
+                {
+                    string displayEvent = "{0} (Code: {1}) \n{2}";
+                    string displayMatch = homeName + " vs " + awayName;
+                    match.Event = String.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
+                }
+                else
+                {
+                    string displayEvent = "{0} (Code: {1}) </br><span class='league'>{2}</span>";
+                    string displayMatch = "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
+                    match.Event = String.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
+                }
             }
         }
 
