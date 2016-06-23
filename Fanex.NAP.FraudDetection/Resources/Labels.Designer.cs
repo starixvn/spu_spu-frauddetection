@@ -106,7 +106,7 @@ namespace Fanex.NAP.FraudDetection.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MainMarketOnly.
+        ///   Looks up a localized string similar to Main Market Only.
         /// </summary>
         public static string MainMarketOnly {
             get {
