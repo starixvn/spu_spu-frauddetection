@@ -1,25 +1,75 @@
 ﻿.ico-notscanned {
-    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -36px -137px transparent;    
+    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -36px -137px transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
 }
 
 .ico-scannednosuspicious {
-    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -19px -138px transparent;    
+    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -19px -138px transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
 }
 
 .ico-scannedhassuspicious {
-    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -67px -59px transparent;    
+    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -67px -59px transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
     cursor: pointer;
 }
 
+.match-code {
+    width: 142px;
+    height: 25px;
+}
+
+.league {
+    height: 25px;
+    min-width: 97px;
+    margin-left: 16px;
+    max-width: 434px;
+}
+
 .filter-forml {
-        margin: 10px 0 -15px;
+    margin: 10px 0 -15px;
+}
+
+.select-refresh {
+    float: right;
+    height: 20px;
+    width: 100px;
+    margin: 5px 5px 0 0;
+}
+
+.playing-match {
+    background-color: #ffccbc !important;
+}
+
+.score-changed {
+    -webkit-animation-name: highlighted; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 3.5s; /* Chrome, Safari, Opera */
+    animation-name: highlighted;
+    animation-duration: 3.5s;
+}
+
+@-webkit-keyframes highlighted {
+    from {
+        background-color: #ffaf8c;
+    }
+
+    to {
+        background-color: #ffccbc;
+    }
+}
+/* Standard syntax */
+@keyframes highlighted {
+    from {
+        background-color: #ffaf8c;
+    }
+
+    to {
+        background-color: #ffccbc;
+    }
 }

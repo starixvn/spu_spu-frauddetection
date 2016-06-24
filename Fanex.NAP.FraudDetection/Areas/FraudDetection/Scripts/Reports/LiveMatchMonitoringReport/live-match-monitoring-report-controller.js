@@ -5,15 +5,16 @@ liveMatchMonitoringReportModule.controller('liveMatchMonitoringReportController'
 ['liveMatchMonitoringReportModel',
 function (liveMatchMonitoringReportModel) {
     var vm = this;
+    var timeId = null;
 
     vm.Leagues = liveMatchMonitoringReportModel.Leagues;
     vm.Sports = liveMatchMonitoringReportModel.Sports;
-    vm.MatchMonitoringReport = liveMatchMonitoringReportModel.MatchMonitoringReport;
-    vm.MatchStatuses = liveMatchMonitoringReportModel.MatchStatuses;
-    vm.SuspiciousStatuses = liveMatchMonitoringReportModel.SuspiciousStatuses;
+    vm.RefreshOptions = liveMatchMonitoringReportModel.RefreshOptions;
+    vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
     vm.filter = liveMatchMonitoringReportModel.filter;
+    vm.RefreshSecond = 15;
 
-    vm.queryMatchMonitoringReport = function () {
+    vm.queryLiveMatchMonitoringReport = function () {
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
 
         if (vm.filter.LeagueId === -1) {
@@ -28,10 +29,33 @@ function (liveMatchMonitoringReportModel) {
         }
 
         liveMatchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
-            vm.MatchMonitoringReport = liveMatchMonitoringReportModel.MatchMonitoringReport;
-
+            vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
+            vm.RefreshSecond = 15;
+            vm.refreshLiveMatchMonitoringReport();
             waitingDialog.hide();
         });
+    };
+
+    vm.refreshLiveMatchMonitoringReport = function () {
+        clearInterval(timeId);
+        if (vm.RefreshSecond !== -1) {
+            timeId = setInterval(function () {
+                if (vm.filter.LeagueId === -1) {
+                    vm.filter.LeagueIds = liveMatchMonitoringReportModel.getLeagueIdList();
+                }
+                else {
+                    vm.filter.LeagueIds = vm.filter.LeagueId;
+                }
+
+                if (!vm.filter.IsMainMarket) {
+                    vm.filter.IsMainMarket = null;
+                }
+
+                liveMatchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
+                    vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
+                });
+            }, (vm.RefreshSecond * 1000));
+        }
     };
 
     vm.changeEventDate = function () {
@@ -60,12 +84,6 @@ function (liveMatchMonitoringReportModel) {
         liveMatchMonitoringReportModel.getLeaguesByDateAndSport(date, sportId).then(function () {
             vm.Leagues = liveMatchMonitoringReportModel.Leagues;
         });
-    };
-
-    vm.exportExcel = function () {
-        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
-        FraudDetectionScripts.downloadFile("MatchMonitoring/ExportExcel", vm.filter);
-        waitingDialog.hide();
     };
 
     liveMatchMonitoringReportModel.initialDateTimePicker();

@@ -4,7 +4,7 @@
 liveMatchMonitoringReportModule.factory('liveMatchMonitoringReportFactory', ['$http', function ($http) {
     return {
         getSportsByDate: function (eventDate) {
-            var url = SPU.getAbsoluteUrl("MatchMonitoring/GetSportsByDate");
+            var url = SPU.getAbsoluteUrl("LiveMatchMonitoring/GetSportsByDate");
 
             return $http.get(url, {
                 params:
@@ -13,7 +13,7 @@ liveMatchMonitoringReportModule.factory('liveMatchMonitoringReportFactory', ['$h
         },
 
         getLeaguesByDate: function (eventDate) {
-            var url = SPU.getAbsoluteUrl("MatchMonitoring/GetLeaguesByDate");
+            var url = SPU.getAbsoluteUrl("LiveMatchMonitoring/GetLeaguesByDate");
 
             return $http.get(url, {
                 params:
@@ -22,7 +22,7 @@ liveMatchMonitoringReportModule.factory('liveMatchMonitoringReportFactory', ['$h
         },
 
         getLeaguesByDateAndSport: function (eventDate, sportId) {
-            var url = SPU.getAbsoluteUrl("MatchMonitoring/GetLeaguesByDateAndSport");
+            var url = SPU.getAbsoluteUrl("LiveMatchMonitoring/GetLeaguesByDateAndSport");
 
             return $http.get(url, {
                 params:
@@ -34,32 +34,16 @@ liveMatchMonitoringReportModule.factory('liveMatchMonitoringReportFactory', ['$h
         },
 
         getAllMatches: function (criteria) {
-            var url = SPU.getAbsoluteUrl("MatchMonitoring/Search");
+            var url = SPU.getAbsoluteUrl("LiveMatchMonitoring/Search");
 
             return $http.post(url, criteria);
         },
 
         getCaseIdFromCaseName: function (caseName) {
-            var url = SPU.getAbsoluteUrl("MatchMonitoring/GetCaseIdFromName");
+            var url = SPU.getAbsoluteUrl("LiveMatchMonitoring/GetCaseIdFromName");
 
             return $http.get(url, {
                 params: { caseName: caseName }
-            });
-        },
-
-        updateDelinquency: function (matchId, isActive) {
-            var url = SPU.getAbsoluteUrl("MatchMonitoring/UpdateDelinquency");
-
-            return $http.get(url, {
-                params: { matchId: matchId, isActive: isActive }
-            });
-        },
-
-        updateVerification: function (matchId, isActive) {
-            var url = SPU.getAbsoluteUrl("MatchMonitoring/UpdateVerification");
-
-            return $http.get(url, {
-                params: { matchId: matchId, isActive: isActive }
             });
         }
     };

@@ -8,15 +8,49 @@ function (liveMatchMonitoringReportFactory) {
 
     liveMatchMonitoringReportModel.Leagues = [];
     liveMatchMonitoringReportModel.Sports = [];
-    liveMatchMonitoringReportModel.MatchMonitoringReport = {};
+    liveMatchMonitoringReportModel.LiveMatchMonitoringReport = {};
     liveMatchMonitoringReportModel.CaseId = '';
     liveMatchMonitoringReportModel.IsUpdated = false;
+    liveMatchMonitoringReportModel.RefreshOptions = [
+        {
+            OptionId: 5,
+            OptionName: 5
+        },
+        {
+            OptionId: 15,
+            OptionName: 15
+        },
+        {
+            OptionId: 30,
+            OptionName: 30
+        },
+        {
+            OptionId: 45,
+            OptionName: 45
+        },
+        {
+            OptionId: 60,
+            OptionName: 60
+        },
+        {
+            OptionId: 90,
+            OptionName: 90
+        },
+        {
+            OptionId: 120,
+            OptionName: 120
+        },
+        {
+            OptionId: -1,
+            OptionName: 'Not refresh'
+        }
+    ];
 
     liveMatchMonitoringReportModel.filter = {
         EventDate: formatDate(new Date()),
         LeagueId: -1,
         LeagueIds: '',
-        SportId: -1,
+        SportId: 1,
         MatchCode: '',
         IsMainMarket: true
     };
@@ -64,27 +98,13 @@ function (liveMatchMonitoringReportFactory) {
 
     liveMatchMonitoringReportModel.getAllMatches = function (criteria) {
         return liveMatchMonitoringReportFactory.getAllMatches(criteria).success(function (report) {
-            liveMatchMonitoringReportModel.MatchMonitoringReport = report;
+            liveMatchMonitoringReportModel.LiveMatchMonitoringReport = report;
         });
     };
 
     liveMatchMonitoringReportModel.getCaseIdFromCaseName = function (caseName) {
         return liveMatchMonitoringReportFactory.getCaseIdFromCaseName(caseName).success(function (caseId) {
             liveMatchMonitoringReportModel.CaseId = caseId;
-        });
-    };
-
-    liveMatchMonitoringReportModel.updateDelinquency = function (matchId, isActive) {
-        return liveMatchMonitoringReportFactory.updateDelinquency(matchId, isActive).success(function (result) {
-            liveMatchMonitoringReportModel.IsUpdated = result.IsSuccessful;
-            AlertService.showAlert(result);
-        });
-    };
-
-    liveMatchMonitoringReportModel.updateVerification = function (matchId, isActive) {
-        return liveMatchMonitoringReportFactory.updateVerification(matchId, isActive).success(function (result) {
-            liveMatchMonitoringReportModel.IsUpdated = result.IsSuccessful;
-            AlertService.showAlert(result);
         });
     };
 
