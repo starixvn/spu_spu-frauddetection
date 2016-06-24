@@ -130,6 +130,7 @@
                     { HeaderText: "CaseId", Width: 100, Name: "CaseId", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Case Name", Width: 300, Name: "CaseName", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Description", Width: 500, Name: "CaseDesc", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Type", Width: 100, Name: "Type", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "IsActive", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
@@ -170,6 +171,7 @@
                     { Name: "Row", Value: fraudCase.Row },
                     { Name: "CaseName", Value: fraudCase, CustomCellRender: caseNameColumn },
                     { Name: "CaseDesc", Value: fraudCase.CaseDesc },
+                    { Name: "Type", Value: fraudCase.TypeName },
                     { Name: "IsActive", Value: fraudCase, CustomCellRender: activeColumn },
                     { Name: "Edit", Value: fraudCase.CaseId, CustomCellRender: editColumn }
                 ]

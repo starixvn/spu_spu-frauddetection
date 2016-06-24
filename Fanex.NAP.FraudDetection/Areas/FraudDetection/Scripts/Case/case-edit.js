@@ -3,11 +3,12 @@
         event.preventDefault();
 
         var fraudCase = {
-            "CaseId": $("#CaseId").val(),
-            "CaseName": $("#CaseName").val(),
-            "CaseDesc": $("#CaseDesc").val(),
-            "IsActive": $('#IsActive').is(':checked'),
-            "IsInternal": $('#IsInternal').is(':checked')
+            "CaseId": $("#CaseModel_CaseId").val(),
+            "CaseName": $("#CaseModel_CaseName").val(),
+            "CaseDesc": $("#CaseModel_CaseDesc").val(),
+            "IsActive": $('#CaseModel_IsActive').is(':checked'),
+            "IsInternal": $('#CaseModel_IsInternal').is(':checked'),
+            "TypeId": parseInt($("#CaseModel_TypeId").val())
         };
 
         caseService.editCase(fraudCase);

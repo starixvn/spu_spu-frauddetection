@@ -5,10 +5,11 @@
         event.preventDefault();
 
         var fraudCase = {
-            "CaseName": $("#CaseName").val(),
-            "CaseDesc": $("#CaseDesc").val(),
-            "IsActive": $('#IsActive').is(':checked'),
-            "IsInternal": $('#IsInternal').is(':checked')
+            "CaseName": $("#CaseModel_CaseName").val(),
+            "CaseDesc": $("#CaseModel_CaseDesc").val(),
+            "IsActive": $('#CaseModel_IsActive').is(':checked'),
+            "IsInternal": $('#CaseModel_IsInternal').is(':checked'),
+            "TypeId": parseInt($("#CaseModel_TypeId").val())
         };
 
         caseService.addCase(fraudCase);

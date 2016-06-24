@@ -10,18 +10,20 @@
 
 namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using System.Web.Mvc;
     using Core.Business;
     using Core.Web.Attribute;
+    using Fanex.NAP.FraudDetection.Model.Case;
     using FD.Lib.Core.Attribute;
     using FD.Lib.Core.Utilities;
     using FD.Lib.Criteria.Case;
+    using FD.Lib.Criteria.Common;
     using FD.Lib.Criteria.Task;
     using FD.Lib.QueryGenerator;
     using FD.Lib.QueueManagement.SendingTasks;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using Service.Core;
+    using System.Web.Mvc;
 
     /// <summary>
     /// The CaseController.
@@ -30,6 +32,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     {
         private readonly CaseService _caseService;
 
+        private readonly CommonService _commonService;
+
         private readonly TaskService _taskService;
 
         public CaseController()
@@ -37,6 +41,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             _caseService = new CaseService();
 
             _taskService = new TaskService();
+
+            _commonService = new CommonService();
         }
 
         #region List Fraud Cases
@@ -70,13 +76,22 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
         public string AddCase()
         {
+            var caseTypes = _commonService.GetCaseTypes(new CaseTypesGetAllCriteria());
+
             var criteria = new CaseInsertCriteria
             {
                 IsActive = true,
-                IsInternal = true
+                IsInternal = true,
+                TypeId = 1
             };
 
-            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Case/CaseAdd.cshtml", criteria);
+            var model = new CaseInsertModel() 
+            {
+                CaseModel = criteria,
+                CaseTypes = caseTypes
+            };
+
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Case/CaseAdd.cshtml", model);
         }
 
         /// <summary>
@@ -150,14 +165,23 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 CaseId = caseId == null ? 0 : (int)caseId
             };
             var caseInfo = _caseService.GetCaseById(criteria);
-            var model = new CaseUpdateCriteria
+            var caseEditInfo = new CaseUpdateCriteria
             {
                 CreatorId = 1,
                 CaseId = caseInfo.CaseId,
                 CaseName = caseInfo.CaseName,
                 CaseDesc = caseInfo.CaseDesc,
                 IsActive = caseInfo.IsActive,
-                IsInternal = caseInfo.IsInternal
+                IsInternal = caseInfo.IsInternal,
+                TypeId = caseInfo.TypeId
+            };
+
+            var caseTypes = _commonService.GetCaseTypes(new CaseTypesGetAllCriteria());
+
+            var model = new CaseUpdateModel()
+            {
+                CaseModel = caseEditInfo,
+                CaseTypes = caseTypes
             };
 
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/Case/CaseEdit.cshtml", model);

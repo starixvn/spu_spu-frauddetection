@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="FD_Case">
-    <Setting Key="FD_CaseGetAll" SpName="FD_CaseGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseUpdate" SpName="FD_CaseUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetAll" SpName="FD_CaseGetAll_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseUpdate" SpName="FD_CaseUpdate_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseUpdateStatus" SpName="FD_CaseUpdateStatus" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseTypesGetAll" SpName="FD_CaseTypesGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="FD_CustomerGroup">

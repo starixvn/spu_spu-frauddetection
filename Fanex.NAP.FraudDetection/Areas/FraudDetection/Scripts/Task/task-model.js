@@ -335,16 +335,6 @@ function (taskFactory) {
         $('#preconditionKickoffTimePicker').datetimepicker('setDate', (new Date()));
 
         $('#ruleDateTimePicker').datepicker();
-        //$('#ruleDateTimePicker').datetimepicker({
-        //    showSecond: true,
-        //    dateFormat: 'mm/dd/yy',
-        //    timeFormat: 'HH:mm:ss',
-        //    hourGrid: 3,
-        //    minuteGrid: 5,
-        //    secondGrid: 5,
-        //    separator: ' ',
-        //    showButtonPanel: true
-        //});
 
         $('#ruleDateTimePicker').datetimepicker('setDate', (new Date()));
 
@@ -413,7 +403,7 @@ function (taskFactory) {
                 break;
         }
 
-        if (row.Value.Name === "Has Changed From Latest Capture") {
+        if (row.Value.Name === "Has Changed From Latest Capture" || row.Value.Name === "Has Changed") {
             operator = "<>";
         }
 

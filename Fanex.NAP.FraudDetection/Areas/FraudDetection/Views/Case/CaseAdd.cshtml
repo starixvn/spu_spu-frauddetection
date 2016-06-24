@@ -1,8 +1,21 @@
-﻿@model FD.Lib.Criteria.Case.CaseInsertCriteria
+﻿@using System.Web.UI.WebControls
+@model Fanex.NAP.FraudDetection.Model.Case.CaseInsertModel
 @{
     ViewBag.Title = "Add Case";
     Layout = "~/Views/Shared/_LayoutPopup.cshtml";
-    Model.IsActive = true;
+    Model.CaseModel.IsActive = true;
+    var listItems = new List<ListItem>();
+    foreach (var item in Model.CaseTypes)
+    {
+        var listItem = new ListItem
+        {
+            Text = item.TypeName,
+            Value = item.TypeId.ToString(),
+            Selected = item.TypeId == Model.CaseModel.TypeId
+        };
+
+        listItems.Add(listItem);
+    }
 }
 
 @using (Html.BeginForm("AddCase", "Case", FormMethod.Post, new { @id = "AddCaseForm" }))
@@ -10,19 +23,23 @@
     <table class="table-popup">
         <tr>
             <td align="right"><span>Case Name</span></td>
-            <td>@Html.TextBoxFor(l => l.CaseName, new { @style = "width: 330px;" })</td>
+            <td>@Html.TextBoxFor(l => l.CaseModel.CaseName, new { @style = "width: 330px;" })</td>
         </tr>
         <tr>
             <td align="right"><span>Description</span></td>
-            <td>@Html.TextAreaFor(l => l.CaseDesc, 5, 45, new { @style = "width: 330px;" })</td>
+            <td>@Html.TextAreaFor(l => l.CaseModel.CaseDesc, 5, 45, new { @style = "width: 330px;" })</td>
+        </tr>
+        <tr>
+            <td align="right"><span>Type</span></td>
+            <td>@Html.DropDownListFor(l => l.CaseModel.TypeId, new SelectList(listItems, "Value", "Text"), new { @style = "width: 330px;" })</td>
         </tr>
         <tr>
             <td align="right"><span>Active</span></td>
-            <td>@Html.CheckBoxFor(l => l.IsActive)</td>
+            <td>@Html.CheckBoxFor(l => l.CaseModel.IsActive)</td>
         </tr>
         <tr>
             <td align="right"><span>Internal</span></td>
-            <td>@Html.CheckBoxFor(l => l.IsInternal)</td>
+            <td>@Html.CheckBoxFor(l => l.CaseModel.IsInternal)</td>
         </tr>
         <tr>
             <td></td>
