@@ -152,7 +152,7 @@
             };
 
         if (!caseService.isHostPermission) {
-            caseService.gridOptions.hiddenColumns = [1, 5];
+            caseService.gridOptions.hiddenColumns = [1, 6];
         }
 
         $("#SearchResult").fanexGrid(caseService.gridOptions);
