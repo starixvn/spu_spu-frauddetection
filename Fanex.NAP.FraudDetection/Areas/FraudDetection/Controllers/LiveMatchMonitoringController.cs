@@ -1,7 +1,10 @@
 ﻿namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
     using Fanex.Data.Repository;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.FraudDetection.Controllers;
+    using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Bettype;
     using FD.Lib.Criteria.Case;
     using FD.Lib.Criteria.Common;
@@ -20,6 +23,7 @@
     public class LiveMatchMonitoringController : BaseController
     {
         private readonly ILiveMatchMonitoringReportService liveMatchMonitoringReportService;
+
         private readonly ICaseService caseService;
 
         public LiveMatchMonitoringController()
@@ -28,6 +32,7 @@
             caseService = new CaseService();
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             LeagueGetAllByDateCriteria criteria = new LeagueGetAllByDateCriteria()
@@ -40,7 +45,7 @@
         }
 
         [HttpPost]
-        //[NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Search(LiveMatchMonitoringReportGetAllCriteria criteria)
         {
             var matchesInfo = liveMatchMonitoringReportService.GetMatchMonitoringReport(criteria);
@@ -56,7 +61,7 @@
         }
 
         [HttpGet]
-        //[NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetLeaguesByDate(string eventDate)
         {
             var balanceUpMoveBetService = new MoveBetsBalanceUpService();
@@ -78,7 +83,7 @@
         }
 
         [HttpGet]
-        //[NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetLeaguesByDateAndSport(string eventDate, int sportId)
         {
             var balanceUpMoveBetService = new MoveBetsBalanceUpService();
@@ -107,7 +112,7 @@
         }
 
         [HttpGet]
-        //[NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetSportsByDate(string eventDate)
         {
             var sports = new BettypeService().GetAllSBSports(new SportGetAllCriteria());
@@ -116,7 +121,7 @@
         }
 
         [HttpGet]
-        //[NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
         public int GetCaseIdFromName(string caseName)
         {
             var caseInfo = caseService.GetCaseByName(new CaseGetByNameCriteria
