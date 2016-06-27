@@ -93,7 +93,17 @@ table.customer-report-statistic td
     color: white;
     background-color: #3c5ea5;
     padding: 5px;
-    text-align: center;
+    font-weight: bold;
+}
+
+.group-fraud-case-header{
+    background-color:#f79646 !important;
+    color:#ffffff !important;
+    font-weight: bold !important;
+}
+
+.group-fraud-case{
+    padding-left: 5px
 }
 
 .ui-tooltip

@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 6/27/2016 1:07:00 PM
+// Lasted generated date: 6/27/2016 11:25:21
 // </history>
 namespace Fanex.NAP.FraudDetection.Service.Core
 {

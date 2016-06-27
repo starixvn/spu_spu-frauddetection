@@ -112,7 +112,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult GetDailyViolatedTickets(int custId, DateTime fromDate, DateTime toDate)
         {
-            var result = customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
+            var fraudTicket = customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
+
+            var result = fraudTicket.GroupBy(x => x.CaseName);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

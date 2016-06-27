@@ -594,7 +594,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
         var formatNumber = '0,0.00';
         var columnHeaders =
         [
-            { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center", ShowCollapseExpand: true },
                 { HeaderText: "Trans Date", Width: 150, Name: "TransDate", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet ID", Width: 90, Name: "TransId", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Bet Type", Width: 90, Name: "BetType", HeaderAlign: "center", CellAlign: "left" },
@@ -639,6 +639,28 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
         return rows;
     };
 
+    var generateTreeData = function (data) {
+        var rows = [];
+        var fraudCase = '';
+        for (var i = 0; i < data.length; i++) {
+            fraudCase = data[i][0].CaseName;
+            var currentRow = {
+                Columns: [
+                        {
+                            Name: "No", Value: fraudCase, MergeColNumber: 11,
+                            CellAlign: "left",
+                            TdClass: 'group-fraud-case-header', CssClass: 'group-fraud-case'
+                        }
+                ],
+                SubRows: generateBodyRows(data[i]),
+            }
+
+            rows.push(currentRow);
+        }
+
+        return rows;
+    }
+
     return {
         restrict: "A",
         scope: {
@@ -648,7 +670,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
             $scope.$watch('gridData', function (gridData) {
                 $timeout(function () {
                     if (gridData) {
-                        var bodyRows = generateBodyRows(gridData);
+                        var bodyRows = generateTreeData(gridData);
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
@@ -657,6 +679,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                             fullHeight: true,
                             gridExpandHeight: 280,
                             allowTruncate: true,
+                            showTree: true,
                             pagerOption: {
                                 itemsPerPage: 50,
                                 currentPage: 0,
