@@ -43,7 +43,9 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
                             TdClass: cssName
                         },
                         {
-                            Name: "LiveScore", Value: "<b>" + match.LiveHomeScore + "</b>" + " - " + "<b>" + match.LiveAwayScore + "</b>",
+                            Name: "LiveScore",
+                            Value: match,
+                            CustomCellRender: scoreColumn,
                             TdClass: cssName,
                             CssClass: getCssNameForChangingScore(oldPlayingMatchs[index], match)
                         }
@@ -64,7 +66,7 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
             else {
                 row = {
                     Columns: [
-                        { Name: "Row", Value: index + 1},
+                        { Name: "Row", Value: index + 1 },
                         { Name: "MatchId", Value: match.MatchId },
                         {
                             Name: "Event", Value:
@@ -94,6 +96,14 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
         oldPlayingMatchs = tempOldPlayingMatchs;
 
         return rows;
+    };
+
+    var scoreColumn = function (cell) {
+        var match = cell.Value;
+
+        var result = "<b>" + match.LiveHomeScore + "</b>" + " - " + "<b>" + match.LiveAwayScore + "</b>";
+
+        return result;
     };
 
     var getCssNameForChangingScore = function (oldMatch, newMatch) {

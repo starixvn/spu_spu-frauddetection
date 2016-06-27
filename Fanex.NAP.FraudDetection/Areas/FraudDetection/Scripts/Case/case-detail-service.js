@@ -188,26 +188,30 @@
     * Case Group Grid Service
     */
 
-    //private methods
-
     var caseId = $("#CaseId").val();
 
     var getBodyRowsForCaseGroupTable = function (data) {
         var bodyRows = [];
 
         $.each(data, function (index, element) {
-            var removeValue = "<span class='glyphicon glyphicon-trash' onclick='caseDetailService.removeCustomerGroupFromCase({0}, {1});' style='cursor: pointer'>".format(element.CaseId, element.GroupId);
             bodyRows.push({
                 Columns: [
                     { Name: "No", Value: index + 1 },
                     { Name: "GroupName", Value: element.GroupName },
                     { Name: "GroupDescription", Value: element.GroupDescription },
-                    { Name: "Remove", Value: removeValue }
+                    { Name: "Remove", Value: element, CustomCellRender: removeGroupColumn }
                 ]
             });
         });
 
         return bodyRows;
+    };
+
+    function removeGroupColumn(cell) {
+        var element = cell.Value;
+        var result = "<span title='Remove Group' class='glyphicon glyphicon-trash' onclick='caseDetailService.removeCustomerGroupFromCase({0}, {1});' style='cursor: pointer'>".format(element.CaseId, element.GroupId);
+
+        return result;
     };
 
     var getGridOptionForCaseGroupTable = function (data) {
@@ -217,7 +221,7 @@
                 { HeaderText: "#", Width: 30, Name: "No", HeaderAlign: "center", CellAlign: "center", CustomAttr: "title='demo title'" },
                 { HeaderText: "Name", Width: 200, Name: "GroupName", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Description", Width: 300, Name: "GroupDescription", HeaderAlign: "center", CellAlign: "left" },
-                { HeaderText: "Remove", Width: 50, Name: "Remove", HeaderAlign: "center", CellAlign: "center"}],
+                { HeaderText: "Remove", Width: 60, Name: "Remove", HeaderAlign: "center", CellAlign: "center" }],
             bodyRows: getBodyRowsForCaseGroupTable(data),
             showNumberColumn: true,
             showTitle: true,

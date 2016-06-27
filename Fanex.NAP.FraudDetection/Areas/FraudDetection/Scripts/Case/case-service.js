@@ -45,7 +45,9 @@
             }
 
             AlertServiceOnPopup.showAlert(response);
-        });
+        }).error(function () {
+            AlertServiceOnPopup.showAlert("Invalid Input.");
+        });;
     };
 
     caseService.editCase = function (fraudCase) {
@@ -59,6 +61,8 @@
             }
 
             AlertServiceOnPopup.showAlert(response);
+        }).error(function () {
+            AlertServiceOnPopup.showAlert("Invalid Input.");
         });
     };
 

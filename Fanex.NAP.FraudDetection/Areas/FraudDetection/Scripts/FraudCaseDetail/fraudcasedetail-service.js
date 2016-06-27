@@ -19,7 +19,7 @@
                     { Name: "Stake", CustomCellRender: function () { return element.Stake; } },
                     { Name: "WinLoss", Value: element.WinLoss },
                     { Name: "Status", Value: element.Status },
-                    { Name: "IP", Value: element.DisplayIP }
+                    { Name: "IP", CustomCellRender: function () { return element.DisplayIP; } }
                 ]
             });
         });
