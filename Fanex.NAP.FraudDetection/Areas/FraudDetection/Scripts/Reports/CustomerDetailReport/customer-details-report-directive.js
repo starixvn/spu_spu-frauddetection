@@ -661,6 +661,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
         return rows;
     }
 
+    var triggerCollapseDefault = function () {
+        var groupRow = $(".parent-row > td.tr-grid-collapse-expand");
+
+        groupRow.trigger('click');
+    };
+
     return {
         restrict: "A",
         scope: {
@@ -691,6 +697,8 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                         gridOptions.bodyRows = bodyRows;
 
                         $('#customer-details-report-daily-violated-tickets').fanexGrid(gridOptions);
+
+                        triggerCollapseDefault();
                     }
                 });
             });
