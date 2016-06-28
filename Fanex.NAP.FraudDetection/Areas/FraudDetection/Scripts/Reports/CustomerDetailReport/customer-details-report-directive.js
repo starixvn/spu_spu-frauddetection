@@ -621,7 +621,7 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
         $.each(data, function (index, element) {
             rows.push({
                 Columns: [
-                    { Name: "No", Value: index + 1 },
+                    { Name: "No", Value: index + 1, CellAlign: "center", CssClass: 'no-column' },
                     { Name: "TransDate", Value: element.TransDate },
                     { Name: "TransId", Value: element.TransId },
                     { Name: "BetType", Value: element.BetType },
@@ -674,11 +674,10 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                         var columnHeaders = generateColumnHeaders();
 
                         var gridOptions = {
-                            showNumberColumn: true,
+                            showNumberColumn: false,
                             showPager: true,
                             fullHeight: true,
                             gridExpandHeight: 280,
-                            allowTruncate: true,
                             showTree: true,
                             pagerOption: {
                                 itemsPerPage: 50,

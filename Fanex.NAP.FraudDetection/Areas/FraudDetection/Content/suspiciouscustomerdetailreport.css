@@ -106,6 +106,12 @@ table.customer-report-statistic td
     padding-left: 5px
 }
 
+.no-column {
+    display: block !important;
+    padding-left: initial !important;
+    width: 100% !important;
+}
+
 .ui-tooltip
 {
     max-width: 500px !important;
