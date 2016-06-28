@@ -56,8 +56,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [HttpPost]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
-        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria)
+        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria,  int SportId)
         {
+            if (criteria.LeagueId == -1)
+            {
+                var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), SportId);
+
+                if (listLeagues != null && listLeagues.Count() > 0)
+                {
+                    criteria.LeagueIds = string.Join(",", listLeagues.Select(l => l.LeagueId));
+                }
+            }
+
             var matchesInfo = GenerateMatchMonitoringData(criteria);
             MapRemotingRefData(matchesInfo);
 
@@ -72,8 +82,18 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
-        public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria)
+        public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria, int SportId)
         {
+            if (criteria.LeagueId == -1)
+            {
+                var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), SportId);
+
+                if (listLeagues != null && listLeagues.Count() > 0)
+                {
+                    criteria.LeagueIds = string.Join(",", listLeagues.Select(l => l.LeagueId));
+                }
+            }
+
             var matchesInfo = GenerateMatchMonitoringData(criteria);
             MapRemotingRefData(matchesInfo, true);
             var headers = GetMatchMonitoringHeaders(matchesInfo);
@@ -138,22 +158,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetLeaguesByDateAndSport(string eventDate, int sportId)
         {
-            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
-            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-
-            var criteria = DateTime.Parse(eventDate) > balanceUpMoveBetDates.BalanceUpDay
-                               ? (ICriteria)new LeagueGetAllByDateAndSportCriteria
-                               {
-                                   IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
-                                   EventDate = DateTime.Parse(eventDate),
-                                   SportId = sportId
-                               }
-                               : new LeagueGetAllByDateAndSportFromDBArchiveCriteria
-                               {
-                                   EventDate = DateTime.Parse(eventDate),
-                                   SportId = sportId
-                               };
-            var result = _matchMonitoringReportService.GetLeaguesByDateAndSport(criteria);
+            var result = GetLeagueListByDateAndSport(eventDate, sportId);
 
             if (result.Count() > 0)
             {
@@ -265,6 +270,28 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                        ? _matchMonitoringReportService.GetMatchMonitoringReport(criteria)
                        : _matchMonitoringReportService.GetMatchMonitoringReportFromDBArchive(
                            new MatchMonitoringReportGetAllDBArchiveCriteria(criteria));
+        }
+
+        private IEnumerable<League> GetLeagueListByDateAndSport(string eventDate, int sportId)
+        {
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+
+            var criteria = DateTime.Parse(eventDate) > balanceUpMoveBetDates.BalanceUpDay
+                               ? (ICriteria)new LeagueGetAllByDateAndSportCriteria
+                               {
+                                   IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
+                                   EventDate = DateTime.Parse(eventDate),
+                                   SportId = sportId
+                               }
+                               : new LeagueGetAllByDateAndSportFromDBArchiveCriteria
+                               {
+                                   EventDate = DateTime.Parse(eventDate),
+                                   SportId = sportId
+                               };
+            var result = _matchMonitoringReportService.GetLeaguesByDateAndSport(criteria);
+
+            return result;
         }
     }
 }

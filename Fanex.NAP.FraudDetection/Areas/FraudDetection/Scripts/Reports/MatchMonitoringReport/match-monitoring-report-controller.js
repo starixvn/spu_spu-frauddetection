@@ -17,7 +17,7 @@ function (matchMonitoringReportModel) {
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
 
         if (vm.filter.LeagueId === -1) {
-            vm.filter.LeagueIds = matchMonitoringReportModel.getLeagueIdList();
+            //vm.filter.LeagueIds = matchMonitoringReportModel.getLeagueIdList();
         }
         else {
             vm.filter.LeagueIds = vm.filter.LeagueId;
