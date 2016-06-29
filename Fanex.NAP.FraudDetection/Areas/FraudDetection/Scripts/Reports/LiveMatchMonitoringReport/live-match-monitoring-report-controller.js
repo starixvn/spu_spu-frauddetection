@@ -2,13 +2,14 @@
 /*global matchMonitoringReportModule*/
 
 liveMatchMonitoringReportModule.controller('liveMatchMonitoringReportController',
-['liveMatchMonitoringReportModel',
-function (liveMatchMonitoringReportModel) {
+['liveMatchMonitoringReportModel', '$scope',
+function (liveMatchMonitoringReportModel, $scope) {
     var vm = this;
-    var timeId = null;
+    var timeId = null,
+        intervalId = null;
 
-    vm.Leagues = liveMatchMonitoringReportModel.Leagues;
-    vm.Sports = liveMatchMonitoringReportModel.Sports;
+    vm.Leagues = [];
+    vm.Sports = [];
     vm.RefreshOptions = liveMatchMonitoringReportModel.RefreshOptions;
     vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
     vm.filter = liveMatchMonitoringReportModel.filter;
@@ -37,25 +38,24 @@ function (liveMatchMonitoringReportModel) {
     };
 
     vm.refreshLiveMatchMonitoringReport = function () {
-        clearInterval(timeId);
-        if (vm.RefreshSecond !== -1) {
-            timeId = setInterval(function () {
-                if (vm.filter.LeagueId === -1) {
-                    vm.filter.LeagueIds = liveMatchMonitoringReportModel.getLeagueIdList();
-                }
-                else {
-                    vm.filter.LeagueIds = vm.filter.LeagueId;
-                }
-
-                if (!vm.filter.IsMainMarket) {
-                    vm.filter.IsMainMarket = null;
-                }
-
-                liveMatchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
-                    vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
-                });
-            }, (vm.RefreshSecond * 1000));
+        if (vm.filter.LeagueId === -1) {
+            vm.filter.LeagueIds = liveMatchMonitoringReportModel.getLeagueIdList();
         }
+        else {
+            vm.filter.LeagueIds = vm.filter.LeagueId;
+        }
+
+        if (!vm.filter.IsMainMarket) {
+            vm.filter.IsMainMarket = null;
+        }
+        $('#refreshIcon').addClass('loading-icon');
+        $('#refreshIcon').remove('refresh-icon');
+        liveMatchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
+            vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
+            $('#refreshIcon').removeClass('loading-icon');
+            $('#refreshIcon').addClass('refresh-icon');
+            vm.CountDownToRefresh();
+        });
     };
 
     vm.changeEventDate = function () {
@@ -86,9 +86,35 @@ function (liveMatchMonitoringReportModel) {
         });
     };
 
+    vm.CountDownToRefresh = function () {
+        clearInterval(intervalId);
+        var countdown = vm.RefreshSecond;
+        if (countdown !== -1) {
+            intervalId = setInterval(function () {
+                countdown = $('#secondRefresh').text().trim();
+                countdown = countdown - 1;
+                $('#secondRefresh').text(countdown);
+                if (countdown === 0) {
+                    clearInterval(intervalId);
+                    vm.refreshLiveMatchMonitoringReport();
+                    $('#secondRefresh').text(vm.RefreshSecond);
+                }
+            }, 1000);
+        }
+        else {
+            $('#secondRefresh').text("");
+        }
+    };
+
     liveMatchMonitoringReportModel.initialDateTimePicker();
 
     vm.getSportsByDate(vm.filter.EventDate);
-
     vm.getLeaguesByDateAndSport(vm.filter.EventDate, vm.filter.SportId);
+    $scope.$watch(function () {
+        return vm.Sports.length > 0 && vm.Leagues.length > 0;
+    }, function (newValue) {
+        if (newValue) {
+            vm.queryLiveMatchMonitoringReport();
+        }
+    });
 }]);

@@ -20,6 +20,7 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
 
     var oldPlayingMatchs = [];
     var generateBodyRows = function (matches) {
+        var greaterNumber = matches.length - oldPlayingMatchs.length;
         var rows = [];
         var tempOldPlayingMatchs = [];
         var cssName = 'playing-match';
@@ -107,7 +108,7 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
     };
 
     var getCssNameForChangingScore = function (oldMatch, newMatch) {
-        if (oldMatch) {
+        if (oldMatch && oldMatch.MatchId === newMatch.MatchId) {
             if (oldMatch.LiveHomeScore !== newMatch.LiveHomeScore || oldMatch.LiveAwayScore !== newMatch.LiveAwayScore) {
                 return ' score-changed';
             }

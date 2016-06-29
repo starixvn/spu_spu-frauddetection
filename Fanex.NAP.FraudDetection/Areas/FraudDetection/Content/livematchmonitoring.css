@@ -20,16 +20,35 @@
     cursor: pointer;
 }
 
+.button-refresh {
+    margin: 3px 0 0 5px;
+    height: 22px;
+    padding: 0 4px;
+}
+
+.generate-button {
+    float: right;
+}
+
+.refresh-icon {
+    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -67px -115px;
+    padding-left: 17px;
+}
+
+.loading-icon {
+    background: url("../App_Themes/Images/refreshwait_icon.gif") no-repeat;
+    padding-left: 17px;
+}
+
 .match-code {
     width: 142px;
     height: 25px;
 }
 
-.league {
+.league-select {
     height: 25px;
     min-width: 97px;
-    margin-left: 16px;
-    max-width: 434px;
+    width: 100%;
 }
 
 .filter-forml {
@@ -49,9 +68,11 @@
 
 .score-changed {
     -webkit-animation-name: highlighted; /* Chrome, Safari, Opera */
-    -webkit-animation-duration: 3.5s; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 1.5s; /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: 3;
     animation-name: highlighted;
-    animation-duration: 3.5s;
+    animation-duration: 1.5s;
+    animation-iteration-count: 3;
 }
 
 @-webkit-keyframes highlighted {
