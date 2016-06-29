@@ -24,10 +24,11 @@
     background-color: #fff;
     border-color: rgba(255, 0, 0, 0.407843);
     border-radius: 5px;
+    float: right;
     height: 22px;
-    margin: 3px 0 0 5px;
+    margin: 3px 5px 0px;
     padding: 0 4px;
-    width: 45px;
+    width: 55px;
 }
 
     .button-refresh:hover {
@@ -67,7 +68,7 @@
     float: right;
     height: 20px;
     width: 100px;
-    margin: 5px 5px 0 0;
+    margin: 5px 0px 0px;
 }
 
 .playing-match {

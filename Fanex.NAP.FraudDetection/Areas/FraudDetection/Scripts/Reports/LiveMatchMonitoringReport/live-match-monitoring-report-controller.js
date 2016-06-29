@@ -6,7 +6,8 @@ liveMatchMonitoringReportModule.controller('liveMatchMonitoringReportController'
 function (liveMatchMonitoringReportModel, $scope) {
     var vm = this;
     var timeId = null,
-        intervalId = null;
+        intervalId = null,
+        oldFilter = null;
 
     vm.Leagues = [];
     vm.Sports = [];
@@ -29,6 +30,7 @@ function (liveMatchMonitoringReportModel, $scope) {
             vm.filter.IsMainMarket = null;
         }
 
+        oldFilter = jQuery.extend(true, {}, vm.filter);
         liveMatchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
             vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
             vm.RefreshSecond = 15;
@@ -38,24 +40,16 @@ function (liveMatchMonitoringReportModel, $scope) {
     };
 
     vm.refreshLiveMatchMonitoringReport = function () {
-        if (vm.filter.LeagueId === -1) {
-            vm.filter.LeagueIds = liveMatchMonitoringReportModel.getLeagueIdList();
+        if (oldFilter) {
+            $('#refreshIcon').addClass('loading-icon');
+            $('#refreshIcon').remove('refresh-icon');
+            liveMatchMonitoringReportModel.getAllMatches(oldFilter).then(function () {
+                vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
+                $('#refreshIcon').removeClass('loading-icon');
+                $('#refreshIcon').addClass('refresh-icon');
+                vm.CountDownToRefresh();
+            });
         }
-        else {
-            vm.filter.LeagueIds = vm.filter.LeagueId;
-        }
-
-        if (!vm.filter.IsMainMarket) {
-            vm.filter.IsMainMarket = null;
-        }
-        $('#refreshIcon').addClass('loading-icon');
-        $('#refreshIcon').remove('refresh-icon');
-        liveMatchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
-            vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
-            $('#refreshIcon').removeClass('loading-icon');
-            $('#refreshIcon').addClass('refresh-icon');
-            vm.CountDownToRefresh();
-        });
     };
 
     vm.changeEventDate = function () {
@@ -115,6 +109,14 @@ function (liveMatchMonitoringReportModel, $scope) {
     }, function (newValue) {
         if (newValue) {
             vm.queryLiveMatchMonitoringReport();
+        }
+    });
+
+    $scope.$watch(function () {
+        return $('#secondRefresh').text() == "-1";
+    }, function (newValue) {
+        if (newValue) {
+            $('#secondRefresh').text("");
         }
     });
 }]);
