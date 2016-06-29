@@ -97,9 +97,11 @@ table.customer-report-statistic td
 }
 
 .group-fraud-case-header{
-    background-color:#f79646 !important;
-    color:#ffffff !important;
-    font-weight: bold !important;
+    background-color:#C2D9EC !important;
+}
+
+.group-fraud-case-header .tr-grid-collapse-expand{
+    background: transparent !important;
 }
 
 .group-fraud-case{

@@ -649,10 +649,12 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
                         {
                             Name: "No", Value: fraudCase, MergeColNumber: 11,
                             CellAlign: "left",
-                            TdClass: 'group-fraud-case-header', CssClass: 'group-fraud-case'
+                            TdClass: 'abc',
+                            CssClass: 'group-fraud-case'
                         }
                 ],
                 SubRows: generateBodyRows(data[i]),
+                CssClass: 'group-fraud-case-header'
             }
 
             rows.push(currentRow);

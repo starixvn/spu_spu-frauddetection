@@ -348,6 +348,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\Images\edit-ico.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\glyphicons-halflings.png" />
     <Content Include="Areas\FraudDetection\App_Themes\Images\graph_up_arrow.png" />
+    <Content Include="Areas\FraudDetection\App_Themes\Images\refreshwait_icon.gif" />
     <Content Include="Areas\FraudDetection\Content\case.css" />
     <Compile Include="App_Start\BundleExtensions.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\LiveMatchMonitoringController.cs" />
