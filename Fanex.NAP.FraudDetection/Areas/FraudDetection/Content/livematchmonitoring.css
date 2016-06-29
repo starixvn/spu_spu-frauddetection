@@ -21,10 +21,18 @@
 }
 
 .button-refresh {
-    margin: 3px 0 0 5px;
+    background-color: #fff;
+    border-color: rgba(255, 0, 0, 0.407843);
+    border-radius: 5px;
     height: 22px;
+    margin: 3px 0 0 5px;
     padding: 0 4px;
+    width: 45px;
 }
+
+    .button-refresh:hover {
+        background-color: rgb(232, 227, 227);
+    }
 
 .generate-button {
     float: right;
