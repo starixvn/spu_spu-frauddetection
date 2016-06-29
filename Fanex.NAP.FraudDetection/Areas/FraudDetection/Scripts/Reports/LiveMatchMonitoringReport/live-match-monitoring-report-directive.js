@@ -3,6 +3,7 @@
 
 liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeout', 'liveMatchMonitoringReportModel', function ($timeout, liveMatchMonitoringReportModel) {
     var pageNumber = 0;
+    var pageSize = 50;
     var generateColumnHeaders = function () {
         var columnHeaders =
         [
@@ -188,12 +189,13 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
                             allowTruncate: true,
                             showPager: true,
                             pagerOption: {
-                                itemsPerPage: 10,
+                                itemsPerPage: pageSize,
                                 currentPage: pageNumber,
                                 totalItem: gridData.MatchMonitoring.length,
                                 itemsPerPageArray: [10, 20, 50, 100, 500],
                                 afterPagedFunction: function () {
                                     pageNumber = this.currentPage;
+                                    pageSize = this.itemsPerPage;
                                 }
                             }
                         };
