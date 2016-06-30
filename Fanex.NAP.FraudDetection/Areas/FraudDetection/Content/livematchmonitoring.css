@@ -35,9 +35,6 @@
         background-color: rgb(232, 227, 227);
     }
 
-.generate-button {
-    float: right;
-}
 
 .refresh-icon {
     background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -67px -115px;

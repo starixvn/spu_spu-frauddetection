@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="col-sm-3">
+                <div class="col-sm-3" style="text-align: right;">
                     <label style="padding-top: 5px;">
                         @Labels.Sport
                     </label>
@@ -71,12 +71,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="col-sm-12">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
                     <span class="checkbox">
                         <input style="vertical-align: text-bottom;" id="checkboxMainMarket" type="checkbox"
                                ng-model="lmmrCtrl.filter.IsMainMarket" />
                         <label style="cursor: pointer; font-weight: normal;" for="checkboxMainMarket">Main Market Only</label>
                     </span>
+
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-10">
                     <button style="width: 97px; height: 25px;" class="btn-green generate-button" ng-click="lmmrCtrl.queryLiveMatchMonitoringReport()">
                         Generate
                     </button>
