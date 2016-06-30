@@ -63,7 +63,7 @@
     <Setting Key="FD_MatchMonitoringReportGetAll" SpName="FD_MatchMonitoringReportGetAll_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_MatchMonitoringReportUpdateVerified" SpName="FD_MatchMonitoringReportUpdateVerified" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_MatchMonitoringReportUpdateDelinquent" SpName="FD_MatchMonitoringReportUpdateDelinquent" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_MatchMonitoringReportGetAll_DBArchive" SpName="FD_MatchMonitoringReportGetAll_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
+    <Setting Key="FD_MatchMonitoringReportGetAll_DBArchive" SpName="FD_MatchMonitoringReportGetAll_DBArchive_xtest" DbName="DBFD.bodb_Archive.bodbSPUNet" />
 
     <Setting Key="FD_LiveMatchMonitoringReportGetAll" SpName="FD_LiveMatchMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
