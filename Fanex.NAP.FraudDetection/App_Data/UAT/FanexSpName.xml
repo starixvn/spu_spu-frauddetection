@@ -71,7 +71,7 @@
     <Setting Key="FD_LeagueGetAllByDate_DBArchive" SpName="FD_LeagueGetAllByDate_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDateAndSport" SpName="FD_LeagueGetAllByDateAndSport" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDateAndSport_DBArchive" SpName="FD_LeagueGetAllByDateAndSport_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
-    <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
     <Setting Key="FD_DailyDataMonitoringReportGetAll" SpName="FD_DailyDataMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
@@ -148,7 +148,7 @@
     <Setting Key="FD_CustomerDetailsLogsNotesGet" SpName="FD_CustomerDetailsLogsNotesGet_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTicketsGetByTransIds" SpName="FD_CustomerDetailsTicketsGetByTransIds" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" SpName="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsTransListGetByCustId" SpName="FD_CustomerDetailsTransListGetByCustId" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsTransListGetByCustId" SpName="FD_CustomerDetailsTransListGetByCustId_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsWinlossStatisticGet" SpName="FD_CustomerDetailsWinlossStatisticGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsMonthlyWinlossGet" SpName="FD_CustomerDetailsMonthlyWinlossGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
