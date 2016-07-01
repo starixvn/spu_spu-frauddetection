@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="FD_Case">
-    <Setting Key="FD_CaseGetAll" SpName="FD_CaseGetAll_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseUpdate" SpName="FD_CaseUpdate_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetAll" SpName="FD_CaseGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseUpdate" SpName="FD_CaseUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseUpdateStatus" SpName="FD_CaseUpdateStatus" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseTypesGetAll" SpName="FD_CaseTypesGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
@@ -71,7 +71,7 @@
     <Setting Key="FD_LeagueGetAllByDate_DBArchive" SpName="FD_LeagueGetAllByDate_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDateAndSport" SpName="FD_LeagueGetAllByDateAndSport" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDateAndSport_DBArchive" SpName="FD_LeagueGetAllByDateAndSport_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
-    <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
     <Setting Key="FD_DailyDataMonitoringReportGetAll" SpName="FD_DailyDataMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
@@ -116,7 +116,7 @@
 
   <Function Name="FD_FraudCaseDetails">
     <Setting Key="FD_FraudCaseDetailSummaryGetByMatchId" SpName="FD_FraudCaseDetailSummaryGetByMatchId" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList_xtest" DbName="DBFD.bodb02.bodbSPUNet" />
+    <Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_BetTicketGetByTransListFromDBArchive" SpName="FD_BetTicketGetByTransListFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_BetTicketGetByIp" SpName="FD_BetTicketGetByIp" DbName="DBFD.bodb02.bodbSPUNet" />
   </Function>
