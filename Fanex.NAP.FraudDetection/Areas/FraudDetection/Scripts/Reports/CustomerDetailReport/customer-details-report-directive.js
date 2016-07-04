@@ -683,16 +683,10 @@ customerDetailsReportModule.directive('fanexGridCustomerDetailsReportDailyViolat
 
                         var gridOptions = {
                             showNumberColumn: false,
-                            showPager: true,
+                            showFooter: true,
                             fullHeight: true,
                             gridExpandHeight: 280,
-                            showTree: true,
-                            pagerOption: {
-                                itemsPerPage: 50,
-                                currentPage: 0,
-                                itemsPerPageArray: [10, 20, 50, 100, 500]
-                            },
-
+                            showTree: true
                         };
 
                         gridOptions.columns = columnHeaders;
