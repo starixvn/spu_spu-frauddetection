@@ -30,7 +30,7 @@
     var getDataAllTicketRows = function (ip) {
         var bodyRows = [];
         $.ajax({
-            url: '/FraudCaseDetail/GetAllTicketsByIp?ip=' + ip,
+            url: SPU.getAbsoluteUrl("FraudCaseDetail/GetAllTicketsByIp?ip=" + ip),
             type: 'GET',
             async: false,
             dataType: 'json',
