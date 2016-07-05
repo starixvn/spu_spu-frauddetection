@@ -134,7 +134,7 @@
             },
             complete: function (data) {
                 waitingDialog.hide();
-                $('#popup .match').addClass('clearfix');
+                //$('#popup .match').addClass('clearfix');
             }
         });
     };
@@ -172,9 +172,6 @@
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true,
-                afterPagedFunction: function () {
-                    $('#popup .match').addClass('clearfix');
-                }
             }
         };
 

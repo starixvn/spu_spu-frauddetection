@@ -54,6 +54,7 @@ body {
 .tickets .match {
     display: initial;
     color: #000000;
+    float: right;
     font-weight: normal;
     line-height: 15px;
     text-align: right;
@@ -63,6 +64,7 @@ body {
 .tickets div.match + div.league {
     display: initial;
     background: none repeat scroll 0 0 transparent;
+    float: right;
     font-weight: normal;
     text-align: right;
     text-transform: none;
