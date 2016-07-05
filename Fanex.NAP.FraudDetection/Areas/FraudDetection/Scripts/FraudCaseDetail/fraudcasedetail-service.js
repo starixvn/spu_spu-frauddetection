@@ -171,7 +171,10 @@
                 itemsPerPage: 10,
                 currentPage: 0,
                 itemsPerPageArray: [10, 20, 50, 100, 500],
-                showDetail: true
+                showDetail: true,
+                afterPagedFunction: function () {
+                    $('#popup .match').addClass('clearfix');
+                }
             }
         };
 
