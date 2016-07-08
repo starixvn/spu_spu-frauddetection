@@ -1,0 +1,91 @@
+﻿@model FD.Lib.DTO.MessageMaster
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Message";
+}
+
+@section HeadCss
+{
+    @*<link href="@Url.Content("~/Areas/FraudDetection/Content/mailmaster.css")" rel="stylesheet" type="text/css" />*@
+}
+@section FooterJs
+{
+    @*@Scripts.Render("~/bundles/App/MailMaster")*@
+}
+<h4>
+    <b>Message Master</b>
+</h4>
+@using (Html.BeginForm("Add", "MessageMaster", FormMethod.Post, new { @id = "addNewMailForm" }))
+{
+    <div class="filter-form col-sm-12">
+        <div class="col-sm-7">
+            <div class="col-sm-12">
+                <div class="col-sm-8">
+                    <label class="col-sm-5 text-right">
+                        Message Code
+                    </label>
+                    @Html.TextBoxFor(model => model.MessageCode, new { @class = "inputbox col-sm-7 ui-corner-all", @style = "" })
+                </div>
+                <div class="col-sm-4">
+                    <label class="col-sm-4 text-right">
+                        Active
+                    </label>
+                    @Html.CheckBoxFor(model => model.Active, new { @checked = "checked" })
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Description
+                </label>
+                @Html.TextBoxFor(model => model.MessageDesc, new { @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px" })
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Content
+                </label>
+                <div class="col-sm-9" style="padding-left: 0">
+                    @Html.TextAreaFor(model => model.MessageContent, new { @class = "col-sm-12 editor", @id = "editor" })
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Recipient
+                </label>
+                <ul id="CcTo" style="width: 380px;"></ul>
+                @Html.TextBoxFor(model => model.Recipient, new { @id = "FakeCcTo", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Online Recipient
+                </label>
+                <ul id="BccTo" style="width: 380px;"></ul>
+                @Html.TextBoxFor(model => model.OnlineRecipient, new { @id = "FakeBccTo", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="list-group" style="height: 490px; border: 1px solid #9E9E9E;
+                    padding: 10px;">
+                <div onclick="insertSuspiciousStatistic('Suspicious Statistic');" class="suspicious-statistic list-group-item">
+                    Suspicious Statistic
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body" style="padding-bottom: 0;">
+            <label class="col-sm-12" style="padding-left: 0">
+                Subject
+            </label>
+            @*@Html.TextBoxFor(model => model.tit, new { @class = "col-sm-12 inputbox", @style = "padding-left: 5px;" })*@
+            <div class="col-sm-12" style="padding: 0">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group text-center col-md-12">
+        <input id="btn_addMail" type="button" value="Submit" class="btn-green" />
+        <input id="btn_cancelMail" type="button" value="Cancel" class="btn-green" />
+    </div>
+}

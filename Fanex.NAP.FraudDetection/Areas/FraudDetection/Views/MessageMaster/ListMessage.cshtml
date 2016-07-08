@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+@section HeadCss
+{
+    @*<link href="@Url.Content("~/Areas/FraudDetection/Content/mailmaster.css")" rel="stylesheet" type="text/css" />*@
+}
+@section FooterJs
+{
+    @*@Scripts.Render("~/bundles/App/MailMaster")*@
+}
+<div>
+    <span class="infor-text">All Messages</span>
+    @*@if (PermissionService.HasHostPermission(FDFunctionKeys.MailMaster))
+    {*@
+        <input class="btn-green" type="button" value="+ Add Mail"
+               onclick="location.href='@Url.Action("Add", "MessageMaster")'" />
+    @*}*@
+</div>
+<div id="mailSearch" class="newline">
+    &nbsp;
+</div>
+<div id="messageMasterId" class="freegrid content-grid">
+</div>

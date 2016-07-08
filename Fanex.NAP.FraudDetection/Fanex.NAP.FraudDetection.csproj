@@ -315,6 +315,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\MessageMasterController.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -574,6 +575,8 @@
     <Content Include="Content\betlist\betlist.core.css" />
     <Content Include="Areas\FraudDetection\Views\Reports\OfficeIpReport.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\LiveMatchMonitoringReport.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\MessageMaster\ListMessage.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\MessageMaster\AddMessage.cshtml" />
     <None Include="Content\betlist\betList.css1" />
     <Content Include="Content\betlist\custom-betlist.css" />
     <Content Include="Content\betlist\fanex.result.css" />
