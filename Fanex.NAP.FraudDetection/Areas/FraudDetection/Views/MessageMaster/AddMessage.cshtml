@@ -18,7 +18,7 @@
 @using (Html.BeginForm("Add", "MessageMaster", FormMethod.Post, new { @id = "addNewMailForm" }))
 {
     <div class="filter-form col-sm-12">
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             <div class="col-sm-12">
                 <div class="col-sm-8">
                     <label class="col-sm-5 text-right">
@@ -62,24 +62,12 @@
                 @Html.TextBoxFor(model => model.OnlineRecipient, new { @id = "FakeBccTo", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
             </div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <div class="list-group" style="height: 490px; border: 1px solid #9E9E9E;
                     padding: 10px;">
                 <div onclick="insertSuspiciousStatistic('Suspicious Statistic');" class="suspicious-statistic list-group-item">
                     Suspicious Statistic
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-body" style="padding-bottom: 0;">
-            <label class="col-sm-12" style="padding-left: 0">
-                Subject
-            </label>
-            @*@Html.TextBoxFor(model => model.tit, new { @class = "col-sm-12 inputbox", @style = "padding-left: 5px;" })*@
-            <div class="col-sm-12" style="padding: 0">
-                
             </div>
         </div>
     </div>

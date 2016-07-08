@@ -544,6 +544,9 @@
     <Content Include="Areas\FraudDetection\Scripts\Group\group-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\Parameter\parameter-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Reports\LiveMatchMonitoringReport\live-match-monitoring-report-directive.js" />

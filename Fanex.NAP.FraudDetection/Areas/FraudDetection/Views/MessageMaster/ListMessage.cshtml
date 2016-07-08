@@ -1,6 +1,8 @@
-﻿@{
+﻿@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Message Master";
 }
 
 @section HeadCss
@@ -9,15 +11,19 @@
 }
 @section FooterJs
 {
-    @*@Scripts.Render("~/bundles/App/MailMaster")*@
+    <script type="text/javascript">
+        var isHost = "@PermissionService.HasHostPermission(FDFunctionKeys.MailMaster)" === "True";
+    </script>
+    @Scripts.Render("~/bundles/App/MessageMaster")
+
 }
 <div>
     <span class="infor-text">All Messages</span>
-    @*@if (PermissionService.HasHostPermission(FDFunctionKeys.MailMaster))
-    {*@
+    @if (PermissionService.HasHostPermission(FDFunctionKeys.MailMaster))
+    {
         <input class="btn-green" type="button" value="+ Add Mail"
                onclick="location.href='@Url.Action("Add", "MessageMaster")'" />
-    @*}*@
+    }
 </div>
 <div id="mailSearch" class="newline">
     &nbsp;
