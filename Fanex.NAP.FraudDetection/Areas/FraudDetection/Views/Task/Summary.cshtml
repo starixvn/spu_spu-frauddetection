@@ -41,7 +41,8 @@
                     </td>
                     <td ng-show="2 == taskCtr.Model.Event.EventId">
                         <span ng-show="task.TaskId == taskCtr.Model.Event.BackGroundTaskId" ng-repeat="task in taskCtr.BackGroundTasks">
-                            Trigger By Another Task (Executed Affter: {{ task.TaskName}})</span>
+                            Trigger By Another Task (Executed Affter: {{ task.TaskName}})
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -50,7 +51,8 @@
                     </td>
                     <td>
                         <span ng-show="activity.ActivityId == taskCtr.Model.Activity.ActivityId" ng-repeat="activity in taskCtr.Activities">
-                            {{ activity.ActivityName}}</span>
+                            {{ activity.ActivityName}}
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -86,14 +88,25 @@
                         Next Actions
                     </td>
                     <td>
-                        <span ng-show="taskCtr.nextActionAssignGroup.IsTicked">{{ taskCtr.NextActions[0].Name
+                        <span ng-show="taskCtr.nextActionAssignGroup.IsTicked">
+                            {{ taskCtr.NextActions[0].Name
                             }} (<span ng-show="group.GroupId == taskCtr.nextActionAssignGroup.ActionTargetId"
-                                ng-repeat="group in taskCtr.CustomerGroups">{{ group.GroupName }}</span>)<br/></span>
-                        <span ng-show="taskCtr.nextActionSendMail.IsTicked">{{ taskCtr.NextActions[1].Name
+                                      ng-repeat="group in taskCtr.CustomerGroups">{{ group.GroupName }}</span>)<br />
+                        </span>
+                        <span ng-show="taskCtr.nextActionSendMail.IsTicked">
+                            {{ taskCtr.NextActions[1].Name
                             }} (<span ng-show="mail.MailId == taskCtr.nextActionSendMail.ActionTargetId"
-                                ng-repeat="mail in taskCtr.Mails">{{ mail.MailCode }}</span>)<br/></span>
-                        <span ng-show="taskCtr.nextActionCaptureData.IsTicked"> {{ taskCtr.NextActions[2].Name
-                            }} (<span ng-show="dataType.IsChecked" ng-repeat="dataType in taskCtr.DataTypes">{{ dataType.DataName }};</span>)</span>
+                                      ng-repeat="mail in taskCtr.Mails">{{ mail.MailCode }}</span>)<br />
+                        </span>
+                        <span ng-show="taskCtr.nextActionSendMessage.IsTicked">
+                            {{ taskCtr.NextActions[3].Name
+                            }} (<span ng-show="message.MessageId == taskCtr.nextActionSendMessage.ActionTargetId"
+                                      ng-repeat="message in taskCtr.Messages">{{ message.MessageCode }}</span>)<br />
+                        </span>
+                        <span ng-show="taskCtr.nextActionCaptureData.IsTicked">
+                            {{ taskCtr.NextActions[2].Name
+                            }} (<span ng-show="dataType.IsChecked" ng-repeat="dataType in taskCtr.DataTypes">{{ dataType.DataName }};</span>)
+                        </span>
                     </td>
                 </tr>
             </table>
@@ -103,7 +116,7 @@
         <input type="button" ng-click="taskCtr.backToRule()" value="Back" class="btn-green btn-customConfirm font-size-small" />
         @if (PermissionService.HasHostPermission(FDFunctionKeys.FraudCase))
         {
-             <input type="button" ng-click="taskCtr.addEditTask()" value="Finish" class="btn-green btn-customConfirm font-size-small" />
+            <input type="button" ng-click="taskCtr.addEditTask()" value="Finish" class="btn-green btn-customConfirm font-size-small" />
         }
     </div>
     <br>

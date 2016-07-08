@@ -48,6 +48,11 @@ function (taskFactory) {
         IsTicked: false,
         ActionTargetId: []
     };
+    taskModel.nextActionSendMessage = {
+        ActionId: 4,
+        IsTicked: false,
+        ActionTargetId: -1
+    };
 
     taskModel.Task = [];
     taskModel.Events = [];
@@ -60,6 +65,7 @@ function (taskFactory) {
     taskModel.Currencies = [];
     taskModel.DataTypes = [];
     taskModel.Mails = [];
+    taskModel.Messages = [];
     taskModel.Timers = [
         { Id: 1, Value: "Second", Name: "Second(s)" },
         { Id: 2, Value: "Minute", Name: "Minute(s)" },
@@ -122,7 +128,8 @@ function (taskFactory) {
     taskModel.NextActions = [
         { Id: 1, Value: 1, Name: "Assign Group" },
         { Id: 2, Value: 2, Name: "Send Email" },
-        { Id: 3, Value: 3, Name: "Capture Data" }
+        { Id: 3, Value: 3, Name: "Capture Data" },
+        { Id: 4, Value: 4, Name: "Send Message" }
     ];
 
     taskModel.addTask = function (criteria) {
@@ -162,6 +169,12 @@ function (taskFactory) {
     taskModel.getMails = function () {
         return taskFactory.getMails().success(function (mails) {
             taskModel.Mails = mails;
+        });
+    };
+
+    taskModel.getMessages = function () {
+        return taskFactory.getMessages().success(function (messages) {
+            taskModel.Messages = messages;
         });
     };
 
@@ -720,7 +733,7 @@ function (taskFactory) {
         return result.join("#");
     };
 
-    taskModel.getNextActionIdList = function (assignGroup, sendMail, captureData) {
+    taskModel.getNextActionIdList = function (assignGroup, sendMail, captureData, sendMessage) {
         var result = [];
         if (assignGroup.IsTicked) {
             result.push(assignGroup.ActionId);
@@ -728,6 +741,10 @@ function (taskFactory) {
 
         if (sendMail.IsTicked) {
             result.push(sendMail.ActionId);
+        }
+
+        if (sendMessage.IsTicked) {
+            result.push(sendMessage.ActionId);
         }
 
         if (captureData.IsTicked) {
@@ -740,7 +757,7 @@ function (taskFactory) {
         return result.join(",");
     };
 
-    taskModel.getNextActionTargetIdList = function (assignGroup, sendMail, captureData) {
+    taskModel.getNextActionTargetIdList = function (assignGroup, sendMail, captureData, sendMessage) {
         var result = [];
         if (assignGroup.IsTicked) {
             result.push(assignGroup.ActionTargetId);
@@ -748,6 +765,10 @@ function (taskFactory) {
 
         if (sendMail.IsTicked) {
             result.push(sendMail.ActionTargetId);
+        }
+
+        if (sendMessage.IsTicked) {
+            result.push(sendMessage.ActionTargetId);
         }
 
         if (captureData.IsTicked) {
@@ -760,7 +781,7 @@ function (taskFactory) {
         return result.join(",");
     };
 
-    taskModel.makeNextActions = function (assignGroup, sendMail, captureData, nextActionList, targetList) {
+    taskModel.makeNextActions = function (assignGroup, sendMail, captureData, sendMessage, nextActionList, targetList) {
         var actions = nextActionList.split(",");
         var targets = targetList.split(",");
 
@@ -777,6 +798,11 @@ function (taskFactory) {
             if (sendMail.ActionId === parseInt(actions[i])) {
                 sendMail.IsTicked = true;
                 sendMail.ActionTargetId = parseInt(targets[i]);
+            }
+
+            if (sendMessage.ActionId === parseInt(actions[i])) {
+                sendMessage.IsTicked = true;
+                sendMessage.ActionTargetId = parseInt(targets[i]);
             }
 
             if (captureData.ActionId === parseInt(actions[i])) {

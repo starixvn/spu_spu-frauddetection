@@ -19,6 +19,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Criteria.Config;
     using FD.Lib.Criteria.Event;
     using FD.Lib.Criteria.MailMaster;
+    using FD.Lib.Criteria.MessageMaster;
     using FD.Lib.Criteria.Parameter;
     using FD.Lib.Criteria.Task;
     using FD.Lib.QueryGenerator;
@@ -175,6 +176,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var mailMasters = new MailMasterService().GetMails(new MailMasterGetAllCriteria()).Where(m => m.IsActive);
 
             return Json(mailMasters, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
+        public ActionResult GetMessages()
+        {
+            var messages = new MessageMasterService().GetAllMessage(new MessageMasterGetAllCriteria()).Where(m => m.IsActive);
+
+            return Json(messages, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

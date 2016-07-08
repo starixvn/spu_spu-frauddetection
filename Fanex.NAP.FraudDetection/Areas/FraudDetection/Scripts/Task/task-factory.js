@@ -91,6 +91,12 @@ taskModule.factory('taskFactory', ['$http', function ($http) {
             var url = SPU.getAbsoluteUrl("Task/GetMails");
 
             return $http.get(url);
+        },
+
+        getMessages: function () {
+            var url = SPU.getAbsoluteUrl("Task/GetMessages");
+
+            return $http.get(url);
         }
     };
 } ]);

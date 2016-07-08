@@ -198,6 +198,18 @@
                                     ng-options="mail.MailId as mail.MailCode for mail in taskCtr.Mails"></select>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <input type="checkbox" ng-model="taskCtr.nextActionSendMessage.IsTicked" ng-change="taskCtr.changeSendMessage()" />
+                                {{ taskCtr.NextActions[3].Name }}
+                            </div>
+                        </td>
+                        <td ng-show="taskCtr.nextActionSendMessage.IsTicked">
+                            <select ng-model="taskCtr.nextActionSendMessage.ActionTargetId" style="height: 25px;"
+                                    ng-options="message.MessageId as message.MessageCode for message in taskCtr.Messages"></select>
+                        </td>
+                    </tr>
                     <tr ng-show=" taskCtr.Model.Activity.ActivityId == 3 || taskCtr.Model.Activity.ActivityId == 4 ">
                         <td>
                             <div>
