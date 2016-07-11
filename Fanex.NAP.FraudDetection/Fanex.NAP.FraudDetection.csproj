@@ -315,6 +315,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\TrackLoginsFilter.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MessageMasterController.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -18,6 +18,8 @@ namespace Fanex.NAP.FraudDetection.AppStart
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new CustomHandleErrorAttribute { View = "Error.cshtml:" }); // by default added
+
+            filters.Add(new TrackLoginsFilter());
         }
     }
 }
