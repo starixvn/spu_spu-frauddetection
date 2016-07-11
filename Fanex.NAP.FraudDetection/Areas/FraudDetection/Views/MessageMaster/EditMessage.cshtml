@@ -1,0 +1,91 @@
+﻿@model FD.Lib.DTO.MessageMaster
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit Message";
+}
+
+@section HeadCss
+{
+    <link href="@Url.Content("~/Areas/FraudDetection/Content/messagemaster.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/bundles/TagItCss")
+}
+@section FooterJs
+{
+    @Scripts.Render("~/bundles/TagItJs")
+    @Scripts.Render("~/bundles/App/EditMessageMaster")
+}
+<h4>
+    <b>Message Master</b>
+</h4>
+@using (Html.BeginForm("Add", "MessageMaster", FormMethod.Post, new { @id = "editMesssageForm" }))
+{
+    <div class="filter-form col-sm-12">
+        <div class="col-sm-8">
+            <div class="col-sm-12">
+                <div class="col-sm-8">
+                    <label class="col-sm-5 text-right">
+                        Message Code
+                    </label>
+                    @Html.TextBoxFor(model => model.MessageCode, new { @class = "inputbox col-sm-7 ui-corner-all", @style = "" })
+                    @Html.HiddenFor(model => model.MessageId, new { @class = "inputbox col-sm-7 ui-corner-all", @style = "" })
+                </div>
+                <div class="col-sm-4">
+                    <label class="col-sm-4 text-right">
+                        Active
+                    </label>
+                    @Html.CheckBoxFor(model => model.IsActive, new { @checked = "checked" })
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Description
+                </label>
+                @Html.TextBoxFor(model => model.MessageDesc, new { @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px" })
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Content
+                </label>
+                <div class="col-sm-9" style="padding-left: 0">
+                    @Html.TextAreaFor(model => model.MessageContent, new { @class = "col-sm-12 editor", @id = "content" })
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Recipient
+                </label>
+                    <ul id="recipient" style="width: 380px;"></ul>
+                    @Html.TextBoxFor(model => model.Recipient, new { @id = "fakeRecipient", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+            </div>
+            <div class="col-sm-12">
+                <label class="col-sm-3 text-right">
+                    Online Recipient
+                </label>
+                <ul id="onlRecipient" style="width: 380px;"></ul>
+                @Html.TextBoxFor(model => model.OnlineRecipient, new { @id = "fakeOnlRecipient", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="list-group" style="height: 490px; border: 1px solid #9E9E9E;
+                    padding: 10px;">
+                <div onclick="insertParameters('TeamAvsTeamB');" class="message-parameter list-group-item">
+                    Team A vs team B
+                </div>
+                <div onclick="insertParameters('MatchCode');" class="message-parameter list-group-item">
+                    Match code
+                </div>
+                <div onclick="insertParameters('MatchId');" class="message-parameter list-group-item">
+                    Match Id
+                </div>
+                <div onclick="insertParameters('FraudCaseName');" class="message-parameter list-group-item">
+                    Fraud case name
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group text-center col-md-12">
+        <input id="btn_editMessage" type="button" value="Submit" class="btn-green" />
+        <input id="btn_cancelMessage" type="button" value="Cancel" class="btn-green" />
+    </div>
+}

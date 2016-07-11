@@ -3,22 +3,26 @@
 
     return {
         getMessages: function () {
-            return $.get('MessageMaster/GetAllMessages');
+            var url = SPU.getAbsoluteUrl('MessageMaster/GetAllMessages');
+            return $.get(url);
         },
-        //addMail: function (mail) {
-        //    return $.post('AddMail', mail);
-        //},
+        addMessage: function (message) {
+            var url = SPU.getAbsoluteUrl('MessageMaster/AddMessage');
+            return $.post(url, message);
+        },
         deleteMessage: function (messId) {
-            return $.post('MessageMaster/DeleteMessage', { messageId: messId });
+            var url = SPU.getAbsoluteUrl('MessageMaster/DeleteMessage');
+            return $.post(url, { messageId: messId });
         },
         //getMailById: function (mailId) {
         //    return $.get('MailMaster/EditMail', { mailId: mailId });
         //},
-        //editMail: function (mail) {
-        //    return $.post('EditMail', mail);
-        //},
-        editMailStatus: function (messId, isActive) {
-            return $.post('MessageMaster/EditMessageStatus', { messageId: messId, isActive: isActive });
+        editMessage: function (mail) {
+            return $.post('EditMessage', mail);
+        },
+        editMessageStatus: function (messId, isActive) {
+            var url = SPU.getAbsoluteUrl('MessageMaster/EditMessageStatus');
+            return $.post(url, { messageId: messId, isActive: isActive });
         }
     };
 })(jQuery);

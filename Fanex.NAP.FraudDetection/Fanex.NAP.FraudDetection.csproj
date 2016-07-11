@@ -522,6 +522,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
     <Content Include="Areas\FraudDetection\Content\livematchmonitoring.css" />
+    <Content Include="Areas\FraudDetection\Content\messagemaster.css" />
     <Content Include="Areas\FraudDetection\Content\suspiciouscustomerdetailreport.css" />
     <Content Include="Areas\FraudDetection\Content\task.css" />
     <Content Include="Areas\FraudDetection\Content\suspiciouscustomerreport.css" />
@@ -545,6 +546,8 @@
     <Content Include="Areas\FraudDetection\Scripts\Group\group-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-edit.js" />
+    <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-add.js" />
     <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-list.js" />
     <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\MessageMaster\messagemaster-service.js" />
@@ -581,6 +584,7 @@
     <Content Include="Areas\FraudDetection\Views\Reports\LiveMatchMonitoringReport.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MessageMaster\ListMessage.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MessageMaster\AddMessage.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\MessageMaster\EditMessage.cshtml" />
     <None Include="Content\betlist\betList.css1" />
     <Content Include="Content\betlist\custom-betlist.css" />
     <Content Include="Content\betlist\fanex.result.css" />

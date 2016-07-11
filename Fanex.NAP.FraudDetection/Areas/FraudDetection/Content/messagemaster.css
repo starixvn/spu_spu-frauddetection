@@ -1,0 +1,21 @@
+﻿/*#btn_addMail, #btn_editMail, #btn_cancelMail, .btn-customConfirm, .btn-customCancel
+{
+    width: 66px !important;
+    cursor: pointer;
+}*/
+
+#btn_cancelMessage
+{
+    background: #9e9e9e !important;
+    border-color: #9e9e9e !important;
+}
+
+.message-parameter
+{
+    margin-bottom: 10px !important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: beige !important;
+    cursor: pointer;
+}

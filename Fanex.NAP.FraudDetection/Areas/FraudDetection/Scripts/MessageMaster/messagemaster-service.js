@@ -6,13 +6,13 @@
 
     messMasterService.isHostPermission = false;
 
-    messMasterService.getAllMail = function () {
+    messMasterService.getAllMessage = function () {
         messMasterFactory.getMessages().success(function (result) {
             renderMessageTable(result);
         });
     };
 
-    messMasterService.editMailStatus = function (obj, messageId) {
+    messMasterService.editMessageStatus = function (obj, messageId) {
         if (messMasterService.isHostPermission) {
             var active = "activate ";
             var isActive = false;
@@ -32,7 +32,7 @@
                 title: "Confirmation",
                 text: "Are you sure you really want to " + active + " this message?",
                 confirm: function () {
-                    messMasterFactory.editMailStatus(messageId, !isActive).success(function (result) {
+                    messMasterFactory.editMessageStatus(messageId, !isActive).success(function (result) {
                         isActive = !isActive;
                         AlertService.showAlert(result);
 
@@ -57,7 +57,7 @@
         }
     };
 
-    messMasterService.deleteMessage = function (mailId) {
+    messMasterService.deleteMessage = function (messageId) {
         $.confirm({
             confirmButtonClass: 'btn-green btn-customConfirm',
             cancelButtonClass: 'btn-green btn-customCancel',
@@ -66,9 +66,9 @@
             confirm: function () {
                 $(".confirmation-modal").modal("hide");
 
-                messMasterFactory.deleteMessage(mailId).success(function (result) {
+                messMasterFactory.deleteMessage(messageId).success(function (result) {
                     if (result.IsSuccessful) {
-                        messMasterService.getAllMail();
+                        messMasterService.getAllMessage();
                     }
 
                     AlertService.showAlert(result);
@@ -81,8 +81,8 @@
         });
     };
 
-    messMasterService.updateMessage = function (mailId) {
-        window.location.href = window.location.href.toString() + '/EditMail?mailId=' + mailId;
+    messMasterService.updateMessage = function (messageId) {
+        window.location.href = window.location.href.toString() + '/EditMessage?messageId=' + messageId;
     };
 
     messMasterService.showAction = function (messageId) {
@@ -132,25 +132,25 @@
 
     };
 
-    //messMasterService.addMail = function (mail) {
-    //    mailMasterFactory.addMail(mail).success(function (result) {
-    //        if (result.IsSuccessful) {
-    //            window.location.href = window.location.href.split('/AddMail', 1)[0].toString();
-    //        } else {
-    //            AlertService.showAlert(result);
-    //        }
-    //    });
-    //};
+    messMasterService.addMessage = function (message) {
+        messMasterFactory.addMessage(message).success(function (result) {
+            if (result.IsSuccessful) {
+                window.location.href = window.location.href.split('/AddMessage', 1)[0].toString();
+            } else {
+                AlertService.showAlert(result);
+            }
+        });
+    };
 
-    //messMasterService.editMail = function (mail) {
-    //    mailMasterFactory.editMail(mail).success(function (result) {
-    //        if (result.IsSuccessful) {
-    //            window.location.href = window.location.href.split('/EditMail', 1)[0].toString();
-    //        } else {
-    //            AlertService.showAlert(result);
-    //        }
-    //    });
-    //};
+    messMasterService.editMessage = function (message) {
+        messMasterFactory.editMessage(message).success(function (result) {
+            if (result.IsSuccessful) {
+                window.location.href = window.location.href.split('/EditMessage', 1)[0].toString();
+            } else {
+                AlertService.showAlert(result);
+            }
+        });
+    };
 
     /*
     * Render mails.
@@ -207,10 +207,10 @@
     */
     function activeColumn(cell) {
         if (cell.Value.IsActive) {
-            return "<img title='Deactivate this email' class='ico-tick' alt='' onclick=\"messMasterService.editMailStatus(this," + cell.Value.MessageId + ");\"/>";
+            return "<img title='Deactivate this email' class='ico-tick' alt='' onclick=\"messMasterService.editMessageStatus(this," + cell.Value.MessageId + ");\"/>";
         }
         else {
-            return "<img title='Activate this email' class='ico-untick' alt='' onclick=\"messMasterService.editMailStatus(this," + cell.Value.MessageId + ");\"/>";
+            return "<img title='Activate this email' class='ico-untick' alt='' onclick=\"messMasterService.editMessageStatus(this," + cell.Value.MessageId + ");\"/>";
         }
     }
 

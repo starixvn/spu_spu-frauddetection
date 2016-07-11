@@ -4,6 +4,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Fanex.NAP.FraudDetection.Controllers;
     using FD.Lib.Criteria.MessageMaster;
     using FD.Lib.Service.Implement;
+    using FD.Lib.DTO;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -24,9 +25,26 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return View("~/Areas/FraudDetection/Views/MessageMaster/ListMessage.cshtml");
         }
 
-        public ActionResult Add()
+        public ActionResult AddMessage()
         {
             return View("~/Areas/FraudDetection/Views/MessageMaster/AddMessage.cshtml");
+        }
+
+        [HttpPost]
+        public JsonResult AddMessage(MessageMaster model)
+        {
+            MessageMasterInsertCriteria criteria = new MessageMasterInsertCriteria()
+            {
+                MessageCode = model.MessageCode,
+                MessageDesc = model.MessageDesc,
+                MessageContent = model.MessageContent,
+                Recipient = model.Recipient,
+                OnlineRecipient = model.OnlineRecipient
+            };
+
+            var result = messMasterService.InsertMessage(criteria);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
 
         public JsonResult GetAllMessages()
@@ -63,17 +81,34 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EditMail(int? messageId)
+        public ActionResult EditMessage(int? messageId)
         {
             var criteria = new MessageMasterGetByIdCriteria
             {
                 MessageId = messageId == null ? 0 : (int)messageId
             };
 
-            var mail = messMasterService.GetMessageById(criteria);
+            var message = messMasterService.GetMessageById(criteria);
             //var viewModel = GenerateMailMasterModel(mail);
 
-            return View("~/Areas/FraudDetection/Views/MessageMaster/AddMessage.cshtml", mail);
+            return View("~/Areas/FraudDetection/Views/MessageMaster/EditMessage.cshtml", message);
+        }
+
+        [HttpPost]
+        public JsonResult EditMessage(MessageMaster model)
+        {
+            MessageMasterUpdateCriteria criteria = new MessageMasterUpdateCriteria() 
+            {
+                MessageId = model.MessageId,
+                MessageCode = model.MessageCode,
+                MessageDesc = model.MessageDesc,
+                MessageContent = model.MessageContent,
+                Recipient = model.Recipient,
+                OnlineRecipient = model.OnlineRecipient
+            };
+
+            var result = messMasterService.UpdateMessage(criteria);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

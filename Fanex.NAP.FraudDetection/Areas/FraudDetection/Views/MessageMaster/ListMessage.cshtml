@@ -22,7 +22,7 @@
     @if (PermissionService.HasHostPermission(FDFunctionKeys.MailMaster))
     {
         <input class="btn-green" type="button" value="+ Add Mail"
-               onclick="location.href='@Url.Action("Add", "MessageMaster")'" />
+               onclick="location.href='@Url.Action("AddMessage", "MessageMaster")'" />
     }
 </div>
 <div id="mailSearch" class="newline">
