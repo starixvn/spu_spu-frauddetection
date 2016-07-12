@@ -46,7 +46,8 @@
                     Content
                 </label>
                 <div class="col-sm-9" style="padding-left: 0">
-                    @Html.TextAreaFor(model => model.MessageContent, new { @class = "col-sm-12 editor", @id = "content" })
+                    @Html.TextArea("displayContent", new { @class = "col-sm-12 editor", @id = "displayContent" })
+                    @Html.HiddenFor(model => model.MessageContent, new { @id = "content" })
                 </div>
             </div>
             <div class="col-sm-12">

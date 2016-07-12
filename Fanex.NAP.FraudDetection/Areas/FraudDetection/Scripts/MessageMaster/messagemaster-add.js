@@ -18,6 +18,11 @@
         $('#addNewMesssageForm').validate();
 
         if ($('#addNewMesssageForm').valid()) {
+            var content = $('#content');
+            var displayContent = $('#displayContent');
+            var decodeString = htmlEncode(displayContent.val());
+            content.val(decodeString);
+
             $('#fakeRecipient').val(getTags($("#recipient").tagit("assignedTags")));
             $('#fakeOnlRecipient').val(getTags($("#onlRecipient").tagit("assignedTags")));
             messMasterService.addMessage($(this).serialize());
@@ -26,9 +31,12 @@
 });
 
 function insertParameters(name) {
-    var data = '&lt;placeholder&gt;' + name + '&lt;/placeholder&gt;';
-    //var data = '<' + name + '>';
-    $('#content').append(data);
+    //var txt = '&lt;placeholder&gt;' + name + '&lt;/placeholder&gt;';
+    var txt = '<placeholder>' + name + '</placeholder>';
+    var displayContent = $('#displayContent');
+
+    displayContent.val(displayContent.val() + txt);
+    displayContent.focus();
 }
 
 function initializeTagIt() {
@@ -60,4 +68,12 @@ function getTags(tags) {
         tagsString += tags[i] + ";";
 
     return tagsString.slice(0, -1);;
+}
+
+function htmlEncode(value) {
+    return $('<div/>').text(value).html();
+}
+
+function htmlDecode(value) {
+    return $('<div/>').html(value).text();
 }

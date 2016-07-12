@@ -17,8 +17,9 @@
         //getMailById: function (mailId) {
         //    return $.get('MailMaster/EditMail', { mailId: mailId });
         //},
-        editMessage: function (mail) {
-            return $.post('EditMessage', mail);
+        editMessage: function (message) {
+            var url = SPU.getAbsoluteUrl('MessageMaster/EditMessage');
+            return $.post(url, message);
         },
         editMessageStatus: function (messId, isActive) {
             var url = SPU.getAbsoluteUrl('MessageMaster/EditMessageStatus');

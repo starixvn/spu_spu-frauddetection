@@ -39,6 +39,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 MessageDesc = model.MessageDesc,
                 MessageContent = model.MessageContent,
                 Recipient = model.Recipient,
+                IsActive = model.IsActive,
                 OnlineRecipient = model.OnlineRecipient
             };
 
@@ -68,6 +69,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult DeleteMessage(int messageId)
         {
             var criteria = new MessageMasterDeleteCriteria
@@ -81,6 +83,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult EditMessage(int? messageId)
         {
             var criteria = new MessageMasterGetByIdCriteria
@@ -89,11 +92,10 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             };
 
             var message = messMasterService.GetMessageById(criteria);
-            //var viewModel = GenerateMailMasterModel(mail);
 
             return View("~/Areas/FraudDetection/Views/MessageMaster/EditMessage.cshtml", message);
         }
-
+        
         [HttpPost]
         public JsonResult EditMessage(MessageMaster model)
         {
@@ -104,6 +106,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 MessageDesc = model.MessageDesc,
                 MessageContent = model.MessageContent,
                 Recipient = model.Recipient,
+                IsActive = model.IsActive,
                 OnlineRecipient = model.OnlineRecipient
             };
 
