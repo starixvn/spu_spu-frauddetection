@@ -316,6 +316,7 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\TrackLoginsFilter.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\NotificationController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MessageMasterController.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -579,6 +580,7 @@
     <Content Include="Areas\FraudDetection\Scripts\Task\task-model.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\Task\task-factory.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Notification\ReCheckNotification.js" />
     <Content Include="Content\betlist\betlist.core.css" />
     <Content Include="Areas\FraudDetection\Views\Reports\OfficeIpReport.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Reports\LiveMatchMonitoringReport.cshtml" />

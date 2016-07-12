@@ -168,6 +168,8 @@ namespace Fanex.NAP.FraudDetection.AppStart
             bundles.Add(new ScriptBundle("~/bundles/FraudDetectionJs").IncludeDirectory(
                 "~/Areas/FraudDetection/Scripts/Core", "*.js", true));
 
+            bundles.Add(new ScriptBundle("~/bundles/Notification").Include(
+                "~/Areas/FraudDetection/Scripts/Notification/ReCheckNotification.js"));
             bundles.Add(new ScriptBundle("~/bundles/App/MessageMaster").Include(
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-factory.js",
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-service.js",
