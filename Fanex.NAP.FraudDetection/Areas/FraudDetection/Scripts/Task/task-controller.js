@@ -16,7 +16,7 @@ function (taskModel) {
     vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
     vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
     vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
-    vm.nextActionSendMessage = angular.copy(taskModel.nextActionSendMessage);
+    vm.nextActionPostMessage = angular.copy(taskModel.nextActionPostMessage);
 
     /*
     Old data.
@@ -236,7 +236,7 @@ function (taskModel) {
         var backupModel = {
             ActivityId: vm.OldActivityId,
             Rule: vm.Model.Rule,
-            NexActions: [vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionSendMessage]
+            NexActions: [vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage]
         };
 
         if (index > -1) {
@@ -255,14 +255,14 @@ function (taskModel) {
             vm.nextActionAssignGroup = angular.copy(vm.OldModel[index].NexActions[0]);
             vm.nextActionSendMail = angular.copy(vm.OldModel[index].NexActions[1]);
             vm.nextActionCaptureData = angular.copy(vm.OldModel[index].NexActions[2]);
-            vm.nextActionSendMessage = angular.copy(vm.OldModel[index].NexActions[3]);
+            vm.nextActionPostMessage = angular.copy(vm.OldModel[index].NexActions[3]);
         } else {
             vm.Model.Rule.PreconditionTable = [];
             vm.Model.Rule.RuleTable = [];
             vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
             vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
             vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
-            vm.nextActionSendMessage = angular.copy(taskModel.nextActionSendMessage);
+            vm.nextActionPostMessage = angular.copy(taskModel.nextActionPostMessage);
         }
 
         vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
@@ -310,9 +310,9 @@ function (taskModel) {
         }
     };
 
-    vm.changeSendMessage = function () {
-        if (vm.nextActionSendMessage.IsTicked) {
-            vm.nextActionSendMessage.ActionTargetId = vm.Messages.length > 0 ? vm.Messages[0].MessageId : -1;
+    vm.changePostMessage = function () {
+        if (vm.nextActionPostMessage.IsTicked) {
+            vm.nextActionPostMessage.ActionTargetId = vm.Messages.length > 0 ? vm.Messages[0].MessageId : -1;
         }
     };
 
@@ -463,8 +463,8 @@ function (taskModel) {
                     "TaskRules": taskModel.generateFormattedConfig(vm.Model.Rule.RuleTable),
                     "TaskRulesFormatted": taskModel.generateFormattedConfig(vm.Model.Rule.RuleTable),
                     "TaskRulesOriginal": taskModel.getFormula(vm.Model.Rule.RuleTable),
-                    "NextActionIdList": taskModel.getNextActionIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionSendMessage),
-                    "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionSendMessage),
+                    "NextActionIdList": taskModel.getNextActionIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage),
+                    "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage),
                     "PreconConfigs": taskModel.getConfigIds(vm.Model.Rule.PreconditionTable),
                     "RuleConfigs": taskModel.getConfigIds(vm.Model.Rule.RuleTable),
                     "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable)
@@ -543,7 +543,7 @@ function (taskModel) {
     vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
     vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
     vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
-    vm.nextActionSendMessage = angular.copy(taskModel.nextActionSendMessage);
+    vm.nextActionPostMessage = angular.copy(taskModel.nextActionPostMessage);
 
     /*
     Old data.
@@ -763,7 +763,7 @@ function (taskModel) {
         var backupModel = {
             ActivityId: vm.OldActivityId,
             Rule: vm.Model.Rule,
-            NexActions: [vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionSendMessage]
+            NexActions: [vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage]
         };
 
         if (index > -1) {
@@ -782,14 +782,14 @@ function (taskModel) {
             vm.nextActionAssignGroup = angular.copy(vm.OldModel[index].NexActions[0]);
             vm.nextActionSendMail = angular.copy(vm.OldModel[index].NexActions[1]);
             vm.nextActionCaptureData = angular.copy(vm.OldModel[index].NexActions[2]);
-            vm.nextActionSendMessage = angular.copy(vm.OldModel[index].NexActions[3]);
+            vm.nextActionPostMessage = angular.copy(vm.OldModel[index].NexActions[3]);
         } else {
             vm.Model.Rule.PreconditionTable = [];
             vm.Model.Rule.RuleTable = [];
             vm.nextActionAssignGroup = angular.copy(taskModel.nextActionAssignGroup);
             vm.nextActionSendMail = angular.copy(taskModel.nextActionSendMail);
             vm.nextActionCaptureData = angular.copy(taskModel.nextActionCaptureData);
-            vm.nextActionSendMessage = angular.copy(taskModel.nextActionSendMessage);
+            vm.nextActionPostMessage = angular.copy(taskModel.nextActionPostMessage);
         }
 
         vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
@@ -837,9 +837,9 @@ function (taskModel) {
         }
     };
 
-    vm.changeSendMessage = function () {
-        if (vm.nextActionSendMessage.IsTicked) {
-            vm.nextActionSendMessage.ActionTargetId = vm.Messages.length > 0 ? vm.Messages[0].MessageId : -1;
+    vm.changePostMessage = function () {
+        if (vm.nextActionPostMessage.IsTicked) {
+            vm.nextActionPostMessage.ActionTargetId = vm.Messages.length > 0 ? vm.Messages[0].MessageId : -1;
         }
     };
 
@@ -972,8 +972,8 @@ function (taskModel) {
                     "TaskRules": taskModel.generateFormattedConfig(vm.Model.Rule.RuleTable),
                     "TaskRulesFormatted": taskModel.generateFormattedConfig(vm.Model.Rule.RuleTable),
                     "TaskRulesOriginal": taskModel.getFormula(vm.Model.Rule.RuleTable),
-                    "NextActionIdList": taskModel.getNextActionIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionSendMessage),
-                    "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionSendMessage),
+                    "NextActionIdList": taskModel.getNextActionIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage),
+                    "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage),
                     "PreconConfigs": taskModel.getConfigIds(vm.Model.Rule.PreconditionTable),
                     "RuleConfigs": taskModel.getConfigIds(vm.Model.Rule.RuleTable),
                     "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable)
@@ -1072,7 +1072,7 @@ function (taskModel) {
                                 vm.Model.Rule.PreconditionTable = taskModel.makeFormula(vm.Task.TaskPreconditionsOriginal);
                                 vm.Model.Rule.RuleTable = taskModel.makeFormula(vm.Task.TaskRulesOriginal);
 
-                                taskModel.makeNextActions(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionSendMessage, vm.Task.NextActionIdList, vm.Task.NextActionTargetIdList);
+                                taskModel.makeNextActions(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage, vm.Task.NextActionIdList, vm.Task.NextActionTargetIdList);
                             });
                         });
                     });

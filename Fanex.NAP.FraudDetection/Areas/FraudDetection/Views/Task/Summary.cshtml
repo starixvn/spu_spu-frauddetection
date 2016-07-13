@@ -98,9 +98,9 @@
                             }} (<span ng-show="mail.MailId == taskCtr.nextActionSendMail.ActionTargetId"
                                       ng-repeat="mail in taskCtr.Mails">{{ mail.MailCode }}</span>)<br />
                         </span>
-                        <span ng-show="taskCtr.nextActionSendMessage.IsTicked">
+                        <span ng-show="taskCtr.nextActionPostMessage.IsTicked">
                             {{ taskCtr.NextActions[3].Name
-                            }} (<span ng-show="message.MessageId == taskCtr.nextActionSendMessage.ActionTargetId"
+                            }} (<span ng-show="message.MessageId == taskCtr.nextActionPostMessage.ActionTargetId"
                                       ng-repeat="message in taskCtr.Messages">{{ message.MessageCode }}</span>)<br />
                         </span>
                         <span ng-show="taskCtr.nextActionCaptureData.IsTicked">
