@@ -1,52 +1,50 @@
 ﻿@model FD.Lib.DTO.MessageMaster
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
     ViewBag.Title = "Add Message";
 }
 
-@section HeadCss
-{
-    <link href="@Url.Content("~/Areas/FraudDetection/Content/messagemaster.css")" rel="stylesheet" type="text/css" />
-    @Styles.Render("~/bundles/TagItCss")
-}
 @section FooterJs
 {
     @Scripts.Render("~/bundles/TagItJs")
     @Scripts.Render("~/bundles/App/AddMessageMaster")
 }
-<h4>
-    <b>Message Master</b>
-</h4>
 @using (Html.BeginForm("Add", "MessageMaster", FormMethod.Post, new { @id = "addNewMesssageForm" }))
 {
-    <div class="filter-form col-sm-12">
-        <div class="col-sm-8">
+    <div class="col-sm-12">
+        <div class="col-sm-7 col-sm-offset-1">
             <div class="col-sm-12">
-                <div class="col-sm-8">
-                    <label class="col-sm-5 text-right">
+                <div class="col-sm-3 text-right">
+                    <label>
                         Message Code
                     </label>
-                    @Html.TextBoxFor(model => model.MessageCode, new { @class = "inputbox col-sm-7 ui-corner-all", @style = "" })
                 </div>
-                <div class="col-sm-4">
-                    <label class="col-sm-4 text-right">
-                        Active
-                    </label>
-                    @Html.CheckBoxFor(model => model.IsActive, new { @checked = "checked" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.MessageCode, new { @class = "col-sm-9 inputbox ui-corner-all", @style = "" })
+                    <div class="col-sm-3">
+                        <label>
+                            Active
+                        </label>
+                        @Html.CheckBoxFor(model => model.IsActive, new { @checked = "checked" })
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label class="col-sm-3 text-right">
-                    Description
-                </label>
-                @Html.TextBoxFor(model => model.MessageDesc, new { @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px" })
+                <div class="col-sm-3 text-right">
+                    <label>
+                        Description
+                    </label>
+                </div>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.MessageDesc, new { @class = "col-sm-11 inputbox ui-corner-all" })
+                </div>
             </div>
             <div class="col-sm-12">
                 <label class="col-sm-3 text-right">
                     Content
                 </label>
-                <div class="col-sm-9" style="padding-left: 0">
-                    @Html.TextArea("displayContent", new { @class = "col-sm-12 editor", @id = "displayContent" })
+                <div class="col-sm-9">
+                    @Html.TextArea("displayContent", new { @class = "col-sm-11 inputbox ui-corner-all textarea", @id = "displayContent" })
                     @Html.HiddenFor(model => model.MessageContent, new { @id = "content" })
                 </div>
             </div>
@@ -54,21 +52,25 @@
                 <label class="col-sm-3 text-right">
                     Recipient
                 </label>
-                <ul id="RecipientTags" style="width: 380px;"></ul>
-                @Html.TextBoxFor(model => model.UsernameRecipient, new { @id = "fakeRecipientTags", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
-                @Html.HiddenFor(model => model.Recipient)
+                <div class="col-sm-9">
+                    <ul id="RecipientTags" class="col-sm-11"></ul>
+                    @Html.TextBoxFor(model => model.UsernameRecipient, new { @id = "fakeRecipientTags", @class = "inputbox col-sm-11 ui-corner-all textarea" })
+                    @Html.HiddenFor(model => model.Recipient)
+                </div>
             </div>
             <div class="col-sm-12">
                 <label class="col-sm-3 text-right">
                     Online Recipient
                 </label>
-                <ul id="OnlRecipientTags" style="width: 380px;"></ul>
-                @Html.TextBoxFor(model => model.UsernameOnlineRecipient, new { @id = "fakeOnlRecipientTags", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
-                @Html.HiddenFor(model => model.OnlineRecipient)
+                <div class="col-sm-9">
+                    <ul id="OnlRecipientTags" class="col-sm-11"></ul>
+                    @Html.TextBoxFor(model => model.UsernameOnlineRecipient, new { @id = "fakeOnlRecipientTags", @class = "inputbox col-sm-11 ui-corner-all"})
+                    @Html.HiddenFor(model => model.OnlineRecipient)
+                </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="list-group" style="height: 490px; border: 1px solid #9E9E9E;
+        <div class="col-sm-3">
+            <div class="list-group" style="border: 1px solid #9E9E9E;
                     padding: 10px;">
                 <div onclick="insertParameters('TeamAvsTeamB');" class="message-parameter list-group-item">
                     Team A vs team B

@@ -10,6 +10,10 @@
             var url = SPU.getAbsoluteUrl('MessageMaster/AddMessage');
             return $.post(url, message);
         },
+        addNewMessage: function () {
+            var url = SPU.getAbsoluteUrl('MessageMaster/AddMessage');
+            return $.get(url);
+        },
         deleteMessage: function (messId) {
             var url = SPU.getAbsoluteUrl('MessageMaster/DeleteMessage');
             return $.post(url, { messageId: messId });
@@ -20,6 +24,10 @@
         editMessage: function (message) {
             var url = SPU.getAbsoluteUrl('MessageMaster/EditMessage');
             return $.post(url, message);
+        },
+        editMessageInfo: function (messageId) {
+            var url = SPU.getAbsoluteUrl('MessageMaster/EditMessage');
+            return $.get(url, { messageId: messageId });
         },
         editMessageStatus: function (messId, isActive) {
             var url = SPU.getAbsoluteUrl('MessageMaster/EditMessageStatus');

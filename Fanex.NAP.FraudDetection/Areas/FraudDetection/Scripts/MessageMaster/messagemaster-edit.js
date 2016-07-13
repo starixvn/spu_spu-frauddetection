@@ -2,7 +2,7 @@
     initializeTagIt();
 
     $("#btn_cancelMessage").click(function () {
-        window.history.back();
+        DialogService.closeDialog();
     });
 
     $("#btn_editMessage").click(function () {

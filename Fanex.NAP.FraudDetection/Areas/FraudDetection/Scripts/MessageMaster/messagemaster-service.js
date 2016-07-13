@@ -107,14 +107,6 @@
             $.contextMenu({
                 selector: '#edit' + messageId,
                 items: {
-                    deleteMessage: {
-                        name: "Delete this message",
-                        height: 25,
-                        className: "iconDelAff",
-                        callback: function () {
-                            messMasterService.deleteMessage(messageId);
-                        }
-                    },
                     editMessage: {
                         name: "Edit message",
                         height: 25,
@@ -149,6 +141,24 @@
             } else {
                 AlertService.showAlert(result);
             }
+        });
+    };
+
+    messMasterService.openPopupAddMessage = function () {
+        messMasterFactory.addNewMessage().success(function (response) {
+            DialogService.setDialogId("popup");
+            DialogService.openDialogContent(response, "New Message", {
+                width: '1200px'
+            });
+        });
+    };
+
+    messMasterService.openPopupEditMessage = function (messageId) {
+        messMasterFactory.editMessageInfo(messageId).success(function (response) {
+            DialogService.setDialogId("popup");
+            DialogService.openDialogContent(response, "Edit Message", {
+                width: '1200px'
+            });
         });
     };
 
@@ -218,7 +228,7 @@
     * Action Column template.
     */
     function actionColumn(cell) {
-        return "<div id ='edit" + cell.Value + "' class='btn-action' onclick=\"messMasterService.showAction(" + cell.Value + ");\"></div>";
+        return "<div id ='edit" + cell.Value + "' class='btn-action' onclick=\"messMasterService.openPopupEditMessage(" + cell.Value + ");\"></div>";
     }
 
     return messMasterService;

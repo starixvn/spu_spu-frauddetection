@@ -30,9 +30,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return View("~/Areas/FraudDetection/Views/MessageMaster/ListMessage.cshtml");
         }
 
-        public ActionResult AddMessage()
+        public string AddMessage()
         {
-            return View("~/Areas/FraudDetection/Views/MessageMaster/AddMessage.cshtml");
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/MessageMaster/AddMessage.cshtml");
         }
 
         [HttpPost]
@@ -89,7 +89,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditMessage(int? messageId)
+        public string EditMessage(int? messageId)
         {
             var criteria = new MessageMasterGetByIdCriteria
             {
@@ -100,7 +100,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             message.UsernameRecipient = MapIdToUsername(message.Recipient);
             message.UsernameOnlineRecipient = MapIdToUsername(message.OnlineRecipient);
 
-            return View("~/Areas/FraudDetection/Views/MessageMaster/EditMessage.cshtml", message);
+            return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/MessageMaster/EditMessage.cshtml", message);
         }
 
         [HttpPost]

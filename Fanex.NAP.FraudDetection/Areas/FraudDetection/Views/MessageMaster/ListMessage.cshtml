@@ -7,7 +7,8 @@
 
 @section HeadCss
 {
-    @*<link href="@Url.Content("~/Areas/FraudDetection/Content/mailmaster.css")" rel="stylesheet" type="text/css" />*@
+    <link href="@Url.Content("~/Areas/FraudDetection/Content/messagemaster.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/bundles/TagItCss")
 }
 @section FooterJs
 {
@@ -21,8 +22,7 @@
     <span class="infor-text">All Messages</span>
     @if (PermissionService.HasHostPermission(FDFunctionKeys.MailMaster))
     {
-        <input class="btn-green" type="button" value="+ Add Message"
-               onclick="location.href='@Url.Action("AddMessage", "MessageMaster")'" />
+        <input class="btn-green" type="button" value="+ Add Message" id="btn_OpenNewMessage" />
     }
 </div>
 <div id="mailSearch" class="newline">
