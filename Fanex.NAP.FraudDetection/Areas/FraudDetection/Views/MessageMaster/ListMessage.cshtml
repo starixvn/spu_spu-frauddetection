@@ -21,7 +21,7 @@
     <span class="infor-text">All Messages</span>
     @if (PermissionService.HasHostPermission(FDFunctionKeys.MailMaster))
     {
-        <input class="btn-green" type="button" value="+ Add Mail"
+        <input class="btn-green" type="button" value="+ Add Message"
                onclick="location.href='@Url.Action("AddMessage", "MessageMaster")'" />
     }
 </div>

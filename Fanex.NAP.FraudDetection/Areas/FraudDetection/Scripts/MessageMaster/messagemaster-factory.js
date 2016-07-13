@@ -24,6 +24,10 @@
         editMessageStatus: function (messId, isActive) {
             var url = SPU.getAbsoluteUrl('MessageMaster/EditMessageStatus');
             return $.post(url, { messageId: messId, isActive: isActive });
+        },
+        getAllUser: function() {
+            var url = SPU.getAbsoluteUrl('MessageMaster/GetAllUsers');
+            return $.get(url);
         }
     };
 })(jQuery);

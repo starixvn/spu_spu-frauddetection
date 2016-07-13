@@ -10,6 +10,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using Fanex.NAP.FraudDetection.Service.Core;
+    using System.Configuration;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Model;
 
     public class MessageMasterController : BaseController
     {
@@ -92,14 +97,16 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             };
 
             var message = messMasterService.GetMessageById(criteria);
+            message.UsernameRecipient = MapIdToUsername(message.Recipient);
+            message.UsernameOnlineRecipient = MapIdToUsername(message.OnlineRecipient);
 
             return View("~/Areas/FraudDetection/Views/MessageMaster/EditMessage.cshtml", message);
         }
-        
+
         [HttpPost]
-        public JsonResult EditMessage(MessageMaster model)
+        public ActionResult EditMessage(MessageMaster model)
         {
-            MessageMasterUpdateCriteria criteria = new MessageMasterUpdateCriteria() 
+            var criteria = new MessageMasterUpdateCriteria() 
             {
                 MessageId = model.MessageId,
                 MessageCode = model.MessageCode,
@@ -112,6 +119,57 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             var result = messMasterService.UpdateMessage(criteria);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAllUsers()
+        {
+            var result = GetUsers();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private string MapIdToUsername(string listId)
+        {
+            var idArray = listId.Split(';');
+            var users = GetUsers();
+            string result = string.Empty;
+
+            foreach (var item in idArray)
+            {
+                if (item != string.Empty)
+                {
+                    result += users.SingleOrDefault(x => x.Id == int.Parse(item)).Username + ';';
+                }
+            }
+
+            return result;
+        }
+
+        private List<User> GetUsers()
+        {
+            const string FunctionKey = FDFunctionKeys.SuspiciousCustomer;
+            var siteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]);
+            var notificationFunction = new FunctionService().GetByKeyAndSite(FunctionKey, siteId);
+            var users = new UserService().GetByFunctionAndSite(notificationFunction.Id, siteId);
+            var result = new List<User>();
+
+            foreach (var user in users)
+            {
+                if (user.Policy != (decimal)Constant.Policy.Read && user.Policy != (decimal)Constant.Policy.Host)
+                {
+                    continue;
+                }
+
+                if (user.User.Group == null)
+                {
+                    result.Add(user.User);
+                }
+                else if (!user.User.Group.Name.Equals("IT"))
+                {
+                    result.Add(user.User);
+                }
+            }
+
+            return result;
         }
     }
 }

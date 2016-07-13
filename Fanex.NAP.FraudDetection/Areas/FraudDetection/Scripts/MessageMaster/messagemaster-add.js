@@ -23,15 +23,12 @@
             var decodeString = htmlEncode(displayContent.val());
             content.val(decodeString);
 
-            $('#fakeRecipient').val(getTags($("#recipient").tagit("assignedTags")));
-            $('#fakeOnlRecipient').val(getTags($("#onlRecipient").tagit("assignedTags")));
             messMasterService.addMessage($(this).serialize());
         }
     });
 });
 
 function insertParameters(name) {
-    //var txt = '&lt;placeholder&gt;' + name + '&lt;/placeholder&gt;';
     var txt = '<placeholder>' + name + '</placeholder>';
     var displayContent = $('#displayContent');
 
@@ -40,17 +37,62 @@ function insertParameters(name) {
 }
 
 function initializeTagIt() {
+    var tempId = null;
+    var tempDisplayText = '';
+    messMasterFactory.getAllUser().success(function (result) {
+        $('#RecipientTags').tagit({
+            autocomplete: {
+                source: function (request, response) {
+                    response($.map(result, function (value, key) {
+                        return {
+                            label: value.Username,
+                            value: value.Id
+                        }
+                    }));
+                },
+                select: function (event, ui) {
+                    tempDisplayText = $('#Recipient').val();
+                    tempId = ui.item.value;
+                    ui.item.value = ui.item.label;
+                },
+                focus: function (event, ui) {
+                    return false;
+                },
+            },
+            afterTagAdded: function () {
+                if (tempId !== null) {
+                    tempDisplayText += tempId + ";";
+                    $('#Recipient').val(tempDisplayText);
+                }
+            }
+        });
 
-    $('#recipient').tagit({
-        beforeTagAdded: function (event, ui) {
-            return isEmail(ui.tagLabel);
-        }
-    });
-
-    $('#onlRecipient').tagit({
-        beforeTagAdded: function (event, ui) {
-            return isEmail(ui.tagLabel);
-        }
+        $('#OnlRecipientTags').tagit({
+            autocomplete: {
+                source: function (request, response) {
+                    response($.map(result, function (value, key) {
+                        return {
+                            label: value.Username,
+                            value: value.Id
+                        }
+                    }));
+                },
+                select: function (event, ui) {
+                    tempDisplayText = $('#OnlineRecipient').val();
+                    tempId = ui.item.value;
+                    ui.item.value = ui.item.label;
+                },
+                focus: function (event, ui) {
+                    return false;
+                },
+            },
+            afterTagAdded: function () {
+                if (tempId !== null) {
+                    tempDisplayText += tempId + ";";
+                    $('#OnlineRecipient').val(tempDisplayText);
+                }
+            }
+        });
     });
 
     $('input[id^="fake"').hide();

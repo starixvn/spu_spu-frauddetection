@@ -54,15 +54,17 @@
                 <label class="col-sm-3 text-right">
                     Recipient
                 </label>
-                    <ul id="recipient" style="width: 380px;"></ul>
-                    @Html.TextBoxFor(model => model.Recipient, new { @id = "fakeRecipient", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+                <ul id="RecipientTags" style="width: 380px;"></ul>
+                @Html.TextBoxFor(model => model.UsernameRecipient, new { @id = "fakeRecipientTags", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+                @Html.HiddenFor(model => model.Recipient)
             </div>
             <div class="col-sm-12">
                 <label class="col-sm-3 text-right">
                     Online Recipient
                 </label>
-                <ul id="onlRecipient" style="width: 380px;"></ul>
-                @Html.TextBoxFor(model => model.OnlineRecipient, new { @id = "fakeOnlRecipient", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+                <ul id="OnlRecipientTags" style="width: 380px;"></ul>
+                @Html.TextBoxFor(model => model.UsernameOnlineRecipient, new { @id = "fakeOnlRecipientTags", @class = "inputbox col-md-8 ui-corner-all", @style = "width: 380px; height: 35px; margin-top: -10px" })
+                @Html.HiddenFor(model => model.OnlineRecipient)
             </div>
         </div>
         <div class="col-sm-4">

@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    //$.blockUI();
     initializeTagIt();
 
     $("#btn_cancelMessage").click(function () {
@@ -10,16 +9,17 @@
         editMail.submit();
     });
 
-    //$.unblockUI();
-
     var editMail = $('#editMesssageForm').submit(function (event) {
         event.preventDefault();
 
         $('#editMesssageForm').validate();
 
         if ($('#editMesssageForm').valid()) {
-            $('#fakeRecipient').val(getTags($("#recipient").tagit("assignedTags")));
-            $('#fakeOnlRecipient').val(getTags($("#onlRecipient").tagit("assignedTags")));
+            var content = $('#content');
+            var displayContent = $('#displayContent');
+            var decodeString = htmlEncode(displayContent.val());
+            content.val(decodeString);
+
             messMasterService.editMessage($(this).serialize());
         }
     });
@@ -32,42 +32,119 @@
 
 function insertParameters(name) {
     var txt = '<placeholder>' + name + '</placeholder>';
-    var content = $('#content');
-    content.val(content.val() + txt);
-    content.focus();
+    var displayContent = $('#displayContent');
 
+    displayContent.val(displayContent.val() + txt);
+    displayContent.focus();
 }
 
 function initializeTagIt() {
+    var tempId = null;
+    var tempDisplayText = '';
 
-    $('#Recipient').tagit({
-        beforeTagAdded: function (event, ui) {
-            return isEmail(ui.tagLabel);
-        }
-    });
-    initializeMailTags("Recipient");
+    messMasterFactory.getAllUser().success(function (result) {
+        $('#RecipientTags').tagit({
+            autocomplete: {
+                source: function (request, response) {
+                    response($.map(result, function (value, key) {
+                        return {
+                            label: value.Username,
+                            value: value.Id
+                        }
+                    }));
+                },
+                select: function (event, ui) {
+                    tempDisplayText = $('#Recipient').val();
+                    tempId = ui.item.value;
+                    ui.item.value = ui.item.label;
+                },
+                focus: function (event, ui) {
+                    return false;
+                },
+            },
+            afterTagAdded: function () {
+                if (tempId !== null) {
+                    tempDisplayText += tempId + ";";
+                    $('#Recipient').val(tempDisplayText);
+                }
+            },
+            beforeTagRemoved: function (event, ui) {
+                var label = ui.tagLabel;
+                var usernameArr = $('#fakeRecipientTags').val().split(';');
+                var idArr = $('#Recipient').val().split(';');
+                var index = $.inArray(label, usernameArr);
+                var result = '';
 
-    $('#OnlRecipient').tagit({
-        beforeTagAdded: function (event, ui) {
-            return isEmail(ui.tagLabel);
-        }
+                idArr.splice(index, 1);
+                for (var i = 0; i < idArr.length; i++) {
+                    if (idArr[i] !== "") {
+                        result += idArr[i] + ';'
+                    }
+                }
+
+                $('#Recipient').val(result);
+            }
+        });
+        initializeTags("RecipientTags");
+
+        $('#OnlRecipientTags').tagit({
+            autocomplete: {
+                source: function (request, response) {
+                    response($.map(result, function (value, key) {
+                        return {
+                            label: value.Username,
+                            value: value.Id
+                        }
+                    }));
+                },
+                select: function (event, ui) {
+                    tempDisplayText = $('#OnlineRecipient').val();
+                    tempId = ui.item.value;
+                    ui.item.value = ui.item.label;
+                },
+                focus: function (event, ui) {
+                    return false;
+                },
+            },
+            afterTagAdded: function () {
+                if (tempId !== null) {
+                    tempDisplayText += tempId + ";";
+                    $('#OnlineRecipient').val(tempDisplayText);
+                }
+            },
+            beforeTagRemoved: function (event, ui) {
+                var label = ui.tagLabel;
+                var usernameArr = $('#fakeOnlRecipientTags').val().split(';');
+                var idArr = $('#OnlineRecipient').val().split(';');
+                var index = $.inArray(label, usernameArr);
+                var result = '';
+
+                idArr.splice(index, 1);
+                for (var i = 0; i < idArr.length; i++) {
+                    if (idArr[i] !== "") {
+                        result += idArr[i] + ';'
+                    }
+                }
+
+                $('#OnlineRecipient').val(result);
+            }
+        });
+        initializeTags("OnlRecipientTags");
     });
-    initializeMailTags("OnlRecipient");
 
     $('input[id^="fake"').hide();
 }
 
-function initializeMailTags(parentName) {
+function initializeTags(parentName) {
     var recips = $("#fake" + parentName).val().split(';');
     recips.forEach(function (recipient) {
         $("#" + parentName).tagit("createTag", recipient);
     });
 }
 
-function isEmail(email) {
-    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    //return regex.test(email);
-    return true;
+function isValidId(id) {
+    var regex = /^\d+$/;
+    return regex.test(id);
 }
 
 function getTags(tags) {
