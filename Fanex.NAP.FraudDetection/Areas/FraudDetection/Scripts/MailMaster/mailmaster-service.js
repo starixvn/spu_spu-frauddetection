@@ -107,14 +107,14 @@
             $.contextMenu({
                 selector: '#edit' + mailId,
                 items: {
-                    deleteMail: {
-                        name: "Delete this mail",
-                        height: 25,
-                        className: "iconDelAff",
-                        callback: function () {
-                            mailMasterService.deleteMail(mailId);
-                        }
-                    },
+                    //deleteMail: {
+                    //    name: "Delete this mail",
+                    //    height: 25,
+                    //    className: "iconDelAff",
+                    //    callback: function () {
+                    //        mailMasterService.deleteMail(mailId);
+                    //    }
+                    //},
                     editInfo: {
                         name: "Edit information",
                         height: 25,
@@ -218,7 +218,7 @@
     * Action Column template.
     */
     function actionColumn(cell) {
-        return "<div id ='edit" + cell.Value + "' class='btn-action' onclick=\"mailMasterService.showAction(" + cell.Value + ");\"></div>";
+        return "<div id ='edit" + cell.Value + "' class='btn-action' onclick=\"mailMasterService.updateMail(" + cell.Value + ");\"></div>";
     }
 
     return mailMasterService;
