@@ -1,16 +1,13 @@
 ﻿$(document).ready(function () {
-    //$.blockUI();
     initializeTagIt();
 
     $("#btn_cancelMessage").click(function () {
-        window.history.back();
+        DialogService.closeDialog();
     });
 
     $("#btn_addMessage").click(function () {
         addMail.submit();
     });
-
-    //$.unblockUI();
 
     var addMail = $('#addNewMesssageForm').submit(function (event) {
         event.preventDefault();

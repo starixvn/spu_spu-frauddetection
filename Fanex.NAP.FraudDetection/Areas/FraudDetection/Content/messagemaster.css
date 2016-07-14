@@ -21,3 +21,11 @@
 .textarea {
     height: 50px;
 }
+
+.form-edit{
+    margin: 20px 0 0 0;
+}
+
+ label{
+     font-weight: normal;
+ }
