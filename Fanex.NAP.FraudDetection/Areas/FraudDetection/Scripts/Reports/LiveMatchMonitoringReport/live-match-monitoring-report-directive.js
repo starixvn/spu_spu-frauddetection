@@ -1,8 +1,7 @@
 ﻿'use strict';
 /*global liveMatchMonitoringReportModel*/
-
+var pageNumber = 0;
 liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeout', 'liveMatchMonitoringReportModel', function ($timeout, liveMatchMonitoringReportModel) {
-    var pageNumber = 0;
     var pageSize = 50;
     var generateColumnHeaders = function () {
         var columnHeaders =

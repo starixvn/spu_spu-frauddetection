@@ -18,6 +18,7 @@ function (liveMatchMonitoringReportModel, $scope) {
 
     vm.queryLiveMatchMonitoringReport = function () {
         waitingDialog.show("Please wait...", { dialogSize: 'sm' });
+        pageNumber = 0;
 
         if (vm.filter.LeagueId === -1) {
             vm.filter.LeagueIds = liveMatchMonitoringReportModel.getLeagueIdList();
@@ -83,9 +84,10 @@ function (liveMatchMonitoringReportModel, $scope) {
     vm.CountDownToRefresh = function () {
         clearInterval(intervalId);
         var countdown = vm.RefreshSecond;
+        $('#secondRefresh').text(countdown);
+
         if (countdown !== -1) {
             intervalId = setInterval(function () {
-                countdown = $('#secondRefresh').text().trim();
                 countdown = countdown - 1;
                 $('#secondRefresh').text(countdown);
                 if (countdown === 0) {
