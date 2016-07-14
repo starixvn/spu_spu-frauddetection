@@ -15,6 +15,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Web.Attribute;
 
     public class MessageMasterController : BaseController
     {
@@ -25,16 +26,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             messMasterService = new MessageMasterService();
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View("~/Areas/FraudDetection/Views/MessageMaster/ListMessage.cshtml");
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
         public string AddMessage()
         {
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/MessageMaster/AddMessage.cshtml");
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Host)]
         [HttpPost]
         public JsonResult AddMessage(MessageMaster model)
         {
@@ -53,12 +57,14 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
         public JsonResult GetAllMessages()
         {
             var messages = messMasterService.GetAllMessage(new MessageMasterGetAllCriteria());
             return Json(messages, JsonRequestBehavior.AllowGet);
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Host)]
         [HttpPost]
         public JsonResult EditMessageStatus(int messageId, bool isActive)
         {
@@ -74,6 +80,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Host)]
         [HttpPost]
         public JsonResult DeleteMessage(int messageId)
         {
@@ -88,6 +95,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
         [HttpGet]
         public string EditMessage(int? messageId)
         {
@@ -103,6 +111,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/MessageMaster/EditMessage.cshtml", message);
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Host)]
         [HttpPost]
         public ActionResult EditMessage(MessageMaster model)
         {
@@ -121,6 +130,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
         public JsonResult GetAllUsers()
         {
             var result = GetUsers();
@@ -146,7 +156,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         private List<User> GetUsers()
         {
-            const string FunctionKey = FDFunctionKeys.SuspiciousCustomer;
+            const string FunctionKey = FDFunctionKeys.MessageMaster;
             var siteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]);
             var notificationFunction = new FunctionService().GetByKeyAndSite(FunctionKey, siteId);
             var users = new UserService().GetByFunctionAndSite(notificationFunction.Id, siteId);
@@ -154,7 +164,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             foreach (var user in users)
             {
-                if (user.Policy != (decimal)Constant.Policy.Read && user.Policy != (decimal)Constant.Policy.Host)
+                if (user.Policy != (decimal)Constant.Policy.Read && 
+                    user.Policy != (decimal)Constant.Policy.Host)
                 {
                     continue;
                 }

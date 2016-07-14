@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 6/27/2016 11:25:21
+// Lasted generated date: 7/14/2016 10:23:18
 // </history>
 namespace Fanex.NAP.FraudDetection.Service.Core
 {
@@ -52,6 +52,10 @@ namespace Fanex.NAP.FraudDetection.Service.Core
         public const string ManageUser = "ManageUser";
 
         public const string MatchMonitoring = "MatchMonitoring";
+
+        public const string MessageMaster = "MessageMaster";
+
+        public const string Notification = "Notification";
 
         public const string OfficeIPs = "OfficeIPs";
 
