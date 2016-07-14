@@ -78,6 +78,10 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-model.js",
                 "~/Areas/FraudDetection/Scripts/CustomerBettingGroup/customer-betting-group-controller.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/App/Notification").Include(
+                "~/Areas/FraudDetection/Scripts/Notification/notification-factory.js",
+                "~/Areas/FraudDetection/Scripts/Notification/notification-service.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/App/Case").Include(
                 "~/Areas/FraudDetection/Scripts/Case/case-factory.js",
                 "~/Areas/FraudDetection/Scripts/Case/case-service.js",
@@ -170,6 +174,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/Notification").Include(
                 "~/Areas/FraudDetection/Scripts/Notification/ReCheckNotification.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/App/MessageMaster").Include(
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-factory.js",
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-service.js",

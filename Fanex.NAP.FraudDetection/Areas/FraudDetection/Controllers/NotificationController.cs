@@ -1,7 +1,12 @@
 ﻿namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
+    using FD.Lib.BusinessManager.MessageGenerator;
+    using FD.Lib.Criteria.Notification;
+    using FD.Lib.DTO;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
+    using NAP.FraudDetection.Service;
+    using System.Linq;
     using System.Web.Mvc;
 
     /// <summary>
@@ -9,57 +14,56 @@
     /// </summary>
     public class NotificationController : BaseController
     {
-        private readonly CaseService _caseService;
+        private readonly NotificationService _notificationService;
 
         public NotificationController()
         {
-            _caseService = new CaseService();
+            _notificationService = new NotificationService();
         }
 
         #region List Notify Messages
-        [HttpGet]
-        public JsonResult Index()
+        [HttpPost]
+        public JsonResult ReCheckNotification(bool updateStatus)
         {
-            var cases = _caseService.GetCases(null);
+            var userId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0;
+            var rawMessages = _notificationService.GetMessageByUserId(new NotificationMessageByUserIdGetCriteria { UserId = userId, GetTop = 10 }).ToList();
+            if (updateStatus)
+            {
+                _notificationService.UpdateAllMessageStatusByUserId(new NotificationMessageByUserIdUpdateCriteria { UserId = userId, IsViewed = true });
+            }
 
-            return Json(cases, JsonRequestBehavior.AllowGet);
+            var formattedMessages = (new MessageGenerator()).GenerateMessages(rawMessages);
+            var numNewMessage = formattedMessages.Where(l => l.IsViewed == false).Count();
+
+            return Json(new { MessageList = formattedMessages, NumNewMessage = numNewMessage }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
-        /*
+        
         #region List Fraud Case's Details
         /// <summary>
-        /// Case Detail.
+        /// Fanex.NAP.FraudDetection
         /// </summary>
-        /// <param name="caseId">The Case ID.</param>
         /// <returns>Action Result.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
-        public ActionResult GetCaseDetail(int caseId)
+        public ActionResult Index()
         {
-            var caseInfo = _caseService.GetCaseById(new CaseGetByIdCriteria { CaseId = caseId });
-            ViewBag.CaseName = caseInfo.CaseName;
-            var criteria = new TaskGetAllByCaseIdCriteria { CaseId = caseId };
-
-            return View("~/Areas/FraudDetection/Views/Case/CaseDetail.cshtml", criteria);
+            return View("~/Areas/FraudDetection/Views/Notification/MessageList.cshtml");
         }
 
         /// <summary>
-        /// Display the list of task by caseId.
+        /// Display all messages by UserId.
         /// </summary>
-        /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
-        [Compress]
-        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
-        public JsonResult GetCaseDetail(TaskGetAllByCaseIdCriteria criteria)
+        [HttpPost]
+        public JsonResult GetAllMessages()
         {
-            criteria.PageIndex++;
-            var dataReader = _taskService.GetTasksByCaseId(criteria);
-            var result = FanexGridHelper.DataForFanexGrid_PreventContainQuote(dataReader);
+            var userId = AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0;
+            var rawMessages = _notificationService.GetMessageByUserId(new NotificationMessageByUserIdGetCriteria { UserId = userId, GetTop = -1 }).ToList();
+            var formattedMessages = (new MessageGenerator()).GenerateMessages(rawMessages);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(formattedMessages, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        */
     }
 }

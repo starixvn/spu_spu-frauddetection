@@ -2,36 +2,36 @@
     "use strict";
 
     return {
-        getCases: function(criteria) {
+        getCases: function (criteria) {
             return $.post('Case/GetCaseList', criteria);
         },
 
-        getEmptyCase: function() {
+        getEmptyCase: function () {
             return $.get('Case/AddCase');
         },
-        addCase: function(fraudCase) {
+        addCase: function (fraudCase) {
             return $.post('Case/AddCase', fraudCase);
         },
 
-        getCaseById: function(caseId) {
+        getCaseById: function (caseId) {
             return $.get('Case/GetCaseDetail', { caseId: caseId });
         },
-        getCaseDetail: function(criteria) {
+        getCaseDetail: function (criteria) {
             return $.post('GetCaseDetail', criteria);
         },
 
-        getCaseInfo: function(caseId) {
+        getCaseInfo: function (caseId) {
             return $.get('Case/EditCaseInfo', { caseId: caseId });
         },
-        editCase: function(criteria) {
+        editCase: function (criteria) {
             return $.post('Case/EditCaseInfo', criteria);
         },
 
-        editCaseStatus: function(caseId, isActive) {
+        editCaseStatus: function (caseId, isActive) {
             return $.post('Case/EditCaseStatus', { caseId: caseId, isActive: isActive });
         },
 
-        editTaskStatus: function(criteria) {
+        editTaskStatus: function (criteria) {
             return $.post('EditTaskStatus', criteria);
         },
 
@@ -42,7 +42,7 @@
             return $.post(url, criteria);
         },
 
-        addCustomerGroupToCase: function(caseId) {
+        addCustomerGroupToCase: function (caseId) {
             var url = SPU.getAbsoluteUrl("CaseGroup/AddCustomerGroupToCase?caseId={0}".format(caseId));
 
             return $.get(url);
@@ -58,5 +58,5 @@
 
             return $.post(url, criteria);
         }
-};
+    };
 })(jQuery);

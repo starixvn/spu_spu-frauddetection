@@ -21,20 +21,124 @@
             return window.rootUrl + relativeUrl;
         };
     </script>
+    <style>
+        #notificationContainer {
+            background-color: #fff;
+            border: 1px solid rgba(100, 100, 100, .4);
+            -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+            overflow: visible;
+            position: absolute;
+            top: 40px;
+            right: 15px;
+            width: 400px;
+            z-index: -1;
+            display: none;
+        }
+
+        #notificationContainer:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            color: transparent;
+            border: 10px solid black;
+            border-color: transparent transparent white;
+            margin-top: -20px;
+            margin-left: 220px;
+        }
+
+        #notificationTitle {
+            z-index: 1000;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 13px;
+            background-color: #ffffff;
+            width: 384px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        #notificationsBody {
+            padding: 33px 0px 0px 0px !important;
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        #notificationFooter {
+            background-color: #e9eaed;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 12px;
+            border-top: 1px solid #dddddd;
+        }
+
+        #notification_count {
+            padding: 3px 7px 3px 7px;
+            background: #cc0000;
+            color: #ffffff;
+            font-weight: bold;
+            margin-left: 77px;
+            border-radius: 9px;
+            position: absolute;
+            margin-top: -11px;
+            font-size: 11px;
+        }
+
+        hr.style-two {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+
+        .notify-content-wrap {
+            margin: 5px 5px 5px 5px;
+        }
+
+        .notifications {
+            overflow-y: auto;
+        }
+
+        .notify-text-wrap {
+            line-height: 1.5em;
+            height: 3em;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 100%;
+            padding: 8px;
+        }
+
+        .notify-text-bold {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body ng-app="fraudDetectionModule">
     <div class="container-fluid page">
-        <header class="row header">
+        <header class="row header" style="z-index:1">
             <a class="logo" href="@Url.Action("Index", "Home")">
                 Fraud
                 <span> Sensor</span>
             </a>
             @Html.Action("Menu", new RouteValueDictionary(new { controller = "Home", area = "" }))
+
             <div class="user-info">
                 <span class="info-bar">Howdy, <span class="account-name">@ViewBag.Session.Username</span><span class="caret"></span></span>
                 <ul class="user-dropdown">
                     <li>@Html.ActionLink("Sign Out", "LogOut", "Login")</li>
                 </ul>
+            </div>
+
+            <div id="notification-icon" class="user-notify-wrap notify-pointer">
+                <div class="user-notify"></div>
+                <span id="noti-unread-msg" class="badge badge-danger up"></span>
+            </div>
+            <div id="notificationContainer">
+                <div id="notificationTitle">Notifications</div>
+                <div id="notificationsBody" class="notifications"></div>
+                <div id="notificationFooter"><a href="~/Notification">See All</a></div>
             </div>
         </header>
         <section id="headline" class="row title-bar">
