@@ -60,11 +60,11 @@ $(document).ready(function () {
         }
     });
 
-    setInterval(ReCheckNotification, 10000);
+    $(document).mouseup(function (e) {
+        if (e.target.id != $("#notificationContainer").attr('id') && !$("#notificationContainer").has(e.target).length) {
+            $("#notificationContainer").hide();
+        }
+    });
+
+    setInterval(ReCheckNotification, 3000);
 });
-/*
-$(document).click(function (e) {
-    if (e.target.id != 'notificationContainer' && !$('#notificationContainer').find(e.target).length) {
-        $("#notificationContainer").hide();
-    }
-});*/
