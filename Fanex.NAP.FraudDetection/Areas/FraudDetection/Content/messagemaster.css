@@ -24,8 +24,18 @@
 
 .form-edit{
     margin: 20px 0 0 0;
+    font-size: 13px;
 }
 
  label{
      font-weight: normal;
  }
+ 
+.question-icon{
+    height: 15px;
+    width: 15px;
+}
+
+.btn-green {
+    font-size: 12px !important;
+}

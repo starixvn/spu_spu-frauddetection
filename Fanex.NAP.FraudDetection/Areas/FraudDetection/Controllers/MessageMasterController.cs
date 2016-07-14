@@ -97,7 +97,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
         [HttpGet]
-        public string EditMessage(int? messageId)
+        public string EditMessage(int messageId)
         {
             var criteria = new MessageMasterGetByIdCriteria
             {
@@ -115,7 +115,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult EditMessage(MessageMaster model)
         {
-            var criteria = new MessageMasterUpdateCriteria() 
+            var criteria = new MessageMasterUpdateCriteria()
             {
                 MessageId = model.MessageId,
                 MessageCode = model.MessageCode,
@@ -147,7 +147,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             {
                 if (item != string.Empty)
                 {
-                    result += users.SingleOrDefault(x => x.Id == int.Parse(item)).Username + ';';
+                    var filteredItem = users.SingleOrDefault(x => x.Id == int.Parse(item));
+                    if (filteredItem != null)
+                    {
+                        result += filteredItem.Username + ';';
+                    }
                 }
             }
 
@@ -164,7 +168,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
             foreach (var user in users)
             {
-                if (user.Policy != (decimal)Constant.Policy.Read && 
+                if (user.Policy != (decimal)Constant.Policy.Read &&
                     user.Policy != (decimal)Constant.Policy.Host)
                 {
                     continue;

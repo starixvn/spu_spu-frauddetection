@@ -12,9 +12,9 @@
 @using (Html.BeginForm("Add", "MessageMaster", FormMethod.Post, new { @id = "addNewMesssageForm" }))
 {
     <div class="col-sm-12 form-edit">
-        <div class="col-sm-7 col-sm-offset-1">
+        <div class="col-sm-9">
             <div class="col-sm-12">
-                <div class="col-sm-3 text-right">
+                <div class="col-sm-3">
                     <label>
                         Message Code
                     </label>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <div class="col-sm-3 text-right">
+                <div class="col-sm-3">
                     <label>
                         Description
                     </label>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <label class="col-sm-3 text-right">
+                <label class="col-sm-3">
                     Content
                 </label>
                 <div class="col-sm-9">
@@ -49,9 +49,13 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <label class="col-sm-3 text-right">
-                    Recipient
-                </label>
+                <div class="col-sm-3">
+                    <label>
+                        Recipient
+                    </label>
+                    <img src="~/Areas/FraudDetection/App_Themes/Images/icon-question.PNG" class="question-icon"
+                         title="those who will receive the message even they are online or offline" />
+                </div>
                 <div class="col-sm-9">
                     <ul id="RecipientTags" class="col-sm-11"></ul>
                     @Html.TextBoxFor(model => model.UsernameRecipient, new { @id = "fakeRecipientTags", @class = "inputbox col-sm-11 ui-corner-all textarea" })
@@ -59,9 +63,13 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <label class="col-sm-3 text-right">
-                    Online Recipient
-                </label>
+                <div class="col-sm-3">
+                    <label>
+                        Online Recipient
+                    </label>
+                    <img src="~/Areas/FraudDetection/App_Themes/Images/icon-question.PNG" class="question-icon"
+                         title="those who will receive the message only when they are online" />
+                </div>
                 <div class="col-sm-9">
                     <ul id="OnlRecipientTags" class="col-sm-11"></ul>
                     @Html.TextBoxFor(model => model.UsernameOnlineRecipient, new { @id = "fakeOnlRecipientTags", @class = "inputbox col-sm-11 ui-corner-all" })

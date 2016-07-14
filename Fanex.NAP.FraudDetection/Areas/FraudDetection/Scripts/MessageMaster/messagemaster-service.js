@@ -148,7 +148,7 @@
         messMasterFactory.addNewMessage().success(function (response) {
             DialogService.setDialogId("popup");
             DialogService.openDialogContent(response, "New Message", {
-                width: '1200px'
+                width: '1000px'
             });
         });
     };
@@ -157,7 +157,7 @@
         messMasterFactory.editMessageInfo(messageId).success(function (response) {
             DialogService.setDialogId("popup");
             DialogService.openDialogContent(response, "Edit Message", {
-                width: '1200px'
+                width: '1000px'
             });
         });
     };
