@@ -12,8 +12,6 @@
     var editMail = $('#editMesssageForm').submit(function (event) {
         event.preventDefault();
 
-        $('#editMesssageForm').validate();
-
         if ($('#editMesssageForm').valid()) {
             var content = $('#content');
             var displayContent = $('#displayContent');
@@ -38,6 +36,7 @@ function insertParameters(name) {
     displayContent.focus();
 }
 
+var tempData;
 function initializeTagIt() {
     var tempId = null;
     var tempDisplayText = '';
@@ -45,6 +44,7 @@ function initializeTagIt() {
     messMasterFactory.getAllUser().success(function (result) {
         $('#RecipientTags').tagit({
             autocomplete: {
+                delay: 350,
                 source: function (request, response) {
                     response($.map(result, function (value, key) {
                         return {
@@ -52,11 +52,14 @@ function initializeTagIt() {
                             value: value.Id
                         }
                     }));
+                    });
+                    response(tempData);
                 },
                 select: function (event, ui) {
+                    event.preventDefault();
                     tempDisplayText = $('#Recipient').val();
                     tempId = ui.item.value;
-                    ui.item.value = ui.item.label;
+                    event.target.value = ui.item.label;
                 },
                 focus: function (event, ui) {
                     return false;
@@ -74,11 +77,12 @@ function initializeTagIt() {
                 var idArr = $('#Recipient').val().split(';');
                 var index = $.inArray(label, usernameArr);
                 var result = '';
-
-                idArr.splice(index, 1);
-                for (var i = 0; i < idArr.length; i++) {
-                    if (idArr[i] !== "") {
-                        result += idArr[i] + ';'
+                if (index !== -1) {
+                    idArr.splice(index, 1);
+                    for (var i = 0; i < idArr.length; i++) {
+                        if (idArr[i] !== "") {
+                            result += idArr[i] + ';'
+                        }
                     }
                 }
 
@@ -89,6 +93,7 @@ function initializeTagIt() {
 
         $('#OnlRecipientTags').tagit({
             autocomplete: {
+                delay: 350,
                 source: function (request, response) {
                     response($.map(result, function (value, key) {
                         return {
@@ -96,15 +101,32 @@ function initializeTagIt() {
                             value: value.Id
                         }
                     }));
+                    });
+                    response(tempData);
                 },
                 select: function (event, ui) {
+                    event.preventDefault();
                     tempDisplayText = $('#OnlineRecipient').val();
                     tempId = ui.item.value;
-                    ui.item.value = ui.item.label;
+                    event.target.value = ui.item.label;
                 },
                 focus: function (event, ui) {
                     return false;
                 },
+                search: function (event, ui) {
+                    var keyword = $(event.target).val();
+                    var newSource = [];
+
+                    if (tempData) {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+
+                        $(this).autocomplete('option', 'source', newSource);
+                    }
+                }
             },
             afterTagAdded: function () {
                 if (tempId !== null) {
@@ -119,6 +141,7 @@ function initializeTagIt() {
                 var index = $.inArray(label, usernameArr);
                 var result = '';
 
+                result = '';
                 idArr.splice(index, 1);
                 for (var i = 0; i < idArr.length; i++) {
                     if (idArr[i] !== "") {

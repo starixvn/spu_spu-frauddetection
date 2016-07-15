@@ -12,7 +12,6 @@
     var addMail = $('#addNewMesssageForm').submit(function (event) {
         event.preventDefault();
 
-        $('#addNewMesssageForm').validate();
 
         if ($('#addNewMesssageForm').valid()) {
             var content = $('#content');
@@ -33,12 +32,15 @@ function insertParameters(name) {
     displayContent.focus();
 }
 
+var tempData;
 function initializeTagIt() {
     var tempId = null;
     var tempDisplayText = '';
     messMasterFactory.getAllUser().success(function (result) {
         $('#RecipientTags').tagit({
             autocomplete: {
+                delay: 350,
+                appendTo: this,
                 source: function (request, response) {
                     response($.map(result, function (value, key) {
                         return {
@@ -46,26 +48,75 @@ function initializeTagIt() {
                             value: value.Id
                         }
                     }));
+                    });
+                    response(tempData);
                 },
                 select: function (event, ui) {
+                    event.preventDefault();
                     tempDisplayText = $('#Recipient').val();
                     tempId = ui.item.value;
-                    ui.item.value = ui.item.label;
+                    event.target.value = ui.item.label;
                 },
                 focus: function (event, ui) {
                     return false;
                 },
+                search: function (event, ui) {
+                    var keyword = $(event.target).val();
+                    var newSource = [];
+
+                    if (tempData) {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+
+                        $(this).autocomplete('option', 'source', newSource);
+                    }
+                }
             },
+            //beforeTagAdded: function(evt, ui) {
+            //    var $tagdropdowns = $('body ul:last li a');
+            //    var $activeTag = $tagdropdowns.filter(function() { 
+            //        return $(this).hasClass('ui-state-focus') 
+            //    });
+            //    $tagdropdowns.removeClass('ui-state-focus');
+
+            //    if ($activeTag.length) {
+            //        $(this).tagit("createTag", $activeTag.text());
+            //        return false;
+            //    }
+
+            //},
             afterTagAdded: function () {
+                debugger    
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#Recipient').val(tempDisplayText);
                 }
+            },
+            beforeTagRemoved: function (event, ui) {
+                var label = ui.tagLabel;
+                var usernameArr = $('#fakeRecipientTags').val().split(';');
+                var idArr = $('#Recipient').val().split(';');
+                var index = $.inArray(label, usernameArr);
+                var result = '';
+
+                idArr.splice(index, 1);
+                for (var i = 0; i < idArr.length; i++) {
+                    if (idArr[i] !== "") {
+                        result += idArr[i] + ';'
+                    }
+                }
+
+                $('#Recipient').val(result);
             }
         });
 
         $('#OnlRecipientTags').tagit({
             autocomplete: {
+                delay: 350,
+                appendTo: $('#popup'),
                 source: function (request, response) {
                     response($.map(result, function (value, key) {
                         return {
@@ -73,21 +124,54 @@ function initializeTagIt() {
                             value: value.Id
                         }
                     }));
+                    });
+                    response(tempData);
                 },
                 select: function (event, ui) {
+                    event.preventDefault();
                     tempDisplayText = $('#OnlineRecipient').val();
                     tempId = ui.item.value;
-                    ui.item.value = ui.item.label;
+                    event.target.value = ui.item.label;
                 },
                 focus: function (event, ui) {
                     return false;
                 },
+                search: function (event, ui) {
+                    var keyword = $(event.target).val();
+                    var newSource = [];
+
+                    if (tempData) {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+
+                        $(this).autocomplete('option', 'source', newSource);
+                    }
+                }
             },
             afterTagAdded: function () {
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#OnlineRecipient').val(tempDisplayText);
                 }
+            },
+            beforeTagRemoved: function (event, ui) {
+                var label = ui.tagLabel;
+                var usernameArr = $('#fakeOnlRecipientTags').val().split(';');
+                var idArr = $('#OnlineRecipient').val().split(';');
+                var index = $.inArray(label, usernameArr);
+                var result = '';
+
+                idArr.splice(index, 1);
+                for (var i = 0; i < idArr.length; i++) {
+                    if (idArr[i] !== "") {
+                        result += idArr[i] + ';'
+                    }
+                }
+
+                $('#OnlineRecipient').val(result);
             }
         });
     });

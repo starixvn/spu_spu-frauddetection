@@ -16,6 +16,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.Framework.Command;
 
     public class MessageMasterController : BaseController
     {
@@ -42,19 +43,44 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public JsonResult AddMessage(MessageMaster model)
         {
-            MessageMasterInsertCriteria criteria = new MessageMasterInsertCriteria()
+            JsonResult returnResult = new JsonResult();
+            var errorMessage = string.Empty;
+
+            if (ModelState.IsValid)
             {
-                MessageCode = model.MessageCode,
-                MessageDesc = model.MessageDesc,
-                MessageContent = model.MessageContent,
-                Recipient = model.Recipient,
-                IsActive = model.IsActive,
-                OnlineRecipient = model.OnlineRecipient
-            };
+                if (model.Recipient != null || model.OnlineRecipient != null)
+                {
+                    MessageMasterInsertCriteria criteria = new MessageMasterInsertCriteria()
+                    {
+                        MessageCode = model.MessageCode,
+                        MessageDesc = model.MessageDesc,
+                        MessageContent = model.MessageContent,
+                        Recipient = model.Recipient == null ? "" : model.Recipient,
+                        IsActive = model.IsActive,
+                        OnlineRecipient = model.OnlineRecipient == null ? "" : model.OnlineRecipient
+                    };
 
-            var result = messMasterService.InsertMessage(criteria);
-            return Json(result, JsonRequestBehavior.AllowGet);
+                    ICommandResult result = messMasterService.InsertMessage(criteria);
+                    returnResult = Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    errorMessage = "Recipient Required";
+                    returnResult = new JsonResult { Data = new { IsSuccessful = false, Message = errorMessage } };
+                }
+            }
+            else
+            {
+                foreach (var value in ModelState.Values.Where(value => value.Errors.Count > 0))
+                {
+                    errorMessage = value.Errors[0].ErrorMessage;
+                    break;
+                }
 
+                returnResult = new JsonResult{ Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage }};
+            }
+
+            return returnResult;
         }
 
         [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
@@ -115,19 +141,45 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [HttpPost]
         public ActionResult EditMessage(MessageMaster model)
         {
-            var criteria = new MessageMasterUpdateCriteria()
-            {
-                MessageId = model.MessageId,
-                MessageCode = model.MessageCode,
-                MessageDesc = model.MessageDesc,
-                MessageContent = model.MessageContent,
-                Recipient = model.Recipient,
-                IsActive = model.IsActive,
-                OnlineRecipient = model.OnlineRecipient
-            };
+            JsonResult returnResult = new JsonResult();
+            var errorMessage = string.Empty;
 
-            var result = messMasterService.UpdateMessage(criteria);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (ModelState.IsValid)
+            {
+                if (model.Recipient != null || model.OnlineRecipient != null)
+                {
+                    var criteria = new MessageMasterUpdateCriteria()
+                    {
+                        MessageId = model.MessageId,
+                        MessageCode = model.MessageCode,
+                        MessageDesc = model.MessageDesc,
+                        MessageContent = model.MessageContent,
+                        Recipient = model.Recipient == null ? "" : model.Recipient,
+                        IsActive = model.IsActive,
+                        OnlineRecipient = model.OnlineRecipient == null ? "" : model.OnlineRecipient
+                    };
+
+                    ICommandResult result = messMasterService.UpdateMessage(criteria);
+                    returnResult = Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    errorMessage = "Recipient Required";
+                    returnResult = new JsonResult { Data = new { IsSuccessful = false, Message = errorMessage } };
+                }
+            }
+            else
+            {
+                foreach (var value in ModelState.Values.Where(value => value.Errors.Count > 0))
+                {
+                    errorMessage = value.Errors[0].ErrorMessage;
+                    break;
+                }
+
+                returnResult = new JsonResult { Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage } };
+            }
+
+            return returnResult;
         }
 
         [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]

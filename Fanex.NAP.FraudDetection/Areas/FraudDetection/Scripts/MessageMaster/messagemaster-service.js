@@ -129,7 +129,7 @@
             if (result.IsSuccessful) {
                 window.location.href = window.location.href.split('/AddMessage', 1)[0].toString();
             } else {
-                AlertService.showAlert(result);
+                AlertServiceOnPopup.showAlert(result);
             }
         });
     };
@@ -139,7 +139,7 @@
             if (result.IsSuccessful) {
                 window.location.href = window.location.href.split('/EditMessage', 1)[0].toString();
             } else {
-                AlertService.showAlert(result);
+                AlertServiceOnPopup.showAlert(result);
             }
         });
     };

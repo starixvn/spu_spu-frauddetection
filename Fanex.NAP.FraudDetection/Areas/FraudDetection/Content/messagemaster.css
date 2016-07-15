@@ -20,22 +20,30 @@
 
 .textarea {
     height: 50px;
+    resize: none;
 }
 
-.form-edit{
+.form-edit {
     margin: 20px 0 0 0;
     font-size: 13px;
 }
 
- label{
-     font-weight: normal;
- }
- 
-.question-icon{
+label {
+    font-weight: normal;
+}
+
+.question-icon {
     height: 15px;
     width: 15px;
 }
 
 .btn-green {
     font-size: 12px !important;
+}
+
+.paramerter {
+    border: 1px solid #9E9E9E;
+    /*height: 300px;*/
+    padding: 10px;
+    margin-bottom: 0;
 }
