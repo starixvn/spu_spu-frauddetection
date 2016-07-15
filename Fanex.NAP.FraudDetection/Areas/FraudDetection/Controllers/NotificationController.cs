@@ -33,7 +33,7 @@
             }
 
             var formattedMessages = (new MessageGenerator()).GenerateMessages(rawMessages);
-            var numNewMessage = rawMessages[0].UnreadMsgCount;
+            var numNewMessage = rawMessages.Count > 0 ? rawMessages[0].UnreadMsgCount : 0;
 
             return Json(new { MessageList = formattedMessages, NumNewMessage = numNewMessage }, JsonRequestBehavior.AllowGet);
         }

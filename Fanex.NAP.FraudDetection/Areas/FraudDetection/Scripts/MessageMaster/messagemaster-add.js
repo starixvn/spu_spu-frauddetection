@@ -48,31 +48,30 @@ function initializeTagIt() {
                             value: value.Id
                         }
                     }));
-                    });
                     response(tempData);
-                },
-                select: function (event, ui) {
-                    event.preventDefault();
-                    tempDisplayText = $('#Recipient').val();
-                    tempId = ui.item.value;
-                    event.target.value = ui.item.label;
-                },
-                focus: function (event, ui) {
-                    return false;
-                },
-                search: function (event, ui) {
-                    var keyword = $(event.target).val();
-                    var newSource = [];
+                }
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                tempDisplayText = $('#Recipient').val();
+                tempId = ui.item.value;
+                event.target.value = ui.item.label;
+            },
+            focus: function (event, ui) {
+                return false;
+            },
+            search: function (event, ui) {
+                var keyword = $(event.target).val();
+                var newSource = [];
 
-                    if (tempData) {
-                        $(tempData).each(function (index, element) {
-                            if (element.label.indexOf(keyword) != -1) {
-                                newSource.push(element);
-                            }
-                        });
+                if (tempData) {
+                    $(tempData).each(function (index, element) {
+                        if (element.label.indexOf(keyword) != -1) {
+                            newSource.push(element);
+                        }
+                    });
 
-                        $(this).autocomplete('option', 'source', newSource);
-                    }
+                    $(this).autocomplete('option', 'source', newSource);
                 }
             },
             //beforeTagAdded: function(evt, ui) {
@@ -89,7 +88,7 @@ function initializeTagIt() {
 
             //},
             afterTagAdded: function () {
-                debugger    
+                debugger
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#Recipient').val(tempDisplayText);
@@ -124,31 +123,30 @@ function initializeTagIt() {
                             value: value.Id
                         }
                     }));
-                    });
                     response(tempData);
-                },
-                select: function (event, ui) {
-                    event.preventDefault();
-                    tempDisplayText = $('#OnlineRecipient').val();
-                    tempId = ui.item.value;
-                    event.target.value = ui.item.label;
-                },
-                focus: function (event, ui) {
-                    return false;
-                },
-                search: function (event, ui) {
-                    var keyword = $(event.target).val();
-                    var newSource = [];
+                }
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                tempDisplayText = $('#OnlineRecipient').val();
+                tempId = ui.item.value;
+                event.target.value = ui.item.label;
+            },
+            focus: function (event, ui) {
+                return false;
+            },
+            search: function (event, ui) {
+                var keyword = $(event.target).val();
+                var newSource = [];
 
-                    if (tempData) {
-                        $(tempData).each(function (index, element) {
-                            if (element.label.indexOf(keyword) != -1) {
-                                newSource.push(element);
-                            }
-                        });
+                if (tempData) {
+                    $(tempData).each(function (index, element) {
+                        if (element.label.indexOf(keyword) != -1) {
+                            newSource.push(element);
+                        }
+                    });
 
-                        $(this).autocomplete('option', 'source', newSource);
-                    }
+                    $(this).autocomplete('option', 'source', newSource);
                 }
             },
             afterTagAdded: function () {
