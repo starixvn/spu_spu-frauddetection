@@ -29,10 +29,10 @@ function ReCheckNotification() {
             {
                 var message = results.MessageList[i];
                 if (message.IsViewed == true) {
-                    messagesHtmlString += "<div class='notify-text-wrap' style='width: 100%'>" + message.MessageContent + "</div><hr class='style-two'>";
+                    messagesHtmlString += "<div class='notify-text-wrap' style='width: 100%'>" + message.MessageContent + "</div><div class='notify-text-wrap notify-text-time' style='width: 100%'>" + message.PostedDate + "</div><hr class='style-two'>";
                 }
                 else {
-                    messagesHtmlString += "<div class='notify-text-wrap notify-text-bold' style='width: 100%'>" + message.MessageContent + "</div><hr class='style-two'>";
+                    messagesHtmlString += "<div class='notify-text-wrap notify-text-bold' style='width: 100%'>" + message.MessageContent + "</div><div class='notify-text-wrap notify-text-time' style='width: 100%'>" + message.PostedDate + "</div><hr class='style-two'>";
                 }
             }
 
@@ -67,5 +67,5 @@ $(document).ready(function () {
     });
 
     ReCheckNotification();
-    setInterval(ReCheckNotification, 3000);
+    //setInterval(ReCheckNotification, 3000);
 });

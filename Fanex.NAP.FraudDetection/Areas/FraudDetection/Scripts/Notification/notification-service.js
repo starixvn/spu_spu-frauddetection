@@ -38,7 +38,9 @@
                 gridExpandHeight: 180,
                 allowTruncate: true,
                 showPager: true,
-                customPager: false,                
+                customPager: false,
+                enableHiddenColumns: false,
+                hiddenColumns: [5],
                 pagerOption: {
                     itemsPerPage: notificationService._pageSize,
                     currentPage: notificationService._pageIndex,
