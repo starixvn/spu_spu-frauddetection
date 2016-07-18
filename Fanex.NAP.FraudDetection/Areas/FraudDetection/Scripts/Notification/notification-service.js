@@ -26,7 +26,7 @@
         notificationService.gridOptions =
             {
                 columns: [
-                    { HeaderText: "#", Width: 20, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "#", Width: 50, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Event", Width: 500, Name: "Event", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Message", Width: 500, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Fraud Case", Width: 150, Name: "FraudCase", HeaderAlign: "center", CellAlign: "left" },
