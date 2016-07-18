@@ -19,7 +19,7 @@
                 </label>
                 @Html.HiddenFor(model => model.MessageId)
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.MessageCode, new { disabled = "disabled", @class = "col-sm-9 inputbox ui-corner-all", @style = "" })
+                    @Html.TextBoxFor(model => model.MessageCode, new { @readonly="readonly", @class = "col-sm-9 inputbox ui-corner-all", @style = "" })
                     <div class="col-sm-3">
                         <label>
                             Active

@@ -12,7 +12,6 @@
     var addMail = $('#addNewMesssageForm').submit(function (event) {
         event.preventDefault();
 
-
         if ($('#addNewMesssageForm').valid()) {
             var content = $('#content');
             var displayContent = $('#displayContent');
@@ -42,36 +41,36 @@ function initializeTagIt() {
                 delay: 350,
                 appendTo: this,
                 source: function (request, response) {
-                    response($.map(result, function (value, key) {
+                    tempData = $.map(result, function (value, key) {
                         return {
                             label: value.Username,
                             value: value.Id
                         }
-                    }));
-                    response(tempData);
-                }
-            },
-            select: function (event, ui) {
-                event.preventDefault();
-                tempDisplayText = $('#Recipient').val();
-                tempId = ui.item.value;
-                event.target.value = ui.item.label;
-            },
-            focus: function (event, ui) {
-                return false;
-            },
-            search: function (event, ui) {
-                var keyword = $(event.target).val();
-                var newSource = [];
-
-                if (tempData) {
-                    $(tempData).each(function (index, element) {
-                        if (element.label.indexOf(keyword) != -1) {
-                            newSource.push(element);
-                        }
                     });
+                    response(tempData);
+                },
+                select: function (event, ui) {
+                    event.preventDefault();
+                    tempDisplayText = $('#Recipient').val();
+                    tempId = ui.item.value;
+                    event.target.value = ui.item.label;
+                },
+                focus: function (event, ui) {
+                    return false;
+                },
+                search: function (event, ui) {
+                    var keyword = $(event.target).val();
+                    var newSource = [];
 
-                    $(this).autocomplete('option', 'source', newSource);
+                    if (tempData) {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+
+                        $(this).autocomplete('option', 'source', newSource);
+                    }
                 }
             },
             //beforeTagAdded: function(evt, ui) {
@@ -117,36 +116,36 @@ function initializeTagIt() {
                 delay: 350,
                 appendTo: $('#popup'),
                 source: function (request, response) {
-                    response($.map(result, function (value, key) {
+                    tempData = $.map(result, function (value, key) {
                         return {
                             label: value.Username,
                             value: value.Id
                         }
-                    }));
-                    response(tempData);
-                }
-            },
-            select: function (event, ui) {
-                event.preventDefault();
-                tempDisplayText = $('#OnlineRecipient').val();
-                tempId = ui.item.value;
-                event.target.value = ui.item.label;
-            },
-            focus: function (event, ui) {
-                return false;
-            },
-            search: function (event, ui) {
-                var keyword = $(event.target).val();
-                var newSource = [];
-
-                if (tempData) {
-                    $(tempData).each(function (index, element) {
-                        if (element.label.indexOf(keyword) != -1) {
-                            newSource.push(element);
-                        }
                     });
+                    response(tempData);
+                },
+                select: function (event, ui) {
+                    event.preventDefault();
+                    tempDisplayText = $('#OnlineRecipient').val();
+                    tempId = ui.item.value;
+                    event.target.value = ui.item.label;
+                },
+                focus: function (event, ui) {
+                    return false;
+                },
+                search: function (event, ui) {
+                    var keyword = $(event.target).val();
+                    var newSource = [];
 
-                    $(this).autocomplete('option', 'source', newSource);
+                    if (tempData) {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+
+                        $(this).autocomplete('option', 'source', newSource);
+                    }
                 }
             },
             afterTagAdded: function () {
