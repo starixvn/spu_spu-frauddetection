@@ -181,13 +181,9 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-list.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/AddMessageMaster").Include(
-                "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-factory.js",
-                "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-service.js",
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-add.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/EditMessageMaster").Include(
-                "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-factory.js",
-                "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-service.js",
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-edit.js"));
         }
     }

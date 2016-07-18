@@ -130,6 +130,9 @@
                 window.location.href = window.location.href.split('/AddMessage', 1)[0].toString();
             } else {
                 AlertServiceOnPopup.showAlert(result);
+                $('#sentAlertOnPopup').css({
+                    position: 'relative'
+                });
             }
         });
     };
@@ -140,6 +143,9 @@
                 window.location.href = window.location.href.split('/EditMessage', 1)[0].toString();
             } else {
                 AlertServiceOnPopup.showAlert(result);
+                $('#sentAlertOnPopup').css({
+                    position: 'relative'
+                });
             }
         });
     };

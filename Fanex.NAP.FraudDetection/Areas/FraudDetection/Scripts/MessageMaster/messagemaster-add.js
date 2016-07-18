@@ -36,20 +36,14 @@ function initializeTagIt() {
     var tempId = null;
     var tempDisplayText = '';
     messMasterFactory.getAllUser().success(function (result) {
-        debugger
         $('#RecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                appendTo: $('#popup').parent(),
-                //source: function (request, response) {
-                //    tempData = $.map(result, function (value, key) {
-                //        return {
-                //            label: value.Username,
-                //            value: value.Id
-                //        }
-                //    });
-                //    response(tempData);
-                //},
+                appendTo: $('#popup').parent().parent(),
+                open: function () {
+                    var indexValue = $('#popup').parent().css("z-index");
+                    $('.tagit-autocomplete').css("z-index", indexValue + 1);
+                },
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#Recipient').val();
@@ -57,6 +51,7 @@ function initializeTagIt() {
                     event.target.value = ui.item.label;
                 },
                 focus: function (event, ui) {
+                    event.target.value = ui.item.label;
                     return false;
                 },
                 search: function (event, ui) {
@@ -88,19 +83,6 @@ function initializeTagIt() {
                     $(this).autocomplete('option', 'source', newSource);
                 }
             },
-            //beforeTagAdded: function(evt, ui) {
-            //    var $tagdropdowns = $('body ul:last li a');
-            //    var $activeTag = $tagdropdowns.filter(function() { 
-            //        return $(this).hasClass('ui-state-focus') 
-            //    });
-            //    $tagdropdowns.removeClass('ui-state-focus');
-
-            //    if ($activeTag.length) {
-            //        $(this).tagit("createTag", $activeTag.text());
-            //        return false;
-            //    }
-
-            //},
             afterTagAdded: function () {
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
@@ -128,16 +110,11 @@ function initializeTagIt() {
         $('#OnlRecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                appendTo: $('#popup').parent(),
-                //source: function (request, response) {
-                //    tempData = $.map(result, function (value, key) {
-                //        return {
-                //            label: value.Username,
-                //            value: value.Id
-                //        }
-                //    });
-                //    response(tempData);
-                //},
+                appendTo: $('#popup').parent().parent(),
+                open: function () {
+                    var indexValue = $('#popup').parent().css("z-index");
+                    $('.tagit-autocomplete').css("z-index", indexValue + 1);
+                },
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#OnlineRecipient').val();
@@ -145,6 +122,7 @@ function initializeTagIt() {
                     event.target.value = ui.item.label;
                 },
                 focus: function (event, ui) {
+                    event.target.value = ui.item.label;
                     return false;
                 },
                 search: function (event, ui) {

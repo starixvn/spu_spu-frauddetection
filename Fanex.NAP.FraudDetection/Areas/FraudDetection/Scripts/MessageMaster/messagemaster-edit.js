@@ -45,22 +45,19 @@ function initializeTagIt() {
         $('#RecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                //source: function (request, response) {
-                //    tempData = $.map(result, function (value, key) {
-                //        return {
-                //            label: value.Username,
-                //            value: value.Id
-                //        }
-                //    });
-                //    response(tempData);
-                //},
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#Recipient').val();
                     tempId = ui.item.value;
                     event.target.value = ui.item.label;
                 },
+                appendTo: $('#popup').parent().parent(),
+                open: function () {
+                    var indexValue = $('#popup').parent().css("z-index");
+                    $('.tagit-autocomplete').css("z-index", indexValue + 1);
+                },
                 focus: function (event, ui) {
+                    event.target.value = ui.item.label;
                     return false;
                 },
                 search: function (event, ui) {
@@ -121,22 +118,19 @@ function initializeTagIt() {
         $('#OnlRecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                //source: function (request, response) {
-                //    tempData = $.map(result, function (value, key) {
-                //        return {
-                //            label: value.Username,
-                //            value: value.Id
-                //        }
-                //    });
-                //    response(tempData);
-                //},
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#OnlineRecipient').val();
                     tempId = ui.item.value;
                     event.target.value = ui.item.label;
                 },
+                appendTo: $('#popup').parent().parent(),
+                open: function () {
+                    var indexValue = $('#popup').parent().css("z-index");
+                    $('.tagit-autocomplete').css("z-index", indexValue + 1);
+                },
                 focus: function (event, ui) {
+                    event.target.value = ui.item.label;
                     return false;
                 },
                 search: function (event, ui) {
