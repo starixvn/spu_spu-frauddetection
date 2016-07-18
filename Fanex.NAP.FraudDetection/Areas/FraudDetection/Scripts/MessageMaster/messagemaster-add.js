@@ -36,19 +36,20 @@ function initializeTagIt() {
     var tempId = null;
     var tempDisplayText = '';
     messMasterFactory.getAllUser().success(function (result) {
+        debugger
         $('#RecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                appendTo: this,
-                source: function (request, response) {
-                    tempData = $.map(result, function (value, key) {
-                        return {
-                            label: value.Username,
-                            value: value.Id
-                        }
-                    });
-                    response(tempData);
-                },
+                appendTo: $('#popup').parent(),
+                //source: function (request, response) {
+                //    tempData = $.map(result, function (value, key) {
+                //        return {
+                //            label: value.Username,
+                //            value: value.Id
+                //        }
+                //    });
+                //    response(tempData);
+                //},
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#Recipient').val();
@@ -62,15 +63,29 @@ function initializeTagIt() {
                     var keyword = $(event.target).val();
                     var newSource = [];
 
-                    if (tempData) {
+                    if (!tempData) {
+                        tempData = $.map(result, function (value, key) {
+                            return {
+                                label: value.Username,
+                                value: value.Id
+                            }
+                        });
+
                         $(tempData).each(function (index, element) {
                             if (element.label.indexOf(keyword) != -1) {
                                 newSource.push(element);
                             }
                         });
-
-                        $(this).autocomplete('option', 'source', newSource);
                     }
+                    else {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+                    }
+
+                    $(this).autocomplete('option', 'source', newSource);
                 }
             },
             //beforeTagAdded: function(evt, ui) {
@@ -87,7 +102,6 @@ function initializeTagIt() {
 
             //},
             afterTagAdded: function () {
-                debugger
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#Recipient').val(tempDisplayText);
@@ -110,20 +124,20 @@ function initializeTagIt() {
                 $('#Recipient').val(result);
             }
         });
-
+        
         $('#OnlRecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                appendTo: $('#popup'),
-                source: function (request, response) {
-                    tempData = $.map(result, function (value, key) {
-                        return {
-                            label: value.Username,
-                            value: value.Id
-                        }
-                    });
-                    response(tempData);
-                },
+                appendTo: $('#popup').parent(),
+                //source: function (request, response) {
+                //    tempData = $.map(result, function (value, key) {
+                //        return {
+                //            label: value.Username,
+                //            value: value.Id
+                //        }
+                //    });
+                //    response(tempData);
+                //},
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#OnlineRecipient').val();
@@ -137,15 +151,29 @@ function initializeTagIt() {
                     var keyword = $(event.target).val();
                     var newSource = [];
 
-                    if (tempData) {
+                    if (!tempData) {
+                        tempData = $.map(result, function (value, key) {
+                            return {
+                                label: value.Username,
+                                value: value.Id
+                            }
+                        });
+
                         $(tempData).each(function (index, element) {
                             if (element.label.indexOf(keyword) != -1) {
                                 newSource.push(element);
                             }
                         });
-
-                        $(this).autocomplete('option', 'source', newSource);
                     }
+                    else {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+                    }
+
+                    $(this).autocomplete('option', 'source', newSource);
                 }
             },
             afterTagAdded: function () {
@@ -174,12 +202,6 @@ function initializeTagIt() {
     });
 
     $('input[id^="fake"').hide();
-}
-
-function isEmail(email) {
-    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    //return regex.test(email);
-    return true;
 }
 
 function getTags(tags) {

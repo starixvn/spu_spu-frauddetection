@@ -45,15 +45,15 @@ function initializeTagIt() {
         $('#RecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                source: function (request, response) {
-                    tempData = $.map(result, function (value, key) {
-                        return {
-                            label: value.Username,
-                            value: value.Id
-                        }
-                    });
-                    response(tempData);
-                },
+                //source: function (request, response) {
+                //    tempData = $.map(result, function (value, key) {
+                //        return {
+                //            label: value.Username,
+                //            value: value.Id
+                //        }
+                //    });
+                //    response(tempData);
+                //},
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#Recipient').val();
@@ -67,15 +67,29 @@ function initializeTagIt() {
                     var keyword = $(event.target).val();
                     var newSource = [];
 
-                    if (tempData) {
+                    if (!tempData) {
+                        tempData = $.map(result, function (value, key) {
+                            return {
+                                label: value.Username,
+                                value: value.Id
+                            }
+                        });
+
                         $(tempData).each(function (index, element) {
                             if (element.label.indexOf(keyword) != -1) {
                                 newSource.push(element);
                             }
                         });
-
-                        $(this).autocomplete('option', 'source', newSource);
                     }
+                    else {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+                    }
+
+                    $(this).autocomplete('option', 'source', newSource);
                 }
             },
             afterTagAdded: function () {
@@ -107,15 +121,15 @@ function initializeTagIt() {
         $('#OnlRecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                source: function (request, response) {
-                    tempData = $.map(result, function (value, key) {
-                        return {
-                            label: value.Username,
-                            value: value.Id
-                        }
-                    });
-                    response(tempData);
-                },
+                //source: function (request, response) {
+                //    tempData = $.map(result, function (value, key) {
+                //        return {
+                //            label: value.Username,
+                //            value: value.Id
+                //        }
+                //    });
+                //    response(tempData);
+                //},
                 select: function (event, ui) {
                     event.preventDefault();
                     tempDisplayText = $('#OnlineRecipient').val();
@@ -129,15 +143,29 @@ function initializeTagIt() {
                     var keyword = $(event.target).val();
                     var newSource = [];
 
-                    if (tempData) {
+                    if (!tempData) {
+                        tempData = $.map(result, function (value, key) {
+                            return {
+                                label: value.Username,
+                                value: value.Id
+                            }
+                        });
+
                         $(tempData).each(function (index, element) {
                             if (element.label.indexOf(keyword) != -1) {
                                 newSource.push(element);
                             }
                         });
-
-                        $(this).autocomplete('option', 'source', newSource);
                     }
+                    else {
+                        $(tempData).each(function (index, element) {
+                            if (element.label.indexOf(keyword) != -1) {
+                                newSource.push(element);
+                            }
+                        });
+                    }
+
+                    $(this).autocomplete('option', 'source', newSource);
                 }
             },
             afterTagAdded: function () {
