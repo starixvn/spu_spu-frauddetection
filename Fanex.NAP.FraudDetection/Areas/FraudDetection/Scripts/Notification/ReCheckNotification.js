@@ -67,5 +67,5 @@ $(document).ready(function () {
     });
 
     ReCheckNotification();
-    //setInterval(ReCheckNotification, 3000);
+    setInterval(ReCheckNotification, 3000);
 });
