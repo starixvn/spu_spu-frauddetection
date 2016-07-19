@@ -36,7 +36,7 @@ function ReCheckNotification() {
                 }
             }
 
-            $('#notificationsBody').html(messagesHtmlString);
+            $('#notificationsBody').html(messagesNum > 0 ? messagesHtmlString : "<div class='notify-text-wrap notify-text-nomsg' style='width: 100%'>There is no message.</div>");
         },
         error: function () {
         }
@@ -62,6 +62,8 @@ $(document).ready(function () {
 
     $(document).mouseup(function (e) {
         if (e.target.id != $("#notificationContainer").attr('id') && !$("#notificationContainer").has(e.target).length) {
+            updateStatus = false;
+            showNotification = false;
             $("#notificationContainer").hide();
         }
     });

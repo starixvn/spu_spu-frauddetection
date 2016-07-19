@@ -36,7 +36,7 @@
                 bodyRows: createMessageTable(messageList),
                 hideYBackGroundScroller: true,
                 gridExpandHeight: 180,
-                allowTruncate: true,
+                //allowTruncate: true,
                 showPager: true,
                 customPager: false,
                 enableHiddenColumns: false,
