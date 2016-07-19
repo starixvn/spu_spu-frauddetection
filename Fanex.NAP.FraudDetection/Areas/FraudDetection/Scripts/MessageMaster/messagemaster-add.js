@@ -18,7 +18,22 @@
             var decodeString = htmlEncode(displayContent.val());
             content.val(decodeString);
 
-            messMasterService.addMessage($(this).serialize());
+            var recipientTags = getTags($("#RecipientTags").tagit("assignedTags"));
+            var recipientIds = $('#Recipient').val();
+            var onlRecipientTags = getTags($("#OnlRecipientTags").tagit("assignedTags"));
+            var onlRecipientIds = $('#OnlineRecipient').val();
+            var errMess = "Invalid Recipient";
+
+            
+            if ((recipientTags && recipientIds === "") || (onlRecipientTags && onlRecipientIds === "")) {
+                AlertServiceOnPopup.showAlert(errMess);
+                $('#sentAlertOnPopup').css({
+                    position: 'relative'
+                });
+            }
+            else {
+                messMasterService.addMessage($(this).serialize());
+            }
         }
     });
 });
@@ -39,6 +54,7 @@ function initializeTagIt() {
         $('#RecipientTags').tagit({
             autocomplete: {
                 delay: 350,
+                autoFocus: true,
                 appendTo: $('#popup').parent().parent(),
                 open: function () {
                     var indexValue = $('#popup').parent().css("z-index");
@@ -84,14 +100,16 @@ function initializeTagIt() {
                 }
             },
             afterTagAdded: function () {
+                debugger
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#Recipient').val(tempDisplayText);
+                    tempId = null;
                 }
             },
             beforeTagRemoved: function (event, ui) {
                 var label = ui.tagLabel;
-                var usernameArr = $('#fakeRecipientTags').val().split(';');
+                var usernameArr = getTags($("#RecipientTags").tagit("assignedTags")).split(';');
                 var idArr = $('#Recipient').val().split(';');
                 var index = $.inArray(label, usernameArr);
                 var result = '';
@@ -106,7 +124,7 @@ function initializeTagIt() {
                 $('#Recipient').val(result);
             }
         });
-        
+
         $('#OnlRecipientTags').tagit({
             autocomplete: {
                 delay: 350,
@@ -158,11 +176,12 @@ function initializeTagIt() {
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#OnlineRecipient').val(tempDisplayText);
+                    tempId = null;
                 }
             },
             beforeTagRemoved: function (event, ui) {
                 var label = ui.tagLabel;
-                var usernameArr = $('#fakeOnlRecipientTags').val().split(';');
+                var usernameArr = getTags($("#OnlRecipientTags").tagit("assignedTags")).split(';');
                 var idArr = $('#OnlineRecipient').val().split(';');
                 var index = $.inArray(label, usernameArr);
                 var result = '';

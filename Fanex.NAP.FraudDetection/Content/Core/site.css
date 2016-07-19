@@ -69,7 +69,7 @@
   margin: 10px 0;
 }
 .multi-select-control .icon {
-  background-image: url(../jquery-ui/base/images/ui-icons_888888_256x240.png);
+  background-image: url(../Common/Images/ui-icons_888888_256x240.png);
 }
 /********************************************************/
 /*                         Grid                         */
@@ -113,7 +113,7 @@
   background: #4e71bb;
 }
 .ui-datepicker .ui-widget-header .ui-icon {
-  background-image: url(../jquery-ui/base/images/ui-icons_cbd4e6_256x240.png);
+  background-image: url(../Common/Images/ui-icons_222222_256x240.png);
 }
 .ui-datepicker .ui-widget-header .ui-datepicker-month,
 .ui-datepicker .ui-widget-header .ui-datepicker-year {
@@ -427,6 +427,34 @@ a:hover {
 }
 .header nav .menu > li.has-kids:hover > a {
   cursor: default;
+}
+.header .user-notify-wrap {
+  float: right;
+  display: inline-block;
+  position: relative;
+}
+.header .user-notify-wrap .user-notify {
+  background: url(img/bell.png) no-repeat 10px center transparent;
+  border: 0px;
+  cursor: pointer;
+  padding: 29px 10px 3px 30px;
+  margin: 5px 22px 0px 5px;
+}
+.header .user-notify-wrap .badge.up {
+  top: 2px;
+  border-radius: 15px;
+  left: 30px;
+}
+.header .user-notify-wrap .badge-danger {
+  color: #fff;
+  background-color: #f44336;
+}
+.header .user-notify-wrap .badge {
+  padding: 3px 6px;
+  position: absolute;
+}
+.header .user-notify-wrap .notify-pointer {
+  cursor: pointer;
 }
 .header .user-info {
   float: right;
@@ -750,6 +778,7 @@ input[type="submit"].btn-ok,
   border: 1px solid #cecccd;
   height: 25px;
   padding: 2px;
+  margin-left: -5px;
 }
 .filter-form .form-group .width-160 {
   width: 160px;
@@ -1112,5 +1141,11 @@ input[type="checkbox"].input-validation-error {
 .btn-customCancel {
   background: #9e9e9e !important;
   border-color: #9e9e9e !important;
+}
+.inputbox {
+  border: 1px solid #cecccd;
+  height: 25px;
+  padding: 2px;
+  margin: 0 0 10px;
 }
 /*# sourceMappingURL=site.css.map */

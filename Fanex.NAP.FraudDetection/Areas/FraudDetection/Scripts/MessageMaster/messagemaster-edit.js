@@ -93,11 +93,12 @@ function initializeTagIt() {
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#Recipient').val(tempDisplayText);
+                    tempId = null;
                 }
             },
             beforeTagRemoved: function (event, ui) {
                 var label = ui.tagLabel;
-                var usernameArr = $('#fakeRecipientTags').val().split(';');
+                var usernameArr = getTags($("#RecipientTags").tagit("assignedTags")).split(';');
                 var idArr = $('#Recipient').val().split(';');
                 var index = $.inArray(label, usernameArr);
                 var result = '';
@@ -166,11 +167,12 @@ function initializeTagIt() {
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#OnlineRecipient').val(tempDisplayText);
+                    tempId = null;
                 }
             },
             beforeTagRemoved: function (event, ui) {
                 var label = ui.tagLabel;
-                var usernameArr = $('#fakeOnlRecipientTags').val().split(';');
+                var usernameArr = getTags($("#OnlRecipientTags").tagit("assignedTags")).split(';');
                 var idArr = $('#OnlineRecipient').val().split(';');
                 var index = $.inArray(label, usernameArr);
                 var result = '';

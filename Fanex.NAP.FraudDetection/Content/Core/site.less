@@ -195,36 +195,36 @@ a {
                 }
             }
 
-                > li:hover {
-                    > a {
-                        text-decoration: none;
-                        background-color: @menu-bg-o;
-                        color: @menu-text-o;
-                        text-shadow: 0 0 3px @white;
-                        border: 1px solid @sub-menu-bg-o;
-                        border-color: @sub-menu-bg-o @sub-menu-bg-o rgba(0, 0, 0, 0);
-                    }
-
-                    ul {
-                        top: 32px;
-                        visibility: visible;
-                        opacity: 1;
-                        border: 1px solid @sub-menu-bg-o;
-                        border-color: rgba(0, 0, 0, 0) @sub-menu-bg-o @sub-menu-bg-o;
-                    }
+            > li:hover {
+                > a {
+                    text-decoration: none;
+                    background-color: @menu-bg-o;
+                    color: @menu-text-o;
+                    text-shadow: 0 0 3px @white;
+                    border: 1px solid @sub-menu-bg-o;
+                    border-color: @sub-menu-bg-o @sub-menu-bg-o rgba(0, 0, 0, 0);
                 }
 
-                > li.first {
-                    border-left: 0 none;
+                ul {
+                    top: 32px;
+                    visibility: visible;
+                    opacity: 1;
+                    border: 1px solid @sub-menu-bg-o;
+                    border-color: rgba(0, 0, 0, 0) @sub-menu-bg-o @sub-menu-bg-o;
                 }
+            }
 
-                > li.last {
-                    border-right: 0 none;
-                }
+            > li.first {
+                border-left: 0 none;
+            }
 
-                > li.has-kids:hover > a {
-                    cursor: default;
-                }
+            > li.last {
+                border-right: 0 none;
+            }
+
+            > li.has-kids:hover > a {
+                cursor: default;
+            }
         }
     }
 
@@ -236,6 +236,7 @@ a {
         .user-notify {
             background: url(img/bell.png) no-repeat 10px center transparent;
             border: 0px;
+            cursor: pointer;
             padding: 29px 10px 3px 30px;
             margin: 5px 22px 0px 5px;
         }
@@ -256,7 +257,7 @@ a {
             position: absolute;
         }
 
-        .notify-pointer{
+        .notify-pointer {
             cursor: pointer;
         }
     }
@@ -416,10 +417,10 @@ a {
             float: left;
         }
 
-            li + li:before {
-                color: #767676;
-                padding: 0 2px;
-            }
+        li + li:before {
+            color: #767676;
+            padding: 0 2px;
+        }
     }
 
     .button-action {
@@ -858,11 +859,11 @@ input[type="submit"], .btn-primary {
         }
     }
 
-        thead > tr > th, tbody > tr > th, tfoot > tr > th,
-        thead > tr > td, tbody > tr > td, tfoot > tr > td {
-            min-height: 25px;
-            padding: 5px;
-        }
+    thead > tr > th, tbody > tr > th, tfoot > tr > th,
+    thead > tr > td, tbody > tr > td, tfoot > tr > td {
+        min-height: 25px;
+        padding: 5px;
+    }
 }
 
 /********************************************************/

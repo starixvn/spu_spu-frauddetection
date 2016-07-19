@@ -22,5 +22,6 @@ function ReCheckin() {
 }
 
 $(document).ready(function () {
+    ReCheckin();
     setInterval(ReCheckin, 10000);
 });
