@@ -68,6 +68,8 @@ function initializeTagIt() {
                 },
                 focus: function (event, ui) {
                     event.target.value = ui.item.label;
+                    tempDisplayText = $('#Recipient').val();
+                    tempId = ui.item.value;
                     return false;
                 },
                 search: function (event, ui) {
@@ -140,6 +142,8 @@ function initializeTagIt() {
                 },
                 focus: function (event, ui) {
                     event.target.value = ui.item.label;
+                    tempDisplayText = $('#OnlineRecipient').val();
+                    tempId = ui.item.value;
                     return false;
                 },
                 search: function (event, ui) {

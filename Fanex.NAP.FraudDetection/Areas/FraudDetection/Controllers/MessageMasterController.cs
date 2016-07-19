@@ -121,7 +121,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
         [HttpGet]
         public string EditMessage(int messageId)
         {

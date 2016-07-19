@@ -58,6 +58,8 @@ function initializeTagIt() {
                 },
                 focus: function (event, ui) {
                     event.target.value = ui.item.label;
+                    tempDisplayText = $('#Recipient').val();
+                    tempId = ui.item.value;
                     return false;
                 },
                 search: function (event, ui) {
@@ -120,6 +122,7 @@ function initializeTagIt() {
             autocomplete: {
                 delay: 350,
                 select: function (event, ui) {
+                    debugger
                     event.preventDefault();
                     tempDisplayText = $('#OnlineRecipient').val();
                     tempId = ui.item.value;
@@ -132,6 +135,8 @@ function initializeTagIt() {
                 },
                 focus: function (event, ui) {
                     event.target.value = ui.item.label;
+                    tempDisplayText = $('#OnlineRecipient').val();
+                    tempId = ui.item.value;
                     return false;
                 },
                 search: function (event, ui) {
@@ -164,6 +169,7 @@ function initializeTagIt() {
                 }
             },
             afterTagAdded: function () {
+                debugger
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#OnlineRecipient').val(tempDisplayText);
