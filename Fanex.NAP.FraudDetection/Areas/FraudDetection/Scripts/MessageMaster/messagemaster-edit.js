@@ -189,6 +189,10 @@ function initializeTagIt() {
             }
         });
         initializeTags("OnlRecipientTags");
+
+        $('.ui-dialog-title').mousedown(function () {
+            $('.tagit-autocomplete').hide();
+        });
     });
 
     $('input[id^="fake"').hide();

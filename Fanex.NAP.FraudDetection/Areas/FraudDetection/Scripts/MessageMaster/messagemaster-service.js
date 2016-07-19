@@ -2,8 +2,6 @@
     "use strict";
     var messMasterService = {};
 
-    messMasterService.mailUlr = '';
-
     messMasterService.isHostPermission = false;
 
     messMasterService.getAllMessage = function () {
@@ -127,7 +125,10 @@
     messMasterService.addMessage = function (message) {
         messMasterFactory.addMessage(message).success(function (result) {
             if (result.IsSuccessful) {
-                window.location.href = window.location.href.split('/AddMessage', 1)[0].toString();
+                //window.location.href = window.location.href.split('/AddMessage', 1)[0].toString();
+                messMasterService.getAllMessage();
+                DialogService.closeDialog();
+                AlertService.showAlert(result);
             } else {
                 AlertServiceOnPopup.showAlert(result);
                 $('#sentAlertOnPopup').css({
@@ -140,7 +141,10 @@
     messMasterService.editMessage = function (message) {
         messMasterFactory.editMessage(message).success(function (result) {
             if (result.IsSuccessful) {
-                window.location.href = window.location.href.split('/EditMessage', 1)[0].toString();
+                //window.location.href = window.location.href.split('/EditMessage', 1)[0].toString();
+                messMasterService.getAllMessage();
+                DialogService.closeDialog();
+                AlertService.showAlert(result);
             } else {
                 AlertServiceOnPopup.showAlert(result);
                 $('#sentAlertOnPopup').css({

@@ -24,7 +24,7 @@
             var onlRecipientIds = $('#OnlineRecipient').val();
             var errMess = "Invalid Recipient";
 
-            
+
             if ((recipientTags && recipientIds === "") || (onlRecipientTags && onlRecipientIds === "")) {
                 AlertServiceOnPopup.showAlert(errMess);
                 $('#sentAlertOnPopup').css({
@@ -100,7 +100,6 @@ function initializeTagIt() {
                 }
             },
             afterTagAdded: function () {
-                debugger
                 if (tempId !== null) {
                     tempDisplayText += tempId + ";";
                     $('#Recipient').val(tempDisplayText);
@@ -196,8 +195,12 @@ function initializeTagIt() {
                 $('#OnlineRecipient').val(result);
             }
         });
-    });
 
+        $('.ui-dialog-title').mousedown(function() {
+            $('.tagit-autocomplete').hide();
+        });
+    });
+    
     $('input[id^="fake"').hide();
 }
 
