@@ -33,7 +33,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return View("~/Areas/FraudDetection/Views/MessageMaster/ListMessage.cshtml");
         }
 
-        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Host)]
         public string AddMessage()
         {
             return RenderViewToString(ControllerContext, "~/Areas/FraudDetection/Views/MessageMaster/AddMessage.cshtml");
@@ -121,7 +121,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = FDFunctionKeys.MessageMaster, Policy = Constant.Policy.Host)]
         [HttpGet]
         public string EditMessage(int messageId)
         {
