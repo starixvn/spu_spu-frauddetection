@@ -165,6 +165,7 @@
     <Setting Key="FD_MessageMasterUpdate" SpName="FD_MessageMasterUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_MessageMasterUpdateStatus" SpName="FD_MessageMasterUpdateStatus" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
+  
   <Function Name="Notification">
     <Setting Key="FD_NotificationGetUserOnline" SpName="FD_NotificationGetUserOnline" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_NotificationInsertUserAction" SpName="FD_NotificationInsertUserAction" DbName="DBFD.FraudDetection.bodbSPUNet" />

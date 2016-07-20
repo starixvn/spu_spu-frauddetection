@@ -18,9 +18,6 @@
             var url = SPU.getAbsoluteUrl('MessageMaster/DeleteMessage');
             return $.post(url, { messageId: messId });
         },
-        //getMailById: function (mailId) {
-        //    return $.get('MailMaster/EditMail', { mailId: mailId });
-        //},
         editMessage: function (message) {
             var url = SPU.getAbsoluteUrl('MessageMaster/EditMessage');
             return $.post(url, message);

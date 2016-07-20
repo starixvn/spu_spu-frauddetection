@@ -212,7 +212,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         private List<User> GetUsers()
         {
-            const string FunctionKey = FDFunctionKeys.MessageMaster;
+            const string FunctionKey = FDFunctionKeys.SuspiciousCustomer;
             var siteId = int.Parse(ConfigurationManager.AppSettings["SiteId"]);
             var notificationFunction = new FunctionService().GetByKeyAndSite(FunctionKey, siteId);
             var users = new UserService().GetByFunctionAndSite(notificationFunction.Id, siteId);
