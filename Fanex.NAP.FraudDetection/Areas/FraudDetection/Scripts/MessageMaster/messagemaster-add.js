@@ -85,14 +85,16 @@ function initializeTagIt() {
                         });
 
                         $(tempData).each(function (index, element) {
-                            if (element.label.indexOf(keyword) != -1) {
+                            if (element.label.indexOf(keyword) != -1 ||
+                                element.label.toUpperCase().indexOf(keyword.toUpperCase()) != -1) {
                                 newSource.push(element);
                             }
                         });
                     }
                     else {
                         $(tempData).each(function (index, element) {
-                            if (element.label.indexOf(keyword) != -1) {
+                            if (element.label.indexOf(keyword) != -1 ||
+                                element.label.toUpperCase().indexOf(keyword.toUpperCase()) != -1) {
                                 newSource.push(element);
                             }
                         });
@@ -159,14 +161,16 @@ function initializeTagIt() {
                         });
 
                         $(tempData).each(function (index, element) {
-                            if (element.label.indexOf(keyword) != -1) {
+                            if (element.label.indexOf(keyword) != -1 ||
+                                element.label.toUpperCase().indexOf(keyword.toUpperCase()) != -1) {
                                 newSource.push(element);
                             }
                         });
                     }
                     else {
                         $(tempData).each(function (index, element) {
-                            if (element.label.indexOf(keyword) != -1) {
+                            if (element.label.indexOf(keyword) != -1 ||
+                                element.label.toUpperCase().indexOf(keyword.toUpperCase()) != -1) {
                                 newSource.push(element);
                             }
                         });
@@ -200,11 +204,11 @@ function initializeTagIt() {
             }
         });
 
-        $('.ui-dialog-title').mousedown(function() {
+        $('.ui-dialog-title').mousedown(function () {
             $('.tagit-autocomplete').hide();
         });
     });
-    
+
     $('input[id^="fake"').hide();
 }
 
