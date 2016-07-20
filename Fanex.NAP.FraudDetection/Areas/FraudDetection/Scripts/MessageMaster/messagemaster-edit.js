@@ -91,6 +91,12 @@ function initializeTagIt() {
                     }
 
                     $(this).autocomplete('option', 'source', newSource);
+                    if (newSource.length === 1) {
+                        $(".ui-autocomplete-input").autocomplete("option", "autoFocus", true);
+                    }
+                },
+                close: function (event, ui) {
+                    $(".ui-autocomplete-input").autocomplete("option", "autoFocus", false);
                 }
             },
             afterTagAdded: function () {
@@ -168,6 +174,12 @@ function initializeTagIt() {
                     }
 
                     $(this).autocomplete('option', 'source', newSource);
+                    if (newSource.length === 1) {
+                        $(".ui-autocomplete-input").autocomplete("option", "autoFocus", true);
+                    }
+                },
+                close: function (event, ui) {
+                    $(".ui-autocomplete-input").autocomplete("option", "autoFocus", false);
                 }
             },
             afterTagAdded: function () {
@@ -211,11 +223,6 @@ function initializeTags(parentName) {
     recips.forEach(function (recipient) {
         $("#" + parentName).tagit("createTag", recipient);
     });
-}
-
-function isValidId(id) {
-    var regex = /^\d+$/;
-    return regex.test(id);
 }
 
 function getTags(tags) {
