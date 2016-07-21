@@ -7,10 +7,10 @@
         });
 
         $("#btn_addMessage").click(function () {
-            addMail.submit();
+            addMessage.submit();
         });
 
-        var addMail = $('#addNewMesssageForm').submit(function (event) {
+        var addMessage = $('#addNewMesssageForm').submit(function (event) {
             event.preventDefault();
 
             if ($('#addNewMesssageForm').valid()) {
@@ -39,14 +39,6 @@
         });
     });
 
-    function insertParameters(name) {
-        var txt = '<placeholder>' + name + '</placeholder>';
-        var displayContent = $('#displayContent');
-
-        displayContent.val(displayContent.val() + txt);
-        displayContent.focus();
-    }
-
     var tempData;
     function initializeTagIt() {
         var tempId = null;
@@ -62,13 +54,10 @@
                     },
                     select: function (event, ui) {
                         event.preventDefault();
-                        tempDisplayText = $('#Recipient').val();
-                        tempId = ui.item.value;
-                        event.target.value = ui.item.label;
+                        $('#RecipientTags').tagit('createTag', ui.item.label);
                     },
                     focus: function (event, ui) {
                         event.target.value = ui.item.label;
-                        tempDisplayText = $('#Recipient').val();
                         tempId = ui.item.value;
                         return false;
                     },
@@ -111,6 +100,7 @@
                 },
                 afterTagAdded: function () {
                     if (tempId !== null) {
+                        tempDisplayText = $('#Recipient').val();
                         tempDisplayText += tempId + ";";
                         $('#Recipient').val(tempDisplayText);
                         tempId = null;
@@ -144,13 +134,10 @@
                     },
                     select: function (event, ui) {
                         event.preventDefault();
-                        tempDisplayText = $('#OnlineRecipient').val();
-                        tempId = ui.item.value;
-                        event.target.value = ui.item.label;
+                        $('#OnlRecipientTags').tagit('createTag', ui.item.label);
                     },
                     focus: function (event, ui) {
                         event.target.value = ui.item.label;
-                        tempDisplayText = $('#OnlineRecipient').val();
                         tempId = ui.item.value;
                         return false;
                     },
@@ -193,6 +180,7 @@
                 },
                 afterTagAdded: function () {
                     if (tempId !== null) {
+                        tempDisplayText = $('#OnlineRecipient').val();
                         tempDisplayText += tempId + ";";
                         $('#OnlineRecipient').val(tempDisplayText);
                         tempId = null;
@@ -240,3 +228,11 @@
         return $('<div/>').html(value).text();
     }
 })();
+
+function insertParameters(name) {
+    var txt = '<placeholder>' + name + '</placeholder>';
+    var displayContent = $('#displayContent');
+
+    displayContent.val(displayContent.val() + txt);
+    displayContent.focus();
+}

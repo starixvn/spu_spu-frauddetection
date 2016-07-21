@@ -45,12 +45,6 @@ function initializeTagIt() {
         $('#RecipientTags').tagit({
             autocomplete: {
                 delay: 350,
-                select: function (event, ui) {
-                    event.preventDefault();
-                    tempDisplayText = $('#Recipient').val();
-                    tempId = ui.item.value;
-                    event.target.value = ui.item.label;
-                },
                 appendTo: $('#popup').parent().parent(),
                 open: function () {
                     var indexValue = $('#popup').parent().css("z-index");
@@ -58,7 +52,6 @@ function initializeTagIt() {
                 },
                 focus: function (event, ui) {
                     event.target.value = ui.item.label;
-                    tempDisplayText = $('#Recipient').val();
                     tempId = ui.item.value;
                     return false;
                 },
@@ -95,12 +88,17 @@ function initializeTagIt() {
                         $(".ui-autocomplete-input").autocomplete("option", "autoFocus", true);
                     }
                 },
+                select: function (event, ui) {
+                    event.preventDefault();
+                    $('#RecipientTags').tagit('createTag', ui.item.label);
+                },
                 close: function (event, ui) {
                     $(".ui-autocomplete-input").autocomplete("option", "autoFocus", false);
                 }
             },
             afterTagAdded: function () {
                 if (tempId !== null) {
+                    tempDisplayText = $('#Recipient').val();
                     tempDisplayText += tempId + ";";
                     $('#Recipient').val(tempDisplayText);
                     tempId = null;
@@ -130,11 +128,8 @@ function initializeTagIt() {
             autocomplete: {
                 delay: 350,
                 select: function (event, ui) {
-                    debugger
                     event.preventDefault();
-                    tempDisplayText = $('#OnlineRecipient').val();
-                    tempId = ui.item.value;
-                    event.target.value = ui.item.label;
+                    $('#OnlRecipientTags').tagit('createTag', ui.item.label);
                 },
                 appendTo: $('#popup').parent().parent(),
                 open: function () {
@@ -143,7 +138,6 @@ function initializeTagIt() {
                 },
                 focus: function (event, ui) {
                     event.target.value = ui.item.label;
-                    tempDisplayText = $('#OnlineRecipient').val();
                     tempId = ui.item.value;
                     return false;
                 },
@@ -183,8 +177,8 @@ function initializeTagIt() {
                 }
             },
             afterTagAdded: function () {
-                debugger
                 if (tempId !== null) {
+                    tempDisplayText = $('#OnlineRecipient').val();
                     tempDisplayText += tempId + ";";
                     $('#OnlineRecipient').val(tempDisplayText);
                     tempId = null;
