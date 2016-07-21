@@ -226,19 +226,19 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     continue;
                 }
 
-                //result.Add(new User() 
-                //{ 
-                //    Id = user.User.Id, 
-                //    Username = user.User.Username 
-                //});
-                if (user.User.Group == null)
+                result.Add(new User()
                 {
-                    result.Add(user.User);
-                }
-                else if (!user.User.Group.Name.Equals("IT"))
-                {
-                    result.Add(user.User);
-                }
+                    Id = user.User.Id,
+                    Username = user.User.Username
+                });
+                //if (user.User.Group == null)
+                //{
+                //    result.Add(user.User);
+                //}
+                //else if (!user.User.Group.Name.Equals("IT"))
+                //{
+                //    result.Add(user.User);
+                //}
             }
 
             return result;
