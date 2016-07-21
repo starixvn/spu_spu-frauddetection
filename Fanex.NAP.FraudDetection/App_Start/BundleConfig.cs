@@ -181,9 +181,11 @@ namespace Fanex.NAP.FraudDetection.AppStart
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-list.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/AddMessageMaster").Include(
+                "~/Areas/FraudDetection/AddOns/TagIt/tag-it.min.js",
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-add.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/EditMessageMaster").Include(
+                "~/Areas/FraudDetection/AddOns/TagIt/tag-it.min.js",
                 "~/Areas/FraudDetection/Scripts/MessageMaster/messagemaster-edit.js"));
         }
     }

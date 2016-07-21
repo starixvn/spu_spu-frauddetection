@@ -6,7 +6,6 @@
 
 @section FooterJs
 {
-    @Scripts.Render("~/bundles/TagItJs")
     @Scripts.Render("~/bundles/App/AddMessageMaster")
 }
 @using (Html.BeginForm("Add", "MessageMaster", FormMethod.Post, new { @id = "addNewMesssageForm" }))
