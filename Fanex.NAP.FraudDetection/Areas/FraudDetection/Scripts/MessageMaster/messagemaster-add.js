@@ -46,6 +46,7 @@
         var userList = [];
         messMasterFactory.getAllUser().success(function (result) {
             userList = result;
+            $('.tagit-autocomplete').css("font-size", "1.4em");
         });
 
         $('#RecipientTags').tagit({
