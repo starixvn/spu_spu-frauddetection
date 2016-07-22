@@ -36,7 +36,7 @@
                     </label>
                 </div>
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.MessageDesc, new { @class = "col-sm-11 inputbox ui-corner-all" })
+                    @Html.TextBoxFor(model => model.MessageDesc, new { @class = "col-sm-12 inputbox ui-corner-all" })
                 </div>
             </div>
             <div class="col-sm-12">
@@ -44,7 +44,7 @@
                     Content
                 </label>
                 <div class="col-sm-9">
-                    @Html.TextArea("displayContent", new { @class = "col-sm-11 inputbox ui-corner-all textarea", @id = "displayContent" })
+                    @Html.TextArea("displayContent", new { @class = "col-sm-12 inputbox ui-corner-all textarea", @id = "displayContent" })
                     @Html.HiddenFor(model => model.MessageContent, new { @id = "content" })
                 </div>
             </div>
@@ -57,8 +57,8 @@
                          title="Those who will receive the message even they are online or offline" />
                 </div>
                 <div class="col-sm-9">
-                    <ul id="RecipientTags" class="col-sm-11"></ul>
-                    @Html.TextBoxFor(model => model.UsernameRecipient, new { @id = "fakeRecipientTags", @class = "inputbox col-sm-11 ui-corner-all textarea" })
+                    <ul id="RecipientTags" class="col-sm-12"></ul>
+                    @Html.TextBoxFor(model => model.UsernameRecipient, new { @id = "fakeRecipientTags", @class = "inputbox col-sm-12 ui-corner-all textarea" })
                     @Html.HiddenFor(model => model.Recipient)
                 </div>
             </div>
@@ -71,8 +71,8 @@
                          title="Those who will receive the message only when they are online" />
                 </div>
                 <div class="col-sm-9">
-                    <ul id="OnlRecipientTags" class="col-sm-11"></ul>
-                    @Html.TextBoxFor(model => model.UsernameOnlineRecipient, new { @id = "fakeOnlRecipientTags", @class = "inputbox col-sm-11 ui-corner-all" })
+                    <ul id="OnlRecipientTags" class="col-sm-12"></ul>
+                    @Html.TextBoxFor(model => model.UsernameOnlineRecipient, new { @id = "fakeOnlRecipientTags", @class = "inputbox col-sm-12 ui-corner-all" })
                     @Html.HiddenFor(model => model.OnlineRecipient)
                 </div>
             </div>

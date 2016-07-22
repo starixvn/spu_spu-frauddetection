@@ -32,20 +32,17 @@ label {
     font-weight: normal;
 }
 
-.question-icon {
-    height: 15px;
-    width: 15px;
-}
-
 .btn-green {
     font-size: 12px !important;
 }
 
 .paramerter {
     border: 1px solid #9E9E9E;
-    /*height: 300px;*/
+    height: 305px;
     padding: 10px;
     margin-bottom: 0;
+    margin-left: -30px;
+    width: 100%;
 }
 
 .readonly-input{

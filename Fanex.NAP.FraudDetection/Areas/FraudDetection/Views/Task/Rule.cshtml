@@ -214,9 +214,11 @@
                         <td>
                             <div>
                                 <input type="checkbox" ng-model="taskCtr.nextActionCaptureData.IsTicked" />
-                                {{ taskCtr.NextActions[2].Name }} <span data-placement="top" data-toggle="tooltip"
+                                {{ taskCtr.NextActions[2].Name }} @*<span data-placement="top" data-toggle="tooltip"
                                                                         title="Generated data will be kept in 14 days only." style="margin-left: 5px;
-                                    cursor: pointer;" class="glyphicon glyphicon-question-sign"></span>
+                                    cursor: pointer;" class="glyphicon glyphicon-question-sign"></span>*@
+                                <img src="~/Areas/FraudDetection/App_Themes/Images/icon-question.PNG" class="question-icon"
+                                     title="Generated data will be kept in 14 days only." />
                             </div>
                         </td>
                         <td ng-show="taskCtr.nextActionCaptureData.IsTicked">

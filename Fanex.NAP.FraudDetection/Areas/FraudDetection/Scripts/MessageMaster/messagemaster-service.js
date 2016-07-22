@@ -155,20 +155,27 @@
     };
 
     messMasterService.openPopupAddMessage = function () {
-        messMasterFactory.addNewMessage().success(function (response) {
-            DialogService.setDialogId("popup");
-            DialogService.openDialogContent(response, "New Message", {
-                width: '1000px'
+        $.blockUI();
+        messMasterFactory.addNewMessage()
+            .success(function (response) {
+                DialogService.setDialogId("popup");
+                DialogService.openDialogContent(response, "New Message", {
+                    width: '1000px'
+                });
+            }).complete(function () {
+                $.unblockUI();
             });
-        });
     };
 
     messMasterService.openPopupEditMessage = function (messageId) {
+        $.blockUI();
         messMasterFactory.editMessageInfo(messageId).success(function (response) {
             DialogService.setDialogId("popup");
             DialogService.openDialogContent(response, "Edit Message", {
                 width: '1000px'
             });
+        }).complete(function () {
+            $.unblockUI();
         });
     };
 
