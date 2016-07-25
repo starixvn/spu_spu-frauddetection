@@ -155,7 +155,7 @@
     };
 
     messMasterService.openPopupAddMessage = function () {
-        $.blockUI();
+        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
         messMasterFactory.addNewMessage()
             .success(function (response) {
                 DialogService.setDialogId("popup");
@@ -163,19 +163,19 @@
                     width: '1000px'
                 });
             }).complete(function () {
-                $.unblockUI();
+                waitingDialog.hide();
             });
     };
 
     messMasterService.openPopupEditMessage = function (messageId) {
-        $.blockUI();
+        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
         messMasterFactory.editMessageInfo(messageId).success(function (response) {
             DialogService.setDialogId("popup");
             DialogService.openDialogContent(response, "Edit Message", {
                 width: '1000px'
             });
         }).complete(function () {
-            $.unblockUI();
+            waitingDialog.hide();
         });
     };
 
