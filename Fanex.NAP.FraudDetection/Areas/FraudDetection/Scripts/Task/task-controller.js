@@ -35,6 +35,7 @@ function (taskModel) {
     vm.OnUserId = $("#onUserid").text();
     vm.Events = taskModel.Events;
     vm.Activities = taskModel.Activities;
+    vm.EvidenceTypes = taskModel.EvidenceTypes;
     vm.Configs = taskModel.Configs;
     vm.Configs = taskModel.Sports;
     vm.CustomerGroups = taskModel.CustomerGroups;
@@ -381,6 +382,7 @@ function (taskModel) {
     };
 
     vm.addRule = function () {
+        debugger;
         var ruleRow = {
             FormulaElements: vm.ruleRow.FormulaElements,
             Param: taskModel.getParam(vm.ruleRow.Param),
@@ -520,10 +522,14 @@ function (taskModel) {
         vm.Activities = taskModel.Activities;
     });
 
+    taskModel.getEvidenceTypes().then(function () {
+        vm.EvidenceTypes = taskModel.EvidenceTypes;
+    });
+
     taskModel.getBetTypes().then(function () {
         vm.BetTypes = taskModel.BetTypes;
     });
-} ]);
+}]);
 
 taskModule.controller('taskEditController',
 ['taskModel',
@@ -562,6 +568,7 @@ function (taskModel) {
     vm.Task = taskModel.Task;
     vm.Events = taskModel.Events;
     vm.Activities = taskModel.Activities;
+    vm.EvidenceTypes = taskModel.EvidenceTypes;
     vm.Configs = taskModel.Configs;
     vm.Configs = taskModel.Sports;
     vm.CustomerGroups = taskModel.CustomerGroups;
@@ -1017,7 +1024,6 @@ function (taskModel) {
         vm.Activities = taskModel.Activities;
     });
 
-
     taskModel.getTaskInfo(vm.TaskId).then(function () {
         vm.Task = taskModel.Task;
 
@@ -1052,27 +1058,30 @@ function (taskModel) {
                             vm.BetTypes = taskModel.BetTypes;
                             vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
                             taskModel.getConfigsByActivity(vm.Model.Activity.ActivityId).then(function () {
-                                vm.Configs = taskModel.Configs;
-                                vm.Preconditions = [];
-                                vm.Rules = [];
+                                vm.EvidenceTypes = taskModel.EvidenceTypes;
+                                taskModel.getEvidenceTypes().then(function () {
 
-                                angular.forEach(vm.Configs, function (config) {
-                                    if (config.ConfigCategory === "Match") {
-                                        vm.Preconditions.push(config);
-                                    } else {
-                                        vm.Rules.push(config);
-                                    }
+                                    vm.Configs = taskModel.Configs;
+                                    vm.Preconditions = [];
+                                    vm.Rules = [];
+
+                                    angular.forEach(vm.Configs, function (config) {
+                                        if (config.ConfigCategory === "Match") {
+                                            vm.Preconditions.push(config);
+                                        } else {
+                                            vm.Rules.push(config);
+                                        }
+                                    });
+
+                                    vm.ComparePreconditions = angular.copy(vm.Preconditions);
+                                    vm.CompareRules = angular.copy(vm.Rules);
+                                    vm.preconditionRow.Param = vm.Preconditions.length > 0 ? vm.Preconditions[0] : '';
+                                    vm.ruleRow.Param = vm.Rules.length > 0 ? vm.Rules[0] : '';
+                                    vm.Model.Rule.PreconditionTable = taskModel.makeFormula(vm.Task.TaskPreconditionsOriginal);
+                                    vm.Model.Rule.RuleTable = taskModel.makeFormula(vm.Task.TaskRulesOriginal);
+
+                                    taskModel.makeNextActions(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage, vm.Task.NextActionIdList, vm.Task.NextActionTargetIdList);
                                 });
-
-                                vm.ComparePreconditions = angular.copy(vm.Preconditions);
-                                vm.CompareRules = angular.copy(vm.Rules);
-                                vm.preconditionRow.Param = vm.Preconditions.length > 0 ? vm.Preconditions[0] : '';
-                                vm.ruleRow.Param = vm.Rules.length > 0 ? vm.Rules[0] : '';
-
-                                vm.Model.Rule.PreconditionTable = taskModel.makeFormula(vm.Task.TaskPreconditionsOriginal);
-                                vm.Model.Rule.RuleTable = taskModel.makeFormula(vm.Task.TaskRulesOriginal);
-
-                                taskModel.makeNextActions(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage, vm.Task.NextActionIdList, vm.Task.NextActionTargetIdList);
                             });
                         });
                     });
@@ -1080,4 +1089,4 @@ function (taskModel) {
             });
         });
     });
-} ]);
+}]);

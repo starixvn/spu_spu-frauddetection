@@ -97,6 +97,12 @@ taskModule.factory('taskFactory', ['$http', function ($http) {
             var url = SPU.getAbsoluteUrl("Task/GetMessages");
 
             return $http.get(url);
+        },
+
+        getEvidenceTypes: function () {
+            var url = SPU.getAbsoluteUrl("Task/GetEvidenceTypes");
+
+            return $http.get(url);
         }
     };
 } ]);

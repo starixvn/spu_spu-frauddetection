@@ -124,6 +124,9 @@
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Arbitrage' && !taskCtr.CompareWithOtherField.InRule"
                             ng-options="arbitrage as arbitrage.Name for arbitrage in taskCtr.Arbitrages"
                             ng-change=""></select>
+                    <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Evidence' && !taskCtr.CompareWithOtherField.InRule"
+                            ng-options="evidenceType as evidenceType.EviName for evidenceType in taskCtr.EvidenceTypes"
+                            ng-change=""></select>
                     @*IP Address*@
                     <input type="text" id="IpAddress" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name != 'between'" />
                     <input type="text" id="IpAddressFrom" style="width: 120px; height: 25px;" ng-show="taskCtr.DataInRule.IpAddress && !taskCtr.CompareWithOtherField.InRule && taskCtr.ruleRow.Operator.Name == 'between'" />

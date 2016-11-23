@@ -66,6 +66,7 @@ function (taskFactory) {
     taskModel.DataTypes = [];
     taskModel.Mails = [];
     taskModel.Messages = [];
+    taskModel.EvidenceTypes = [];
     taskModel.Timers = [
         { Id: 1, Value: "Second", Name: "Second(s)" },
         { Id: 2, Value: "Minute", Name: "Minute(s)" },
@@ -210,6 +211,12 @@ function (taskFactory) {
         });
     };
 
+    taskModel.getEvidenceTypes = function () {
+        return taskFactory.getEvidenceTypes().success(function (types) {
+            taskModel.EvidenceTypes = types;
+        });
+    };
+
     taskModel.getCustomerGroupByCase = function (caseId) {
         return taskFactory.getCustomerGroupByCase(caseId).success(function (customerGroups) {
             taskModel.CustomerGroups = customerGroups;
@@ -314,6 +321,11 @@ function (taskFactory) {
                 case "Choice":
                     result = configRow.Value;
                     break;
+                case "Evidence":
+                    result.Name = configRow.Value.EviName;
+                    result.Value = configRow.Value.EviCode;
+                    result.Id = configRow.Value.EviCode;
+                    break;
                 default:
                     result.Name = configRow.Value;
                     result.Value = configRow.Value;
@@ -396,7 +408,12 @@ function (taskFactory) {
 
                 break;
             case 'ComboBox':
-                value = row.Value.Value;
+                if (key == 'Evidence') {
+                    value = '%' + row.Value.Value + '%';
+                }
+                else {
+                    value = row.Value.Value;
+                }
                 break;
             case 'TextBox':
                 value = '%' + value + '%';
@@ -962,6 +979,14 @@ function (taskFactory) {
 
                 vm.ruleRow.Value = $('#IpAddress').val();
                 break;
+            case "Evidence":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.EvidenceTypes[0];
+                break;
             default:
                 vm.DataInRule.TextBox = true;
                 vm.DataInRule.ComboBox = false;
@@ -1112,6 +1137,13 @@ function (taskFactory) {
                     }).indexOf(parseInt(value));
                     if (index >= 0)
                         result = taskModel.Choices[index];
+                    break;
+                case "Evidence":
+                    index = taskModel.EvidenceTypes.map(function (e) {
+                        return e.EviCode;
+                    }).indexOf(value);
+                    if (index >= 0)
+                        result = taskModel.EvidenceTypes[index];
                     break;
                 default:
                     result = value;

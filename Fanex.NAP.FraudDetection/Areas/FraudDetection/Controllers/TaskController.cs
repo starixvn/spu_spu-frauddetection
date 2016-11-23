@@ -264,6 +264,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return Json(tasks, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
+        public ActionResult GetEvidenceTypes()
+        {
+            var evidenceTypes = new CommonService().GetEvidenceTypes(new EvidenceTypesGetAllCriteria());
+
+            return Json(evidenceTypes, JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// Run a Task.
         /// </summary>
