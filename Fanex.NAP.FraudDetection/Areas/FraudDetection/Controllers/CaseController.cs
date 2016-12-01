@@ -60,7 +60,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
-        [Compress]
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public JsonResult GetCaseList(CaseGetAllCriteria criteria)
         {
@@ -146,7 +145,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
-        [Compress]
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public JsonResult GetCaseDetail(TaskGetAllByCaseIdCriteria criteria)
         {

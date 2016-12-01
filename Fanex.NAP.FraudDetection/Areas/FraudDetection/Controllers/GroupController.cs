@@ -44,7 +44,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         /// </summary>
         /// <param name="criteria">The criteria for displaying.</param>
         /// <returns>Represents a JSON-formatted content for displaying.</returns>
-        [Compress]
         [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Read)]
         public JsonResult GetGroupList(GroupGetAllCriteria criteria)
         {
