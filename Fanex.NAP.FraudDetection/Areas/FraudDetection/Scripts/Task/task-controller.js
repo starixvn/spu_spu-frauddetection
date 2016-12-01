@@ -469,7 +469,8 @@ function (taskModel) {
                     "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage),
                     "PreconConfigs": taskModel.getConfigIds(vm.Model.Rule.PreconditionTable),
                     "RuleConfigs": taskModel.getConfigIds(vm.Model.Rule.RuleTable),
-                    "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable)
+                    "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable),
+                    "IsCheckNotSuspicious": taskModel.IsCheckNotSuspicious(vm.Model.Rule.PreconditionTable)
                 };
 
                 taskModel.addTask(param);
@@ -983,7 +984,8 @@ function (taskModel) {
                     "NextActionTargetIdList": taskModel.getNextActionTargetIdList(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage),
                     "PreconConfigs": taskModel.getConfigIds(vm.Model.Rule.PreconditionTable),
                     "RuleConfigs": taskModel.getConfigIds(vm.Model.Rule.RuleTable),
-                    "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable)
+                    "IsCheckNotScanned": taskModel.IsCheckNotScanned(vm.Model.Rule.PreconditionTable),
+                    "IsCheckNotSuspicious": taskModel.IsCheckNotSuspicious(vm.Model.Rule.PreconditionTable)
                 };
 
                 taskModel.editTask(param);
@@ -1058,9 +1060,8 @@ function (taskModel) {
                             vm.BetTypes = taskModel.BetTypes;
                             vm.OldActivityId = angular.copy(vm.Model.Activity.ActivityId);
                             taskModel.getConfigsByActivity(vm.Model.Activity.ActivityId).then(function () {
-                                vm.EvidenceTypes = taskModel.EvidenceTypes;
                                 taskModel.getEvidenceTypes().then(function () {
-
+                                    vm.EvidenceTypes = taskModel.EvidenceTypes;
                                     vm.Configs = taskModel.Configs;
                                     vm.Preconditions = [];
                                     vm.Rules = [];

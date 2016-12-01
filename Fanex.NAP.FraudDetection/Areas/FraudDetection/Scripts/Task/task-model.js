@@ -89,7 +89,9 @@ function (taskFactory) {
     ];
     taskModel.MatchStates = [
         { Id: 1, Value: "notscanned", Name: "Not Scanned" },
-        { Id: 2, Value: "scanned", Name: "Scanned" }
+        { Id: 2, Value: "scanned", Name: "Scanned" },
+        { Id: 3, Value: "notsuspicious", Name: "Not Suspicious" },
+        { Id: 4, Value: "suspicious", Name: "Suspicious" }
     ];
     taskModel.LeagueTypes = [
         { Id: 1, Value: "1", Name: "Main Markets" },
@@ -450,8 +452,12 @@ function (taskFactory) {
             data = key + " " + operator + " " + value;
         }
 
-        if (row.Param.Name === "Match State") {
+        if (row.Param.Name === "Match State" && row.Value.Name.indexOf('Scanned') >= 0) {
             data = "$MatchState$";
+        }
+
+        if (row.Param.Name === "Match State" && row.Value.Name.indexOf('Suspicious') >= 0) {
+            data = "$MatchState1$";
         }
 
         if (row.Param.Name === "Choice" && row.Value.Name !== "Has Changed From Original") {
@@ -837,6 +843,17 @@ function (taskFactory) {
         var result = false;
         angular.forEach(table, function (row) {
             if (row.Param.Name === "Match State" && row.Value.Name === "Not Scanned") {
+                result = true;
+            }
+        });
+
+        return result;
+    };
+
+    taskModel.IsCheckNotSuspicious = function (table) {
+        var result = false;
+        angular.forEach(table, function (row) {
+            if (row.Param.Name === "Match State" && row.Value.Name === "Not Suspicious") {
                 result = true;
             }
         });
