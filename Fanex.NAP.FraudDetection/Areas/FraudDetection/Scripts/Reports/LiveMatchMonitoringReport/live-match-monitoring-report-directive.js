@@ -8,6 +8,8 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
         [
             { HeaderText: "#", Width: 40, Name: "Row", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "MatchId", Width: 10, Name: "MatchId", HeaderAlign: "center", CellAlign: "left", CanResize: true },
+            { HeaderText: "Verified", Width: 40, Name: "Verified", HeaderAlign: "center", CellAlign: "center", CanResize: true, CustomCellRender: verifiedColumn },
+            { HeaderText: "Last Verified By", Width: 100, Name: "LastVerifiedBy", HeaderAlign: "center", CellAlign: "center", CanResize: true, CustomCellRender: lastVerifiedByColumn },
             { HeaderText: "Event", Width: 400, Name: "Event", HeaderAlign: "center", CellAlign: "left", CanResize: true, CustomCellRender: eventRenderer },
             { HeaderText: "Live Score", Width: 100, Name: "LiveScore", HeaderAlign: "center", CellAlign: "center", CanResize: true },
         ];
@@ -35,6 +37,8 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
                     Columns: [
                         { Name: "Row", Value: index + 1, TdClass: cssName },
                         { Name: "MatchId", Value: match.MatchId, TdClass: cssName },
+                        { Name: "Verified", Value: match, TdClass: cssName },
+                         { Name: "LastVerifiedBy", Value: match, TdClass: cssName },
                         {
                             Name: "Event", Value:
                               {
@@ -100,6 +104,21 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
         return rows;
     };
 
+    var verifiedColumn = function (cell) {
+        var matchId = cell.Value.MatchId;
+        var result = "<img alt='' " +
+            "data-matchid='" + matchId + "' " +
+            "id='v" + matchId + "' ";
+
+        if (cell.Value.IsVerified) {
+            result += "class='macth-monitoring-verified ico-tick'>";
+        } else {
+            result += "class='macth-monitoring-verified ico-untick'>";
+        }
+
+        return result;
+    };
+
     var scoreColumn = function (cell) {
         var match = cell.Value;
 
@@ -135,7 +154,8 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
             return "<img class='ico-scannedhassuspicious' " +
                 "data-matchid='" + matchId + "' " +
                 "data-casename='" + caseName + "' " +
-                "data-eventdate='" + eventDate + "'/>";
+                "data-suscount='" + susCount + "' " +
+                "data-eventdate='" + eventDate + "'/>" + "<span id=\"noti-unread-msg\" class=\"\" style=\"display: inline;\">(" + susCount + ")</span>";
         }
         else {
             return "<img class='ico-notscanned' alt=''/>";
@@ -162,6 +182,42 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
 
                 window.open(url, '_blank');
                 window.focus();
+            });
+        });
+    };
+
+    var lastVerifiedByColumn = function (cell) {
+        var matchId = cell.Value.MatchId;
+        var user = cell.Value.LastVerifiedBy.length > 0 ? cell.Value.LastVerifiedBy : "-";
+        var result = "<span " +
+            "id='lvb" + matchId + "'>" + user + "</span>";
+
+        return result;
+    };
+
+    var registerUpdateVerifiedEvent = function () {
+        var element = $(".freegrid .table-cell .macth-monitoring-verified");
+
+        element.die("click");
+        element.live("click", function (event) {
+            event.preventDefault();
+
+            var matchId = $(this).data("matchid");
+            var isActive = false;
+            if ($(this).hasClass('ico-tick')) {
+                isActive = true;
+            }
+
+            liveMatchMonitoringReportModel.updateVerification(matchId, !isActive).then(function () {
+                if (liveMatchMonitoringReportModel.IsUpdated) {
+                    if (isActive) {
+                        $('#v' + matchId).removeClass('ico-tick').addClass('ico-untick');
+                    } else {
+                        $('#v' + matchId).removeClass('ico-untick').addClass('ico-tick');
+                    }
+
+                    $('#lvb' + matchId).text($('.account-name').text());
+                }
             });
         });
     };
@@ -212,6 +268,8 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
                         $('#match-monitoring-report').fanexGrid(gridOptions);
 
                         registerViewDetailsEvent();
+
+                        registerUpdateVerifiedEvent();
 
                         $("#report-header").width($('#match-monitoring-report').width());
                         $("#report-header").removeClass("hidden");

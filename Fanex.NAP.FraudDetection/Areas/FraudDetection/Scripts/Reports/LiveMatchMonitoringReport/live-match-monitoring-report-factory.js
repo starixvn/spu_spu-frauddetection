@@ -45,6 +45,14 @@ liveMatchMonitoringReportModule.factory('liveMatchMonitoringReportFactory', ['$h
             return $http.get(url, {
                 params: { caseName: caseName }
             });
+        },
+
+        updateVerification: function (matchId, isActive) {
+            var url = SPU.getAbsoluteUrl("LiveMatchMonitoring/UpdateVerification");
+
+            return $http.get(url, {
+                params: { matchId: matchId, isActive: isActive }
+            });
         }
     };
 } ]);

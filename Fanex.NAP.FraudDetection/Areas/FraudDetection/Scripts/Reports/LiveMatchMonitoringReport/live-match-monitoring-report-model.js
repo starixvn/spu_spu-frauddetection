@@ -81,7 +81,12 @@ function (liveMatchMonitoringReportFactory) {
         });
     };
 
-
+    liveMatchMonitoringReportModel.updateVerification = function (matchId, isActive) {
+        return liveMatchMonitoringReportFactory.updateVerification(matchId, isActive).success(function (result) {
+            liveMatchMonitoringReportModel.IsUpdated = result.IsSuccessful;
+            AlertService.showAlert(result);
+        });
+    };
 
     liveMatchMonitoringReportModel.getLeaguesByDate = function (date) {
         return liveMatchMonitoringReportFactory.getLeaguesByDate(date).success(function (leagues) {

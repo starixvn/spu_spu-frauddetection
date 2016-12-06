@@ -4,6 +4,7 @@
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.FraudDetection.Controllers;
+    using Fanex.NAP.FraudDetection.Service;
     using Fanex.NAP.FraudDetection.Service.Core;
     using FD.Lib.Criteria.Bettype;
     using FD.Lib.Criteria.Case;
@@ -132,6 +133,20 @@
             });
 
             return caseInfo.CaseId;
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
+        public ActionResult UpdateVerification(int matchId, bool isActive)
+        {
+            var result = liveMatchMonitoringReportService.UpdateVerification(new LiveMatchMonitoringReportUpdateVerifiedCriteria
+            {
+                IsVerified = isActive,
+                MatchId = matchId,
+                VerifiedBy = AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         private static void MapRemotingRefData(List<LiveMatchMonitoring> data)
