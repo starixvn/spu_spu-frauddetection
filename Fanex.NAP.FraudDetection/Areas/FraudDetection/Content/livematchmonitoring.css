@@ -1,23 +1,41 @@
-﻿.ico-notscanned {
-    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -36px -137px transparent;
+﻿.number-bet-count {
+    background: #3c5ea5;
+    font-size: 10px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    position: absolute;
+    top: -5px;
+    left: 56px;
+    margin-top:5px;
+}
+
+.ico-notscanned {
+    background: url("images/icon.png") no-repeat scroll 0px -32px transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
+    vertical-align: middle;
 }
 
 .ico-scannednosuspicious {
-    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -19px -138px transparent;
+    background: url("images/icon.png") no-repeat scroll 0px -16px transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
+    vertical-align: middle;
 }
 
 .ico-scannedhassuspicious {
-    background: url("../App_Themes/Images/basic-icon.png") no-repeat scroll -67px -59px transparent;
+    background: url("images/icon.png") no-repeat scroll 0px 0px transparent;
     display: inline-block;
     height: 16px;
     width: 16px;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .button-refresh {

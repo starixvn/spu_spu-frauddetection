@@ -105,16 +105,16 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
         var caseName = cell.Name;
 
         if (susCount == 0) {
-            return "<img class='ico-scannednosuspicious' alt=''/>";
+            return "<span class='ico-scannednosuspicious'></span>";
         }
         else if (susCount > 0) {
-            return "<img class='ico-scannedhassuspicious' " +
+            return "ánpan class='ico-scannedhassuspicious' " +
                 "data-matchid='" + matchId + "' " +
                 "data-casename='" + caseName + "' " +
-                "data-eventdate='" + eventDate + "'/>";
+                "data-eventdate='" + eventDate + "'></span>";
         }
         else {
-            return "<img class='ico-notscanned' alt=''/>";
+            return "<span class='ico-notscanned'></span>";
         }
     };
 

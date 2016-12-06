@@ -148,17 +148,17 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
         var caseName = cell.Name;
 
         if (susCount == 0) {
-            return "<img class='ico-scannednosuspicious' alt=''/>";
+            return "<span class='ico-scannednosuspicious'></span>";
         }
         else if (susCount > 0) {
-            return "<img class='ico-scannedhassuspicious' " +
+            return "<div class='ico-scannedhassuspicious' " +
                 "data-matchid='" + matchId + "' " +
                 "data-casename='" + caseName + "' " +
                 "data-suscount='" + susCount + "' " +
-                "data-eventdate='" + eventDate + "'/>" + "<span id=\"noti-unread-msg\" class=\"\" style=\"display: inline;\">(" + susCount + ")</span>";
+                "data-eventdate='" + eventDate + "'>" + "<span class=\"number-bet-count\">" + susCount + "</span>" + "</div>";
         }
         else {
-            return "<img class='ico-notscanned' alt=''/>";
+            return "<span class='ico-notscanned'></span>";
         }
     };
 

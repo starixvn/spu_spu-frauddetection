@@ -523,6 +523,7 @@
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.css" />
     <Content Include="Areas\FraudDetection\App_Themes\msgbox\msgbox-0.0.1.js" />
     <Content Include="Areas\FraudDetection\App_Themes\site.css" />
+    <Content Include="Areas\FraudDetection\Content\images\icon.png" />
     <Content Include="Areas\FraudDetection\Content\livematchmonitoring.css" />
     <Content Include="Areas\FraudDetection\Content\messagemaster.css" />
     <Content Include="Areas\FraudDetection\Content\suspiciouscustomerdetailreport.css" />
