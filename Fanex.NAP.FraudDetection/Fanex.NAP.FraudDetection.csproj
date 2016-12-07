@@ -318,6 +318,7 @@
     <Compile Include="App_Start\TrackLoginsFilter.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\NotificationController.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\MessageMasterController.cs" />
+    <Compile Include="Controller\Api\ApiFPSController.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
