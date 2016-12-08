@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
+  <Function Name="FD_API">
+    <Setting Key="FD_FlaggedAccountInsert" SpName="FD_FlaggedAccountInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_FlaggedAccountDelete" SpName="FD_FlaggedAccountDelete" DbName="DBFD.FraudDetection.bodbSPUNet" />
+  </Function>
+  
   <Function Name="FD_Case">
     <Setting Key="FD_CaseGetAll" SpName="FD_CaseGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />

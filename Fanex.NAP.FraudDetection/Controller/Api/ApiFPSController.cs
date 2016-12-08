@@ -1,28 +1,29 @@
 ﻿namespace Fanex.NAP.FraudDetection.Controller.Api
 {
     using Fanex.NAP.Framework.Command;
+    using FD.Lib.Criteria.Case;
+    using FD.Lib.Service.Interface;
     using System.Web.Http;
 
     public class ApiFPSController : ApiController
     {
-        [HttpPost]
-        public CommandResult AddEvidence([FromBody]string data)
+        private readonly IFlaggedAccountService _flaggedAccountService;
+
+        public ApiFPSController()
         {
-            return new CommandResult() 
-            {
-                Code = 1,
-                Message = "Add - Con ga Harvey"
-            };
+            _flaggedAccountService = new FlaggedAccountService();
         }
 
         [HttpPost]
-        public CommandResult RemoveEvidence([FromBody]string data)
+        public ICommandResult AddEvidence([FromBody]FlaggedAccountInsertCriteria criteria)
         {
-            return new CommandResult()
-            {
-                Code = 2,
-                Message = "Remove - Con ga Harvey"
-            };
+            return _flaggedAccountService.InsertAccounts(criteria);
+        }
+
+        [HttpPost]
+        public ICommandResult RemoveEvidence([FromBody]FlaggedAccountDeleteCriteria criteria)
+        {
+            return _flaggedAccountService.DeleteAccounts(criteria);
         }
     }
 }
