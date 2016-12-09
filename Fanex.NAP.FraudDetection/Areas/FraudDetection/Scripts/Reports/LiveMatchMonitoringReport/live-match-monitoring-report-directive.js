@@ -38,7 +38,7 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
                         { Name: "Row", Value: index + 1, TdClass: cssName },
                         { Name: "MatchId", Value: match.MatchId, TdClass: cssName },
                         { Name: "Verified", Value: match, TdClass: cssName },
-                         { Name: "LastVerifiedBy", Value: match, TdClass: cssName },
+                        { Name: "LastVerifiedBy", Value: match, TdClass: cssName },
                         {
                             Name: "Event", Value:
                               {
@@ -74,6 +74,8 @@ liveMatchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$t
                     Columns: [
                         { Name: "Row", Value: index + 1 },
                         { Name: "MatchId", Value: match.MatchId },
+                        { Name: "Verified", Value: match },
+                        { Name: "LastVerifiedBy", Value: match },
                         {
                             Name: "Event", Value:
                               {

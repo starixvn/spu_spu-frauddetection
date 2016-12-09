@@ -35,7 +35,7 @@ function (liveMatchMonitoringReportModel, $scope) {
         liveMatchMonitoringReportModel.getAllMatches(vm.filter).then(function () {
             vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
             vm.RefreshSecond = 15;
-            vm.refreshLiveMatchMonitoringReport();
+            vm.CountDownToRefresh();
             waitingDialog.hide();
         });
     };
