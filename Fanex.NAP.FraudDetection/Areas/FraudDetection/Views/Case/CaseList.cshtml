@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/App/Case")
     <script type="text/javascript">
         var isHost = "@PermissionService.HasHostPermission(FDFunctionKeys.FraudCase)" === "True";
+        var isTest = "@ViewBag.IsTest" === "True";
     </script>
     <script src="~/Areas/FraudDetection/Scripts/Case/case-list.js" type="text/javascript"></script>
 }

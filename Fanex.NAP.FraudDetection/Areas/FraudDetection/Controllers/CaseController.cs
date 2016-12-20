@@ -23,6 +23,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
     using Service.Core;
+    using System.Configuration;
+    using System.Linq;
     using System.Web.Mvc;
 
     /// <summary>
@@ -49,6 +51,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
+            ViewBag.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
             return View("~/Areas/FraudDetection/Views/Case/CaseList.cshtml");
         }
 
@@ -62,6 +65,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public JsonResult GetCaseList(CaseGetAllCriteria criteria)
         {
             var cases = _caseService.GetCases(criteria);
+
+            if (!ConfigurationManager.AppSettings["IsLocalTest"].Equals("1"))
+            {
+                cases.Cases = cases.Cases.Where(c => !c.IsTest);
+            }
 
             return Json(cases, JsonRequestBehavior.AllowGet);
         }
@@ -85,7 +93,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 TypeId = 1
             };
 
-            var model = new CaseInsertModel() 
+            var model = new CaseInsertModel()
             {
                 CaseModel = criteria,
                 CaseTypes = caseTypes
@@ -231,6 +239,22 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     isActive ? SendingType.ActivatingCase : SendingType.DeactivatingCase);
                 syncNewTask.Send(caseId);
             }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Host)]
+        public ActionResult EditCaseTest(int caseId, bool isTest)
+        {
+            var criteria = new CaseUpdateTestCriteria
+            {
+                CreatorId = 1,
+                CaseId = caseId,
+                IsTest = isTest
+            };
+
+            var result = _caseService.UpdateCase(criteria);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

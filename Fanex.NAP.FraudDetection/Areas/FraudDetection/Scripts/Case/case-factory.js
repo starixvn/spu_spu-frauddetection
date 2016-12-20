@@ -31,6 +31,10 @@
             return $.post('Case/EditCaseStatus', { caseId: caseId, isActive: isActive });
         },
 
+        editCaseTest: function (caseId, isTest) {
+            return $.post('Case/EditCaseTest', { caseId: caseId, isTest: isTest });
+        },
+
         editTaskStatus: function (criteria) {
             return $.post('EditTaskStatus', criteria);
         },

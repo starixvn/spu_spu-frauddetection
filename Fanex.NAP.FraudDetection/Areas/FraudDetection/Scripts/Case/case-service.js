@@ -9,6 +9,7 @@
     caseService._pageSize = 50;
 
     caseService.isHostPermission = false;
+    caseService.isTest = false;
 
     caseService.Search = function () {
 
@@ -126,6 +127,54 @@
         }
     };
 
+    /*
+    * Set/Remove a testing case.
+    */
+    caseService.editCaseTest = function (obj, caseId) {
+        if (caseService.isTest) {
+            var active = "set ";
+            var isTest = false;
+            if ($(obj).hasClass('ico-tick')) {
+                active = "remove ";
+                isTest = true;
+            }
+
+            if (isTest) {
+                $(obj).removeClass('ico-tick').addClass('ico-untick');
+            } else {
+                $(obj).removeClass('ico-untick').addClass('ico-tick');
+            }
+            $.confirm({
+                confirmButtonClass: 'btn-green btn-customConfirm',
+                cancelButtonClass: 'btn-green btn-customCancel',
+                title: "Confirmation",
+                text: "Are you sure you really want to " + active + "this Case as Testing?",
+                confirm: function () {
+                    caseFactory.editCaseTest(caseId, !isTest).success(function (response) {
+                        isTest = !isTest;
+                        AlertService.showAlert(response);
+                        caseService.Search();
+                        $(".confirmation-modal").modal("hide");
+                    });
+                },
+                cancel: function () {
+                },
+                confirmButton: "OK",
+                cancelButton: "Cancel"
+            });
+
+            $(document).on('hidden.bs.modal', function () {
+                if (!isTest) {
+                    $(obj).removeClass('ico-tick').addClass('ico-untick');
+                } else {
+                    $(obj).removeClass('ico-untick').addClass('ico-tick');
+                }
+
+                $(document).off('hidden.bs.modal');
+            });
+        }
+    };
+
     function renderCaseTable(caseList) {
         caseService.gridOptions =
             {
@@ -136,6 +185,7 @@
                     { HeaderText: "Description", Width: 500, Name: "CaseDesc", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Type", Width: 100, Name: "Type", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Active", Width: 50, Name: "IsActive", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Is Test", Width: 50, Name: "IsTest", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Edit", Width: 50, Name: "Edit", HeaderAlign: "center", CellAlign: "center" }
                 ],
                 bodyRows: createCaseTable(caseList.Cases),
@@ -156,7 +206,11 @@
             };
 
         if (!caseService.isHostPermission) {
-            caseService.gridOptions.hiddenColumns = [1, 6];
+            caseService.gridOptions.hiddenColumns = [1, 7];
+        }
+
+        if (!caseService.isTest) {
+            caseService.gridOptions.hiddenColumns.push(6);
         }
 
         $("#SearchResult").fanexGrid(caseService.gridOptions);
@@ -177,6 +231,7 @@
                     { Name: "CaseDesc", Value: fraudCase.CaseDesc },
                     { Name: "Type", Value: fraudCase.TypeName },
                     { Name: "IsActive", Value: fraudCase, CustomCellRender: activeColumn },
+                    { Name: "IsTest", Value: fraudCase, CustomCellRender: isTestColumn },
                     { Name: "Edit", Value: fraudCase.CaseId, CustomCellRender: editColumn }
                 ]
             });
@@ -219,6 +274,17 @@
         }
         else {
             return "<img title='Activate this case' class='ico-untick' alt='' onclick='caseService.editCaseStatus(this," + caseId + ")'/>";
+        }
+    }
+
+    function isTestColumn(cell) {
+        var caseId = cell.Value.CaseId;
+
+        if (cell.Value.IsTest) {
+            return "<img title='Remove this case is Testing' class='ico-tick' alt='' onclick='caseService.editCaseTest(this," + caseId + ")'/>";
+        }
+        else {
+            return "<img title='Set this case is Testing' class='ico-untick' alt='' onclick='caseService.editCaseTest(this," + caseId + ")'/>";
         }
     }
 

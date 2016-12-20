@@ -6,5 +6,7 @@
     });
 
     caseService.isHostPermission = isHost;
+    caseService.isTest = isTest;
+
     caseService.Search();
 })();
