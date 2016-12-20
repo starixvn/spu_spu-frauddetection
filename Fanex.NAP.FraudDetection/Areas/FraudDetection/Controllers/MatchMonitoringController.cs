@@ -27,6 +27,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Service.Core;
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
@@ -58,6 +59,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria,  int SportId)
         {
+            criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
+
             if (criteria.LeagueId == -1)
             {
                 var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), SportId);
@@ -84,6 +87,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria, int SportId)
         {
+            criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
+
             if (criteria.LeagueId == -1)
             {
                 var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), SportId);

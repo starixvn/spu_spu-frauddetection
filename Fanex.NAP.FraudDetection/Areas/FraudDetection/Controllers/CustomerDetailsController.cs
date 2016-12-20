@@ -59,6 +59,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetFraudCaseDetails(int custId, DateTime fromDate, DateTime toDate)
         {
             var criteria = new CustomerDetailsReportFraudCaseCriteria(custId, fromDate, toDate);
+            criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
             var fraudCaseDetails = customerDetailsReportService.GetFraudCasesDetails(criteria);
 
             return Json(fraudCaseDetails, JsonRequestBehavior.AllowGet);
@@ -112,7 +113,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult GetDailyViolatedTickets(int custId, DateTime fromDate, DateTime toDate)
         {
-            var fraudTicket = customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate);
+            var isTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
+            var fraudTicket = customerDetailsReportService.GetFraudTickets(custId, fromDate, toDate, isTest);
 
             var result = fraudTicket.GroupBy(x => x.CaseName);
 

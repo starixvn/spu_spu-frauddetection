@@ -55,6 +55,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult Search(SuspiciousCustomerReportGetAllCriteria criteria)
         {
+            criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
             return Json(suspiciousCustomers, JsonRequestBehavior.AllowGet);
@@ -64,6 +65,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult ExportExcel(SuspiciousCustomerReportGetAllCriteria criteria, string caseName)
         {
+            criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
             var suspiciousCustomers = _customerReportService.GetAllSuspiciousCustomers(criteria);
 
             var excelExporter = new FDExportExcelSuspiciousCustomer(
@@ -125,6 +127,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 PageSize = int.MaxValue,
                 PageIndex = 1
             }).Cases.Where(c => !c.IsInternal);
+
+            if (!ConfigurationManager.AppSettings["IsLocalTest"].Equals("1"))
+            {
+                cases = cases.Where(c => !c.IsTest);
+            }
 
             return Json(cases, JsonRequestBehavior.AllowGet);
         }

@@ -16,6 +16,7 @@
     using RemotingRef;
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
@@ -48,6 +49,7 @@
         [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Search(LiveMatchMonitoringReportGetAllCriteria criteria)
         {
+            criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
             var matchesInfo = liveMatchMonitoringReportService.GetMatchMonitoringReport(criteria);
             MapRemotingRefData(matchesInfo);
 
