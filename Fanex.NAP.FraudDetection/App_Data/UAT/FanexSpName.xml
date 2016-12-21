@@ -2,11 +2,11 @@
 <Functions>
   <Function Name="FD_Case">
     <Setting Key="FD_CaseGetAll" SpName="FD_CaseGetAll_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseUpdate" SpName="FD_CaseUpdate_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseUpdate" SpName="FD_CaseUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseUpdateStatus" SpName="FD_CaseUpdateStatus" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseUpdateIsTest" SpName="FD_CaseUpdateIsTest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseUpdateIsTest" SpName="FD_CaseUpdateIsTest_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseTypesGetAll" SpName="FD_CaseTypesGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
@@ -59,20 +59,20 @@
 
   <Function Name="Reports">
     <Setting Key="FD_SuspiciousCustomerReportGetAll" SpName="FD_SuspiciousCustomerReportGetAll_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_SuspiciousCustomerReportGetNotes" SpName="FD_SuspiciousCustomerReportGetNotes_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_SuspiciousCustomerReportGetNotes" SpName="FD_SuspiciousCustomerReportGetNotes" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
     <Setting Key="FD_MatchMonitoringReportGetAll" SpName="FD_MatchMonitoringReportGetAll_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_MatchMonitoringReportUpdateVerified" SpName="FD_MatchMonitoringReportUpdateVerified" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_MatchMonitoringReportUpdateDelinquent" SpName="FD_MatchMonitoringReportUpdateDelinquent" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_MatchMonitoringReportGetAll_DBArchive" SpName="FD_MatchMonitoringReportGetAll_DBArchive_xtest" DbName="DBFD.bodb_Archive.bodbSPUNet" />
 
-    <Setting Key="FD_LiveMatchMonitoringReportGetAll" SpName="FD_LiveMatchMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_LiveMatchMonitoringReportGetAll" SpName="FD_LiveMatchMonitoringReportGetAll_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
     <Setting Key="FD_LeagueGetAllByDate" SpName="FD_LeagueGetAllByDate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDate_DBArchive" SpName="FD_LeagueGetAllByDate_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDateAndSport" SpName="FD_LeagueGetAllByDateAndSport" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_LeagueGetAllByDateAndSport_DBArchive" SpName="FD_LeagueGetAllByDateAndSport_DBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
-    <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetByName" SpName="FD_CaseGetByName" DbName="DBFD.FraudDetection.bodbSPUNet" />
 
     <Setting Key="FD_DailyDataMonitoringReportGetAll" SpName="FD_DailyDataMonitoringReportGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
@@ -117,8 +117,8 @@
 
   <Function Name="FD_FraudCaseDetails">
     <Setting Key="FD_FraudCaseDetailSummaryGetByMatchId" SpName="FD_FraudCaseDetailSummaryGetByMatchId" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList_xtest" DbName="DBFD.bodb02.bodbSPUNet" />
-    <Setting Key="FD_BetTicketGetByTransListFromDBArchive" SpName="FD_BetTicketGetByTransListFromDBArchive_xtest" DbName="DBFD.bodb_Archive.bodbSPUNet" />
+    <Setting Key="FD_BetTicketGetByTransList" SpName="FD_BetTicketGetByTransList" DbName="DBFD.bodb02.bodbSPUNet" />
+    <Setting Key="FD_BetTicketGetByTransListFromDBArchive" SpName="FD_BetTicketGetByTransListFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_BetTicketGetByIp" SpName="FD_BetTicketGetByIp" DbName="DBFD.bodb02.bodbSPUNet" />
   </Function>
 
@@ -144,14 +144,14 @@
     <Setting Key="FD_CustomerVerifyInsert" SpName="FD_CustomerVerifyInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerNoteInsert" SpName="FD_CustomerNoteInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerLogNoteRemove" SpName="FD_CustomerLogNoteRemove" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsCustInfoGet" SpName="FD_CustomerDetailsCustInfoGet_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsFraudCaseDetailsGet" SpName="FD_CustomerDetailsFraudCaseDetailsGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsLogsNotesGet" SpName="FD_CustomerDetailsLogsNotesGet_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsCustInfoGet" SpName="FD_CustomerDetailsCustInfoGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsFraudCaseDetailsGet" SpName="FD_CustomerDetailsFraudCaseDetailsGet_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsLogsNotesGet" SpName="FD_CustomerDetailsLogsNotesGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTicketsGetByTransIds" SpName="FD_CustomerDetailsTicketsGetByTransIds" DbName="DBFD.bodb02.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" SpName="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTransListGetByCustId" SpName="FD_CustomerDetailsTransListGetByCustId_xtest" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsWinlossStatisticGet" SpName="FD_CustomerDetailsWinlossStatisticGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsMonthlyWinlossGet" SpName="FD_CustomerDetailsMonthlyWinlossGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsWinlossStatisticGet" SpName="FD_CustomerDetailsWinlossStatisticGet" DbName="DBFD.bodb_dwrs.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsMonthlyWinlossGet" SpName="FD_CustomerDetailsMonthlyWinlossGet" DbName="DBFD.bodb_dwrs.bodbSPUNet" />
   </Function>
 
   <Function Name="OfficeIPs">
