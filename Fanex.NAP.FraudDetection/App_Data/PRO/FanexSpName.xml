@@ -5,6 +5,7 @@
     <Setting Key="FD_CaseInsert" SpName="FD_CaseInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseUpdate" SpName="FD_CaseUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseUpdateStatus" SpName="FD_CaseUpdateStatus" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseUpdateIsTest" SpName="FD_CaseUpdateIsTest" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CaseTypesGetAll" SpName="FD_CaseTypesGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
