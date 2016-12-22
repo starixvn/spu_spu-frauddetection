@@ -108,7 +108,7 @@ matchMonitoringReportModule.directive('fanexGridMatchMonitoringReport', ['$timeo
             return "<span class='ico-scannednosuspicious'></span>";
         }
         else if (susCount > 0) {
-            return "ánpan class='ico-scannedhassuspicious' " +
+            return "<span class='ico-scannedhassuspicious' " +
                 "data-matchid='" + matchId + "' " +
                 "data-casename='" + caseName + "' " +
                 "data-eventdate='" + eventDate + "'></span>";

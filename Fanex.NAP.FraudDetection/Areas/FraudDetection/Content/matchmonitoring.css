@@ -3,6 +3,7 @@
     display: inline-block;
     height: 16px;
     width: 16px;
+    vertical-align: middle;
 }
 
 .ico-scannednosuspicious {
@@ -10,6 +11,7 @@
     display: inline-block;
     height: 16px;
     width: 16px;
+    vertical-align: middle;
 }
 
 .ico-scannedhassuspicious {
@@ -18,4 +20,5 @@
     height: 16px;
     width: 16px;
     cursor: pointer;
+    vertical-align: middle;
 }
