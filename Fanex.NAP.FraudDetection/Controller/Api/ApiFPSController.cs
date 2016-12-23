@@ -17,12 +17,18 @@
         [HttpPost]
         public ICommandResult AddEvidence([FromBody]FlaggedAccountInsertCriteria criteria)
         {
+            criteria.EviCode = criteria.EviCode ?? string.Empty;
+            criteria.IndirectAccounts = criteria.IndirectAccounts ?? string.Empty;
+            criteria.DirectAccounts = criteria.DirectAccounts ?? string.Empty;
             return _flaggedAccountService.InsertAccounts(criteria);
         }
 
         [HttpPost]
         public ICommandResult RemoveEvidence([FromBody]FlaggedAccountDeleteCriteria criteria)
         {
+            criteria.EviCode = criteria.EviCode ?? string.Empty;
+            criteria.IndirectAccounts = criteria.IndirectAccounts ?? string.Empty;
+            criteria.DirectAccounts = criteria.DirectAccounts ?? string.Empty;
             return _flaggedAccountService.DeleteAccounts(criteria);
         }
     }
