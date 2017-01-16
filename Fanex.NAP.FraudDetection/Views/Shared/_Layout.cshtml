@@ -29,7 +29,7 @@
             overflow: visible;
             position: absolute;
             top: 40px;
-            right: 15px;
+            right: -119px;
             width: 400px;
             z-index: -1;
             display: none;
@@ -45,7 +45,7 @@
             border: 10px solid black;
             border-color: transparent transparent white;
             margin-top: -20px;
-            margin-left: 220px;
+            margin-left: 230px;
         }
 
         #notificationTitle {
@@ -142,15 +142,14 @@
                     <li>@Html.ActionLink("Sign Out", "LogOut", "Login")</li>
                 </ul>
             </div>
-
             <div id="notification-icon" class="user-notify-wrap notify-pointer">
                 <div class="user-notify"></div>
                 <span id="noti-unread-msg" class="badge badge-danger up"></span>
-            </div>
-            <div id="notificationContainer">
-                <div id="notificationTitle">Notifications</div>
-                <div id="notificationsBody" class="notifications"></div>
-                <div id="notificationFooter"><a href="~/Notification">See All</a></div>
+                <div id="notificationContainer">
+                    <div id="notificationTitle">Notifications</div>
+                    <div id="notificationsBody" class="notifications"></div>
+                    <div id="notificationFooter"><a href="~/Notification">See All</a></div>
+                </div>
             </div>
         </header>
         <section id="headline" class="row title-bar">
