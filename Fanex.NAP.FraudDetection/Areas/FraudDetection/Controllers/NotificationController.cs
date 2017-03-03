@@ -39,7 +39,6 @@
         }
         #endregion
 
-        
         #region List Fraud Case's Details
         /// <summary>
         /// Fanex.NAP.FraudDetection

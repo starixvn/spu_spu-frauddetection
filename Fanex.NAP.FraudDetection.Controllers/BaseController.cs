@@ -134,7 +134,7 @@ namespace Fanex.NAP.FraudDetection.Controllers
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
                 JsonRequestBehavior = behavior,
-                MaxJsonLength = Int32.MaxValue
+                MaxJsonLength = int.MaxValue
             };
         }
     }

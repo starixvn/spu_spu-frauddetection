@@ -17,14 +17,7 @@ namespace Fanex.NAP.FraudDetection.Controllers.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class CustomHandleErrorAttribute : HandleErrorAttribute
     {
-        /// <summary>
-        /// Handle exceptions.
-        /// </summary>
-        /// <param name="filterContext">The exception context.</param>
-        [SuppressMessage(
-                  "StyleCop.CSharp.Nexcel.NexcelCustomRules",
-                  "SP2101:MethodMustNotContainMoreLinesThan",
-                  Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public override void OnException(ExceptionContext filterContext)
         {
             if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)

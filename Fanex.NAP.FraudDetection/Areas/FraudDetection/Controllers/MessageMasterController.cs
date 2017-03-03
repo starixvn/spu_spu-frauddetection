@@ -1,22 +1,19 @@
-﻿
-namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
+﻿namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 {
-    using Fanex.NAP.FraudDetection.Controllers;
-    using FD.Lib.Criteria.MessageMaster;
-    using FD.Lib.Service.Implement;
-    using FD.Lib.DTO;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-    using System.Web.Mvc;
-    using Fanex.NAP.FraudDetection.Service.Core;
-    using System.Configuration;
-    using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.FraudDetection.Controllers;
+    using Fanex.NAP.FraudDetection.Service.Core;
+    using FD.Lib.Criteria.MessageMaster;
+    using FD.Lib.DTO;
+    using FD.Lib.Service.Implement;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Linq;
+    using System.Web.Mvc;
 
     public class MessageMasterController : BaseController
     {
@@ -55,9 +52,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                         MessageCode = model.MessageCode,
                         MessageDesc = model.MessageDesc,
                         MessageContent = model.MessageContent,
-                        Recipient = model.Recipient == null ? "" : model.Recipient,
+                        Recipient = model.Recipient == null ? string.Empty : model.Recipient,
                         IsActive = model.IsActive,
-                        OnlineRecipient = model.OnlineRecipient == null ? "" : model.OnlineRecipient
+                        OnlineRecipient = model.OnlineRecipient == null ? string.Empty : model.OnlineRecipient
                     };
 
                     ICommandResult result = messMasterService.InsertMessage(criteria);
@@ -77,7 +74,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     break;
                 }
 
-                returnResult = new JsonResult{ Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage }};
+                returnResult = new JsonResult { Data = new { IsSuccessful = ModelState.IsValid, Message = errorMessage } };
             }
 
             return returnResult;
@@ -154,9 +151,9 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                         MessageCode = model.MessageCode,
                         MessageDesc = model.MessageDesc,
                         MessageContent = model.MessageContent,
-                        Recipient = model.Recipient == null ? "" : model.Recipient,
+                        Recipient = model.Recipient == null ? string.Empty : model.Recipient,
                         IsActive = model.IsActive,
-                        OnlineRecipient = model.OnlineRecipient == null ? "" : model.OnlineRecipient
+                        OnlineRecipient = model.OnlineRecipient == null ? string.Empty : model.OnlineRecipient
                     };
 
                     ICommandResult result = messMasterService.UpdateMessage(criteria);
@@ -231,14 +228,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     Id = user.User.Id,
                     Username = user.User.Username
                 });
-                //if (user.User.Group == null)
-                //{
-                //    result.Add(user.User);
-                //}
-                //else if (!user.User.Group.Name.Equals("IT"))
-                //{
-                //    result.Add(user.User);
-                //}
             }
 
             return result;

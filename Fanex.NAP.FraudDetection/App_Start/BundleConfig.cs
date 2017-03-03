@@ -22,7 +22,7 @@ namespace Fanex.NAP.FraudDetection.AppStart
         /// Register JS , CSS in a bundle.
         /// </summary>
         /// <param name="bundles">The bundle collection.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/Content/Common/css").Include(

@@ -109,11 +109,7 @@ namespace Fanex.NAP.FraudDetection.Areas.UserLogin.Controllers
         /// <param name="password">Password value.</param>
         /// <returns>Return result.</returns>
         [HttpPost]
-        [SuppressMessage(
-            "StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-    
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]    
         public ActionResult Index(string username, string password)
         {
             Response.BufferOutput = true;

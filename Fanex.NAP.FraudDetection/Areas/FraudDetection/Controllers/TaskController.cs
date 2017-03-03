@@ -137,7 +137,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                     matchSize);
             criteria.TaskPreconditions = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.PreCondition).GenerateQuery();
             criteria.TaskRules = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule).GenerateQuery();
-            criteria.TaskDesc = string.IsNullOrEmpty(criteria.TaskDesc) ? "" : criteria.TaskDesc;
+            criteria.TaskDesc = string.IsNullOrEmpty(criteria.TaskDesc) ? string.Empty : criteria.TaskDesc;
             var result = _taskService.UpdateTask(criteria);
 
             if (result.Code == 0 && criteria.EventId == (int)EventType.BackGround)

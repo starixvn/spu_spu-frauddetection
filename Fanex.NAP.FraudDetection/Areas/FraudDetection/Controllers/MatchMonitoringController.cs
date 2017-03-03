@@ -57,13 +57,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [HttpPost]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
-        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria,  int SportId)
+        public ActionResult Search(MatchMonitoringReportGetAllCriteria criteria, int sportId)
         {
             criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
 
             if (criteria.LeagueId == -1)
             {
-                var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), SportId);
+                var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), sportId);
 
                 if (listLeagues != null && listLeagues.Count() > 0)
                 {
@@ -85,13 +85,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         [HttpGet]
         [NapAuth(FunctionKey = FDFunctionKeys.MatchMonitoring, Policy = Constant.Policy.Read)]
-        public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria, int SportId)
+        public ActionResult ExportExcel(MatchMonitoringReportGetAllCriteria criteria, int sportId)
         {
             criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
 
             if (criteria.LeagueId == -1)
             {
-                var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), SportId);
+                var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), sportId);
 
                 if (listLeagues != null && listLeagues.Count() > 0)
                 {
@@ -126,14 +126,15 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
 
         public List<Legend> GetMatchMonitoringReportInfo(MatchMonitoringReportGetAllCriteria criteria)
         {
+            var leagues = "All Leagues";
             return new List<Legend>
-                {
-                    new Legend("Event Date", criteria.EventDate.ToShortDateString()),
-                    new Legend("League", criteria.LeagueId == -1 ? "All Leagues" : RefData.GetLeagueName(criteria.LeagueId.ToString(CultureInfo.InvariantCulture), "en", "All Leagues")),
-                    new Legend("Match Code", criteria.MatchCode),
-                    new Legend("Match Status", criteria.MatchStatus),
-                    new Legend("Has Suspicious Customer(s)", criteria.SuspiciousStatus == 0 ? "All" : (criteria.SuspiciousStatus == 1 ? "Yes" : "No"))
-                };
+            {
+                new Legend("Event Date", criteria.EventDate.ToShortDateString()),
+                new Legend("League", criteria.LeagueId == -1 ? leagues : RefData.GetLeagueName(criteria.LeagueId.ToString(CultureInfo.InvariantCulture), "en", leagues)),
+                new Legend("Match Code", criteria.MatchCode),
+                new Legend("Match Status", criteria.MatchStatus),
+                new Legend("Has Suspicious Customer(s)", criteria.SuspiciousStatus == 0 ? "All" : (criteria.SuspiciousStatus == 1 ? "Yes" : "No"))
+            };
         }
 
         public List<string> GetMatchMonitoringHeaders(List<MatchMonitoring> data)
@@ -254,13 +255,13 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 {
                     string displayEvent = "{0} (Code: {1}) \n{2}";
                     string displayMatch = homeName + " vs " + awayName;
-                    match.Event = String.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
+                    match.Event = string.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
                 }
                 else
                 {
                     string displayEvent = "{0} (Code: {1}) </br><span class='league'>{2}</span>";
                     string displayMatch = "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
-                    match.Event = String.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
+                    match.Event = string.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
                 }
             }
         }

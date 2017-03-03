@@ -158,7 +158,7 @@
                 string displayEvent = "{0} (Code: {1}) </br><span class='league'>{2}</span>";
                 string displayMatch = "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
 
-                match.Event = String.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
+                match.Event = string.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
             }
         }
     }

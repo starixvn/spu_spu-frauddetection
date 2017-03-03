@@ -317,7 +317,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\TrackLoginsFilter.cs" />
     <Compile Include="Areas\FraudDetection\Controllers\NotificationController.cs" />
-    <Compile Include="Areas\FraudDetection\Controllers\MessageMasterController.cs" />
+    <Compile Include="Areas\FraudDetection\Controllers\MessageMasterController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Controller\Api\ApiFPSController.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
