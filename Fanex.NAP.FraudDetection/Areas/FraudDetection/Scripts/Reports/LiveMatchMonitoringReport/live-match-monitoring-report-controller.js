@@ -14,6 +14,7 @@ function (liveMatchMonitoringReportModel, $scope) {
     vm.RefreshOptions = liveMatchMonitoringReportModel.RefreshOptions;
     vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
     vm.filter = liveMatchMonitoringReportModel.filter;
+    vm.VerificationStatuses = liveMatchMonitoringReportModel.VerificationStatuses;
     vm.RefreshSecond = 15;
 
     vm.queryLiveMatchMonitoringReport = function () {

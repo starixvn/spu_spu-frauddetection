@@ -39,7 +39,7 @@
                     </label>
                 </div>
                 <div class="col-sm-9">
-                    <select ng-model="lmmrCtrl.filter.SportId" style="width: 100%; height: 25px;"
+                    <select ng-model="lmmrCtrl.filter.SportId" style="width: 172px; height: 25px;"
                             ng-options="sport.SportId as sport.SportName for sport in lmmrCtrl.Sports"
                             ng-change="lmmrCtrl.changeSport()"></select>
                 </div>
@@ -51,7 +51,7 @@
                     </label>
                 </div>
                 <div class="col-sm-10">
-                    <select ng-model="lmmrCtrl.filter.LeagueId" class="league-select"
+                    <select ng-model="lmmrCtrl.filter.LeagueId" class="league-select" style="width: 300px; height: 25px;"
                             ng-options="league.LeagueId as league.LeagueName for league in lmmrCtrl.Leagues"></select>
                 </div>
             </div>
@@ -71,19 +71,37 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-9">
-                    <span class="checkbox">
-                        <input style="vertical-align: text-bottom;" id="checkboxMainMarket" type="checkbox"
-                               ng-model="lmmrCtrl.filter.IsMainMarket" />
-                        <label style="cursor: pointer; font-weight: normal;" for="checkboxMainMarket">Main Market Only</label>
-                    </span>
-
+                <div class="col-sm-3" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                        Verified
+                    </label>
+                </div>
+                <div class="col-sm-5">
+                    <select ng-model="lmmrCtrl.filter.IsVerified" style="width: 172px; height: 25px;"
+                            ng-options="verification.Value as verification.Name for verification in lmmrCtrl.VerificationStatuses"></select>
                 </div>
             </div>
             <div class="col-sm-5">
                 <div class="col-sm-2">&nbsp;</div>
                 <div class="col-sm-10">
+                    <span class="checkbox">
+                        <input style="vertical-align: text-bottom;" id="checkboxMainMarket" type="checkbox"
+                               ng-model="lmmrCtrl.filter.IsMainMarket" />
+                        <label style="cursor: pointer; font-weight: normal;" for="checkboxMainMarket">M.Market Only</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div style="height: 35px;">
+            &nbsp;
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3">
+                <div class="col-sm-5" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                    </label>
+                </div>
+                <div class="col-sm-7">
                     <button style="width: 97px; height: 25px;" class="btn-green generate-button" ng-click="lmmrCtrl.queryLiveMatchMonitoringReport()">
                         Generate
                     </button>

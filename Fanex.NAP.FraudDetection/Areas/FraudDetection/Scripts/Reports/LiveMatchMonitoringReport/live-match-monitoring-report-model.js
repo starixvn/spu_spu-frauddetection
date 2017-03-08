@@ -46,13 +46,20 @@ function (liveMatchMonitoringReportFactory) {
         }
     ];
 
+    liveMatchMonitoringReportModel.VerificationStatuses = [
+        { Value: null, Name: "All" },
+        { Value: true, Name: "Yes" },
+        { Value: false, Name: "No" }
+    ];
+
     liveMatchMonitoringReportModel.filter = {
         EventDate: formatDate(new Date()),
         LeagueId: -1,
         LeagueIds: '',
         SportId: 1,
         MatchCode: '',
-        IsMainMarket: true
+        IsMainMarket: true,
+        IsVerified: false
     };
 
     liveMatchMonitoringReportModel.getSportsByDate = function (date) {
