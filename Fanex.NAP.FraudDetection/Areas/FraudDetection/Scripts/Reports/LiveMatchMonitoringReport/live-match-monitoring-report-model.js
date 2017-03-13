@@ -52,6 +52,12 @@ function (liveMatchMonitoringReportFactory) {
         { Value: false, Name: "No" }
     ];
 
+    liveMatchMonitoringReportModel.MatchStatuses = [
+        { Value: 'All', Name: "All" },
+        { Value: 'completed', Name: "Completed" },
+        { Value: 'running', Name: "Running" }
+    ];
+
     liveMatchMonitoringReportModel.filter = {
         EventDate: formatDate(new Date()),
         LeagueId: -1,
@@ -59,7 +65,8 @@ function (liveMatchMonitoringReportFactory) {
         SportId: 1,
         MatchCode: '',
         IsMainMarket: true,
-        IsVerified: false
+        IsVerified: false,
+        MatchStatus: 'running',
     };
 
     liveMatchMonitoringReportModel.getSportsByDate = function (date) {

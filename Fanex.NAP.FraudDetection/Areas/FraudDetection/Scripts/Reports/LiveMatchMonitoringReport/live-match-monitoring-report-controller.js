@@ -13,6 +13,7 @@ function (liveMatchMonitoringReportModel, $scope) {
     vm.Sports = [];
     vm.RefreshOptions = liveMatchMonitoringReportModel.RefreshOptions;
     vm.LiveMatchMonitoringReport = liveMatchMonitoringReportModel.LiveMatchMonitoringReport;
+    vm.MatchStatuses = liveMatchMonitoringReportModel.MatchStatuses;
     vm.filter = liveMatchMonitoringReportModel.filter;
     vm.VerificationStatuses = liveMatchMonitoringReportModel.VerificationStatuses;
     vm.RefreshSecond = 15;

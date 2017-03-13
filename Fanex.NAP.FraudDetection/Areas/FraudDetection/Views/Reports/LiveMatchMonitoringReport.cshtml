@@ -67,7 +67,7 @@
                     </label>
                 </div>
                 <div class="col-sm-7">
-                    <input type="text" ng-model="lmmrCtrl.filter.MatchCode" class="match-code" />
+                    <input type="text" ng-model="lmmrCtrl.filter.MatchCode" class="match-code" style="width: 140px; height: 25px;" />
                 </div>
             </div>
             <div class="col-sm-3">
@@ -99,17 +99,25 @@
             <div class="col-sm-3">
                 <div class="col-sm-5" style="text-align: right;">
                     <label style="padding-top: 5px;">
+                        Status
                     </label>
                 </div>
                 <div class="col-sm-7">
+                    <select ng-model="lmmrCtrl.filter.MatchStatus" style="width: 140px; height: 25px;"
+                            ng-options="status.Value as status.Name for status in lmmrCtrl.MatchStatuses"></select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-3" style="text-align: right;">
+                    <label style="padding-top: 5px;">
+                    </label>
+                </div>
+                <div class="col-sm-9">
                     <button style="width: 97px; height: 25px;" class="btn-green generate-button" ng-click="lmmrCtrl.queryLiveMatchMonitoringReport()">
                         Generate
                     </button>
                 </div>
             </div>
-        </div>
-        <div style="height: 35px;">
-            &nbsp;
         </div>
     </div>
     <div class="newline">
