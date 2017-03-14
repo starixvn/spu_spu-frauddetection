@@ -5,21 +5,22 @@
 
     var getBodyRows = function (data) {
         var bodyRows = [];
+        var liveBallCss = 'live-ball';
 
         $.each(data, function (index, element) {
             bodyRows.push({
                 Columns: [
-                    { Name: "No", Value: index + 1 },
-                    { Name: "CustName", Value: element.CustName },
-                    { Name: "TransDate", Value: element.TransDate },
-                    { Name: "TransId", Value: element.TransId },
-                    { Name: "Choice", CustomCellRender: function () { return element.Choice; } },
-                    { Name: "Score", Value: element.Score },
-                    { Name: "Odds", CustomCellRender: function () { return element.Odds; } },
-                    { Name: "Stake", CustomCellRender: function () { return element.Stake; } },
-                    { Name: "WinLoss", Value: element.WinLoss },
-                    { Name: "Status", Value: element.Status },
-                    { Name: "IP", CustomCellRender: function () { return element.DisplayIP; } }
+                    { Name: "No", Value: index + 1, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "CustName", Value: element.CustName, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "TransDate", Value: element.TransDate, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "TransId", Value: element.TransId, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "Choice", CustomCellRender: function () { return element.Choice; }, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "Score", Value: element.Score, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "Odds", CustomCellRender: function () { return element.Odds; }, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "Stake", CustomCellRender: function () { return element.Stake; }, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "WinLoss", Value: element.WinLoss, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "Status", Value: element.Status, TdClass: element.IsLive ? liveBallCss : "" },
+                    { Name: "IP", CustomCellRender: function () { return element.DisplayIP; }, TdClass: element.IsLive ? liveBallCss : "" }
                 ]
             });
         });

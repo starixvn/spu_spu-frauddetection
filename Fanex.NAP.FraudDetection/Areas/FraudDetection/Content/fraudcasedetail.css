@@ -69,3 +69,7 @@ body {
     text-align: right;
     text-transform: none;
 }
+
+.live-ball {
+    background-color: #ffccbc !important;
+}
