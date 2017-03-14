@@ -23,7 +23,7 @@ function (liveMatchMonitoringReportModel, $scope) {
         pageNumber = 0;
 
         if (vm.filter.LeagueId === -1) {
-            vm.filter.LeagueIds = liveMatchMonitoringReportModel.getLeagueIdList();
+            //vm.filter.LeagueIds = liveMatchMonitoringReportModel.getLeagueIdList();
         }
         else {
             vm.filter.LeagueIds = vm.filter.LeagueId;

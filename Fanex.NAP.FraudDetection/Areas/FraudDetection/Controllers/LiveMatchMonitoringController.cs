@@ -48,9 +48,20 @@
 
         [HttpPost]
         [NapAuth(FunctionKey = FDFunctionKeys.LiveMatchMonitoring, Policy = Constant.Policy.Read)]
-        public ActionResult Search(LiveMatchMonitoringReportGetAllCriteria criteria)
+        public ActionResult Search(LiveMatchMonitoringReportGetAllCriteria criteria, int sportId)
         {
             criteria.IsTest = ConfigurationManager.AppSettings["IsLocalTest"].Equals("1");
+
+            if (criteria.LeagueId == -1)
+            {
+                var listLeagues = GetLeagueListByDateAndSport(criteria.EventDate.ToString(), sportId);
+
+                if (listLeagues != null && listLeagues.Count() > 0)
+                {
+                    criteria.LeagueIds = string.Join(",", listLeagues.Select(l => l.LeagueId));
+                }
+            }
+
             var matchesInfo = liveMatchMonitoringReportService.GetMatchMonitoringReport(criteria);
             MapRemotingRefData(matchesInfo);
 
@@ -160,6 +171,28 @@
 
                 match.Event = string.Format(displayEvent, displayMatch, match.MatchCode, match.LeagueName);
             }
+        }
+
+        private IEnumerable<League> GetLeagueListByDateAndSport(string eventDate, int sportId)
+        {
+            var balanceUpMoveBetService = new MoveBetsBalanceUpService();
+            var balanceUpMoveBetDates = balanceUpMoveBetService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+
+            var criteria = DateTime.Parse(eventDate) > balanceUpMoveBetDates.BalanceUpDay
+                               ? (ICriteria)new LeagueGetAllByDateAndSportCriteria
+                               {
+                                   IsLatestData = DateTime.Parse(eventDate) > balanceUpMoveBetDates.MoveBetsDay,
+                                   EventDate = DateTime.Parse(eventDate),
+                                   SportId = sportId
+                               }
+                               : new LeagueGetAllByDateAndSportFromDBArchiveCriteria
+                               {
+                                   EventDate = DateTime.Parse(eventDate),
+                                   SportId = sportId
+                               };
+            var result = liveMatchMonitoringReportService.GetLeaguesByDateAndSport(criteria);
+
+            return result;
         }
     }
 }
