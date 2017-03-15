@@ -30,7 +30,7 @@ function (matchMonitoringReportFactory) {
         LeagueIds: '',
         SportId: -1,
         MatchCode: '',
-        MatchStatus: 'All',
+        MatchStatus: 'completed',
         SuspiciousStatus: 0,
         IsMainMarket: true
     };
