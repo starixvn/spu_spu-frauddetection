@@ -8,7 +8,7 @@
 @section HeadCss
 {
     @Styles.Render("~/Content/betlist/FanexBetListCss")
-    <link href="~/Areas/FraudDetection/Content/fraudcasedetail.css" rel="stylesheet" />
+    @Styles.Render("~/Areas/FraudDetection/Content/fraudcasedetail")
 }
 <div class="hidden" id="MatchId">@Model.Summary.MatchId</div>
 <div class="hidden" id="CaseId">@Model.Summary.CaseId</div>

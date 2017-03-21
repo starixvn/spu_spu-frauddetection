@@ -37,6 +37,9 @@ namespace Fanex.NAP.FraudDetection.AppStart
             bundles.Add(new StyleBundle("~/Areas/FraudDetection/App_Themes/css").Include(
                 "~/Areas/FraudDetection/App_Themes/site.css"));
 
+            bundles.Add(new StyleBundle("~/Areas/FraudDetection/Content/fraudcasedetail").Include(
+               "~/Areas/FraudDetection/Content/fraudcasedetail.css"));
+
             bundles.AddAndInclude(
                 "~/Content/Core/less",
                 "~/Content/Core/site.less");
