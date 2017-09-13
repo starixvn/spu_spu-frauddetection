@@ -940,6 +940,14 @@ function (taskFactory) {
 
     taskModel.changeRule = function (vm) {
         switch (vm.ruleRow.Param.ConfigName) {
+            case "Customer Group":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.CustomerGroups[0];
+                break;
             case "Ticket Status":
                 vm.DataInRule.TextBox = false;
                 vm.DataInRule.ComboBox = true;

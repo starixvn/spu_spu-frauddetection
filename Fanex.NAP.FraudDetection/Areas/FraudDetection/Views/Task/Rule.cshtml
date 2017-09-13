@@ -119,6 +119,9 @@
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Currency' && !taskCtr.CompareWithOtherField.InRule"
                             ng-options="currency as currency.CurrencyName for currency in taskCtr.Currencies"
                             ng-change=""></select>
+                    <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Customer Group' && !taskCtr.CompareWithOtherField.InRule"
+                            ng-options="group as group.GroupName for group in taskCtr.CustomerGroups"
+                            ng-change=""></select>
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Choice' && !taskCtr.CompareWithOtherField.InRule"
                             ng-options="choice as choice.Name for choice in taskCtr.Choices" ng-change=""></select>
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Arbitrage' && !taskCtr.CompareWithOtherField.InRule"
