@@ -63,7 +63,7 @@
                 itemsPerPageArray: [10, 20, 50, 100, 500],
                 showDetail: true,
                 afterPagedFunction: function () {
-                    renderTicketFromSameIPTable();
+                    registerEventForIpButton();
                 }
             },
             showTitle: true,
