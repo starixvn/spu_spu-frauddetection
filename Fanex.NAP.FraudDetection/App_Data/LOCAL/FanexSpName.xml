@@ -22,6 +22,9 @@
     <Setting Key="FD_GroupUpdate" SpName="FD_GroupUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_GroupUpdateStatus" SpName="FD_GroupUpdateStatus" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_GroupGetAvailableGroupForCase" SpName="FD_GroupGetAvailableGroupForCase" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_GroupMemberGetById" SpName="FD_GroupMemberGetById" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_GroupMemberDelete" SpName="FD_GroupMemberDelete" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_GroupMemberInsert" SpName="FD_GroupMemberInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="FD_Task">

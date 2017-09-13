@@ -92,7 +92,9 @@ namespace Fanex.NAP.FraudDetection.AppStart
 
             bundles.Add(new ScriptBundle("~/bundles/App/Group").Include(
                 "~/Areas/FraudDetection/Scripts/Group/group-factory.js",
-                "~/Areas/FraudDetection/Scripts/Group/group-service.js"));
+                "~/Areas/FraudDetection/Scripts/Group/group-service.js",
+                "~/Areas/FraudDetection/Scripts/Group/group-detail-service.js",
+                "~/Areas/FraudDetection/Scripts/Group/group-detail-list.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/App/MailMaster").Include(
                 "~/Areas/FraudDetection/Scripts/MailMaster/mailmaster-factory.js",

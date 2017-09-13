@@ -19,6 +19,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Criteria.Group;
     using FD.Lib.Service.Implement;
     using NAP.FraudDetection.Controllers;
+    using FD.Lib.Core.Utilities;
 
     /// <summary>
     /// The Group Controller.
@@ -155,6 +156,53 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             };
 
             var result = _groupService.UpdateGroup(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Group Detail
+        [HttpGet]
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Read)]
+        public ActionResult GroupDetail(int groupId)
+        {
+            var groupInfo = _groupService.GetGroupById(new GroupGetByIdCriteria { GroupId = groupId });
+            ViewBag.GroupName = groupInfo.GroupName;
+            var criteria = new GroupGetMemberByIdCriteria { GroupId = groupId };
+
+            return View("~/Areas/FraudDetection/Views/Group/GroupDetail.cshtml", criteria);
+        }
+
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Read)]
+        public JsonResult GroupDetail(GroupGetMemberByIdCriteria criteria)
+        {
+            var result = _groupService.GetMemberById(criteria);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Host)]
+        public JsonResult RemoveMember(int custId, int groupId)
+        {
+            var result = _groupService.DeleteGroupMember(new GroupDeleteMemberCriteria
+            {
+                CreatorId = CurrentSession.UserId,
+                CustId = custId,
+                GroupId = groupId
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [NapAuth(FunctionKey = FDFunctionKeys.CustomerGroup, Policy = Constant.Policy.Host)]
+        public JsonResult AddMember(string username, int groupId)
+        {
+            var result = _groupService.InsertGroupMember(new GroupInsertMemberCriteria
+            {
+                CreatorId = CurrentSession.UserId,
+                GroupId = groupId,
+                Username = username
+            });
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

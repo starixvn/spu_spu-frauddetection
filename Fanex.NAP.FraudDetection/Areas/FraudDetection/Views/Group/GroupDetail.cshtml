@@ -1,0 +1,45 @@
+﻿@using Fanex.NAP.FraudDetection.Service.Core
+@using Fanex.NAP.FraudDetection.Service.Utilities
+@model FD.Lib.Criteria.Group.GroupGetMemberByIdCriteria
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Group Members";
+}
+@section HeadCss
+{
+    <link rel="stylesheet" type="text/css" href="~/Areas/FraudDetection/Content/case.css" />
+}
+@section FooterJs
+{
+    <script type="text/javascript">
+        var isHost = "@PermissionService.HasHostPermission(FDFunctionKeys.CustomerGroup)" === "True";
+    </script>
+    @Scripts.Render("~/bundles/App/Group")
+}
+<div>
+    @Html.HiddenFor(a => a.GroupId)
+    <span class="infor-text">Group Members </span><span class="button-action">
+        <a class="back-button"
+           onclick="window.location.href = window.location.href.split('/GroupDetail', 1)[0].toString();">
+            ← Back To List
+        </a>
+    </span>
+    <div class="newline">
+        &nbsp;
+    </div>
+    <span class="lbl-text">Group Name: @ViewBag.GroupName </span>
+    @if (PermissionService.HasHostPermission(FDFunctionKeys.CustomerGroup))
+    {
+        <input type="text" id="username"/>
+        <input type="button" id="btn_AddMember" value="+ Add" class="btn-green" />
+    }
+</div>
+<div class="newline">
+    &nbsp;
+</div>
+
+<div class="grid-container">
+    <div id="GroupMemberResult" class="freegrid  content-grid">
+        &nbsp;
+    </div>
+</div>

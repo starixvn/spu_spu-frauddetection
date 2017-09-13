@@ -167,7 +167,7 @@
             rows.push({
                 Columns: [
                     { Name: "Row", Value: group.Row },
-                    { Name: "GroupName", Value: group.GroupName },
+                    { Name: "GroupName", Value: group, CustomCellRender: groupNameColumn },
                     { Name: "GroupDesc", Value: group.GroupDesc },
                     { Name: "Active", Value: group, CustomCellRender: activeColumn },
                     { Name: "Edit", Value: group.GroupId, CustomCellRender: editColumn }
@@ -211,6 +211,14 @@
         var groupId = cell.Value;
 
         return "<img title='Edit Group's Info' class='btn-action' alt='' onclick='groupService.openPopupEditGroup(" + groupId + ")'/>";
+    }
+
+    function groupNameColumn(cell) {
+        var groupId = cell.Value.GroupId;
+        var groupName = cell.Value.GroupName;
+
+        var url = "Group/GroupDetail?groupId=" + groupId;
+        return "<a href=" + url + ">" + groupName + "</a>";
     }
 
     return groupService;

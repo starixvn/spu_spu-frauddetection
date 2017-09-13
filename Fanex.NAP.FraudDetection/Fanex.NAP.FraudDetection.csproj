@@ -557,6 +557,8 @@
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-controller.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\CustomerBettingGroup\customer-betting-group-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-detail-list.js" />
+    <Content Include="Areas\FraudDetection\Scripts\Group\group-detail-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-service.js" />
     <Content Include="Areas\FraudDetection\Scripts\Group\group-factory.js" />
     <Content Include="Areas\FraudDetection\Scripts\MailMaster\mailmaster-service.js" />
@@ -605,6 +607,7 @@
     <Content Include="Areas\FraudDetection\Views\MessageMaster\AddMessage.cshtml" />
     <Content Include="Areas\FraudDetection\Views\MessageMaster\EditMessage.cshtml" />
     <Content Include="Areas\FraudDetection\Views\Notification\MessageList.cshtml" />
+    <Content Include="Areas\FraudDetection\Views\Group\GroupDetail.cshtml" />
     <None Include="Content\betlist\betList.css1" />
     <Content Include="Content\betlist\custom-betlist.css" />
     <Content Include="Content\betlist\fanex.result.css" />
