@@ -18,6 +18,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using FD.Lib.Criteria.Common;
     using FD.Lib.Criteria.Config;
     using FD.Lib.Criteria.Event;
+    using FD.Lib.Criteria.Group;
     using FD.Lib.Criteria.MailMaster;
     using FD.Lib.Criteria.MessageMaster;
     using FD.Lib.Criteria.Parameter;
@@ -250,7 +251,11 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.FraudCase, Policy = Constant.Policy.Read)]
         public ActionResult GetCustomerGroupByCase(int caseId)
         {
-            var groups = new CaseGroupService().GetCaseGroup(new CaseGroupGetAllCriteria { CaseId = caseId });
+            var groups = new GroupService().GetAllGroups(new GroupGetAllCriteria 
+            {
+                PageSize = int.MaxValue,
+                PageIndex = 1
+            });
 
             return Json(groups, JsonRequestBehavior.AllowGet);
         }

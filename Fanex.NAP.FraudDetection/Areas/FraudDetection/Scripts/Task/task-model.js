@@ -488,6 +488,13 @@ function (taskFactory) {
             }
         }
 
+        if (key === "Customer Group" && operator === "=" && row.Param.Id > 20) {
+            data = "ans.custid IN (SELECT ups.CustId FROM dbo.CustomerGroups ups with(nolock) WHERE ups.GroupId = " + value + ")";
+        }
+        else if (key === "Customer Group" && row.Param.Id > 20) {
+            data = "ans.custid NOT IN (SELECT ups.CustId FROM dbo.CustomerGroups ups with(nolock) WHERE ups.GroupId = " + value + ")";
+        }
+
         result = prefixFormula + data + postfixFormula;
 
         return result;
