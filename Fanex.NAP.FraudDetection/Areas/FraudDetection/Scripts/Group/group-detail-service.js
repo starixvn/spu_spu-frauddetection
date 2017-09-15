@@ -36,6 +36,7 @@
                 showPager: true,
                 fullHeight: true,
                 gridExpandHeight: 160,
+                enableHiddenColumns: false,
                 allowTruncate: true,
                 pagerOption: {
                     itemsPerPage: 50,
@@ -70,19 +71,19 @@
 
     function removeGroupColumn(cell) {
         var element = cell.Value;
-        var result = "<span title='Remove Group' class='glyphicon glyphicon-trash' onclick='groupDetailService.removeMemberFromGroup({0}, {1});' style='cursor: pointer'>".format(element.CustId, groupDetailService._groupId);
+        var result = "<span title='Remove Group' class='glyphicon glyphicon-trash' onclick='groupDetailService.removeMemberFromGroup(\"{0}\", {1}, {2});' style='cursor: pointer'>".format(element.Username, element.CustId, groupDetailService._groupId);
 
         return result;
     };
 
-    groupDetailService.removeMemberFromGroup = function (custId, groupId) {
+    groupDetailService.removeMemberFromGroup = function (username, custId, groupId) {
         AlertService.hideAlert();
 
         $.confirm({
             confirmButtonClass: 'btn-green btn-customConfirm',
             cancelButtonClass: 'btn-green btn-customCancel',
             title: "Delete confirmation",
-            text: "Are you sure you really want to remove this member from this group?",
+            text: "Are you sure you really want to remove <b>{0}</b> from this group?".format(username),
             confirm: function () {
                 $(".confirmation-modal").modal("hide");
 
