@@ -10,7 +10,7 @@
     groupDetailService.isHostPermission = false;
 
     groupDetailService.Search = function () {
-
+        waitingDialog.show("Please wait...", { dialogSize: 'sm' });
         var searchParams = {
             GroupId: groupDetailService._groupId
         };
@@ -18,6 +18,8 @@
         groupFactory.getGroupDetail(searchParams).success(function (result) {
 
             renderGroupDetailTable(result);
+
+            waitingDialog.hide();
         });
     };
 
