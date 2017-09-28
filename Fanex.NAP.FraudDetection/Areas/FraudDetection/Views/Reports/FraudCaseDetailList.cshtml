@@ -2,6 +2,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Fraud Case Details";
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    serializer.MaxJsonLength = Int32.MaxValue;
 }
 
 @model FD.Lib.Model.Reports.FraudCaseDetail.FraudCaseDetailReportViewModel
@@ -85,7 +87,7 @@
 @section FooterJs
 {
     <script type="text/javascript">
-        var data = @Html.Raw(Json.Encode(Model.Body));
+        var data = @Html.Raw(serializer.Serialize(Model.Body));
     </script>
     @Scripts.Render("~/bundles/App/FraudCaseDetail")
 }
