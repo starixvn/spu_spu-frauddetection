@@ -128,6 +128,14 @@ function (taskFactory) {
         { Id: 1, Value: "Yes", Name: "Yes" },
         { Id: 2, Value: "No", Name: "No" }
     ];
+    taskModel.AddedBy = [
+        { Id: 1, Value: '-1', Name: "System" },
+        { Id: 2, Value: '0', Name: "FPS" }
+    ];
+    taskModel.AssociatedAccounts = [
+        { Id: 1, Value: "Yes", Name: "Yes" },
+        { Id: 2, Value: "No", Name: "No" }
+    ];
     taskModel.NextActions = [
         { Id: 1, Value: 1, Name: "Assign Group" },
         { Id: 2, Value: 2, Name: "Send Email" },
@@ -320,6 +328,12 @@ function (taskFactory) {
                 case "Arbitrage":
                     result = configRow.Value;
                     break;
+                case "Added By":
+                    result = configRow.Value;
+                    break;
+                case "Associated Accounts":
+                    result = configRow.Value;
+                    break;
                 case "Choice":
                     result = configRow.Value;
                     break;
@@ -488,10 +502,10 @@ function (taskFactory) {
             }
         }
 
-        if (key === "Customer Group" && operator === "=" && row.Param.Id > 20) {
+        if (key === "Customer Group" && operator === "=" && row.Param.Id == 44) {
             data = "ans.custid IN (SELECT ups.CustId FROM dbo.CustomerGroups ups with(nolock) WHERE ups.GroupId = " + value + ")";
         }
-        else if (key === "Customer Group" && row.Param.Id > 20) {
+        else if (key === "Customer Group" && row.Param.Id == 44) {
             data = "ans.custid NOT IN (SELECT ups.CustId FROM dbo.CustomerGroups ups with(nolock) WHERE ups.GroupId = " + value + ")";
         }
 
@@ -995,6 +1009,22 @@ function (taskFactory) {
 
                 vm.ruleRow.Value = vm.Arbitrages[0];
                 break;
+            case "Added By":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.AddedBy[0];
+                break;
+            case "Associated Accounts":
+                vm.DataInRule.TextBox = false;
+                vm.DataInRule.ComboBox = true;
+                vm.DataInRule.DateTime = false;
+                vm.DataInRule.IpAddress = false;
+
+                vm.ruleRow.Value = vm.AssociatedAccounts[0];
+                break;
             case "TransDate":
                 vm.DataInRule.TextBox = false;
                 vm.DataInRule.ComboBox = false;
@@ -1162,6 +1192,20 @@ function (taskFactory) {
                     }).indexOf(parseInt(value));
                     if (index >= 0)
                         result = taskModel.Arbitrages[index];
+                    break;
+                case "Added By":
+                    index = taskModel.AddedBy.map(function (e) {
+                        return e.Id;
+                    }).indexOf(parseInt(value));
+                    if (index >= 0)
+                        result = taskModel.AddedBy[index];
+                    break;
+                case "Associated Accounts":
+                    index = taskModel.AssociatedAccounts.map(function (e) {
+                        return e.Id;
+                    }).indexOf(parseInt(value));
+                    if (index >= 0)
+                        result = taskModel.AssociatedAccounts[index];
                     break;
                 case "Choice":
                     index = taskModel.Choices.map(function (e) {

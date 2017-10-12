@@ -59,6 +59,8 @@ function (taskModel) {
     vm.TicketStatuses = taskModel.TicketStatuses;
     vm.Choices = taskModel.Choices;
     vm.Arbitrages = taskModel.Arbitrages;
+    vm.AddedBy = taskModel.AddedBy;
+    vm.AssociatedAccounts = taskModel.AssociatedAccounts;
     vm.NextActions = taskModel.NextActions;
 
     /*
@@ -593,6 +595,8 @@ function (taskModel) {
     vm.TicketStatuses = taskModel.TicketStatuses;
     vm.Choices = taskModel.Choices;
     vm.Arbitrages = taskModel.Arbitrages;
+    vm.AddedBy = taskModel.AddedBy;
+    vm.AssociatedAccounts = taskModel.AssociatedAccounts;
     vm.NextActions = taskModel.NextActions;
 
     /*

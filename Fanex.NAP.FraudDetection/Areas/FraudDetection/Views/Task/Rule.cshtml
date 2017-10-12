@@ -25,6 +25,9 @@
                             ng-options="sport as sport.SportName for sport in taskCtr.Sports" ng-change=""></select>
                     <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Customer Group' && !taskCtr.CompareWithOtherField.InPrecondition"
                             ng-options="group as group.GroupName for group in taskCtr.CustomerGroups" ng-change=""></select>
+                    <select ng-model="taskCtr.preconditionRow.Value" style="height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Added By' && !taskCtr.CompareWithOtherField.InPrecondition"
+                            ng-options="addedBy as addedBy.Name for addedBy in taskCtr.AddedBy"
+                            ng-change=""></select>
                     <input type="text" ng-model="taskCtr.preconditionRow.Value" style="width: 100px;
                         height: 25px;" ng-show="taskCtr.preconditionRow.Param.ConfigName == 'Match Code' && !taskCtr.CompareWithOtherField.InPrecondition" />
                     <input type="text" ng-model="taskCtr.preconditionRow.AdditionalValue" style="width: 100px;
@@ -127,6 +130,9 @@
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Arbitrage' && !taskCtr.CompareWithOtherField.InRule"
                             ng-options="arbitrage as arbitrage.Name for arbitrage in taskCtr.Arbitrages"
                             ng-change=""></select>
+                    <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Associated Accounts' && !taskCtr.CompareWithOtherField.InRule"
+                            ng-options="account as account.Name for account in taskCtr.AssociatedAccounts"
+                            ng-change=""></select>
                     <select ng-model="taskCtr.ruleRow.Value" style="height: 25px;" ng-show="taskCtr.ruleRow.Param.ConfigName == 'Evidence' && !taskCtr.CompareWithOtherField.InRule"
                             ng-options="evidenceType as evidenceType.EviName for evidenceType in taskCtr.EvidenceTypes"
                             ng-change=""></select>
@@ -180,7 +186,7 @@
             </h4>
             <div>
                 <table class="table-popup font-size-small">
-                    <tr ng-show=" taskCtr.Model.Activity.ActivityId == 1 || taskCtr.Model.Activity.ActivityId == 2 ">
+                    <tr ng-show=" taskCtr.Model.Activity.ActivityId == 1 || taskCtr.Model.Activity.ActivityId == 2|| taskCtr.Model.Activity.ActivityId == 5 ">
                         <td>
                             <div>
                                 <input type="checkbox" ng-model="taskCtr.nextActionAssignGroup.IsTicked" ng-change="taskCtr.changeAssignGroup()" />
