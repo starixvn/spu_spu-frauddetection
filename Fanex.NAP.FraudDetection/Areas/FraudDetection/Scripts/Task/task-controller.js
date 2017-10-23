@@ -1086,6 +1086,8 @@ function (taskModel) {
                                     vm.Model.Rule.RuleTable = taskModel.makeFormula(vm.Task.TaskRulesOriginal);
 
                                     taskModel.makeNextActions(vm.nextActionAssignGroup, vm.nextActionSendMail, vm.nextActionCaptureData, vm.nextActionPostMessage, vm.Task.NextActionIdList, vm.Task.NextActionTargetIdList);
+
+                                    vm.changeRule();
                                 });
                             });
                         });
