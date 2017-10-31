@@ -158,7 +158,7 @@
     <Setting Key="FD_CustomerDetailsFraudCaseDetailsGet" SpName="FD_CustomerDetailsFraudCaseDetailsGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsLogsNotesGet" SpName="FD_CustomerDetailsLogsNotesGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTicketsGetByTransIds" SpName="FD_CustomerDetailsTicketsGetByTransIds" DbName="DBFD.bodb02.bodbSPUNet" />
-    <Setting Key="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" SpName="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" DbName="DBFD.bodb_Archive.bodbSPUNet" />
+    <Setting Key="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive" SpName="FD_CustomerDetailsTicketsGetByTransIdsFromDBArchive_xtest" DbName="DBFD.bodb_Archive.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsTransListGetByCustId" SpName="FD_CustomerDetailsTransListGetByCustId" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsWinlossStatisticGet" SpName="FD_CustomerDetailsWinlossStatisticGet" DbName="DBFD.FraudDetection.bodbSPUNet" />
     <Setting Key="FD_CustomerDetailsMonthlyWinlossGet" SpName="FD_CustomerDetailsMonthlyWinlossGet_xpre" DbName="DBFD.FraudDetection.bodbSPUNet" />
