@@ -13,6 +13,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Core.Service.Impl;
     using Core.Web.Attribute;
     using FD.Lib.Criteria.Reports.CustomerDetails;
+    using FD.Lib.Model.Reports.CustomerDetails;
     using FD.Lib.Service.Implement;
     using Logging;
     using NAP.FraudDetection.Controllers;
@@ -105,7 +106,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         public ActionResult GetWinlossMonthly(int custId, DateTime fromDate, DateTime toDate)
         {
             var logMsg = string.Empty;
-            var result = new List<FD.Lib.Model.Reports.CustomerDetails.MarginModel>();
+            var result = new List<MarginModel>();
 
             try
             {
@@ -115,16 +116,24 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
                 logMsg += "GetWinlossMonthly \n CustId: " + custId.ToString();
                 logMsg += "\n FromDate: " + fromDate.ToShortDateString();
                 logMsg += "\n ToDate: " + toDate.ToShortDateString();
-                logMsg += "\n Data returned: " + result.ToString();
+                logMsg += "\n Data returned: " + string.Join(",", result.Select(a => ParseMarginModelToString(a)));
+
+                Logger.Log.Info(logMsg);
             }
             catch(Exception err)
             {
-                logMsg += "GetWinlossMonthly \n Error: " + err.ToString();
+                logMsg = "Fraud Detection - GetWinlossMonthly \n Error: " + err.ToString();
+
+                Logger.Log.Error(logMsg);
             }
 
-            Logger.Log.Info(logMsg);
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private string ParseMarginModelToString(MarginModel marginModel)
+        {
+            return "Year: " + marginModel.Year + "; Month: " + marginModel.Month + "; WL: " + marginModel.Winloss + "\n";
         }
 
         [HttpGet]
