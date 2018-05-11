@@ -14,6 +14,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using Core.Web.Attribute;
     using FD.Lib.Criteria.Reports.CustomerDetails;
     using FD.Lib.Service.Implement;
+    using Logging;
     using NAP.FraudDetection.Controllers;
     using Service;
     using Service.Core;
@@ -103,8 +104,25 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         [NapAuth(FunctionKey = FDFunctionKeys.SuspiciousCustomer, Policy = Constant.Policy.Read)]
         public ActionResult GetWinlossMonthly(int custId, DateTime fromDate, DateTime toDate)
         {
-            var criteria = new CustomerDetailsReportMonthlyWinlossCriteria(custId, fromDate, toDate);
-            var result = customerDetailsReportService.GetMonthlyWinloss(criteria);
+            var logMsg = string.Empty;
+            var result = new List<FD.Lib.Model.Reports.CustomerDetails.MarginModel>();
+
+            try
+            {
+                var criteria = new CustomerDetailsReportMonthlyWinlossCriteria(custId, fromDate, toDate);
+                result = customerDetailsReportService.GetMonthlyWinloss(criteria).ToList();
+
+                logMsg += "GetWinlossMonthly \n CustId: " + custId.ToString();
+                logMsg += "\n FromDate: " + fromDate.ToShortDateString();
+                logMsg += "\n ToDate: " + toDate.ToShortDateString();
+                logMsg += "\n Data returned: " + result.ToString();
+            }
+            catch(Exception err)
+            {
+                logMsg += "GetWinlossMonthly \n Error: " + err.ToString();
+            }
+
+            Logger.Log.Info(logMsg);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
