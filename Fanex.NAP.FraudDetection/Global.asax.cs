@@ -1,5 +1,7 @@
 ﻿namespace Fanex.NAP.FraudDetection
 {
+    using Fanex.BetList.Core;
+    using Fanex.BetList.Core.RemotingRef;
     using Fanex.Data.Configuration;
     using Fanex.Logging;
     using Fanex.NAP.FraudDetection.AppStart;
@@ -30,8 +32,10 @@
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             RefDataTypeContainer
-             .ConnectTo(new Uri(ConfigurationManager.AppSettings["Fanex.RemotingRef.Service.Url"]))
-             .FromApplication("Your Application Name");
+                .ConnectTo(new Uri(ConfigurationManager.AppSettings["Fanex.RemotingRef.Service.Url"]))
+                .FromApplication("SPU - Fraud detection");
+
+            BetListManager.RegisterRemotingRef(new CacheRef());
         }
 
         protected void Session_End(object sender, EventArgs e)
