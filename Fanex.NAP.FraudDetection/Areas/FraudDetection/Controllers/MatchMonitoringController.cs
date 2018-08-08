@@ -36,6 +36,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     {
         private readonly MatchMonitoringReportService _matchMonitoringReportService;
         private readonly CaseService _caseService;
+        private static readonly RemotingRefService refService = new RemotingRefService();
 
         public MatchMonitoringController()
         {
@@ -130,7 +131,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return new List<Legend>
             {
                 new Legend("Event Date", criteria.EventDate.ToShortDateString()),
-                new Legend("League", criteria.LeagueId == -1 ? leagues : RefData.GetLeagueName(criteria.LeagueId.ToString(CultureInfo.InvariantCulture), "en", leagues)),
+                new Legend("League", criteria.LeagueId == -1 ? leagues : refService.GetLeagueName(criteria.LeagueId.ToString(CultureInfo.InvariantCulture), "en", leagues)),
                 new Legend("Match Code", criteria.MatchCode),
                 new Legend("Match Status", criteria.MatchStatus),
                 new Legend("Has Suspicious Customer(s)", criteria.SuspiciousStatus == 0 ? "All" : (criteria.SuspiciousStatus == 1 ? "Yes" : "No"))
@@ -248,8 +249,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
         {
             foreach (var match in data)
             {
-                var homeName = RefData.GetTeamName(match.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
-                var awayName = RefData.GetTeamName(match.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
+                var homeName = refService.GetTeamName(match.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
+                var awayName = refService.GetTeamName(match.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
 
                 if (plainText)
                 {

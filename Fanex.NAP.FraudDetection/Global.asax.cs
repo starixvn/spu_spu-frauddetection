@@ -3,7 +3,9 @@
     using Fanex.Data.Configuration;
     using Fanex.Logging;
     using Fanex.NAP.FraudDetection.AppStart;
+    using Fanex.RemotingRef;
     using System;
+    using System.Configuration;
     using System.Data.SqlClient;
     using System.Web;
     using System.Web.Http;
@@ -26,6 +28,10 @@
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            RefDataTypeContainer
+             .ConnectTo(new Uri(ConfigurationManager.AppSettings["Fanex.RemotingRef.Service.Url"]))
+             .FromApplication("Your Application Name");
         }
 
         protected void Session_End(object sender, EventArgs e)

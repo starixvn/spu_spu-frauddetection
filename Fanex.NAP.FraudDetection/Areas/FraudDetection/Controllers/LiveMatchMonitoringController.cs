@@ -28,6 +28,8 @@
 
         private readonly ICaseService caseService;
 
+        private static readonly RemotingRefService refService = new RemotingRefService();
+
         public LiveMatchMonitoringController()
         {
             liveMatchMonitoringReportService = new LiveMatchMonitoringReportService();
@@ -164,8 +166,8 @@
         {
             foreach (var match in data)
             {
-                var homeName = RefData.GetTeamName(match.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
-                var awayName = RefData.GetTeamName(match.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
+                var homeName = refService.GetTeamName(match.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
+                var awayName = refService.GetTeamName(match.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty);
                 string displayEvent = "{0} (Code: {1}) </br><span class='league'>{2}</span>";
                 string displayMatch = "<b>" + homeName + "</b>" + " vs " + "<b>" + awayName + "</b>";
 

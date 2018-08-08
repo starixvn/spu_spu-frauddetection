@@ -22,9 +22,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     using NPOI.SS.UserModel;
     using RemotingRef;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     /// <summary>
@@ -33,6 +31,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
     public class DailyDataMonitoringController : BaseController
     {
         private readonly DailyDataMonitoringReportService _dailyDataMonitoringReportService;
+        private readonly RemotingRefService refService = new RemotingRefService();
 
         public DailyDataMonitoringController()
         {
@@ -80,12 +79,12 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var dailyDataMonitoring = FormatReportData(GenerateDailyDataMonitoringData(criteria), true);
 
             var excelExporter = new FDExportExcelDailyDataMonitoring(
-                Server.MapPath("~/ExcelFiles"), 
-                "DailyDataMonitoring", 
+                Server.MapPath("~/ExcelFiles"),
+                "DailyDataMonitoring",
                 GetMatchMonitoringReportInfo(criteria),
                 GetMatchMonitoringHeaders(),
                 dailyDataMonitoring);
-            
+
             var saveAsFileName = excelExporter.GenerateExcelFile();
             ResponseStreamExcel(excelExporter.Workbook, saveAsFileName);
 
@@ -126,7 +125,7 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return headers;
         }
 
-        #endregion
+        #endregion Export Excel
 
         #region Utilities
 
@@ -145,8 +144,8 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             var dailyDataMonitoringReport = new List<DailyDataMonitoringModel>();
             foreach (var records in data)
             {
-                var homeName = RefData.GetTeamName(records.HomeId.ToString(), "en", string.Empty);
-                var awayName = RefData.GetTeamName(records.AwayId.ToString(), "en", string.Empty);
+                var homeName = refService.GetTeamName(records.HomeId.ToString(), "en", string.Empty);
+                var awayName = refService.GetTeamName(records.AwayId.ToString(), "en", string.Empty);
 
                 records.Event = plainText
                     ? homeName + " vs " + awayName
@@ -158,6 +157,6 @@ namespace Fanex.NAP.FraudDetection.Areas.FraudDetection.Controllers
             return dailyDataMonitoringReport;
         }
 
-        #endregion
+        #endregion Utilities
     }
 }
