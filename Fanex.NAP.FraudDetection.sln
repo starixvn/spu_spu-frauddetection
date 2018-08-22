@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection", "Fanex.NAP.FraudDetection\Fanex.NAP.FraudDetection.csproj", "{0970FB24-9D16-4C86-A170-C2A2156C97EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.Model", "Fanex.NAP.FraudDetection.Model\Fanex.NAP.FraudDetection.Model.csproj", "{F07AB61E-FC65-4292-A968-F124C5A28F30}"
@@ -25,9 +27,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.FraudDetection.StoreProcedures", "Fanex.NAP.FraudDetection.StoreProcedures\Fanex.NAP.FraudDetection.StoreProcedures.csproj", "{BFE3A017-2B3F-4F1D-83E4-BEA4356CE9D3}"
 EndProject
 Global
-	GlobalSection(JSLint) = preSolution
-		SolutionConfigurationLocation = JSLintOptions.xml
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -90,5 +89,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {307E9CF6-EB9A-44E1-92B0-76677219D861}
+	EndGlobalSection
+	GlobalSection(JSLint) = preSolution
+		SolutionConfigurationLocation = JSLintOptions.xml
 	EndGlobalSection
 EndGlobal
